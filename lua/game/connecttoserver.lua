@@ -29,7 +29,7 @@ end
 function ConnectToServer:update(dt)
 	self.timer= self.timer-dt
 	if self.timer<=0 then
-		gameState:changeState('WaitingForDistant')
+		gameStateManager:changeState('WaitingForDistant')
 	end
 	
 end

@@ -29,7 +29,7 @@ end
 function FirstEnter:update(dt)
 	self.timer= self.timer-dt
 	if self.timer<=0 then
-		gameState:changeState('ConnectToServer')
+		gameStateManager:changeState('ConnectToServer')
 	end
 	
 end

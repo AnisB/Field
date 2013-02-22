@@ -1,34 +1,33 @@
-
 --[[ 
 This file is a part of the Field project
 ]]
 
-require('prelude')
-require("storyline")
-require("FirstEnter")
-require("connecttoserver")
-require("waitingfordistant")
-require("levelbegin")
-require("gameplay")
---require("levelchange")
+require("game.prelude")
+require("game.storyline")
+require("game.FirstEnter")
+require("game.connecttoserver")
+require("game.waitingfordistant")
+require("game.levelbegin")
+require("game.gameplay")
+--require("game.levelchange")
 --require()
-GameState {}
+GameStateManager = {}
 GameStateManager.__index = GameStateManager
 
-function GameStateManager:new()
+function GameStateManager.new()
 	local self = {}
 	setmetatable(self, GameStateManager)
 	self.state = {}
-	self.state['Prelude'] = Prelude:new()
-	self.state['Storyline'] = Storyline:new()
-	self.state['FirstEnter'] = FirstEnter:new()
-	self.state['ConnectToServer'] = ConnectToServer:new()
-	self.state['WaitingForDistant'] = WaitingForDistant:new()
-	self.state['LevelBegin'] = LevelBegin:new()
-	self.state['Gameplay'] = Gameplay:new()
-	--self.state['LevelChange'] = LevelChange:new()
-	--self.state['PartyEnd'] = PartyEnd:new()
-	
+	self.state['Prelude'] = Prelude.new()
+	self.state['Storyline'] = Storyline.new()
+	self.state['FirstEnter'] = FirstEnter.new()
+	self.state['ConnectToServer'] = ConnectToServer.new()
+	self.state['WaitingForDistant'] = WaitingForDistant.new()
+	self.state['LevelBegin'] = LevelBegin.new()
+	self.state['Gameplay'] = Gameplay.new()
+	--self.state['LevelChange'] = LevelChange.new()
+	--self.state['PartyEnd'] = PartyEnd.new()
+	self.currentState='Gameplay'
 	return self
 end
 

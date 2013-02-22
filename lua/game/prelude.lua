@@ -29,9 +29,8 @@ end
 function Prelude:update(dt)
 	self.timer= self.timer-dt
 	if self.timer<=0 then
-		gameState:changeState('Storyline')
+		gameStateManager:changeState('Storyline')
 	end
-	
 end
 
 function Prelude:draw()

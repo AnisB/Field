@@ -29,7 +29,7 @@ end
 function LevelBegin:update(dt)
 	self.timer= self.timer-dt
 	if self.timer<=0 then
-		gameState:changeState('Gameplay')
+		gameStateManager:changeState('Gameplay')
 	end
 	
 end
