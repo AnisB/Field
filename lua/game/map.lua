@@ -4,12 +4,11 @@ This file is part of the Field project
 
 
 require("game.platform")
-require("game.bloc")
+require("game.movable")
 require("game.camera")
-require("game.sphere")
 require("const")
 require("game.wall")
-require("game.destructs")
+require("game.destroyable")
 
 Map = {}
 Map.__index =  Map
@@ -63,10 +62,7 @@ function Map.new(mapFile,cam)
     -- 	print(l)
     -- end
 
-    
-    -- Gestion des blocs
-    self.blocs={}
-    self:createBlocs(self.map)
+
 
 
     -- Gestion des platformes
@@ -75,16 +71,16 @@ function Map.new(mapFile,cam)
     
 
     -- Gestion des Sphere
-    self.spheres={}
-    self:createSpheres(self.map)
+    self.movables={}
+    self:createMovable(self.map)
 
     -- Gestion des Murs
     self.walls ={}
     self:createWalls(self.map)
 
     -- Gestion des Desctrutibles
-    self.destrucs ={}
-    self:createDestructs(self.map)
+    self.Destroyable ={}
+    self:createDestroyable(self.map)
 
 
     -- for k = 1, 2,1 do
@@ -98,24 +94,29 @@ function Map.new(mapFile,cam)
 end
 
 
-function Map:createBlocs(map)
+function Map:createMovable(map)
      for k = 1, #map,1 do
      	for j = 1, #map[k],1 do
-     		if map[k][j]=="C" then
+     		if map[k][j]=="S" then
      			local pos= {x=(k -1)*unitWorldSize,y=(j -1)*unitWorldSize}
-     			table.insert(self.blocs, Bloc.new(pos,nil))
+     			table.insert(self.movables, Movable.new(pos,'Sphere',nil))
      		end
+
+            if map[k][j]=="C" then
+                local pos= {x=(k -1)*unitWorldSize,y=(j -1)*unitWorldSize}
+                table.insert(self.movables, Movable.new(pos,'Rectangle',nil))
+            end
      	end
      end
 end
 
 
-function Map:createDestructs(map)
+function Map:createDestroyable(map)
      for k = 1, #map,1 do
         for j = 1, #map[k],1 do
             if map[k][j]=="K" then
                 local pos= {x=(k -1)*unitWorldSize,y=(j -1)*unitWorldSize}
-                table.insert(self.blocs, Destructs.new(pos,nil))
+                table.insert(self.Destroyable, Destroyable.new(pos,'Rectangle',nil))
             end
         end
      end
@@ -181,9 +182,19 @@ function Map:update(dt)
 end
 
 
+function Map:isSeen(pos1,pos2)
+    -- if (pos1.x-pos2.x)>windowH/2 then
+    --     print("out")
+    -- else
+    --     print("in")
+    -- end
+    return true
+end
+
+
 function Map:draw(pos)
 
-    for i,b in ipairs(self.blocs) do
+    for i,b in ipairs(self.movables) do
 		b:draw(pos.x-windowW/2,windowH/2-pos.y)
 	end
 
@@ -195,8 +206,10 @@ function Map:draw(pos)
 		p:draw(pos.x-windowW/2,windowH/2-pos.y)
 	end
 
-	for i,p in ipairs(self.spheres) do
-		p:draw(pos.x-windowW/2,windowH/2-pos.y)
-	end
+    for i,b in pairs(self.Destroyable) do
+        if self:isSeen(pos,b.position) then
+          b:draw(pos.x-windowW/2,windowH/2-pos.y)
+      end
+    end
 end
 

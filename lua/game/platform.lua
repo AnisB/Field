@@ -3,6 +3,8 @@ This file is part of the Field project
 ]]
 
 require("const")
+
+require("game.physics")
 Platform = {}
 Platform.__index =  Platform
 

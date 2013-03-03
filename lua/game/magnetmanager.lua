@@ -76,6 +76,24 @@ function MagnetManager:update(dt)
 		end
 end
 
+
+function MagnetManager:enableG(GID)
+	for i,v in pairs(self.passiveGenerators) do
+		if v.id == GID then
+			print(v.type)
+			v:enableG()
+		end
+	end
+end
+
+function MagnetManager:disableG(GID)
+	for i,v in pairs(self.activeGenerators) do
+		if v.id ==GID then
+			v:disableG()
+		end
+	end
+end
+
 function MagnetManager:changeMetalType(metal,oldType,newType)
 	if oldType==MetalTypes.Normal then
 		for i,g in ipairs(self.normalMetals) do
