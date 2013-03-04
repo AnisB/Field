@@ -10,6 +10,7 @@ ImgDirectory="img/"
 gameStateManager = nil
 
 function love.load()
+	love.graphics.setIcon( love.graphics.newImage(ImgDirectory.."icon.png" ))
 	gameStateManager = GameStateManager:new()
 end
 

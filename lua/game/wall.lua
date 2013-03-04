@@ -19,7 +19,7 @@ function Wall.new(position, length, spriteB, spriteM, spriteE)
 
     -- print("Mur "..self.positionition[1].." "..self.position[2].." "..unitWorldSize.." "..self.length)
     self.pc = Physics.newRectangle(self.position.x,self.position.y,unitWorldSize,self.length,true,decalage)
-        self.pc.fixture:setUserData(self)
+    self.pc.fixture:setUserData(self)
 
     return self
 end

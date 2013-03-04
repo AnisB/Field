@@ -31,7 +31,7 @@ require("const")
         -- Camera
         self.camera =Camera.new(0,0)
 
-        self.map= Map.new("mapFile.txt",self.camera)
+        -- self.map= Map.new("mapFile.txt",self.camera)
 
         --Characters
         local pos1 ={ x=2*unitWorldSize,  y=10*unitWorldSize}
@@ -42,16 +42,17 @@ require("const")
         self.magnetmanager:addMetal(self.metalMan)
 
 
-        self.generateur = Generator.new({x=19*unitWorldSize,  y=15*unitWorldSize},true,'RotativeL',1)
-        self.magnetmanager:addGenerator(self.generateur)
-        self.cube1=Metal.new({x=15*unitWorldSize,  y=10*unitWorldSize}, 'Sphere',false,MetalMTypes.Alu)
-        self.cube2=Metal.new({x=12*unitWorldSize,  y=15*unitWorldSize},'Sphere', false,MetalMTypes.Acier)
-        self.magnetmanager:addMetal(self.cube1)
-        self.magnetmanager:addMetal(self.cube2)
-        self.interruptor = Interruptor.new({x=3.5*unitWorldSize,  y=10.5*unitWorldSize},true,self.generateur.id,self.magnetmanager)
+        --self.generateur = Generator.new({x=19*unitWorldSize,  y=15*unitWorldSize},true,'RotativeL',1)
+        --self.magnetmanager:addGenerator(self.generateur)
+        --self.cube1=Metal.new({x=15*unitWorldSize,  y=10*unitWorldSize}, 'Sphere',false,MetalMTypes.Alu)
+        --self.cube2=Metal.new({x=12*unitWorldSize,  y=15*unitWorldSize},'Sphere', false,MetalMTypes.Acier)
+        --self.magnetmanager:addMetal(self.cube1)
+        --self.magnetmanager:addMetal(self.cube2)
+        
+        --self.interruptor = Interruptor.new({x=3.5*unitWorldSize,  y=10.5*unitWorldSize},true,self.generateur.id,self.magnetmanager)
 
         --Map
-        -- self.mapLoader = MapLoader.new("maps.map1",self.magnetmanager)
+        self.mapLoader = MapLoader.new("maps.map2",self.magnetmanager)
         return self
     end
     
@@ -90,7 +91,7 @@ require("const")
     end
 
     if key =="e" then
-        self.interruptor:handleTry()
+        self.mapLoader:handleTry()
     end
 
     if key =="y" then
@@ -131,10 +132,6 @@ require("const")
         self.theMagnet:disableStaticField()
     end
 
-        if key =="y" then
-        self.generateur:disableField()
-    end
-
     if key =="o" or key =="p" or key =="k"or key =="l"then
         self.theMagnet:disableField()
     end
@@ -162,23 +159,24 @@ require("const")
         self.theMagnet:update(dt)
         self.metalMan:update(dt,self.camera)
          self.magnetmanager:update(dt)   
-         self.generateur:update(dt)  
-         self.cube1:update(dt)   
-         self.cube2:update(dt)   
-         self.interruptor:update(dt)
+        self.mapLoader:update(dt)
+         -- self.generateur:update(dt)  
+         -- self.cube1:update(dt)   
+         -- self.cube2:update(dt)   
+         -- self.interruptor:update(dt)
     end
     
     function Gameplay:draw()
 
         self.camera:draw()
-        -- self.mapLoader:draw(self.camera:getPos())
-        self.map:draw(self.camera:getPos())
+        self.mapLoader:draw(self.camera:getPos())
+        -- self.map:draw(self.camera:getPos())
         self.theMagnet:draw(self.camera:getPos().x-windowW/2,windowH/2-self.camera:getPos().y)
         self.metalMan:draw()
-        self.interruptor:draw(self.camera:getPos().x-windowW/2,windowH/2-self.camera:getPos().y)
-        self.generateur:draw(self.camera:getPos().x-windowW/2,windowH/2-self.camera:getPos().y)
-        self.cube1:draw(self.camera:getPos().x-windowW/2,windowH/2-self.camera:getPos().y)   
-        self.cube2:draw(self.camera:getPos().x-windowW/2,windowH/2-self.camera:getPos().y) 
+        -- self.interruptor:draw(self.camera:getPos().x-windowW/2,windowH/2-self.camera:getPos().y)
+        -- self.generateur:draw(self.camera:getPos().x-windowW/2,windowH/2-self.camera:getPos().y)
+        -- self.cube1:draw(self.camera:getPos().x-windowW/2,windowH/2-self.camera:getPos().y)   
+        -- self.cube2:draw(self.camera:getPos().x-windowW/2,windowH/2-self.camera:getPos().y) 
     end
     
     

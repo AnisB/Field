@@ -4,21 +4,24 @@ require("game.field")
 
 
 
-Generator = {}
-Generator.__index = Generator
+Gate = {}
+Gate.__index = Gate
 
 
-function Generator.new(pos,type,typeField,ID)
+function Gate.new(pos,ID)
 	local self = {}
-	setmetatable(self, Generator)
-	print(pos)
+	setmetatable(self, Gate)
 	self.id=ID
 	self.position={x=pos.x,y=pos.y}
-	self.pc = Physics.newSphere(self.position.x,self.position.y,unitWorldSize/2,type)
-	self.typeG=type
+    -- Type
+    self.type='Gate' 
+    decalage={unitWorldSize/2,unitWorldSize/2}
+    self.pc = Physics.newRectangle(self.position.x,self.position.y,unitWorldSize,unitWorldSize,true,decalage)
+    self.pc.fixture:setUserData(self)    
+    self.typeG=type
 	print(self.position.x,self.position.y)
 	self.pc.fixture:setUserData(self)
-	self.type='Generator'
+	self.type='Gate'
 	self.typeField=typeField
 	self.appliesField=false
 	self.fieldType=FieldTypes.None
@@ -30,7 +33,7 @@ function Generator.new(pos,type,typeField,ID)
 	return self
 end
 
-	function Generator:isAppliable(pos)
+	function Gate:isAppliable(pos)
 		local ax =pos.x-self.position.x
 		local ay =pos.y-self.position.y
 		if math.abs(math.sqrt(ax*ax+ay*ay))<=self.fieldRadius then
@@ -40,20 +43,20 @@ end
 		end
 	end
 	
-	function Generator:getPosition()
+	function Gate:getPosition()
 		return self.position
 	end
 	
 
 	
-	function Generator:collideWith( object, collision )
+	function Gate:collideWith( object, collision )
 	end
 	
-	function Generator:unCollideWith( object, collision )
+	function Gate:unCollideWith( object, collision )
 
 	end
 
-	function Generator:enableG( )
+	function Gate:enableG( )
 		print("Youhouw")
 		self.field.isActive=true
 		if self.typeField == FieldTypes.RotativeL then
@@ -73,9 +76,7 @@ end
 	     end
 	end
 
-	function Generator:disableG( )
-		print("DOH")
-
+	function Gate:disableG( )
 		self.field.isActive=false
 		if self.typeField == FieldTypes.Static then
 			self:disableStaticField()
@@ -87,7 +88,7 @@ end
 	end
 
 
-function Generator:addStatMetal(metal)
+function Gate:addStatMetal(metal)
   for _, value in pairs(self.statMetals) do
     if value == metal then
       return 
@@ -98,42 +99,42 @@ function Generator:addStatMetal(metal)
 end
 
 -- Enabling fields
-function Generator:enableRepulsiveField()
+function Gate:enableRepulsiveField()
 	self.appliesField=true
 	self.fieldType=FieldTypes.Repulsive
 end
 
-function Generator:enableAttractiveField()
+function Gate:enableAttractiveField()
 	self.appliesField=true
 	self.fieldType=FieldTypes.Attractive
 end
-function Generator:enableStaticField()
+function Gate:enableStaticField()
 	self.appliesField=true
 	self.fieldType=FieldTypes.Static
 end
 
-function Generator:enableRotativeLField()
+function Gate:enableRotativeLField()
 	self.appliesField=true
 	self.fieldType=FieldTypes.RotativeL
 end
-function Generator:enableRotativeRField()
+function Gate:enableRotativeRField()
 	self.appliesField=true
 	self.fieldType=FieldTypes.RotativeR
 end
 
 -- Disabling fields
 
-function Generator:disableField()
+function Gate:disableField()
 	self.appliesField=false
 	self.fieldType=FieldTypes.None
 end
 
 
-function Generator:rotativeLField(pos)
+function Gate:rotativeLField(pos)
 
 end
 
-function Generator:rotativeRField(pos)
+function Gate:rotativeRField(pos)
 	if not self.typeG then
 	local vx=self.position.x-pos.x
 	local vy=self.position.y-pos.y
@@ -144,7 +145,7 @@ function Generator:rotativeRField(pos)
 end
 end
 
-function Generator:attractiveField(pos)
+function Gate:attractiveField(pos)
 	if not self.typeG then
 		local vx=self.position.x-pos.x
 		local vy=self.position.y-pos.y
@@ -157,7 +158,7 @@ function Generator:attractiveField(pos)
 	end
 end
 
-function Generator:repulsiveField(pos)
+function Gate:repulsiveField(pos)
 	if not self.typeG then
 	local vx=-self.position.x+pos.x
 	local vy=-self.position.y+pos.y
@@ -168,7 +169,7 @@ function Generator:repulsiveField(pos)
 	end
 	end
 
-function Generator:disableStaticField()
+function Gate:disableStaticField()
 	self.appliesField=false
 	self.fieldType=FieldTypes.None
 	for i,m in ipairs(self.statMetals)  do
@@ -177,16 +178,16 @@ function Generator:disableStaticField()
 	end
 end
 
-function Generator:changeState( newState )
+function Gate:changeState( newState )
 	self.on=newState
 end
 
 
-function Generator:getPosition(  )
+function Gate:getPosition(  )
 	return self.position
 end
 
-function Generator:update(seconds)
+function Gate:update(seconds)
 	self.field:update(seconds)
 	x,y =self.pc.body:getPosition()
 	self.position.x=x
@@ -196,7 +197,7 @@ function Generator:update(seconds)
 	end
 end
 
-function Generator:draw(x,y)
+function Gate:draw(x,y)
 	self.field:draw(self.pc.body:getX()-x, self.pc.body:getY()+y)
 	love.graphics.setColor(255,100,100,255)
 	love.graphics.circle("fill", self.pc.body:getX()-x, self.pc.body:getY()+y, self.pc.shape:getRadius())

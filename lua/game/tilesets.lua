@@ -22,7 +22,7 @@ function Tilesets:getTiles(tiles)
 		local tile ={}
 		tile.id = v.firstgid
 		print("Image "..v.name)
-		tile.img = love.graphics.newImage(v.image)
+		tile.img = love.graphics.newImage("maps/"..v.image)
 		table.insert(self.tiles,tile)
 	end
 end
