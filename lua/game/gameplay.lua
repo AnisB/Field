@@ -193,6 +193,7 @@ function endContact(a, b, coll)
         local x,y = coll:getNormal()
     b:getUserData():unCollideWith(a:getUserData(), coll)
     a:getUserData():unCollideWith(b:getUserData(), coll)
+    collectgarbage()
 end
 
 function preSolve(a, b, coll)

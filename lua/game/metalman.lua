@@ -9,6 +9,7 @@ MetalMan = {}
 MetalMan.__index = MetalMan
 
 MetalMTypes={Alu =0.05,Acier =0.1}
+MetalManMaxSpeed=unitWorldSize*8
 
 function MetalMan.new(camera,pos)
 	local self = {}
@@ -191,6 +192,15 @@ function MetalMan:loadAnimation(anim, force)
 end
 
 function MetalMan:update(seconds,cam)
+	x,y =self.pc.body:getLinearVelocity()
+	if x>MetalManMaxSpeed then
+		self.pc.body:setLinearVelocity(MetalManMaxSpeed,y)
+	end
+
+		x,y =self.pc.body:getLinearVelocity()
+	if x<-MetalManMaxSpeed then
+		self.pc.body:setLinearVelocity(-MetalManMaxSpeed,y)
+	end
 	self.anim:update(seconds)
 	x,y =self.pc.body:getPosition()
 	self.position.x=x

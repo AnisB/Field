@@ -47,8 +47,10 @@ function GateInterruptor:handleTry()
 	if self.canBeEnable>0 then
 		self.on= not self.on
 		if self.on then
+			print ("coucou"..self.gateID)
 			self.mapLoader:openG(self.gateID)
 		else
+			print "lol"
 			self.mapLoader:closeG(self.gateID)
 
 		end

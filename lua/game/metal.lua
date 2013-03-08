@@ -15,10 +15,10 @@ function Metal.new(pos,shapeType,type,material)
 	print(pos)
 	self.position={x=pos.x,y=pos.y}
 	self.shapeType=shapeType
-	if self.shapeType=='Sphere' then
+	if self.shapeType=='sphere' then
 		self.pc = Physics.newSphere(self.position.x,self.position.y,unitWorldSize/2,type)
 	-- Shape choice
-	elseif self.shapeType =='Rectangle' then
+	elseif self.shapeType =='rectangle' then
 		decalage={unitWorldSize/2,unitWorldSize/2}
 		self.pc = Physics.newRectangle(self.position.x,self.position.y,unitWorldSize,unitWorldSize,type,decalage)
 	end
@@ -28,6 +28,7 @@ function Metal.new(pos,shapeType,type,material)
 	self.metalType=MetalTypes.Normal
 	self.type='Metal'
 	self.metalWeight=material
+	print(self.pc.body:getMass())
 	self.pc.body:setMass(self.metalWeight*unitWorldSize)
 	self.gs=self.pc.body:getGravityScale()
 	return self
@@ -113,7 +114,7 @@ end
 		end
 
 
-		function Metal:update(seconds,cam)
+		function Metal:update(seconds)
 			x,y =self.pc.body:getPosition()
 			self.position.x=x
 			self.position.y=y
@@ -121,9 +122,9 @@ end
 
 function Metal:draw(x,y)
 	love.graphics.setColor(20,255,175,255)
-      if self.shapeType=='Sphere' then
+      if self.shapeType=='sphere' then
             love.graphics.circle( "fill", self.position.x-x,self.position.y+y,unitWorldSize/2, 1000 )
-            elseif self.shapeType =='Rectangle' then
+            elseif self.shapeType =='rectangle' then
                 love.graphics.rectangle( "fill", self.position.x-x,self.position.y+y, unitWorldSize, unitWorldSize )
             end
         end

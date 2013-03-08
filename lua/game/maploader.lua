@@ -11,6 +11,9 @@ require("game.destroyable")
 require("game.tilesets")
 require("game.movable")
 require("game.gateinterruptor")
+require("game.gate")
+require("game.acid")
+require("game.arc")
 
 
 MapLoader = {}
@@ -32,6 +35,8 @@ function MapLoader.new(MapLoaderFile,magnetManager)
     self.gateinterruptors={}
     self.gates={}
     self.metals={}
+    self.acids={}
+    self.arcs={}
     for i,d in pairs(self.map.layers) do
         if d.name=="wall" then
             self:createWalls(d)
@@ -66,7 +71,12 @@ function MapLoader.new(MapLoaderFile,magnetManager)
                 elseif  d.name=="gate" then
                 -- Gestion des portes
                 self:createGates(d) 
-            
+                elseif  d.name=="acid" then
+                -- Gestion des acides
+                self:createAcids(d)   
+                elseif  d.name=="arc" then
+                -- Gestion des arcs
+                self:createArcs(d)               
             end    
             
     end
@@ -99,20 +109,20 @@ end
 
 function MapLoader:createMovables(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.movables, Movable.new({x=(j.x),y=(j.y)},'Sphere', false,nil))
+        table.insert(self.movables, Movable.new({x=(j.x),y=(j.y)},j.shape, false,nil))
     end
 end
 
 function MapLoader:createDestroyables(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.destroyables, Destroyable.new({x=(j.x),y=(j.y)},'Rectangle',nil))
+        table.insert(self.destroyables, Destroyable.new({x=(j.x),y=(j.y)},j.shape,nil))
     end
 end
 
 
 function MapLoader:createGenerators(map)
     for i,j in pairs(map.objects) do
-        local g =Generator.new({x=(j.x),y=(j.y)},true,'Repulsive',j.properties["id"])
+        local g =Generator.new({x=(j.x),y=(j.y)},true,j.type,j.properties["id"])
         self.magnetManager:addGenerator(g)
         table.insert(self.generators,g)
     end
@@ -134,15 +144,28 @@ end
 
 function MapLoader:createGates(map)
     for i,j in pairs(map.objects) do
-        --table.insert(self.gates, Gate.new({x=(j.x),y=(j.y)},'Rectangle',j.gate,self.magnetManager))
+        table.insert(self.gates, Gate.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["id"]))
     end
 end
 
+function MapLoader:createAcids(map)
+    for i,j in pairs(map.objects) do
+        table.insert(self.acids, Acid.new({x=(j.x),y=(j.y)},j.width,j.height))
+    end
+end
+
+function MapLoader:createArcs(map)
+    for i,j in pairs(map.objects) do
+        table.insert(self.arcs, Arc.new({x=(j.x),y=(j.y)},j.width,j.height))
+    end
+end
+
+
 function MapLoader:createMetals(map)
     for i,j in pairs(map.objects) do
-        -- local m =Metal.new({x=(j.x),y=(j.y)},'Rectangle',false,MetalMTypes.Alu)
-        -- self.magnetManager:addMetal(m)        
-        -- table.insert(self.metals,m)
+        local m =Metal.new({x=j.x,y=j.y},j.shape,false,MetalMTypes.Acier)
+        self.magnetManager:addMetal(m)        
+        table.insert(self.metals,m)
     end
 end
 
@@ -153,6 +176,10 @@ function MapLoader:update(dt)
     end
 
     for i,p in pairs(self.platforms) do
+        p:update(dt)
+    end
+
+    for i,p in pairs(self.metals) do
         p:update(dt)
     end
 
@@ -179,6 +206,14 @@ function MapLoader:update(dt)
     for i,p in pairs(self.gates) do
         p:update(dt)
     end
+
+    for i,p in pairs(self.acids) do
+        p:update(dt)
+    end
+
+    for i,p in pairs(self.arcs) do
+        p:update(dt)
+    end
 end
 
 function MapLoader:isSeen(pos1,pos2)
@@ -192,9 +227,13 @@ end
 function MapLoader:draw(pos)
     self.tilesets:draw({x=pos.x-windowW/2,y=windowH/2-pos.y})
 
-    for i,b in pairs(self.destroyables) do
+    for i,b in pairs(self.metals) do
           b:draw(pos.x-windowW/2,windowH/2-pos.y)
 	end
+
+    for i,p in pairs(self.destroyables) do
+        p:draw(pos.x-windowW/2,windowH/2-pos.y)
+    end
 
 	for i,p in pairs(self.platforms) do
 		p:draw(pos.x-windowW/2,windowH/2-pos.y)
@@ -223,12 +262,21 @@ function MapLoader:draw(pos)
     for i,p in pairs(self.gates) do
         p:draw(pos.x-windowW/2,windowH/2-pos.y)
     end
+
+    for i,p in pairs(self.acids) do
+        p:draw(pos.x-windowW/2,windowH/2-pos.y)
+    end
+
+
+    for i,p in pairs(self.arcs) do
+        p:draw(pos.x-windowW/2,windowH/2-pos.y)
+    end
 end
 
 function MapLoader:openG(id)
     for i,p in pairs(self.gates) do
         if(p.id==id) then
-            p.enable=true
+            p:openG()
             return
         end
     end
@@ -237,7 +285,7 @@ end
 function MapLoader:closeG(id)
     for i,p in pairs(self.gates) do
         if(p.id==id) then
-            p.enable=false
+            p:closeG()
             return
         end
     end

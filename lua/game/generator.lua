@@ -19,7 +19,18 @@ function Generator.new(pos,type,typeField,ID)
 	print(self.position.x,self.position.y)
 	self.pc.fixture:setUserData(self)
 	self.type='Generator'
-	self.typeField=typeField
+	if typefield=='repulse' then
+	self.typeField='Repulsive'
+	elseif typefield=='attract' then
+	self.typeField='Attractive'
+	elseif typefield=='clockwise' then
+	self.typeField='Repulsive'
+	elseif typefield=='anticlockwise' then
+	self.typeField='RotativeL'
+	elseif typefield=='repulsive' then
+	self.typeField='RotativeR'
+	end
+
 	self.appliesField=false
 	self.fieldType=FieldTypes.None
 	self.statMetals={}
@@ -200,4 +211,5 @@ function Generator:draw(x,y)
 	self.field:draw(self.pc.body:getX()-x, self.pc.body:getY()+y)
 	love.graphics.setColor(255,100,100,255)
 	love.graphics.circle("fill", self.pc.body:getX()-x, self.pc.body:getY()+y, self.pc.shape:getRadius())
+	self.typeField='Repulsive'
 end

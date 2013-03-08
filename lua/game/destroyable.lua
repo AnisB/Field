@@ -19,9 +19,9 @@
         -- Type
         self.type='Destroyable'
         self.shapeType = type
-        if self.shapeType=='Sphere' then
+        if self.shapeType=='sphere' then
             self.pc = Physics.newSphere(self.position.x,self.position.y,unitWorldSize/2,true)
-        elseif self.shapeType =='Rectangle' then
+        elseif self.shapeType =='rectangle' then
             decalage={unitWorldSize/2,unitWorldSize/2}
             self.pc = Physics.newRectangle(self.position.x,self.position.y,unitWorldSize,unitWorldSize,true,decalage)
         end
@@ -57,9 +57,9 @@ end
          self.position.x=self.pc.body:getX()
          self.position.y=self.pc.body:getY()
          love.graphics.setColor(255,255,255,255)
-         if self.shapeType=='Sphere' then
+         if self.shapeType=='sphere' then
             love.graphics.circle( "fill", self.position.x-x,self.position.y+y,unitWorldSize/2, 1000 )
-            elseif self.shapeType =='Rectangle' then
+            elseif self.shapeType =='rectangle' then
                 love.graphics.rectangle( "fill", self.position.x-x,self.position.y+y, unitWorldSize, unitWorldSize )
             end
         end

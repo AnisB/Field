@@ -67,7 +67,6 @@ end
 function Field:update(dt)
 	self.p:update(dt);
 	if  self.isActive then
-    print("lol")
 		self.p:start()
 	end
 end
