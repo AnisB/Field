@@ -1,3 +1,7 @@
+--[[ 
+This file is part of the Field project
+]]
+
 	world=nil
 
 	Physics = {}
@@ -50,9 +54,9 @@ function Physics.newRectangle(x, y, w,l, isStatic,dec)
 		pc.body = love.physics.newBody(world, x, y, "dynamic")
 	end	
 	pc.fixture = love.physics.newFixture(pc.body, pc.shape, 10) -- Attach fixture to body and give it a density of 1 (rigid body)
-	pc.body:setFixedRotation(false)
+	pc.body:setFixedRotation(true)
 	pc.fixture:setFriction(0.5)
-	pc.body:setInertia(0.0)
+	pc.body:setInertia(1.0)
 	return pc
 end
 

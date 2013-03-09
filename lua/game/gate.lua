@@ -48,14 +48,17 @@ end
 	end
 
 	function Gate:openG( )
-		self.open= true
-		self.pc.fixture:setFilterData(1,1,-1)
+	self.open= true
+	self.pc.fixture:setFilterData(1,1,-1)
+	Sound.playSound("door")
 
 	end
 
 	function Gate:closeG( )
-		self.open= false
+	self.open= false
 	self.pc.fixture:setFilterData(1,1,0)
+	Sound.playSound("door")
+
 	end
 
 

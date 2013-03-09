@@ -206,7 +206,6 @@ function MetalMan:update(seconds,cam)
 		self.pc.body:setLinearVelocity(MetalManMaxSpeed,y)
 	end
 
-		x,y =self.pc.body:getLinearVelocity()
 	if x<-MetalManMaxSpeed then
 		self.pc.body:setLinearVelocity(-MetalManMaxSpeed,y)
 	end

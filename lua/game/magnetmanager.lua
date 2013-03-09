@@ -25,22 +25,24 @@ function MagnetManager:update(dt)
 -- Managing
 	for i,g in ipairs(self.passiveGenerators) do
 		if g.appliesField  then
-			print("switch to active")
 			table.insert(self.activeGenerators,g)
 			table.remove(self.passiveGenerators,i)
 		end
 	end
 	for i,g in ipairs(self.activeGenerators) do
 		if not g.appliesField  then
-			print("switch to passive")
 			table.insert(self.passiveGenerators,g)
 			table.remove(self.activeGenerators,i)
 		end
 	end
+
+
+
 	for i,g in ipairs(self.activeGenerators) do
 			for i,m in ipairs(self.normalMetals) do
 				if g:isAppliable(m:getPosition())  then
 					if g.fieldType==FieldTypes.Static then
+						print("add")
 						g:addStatMetal(m)
 						m:staticField()
 					elseif g.fieldType==FieldTypes.RotativeL then

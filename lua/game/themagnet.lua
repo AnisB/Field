@@ -1,10 +1,12 @@
-
+--[[ 
+This file is part of the Field project
+]]
 
 -- Includes
 require("game.camera")
 require("game.animtm")
 require("game.field")
-
+require("game.themagnetconst")
 -- Class Init
 TheMagnet = {}
 TheMagnet.__index = TheMagnet
@@ -29,7 +31,7 @@ function TheMagnet.new(camera,pos)
 	-- Physics Init
 	self.pc = Physics.newCharacter(self.position.x,self.position.y,unitWorldSize/2,false)
 	self.pc.fixture:setUserData(self)
-	self.pc.body:setMass(0.05*unitWorldSize)
+	self.pc.body:setMass(TheMagnetConst.Mass)
 
 	-- State and animation init
 	self:setState("standing")
@@ -56,10 +58,7 @@ function TheMagnet.new(camera,pos)
 	    self.statMetals={}
 
 	    -- Field Radius
-	    self.fieldRadius=4*unitWorldSize
-
-	    -- Field Strenght
-	    self.strenght=2*unitWorldSize
+	    self.fieldRadius=TheMagnetConst.fieldRadius
 
 	    -- Sound
 	    self.fieldSound=Sound.getSound("field")
@@ -73,7 +72,7 @@ function TheMagnet:jump()
 	-- Trying to jump
 	if self.canjump then
 		-- The physics impulse
-		self.pc.body:applyLinearImpulse(0, -10*unitWorldSize/(0.05*7))
+		self.pc.body:applyLinearImpulse(0, TheMagnetConst.jumpImpulse)
 
 		-- Animaiton and state changing
 		self:setState("startjumping")
@@ -195,7 +194,7 @@ function TheMagnet:rotativeLField(pos)
 	local n = math.sqrt(vx*vx+vy*vy)
 	local vrx = vx/n
 	local vry= vy/n
-	self.pc.body:applyLinearImpulse(vry*self.strenght,-vrx*self.strenght)
+	self.pc.body:applyLinearImpulse(vry*TheMagnetConst.Rot.x,-vrx*TheMagnetConst.Rot.y)
 	self:loadAnimation("field",true)
 end
 
@@ -205,7 +204,7 @@ function TheMagnet:rotativeRField(pos)
 	local n = math.sqrt(vx*vx+vy*vy)
 	local vrx = vx/n
 	local vry= vy/n
-	self.pc.body:applyLinearImpulse(-vry*self.strenght,vrx*self.strenght)
+	self.pc.body:applyLinearImpulse(-vry*TheMagnetConst.Rot.x,vrx*TheMagnetConst.Rot.y)
 	self:loadAnimation("field",true)
 end
 
@@ -216,7 +215,7 @@ function TheMagnet:attractiveField(pos)
 	local n = math.sqrt(vx*vx+vy*vy)
 	local vrx = vx/n
 	local vry= vy/n
-		self.pc.body:applyLinearImpulse(-vrx*self.strenght,-vry*self.strenght)
+		self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Att.x,-vry*TheMagnetConst.Att.y)
 	self:loadAnimation("field",true)
 	end
 
@@ -229,7 +228,7 @@ function TheMagnet:repulsiveField(pos)
 	local vrx = vx/n
 	local vry= vy/n
 	if(n>(unitWorldSize)) then 
-			self.pc.body:applyLinearImpulse(-vrx*self.strenght,-vry*self.strenght)
+			self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Rep.x,-vry*TheMagnetConst.Rep.y)
 	end
 	self:loadAnimation("field",true)
 
@@ -251,8 +250,8 @@ function TheMagnet:disableStaticField()
 	self.fieldType=FieldTypes.None
 	for i,m in ipairs(self.statMetals)  do
 		m:cancelStaticField()
-		table.remove(self.statMetals,i)
 	end
+	self.statMetals={}
 	self:loadAnimation("standing",true)
 end
 
@@ -283,19 +282,30 @@ end
 
 -- Method that updates the character state
 function TheMagnet:update(seconds)
+
+	x,y =self.pc.body:getLinearVelocity()
+	if x>TheMagnetConst.MaxSpeed then
+		self.pc.body:setLinearVelocity(MetalManMaxSpeed,y)
+	end
+
+	if x<-TheMagnetConst.MaxSpeed then
+		self.pc.body:setLinearVelocity(-MetalManMaxSpeed,y)
+	end
 	self.field:update(seconds,self.position.x,self.position.y)
 	if self.appliesField then
 		self.fieldSound:play()
 	end
+
 	self.anim:update(seconds)
 	x,y =self.pc.body:getPosition()
 	self.position.x=x
 	self.position.y=y
+
   if love.keyboard.isDown("right") then --press the right arrow key to push the ball to the right
   	self.goLeft=false
-  	self.pc.body:applyForce(unitWorldSize*40, 0)
+  	self.pc.body:applyForce(TheMagnetConst.MovingForce, 0)
   elseif love.keyboard.isDown("left") then --press the left arrow key to push the ball to the left
-  	self.pc.body:applyForce(-unitWorldSize*40,0)
+  	self.pc.body:applyForce(-TheMagnetConst.MovingForce,0)
   	self.goLeft=true
   end
   for i,m in ipairs(self.statMetals)  do

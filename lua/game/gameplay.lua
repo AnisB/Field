@@ -19,7 +19,7 @@ require("const")
     function Gameplay.new(mapFile)
         local self = {}
         setmetatable(self, Gameplay)
-        Sound.playMusic("themeprincipal")
+        --Sound.playMusic("themeprincipal")
 
         -- Physics
         world = love.physics.newWorld( 0, 9*unitWorldSize, true )
