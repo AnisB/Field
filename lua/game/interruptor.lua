@@ -42,11 +42,9 @@ function Interruptor:getPosition()
 end
 
 function Interruptor:handleTry()
-	print("nb collosion value"..self.canBeEnable)
 	if self.canBeEnable>0 then
 		self.on= not self.on
 		if self.on then
-			print("id"..self.generatorID)
 			self.magnetManager:enableG(self.generatorID)
 		else
 			self.magnetManager:disableG(self.generatorID)
@@ -65,15 +63,12 @@ end
 function Interruptor:collideWith( object, collision )
 	if object.type=='MetalMan' or object.type =='TheMagnet' then
 		self.canBeEnable =self.canBeEnable+1
-		print("value"..self.canBeEnable)
-		--collision:resetRestitution( )
 	end
 end
 
 function Interruptor:unCollideWith( object, collision )
 	if object.type=='MetalMan' or object.type =='TheMagnet' then
 		self.canBeEnable =self.canBeEnable-1
-		print("value"..self.canBeEnable)
 	end
 end
 

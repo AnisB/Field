@@ -252,8 +252,8 @@ function TheMagnet:disableStaticField()
 	for i,m in ipairs(self.statMetals)  do
 		m:cancelStaticField()
 		table.remove(self.statMetals,i)
-	self:loadAnimation("standing",true)
 	end
+	self:loadAnimation("standing",true)
 end
 
 -- Method that handles the begining of a movement

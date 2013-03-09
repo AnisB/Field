@@ -10,7 +10,7 @@ AnimMM.ANIMS = {  -- set of animations available :
 	stoprunning={}
 }
 
-AnimMM.DELAY = 0.100  -- toutes les 200ms, on fait AnimMM.next()
+AnimMM.DELAY = 0.0750  -- toutes les 200ms, on fait AnimMM.next()
 
 -- name
 AnimMM.ANIMS.running.name = "running"
@@ -20,12 +20,22 @@ AnimMM.ANIMS.landing.name = "landing"
 AnimMM.ANIMS.standing.name = "standing"
 AnimMM.ANIMS.stoprunning.name = "stoprunning"
 
+
+-- delays
+AnimMM.ANIMS.running.DELAY = 0.075
+AnimMM.ANIMS.startjumping.DELAY = 0.075
+AnimMM.ANIMS.jumping.DELAY = 0.075
+AnimMM.ANIMS.landing.DELAY = 0.075
+AnimMM.ANIMS.standing.DELAY = 0.125
+AnimMM.ANIMS.stoprunning.DELAY = 0.075
+
+
 -- number of sprites :
-AnimMM.ANIMS.running.number = 10
+AnimMM.ANIMS.running.number = 9
 AnimMM.ANIMS.startjumping.number = 4
 AnimMM.ANIMS.jumping.number = 2
 AnimMM.ANIMS.landing.number = 3
-AnimMM.ANIMS.standing.number = 3
+AnimMM.ANIMS.standing.number = 6
 AnimMM.ANIMS.stoprunning.number = 1
 
 
@@ -117,9 +127,9 @@ end
 -- PUBLIC : update l'anim
 function AnimMM:update(seconds)
 	self.time = self.time + seconds
-	if self.time > AnimMM.DELAY then
+	if self.time > self.currentAnim.DELAY then
 		self:next()
-		self.time = self.time - AnimMM.DELAY
+		self.time = self.time - self.currentAnim.DELAY
 	end
 end
 

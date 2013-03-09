@@ -48,7 +48,6 @@ end
 	end
 
 	function Gate:openG( )
-		print("Youhouw")
 		self.open= true
 		self.pc.fixture:setFilterData(1,1,-1)
 
@@ -56,7 +55,6 @@ end
 
 	function Gate:closeG( )
 		self.open= false
-		print("DOH")
 	self.pc.fixture:setFilterData(1,1,0)
 	end
 

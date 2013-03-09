@@ -124,15 +124,10 @@ end
 
 function MagnetManager:addMetal(newM)
 	if newM.metalType == MetalTypes.Normal then
-	print("Adding normal metal")
 	table.insert(self.normalMetals,newM)
 	elseif  newM.metalType == MetalTypes.Static then
-	print("Adding static metal")
 	table.insert(self.staticMetals,newM)
 	end
-
-	print("Nb metal"..#self.normalMetals)
-
 end
 
 
