@@ -2,7 +2,6 @@
 This file is part of the Fiels project
 ]]
 
-
 MagnetManager = {}
 MagnetManager.__index =  MagnetManager
 
