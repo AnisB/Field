@@ -180,7 +180,14 @@ function MetalMan:startMove(  )
 	self.animCounter=self.animCounter+1
 
 	if self.canjump and not self.isStatic then
-		self:loadAnimation("running",true)	end
+		x,y=self.pc.body:getLinearVelocity()
+	    	print ("velo"..x)
+		if((not self.goF and x>=0) or ( self.goF and x<=0))then
+		self:loadAnimation("running",true)
+	    else
+		self:loadAnimation("returnanim",true)
+	    end
+end
 
 end
 function MetalMan:stopMove( )
@@ -228,7 +235,7 @@ function MetalMan:update(seconds,cam)
   	else
   		self.pc.body:applyForce(-MetalManMovingForce.Acier, 0)
   	end
-  		self.goF=false
+  	self.goF=false
 
   end
 end
