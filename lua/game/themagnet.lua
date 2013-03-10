@@ -268,7 +268,8 @@ end
 -- Method that handles the begining of a movement
 function TheMagnet:stopMove( )
 		self.animCounter=self.animCounter-1
-
+	x,y=self.pc.body:getLinearVelocity()
+	self.pc.body:setLinearVelocity(x/TheMagnetConst.BreakFactor,y/TheMagnetConst.BreakFactor)
 	if self.canjump and not self.isStatic  and self.animCounter==0 then
 		self:loadAnimation("stoprunning",true)	end
 end
