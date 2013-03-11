@@ -44,7 +44,6 @@ function  Physics.newSphere(x, y, radius, isStatic)
 end
 
 function Physics.newRectangle(x, y, w,l, isStatic,dec)
-	print "cc"
 	local pc = {}
 	setmetatable(pc, Physics)
 	pc.shape = love.physics.newRectangleShape( dec[1], dec[2], w, l, 0 )
@@ -78,7 +77,7 @@ function Physics.newInterruptor(x, y, w,l, isStatic,dec)
 end
 
 
-function Physics.newAcid(x, y, w,l,dec)
+function Physics.newZone(x, y, w,l,dec)
 	local pc = {}
 	setmetatable(pc, Physics)
 	pc.shape = love.physics.newRectangleShape( dec[1], dec[2], w, l, 0 )
@@ -90,16 +89,5 @@ function Physics.newAcid(x, y, w,l,dec)
 	pc.body:setInertia(0.0)
 	return pc
 end
-	function Physics.newArc(x, y, w,l,dec)
-		local pc = {}
-		setmetatable(pc, Physics)
-		pc.shape = love.physics.newRectangleShape( dec[1], dec[2], w, l, 0 )
-		pc.body = love.physics.newBody(world, x , y)
-	pc.fixture = love.physics.newFixture(pc.body, pc.shape, 0) -- Attach fixture to body and give it a density of 1 (rigid body)
-	pc.fixture:setSensor(true)
-	pc.body:setFixedRotation(false)
-	pc.fixture:setFriction(0.5)
-	pc.body:setInertia(0.0)
-	return pc
-end
+
 

@@ -13,7 +13,7 @@ function Acid.new(pos,w,h)
 	self.w=w
 	self.h=h
 	local decalage={w/2,h/2}
-	self.pc = Physics.newAcid(self.position.x,self.position.y,w,h,decalage)
+	self.pc = Physics.newZone(self.position.x,self.position.y,w,h,decalage)
 	self.pc.fixture:setUserData(self)
 	self.type='Acid'
 	return self

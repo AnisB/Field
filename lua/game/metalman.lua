@@ -11,7 +11,6 @@ MetalMan.__index = MetalMan
 function MetalMan.new(camera,pos)
 	local self = {}
 	setmetatable(self, MetalMan)
-	print(pos)
 
 	-- The camera
 	self.camera=camera
@@ -157,7 +156,7 @@ function MetalMan:collideWith( object, collision )
 		self:loadAnimation("running",true)
 				else
 			self:setState('landing')
-		self:loadAnimation("landing",true)
+			self:loadAnimation("landing",true)
 	end
 	
 end
@@ -181,7 +180,6 @@ function MetalMan:startMove(  )
 
 	if self.canjump and not self.isStatic then
 		x,y=self.pc.body:getLinearVelocity()
-	    	print ("velo"..x)
 		if((not self.goF and x>=0) or ( self.goF and x<=0))then
 		self:loadAnimation("running",true)
 	    else

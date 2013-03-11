@@ -42,7 +42,6 @@ function MagnetManager:update(dt)
 			for i,m in ipairs(self.normalMetals) do
 				if g:isAppliable(m:getPosition())  then
 					if g.fieldType==FieldTypes.Static then
-						print("add")
 						g:addStatMetal(m)
 						m:staticField()
 					elseif g.fieldType==FieldTypes.RotativeL then
@@ -59,10 +58,6 @@ function MagnetManager:update(dt)
 
 			for i,m in ipairs(self.staticMetals) do
 				if g:isAppliable(m:getPosition())  then
-					-- if g.fieldType==FieldTypes.Static then
-					-- 	g:addStatMetal(m)
-					-- 	m:staticField()
-					-- else
 					if g.fieldType==FieldTypes.RotativeL then
 						g:rotativeLField(m:getPosition())
 					elseif g.fieldType==FieldTypes.RotativeR then
@@ -81,7 +76,6 @@ end
 function MagnetManager:enableG(GID)
 	for i,v in pairs(self.passiveGenerators) do
 		if v.id == GID then
-			print(v.type)
 			v:enableG()
 		end
 	end
@@ -119,8 +113,6 @@ end
 
 function MagnetManager:addGenerator(newG)
 	table.insert(self.passiveGenerators,newG)
-			print("Nb Gene"..#self.passiveGenerators)
-
 end
 
 function MagnetManager:addMetal(newM)

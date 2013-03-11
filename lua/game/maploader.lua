@@ -14,6 +14,7 @@ require("game.gateinterruptor")
 require("game.gate")
 require("game.acid")
 require("game.arc")
+require("game.levelend")
 
 
 MapLoader = {}
@@ -37,6 +38,8 @@ function MapLoader.new(MapLoaderFile,magnetManager)
     self.metals={}
     self.acids={}
     self.arcs={}
+    self.levelends={}
+
     for i,d in pairs(self.map.layers) do
         if d.name=="wall" then
             self:createWalls(d)
@@ -76,7 +79,10 @@ function MapLoader.new(MapLoaderFile,magnetManager)
                 self:createAcids(d)   
                 elseif  d.name=="arc" then
                 -- Gestion des arcs
-                self:createArcs(d)               
+                self:createArcs(d)
+                elseif  d.name=="levelend" then
+                -- Gestion des arcs
+                self:createLevelEnds(d)                  
             end    
             
     end
@@ -115,7 +121,7 @@ end
 
 function MapLoader:createDestroyables(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.destroyables, Destroyable.new({x=(j.x),y=(j.y)},j.shape,nil))
+        table.insert(self.destroyables, Destroyable.new({x=(j.x),y=(j.y)},j.shape,nil,j.width,j.height))
     end
 end
 
@@ -130,13 +136,11 @@ end
 
 function MapLoader:createInterruptors(map)
     for i,j in pairs(map.objects) do
-        print("id"..j.properties["id"])
         table.insert(self.interruptors, Interruptor.new({x=(j.x),y=(j.y)},true,j.properties["id"],self.magnetManager))
     end
 end
 
 function MapLoader:createGateInterruptors(map)
-    print "TROLOLOL"
     for i,j in pairs(map.objects) do
         table.insert(self.gateinterruptors, GateInterruptor.new({x=(j.x),y=(j.y)},true,j.properties["id"],self))
     end
@@ -151,6 +155,12 @@ end
 function MapLoader:createAcids(map)
     for i,j in pairs(map.objects) do
         table.insert(self.acids, Acid.new({x=(j.x),y=(j.y)},j.width,j.height))
+    end
+end
+
+function MapLoader:createLevelEnds(map)
+    for i,j in pairs(map.objects) do
+        table.insert(self.levelends, LevelEnd.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["next"]))
     end
 end
 
@@ -216,60 +226,81 @@ function MapLoader:update(dt)
     end
 end
 
-function MapLoader:isSeen(pos1,pos2)
-    if (pos1.x-pos2.x)>windowH/2 then
-        print("out")
+function MapLoader:isSeen(pos1,pos2,w,h)
+    if (pos1.x-pos2.x-w)>(windowW/2) or (pos1.x-pos2.x)<(-windowW/2) or (pos1.y-pos2.y-h)>(windowH/2) or (pos1.y-pos2.y)<(-windowH/2) then
+        return false
     else
-        print("in")
+        return true
     end
-    return true
 end
 function MapLoader:draw(pos)
     self.tilesets:draw({x=pos.x-windowW/2,y=windowH/2-pos.y})
 
-    for i,b in pairs(self.metals) do
-          b:draw(pos.x-windowW/2,windowH/2-pos.y)
+    for i,p in pairs(self.metals) do
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        end
 	end
 
     for i,p in pairs(self.destroyables) do
-        p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        end
     end
 
 	for i,p in pairs(self.platforms) do
-		p:draw(pos.x-windowW/2,windowH/2-pos.y)
-	end
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end
 
 	for i,p in pairs(self.walls) do
-		p:draw(pos.x-windowW/2,windowH/2-pos.y)
-	end
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end
 
     for i,p in pairs(self.movables) do
-        p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        end
     end
 
     for i,p in pairs(self.interruptors) do
-        p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        end
     end
 
     for i,p in pairs(self.generators) do
-        p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        end
     end
     
     for i,p in pairs(self.gateinterruptors) do
-        p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        end
     end    
 
     for i,p in pairs(self.gates) do
-        p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        end
     end
 
     for i,p in pairs(self.acids) do
-        p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        end
     end
 
 
     for i,p in pairs(self.arcs) do
-        p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        end
     end
 end
 

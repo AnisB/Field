@@ -14,6 +14,8 @@ function Wall.new(position, length, spriteB, spriteM, spriteE)
     self.spriteM=spriteM
     self.spriteE=spriteE
     self.length=length
+    self.w=unitWorldSize
+    self.h=length
         self.type='Wall'
     decalage={unitWorldSize/2,self.length/2}
 

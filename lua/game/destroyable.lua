@@ -6,13 +6,14 @@
     Destroyable = {}
     Destroyable.__index =  Destroyable
     
-    function Destroyable.new(position,type,sprite)
+    function Destroyable.new(position,type,sprite,w,h)
         local self = {}
         setmetatable(self, Destroyable)
 
         -- Position
         self.position={x=position.x,y=position.y}
-
+        self.w=w
+        self.h=h
         -- Sprite
         self.sprite=sprite
 
@@ -22,8 +23,8 @@
         if self.shapeType=='sphere' then
             self.pc = Physics.newSphere(self.position.x,self.position.y,unitWorldSize/2,true)
         elseif self.shapeType =='rectangle' then
-            decalage={unitWorldSize/2,unitWorldSize/2}
-            self.pc = Physics.newRectangle(self.position.x,self.position.y,unitWorldSize,unitWorldSize,true,decalage)
+            decalage={w/2,h/2}
+            self.pc = Physics.newRectangle(self.position.x,self.position.y,w,h,true,decalage)
         end
         self.pc.fixture:setUserData(self)    
         self.kinPallier = 90    
@@ -58,9 +59,9 @@ end
          self.position.y=self.pc.body:getY()
          love.graphics.setColor(255,255,255,255)
          if self.shapeType=='sphere' then
-            love.graphics.circle( "fill", self.position.x-x,self.position.y+y,unitWorldSize/2, 1000 )
+            love.graphics.circle( "fill", self.position.x-x,self.position.y+y,self.w/2, 1000 )
             elseif self.shapeType =='rectangle' then
-                love.graphics.rectangle( "fill", self.position.x-x,self.position.y+y, unitWorldSize, unitWorldSize )
+                love.graphics.rectangle( "fill", self.position.x-x,self.position.y+y, self.w, self.h )
             end
         end
     end

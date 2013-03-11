@@ -12,7 +12,8 @@ MetalMTypes={Alu =0.05,Acier =0.1}
 function Metal.new(pos,shapeType,type,material)
 	local self = {}
 	setmetatable(self, Metal)
-	print(pos)
+	self.w=unitWorldSize
+	self.h=unitWorldSize
 	self.position={x=pos.x,y=pos.y}
 	self.shapeType=shapeType
 	if self.shapeType=='sphere' then

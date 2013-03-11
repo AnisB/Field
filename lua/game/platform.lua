@@ -16,6 +16,8 @@ function Platform.new(position, length, spriteB, spriteM, spriteE)
     self.spriteM=spriteM
     self.spriteE=spriteE
     self.length=length
+    self.w=length
+    self.h=unitWorldSize
     self.type='Platform'
     decalage={self.length/2,unitWorldSize/2}
 

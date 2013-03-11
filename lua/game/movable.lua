@@ -12,7 +12,8 @@
 
         -- Position
         self.position={x=position.x,y=position.y}
-
+        self.w=unitWorldSize
+        self.h=unitWorldSize
         -- Sprite
         self.sprite=sprite
 

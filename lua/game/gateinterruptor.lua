@@ -23,6 +23,8 @@ function GateInterruptor.new(pos,type,gateID,mapLoader)
 	self.canBeEnable=0
 	self.mapLoader=mapLoader
 	self.gateID= gateID
+	self.w=unitWorldSize/2
+	self.h=unitWorldSize/2
 	return self
 end
 
@@ -67,7 +69,6 @@ end
 function GateInterruptor:collideWith( object, collision )
 	if object.type=='MetalMan' or object.type =='TheMagnet' then
 		self.canBeEnable =self.canBeEnable+1
-		print("value"..self.canBeEnable)
 		collision:resetRestitution( )
 	end
 end
@@ -75,7 +76,6 @@ end
 function GateInterruptor:unCollideWith( object, collision )
 	if object.type=='MetalMan' or object.type =='TheMagnet' then
 		self.canBeEnable =self.canBeEnable-1
-		print("value"..self.canBeEnable)
 	end
 end
 

@@ -15,6 +15,9 @@ function Interruptor.new(pos,type,generatorID,magnetManager)
 	self.pc = Physics.newInterruptor(self.position.x,self.position.y,unitWorldSize/2,unitWorldSize/2,type,decalage)
 	self.typeG=type
 	print(self.position.x,self.position.y)
+
+	self.w=unitWorldSize/2
+	self.h=unitWorldSize/2
 	self.pc.fixture:setUserData(self)
 	self.type='Interruptor'
 	self.on= false

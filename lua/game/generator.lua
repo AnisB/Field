@@ -38,6 +38,8 @@ function Generator.new(pos,type,typeField,ID)
 	self.strenght=5*unitWorldSize
 	self.on= false
 	self.field=Field.new(nil,typeField,{x=0,y=0})
+	self.w=unitWorldSize
+	self.h=unitWorldSize
 	return self
 end
 
