@@ -6,16 +6,13 @@ Interruptor = {}
 Interruptor.__index = Interruptor
 
 
-function Interruptor.new(pos,type,generatorID,magnetManager)
+function Interruptor.new(pos,type,generatorID,magnetManager,sprite)
 	local self = {}
-	setmetatable(self, Interruptor)
-	print(pos)
+    setmetatable(self, Interruptor)
 	self.position={x=pos.x,y=pos.y}
 	local decalage={unitWorldSize/4,unitWorldSize/4}
 	self.pc = Physics.newInterruptor(self.position.x,self.position.y,unitWorldSize/2,unitWorldSize/2,type,decalage)
 	self.typeG=type
-	print(self.position.x,self.position.y)
-
 	self.w=unitWorldSize/2
 	self.h=unitWorldSize/2
 	self.pc.fixture:setUserData(self)
@@ -24,6 +21,7 @@ function Interruptor.new(pos,type,generatorID,magnetManager)
 	self.canBeEnable=0
 	self.magnetManager=magnetManager
 	self.generatorID= generatorID
+	self.sprite = love.graphics.newImage("maps/"..sprite)
 	return self
 end
 
@@ -102,6 +100,6 @@ function Interruptor:update(seconds)
 end
 
 function Interruptor:draw(x,y)
-	love.graphics.setColor(100,100,100,255)
-       love.graphics.rectangle( "fill", self.position.x-x,self.position.y+y, unitWorldSize/2, unitWorldSize/2)
+	love.graphics.setColor(255,255,255,255)
+       love.graphics.draw( self.sprite, self.position.x-x,self.position.y+y,0,0.25,0.25)
 end

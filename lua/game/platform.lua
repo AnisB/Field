@@ -43,7 +43,7 @@ function Platform:unCollideWith( object, collision )
 end
 function Platform:draw(x,y)
 	  love.graphics.setColor(0,0,255,255)
-	  love.graphics.rectangle( "fill", self.position.x-x,self.position.y+y,self.length,unitWorldSize)
+	  --love.graphics.rectangle( "fill", self.position.x-x,self.position.y+y,self.length,unitWorldSize)
 	  				love.graphics.setColor(0,20,175,255)
 
 	 --love.graphics.polygon("fill", self.pc.body:getWorldPoints(self.pc.shape:getPoints()))

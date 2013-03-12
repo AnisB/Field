@@ -44,7 +44,7 @@ end
 function Wall:draw(x,y)
 
 		love.graphics.setColor(0,255,0,255)
-	  love.graphics.rectangle( "fill", self.position.x-x,self.position.y+y,unitWorldSize,self.length)
+	--love.graphics.rectangle( "fill", self.position.x-x,self.position.y+y,unitWorldSize,self.length)
 	  --		love.graphics.setColor(0,175,50,255)
 
 	  --love.graphics.polygon("fill", self.pc.body:getWorldPoints(self.pc.shape:getPoints()))

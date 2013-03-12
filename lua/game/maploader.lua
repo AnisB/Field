@@ -136,7 +136,7 @@ end
 
 function MapLoader:createInterruptors(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.interruptors, Interruptor.new({x=(j.x),y=(j.y)},true,j.properties["id"],self.magnetManager))
+        table.insert(self.interruptors, Interruptor.new({x=(j.x),y=(j.y)},true,j.properties["id"],self.magnetManager,j.properties["image"]))
     end
 end
 
