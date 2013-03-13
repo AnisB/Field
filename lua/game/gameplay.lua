@@ -77,10 +77,10 @@ require("const")
     end
 
     if key =="o" then
-        self.theMagnet:enableRepulsiveField()
+        self.theMagnet:enableAttractiveField()
     end
         if key =="p" then
-        self.theMagnet:enableAttractiveField()
+        self.theMagnet:enableRepulsiveField()
     end
 
     if key =="k" then

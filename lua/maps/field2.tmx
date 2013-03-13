@@ -6,9 +6,21 @@
  <tileset firstgid="2" name="sol" tilewidth="64" tileheight="64">
   <image source="sol.png" trans="ffffff" width="64" height="64"/>
  </tileset>
+ <tileset firstgid="3" name="alone" tilewidth="64" tileheight="64">
+  <image source="alone.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="4" name="left" tilewidth="64" tileheight="64">
+  <image source="left.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="5" name="mid" tilewidth="64" tileheight="64">
+  <image source="mid.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="6" name="right" tilewidth="64" tileheight="64">
+  <image source="right.png" width="64" height="64"/>
+ </tileset>
  <layer name="Calque de Tile 1" width="200" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt28EKgCAAREHt/z+6S0EoC0UGhjOwlzxJvKO1lLKZWbd6DOjpAzJ9QKYPyPQBmT4g0wdk+oBMH5DpAzJ9QLZSH6vck3H0AZk+INMHZPoY53wzkL7fOWcuK/Xxpet7mlZ9cM5c9PFe+96spY//uv4bM+u3A9Y1A3w=
+   eJzt2+0KgjAYBtDZ1/1fcg60zPZmQqVt58CD5H6ZPI4p61JKpz4HEbnl0qcbAjzTD4jpB8T0A2L6ATH9gJh+QGzaj3eP0IqxH8fh99IRWjKdP3QDHs3XH7oBd6X1ea3dsH5irdL6PAXn/l1N18JvvHq/a/6gdVE/autGph+s1dL3wW9fZ95DcwnOT/cUROOlMbY1//5RUuNc8mljN0od7FaMsy9L/XDfluX/6Jz0o0bjvdl6L6PIHpOfWVf6iwQM
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="200" height="20">
@@ -19,6 +31,8 @@
   <object x="5632" y="1088" width="64" height="128"/>
   <object x="5824" y="1088" width="64" height="128"/>
   <object x="6144" y="1088" width="64" height="128"/>
+  <object x="64" y="1152" width="64" height="64"/>
+  <object x="512" y="1152" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#0000ff" name="platform" width="200" height="20">
   <object x="0" y="1216" width="12800" height="64"/>
@@ -28,6 +42,10 @@
   <object x="5248" y="1024" width="128" height="64"/>
   <object x="5632" y="1024" width="256" height="64"/>
   <object x="6144" y="1024" width="192" height="64"/>
+  <object x="448" y="1152" width="64" height="64"/>
+  <object x="512" y="1088" width="64" height="64"/>
+  <object x="64" y="1088" width="64" height="64"/>
+  <object x="128" y="832" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#ffffff" name="movable" width="200" height="20">
   <object x="2944" y="1152" width="64" height="64"/>
@@ -97,11 +115,13 @@
   <object x="768" y="1152" width="64" height="64">
    <properties>
     <property name="id" value="42"/>
+    <property name="image" value="switch.png"/>
    </properties>
   </object>
   <object x="3968" y="1152" width="64" height="64">
    <properties>
     <property name="id" value="12345"/>
+    <property name="image" value="switch.png"/>
    </properties>
   </object>
  </objectgroup>
