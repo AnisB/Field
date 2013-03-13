@@ -690,7 +690,8 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "42"
+            ["id"] = "42",
+            ["image"] = "switch.png"
           }
         },
         {
@@ -703,7 +704,8 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "12345"
+            ["id"] = "12345",
+            ["image"] = "switch.png"
           }
         }
       }

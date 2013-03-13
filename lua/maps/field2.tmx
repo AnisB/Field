@@ -97,11 +97,13 @@
   <object x="768" y="1152" width="64" height="64">
    <properties>
     <property name="id" value="42"/>
+    <property name="image" value="switch.png"/>
    </properties>
   </object>
   <object x="3968" y="1152" width="64" height="64">
    <properties>
     <property name="id" value="12345"/>
+    <property name="image" value="switch.png"/>
    </properties>
   </object>
  </objectgroup>
