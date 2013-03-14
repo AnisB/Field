@@ -97,8 +97,9 @@ function MetalMan:repulsiveField(pos)
 	local n = math.sqrt(vx*vx+vy*vy)
 	local vrx = vx/n
 	local vry = vy/(n*n)
-	self.pc.body:applyLinearImpulse(vrx*MetaManRepFieldS.x,vry*MetaManRepFieldS.y*100)
-
+	if(n>(unitWorldSize)) then 
+		self.pc.body:applyLinearImpulse(vrx*MetaManRepFieldS.x,vry*MetaManRepFieldS.y*100)
+	end
 	-- if(n>(unitWorldSize)) then 
 	-- 	self.pc.body:applyLinearImpulse(vrx*MetaManRepFieldS.x,0)
 	-- end
