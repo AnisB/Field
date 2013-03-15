@@ -34,9 +34,9 @@ require("const")
         -- self.map= Map.new("mapFile.txt",self.camera)
 
         --Characters
-        local pos1 ={ x=2*unitWorldSize,  y=10*unitWorldSize}
+        local pos1 ={ x=2*unitWorldSize,  y=5*unitWorldSize}
         self.metalMan = MetalMan.new(self.camera,pos1)
-        local pos ={ x=4*unitWorldSize,  y=10*unitWorldSize}
+        local pos ={ x=4*unitWorldSize,  y=5*unitWorldSize}
         self.theMagnet = TheMagnet.new(nil,pos)
         self.magnetmanager:addGenerator(self.theMagnet)
         self.magnetmanager:addMetal(self.metalMan)
@@ -52,7 +52,7 @@ require("const")
         --self.interruptor = Interruptor.new({x=3.5*unitWorldSize,  y=10.5*unitWorldSize},true,self.generateur.id,self.magnetmanager)
 
         --Map
-        self.mapLoader = MapLoader.new("maps.map1",self.magnetmanager)
+        self.mapLoader = MapLoader.new("maps.level1",self.magnetmanager)
         return self
     end
     
