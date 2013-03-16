@@ -20,7 +20,7 @@
  </tileset>
  <layer name="Calque de Tile 1" width="60" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYAFi1mGO2YCYEYpHChj179ABjAyo7sdHo+OBBOTaj83tjATYuPw70GFADCA2ftHFqO03Us3Elt5ole6obS6lbqW1n6lpJjXcSet4BpkFamswjRAManMAAGkpAeU=
+   eJxjZGBgYAFi1mGO2YCYEYpHChj179ABjAyo7sdHo+OhCLC5nZEAG5d/h0IYEBu/6GLU9hupZmJLb7RKd9Q2l1K30trP1DSTGu6kdTyDzAK1NZhGCAa1OQBkCQHk
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="60" height="10">
@@ -39,7 +39,6 @@
   <object x="1216" y="448" width="64" height="64"/>
   <object x="1152" y="512" width="64" height="64"/>
   <object x="1408" y="448" width="640" height="64"/>
-  <object x="2048" y="256" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#ffffff" name="movable" width="60" height="10"/>
  <objectgroup color="#ff6666" name="destroyable" width="60" height="10"/>
@@ -52,7 +51,18 @@
  <objectgroup color="#800000" name="generator" width="60" height="10"/>
  <objectgroup color="#66ccff" name="switch" width="60" height="10"/>
  <objectgroup color="#e6e6e6" name="metal" width="60" height="10">
-  <object x="320" y="320" width="64" height="64"/>
+  <object x="320" y="320" width="64" height="64">
+   <properties>
+    <property name="magnet" value="static"/>
+    <property name="physic" value="static"/>
+   </properties>
+  </object>
+  <object x="2048" y="192" width="64" height="64">
+   <properties>
+    <property name="magnet" value="static"/>
+    <property name="physic" value="static"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#333333" name="gate" width="60" height="10"/>
  <objectgroup color="#004080" name="acid" width="60" height="10">
