@@ -210,18 +210,6 @@ end
 
 function TheMagnet:attractiveField(pos)
 	
-	local vx=-self.position.x+pos.x
-	local vy=-self.position.y+pos.y
-	local n = math.sqrt(vx*vx+vy*vy)
-	local vrx = vx/n
-	local vry= vy/n
-		self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Att.x,-vry*TheMagnetConst.Att.y)
-	self:loadAnimation("field",true)
-	end
-
-
-function TheMagnet:repulsiveField(pos)
-
 		local vx=self.position.x-pos.x
 	local vy=self.position.y-pos.y
 	local n = math.sqrt(vx*vx+vy*vy)
@@ -230,6 +218,18 @@ function TheMagnet:repulsiveField(pos)
 	if(n>(unitWorldSize)) then 
 			self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Rep.x,-vry*TheMagnetConst.Rep.y)
 	end
+	self:loadAnimation("field",true)
+	
+	end
+
+
+function TheMagnet:repulsiveField(pos)
+local vx=-self.position.x+pos.x
+	local vy=-self.position.y+pos.y
+	local n = math.sqrt(vx*vx+vy*vy)
+	local vrx = vx/n
+	local vry= vy/n
+		self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Att.x,-vry*TheMagnetConst.Att.y)
 	self:loadAnimation("field",true)
 
 	end

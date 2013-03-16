@@ -9,7 +9,7 @@ Metal.__index = Metal
 
 MetalMTypes={Alu =0.05,Acier =0.1}
 
-function Metal.new(pos,shapeType,type,material)
+function Metal.new(pos,shapeType,type,material,IsStaticMetal)
 	local self = {}
 	setmetatable(self, Metal)
 	self.w=unitWorldSize
@@ -26,7 +26,11 @@ function Metal.new(pos,shapeType,type,material)
 	self.pc.fixture:setUserData(self)
 	self.isStatic=type
 	self.strenght=5*unitWorldSize
+	if IsStaticMetal then
+		self.metalType=MetalTypes.Static
+	else
 	self.metalType=MetalTypes.Normal
+	end
 	self.type='Metal'
 	self.metalWeight=material
 	print(self.pc.body:getMass())
@@ -59,18 +63,6 @@ function Metal:rotativeRField(pos)
 end
 
 function Metal:attractiveField(pos)
-	if not self.isStatic then	
-		local vx=self.position.x-pos.x+0.01
-		local vy=self.position.y-pos.y
-		local n = math.sqrt(vx*vx+vy*vy)
-		local vrx = vx/n
-		local vry= vy/n
-		self.pc.body:applyLinearImpulse(vrx*self.strenght,vry*self.strenght)
-	end
-end
-
-
-function Metal:repulsiveField(pos)
 if not self.isStatic then
 	local vx=-self.position.x+pos.x+0.01
 	local vy=-self.position.y+pos.y
@@ -81,6 +73,19 @@ if not self.isStatic then
 		self.pc.body:applyLinearImpulse(vrx*self.strenght,vry*self.strenght)
 	end
 end
+
+end
+
+
+function Metal:repulsiveField(pos)
+	if not self.isStatic then	
+		local vx=self.position.x-pos.x+0.01
+		local vy=self.position.y-pos.y
+		local n = math.sqrt(vx*vx+vy*vy)
+		local vrx = vx/n
+		local vry= vy/n
+		self.pc.body:applyLinearImpulse(vrx*self.strenght,vry*self.strenght)
+	end
 end
 
 function Metal:setVelocity(x,y)
