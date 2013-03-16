@@ -20,7 +20,7 @@
  </tileset>
  <layer name="Calque de Tile 1" width="60" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYAFi1mGO2YCYEYpHChj179ABjAyo7sdHo+OhCLC5nZEAG5d/h0IYEBu/6GLU9hslZtI63VHbXErdSuu8Rk0zqeFObP6ldnyA2hpMIwSD2hwAWlUB4Q==
+   eJxjZGBgYAFi1mGO2YCYEYpHChj179ABjAyo7sdHo+OBBOTaj83tjATYuPw70GFADCA2ftHFqO03Us3Elt5ole6obS6lbqW1n6lpJjXcSet4BpkFamswjRAManMAAGkpAeU=
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="60" height="10">
@@ -32,12 +32,14 @@
  <objectgroup color="#0000ff" name="platform" width="60" height="10">
   <object x="0" y="576" width="3840" height="64"/>
   <object x="64" y="0" width="3712" height="64"/>
-  <object x="2240" y="384" width="256" height="64"/>
+  <object x="2048" y="384" width="448" height="64"/>
   <object x="2496" y="448" width="64" height="64"/>
   <object x="2560" y="512" width="64" height="64"/>
   <object x="1280" y="384" width="128" height="64"/>
   <object x="1216" y="448" width="64" height="64"/>
   <object x="1152" y="512" width="64" height="64"/>
+  <object x="1408" y="448" width="640" height="64"/>
+  <object x="2048" y="256" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#ffffff" name="movable" width="60" height="10"/>
  <objectgroup color="#ff6666" name="destroyable" width="60" height="10"/>
