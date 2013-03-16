@@ -20,25 +20,24 @@
  </tileset>
  <layer name="Calque de Tile 1" width="60" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYAFi1mGO2YCYEYpHChj179ABjAyo7sdHo+OhCLC5nZEAG5d/h0IYEBu/6GLU9hupZmJLb7RKd9Q2l1K30trP1DSTGu6kdTyDzAK1NZhGCAa1OQBkCQHk
+   eJxjZGBgYAFi1mGO2YCYEYpHChj179ABjAyo7sdHo+OhCLC5nZEAG5d/h0IYEBu/6GK09BspZtMjrdHKDnLyCj3yFy3MJ7dsoEeZAjIX1NZgGiEY1OYAAEmFAdo=
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="60" height="10">
   <object x="0" y="0" width="64" height="576"/>
   <object x="3776" y="0" width="64" height="576"/>
-  <object x="2240" y="448" width="64" height="128"/>
-  <object x="1344" y="448" width="64" height="128"/>
+  <object x="2176" y="448" width="64" height="128"/>
+  <object x="1472" y="448" width="64" height="128"/>
  </objectgroup>
  <objectgroup color="#0000ff" name="platform" width="60" height="10">
   <object x="0" y="576" width="3840" height="64"/>
   <object x="64" y="0" width="3712" height="64"/>
-  <object x="2048" y="384" width="448" height="64"/>
-  <object x="2496" y="448" width="64" height="64"/>
-  <object x="2560" y="512" width="64" height="64"/>
-  <object x="1280" y="384" width="128" height="64"/>
-  <object x="1216" y="448" width="64" height="64"/>
-  <object x="1152" y="512" width="64" height="64"/>
-  <object x="1408" y="448" width="640" height="64"/>
+  <object x="2176" y="384" width="128" height="64"/>
+  <object x="2304" y="448" width="64" height="64"/>
+  <object x="2368" y="512" width="64" height="64"/>
+  <object x="1472" y="384" width="64" height="64"/>
+  <object x="1344" y="448" width="128" height="64"/>
+  <object x="1280" y="512" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#ffffff" name="movable" width="60" height="10"/>
  <objectgroup color="#ff6666" name="destroyable" width="60" height="10"/>
@@ -57,7 +56,7 @@
     <property name="physic" value="static"/>
    </properties>
   </object>
-  <object x="2048" y="192" width="64" height="64">
+  <object x="1984" y="64" width="64" height="64">
    <properties>
     <property name="magnet" value="static"/>
     <property name="physic" value="static"/>
@@ -66,7 +65,7 @@
  </objectgroup>
  <objectgroup color="#333333" name="gate" width="60" height="10"/>
  <objectgroup color="#004080" name="acid" width="60" height="10">
-  <object x="1408" y="448" width="832" height="128"/>
+  <object x="1536" y="448" width="640" height="128"/>
  </objectgroup>
  <objectgroup color="#ffff00" name="arc" width="60" height="10"/>
  <objectgroup color="#ffff00" name="levelend" width="60" height="10">
