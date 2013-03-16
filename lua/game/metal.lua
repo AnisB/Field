@@ -9,9 +9,21 @@ Metal.__index = Metal
 
 MetalMTypes={Alu =0.05,Acier =0.1}
 
-function Metal.new(pos,shapeType,type,material,IsStaticMetal)
+function Metal.new(pos,shapeType,typeP,material,typemetal)
 	local self = {}
 	setmetatable(self, Metal)
+	local type =false
+	if typeP =="static" then
+		type=true
+	else
+		type = false
+	end
+
+	if typemetal =="static" then
+		IsStaticMetal=MetalTypes.Static
+	else
+		IsStaticMetal = MetalTypes.Normal
+	end
 	self.w=unitWorldSize
 	self.h=unitWorldSize
 	self.position={x=pos.x,y=pos.y}

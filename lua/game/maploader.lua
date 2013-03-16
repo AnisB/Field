@@ -173,7 +173,7 @@ end
 
 function MapLoader:createMetals(map)
     for i,j in pairs(map.objects) do
-        local m =Metal.new({x=j.x,y=j.y},j.shape,false,MetalMTypes.Acier,false)
+        local m =Metal.new({x=j.x,y=j.y},j.shape,j.properties["physic"],MetalMTypes.Acier,j.properties["magnet"])
         self.magnetManager:addMetal(m)        
         table.insert(self.metals,m)
     end

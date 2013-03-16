@@ -4,7 +4,7 @@ This file is a part of the Field project
 
 require("game.prelude")
 require("game.storyline")
-require("game.FirstEnter")
+require("game.firstenter")
 require("game.connecttoserver")
 require("game.waitingfordistant")
 require("game.levelbegin")
