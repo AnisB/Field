@@ -52,7 +52,7 @@ require("const")
         --self.interruptor = Interruptor.new({x=3.5*unitWorldSize,  y=10.5*unitWorldSize},true,self.generateur.id,self.magnetmanager)
 
         --Map
-        self.mapLoader = MapLoader.new("maps.level3",self.magnetmanager)
+        self.mapLoader = MapLoader.new("maps.map1",self.magnetmanager)
         return self
     end
     
