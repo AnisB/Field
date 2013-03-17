@@ -102,4 +102,5 @@ end
 function Interruptor:draw(x,y)
 	love.graphics.setColor(255,255,255,255)
        love.graphics.draw( self.sprite, self.position.x-x,self.position.y+y,0,0.25,0.25)
+       
 end

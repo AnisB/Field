@@ -22,7 +22,7 @@ UTILISATION :
 --]]--
 
 MUSIC_VOLUME = 0.5
-SOUND_VOLUME = 0
+SOUND_VOLUME = 0.75
 Sound.isPaused = false
 
 Sound.play = function ()

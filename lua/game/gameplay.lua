@@ -19,7 +19,7 @@ require("const")
     function Gameplay.new(mapFile)
         local self = {}
         setmetatable(self, Gameplay)
-        --Sound.playMusic("themeprincipal")
+        Sound.playMusic("themeprincipal")
 
         -- Physics
         world = love.physics.newWorld( 0, 9*unitWorldSize, true )
@@ -29,7 +29,7 @@ require("const")
         self.magnetmanager = MagnetManager.new()
 
         --Map
-        self.mapLoader = MapLoader.new("maps.level7",self.magnetmanager)
+        self.mapLoader = MapLoader.new("maps.level5",self.magnetmanager)
 
         -- Camera Metal Man
         self.cameraMM =Camera.new(0,0)

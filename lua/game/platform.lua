@@ -19,10 +19,10 @@ function Platform.new(position, length, spriteB, spriteM, spriteE)
     self.w=length
     self.h=unitWorldSize
     self.type='Platform'
-    decalage={self.length/2,unitWorldSize/2}
+    decalage={self.length/2,unitWorldSize/4}
 
     -- print("Sol "..self.position[1].." "..self.position[2].." "..unitWorldSize.." "..self.length)
-    self.pc = Physics.newRectangle(self.position.x,self.position.y,self.length,unitWorldSize,true,decalage)
+    self.pc = Physics.newRectangle(self.position.x,self.position.y,self.length,unitWorldSize/2,true,decalage)
     self.pc.fixture:setUserData(self)
     return self
 end

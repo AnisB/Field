@@ -3,7 +3,7 @@
 This file is part of the Field project]]
 
 
-
+require("game.animinter")
 GateInterruptor = {}
 GateInterruptor.__index = GateInterruptor
 
@@ -16,7 +16,7 @@ function GateInterruptor.new(pos,type,gateID,mapLoader)
 	local decalage={unitWorldSize/4,unitWorldSize/4}
 	self.pc = Physics.newInterruptor(self.position.x,self.position.y,unitWorldSize/2,unitWorldSize/2,type,decalage)
 	self.typeG=type
-	print(self.position.x,self.position.y)
+	self.anim = AnimInter.new('inter')
 	self.pc.fixture:setUserData(self)
 	self.type='GateInterruptor'
 	self.on= false
@@ -51,15 +51,19 @@ function GateInterruptor:handleTry()
 		if self.on then
 			print ("coucou"..self.gateID)
 			self.mapLoader:openG(self.gateID)
+			self:loadAnimation("launching",true)
+
 		else
-			print "lol"
+			self:loadAnimation("off",true)
 			self.mapLoader:closeG(self.gateID)
 
 		end
 	end
 end
 
-
+function GateInterruptor:loadAnimation(anim, force)
+		self.anim:load(anim, force)
+end
 
 function GateInterruptor:preSolve(b,coll)
 end
@@ -100,12 +104,15 @@ function GateInterruptor:getPosition(  )
 end
 
 function GateInterruptor:update(seconds)
+	self.anim:update(seconds)
 	x,y =self.pc.body:getPosition()
 	self.position.x=x
 	self.position.y=y
 end
 
 function GateInterruptor:draw(x,y)
-	love.graphics.setColor(255,100,100,255)
+	love.graphics.setColor(255,255,255,255)
     love.graphics.rectangle( "fill", self.position.x-x,self.position.y+y, unitWorldSize/2, unitWorldSize/2)
+    	love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
+
 end

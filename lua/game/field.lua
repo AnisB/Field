@@ -22,6 +22,8 @@ function Field.new(type,position)
   self.isActive=false
   local backimg=nil
   local movimg=nil
+  backimg="img/particle/backstat.png"
+  movimg="img/particle/movstat.png"  
   self.fieldType=type
   self.movposition={x=0,y=0}
   self.bufferSize=256
@@ -32,7 +34,10 @@ function Field.new(type,position)
   self.Spread=5
   self.speed={x=0,y=00}
   self.spin=0
-
+  self.particleLife=3
+  self.radialAcceleration=200
+  self.tangentialAcceleration=1
+  self.colors={r1=30,g1=30,b1=180,a1=10,r2=30,g2=30,b2=180,a2=10}
   if type == FieldTypes.Static then
     backimg="img/particle/backstat.png"
     movimg="img/particle/movstat.png"
