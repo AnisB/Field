@@ -701,7 +701,7 @@ return {
           height = 192,
           visible = true,
           properties = {
-            ["next"] = "level4"
+            ["next"] = "level6"
           }
         }
       }
