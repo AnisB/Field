@@ -152,7 +152,9 @@ end
 
 function MapLoader:createGates(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.gates, Gate.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["id"]))
+        print("Door")
+        print(j.properties["enabled"])
+        table.insert(self.gates, Gate.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["id"],j.properties["enabled"]));
     end
 end
 

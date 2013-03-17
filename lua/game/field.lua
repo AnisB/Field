@@ -24,6 +24,15 @@ function Field.new(type,position)
   local movimg=nil
   self.fieldType=type
   self.movposition={x=0,y=0}
+  self.bufferSize=256
+  self.EmissionRate=10
+  self.lifeTime=0.1
+  self.position={x=0,y=0}
+  self.Direction=0
+  self.Spread=5
+  self.speed={x=0,y=00}
+  self.spin=0
+
   if type == FieldTypes.Static then
     backimg="img/particle/backstat.png"
     movimg="img/particle/movstat.png"
@@ -42,7 +51,7 @@ function Field.new(type,position)
     backimg="img/particle/backrotl.png"
     movimg="img/particle/movrotl.png"
     self.tangentialAcceleration=1000
-    self.radialAcceleration=200
+    self.radialAcceleration=10
     self.colors={r1=255,g1=255,b1=30,a1=10,r2=255,g2=255,b2=30,a2=10}
     self.particleLife=1
   elseif type == FieldTypes.RotativeR then
@@ -54,14 +63,6 @@ function Field.new(type,position)
     self.particleLife=1
   end         
   i =love.graphics.newImage(id)
-  self.img= i
-  self.bufferSize=256
-  self.EmissionRate=10
-  self.lifeTime=0.1
-  self.position={x=0,y=0}
-  self.Direction=0
-  self.Spread=2
-  self.speed={x=0,y=00}
   self.back = love.graphics.newParticleSystem(i, self.bufferSize)
   self.back:setEmissionRate          (self.EmissionRate)
   self.back:setLifetime              (self.lifeTime)
@@ -102,10 +103,10 @@ function Field.new(type,position)
   self.mov:setGravity               (0)
   self.mov:setRadialAcceleration    (self.radialAcceleration)
   self.mov:setTangentialAcceleration(self.tangentialAcceleration)
-  self.mov:setSizes                  (1,2,1 )
-  self.mov:setSizeVariation         (0.5)
+  self.mov:setSizes                  (2,2,1 )
+  self.mov:setSizeVariation         (1)
   self.mov:setRotation              (0)
-  self.mov:setSpin                  (0)
+  self.mov:setSpin                  (self.spin)
   self.mov:setSpinVariation         (0)
   self.mov:setColors                 (255, 255, 255, 255, 255, 255, 255, 255)
   self.mov:stop();
@@ -133,6 +134,6 @@ end
 
 
 function Field:draw(x,y)
-	love.graphics.draw(self.back, x,y)
-  love.graphics.draw(self.mov, x,y)
+	love.graphics.draw(self.back, x-unitWorldSize/4,y-unitWorldSize/4)
+  love.graphics.draw(self.mov, x-unitWorldSize/4,y-unitWorldSize/4)
 end

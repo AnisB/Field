@@ -8,7 +8,7 @@ Gate = {}
 Gate.__index = Gate
 
 
-function Gate.new(pos,w,h,ID)
+function Gate.new(pos,w,h,ID,enabled)
 	local self = {}
 	setmetatable(self, Gate)
 	self.id=ID
@@ -20,7 +20,11 @@ function Gate.new(pos,w,h,ID)
     decalage={w/2,h/2}
     self.pc = Physics.newRectangle(self.position.x,self.position.y,w,h,true,decalage)
     self.pc.fixture:setUserData(self)    
+    if enabled then 
+    	self.open=true
+    else
 	self.open= false
+	end
 	return self
 end
 
