@@ -312,7 +312,6 @@ function MapLoader:openG(id)
     for i,p in pairs(self.gates) do
         if(p.id==id) then
             p:openG()
-            return
         end
     end
 end
@@ -321,7 +320,6 @@ function MapLoader:closeG(id)
     for i,p in pairs(self.gates) do
         if(p.id==id) then
             p:closeG()
-            return
         end
     end
 end
