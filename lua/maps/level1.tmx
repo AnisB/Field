@@ -20,7 +20,7 @@
  </tileset>
  <layer name="Calque de Tile 1" width="60" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjZBg5gBGKRwoY9e/QAYwMqO7HR6PjoQiwuZ2RAHs4+JdQ/KKL0cK/pKYfeqU3WphPTn6hVx6jttnY3E2uf2mV7liAmGmEYDYgBgBL8wDE
+   eJxjZGBgYAFi1mGO2YCYEYpHChj179ABjAyo7sdHo+OhCLC5nZEAezj4l1D8oovRwr+kph96pTdamE9OfqFXHqO22djcTa5/aZXuQG0NphGCQW0OAGS5AeY=
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="60" height="10">
