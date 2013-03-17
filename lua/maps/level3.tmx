@@ -71,7 +71,7 @@
  <objectgroup color="#ffff00" name="levelend" width="60" height="10">
   <object x="3456" y="384" width="320" height="192">
    <properties>
-    <property name="next" value="level2"/>
+    <property name="next" value="level4"/>
    </properties>
   </object>
  </objectgroup>
