@@ -19,7 +19,7 @@ require("const")
     function Gameplay.new(mapFile)
         local self = {}
         setmetatable(self, Gameplay)
-        Sound.playMusic("themeprincipal")
+        --Sound.playMusic("themeprincipal")
 
         -- Physics
         world = love.physics.newWorld( 0, 9*unitWorldSize, true )
@@ -28,31 +28,24 @@ require("const")
         -- Custom physics
         self.magnetmanager = MagnetManager.new()
 
-        -- Camera
-        self.camera =Camera.new(0,0)
+        --Map
+        self.mapLoader = MapLoader.new("maps.level3",self.magnetmanager)
 
-        -- self.map= Map.new("mapFile.txt",self.camera)
+        -- Camera Metal Man
+        self.cameraMM =Camera.new(0,0)
+        -- Camera The Magnet
+        self.cameraTM =Camera.new(0,0)
 
+        
         --Characters
-        local pos1 ={ x=2*unitWorldSize,  y=5*unitWorldSize}
-        self.metalMan = MetalMan.new(self.camera,pos1)
-        local pos ={ x=4*unitWorldSize,  y=5*unitWorldSize}
-        self.theMagnet = TheMagnet.new(nil,pos)
+        self.metalMan = MetalMan.new(self.cameraMM,self.mapLoader.metalManPos)
+        self.theMagnet = TheMagnet.new(self.cameraTM,self.mapLoader.theMagnetPos)
         self.magnetmanager:addGenerator(self.theMagnet)
         self.magnetmanager:addMetal(self.metalMan)
 
+        -- Temp var
+        self.drawWho=1
 
-        --self.generateur = Generator.new({x=19*unitWorldSize,  y=15*unitWorldSize},true,'RotativeL',1)
-        --self.magnetmanager:addGenerator(self.generateur)
-        --self.cube1=Metal.new({x=15*unitWorldSize,  y=10*unitWorldSize}, 'Sphere',false,MetalMTypes.Alu)
-        --self.cube2=Metal.new({x=12*unitWorldSize,  y=15*unitWorldSize},'Sphere', false,MetalMTypes.Acier)
-        --self.magnetmanager:addMetal(self.cube1)
-        --self.magnetmanager:addMetal(self.cube2)
-        
-        --self.interruptor = Interruptor.new({x=3.5*unitWorldSize,  y=10.5*unitWorldSize},true,self.generateur.id,self.magnetmanager)
-
-        --Map
-        self.mapLoader = MapLoader.new("maps.map1",self.magnetmanager)
         return self
     end
     
@@ -95,7 +88,7 @@ require("const")
     end
 
     if key =="y" then
-        self.generateur:enableRotativeLField()
+        self.drawWho= (self.drawWho+1)%2
     end
 
     if key =="b" then
@@ -155,28 +148,27 @@ require("const")
     
     
     function Gameplay:update(dt)
+
+        -- Physics managers
         world:update(dt) 
+        self.magnetmanager:update(dt)   
+
+        -- Other stuff
         self.theMagnet:update(dt)
-        self.metalMan:update(dt,self.camera)
-         self.magnetmanager:update(dt)   
+        self.metalMan:update(dt)
         self.mapLoader:update(dt)
-         -- self.generateur:update(dt)  
-         -- self.cube1:update(dt)   
-         -- self.cube2:update(dt)   
-         -- self.interruptor:update(dt)
     end
     
     function Gameplay:draw()
-
-        self.camera:draw()
-        self.mapLoader:draw(self.camera:getPos())
-        -- self.map:draw(self.camera:getPos())
-        self.theMagnet:draw(self.camera:getPos().x-windowW/2,windowH/2-self.camera:getPos().y)
-        self.metalMan:draw()
-        -- self.interruptor:draw(self.camera:getPos().x-windowW/2,windowH/2-self.camera:getPos().y)
-        -- self.generateur:draw(self.camera:getPos().x-windowW/2,windowH/2-self.camera:getPos().y)
-        -- self.cube1:draw(self.camera:getPos().x-windowW/2,windowH/2-self.camera:getPos().y)   
-        -- self.cube2:draw(self.camera:getPos().x-windowW/2,windowH/2-self.camera:getPos().y) 
+        if self.drawWho==1 then
+            self.mapLoader:draw(self.cameraMM:getPos())
+            self.theMagnet:secondDraw(self.cameraMM:getPos().x-windowW/2,windowH/2-self.cameraMM:getPos().y)
+            self.metalMan:draw() 
+        else
+            self.mapLoader:draw(self.cameraTM:getPos())
+            self.metalMan:secondDraw(self.cameraTM:getPos().x-windowW/2,windowH/2-self.cameraTM:getPos().y)
+            self.theMagnet:draw() 
+        end
     end
     
     

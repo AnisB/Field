@@ -6,10 +6,10 @@
 Field = {}
 Field.__index =  Field
 
-function Field.new(img,type,position)
+function Field.new(type,position)
     local self = {}
     setmetatable(self, Field)
-      --sorry, too lazy to pick an image, just skip point 1a and 1b when you use an image file
+
   --1a. create a blank 32px*32px image data
   id = love.image.newImageData(32, 32)
   --1b. fill that blank image data
@@ -20,38 +20,96 @@ function Field.new(img,type,position)
   	end
   end
   self.isActive=false
-  --2. create an image from that image data
+  local backimg=nil
+  local movimg=nil
+  self.fieldType=type
+  self.movposition={x=0,y=0}
+  if type == FieldTypes.Static then
+    backimg="img/particle/backstat.png"
+    movimg="img/particle/movstat.png"
+    self.tangentialAcceleration=1
+    self.radialAcceleration=50
+    self.colors={r1=30,g1=30,b1=180,a1=10,r2=30,g2=30,b2=180,a2=10}
+    self.particleLife=3
+  elseif type == FieldTypes.Repulsive then
+    backimg="img/particle/backrep.png"
+    movimg="img/particle/movrep.png"
+    self.tangentialAcceleration=1
+    self.radialAcceleration=1000
+    self.colors={r1=180,g1=30,b1=30,a1=20,r2=180,g2=30,b2=30,a2=20}
+    self.particleLife=0.75
+  elseif type == FieldTypes.RotativeL then 
+    backimg="img/particle/backrotl.png"
+    movimg="img/particle/movrotl.png"
+    self.tangentialAcceleration=1000
+    self.radialAcceleration=200
+    self.colors={r1=255,g1=255,b1=30,a1=10,r2=255,g2=255,b2=30,a2=10}
+    self.particleLife=1
+  elseif type == FieldTypes.RotativeR then
+    backimg="img/particle/backrotr.png"
+    movimg="img/particle/movrotr.png"
+    self.tangentialAcceleration=-1000
+    self.radialAcceleration=200
+    self.colors={r1=255,g1=150,b1=30,a1=10,r2=255,g2=127,b2=30,a2=10}
+    self.particleLife=1
+  end         
   i =love.graphics.newImage(id)
+  self.img= i
+  self.bufferSize=256
+  self.EmissionRate=10
+  self.lifeTime=0.1
+  self.position={x=0,y=0}
+  self.Direction=0
+  self.Spread=2
+  self.speed={x=0,y=00}
+  self.back = love.graphics.newParticleSystem(i, self.bufferSize)
+  self.back:setEmissionRate          (self.EmissionRate)
+  self.back:setLifetime              (self.lifeTime)
+  self.back:setParticleLife          (self.particleLife)
+  self.back:setPosition              (self.position.x, self.position.y)
+  self.back:setDirection             (self.Direction)
+  self.back:setSpread                (self.Spread)
+  self.back:setSpeed                 (self.speed.x,self.speed.y)
+  self.back:setGravity               (00)
+  self.back:setRadialAcceleration    (self.radialAcceleration)
+  self.back:setTangentialAcceleration(self.tangentialAcceleration)
+  self.back:setSizes                  (1,50, 1)
+  self.back:setSizeVariation         (0.5)
+  self.back:setRotation              (0)
+  self.back:setSpin                  (0)
+  self.back:setSpinVariation         (0)
+  self.back:setColors                 (self.colors.r1, self.colors.g1, self.colors.b1, self.colors.a1, self.colors.r2, self.colors.g2, self.colors.b2, self.colors.a2)
+  self.back:stop();
+
+    --2. create an image from that image data
+  i =love.graphics.newImage(movimg)
   self.fieldType=type
   self.img= i
   self.bufferSize=256
   self.EmissionRate=20
   self.lifeTime=0.1
-  self.position={x=0,y=0}
-  self.particleLife=1
   self.Direction=0
-  self.Spread=2
-  self.speed={x=0,y=00}
-  self.radialAcceleration=20
-  self.tangentialAcceleration=1
-  self.p = love.graphics.newParticleSystem(i, self.bufferSize)
-  self.p:setEmissionRate          (self.EmissionRate)
-  self.p:setLifetime              (self.lifeTime)
-  self.p:setParticleLife          (self.particleLife)
-  self.p:setPosition              (self.position.x, self.position.y)
-  self.p:setDirection             (self.Direction)
-  self.p:setSpread                (self.Spread)
-  self.p:setSpeed                 (self.speed.x,self.speed.y)
-  self.p:setGravity               (00)
-  self.p:setRadialAcceleration    (self.radialAcceleration)
-  self.p:setTangentialAcceleration(self.tangentialAcceleration)
-  self.p:setSizes                  (1,50, 1)
-  self.p:setSizeVariation         (0.5)
-  self.p:setRotation              (0)
-  self.p:setSpin                  (0)
-  self.p:setSpinVariation         (0)
-  self.p:setColors                 (200, 100, 100, 20, 200, 90, 90, 20)
-  self.p:stop();
+  self.Spread=3
+  self.speed={x=-1,y=1}
+  self.mov = love.graphics.newParticleSystem(i, self.bufferSize)
+  self.mov:setEmissionRate          (self.EmissionRate)
+  self.mov:setLifetime              (self.lifeTime)
+  self.mov:setParticleLife          (self.particleLife)
+  self.mov:setPosition              (self.movposition.x, self.movposition.y)
+  self.mov:setDirection             (self.Direction)
+  self.mov:setSpread                (self.Spread)
+  self.mov:setSpeed                 (self.speed.x,self.speed.y)
+  self.mov:setGravity               (0)
+  self.mov:setRadialAcceleration    (self.radialAcceleration)
+  self.mov:setTangentialAcceleration(self.tangentialAcceleration)
+  self.mov:setSizes                  (1,2,1 )
+  self.mov:setSizeVariation         (0.5)
+  self.mov:setRotation              (0)
+  self.mov:setSpin                  (0)
+  self.mov:setSpinVariation         (0)
+  self.mov:setColors                 (255, 255, 255, 255, 255, 255, 255, 255)
+  self.mov:stop();
+
   return self
 end
 
@@ -65,13 +123,16 @@ function Field:disable()
 end
 
 function Field:update(dt)
-	self.p:update(dt);
+	self.back:update(dt);
+  self.mov:update(dt)
 	if  self.isActive then
-		self.p:start()
+		self.back:start()
+    self.mov:start()
 	end
 end
 
 
 function Field:draw(x,y)
-	love.graphics.draw(self.p, x,y)
+	love.graphics.draw(self.back, x,y)
+  love.graphics.draw(self.mov, x,y)
 end

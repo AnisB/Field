@@ -6,6 +6,7 @@ This file is part of the Field project
 require("game.camera")
 require("game.animtm")
 require("game.field")
+require("game.attfield")
 require("game.themagnetconst")
 -- Class Init
 TheMagnet = {}
@@ -47,7 +48,7 @@ function TheMagnet.new(camera,pos)
 	-- Field init
 
 		-- Particle field managing
-		self.field= Field.new(nil,FieldTypes.Static,pos)
+		self.field= Field.new(FieldTypes.Static,pos)
 		self.field.isActive=false
 	
 	    -- Other field attributes
@@ -150,6 +151,7 @@ end
 
 -- Enabling fields
 function TheMagnet:enableRepulsiveField()
+	self.field= Field.new(FieldTypes.Repulsive,pos)
 	self.field.isActive=true
 	self.appliesField=true
 	self.fieldType=FieldTypes.Repulsive
@@ -157,6 +159,7 @@ function TheMagnet:enableRepulsiveField()
 end
 
 function TheMagnet:enableAttractiveField()
+	self.field= AttField.new(pos)
 	self.field.isActive=true
 	self.appliesField=true
 	self.fieldType=FieldTypes.Attractive
@@ -164,6 +167,7 @@ function TheMagnet:enableAttractiveField()
     Sound.playSound("field")
 end
 function TheMagnet:enableStaticField()
+	self.field= Field.new(FieldTypes.Static,pos)
 	self.field.isActive=true
 	self.appliesField=true
 	self.fieldType=FieldTypes.Static
@@ -172,6 +176,7 @@ function TheMagnet:enableStaticField()
 end
 
 function TheMagnet:enableRotativeLField()
+	self.field= Field.new(FieldTypes.RotativeL,pos)
 	self.field.isActive=true
 	self.appliesField=true
 	self:loadAnimation("field",true)
@@ -179,6 +184,7 @@ function TheMagnet:enableRotativeLField()
     Sound.playSound("field")
 end
 function TheMagnet:enableRotativeRField()
+	self.field= Field.new(FieldTypes.RotativeR,pos)
 	self.field.isActive=true
 	self.appliesField=true
 	self.fieldType=FieldTypes.RotativeR
@@ -194,7 +200,7 @@ function TheMagnet:rotativeLField(pos)
 	local n = math.sqrt(vx*vx+vy*vy)
 	local vrx = vx/n
 	local vry= vy/n
-	self.pc.body:applyLinearImpulse(vry*TheMagnetConst.Rot.x,-vrx*TheMagnetConst.Rot.y)
+	self.pc.body:applyLinearImpulse(-vry*TheMagnetConst.Rot.x,vrx*TheMagnetConst.Rot.y)
 	self:loadAnimation("field",true)
 end
 
@@ -204,7 +210,7 @@ function TheMagnet:rotativeRField(pos)
 	local n = math.sqrt(vx*vx+vy*vy)
 	local vrx = vx/n
 	local vry= vy/n
-	self.pc.body:applyLinearImpulse(-vry*TheMagnetConst.Rot.x,vrx*TheMagnetConst.Rot.y)
+	self.pc.body:applyLinearImpulse(vry*TheMagnetConst.Rot.x,-vrx*TheMagnetConst.Rot.y)
 	self:loadAnimation("field",true)
 end
 
@@ -312,11 +318,12 @@ function TheMagnet:update(seconds)
   for i,m in ipairs(self.statMetals)  do
   	m:setVelocity(self.pc.body:getLinearVelocity())
   end
+  	self.camera:newPosition(self.position.x,self.position.y)
 end
 
 
 -- Draws the character to screen
-function TheMagnet:draw(x,y)
+function TheMagnet:secondDraw(x,y)
 
 	-- Draws the field
 	self.field:draw(self.position.x-x, self.position.y+y)
@@ -327,4 +334,16 @@ function TheMagnet:draw(x,y)
 	else
 	love.graphics.draw(self.anim:getSprite(), self.position.x-x-unitWorldSize/2*1.4, self.position.y+y-unitWorldSize/2*1.4, 0, 1.8,1.8)
 	end
+end
+
+
+function TheMagnet:draw()
+	-- Draws the field
+		self.field:draw(windowW/2+unitWorldSize/2, windowH/2+unitWorldSize/2)
+    	love.graphics.setColor(255,255,255,255)
+    	if 	not self.goLeft then
+    		love.graphics.draw(self.anim:getSprite(), windowW/2-unitWorldSize/2*0.9,windowH/2-unitWorldSize/2*1.4, 0, 1.8,1.8)
+    	else
+    		love.graphics.draw(self.anim:getSprite(), windowW/2+unitWorldSize/2*1.4,windowH/2-unitWorldSize/2*1.4,0 , -1.8,1.8)
+    	end
 end

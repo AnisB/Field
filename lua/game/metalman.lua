@@ -100,23 +100,6 @@ function MetalMan:repulsiveField(pos)
 	if(n>(unitWorldSize)) then 
 		self.pc.body:applyLinearImpulse(vrx*MetaManRepFieldS.x,vry*MetaManRepFieldS.y*100)
 	end
-	-- if(n>(unitWorldSize)) then 
-	-- 	self.pc.body:applyLinearImpulse(vrx*MetaManRepFieldS.x,0)
-	-- end
-	-- if vy<-1 or vy>1 then
-	-- if(n>(unitWorldSize)) then 
-	-- 	self.pc.body:applyLinearImpulse(vrx*MetaManRepFieldS.x,0)
-	-- end
-	-- else
-	-- if vy>0 then
-	--  vry=math.sqrt(vy/(y*0.2))
-	-- else
-	-- 	vry=-math.sqrt(-vy/(y*0.2))
-	-- end
-	-- if(n>(unitWorldSize)) then 
-	-- 	self.pc.body:applyLinearImpulse(vrx*MetaManRepFieldS.x,(1/vry)*MetaManRepFieldS.y/2)
-	-- end
--- end
 end
 
 function MetalMan:setVelocity(x,y)
@@ -224,7 +207,7 @@ function MetalMan:loadAnimation(anim, force)
 		self.anim:load(anim, force)
 end
 
-function MetalMan:update(seconds,cam)
+function MetalMan:update(seconds)
 	x,y =self.pc.body:getLinearVelocity()
 	if x>MetalManMaxSpeed then
 		self.pc.body:setLinearVelocity(MetalManMaxSpeed,y)
@@ -256,7 +239,7 @@ function MetalMan:update(seconds,cam)
 
   end
 end
-	cam:newPosition(self.position.x,self.position.y)
+	self.camera:newPosition(self.position.x,self.position.y)
 end
 
 function MetalMan:draw()
@@ -266,4 +249,16 @@ function MetalMan:draw()
     	else
     		love.graphics.draw(self.anim:getSprite(), windowW/2+unitWorldSize/2,windowH/2-unitWorldSize/2,0 , -1,1)
     	end
+end
+
+-- Draws the character to screen
+function MetalMan:secondDraw(x,y)
+
+	-- Draws the character
+	love.graphics.setColor(255,255,255,255)
+	if self.goF then
+	love.graphics.draw(self.anim:getSprite(), self.position.x-x-unitWorldSize/2, self.position.y+y-unitWorldSize/2, 0, 1,1)
+	else
+	love.graphics.draw(self.anim:getSprite(), self.position.x-x+unitWorldSize/2, self.position.y+y-unitWorldSize/2, 0, -1,1)
+	end
 end

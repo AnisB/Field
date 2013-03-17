@@ -39,6 +39,10 @@ function MapLoader.new(MapLoaderFile,magnetManager)
     self.acids={}
     self.arcs={}
     self.levelends={}
+    self.allowedPowers={}
+
+    -- self.metalManPos={}
+    -- self.theMagnetPos={}
 
     for i,d in pairs(self.map.layers) do
         if d.name=="wall" then
@@ -81,8 +85,14 @@ function MapLoader.new(MapLoaderFile,magnetManager)
                 -- Gestion des arcs
                 self:createArcs(d)
                 elseif  d.name=="levelend" then
-                -- Gestion des arcs
-                self:createLevelEnds(d)                  
+                -- Gestion des fin de niveau
+                self:createLevelEnds(d)   
+                elseif  d.name=="metalman" then
+                -- Gestion de position
+                self.metalManPos={x=d.objects[1].x,y=d.objects[1].y}  
+                elseif  d.name=="themagnet" then
+                -- Gestion de position
+                self.theMagnetPos={x=d.objects[1].x,y=d.objects[1].y}             
             end    
             
     end
@@ -91,12 +101,6 @@ function MapLoader.new(MapLoaderFile,magnetManager)
 
     return self
 end
-
-
-function MapLoader:createBlocs(map)
-
-end
-
 
 
 function MapLoader:createPlatforms(map)

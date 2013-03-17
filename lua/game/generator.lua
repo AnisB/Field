@@ -37,7 +37,7 @@ function Generator.new(pos,type,typeField,ID)
 	self.fieldRadius=4*unitWorldSize
 	self.strenght=5*unitWorldSize
 	self.on= false
-	self.field=Field.new(nil,typeField,{x=0,y=0})
+	self.field=Field.new(typeField,{x=0,y=0})
 	self.w=unitWorldSize
 	self.h=unitWorldSize
 	return self
