@@ -164,6 +164,28 @@ return {
           height = 384,
           visible = true,
           properties = {}
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1408,
+          y = 192,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1728,
+          y = 64,
+          width = 64,
+          height = 128,
+          visible = true,
+          properties = {}
         }
       }
     },
@@ -315,7 +337,21 @@ return {
       visible = true,
       opacity = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          name = "",
+          type = "Attractive",
+          shape = "rectangle",
+          x = 1408,
+          y = 256,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "2"
+          }
+        }
+      }
     },
     {
       type = "objectgroup",
@@ -323,7 +359,22 @@ return {
       visible = true,
       opacity = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 896,
+          y = 64,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "2",
+            ["image"] = "switch.png"
+          }
+        }
+      }
     },
     {
       type = "objectgroup",
@@ -350,7 +401,21 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["enabled"] = "true",
+            ["enableda"] = "true",
+            ["id"] = "1"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 832,
+          y = 128,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["enableda"] = "true",
             ["id"] = "1"
           }
         }
@@ -401,7 +466,7 @@ return {
           height = 192,
           visible = true,
           properties = {
-            ["next"] = "level8"
+            ["next"] = "level9"
           }
         }
       }
@@ -417,8 +482,21 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 2560,
-          y = 512,
+          x = 1664,
+          y = 64,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "1"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 448,
+          y = 448,
           width = 64,
           height = 64,
           visible = true,
