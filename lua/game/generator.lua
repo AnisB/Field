@@ -1,7 +1,7 @@
 
 
 require("game.field")
-
+require("game.attfield")
 
 
 Generator = {}
@@ -35,8 +35,11 @@ function Generator.new(pos,type,typeField,ID)
 	self.fieldRadius=4*unitWorldSize
 	self.strenght=5*unitWorldSize
 	self.on= false
-	print("Post "..self.typeField)
-	self.field=Field.new(self.typeField,{x=0,y=0})
+	if self.typeField==FieldTypes.Attractive then
+		self.field=AttField.new({x=0,y=0})
+	else
+		self.field=Field.new(self.typeField,{x=0,y=0})
+	end
 	self.w=unitWorldSize
 	self.h=unitWorldSize
 
