@@ -16,19 +16,17 @@ function Generator.new(pos,type,typeField,ID)
 	self.position={x=pos.x,y=pos.y}
 	self.pc = Physics.newSphere(self.position.x,self.position.y,unitWorldSize/2,type)
 	self.typeG=type
-	print(self.position.x,self.position.y)
 	self.pc.fixture:setUserData(self)
 	self.type='Generator'
-	if typefield=='repulse' then
-	self.typeField='Repulsive'
-	elseif typefield=='attract' then
-	self.typeField='Attractive'
-	elseif typefield=='clockwise' then
-	self.typeField='Repulsive'
-	elseif typefield=='anticlockwise' then
-	self.typeField='RotativeL'
-	elseif typefield=='repulsive' then
-	self.typeField='RotativeR'
+
+	if typeField=="repulse" then
+	self.typeField=FieldTypes.Repulsive
+	elseif typeField=="attract" then
+	self.typeField=FieldTypes.Attractive
+	elseif typeField=="clockwise" then
+	self.typeField=FieldTypes.RotativeR
+	elseif typeField=="anticlockwise" then
+	self.typeField=FieldTypes.RotativeL
 	end
 
 	self.appliesField=false
@@ -37,9 +35,11 @@ function Generator.new(pos,type,typeField,ID)
 	self.fieldRadius=4*unitWorldSize
 	self.strenght=5*unitWorldSize
 	self.on= false
-	self.field=Field.new(typeField,{x=0,y=0})
+	print("Post "..self.typeField)
+	self.field=Field.new(self.typeField,{x=0,y=0})
 	self.w=unitWorldSize
 	self.h=unitWorldSize
+
 	return self
 end
 
@@ -67,9 +67,10 @@ end
 	end
 
 	function Generator:enableG( )
-		print("Youhouw")
+		print("Youhouw"..self.typeField)
 		self.field.isActive=true
 		if self.typeField == FieldTypes.RotativeL then
+			print("lol")
 			self:enableRotativeLField()
 		--
 		elseif self.typeField == FieldTypes.RotativeR then
@@ -213,5 +214,4 @@ function Generator:draw(x,y)
 	self.field:draw(self.pc.body:getX()-x, self.pc.body:getY()+y)
 	love.graphics.setColor(255,100,100,255)
 	love.graphics.circle("fill", self.pc.body:getX()-x, self.pc.body:getY()+y, self.pc.shape:getRadius())
-	self.typeField='Repulsive'
 end

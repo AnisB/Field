@@ -887,7 +887,8 @@ return {
           height = 128,
           visible = true,
           properties = {
-            ["id"] = "1337"
+            ["id"] = "1337",
+            ["enabled"] ="true"
           }
         }
       }
@@ -971,7 +972,8 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "1337"
+            ["id"] = "1337",
+            ["enabled"] = true
           }
         }
       }

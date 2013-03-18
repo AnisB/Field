@@ -20,9 +20,11 @@ function Gate.new(pos,w,h,ID,enabled)
     decalage={w/2,h/2}
     self.pc = Physics.newRectangle(self.position.x,self.position.y,w,h,true,decalage)
     self.pc.fixture:setUserData(self)    
-    if enabled then 
+    if enabled then
+        self.pc.fixture:setFilterData(1,1,-1)    	
     	self.open=true
     else
+    	self.pc.fixture:setFilterData(1,1,0)
 	self.open= false
 	end
 	return self

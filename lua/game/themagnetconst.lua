@@ -14,9 +14,9 @@ TheMagnetConst.fieldRadius=4*unitWorldSize
 -- Rotative Field Strengh
 TheMagnetConst.Rot={x=2*unitWorldSize,y=2*unitWorldSize}
 -- Attractive Field Strengh
-TheMagnetConst.Att={x=1.5*unitWorldSize,y=10*unitWorldSize}
+TheMagnetConst.Att={x=1.5*unitWorldSize,y=1.5*unitWorldSize}
 -- Repulsive Field Strengh
-TheMagnetConst.Rep={x=2*unitWorldSize,y=2*unitWorldSize}
+TheMagnetConst.Rep={x=unitWorldSize*1.5,y=unitWorldSize*1.5}
 
 
 -- Jump impulse

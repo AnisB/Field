@@ -10,11 +10,11 @@ function Interruptor.new(pos,type,generatorID,magnetManager,sprite)
 	local self = {}
     setmetatable(self, Interruptor)
 	self.position={x=pos.x,y=pos.y}
-	local decalage={unitWorldSize/4,unitWorldSize/4}
-	self.pc = Physics.newInterruptor(self.position.x,self.position.y,unitWorldSize/2,unitWorldSize/2,type,decalage)
+	local decalage={unitWorldSize/2,unitWorldSize/2}
+	self.pc = Physics.newInterruptor(self.position.x,self.position.y,unitWorldSize,unitWorldSize,type,decalage)
 	self.typeG=type
-	self.w=unitWorldSize/2
-	self.h=unitWorldSize/2
+	self.w=unitWorldSize
+	self.h=unitWorldSize
 	self.pc.fixture:setUserData(self)
 	self.type='Interruptor'
 	self.on= false
@@ -102,5 +102,5 @@ end
 function Interruptor:draw(x,y)
 	love.graphics.setColor(255,255,255,255)
        love.graphics.draw( self.sprite, self.position.x-x,self.position.y+y,0,0.25,0.25)
-       
+
 end

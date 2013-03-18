@@ -8,10 +8,9 @@ GateInterruptor = {}
 GateInterruptor.__index = GateInterruptor
 
 
-function GateInterruptor.new(pos,type,gateID,mapLoader)
+function GateInterruptor.new(pos,type,gateID,mapLoader,enabled)
 	local self = {}
 	setmetatable(self, GateInterruptor)
-	print(pos)
 	self.position={x=pos.x,y=pos.y}
 	local decalage={unitWorldSize/4,unitWorldSize/4}
 	self.pc = Physics.newInterruptor(self.position.x,self.position.y,unitWorldSize/2,unitWorldSize/2,type,decalage)
@@ -19,12 +18,21 @@ function GateInterruptor.new(pos,type,gateID,mapLoader)
 	self.anim = AnimInter.new('inter')
 	self.pc.fixture:setUserData(self)
 	self.type='GateInterruptor'
-	self.on= false
+
+	if enabled then
+		self.on=true
+		self:loadAnimation("on",true)
+	else
+		self.on= false
+		self:loadAnimation("off",true)
+
+	end
 	self.canBeEnable=0
 	self.mapLoader=mapLoader
 	self.gateID= gateID
 	self.w=unitWorldSize/2
 	self.h=unitWorldSize/2
+
 	return self
 end
 

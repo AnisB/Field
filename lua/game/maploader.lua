@@ -146,14 +146,13 @@ end
 
 function MapLoader:createGateInterruptors(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.gateinterruptors, GateInterruptor.new({x=(j.x),y=(j.y)},true,j.properties["id"],self))
+        table.insert(self.gateinterruptors, GateInterruptor.new({x=(j.x),y=(j.y)},true,j.properties["id"],self,j.properties["enabled"]))
     end
 end
 
 function MapLoader:createGates(map)
     for i,j in pairs(map.objects) do
         print("Door")
-        print(j.properties["enabled"])
         table.insert(self.gates, Gate.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["id"],j.properties["enabled"]));
     end
 end
