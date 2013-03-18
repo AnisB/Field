@@ -103,14 +103,14 @@ return {
       encoding = "lua",
       data = {
         1, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6
       }
     },
@@ -147,10 +147,10 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 1664,
-          y = 448,
+          x = 768,
+          y = 64,
           width = 64,
-          height = 128,
+          height = 256,
           visible = true,
           properties = {}
         },
@@ -159,7 +159,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 960,
-          y = 448,
+          y = 192,
           width = 64,
           height = 128,
           visible = true,
@@ -200,29 +200,7 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 1728,
-          y = 448,
-          width = 640,
-          height = 64,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 2368,
-          y = 448,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 2432,
+          x = 1984,
           y = 512,
           width = 64,
           height = 64,
@@ -234,8 +212,63 @@ return {
           type = "",
           shape = "rectangle",
           x = 64,
-          y = 384,
+          y = 512,
           width = 960,
+          height = 64,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 832,
+          y = 384,
+          width = 128,
+          height = 64,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1024,
+          y = 128,
+          width = 960,
+          height = 64,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 896,
+          y = 256,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 960,
+          y = 320,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1472,
+          y = 320,
+          width = 512,
           height = 64,
           visible = true,
           properties = {}
@@ -261,8 +294,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 1792,
-          y = 384,
+          x = 1408,
+          y = 192,
           width = 64,
           height = 64,
           visible = true,
@@ -272,107 +305,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 1856,
-          y = 384,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 1920,
-          y = 384,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 1984,
-          y = 384,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 2048,
-          y = 384,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 2112,
-          y = 384,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 2176,
-          y = 384,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 2240,
-          y = 384,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 2304,
-          y = 384,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 1664,
-          y = 384,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 1728,
-          y = 384,
+          x = 1408,
+          y = 256,
           width = 64,
           height = 64,
           visible = true,
@@ -392,7 +326,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 128,
-          y = 320,
+          y = 448,
           width = 64,
           height = 64,
           visible = true,
@@ -412,7 +346,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 256,
-          y = 320,
+          y = 448,
           width = 64,
           height = 64,
           visible = true,
@@ -450,7 +384,34 @@ return {
       visible = true,
       opacity = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1024,
+          y = 320,
+          width = 448,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "1"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 960,
+          y = 64,
+          width = 64,
+          height = 128,
+          visible = true,
+          properties = {
+            ["id"] = "2"
+          }
+        }
+      }
     },
     {
       type = "objectgroup",
@@ -464,9 +425,9 @@ return {
           type = "",
           shape = "rectangle",
           x = 1024,
-          y = 448,
-          width = 640,
-          height = 128,
+          y = 512,
+          width = 960,
+          height = 64,
           visible = true,
           properties = {}
         }
@@ -508,7 +469,34 @@ return {
       visible = true,
       opacity = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 896,
+          y = 320,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "1"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2560,
+          y = 512,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "2"
+          }
+        }
+      }
     }
   }
 }
