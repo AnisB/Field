@@ -20,7 +20,7 @@
  </tileset>
  <layer name="Calque de Tile 1" width="60" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYAFi1mGO2YCYEYpJAaSqH0yAEv8ykoEHGgzl+EUPR3w0JeE+WOILmxsYCbAp8e9AA2LjF11sqMYvOWCouptcQE4ZS80yl95hDbIP1NZgGiEY1OYAANRdAfA=
+   eJxjZGBgYAFi1mGO2YCYEYpJAaSqp5ZeagBK/MtIJh5IQO/4pSZAD0N8NCVhPpjjipEAmxL/DjQgNn7RxYZq/JIDhqq7yQXklrHUimN6hzXIPlBbg2mEYFCbAwDjdQHy
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="60" height="10">
@@ -67,13 +67,13 @@
  <objectgroup color="#333333" name="gate" width="60" height="10">
   <object x="1152" y="448" width="832" height="64">
    <properties>
-    <property name="enableda" value="true"/>
+    <property name="enabled" value="true"/>
     <property name="id" value="1"/>
    </properties>
   </object>
   <object x="832" y="128" width="64" height="64">
    <properties>
-    <property name="enableda" value="true"/>
+    <property name="enabled" value="true"/>
     <property name="id" value="1"/>
    </properties>
   </object>
@@ -92,11 +92,7 @@
  <objectgroup color="#800080" name="gateswitch" width="60" height="10">
   <object x="1664" y="64" width="64" height="64">
    <properties>
-    <property name="id" value="1"/>
-   </properties>
-  </object>
-  <object x="448" y="448" width="64" height="64">
-   <properties>
+    <property name="enabled" value="true"/>
     <property name="id" value="1"/>
    </properties>
   </object>

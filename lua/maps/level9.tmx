@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="10" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="mur" tilewidth="64" tileheight="64">
+  <image source="mur.png" trans="ffffff" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="2" name="sol" tilewidth="64" tileheight="64">
+  <image source="sol.png" trans="ffffff" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="3" name="alone" tilewidth="64" tileheight="64">
+  <image source="alone.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="4" name="left" tilewidth="64" tileheight="64">
+  <image source="left.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="5" name="mid" tilewidth="64" tileheight="64">
+  <image source="mid.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="6" name="right" tilewidth="64" tileheight="64">
+  <image source="right.png" width="64" height="64"/>
+ </tileset>
+ <layer name="Calque de Tile 1" width="60" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYAFi1mGO2YCYEYrJBZToHQgw6l/66qcEMDKg2o+PRseU2DlQAJvbGQmwBzJ+KAXExi+62FD1LzlgpPqXEkyp/fQEIPtAbQ2mEYJBbQ4AXpkB3Q==
+  </data>
+ </layer>
+ <objectgroup color="#00ff00" name="wall" width="60" height="10">
+  <object x="0" y="0" width="64" height="576"/>
+  <object x="3776" y="0" width="64" height="576"/>
+  <object x="960" y="64" width="64" height="256"/>
+ </objectgroup>
+ <objectgroup color="#0000ff" name="platform" width="60" height="10">
+  <object x="0" y="576" width="3840" height="64"/>
+  <object x="64" y="0" width="3712" height="64"/>
+  <object x="1984" y="512" width="64" height="64"/>
+  <object x="64" y="512" width="960" height="64"/>
+  <object x="1024" y="192" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup color="#ffffff" name="movable" width="60" height="10"/>
+ <objectgroup color="#ff6666" name="destroyable" width="60" height="10">
+  <object x="1600" y="448" width="64" height="64"/>
+  <object x="1152" y="448" width="64" height="64"/>
+  <object x="1664" y="448" width="64" height="64"/>
+  <object x="1024" y="448" width="64" height="64"/>
+  <object x="1344" y="448" width="64" height="64"/>
+  <object x="1280" y="448" width="64" height="64"/>
+  <object x="1088" y="448" width="64" height="64"/>
+  <object x="1408" y="448" width="64" height="64"/>
+  <object x="1472" y="448" width="64" height="64"/>
+  <object x="1216" y="448" width="64" height="64"/>
+  <object x="1536" y="448" width="64" height="64"/>
+  <object x="1408" y="384" width="64" height="64"/>
+  <object x="1856" y="448" width="64" height="64"/>
+  <object x="1984" y="64" width="64" height="64"/>
+  <object x="1728" y="448" width="64" height="64"/>
+  <object x="1856" y="256" width="64" height="64"/>
+  <object x="1792" y="320" width="64" height="64"/>
+  <object x="1792" y="448" width="64" height="64"/>
+  <object x="1920" y="256" width="64" height="64"/>
+  <object x="1792" y="384" width="64" height="64"/>
+  <object x="1920" y="448" width="64" height="64"/>
+  <object x="1408" y="320" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="metalman" width="60" height="10">
+  <object x="128" y="448" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="themagnet" width="60" height="10">
+  <object x="256" y="448" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup color="#800000" name="generator" width="60" height="10"/>
+ <objectgroup color="#66ccff" name="switch" width="60" height="10"/>
+ <objectgroup color="#e6e6e6" name="metal" width="60" height="10"/>
+ <objectgroup color="#333333" name="gate" width="60" height="10">
+  <object x="1024" y="256" width="832" height="64">
+   <properties>
+    <property name="id" value="1"/>
+   </properties>
+  </object>
+  <object x="1984" y="128" width="64" height="384"/>
+ </objectgroup>
+ <objectgroup color="#004080" name="acid" width="60" height="10">
+  <object x="1024" y="512" width="960" height="64"/>
+ </objectgroup>
+ <objectgroup color="#ffff00" name="arc" width="60" height="10"/>
+ <objectgroup color="#ffff00" name="levelend" width="60" height="10">
+  <object x="3456" y="384" width="320" height="192">
+   <properties>
+    <property name="next" value="level9"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#800080" name="gateswitch" width="60" height="10">
+  <object x="1024" y="128" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+   </properties>
+  </object>
+  <object x="2176" y="512" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
