@@ -6,7 +6,8 @@ Arc = {}
 Arc.__index = Arc
 
 
-function Arc.new(pos,w,h)
+ArcType={DebutH='DebutH',MillieuH='MillieuH',FinH='FinH',DebutV='DebutV',MillieuV='MillieuV',FinV='FinV'}
+function Arc.new(pos,w,h,typeArc)
 	local self = {}
 	setmetatable(self, Arc)
 	self.position={x=pos.x,y=pos.y}
@@ -16,6 +17,7 @@ function Arc.new(pos,w,h)
 	self.pc = Physics.newZone(self.position.x,self.position.y,w,h,decalage)
 	self.pc.fixture:setUserData(self)
 	self.type='Arc'
+	self.arcType=typeArc
 	return self
 end
 

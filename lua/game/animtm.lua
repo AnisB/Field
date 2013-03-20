@@ -8,7 +8,8 @@ AnimTM.ANIMS = {  -- set of animations available :
 	landing = {},
 	standing= {},
 	stoprunning={},
-	field={}
+	field={},
+	returnanim={}
 }
 
 AnimTM.DELAY = 0.100  -- toutes les 200ms, on fait AnimTM.next()
@@ -21,17 +22,29 @@ AnimTM.ANIMS.landing.name = "landing"
 AnimTM.ANIMS.standing.name = "standing"
 AnimTM.ANIMS.stoprunning.name = "stoprunning"
 AnimTM.ANIMS.field.name = "field"
+AnimTM.ANIMS.returnanim.name = "returnanim"
 
 
 -- number of sprites :
 AnimTM.ANIMS.running.number = 9
-AnimTM.ANIMS.startjumping.number = 2
-AnimTM.ANIMS.jumping.number = 3
-AnimTM.ANIMS.landing.number = 4
+AnimTM.ANIMS.startjumping.number = 3
+AnimTM.ANIMS.jumping.number = 2
+AnimTM.ANIMS.landing.number = 3
 AnimTM.ANIMS.standing.number = 6
-AnimTM.ANIMS.stoprunning.number = 2
-AnimTM.ANIMS.field.number = 5
+AnimTM.ANIMS.stoprunning.number = 1
+AnimTM.ANIMS.field.number = 1
+AnimTM.ANIMS.returnanim.number = 1
 
+
+-- delays
+AnimTM.ANIMS.running.DELAY = 0.075
+AnimTM.ANIMS.startjumping.DELAY = 0.075
+AnimTM.ANIMS.jumping.DELAY = 0.300
+AnimTM.ANIMS.landing.DELAY = 0.075
+AnimTM.ANIMS.standing.DELAY = 0.150
+AnimTM.ANIMS.stoprunning.DELAY = 0.075
+AnimTM.ANIMS.returnanim.DELAY = 0.2
+AnimTM.ANIMS.field.DELAY = 0.2
 
 -- priority :
 AnimTM.ANIMS.running.priority = 10
@@ -41,6 +54,7 @@ AnimTM.ANIMS.landing.priority = 20
 AnimTM.ANIMS.standing.priority = 20
 AnimTM.ANIMS.stoprunning.priority = 20
 AnimTM.ANIMS.field.priority = 20
+AnimTM.ANIMS.returnanim.priority = 20
 
 
 -- automatic loopings or automatic switch :
@@ -51,6 +65,7 @@ AnimTM.ANIMS.landing.switch = AnimTM.ANIMS.standing
 AnimTM.ANIMS.standing.loop = true
 AnimTM.ANIMS.stoprunning.switch = AnimTM.ANIMS.standing
 AnimTM.ANIMS.field.loop = true
+AnimTM.ANIMS.returnanim.switch = AnimTM.ANIMS.running
 
 
 -- next AnimTM available :
@@ -122,9 +137,9 @@ end
 -- PUBLIC : update l'AnimTM
 function AnimTM:update(seconds)
 	self.time = self.time + seconds
-	if self.time > AnimTM.DELAY then
+	if self.time > self.currentAnim.DELAY then
 		self:next()
-		self.time = self.time - AnimTM.DELAY
+		self.time = self.time - self.currentAnim.DELAY
 	end
 end
 

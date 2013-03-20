@@ -19,13 +19,13 @@ function Generator.new(pos,type,typeField,ID)
 	self.pc.fixture:setUserData(self)
 	self.type='Generator'
 
-	if typeField=="repulse" then
+	if typeField=="Repulsive" then
 	self.typeField=FieldTypes.Repulsive
-	elseif typeField=="attract" then
+	elseif typeField=="Attractive" then
 	self.typeField=FieldTypes.Attractive
-	elseif typeField=="clockwise" then
+	elseif typeField=="RorativeR" then
 	self.typeField=FieldTypes.RotativeR
-	elseif typeField=="anticlockwise" then
+	elseif typeField=="RotativeL" then
 	self.typeField=FieldTypes.RotativeL
 	end
 

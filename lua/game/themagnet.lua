@@ -39,7 +39,7 @@ function TheMagnet.new(camera,pos)
 	self.anim = AnimTM.new('themagnet')
 	self:loadAnimation("standing",true)
 	self.canjump=true
-	self.goLeft=false
+	self.goF=true
 	self.animCounter=0
 
 	-- Object's type
@@ -269,8 +269,13 @@ function TheMagnet:startMove(  )
 	self.animCounter=self.animCounter+1
 
 	if self.canjump and not self.isStatic then
-		self:loadAnimation("running",true)	end
-
+		x,y=self.pc.body:getLinearVelocity()
+		if((not self.goF and x>=0) or ( self.goF and x<=0))then
+		self:loadAnimation("running",true)
+	    else
+		self:loadAnimation("returnanim",true)
+	    end
+	end
 end
 
 
@@ -312,11 +317,11 @@ function TheMagnet:update(seconds)
 	self.position.y=y
 
   if love.keyboard.isDown("right") then --press the right arrow key to push the ball to the right
-  	self.goLeft=false
+  	self.goF=true
   	self.pc.body:applyForce(TheMagnetConst.MovingForce, 0)
   elseif love.keyboard.isDown("left") then --press the left arrow key to push the ball to the left
   	self.pc.body:applyForce(-TheMagnetConst.MovingForce,0)
-  	self.goLeft=true
+  	self.goF=false
   end
   for i,m in ipairs(self.statMetals)  do
   	m:setVelocity(self.pc.body:getLinearVelocity())
@@ -332,10 +337,10 @@ function TheMagnet:secondDraw(x,y)
 	self.field:draw(self.position.x-x, self.position.y+y)
 	-- Draws the character
 	love.graphics.setColor(255,255,255,255)
-	if self.goLeft then
-	love.graphics.draw(self.anim:getSprite(), self.position.x-x+unitWorldSize/2*0.9, self.position.y+y-unitWorldSize/2*1.4, 0, -1.8,1.8)
+	if not self.goF then
+	love.graphics.draw(self.anim:getSprite(), self.position.x-x+unitWorldSize/2, self.position.y+y-unitWorldSize/2, 0, -1,1)
 	else
-	love.graphics.draw(self.anim:getSprite(), self.position.x-x-unitWorldSize/2*1.4, self.position.y+y-unitWorldSize/2*1.4, 0, 1.8,1.8)
+	love.graphics.draw(self.anim:getSprite(), self.position.x-x-unitWorldSize/2, self.position.y+y-unitWorldSize/2, 0, 1,1)
 	end
 end
 
@@ -344,9 +349,9 @@ function TheMagnet:draw()
 	-- Draws the field
 		self.field:draw(windowW/2+unitWorldSize/2, windowH/2+unitWorldSize/2)
     	love.graphics.setColor(255,255,255,255)
-    	if 	not self.goLeft then
-    		love.graphics.draw(self.anim:getSprite(), windowW/2-unitWorldSize/2*0.9,windowH/2-unitWorldSize/2*1.4, 0, 1.8,1.8)
+    	if 	 self.goF then
+    		love.graphics.draw(self.anim:getSprite(), windowW/2-unitWorldSize/2,windowH/2-unitWorldSize/2, 0, 1,1)
     	else
-    		love.graphics.draw(self.anim:getSprite(), windowW/2+unitWorldSize/2*1.4,windowH/2-unitWorldSize/2*1.4,0 , -1.8,1.8)
+    		love.graphics.draw(self.anim:getSprite(), windowW/2+unitWorldSize/2,windowH/2-unitWorldSize/2,0 , -1,1)
     	end
 end
