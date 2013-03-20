@@ -29,7 +29,8 @@ require("const")
         self.magnetmanager = MagnetManager.new()
 
         --Map
-        self.mapLoader = MapLoader.new("maps.level8",self.magnetmanager)
+        --self.mapLoader = MapLoader.new("maps.map1",self.magnetmanager)
+        self.mapLoader = MapLoader.new("maps.level9",self.magnetmanager)
 
         -- Camera Metal Man
         self.cameraMM =Camera.new(0,0)
