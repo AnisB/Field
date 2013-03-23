@@ -29,7 +29,7 @@ function MetalMan.new(camera,pos)
 
 	-- Animation state
 	self:setState("standing")
-	self.anim = AnimMM.new('metalMan')
+	self.anim = AnimMM.new('metalman')
 	self:loadAnimation("standing",true)
 	self.goF=true
 	self.animCounter=0
