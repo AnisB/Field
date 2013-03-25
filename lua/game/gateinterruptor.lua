@@ -120,7 +120,6 @@ end
 
 function GateInterruptor:draw(x,y)
 	love.graphics.setColor(255,255,255,255)
-    love.graphics.rectangle( "fill", self.position.x-x,self.position.y+y, unitWorldSize/2, unitWorldSize/2)
     	love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
 
 end

@@ -41,8 +41,17 @@
 end 
 function Destroyable:collideWith( object, collision )
     if object.type=='MetalMan' then
-        local kinEnergy = math.log(0.5*object.pc.body:getMass()*object.pc.body:getMass()*object.pc.body:getMass()*math.abs(object.pc.body:getLinearVelocity()))
-        if(kinEnergy>10.5) and object.position.y>self.position.y then
+        x,y =object.pc.body:getLinearVelocity()
+        local kinEnergyX = math.log(0.5*object.pc.body:getMass()*object.pc.body:getMass()*object.pc.body:getMass()*math.abs(x))
+        local kinEnergyY = math.log(0.5*object.pc.body:getMass()*object.pc.body:getMass()*object.pc.body:getMass()*math.abs(y))
+        print(kinEnergyX..kinEnergyY)
+        if(kinEnergyX>10.5) and object.position.y>self.position.y then
+            self.pc.body:destroy()
+            self.destroy=true
+            Sound.playSound('break')
+        end
+
+        if(kinEnergyY>11.2) and object.position.x>self.position.x then
             self.pc.body:destroy()
             self.destroy=true
             Sound.playSound('break')

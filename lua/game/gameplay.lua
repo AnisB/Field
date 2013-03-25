@@ -13,24 +13,25 @@ require("game.interruptor")
 require("game.sound")
 require("const")
 
-    Gameplay = {}
-    Gameplay.__index = Gameplay
-    
-    function Gameplay.new(mapFile)
-        local self = {}
-        setmetatable(self, Gameplay)
-        Sound.playMusic("themeprincipal")
+Gameplay = {}
+Gameplay.__index = Gameplay
+
+function Gameplay.new(mapFile)
+    local self = {}
+    setmetatable(self, Gameplay)
+    Sound.playMusic("theme")
 
         -- Physics
-        world = love.physics.newWorld( 0, 9*unitWorldSize, true )
         love.physics.setMeter( unitWorldSize) --the height of a meter our worlds will be 64px
+        world = love.physics.newWorld( 0, 18*unitWorldSize, false )
+        print(world:getGravity())
         world:setCallbacks(beginContact, endContact, preSolve, postSolve)
         -- Custom physics
         self.magnetmanager = MagnetManager.new()
 
         --Map
-        --self.mapLoader = MapLoader.new("maps.map1",self.magnetmanager)
-        self.mapLoader = MapLoader.new("maps.level9",self.magnetmanager)
+        self.mapLoader = MapLoader.new("maps.field2",self.magnetmanager)
+        -- self.mapLoader = MapLoader.new("maps.level9",self.magnetmanager)
 
         -- Camera Metal Man
         self.cameraMM =Camera.new(0,0)
@@ -46,11 +47,43 @@ require("const")
 
         -- Temp var
         self.drawWho=1
-
+        print(world:getGravity())
 
         return self
     end
     
+    function Gameplay:reset()
+        world:setCallbacks(nil, function() collectgarbage() end)
+        world:destroy()
+        world=nil
+        world = love.physics.newWorld( 0, 18*unitWorldSize, false )
+        print(world:getGravity())
+        world:setCallbacks(beginContact, endContact, preSolve, postSolve)
+        -- Custom physics
+        self.magnetmanager= nil
+        self.magnetmanager = MagnetManager.new()
+
+        --Map
+        self.mapLoader = MapLoader.new("maps.field2",self.magnetmanager)
+        -- self.mapLoader = MapLoader.new("maps.level9",self.magnetmanager)
+
+        -- Camera Metal Man
+        self.cameraMM =Camera.new(0,0)
+        -- Camera The Magnet
+        self.cameraTM =Camera.new(0,0)
+
+        
+        --Characters
+        self.metalMan = MetalMan.new(self.cameraMM,self.mapLoader.metalManPos)
+        self.theMagnet = TheMagnet.new(self.cameraTM,self.mapLoader.theMagnetPos)
+        self.magnetmanager:addGenerator(self.theMagnet)
+        self.magnetmanager:addMetal(self.metalMan)
+
+        -- Temp var
+        self.drawWho=1
+        print(world:getGravity())
+
+    end
     
     function Gameplay:mousePressed(x, y, button)
     end
@@ -60,91 +93,91 @@ require("const")
     
     
     function Gameplay:keyPressed(key, unicode)
-    if key=="z" then
-        self.metalMan:jump()     
-    end
-    if key=="up" then
-        self.theMagnet:jump()
-    end 
+        if key=="z" then
+            self.metalMan:jump()     
+        end
+        if key=="up" then
+            self.theMagnet:jump()
+        end 
 
-    if key =="i" then
-        self.theMagnet:enableStaticField()
-    end
+        if key =="i" then
+            self.theMagnet:enableStaticField()
+        end
 
-    if key =="o" then
-        self.theMagnet:enableAttractiveField()
-    end
+        if key =="o" then
+            self.theMagnet:enableAttractiveField()
+        end
         if key =="p" then
-        self.theMagnet:enableRepulsiveField()
-    end
+            self.theMagnet:enableRepulsiveField()
+        end
 
-    if key =="k" then
-        self.theMagnet:enableRotativeLField()
-    end
-    if key =="l" then
-        self.theMagnet:enableRotativeRField()
-    end
+        if key =="k" then
+            self.theMagnet:enableRotativeLField()
+        end
+        if key =="l" then
+            self.theMagnet:enableRotativeRField()
+        end
 
-    if key =="e" then
-        self.mapLoader:handleTry()
-    end
+        if key =="e" then
+            self.mapLoader:handleTry()
+        end
 
-    if key =="y" then
-        self.drawWho= (self.drawWho+1)%2
-    end
+        if key =="y" then
+            self.drawWho= (self.drawWho+1)%2
+        end
 
-    if key =="b" then
-        self.metalMan:changeMass()
-    end
-    if key =="d" then
-        self.metalMan:startMove()
-    end
+        if key =="b" then
+            self.metalMan:changeMass()
+        end
+        if key =="d" then
+            self.metalMan:startMove()
+        end
 
-    if key =="q" then
-        self.metalMan:startMove()
-    end
+        if key =="q" then
+            self.metalMan:startMove()
+        end
 
 
-    if key =="left" then
-        self.theMagnet:startMove()
-    end
+        if key =="left" then
+            self.theMagnet:startMove()
+        end
 
-    if key =="right" then
-        self.theMagnet:startMove()
-    end
+        if key =="right" then
+            self.theMagnet:startMove()
+        end
 
-    if key=="n" then
-        self.metalMan:switchType()
-        self.magnetmanager:changeMetalType(self.metalMan,self.metalMan.oldMetal,self.metalMan.metalType)
-    end
+        if key=="n" then
+            self.metalMan:switchType()
+            self.magnetmanager:changeMetalType(self.metalMan,self.metalMan.oldMetal,self.metalMan.metalType)
+        end
 
     end
 
 
 
     function Gameplay:keyReleased(key, unicode)
-    if key =="i" then
-        self.theMagnet:disableStaticField()
-    end
+        if key =="i" then
+            self.theMagnet:disableStaticField()
+        end
 
-    if key =="o" or key =="p" or key =="k"or key =="l"then
-        self.theMagnet:disableField()
-    end
-    if key =="d" then
-        self.metalMan:stopMove()
-    end
+        if key =="o" or key =="p" or key =="k"or key =="l"then
+            self.theMagnet:disableField()
+        end
+        if key =="d" then
+            self.metalMan:stopMove()
+        end
 
-    if key =="q" then
-        self.metalMan:stopMove()
-    end
+        if key =="q" then
+            self.metalMan:stopMove()
+        end
 
-    if key =="left" then
-        self.theMagnet:stopMove()
-    end
+        if key =="left" then
+            self.theMagnet:stopMove()
+        end
 
-    if key =="right" then
-        self.theMagnet:stopMove()
-    end
+        if key =="right" then
+            self.theMagnet:stopMove()
+        end
 
     end
     
@@ -176,15 +209,13 @@ require("const")
     
     function beginContact(a, b, coll)
         local x,y = coll:getNormal()
-    b:getUserData():collideWith(a:getUserData(), coll)
-    a:getUserData():collideWith(b:getUserData(), coll)
+        b:getUserData():collideWith(a:getUserData(), coll)
+        a:getUserData():collideWith(b:getUserData(), coll)
 
     end
-
-    persisting = 0
     
-function endContact(a, b, coll)
-        local x,y = coll:getNormal()
+    function endContact(a, b, coll)
+    local x,y = coll:getNormal()
     b:getUserData():unCollideWith(a:getUserData(), coll)
     a:getUserData():unCollideWith(b:getUserData(), coll)
     collectgarbage()

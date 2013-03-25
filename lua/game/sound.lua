@@ -21,8 +21,8 @@ UTILISATION :
 
 --]]--
 
-MUSIC_VOLUME = 0.5
-SOUND_VOLUME = 0.75
+MUSIC_VOLUME = 1
+SOUND_VOLUME = 0.1
 Sound.isPaused = false
 
 Sound.play = function ()
@@ -82,7 +82,7 @@ Sound.preload = function (name,isLoop)
 	if Sound.sources[name] ~= nil then
 		return
 	end
-	local path = Sound.SOUND_ROOT..name..'.ogg'
+	local path = Sound.SOUND_ROOT..name..'.wav'
 	local src = love.audio.newSource(path)
 	src:setLooping(isLoop)
 	if name == "themeprincipal" then

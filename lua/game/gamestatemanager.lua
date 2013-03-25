@@ -51,10 +51,12 @@ function GameStateManager:update(dt)
 	self.state[self.currentState]:update(dt)
 end
 
+function GameStateManager:reset()	
+	self.state[self.currentState]:reset()
+end
 function GameStateManager:draw()	
 	self.state[self.currentState]:draw()
 end
-
 function GameStateManager:changeState(newState)
 	self.currentState=newState
 end

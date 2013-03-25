@@ -141,7 +141,36 @@
   <object x="5376" y="1088" width="256" height="128"/>
  </objectgroup>
  <objectgroup color="#ffff00" name="arc" width="200" height="20">
-  <object x="5888" y="1088" width="256" height="128"/>
+  <object x="5888" y="1024" width="64" height="64">
+   <properties>
+    <property name="type" value="DebutH"/>
+   </properties>
+  </object>
+  <object x="5952" y="1024" width="64" height="64">
+   <properties>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="6016" y="1024" width="64" height="64">
+   <properties>
+    <property name="type" value="FinH"/>
+   </properties>
+  </object>
+  <object x="6080" y="1024" width="64" height="64">
+   <properties>
+    <property name="type" value="DebutV"/>
+   </properties>
+  </object>
+  <object x="6080" y="1088" width="64" height="64">
+   <properties>
+    <property name="type" value="MillieuV"/>
+   </properties>
+  </object>
+  <object x="6080" y="1152" width="64" height="64">
+   <properties>
+    <property name="type" value="FinV"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ffff00" name="levelend" width="200" height="20">
   <object x="2176" y="1024" width="128" height="192">

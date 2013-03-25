@@ -688,8 +688,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 128,
-          y = 1152,
+          x = 5760,
+          y = 768,
           width = 64,
           height = 64,
           visible = true,
@@ -708,8 +708,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 256,
-          y = 1152,
+          x = 5696,
+          y = 768,
           width = 64,
           height = 64,
           visible = true,
@@ -924,11 +924,78 @@ return {
           type = "",
           shape = "rectangle",
           x = 5888,
-          y = 1088,
-          width = 256,
-          height = 128,
+          y = 1024,
+          width = 64,
+          height = 64,
           visible = true,
-          properties = {}
+          properties = {
+            ["type"] = "DebutH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 5952,
+          y = 1024,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["type"] = "MillieuH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 6016,
+          y = 1024,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["type"] = "FinH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 6080,
+          y = 1024,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["type"] = "DebutV"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 6080,
+          y = 1088,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["type"] = "MillieuV"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 6080,
+          y = 1152,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["type"] = "FinV"
+          }
         }
       }
     },
