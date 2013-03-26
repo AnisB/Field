@@ -159,7 +159,8 @@ end
 
 function MapLoader:createAcids(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.acids, Acid.new({x=(j.x),y=(j.y)},j.width,j.height))
+        print("acid")
+        table.insert(self.acids, Acid.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["type"]))
     end
 end
 
@@ -294,7 +295,10 @@ function MapLoader:draw(pos)
           p:draw(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
+end
 
+function MapLoader:firstPlanDraw(pos)
+ 
     for i,p in pairs(self.acids) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
           p:draw(pos.x-windowW/2,windowH/2-pos.y)

@@ -79,10 +79,10 @@
   <object x="2432" y="1152" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#ff0000" name="metalman" width="200" height="20">
-  <object x="128" y="1152" width="64" height="64"/>
+  <object x="5824" y="640" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#ff0000" name="themagnet" width="200" height="20">
-  <object x="256" y="1152" width="64" height="64"/>
+  <object x="5632" y="640" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#800000" name="generator" width="200" height="20">
   <object type="clockwise" x="1152" y="1024" width="64" height="64">
@@ -138,7 +138,66 @@
   </object>
  </objectgroup>
  <objectgroup color="#004080" name="acid" width="200" height="20">
-  <object x="5376" y="1088" width="256" height="128"/>
+  <object x="5376" y="1088" width="64" height="64">
+   <properties>
+    <property name="type" value="mg"/>
+   </properties>
+  </object>
+  <object x="5440" y="1024" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="5376" y="1024" width="64" height="64">
+   <properties>
+    <property name="type" value="hg"/>
+   </properties>
+  </object>
+  <object x="5440" y="1088" width="64" height="64">
+   <properties>
+    <property name="type" value="mm"/>
+   </properties>
+  </object>
+  <object x="5376" y="1152" width="64" height="64">
+   <properties>
+    <property name="type" value="bg"/>
+   </properties>
+  </object>
+  <object x="5440" y="1152" width="64" height="64">
+   <properties>
+    <property name="type" value="bm"/>
+   </properties>
+  </object>
+  <object x="5568" y="1152" width="64" height="64">
+   <properties>
+    <property name="type" value="bd"/>
+   </properties>
+  </object>
+  <object x="5568" y="1088" width="64" height="64">
+   <properties>
+    <property name="type" value="md"/>
+   </properties>
+  </object>
+  <object x="5568" y="1024" width="64" height="64">
+   <properties>
+    <property name="type" value="hd"/>
+   </properties>
+  </object>
+  <object x="5504" y="1088" width="64" height="64">
+   <properties>
+    <property name="type" value="mm"/>
+   </properties>
+  </object>
+  <object x="5504" y="1024" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="5504" y="1152" width="64" height="64">
+   <properties>
+    <property name="type" value="bm"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ffff00" name="arc" width="200" height="20">
   <object x="5888" y="1024" width="64" height="64">

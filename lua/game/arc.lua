@@ -19,11 +19,9 @@ function Arc.new(pos,w,h,typeArc)
 	self.type='Arc'
 	self.arcType=typeArc
 	if( self.arcType==ArcType.MillieuV or self.arcType==ArcType.MillieuH ) then
-		
-		self.anim = AnimArc.new('arcmid')
-
+		self.anim = AnimArc.new('arc/arcmid')
 	else
-		self.anim = AnimArc.new('arcside')
+		self.anim = AnimArc.new('arc/arcside')
 	end
 	self:loadAnimation("on",true)
 	return self

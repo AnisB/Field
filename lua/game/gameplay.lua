@@ -198,11 +198,15 @@ function Gameplay.new(mapFile)
         if self.drawWho==1 then
             self.mapLoader:draw(self.cameraMM:getPos())
             self.theMagnet:secondDraw(self.cameraMM:getPos().x-windowW/2,windowH/2-self.cameraMM:getPos().y)
-            self.metalMan:draw() 
+            self.metalMan:draw()
+            self.mapLoader:firstPlanDraw(self.cameraMM:getPos())
+
         else
             self.mapLoader:draw(self.cameraTM:getPos())
             self.metalMan:secondDraw(self.cameraTM:getPos().x-windowW/2,windowH/2-self.cameraTM:getPos().y)
             self.theMagnet:draw() 
+            self.mapLoader:firstPlanDraw(self.cameraTM:getPos())
+
         end
     end
     
