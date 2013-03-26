@@ -9,7 +9,8 @@ AnimTM.ANIMS = {  -- set of animations available :
 	standing= {},
 	stoprunning={},
 	field={},
-	returnanim={}
+	returnanim={},
+	launchfield={}
 }
 
 AnimTM.DELAY = 0.100  -- toutes les 200ms, on fait AnimTM.next()
@@ -22,6 +23,7 @@ AnimTM.ANIMS.landing.name = "landing"
 AnimTM.ANIMS.standing.name = "standing"
 AnimTM.ANIMS.stoprunning.name = "stoprunning"
 AnimTM.ANIMS.field.name = "field"
+AnimTM.ANIMS.launchfield.name = "launchfield"
 AnimTM.ANIMS.returnanim.name = "returnanim"
 
 
@@ -32,8 +34,9 @@ AnimTM.ANIMS.jumping.number = 2
 AnimTM.ANIMS.landing.number = 3
 AnimTM.ANIMS.standing.number = 6
 AnimTM.ANIMS.stoprunning.number = 1
-AnimTM.ANIMS.field.number = 1
+AnimTM.ANIMS.field.number = 2
 AnimTM.ANIMS.returnanim.number = 1
+AnimTM.ANIMS.launchfield.number = 1
 
 
 -- delays
@@ -44,7 +47,8 @@ AnimTM.ANIMS.landing.DELAY = 0.075
 AnimTM.ANIMS.standing.DELAY = 0.150
 AnimTM.ANIMS.stoprunning.DELAY = 0.075
 AnimTM.ANIMS.returnanim.DELAY = 0.2
-AnimTM.ANIMS.field.DELAY = 0.2
+AnimTM.ANIMS.field.DELAY = 0.3
+AnimTM.ANIMS.launchfield.DELAY = 0.2
 
 -- priority :
 AnimTM.ANIMS.running.priority = 10
@@ -54,6 +58,7 @@ AnimTM.ANIMS.landing.priority = 20
 AnimTM.ANIMS.standing.priority = 20
 AnimTM.ANIMS.stoprunning.priority = 20
 AnimTM.ANIMS.field.priority = 20
+AnimTM.ANIMS.launchfield.priority = 20
 AnimTM.ANIMS.returnanim.priority = 20
 
 
@@ -66,6 +71,7 @@ AnimTM.ANIMS.standing.loop = true
 AnimTM.ANIMS.stoprunning.switch = AnimTM.ANIMS.standing
 AnimTM.ANIMS.field.loop = true
 AnimTM.ANIMS.returnanim.switch = AnimTM.ANIMS.running
+AnimTM.ANIMS.launchfield.switch = AnimTM.ANIMS.field
 
 
 -- next AnimTM available :

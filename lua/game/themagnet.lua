@@ -155,7 +155,7 @@ function TheMagnet:enableRepulsiveField()
 	self.field.isActive=true
 	self.appliesField=true
 	self.fieldType=FieldTypes.Repulsive
-	self:loadAnimation("field",true)
+	self:loadAnimation("launchfield",true)
 end
 
 function TheMagnet:enableAttractiveField()
@@ -163,7 +163,7 @@ function TheMagnet:enableAttractiveField()
 	self.field.isActive=true
 	self.appliesField=true
 	self.fieldType=FieldTypes.Attractive
-	self:loadAnimation("field",true)
+	self:loadAnimation("launchfield",true)
     Sound.playSound("field")
 end
 function TheMagnet:enableStaticField()
@@ -171,7 +171,7 @@ function TheMagnet:enableStaticField()
 	self.field.isActive=true
 	self.appliesField=true
 	self.fieldType=FieldTypes.Static
-	self:loadAnimation("field",true)
+	self:loadAnimation("launchfield",true)
     Sound.playSound("field")
 end
 
@@ -179,7 +179,7 @@ function TheMagnet:enableRotativeLField()
 	self.field= Field.new(FieldTypes.RotativeL,pos)
 	self.field.isActive=true
 	self.appliesField=true
-	self:loadAnimation("field",true)
+	self:loadAnimation("launchfield",true)
 	self.fieldType=FieldTypes.RotativeL
     Sound.playSound("field")
 end
@@ -188,7 +188,7 @@ function TheMagnet:enableRotativeRField()
 	self.field.isActive=true
 	self.appliesField=true
 	self.fieldType=FieldTypes.RotativeR
-	self:loadAnimation("field",true)
+	self:loadAnimation("launchfield",true)
     Sound.playSound("field")
 end
 
@@ -201,7 +201,7 @@ function TheMagnet:rotativeLField(pos)
 	local vrx = vx/n
 	local vry= vy/n
 	self.pc.body:applyLinearImpulse(-vry*TheMagnetConst.Rot.x,vrx*TheMagnetConst.Rot.y)
-	self:loadAnimation("field",true)
+	self:loadAnimation("launchfield",true)
 end
 
 function TheMagnet:rotativeRField(pos)
@@ -211,7 +211,7 @@ function TheMagnet:rotativeRField(pos)
 	local vrx = vx/n
 	local vry= vy/n
 	self.pc.body:applyLinearImpulse(vry*TheMagnetConst.Rot.x,-vrx*TheMagnetConst.Rot.y)
-	self:loadAnimation("field",true)
+	self:loadAnimation("launchfield",true)
 end
 
 function TheMagnet:attractiveField(pos)
@@ -224,7 +224,7 @@ function TheMagnet:attractiveField(pos)
 	if(n>(unitWorldSize)) then 
 			self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Att.x,-vry*TheMagnetConst.Att.y)
 	end
-	self:loadAnimation("field",true)
+	self:loadAnimation("launchfield",true)
 	
 	end
 
@@ -239,7 +239,7 @@ local vx=-self.position.x+pos.x
 	if(n>(unitWorldSize)) then 
 		self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Rep.x,-vry*TheMagnetConst.Rep.y)
 	end
-	self:loadAnimation("field",true)
+	self:loadAnimation("launchfield",true)
 
 	end
 
@@ -334,7 +334,7 @@ end
 function TheMagnet:secondDraw(x,y)
 
 	-- Draws the field
-	self.field:draw(self.position.x-x, self.position.y+y)
+	self.field:draw(self.position.x-x+unitWorldSize/4, self.position.y+y+unitWorldSize/4)
 	-- Draws the character
 	love.graphics.setColor(255,255,255,255)
 	if not self.goF then
@@ -347,7 +347,7 @@ end
 
 function TheMagnet:draw()
 	-- Draws the field
-		self.field:draw(windowW/2+unitWorldSize/2, windowH/2+unitWorldSize/2)
+		self.field:draw(windowW/2+unitWorldSize/4, windowH/2+unitWorldSize/4)
     	love.graphics.setColor(255,255,255,255)
     	if 	 self.goF then
     		love.graphics.draw(self.anim:getSprite(), windowW/2-unitWorldSize/2,windowH/2-unitWorldSize/2, 0, 1,1)
