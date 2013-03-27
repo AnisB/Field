@@ -48,11 +48,13 @@ function Gameplay.new(mapFile)
         -- Temp var
         self.drawWho=1
         print(world:getGravity())
+        self.shouldEnd=false
 
         return self
     end
     
     function Gameplay:reset()
+        self.shouldEnd=false
         world:setCallbacks(nil, function() collectgarbage() end)
         world:destroy()
         world=nil
@@ -84,7 +86,11 @@ function Gameplay.new(mapFile)
         print(world:getGravity())
 
     end
-    
+
+    function Gameplay:finish()
+        self.shouldEnd=true
+    end
+
     function Gameplay:mousePressed(x, y, button)
     end
     
@@ -185,6 +191,11 @@ function Gameplay.new(mapFile)
     function Gameplay:update(dt)
 
         -- Physics managers
+        if(self.shouldEnd) then
+        gameStateManager:reset()
+
+            return
+        end
         world:update(dt) 
         self.magnetmanager:update(dt)   
 

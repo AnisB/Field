@@ -5,6 +5,7 @@ require("game.animarc")
 Arc = {}
 Arc.__index = Arc
 
+TimerArc =0.5
 
 ArcType={DebutH='DebutH',MillieuH='MillieuH',FinH='FinH',DebutV='DebutV',MillieuV='MillieuV',FinV='FinV'}
 function Arc.new(pos,w,h,typeArc)
@@ -24,6 +25,8 @@ function Arc.new(pos,w,h,typeArc)
 		self.anim = AnimArc.new('arc/arcside')
 	end
 	self:loadAnimation("on",true)
+	self.isTouched=false
+	self.timer=0
 	return self
 end
 
@@ -45,7 +48,7 @@ end
 function Arc:collideWith( object, collision )
 	if object.type=='MetalMan' or object.type =='TheMagnet' then
 		print("He is dead now")
-		gameStateManager:reset()
+		self.isTouched=true
 	end
 end
 
@@ -54,10 +57,17 @@ function Arc:unCollideWith( object, collision )
 end
 
 function Arc:update(seconds)
+	if self.isTouched then
+		self.timer=self.timer+seconds
+	end
 	self.anim:update(seconds)
 	x,y =self.pc.body:getPosition()
 	self.position.x=x
 	self.position.y=y
+	if(self.timer>=TimerArc) then
+		self.isTouched=false
+		gameStateManager:finish()
+	end
 end
 
 function Arc:draw(x,y)
@@ -66,10 +76,10 @@ function Arc:draw(x,y)
 	if( self.arcType==ArcType.MillieuH or self.arcType==ArcType.DebutH) then
 		love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
 		elseif (  self.arcType==ArcType.MillieuV or self.arcType==ArcType.DebutV) then
-		love.graphics.draw(self.anim:getSprite(), self.position.x-x +unitWorldSize, self.position.y+y,math.pi/2)
-		elseif (  self.arcType==ArcType.FinV) then
-		love.graphics.draw(self.anim:getSprite(), self.position.x-x , self.position.y+y+unitWorldSize,-math.pi/2)
-		elseif (  self.arcType==ArcType.FinH) then
-		love.graphics.draw(self.anim:getSprite(), self.position.x-x+unitWorldSize , self.position.y+y,0,-1,1)
-		end
-	end
+			love.graphics.draw(self.anim:getSprite(), self.position.x-x +unitWorldSize, self.position.y+y,math.pi/2)
+			elseif (  self.arcType==ArcType.FinV) then
+				love.graphics.draw(self.anim:getSprite(), self.position.x-x , self.position.y+y+unitWorldSize,-math.pi/2)
+				elseif (  self.arcType==ArcType.FinH) then
+					love.graphics.draw(self.anim:getSprite(), self.position.x-x+unitWorldSize , self.position.y+y,0,-1,1)
+				end
+			end

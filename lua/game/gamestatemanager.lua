@@ -60,3 +60,7 @@ end
 function GameStateManager:changeState(newState)
 	self.currentState=newState
 end
+
+function GameStateManager:finish()
+	self.state[self.currentState]:finish()
+end
