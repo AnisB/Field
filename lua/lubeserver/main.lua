@@ -5,6 +5,7 @@ require("TSerial")
 require("client")
 require("gamestatemanager")
 table2 = require("table2")
+require('history')
 
 -- debug stuff :
 
@@ -61,11 +62,14 @@ end
 -- love stuff :
 
 function love.load()
+	monde = {} -- messy world.
 	clients = {} -- map { idClient => client }
 	nb_clients = 0
 	gameStateManager = common.instance(GameStateManager)
     --anything
     print("Ready !")
+    -- local h1, h2 = load_history("lol", "lil")
+    -- print("HIST :", table2.tostring(h2))
     conn = lube.tcpServer()
 	conn.handshake = "hello"
 	conn:listen(3410)

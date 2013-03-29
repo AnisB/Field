@@ -17,10 +17,27 @@ function Attente:onMessage(msg, client)
 				return (c.pseudo ~= nil and c.cookie ~= nil)
 			end, clients)
 			if clients_logged then
-				gameStateManager:changeState("choixTypeJeu")
-			end
-			for k,c in pairs(clients) do
-				c:send({type= "attenteFinie"})
+				local i = 0
+				for k,c in pairs(clients) do
+					if i == 0 then
+						monde.player1 = c
+						c.numero = 1
+					elseif i == 1 then
+						monde.player2 = c
+						c.numero = 2
+					end
+					i = i + 1
+				end
+				if monde.player1.cookie ~= monde.player2.cookie then
+					local histories = load_history(monde.player1.cookie, monde.player2.cookie)
+					monde.player1.history, monde.player2.history = histories
+					gameStateManager:changeState("choixTypeJeu")
+					for k,c in pairs(clients) do
+						c:send({type= "attenteFinie"})
+					end
+				else
+					debug_warn("[login] same cookies")
+				end
 			end
 		elseif #clients > 2 then
 			debug_warn("[login] more than 2 clients")

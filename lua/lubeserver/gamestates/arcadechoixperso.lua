@@ -10,11 +10,22 @@ function ArcadeChoixPerso:onMessage(msg, client)
 	if msg.type == "choixPerso" then
 		if not msg.confirm then
 			client.perso = msg.perso or debug_warn("[ArcadeChoixPerso] missing perso")
-			-- renvoyer aux clients que untel a cliqué sur tel perso.
+			for k,c in pairs(clients) do
+				c:send({type= "choixPerso", player= client.cookie, perso= client.perso})
+			end
 		else
-			-- checker que les deux joueurs ont selectionne un perso different
-			-- si c'est le cas, on peut passer a l'ecran suivant
-			-- sinon, message d'erreur renvoyé
+			if monde.player1.perso and monde.player2.perso and
+			   monde.player1.perso ~= monde.player2.perso then
+				for k,c in pairs(clients) do
+					c:send({type= "choixPersoFini"})
+				end
+				monde[monde.player1.perso] = monde.player1
+				monde[monde.player2.perso] = monde.player2
+				gameStateManager:changeState("arcadeChoixNiveau")
+				-- TODO : envoyer la liste des niveau possibles ?
+			else
+				client:send({type= "err", msg="choix des personnages pas fini"})
+			end
 		end
 	else
 		debug_warn("[ArcadeChoixPerso] wrong type")

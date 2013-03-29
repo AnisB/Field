@@ -18,6 +18,25 @@ function onMessage(msg)
 	print("Received : " .. table2.tostring(msg))
 end
 
+function gen_cookie()
+    local length = 32
+    local cookie = ""
+    for i=0, length do
+        local n = math.random(65+32, 65+32+25)
+        cookie = cookie .. string.char(n)
+    end
+    return cookie
+end
+
+function get_cookie()
+	local savefile = gen_cookie()..".cookiesave" -- "cookie.save"
+	if not love.filesystem.exists(savefile) then
+		love.filesystem.write(savefile, TSerial.pack({cookie= gen_cookie()}))
+	end
+	local c = TSerial.unpack(love.filesystem.read(savefile))
+	return c.cookie
+end
+
 -- love stuff :
 
 function love.load()
@@ -32,7 +51,7 @@ function love.load()
 	local function popMsg()
 		local toSend = {
 			type= "login",
-			cookie= "dg19u8HGsaWv5i546LK0YDz",
+			cookie= get_cookie(),
 			pseudo= "luc"
 		}
 		serveur:send(toSend)
