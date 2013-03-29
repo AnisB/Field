@@ -8,7 +8,9 @@ AnimMM.ANIMS = {  -- set of animations available :
 	landing = {},
 	standing= {},
 	stoprunning={},
-	returnanim={}
+	returnanim={},
+	load1={},
+	load2={}
 }
 
 AnimMM.DELAY = 0.0750  -- toutes les 200ms, on fait AnimMM.next()
@@ -21,6 +23,8 @@ AnimMM.ANIMS.landing.name = "landing"
 AnimMM.ANIMS.standing.name = "standing"
 AnimMM.ANIMS.stoprunning.name = "stoprunning"
 AnimMM.ANIMS.returnanim.name = "returnanim"
+AnimMM.ANIMS.load1.name = "load1"
+AnimMM.ANIMS.load2.name = "load2"
 
 
 -- delays
@@ -31,6 +35,8 @@ AnimMM.ANIMS.landing.DELAY = 0.075
 AnimMM.ANIMS.standing.DELAY = 0.150
 AnimMM.ANIMS.stoprunning.DELAY = 0.075
 AnimMM.ANIMS.returnanim.DELAY = 0.2
+AnimMM.ANIMS.load1.DELAY = 0.1
+AnimMM.ANIMS.load2.DELAY = 0.1
 
 
 -- number of sprites :
@@ -41,6 +47,8 @@ AnimMM.ANIMS.landing.number = 3
 AnimMM.ANIMS.standing.number = 6
 AnimMM.ANIMS.stoprunning.number = 1
 AnimMM.ANIMS.returnanim.number = 1
+AnimMM.ANIMS.load1.number = 10
+AnimMM.ANIMS.load2.number = 10
 
 
 
@@ -52,6 +60,8 @@ AnimMM.ANIMS.landing.priority = 20
 AnimMM.ANIMS.standing.priority = 20
 AnimMM.ANIMS.stoprunning.priority = 20
 AnimMM.ANIMS.returnanim.priority = 20
+AnimMM.ANIMS.load1.priority = 20
+AnimMM.ANIMS.load2.priority = 20
 
 
 -- automatic loopings or automatic switch :
@@ -62,6 +72,8 @@ AnimMM.ANIMS.landing.switch = AnimMM.ANIMS.standing
 AnimMM.ANIMS.standing.loop = true
 AnimMM.ANIMS.stoprunning.switch = AnimMM.ANIMS.standing
 AnimMM.ANIMS.returnanim.switch = AnimMM.ANIMS.running
+AnimMM.ANIMS.load1.switch = AnimMM.ANIMS.standing
+AnimMM.ANIMS.load2.switch = AnimMM.ANIMS.standing
 
 
 -- next anim available :

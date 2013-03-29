@@ -132,8 +132,10 @@ function Gameplay.new(mapFile)
             self.drawWho= (self.drawWho+1)%2
         end
 
-        if key =="b" then
-            self.metalMan:changeMass()
+        if not self.metalMan.isStatic then
+            if key =="b" then
+                self.metalMan:changeMass()
+            end
         end
         if key =="d" then
             self.metalMan:startMove()

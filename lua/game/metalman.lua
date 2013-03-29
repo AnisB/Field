@@ -29,7 +29,7 @@ function MetalMan.new(camera,pos)
 
 	-- Animation state
 	self:setState("standing")
-	self.anim = AnimMM.new('metalman')
+	self.anim = AnimMM.new('metalman/alu')
 	self:loadAnimation("standing",true)
 	self.goF=true
 	self.animCounter=0
@@ -119,9 +119,14 @@ end
 function MetalMan:changeMass()
 	print("Old mass"..self.pc.body:getMass())
 	if 	self.metalWeight==MetalMTypes.Alu then
+		self.anim = AnimMM.new('metalman/acier')
+		self:loadAnimation("standing",true)
+		self:loadAnimation("load1",true)
 		self.metalWeight=MetalMTypes.Acier
 	elseif 	self.metalWeight==MetalMTypes.Acier then
 		self.metalWeight=MetalMTypes.Alu
+		self.anim = AnimMM.new('metalman/alu')
+		self:loadAnimation("load2",true)
 	end
 	print("New Mass"..self.metalWeight*unitWorldSize)
 	self.pc.body:setMass(self.metalWeight*unitWorldSize)
@@ -140,11 +145,25 @@ function MetalMan:switchType()
 	if self.metalType ==MetalTypes.Normal then
 		self.oldMetal = self.metalType
 		self.metalType=MetalTypes.Static
+		self.anim = AnimMM.new('metalman/static')
+			
+		if 	self.metalWeight==MetalMTypes.Alu then
+			self:loadAnimation("load1",true)
+			elseif 	self.metalWeight==MetalMTypes.Acier then
+				self:loadAnimation("load2",true)
+			end
 		self.isStatic=true
 	elseif self.metalType ==MetalTypes.Static then
 		self.oldMetal = self.metalType
 		self.metalType=MetalTypes.Normal
 		self.isStatic=false
+		if 	self.metalWeight==MetalMTypes.Alu then
+			self.anim = AnimMM.new('metalman/alu')
+			self:loadAnimation("load1",true)
+			elseif 	self.metalWeight==MetalMTypes.Acier then
+				self.anim = AnimMM.new('metalman/acier')
+				self:loadAnimation("load2",true)
+			end
 	end
 end
 
@@ -155,11 +174,11 @@ function MetalMan:collideWith( object, collision )
 	if(object:getPosition().y>self.position.y) and (not self.canjump)  then
 		self.canjump=true
 		if self.animCounter>0 then 
-		self:loadAnimation("running",true)
-				else
+			self:loadAnimation("running",true)
+		else
 			self:setState('landing')
 			self:loadAnimation("landing",true)
-	end
+		end
 	
 end
 end

@@ -13,7 +13,7 @@ AnimAcid.ANIMS.kill.name = "kill"
 
 
 -- delays
-AnimAcid.ANIMS.normal.DELAY = 0.1
+AnimAcid.ANIMS.normal.DELAY = 0.2
 AnimAcid.ANIMS.kill.DELAY = 0.2
 
 
