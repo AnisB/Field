@@ -10,10 +10,18 @@ function Acid.new(pos,w,h,type)
 	local self = {}
 	setmetatable(self, Acid)
 	self.position={x=pos.x,y=pos.y}
+	print(type)
+	print(Acid.Types.hg)
+
+	if type==Acid.Types.hg  or type==Acid.Types.hm or type==Acid.Types.hd then
+		self.dec=20
+	else
+		self.dec=0
+	end
 	self.w=w
-	self.h=h
-	local decalage={w/2,h/2}
-	self.pc = Physics.newZone(self.position.x,self.position.y,w,h,decalage)
+	self.h=h-self.dec
+	local decalage={self.w/2,self.h/2}
+	self.pc = Physics.newZone(self.position.x,self.position.y+self.dec,self.w,self.h,decalage)
 	self.pc.fixture:setUserData(self)
 	self.type='Acid'
 	self.acidType=type
@@ -52,7 +60,7 @@ function Acid:update(seconds)
 	self.anim:update(seconds)
 	x,y =self.pc.body:getPosition()
 	self.position.x=x
-	self.position.y=y
+	self.position.y=y-self.dec
 end
 
 function Acid:draw(x,y)
