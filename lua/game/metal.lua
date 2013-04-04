@@ -21,9 +21,9 @@ function Metal.new(pos,shapeType,typeP,material,typemetal)
 	end
 
 	if typemetal =="static" then
-		IsStaticMetal=MetalTypes.Static
+		self.metalType=MetalTypes.Static
 	else
-		IsStaticMetal = MetalTypes.Normal
+		self.metalType=MetalTypes.Normal
 	end
 	self.w=unitWorldSize
 	self.h=unitWorldSize
@@ -39,127 +39,126 @@ function Metal.new(pos,shapeType,typeP,material,typemetal)
 	self.pc.fixture:setUserData(self)
 	self.isStatic=type
 	self.strenght=5*unitWorldSize
-	if IsStaticMetal then
-		self.metalType=MetalTypes.Static
-	else
-		self.metalType=MetalTypes.Normal
-	end
 	self.type='Metal'
-	self.metalWeight=material
-	print(typemetal)
+	if material=="aluminium" then
+		self.metalWeight=MetalMTypes.Alu
+	else
+		self.metalWeight=MetalMTypes.Acier
+
+	end
 	if typemetal =="static" then
 		self.anim = AnimBloc.new('bloc/static')
 	else
 		if self.metalWeight==MetalMTypes.Alu then
 			self.anim = AnimBloc.new('bloc/alu')
 			elseif self.metalWeight==MetalMTypes.Acier then
-			self.anim = AnimBloc.new('bloc/acier')
+				self.anim = AnimBloc.new('bloc/acier')
+			end
+		end
+		self:loadAnimation("normal",true)		
+		self.pc.body:setMass(self.metalWeight*unitWorldSize)
+		self.gs=self.pc.body:getGravityScale()
+		return self
+	end
 
+
+	function Metal:rotativeLField(pos)
+		if not self.isStatic then
+			local vx=self.position.x-pos.x+0.01
+			local vy=self.position.y-pos.y
+			local n = math.sqrt(vx*vx+vy*vy)
+			local vrx = vx/n
+			local vry= vy/n
+			self.pc.body:applyLinearImpulse(-vry*self.strenght/5,vrx*self.strenght/5)
 		end
 	end
-	self:loadAnimation("normal",true)		
-	self.pc.body:setMass(self.metalWeight*unitWorldSize)
-	self.gs=self.pc.body:getGravityScale()
-	return self
-end
 
-
-function Metal:rotativeLField(pos)
-	if not self.isStatic then
-		local vx=self.position.x-pos.x+0.01
-		local vy=self.position.y-pos.y
-		local n = math.sqrt(vx*vx+vy*vy)
-		local vrx = vx/n
-		local vry= vy/n
-		self.pc.body:applyLinearImpulse(-vry*self.strenght/5,vrx*self.strenght/5)
+	function Metal:rotativeRField(pos)
+		if not self.isStatic then
+			local vx=self.position.x-pos.x+0.01
+			local vy=self.position.y-pos.y
+			local n = math.sqrt(vx*vx+vy*vy)
+			local vrx = vx/n
+			local vry= vy/n
+			self.pc.body:applyLinearImpulse(vry*self.strenght/3,-vrx*self.strenght/3)
+		end
 	end
-end
 
-function Metal:rotativeRField(pos)
-	if not self.isStatic then
-		local vx=self.position.x-pos.x+0.01
-		local vy=self.position.y-pos.y
-		local n = math.sqrt(vx*vx+vy*vy)
-		local vrx = vx/n
-		local vry= vy/n
-		self.pc.body:applyLinearImpulse(vry*self.strenght/5,-vrx*self.strenght/5)
+	function Metal:attractiveField(pos)
+		if not self.isStatic then
+			local vx=-self.position.x+pos.x+0.01
+			local vy=-self.position.y+pos.y
+			local n = math.sqrt(vx*vx+vy*vy)
+			local vrx = vx/n
+			local vry= vy/n
+			if(n>(unitWorldSize)) then 
+				self.pc.body:applyLinearImpulse(vrx*self.strenght,vry*self.strenght)
+			end
+		end
+
 	end
-end
 
-function Metal:attractiveField(pos)
-	if not self.isStatic then
-		local vx=-self.position.x+pos.x+0.01
-		local vy=-self.position.y+pos.y
-		local n = math.sqrt(vx*vx+vy*vy)
-		local vrx = vx/n
-		local vry= vy/n
-		if(n>(unitWorldSize)) then 
+
+	function Metal:repulsiveField(pos)
+		if not self.isStatic then	
+			local vx=self.position.x-pos.x+0.01
+			local vy=self.position.y-pos.y
+			local n = math.sqrt(vx*vx+vy*vy)
+			local vrx = vx/n
+			local vry= vy/n
 			self.pc.body:applyLinearImpulse(vrx*self.strenght,vry*self.strenght)
 		end
 	end
 
-end
-
-
-function Metal:repulsiveField(pos)
-	if not self.isStatic then	
-		local vx=self.position.x-pos.x+0.01
-		local vy=self.position.y-pos.y
-		local n = math.sqrt(vx*vx+vy*vy)
-		local vrx = vx/n
-		local vry= vy/n
-		self.pc.body:applyLinearImpulse(vrx*self.strenght,vry*self.strenght)
+	function Metal:setVelocity(x,y)
+		self.pc.body:setLinearVelocity(x,y)
 	end
-end
 
-function Metal:setVelocity(x,y)
-	self.pc.body:setLinearVelocity(x,y)
-end
+	function Metal:initStaticField()
+		self.pc.body:setLinearVelocity(0,0)
+		self.isStatic=true
+		self.pc.body:setGravityScale(0)
+	end
 
-function Metal:initStaticField()
-	self.pc.body:setLinearVelocity(0,0)
-	self.isStatic=true
-	self.pc.body:setGravityScale(0)
-end
+	function Metal:staticField(magnet)
 
-function Metal:staticField(magnet)
+	end
 
-end
+	function Metal:cancelStaticField()
+		self.isStatic=false
+		self.pc.body:setGravityScale(self.gs)
+		self.pc.body:applyLinearImpulse(0, 1)
+	end
 
-function Metal:cancelStaticField()
-	self.isStatic=false
-	self.pc.body:setGravityScale(self.gs)
-	self.pc.body:applyLinearImpulse(0, 1)
-end
+	function Metal:collideWith( object, collision )
+	end
 
-function Metal:collideWith( object, collision )
-end
+	function Metal:unCollideWith( object, collision )
 
-function Metal:unCollideWith( object, collision )
+	end
 
-end
-
-function Metal:getPosition(  )
-	return self.position
-end
+	function Metal:getPosition(  )
+		return self.position
+	end
 
 
-function Metal:update(seconds)
-	x,y =self.pc.body:getPosition()
-	self.position.x=x
-	self.position.y=y
-end
+	function Metal:update(seconds)
+		self.anim:update(seconds)
+		x,y =self.pc.body:getPosition()
+		self.position.x=x
+		self.position.y=y
+	end
 
-function Metal:loadAnimation(anim, force)
-	self.anim:load(anim, force)
-end
+	function Metal:loadAnimation(anim, force)
+		self.anim:load(anim, force)
+	end
 
-function Metal:draw(x,y)
-	love.graphics.setColor(255,255,255,255)
-	love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
-end
-function Metal:send(x,y)
-return ("@metal".."img/img.png".."#"..(self.position.x-x).."#"..(self.position.y+y))
+	function Metal:draw(x,y)
+		love.graphics.setColor(255,255,255,255)
+		love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
+	end
+	function Metal:send(x,y)
+	return ("@metal".."img/img.png".."#"..(self.position.x-x).."#"..(self.position.y+y))
 end
 
 

@@ -688,8 +688,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 5824,
-          y = 640,
+          x = 1984,
+          y = 576,
           width = 64,
           height = 64,
           visible = true,
@@ -708,8 +708,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 5632,
-          y = 640,
+          x = 1408,
+          y = 576,
           width = 64,
           height = 64,
           visible = true,
@@ -855,7 +855,9 @@ return {
           width = 64,
           height = 64,
           visible = true,
-          properties = {}
+          properties = {
+            ["physic"] = "aluminium"
+          }
         },
         {
           name = "",
@@ -866,7 +868,9 @@ return {
           width = 64,
           height = 64,
           visible = true,
-          properties = {}
+          properties = {
+            ["magnet"] = "static"
+          }
         }
       }
     },

@@ -1,34 +1,48 @@
-AnimBloc = {}
-AnimBloc.__index = AnimBloc
+AnimDestroyable = {}
+AnimDestroyable.__index = AnimDestroyable
 
-AnimBloc.ANIMS = {  -- set of animations available :
-	normal = {}
+AnimDestroyable.ANIMS = {  -- set of animations available :
+	normal = {},
+	breaking = {},
+	destroyed = {}
 }
 
 
 -- name
-AnimBloc.ANIMS.normal.name = "normal"
+AnimDestroyable.ANIMS.normal.name = "normal"
+AnimDestroyable.ANIMS.breaking.name = "breaking"
+AnimDestroyable.ANIMS.destroyed.name = "destroyed"
+
+
 -- number of sprites :
-AnimBloc.ANIMS.normal.number = 4
+AnimDestroyable.ANIMS.normal.number = 1
+AnimDestroyable.ANIMS.breaking.number = 3
+AnimDestroyable.ANIMS.destroyed.number = 1
 
 
-AnimBloc.ANIMS.normal.DELAY= 0.2
+AnimDestroyable.ANIMS.normal.DELAY= 0.2
+AnimDestroyable.ANIMS.breaking.DELAY= 0.3
+AnimDestroyable.ANIMS.destroyed.DELAY= 0.2
 -- priority 
-AnimBloc.ANIMS.normal.priority = 10
+AnimDestroyable.ANIMS.normal.priority = 10
+AnimDestroyable.ANIMS.breaking.priority = 20
+AnimDestroyable.ANIMS.destroyed.priority = 10
 
 
 -- automatic loopings or automatic switch :
-AnimBloc.ANIMS.normal.loop = true
+AnimDestroyable.ANIMS.normal.loop = true
+AnimDestroyable.ANIMS.breaking.loop = true
+AnimDestroyable.ANIMS.destroyed.loop = true
 
 
 
 -- PUBLIC : constructor
-function AnimBloc.new(folder)
+function AnimDestroyable.new(folder)
 	local self = {}
-	setmetatable(self, AnimBloc)
+	setmetatable(self, AnimDestroyable)
 	self.time = 0.0
 	self.sprites = {}
-	for key,val in pairs(AnimBloc.ANIMS) do
+	for key,val in pairs(AnimDestroyable.ANIMS) do
 		self.sprites[key] = {}
 		for i=1, val.number do
 			local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
@@ -36,7 +50,7 @@ function AnimBloc.new(folder)
 			self.sprites[key][i] = love.graphics.newImage(path)
 		end
 	end
-	self.currentAnim = AnimBloc.ANIMS.normal
+	self.currentAnim = AnimDestroyable.ANIMS.normal
 	self.currentPos = 1
 	-- begin of an animation
 	if self.currentAnim.beginCallback then
@@ -47,14 +61,14 @@ function AnimBloc.new(folder)
 end
 
 -- PUBLIC : getter for the sprite
-function AnimBloc:getSprite()
+function AnimDestroyable:getSprite()
 	return self.currentImg
 end
 
 -- PUBLIC : change animation (you can force it)
-function AnimBloc:load(anim, force)
-	local newAnim = AnimBloc.ANIMS[anim]
-	if force or newAnimBloc.priority > self.currentAnim.priority then
+function AnimDestroyable:load(anim, force)
+	local newAnim = AnimDestroyable.ANIMS[anim]
+	if force or newAnimDestroyable.priority > self.currentAnim.priority then
 		self.currentAnim = newAnim
 		self.currentPos = 1
 		-- begin of an animation
@@ -68,7 +82,7 @@ function AnimBloc:load(anim, force)
 end
 
 -- PUBLIC : update l'anim
-function AnimBloc:update(seconds)
+function AnimDestroyable:update(seconds)
 	self.time = self.time + seconds
 	if self.time > self.currentAnim.DELAY then
 		self:next()
@@ -77,7 +91,7 @@ function AnimBloc:update(seconds)
 end
 
 -- PRIVATE : go to next sprite
-function AnimBloc:next()
+function AnimDestroyable:next()
 	self.currentPos = self.currentPos + 1
 	if self.currentPos > self.currentAnim.number then
 		-- end of an animation
@@ -103,11 +117,11 @@ function AnimBloc:next()
 end
 
 -- PRIVATE
-function AnimBloc:updateImg()
+function AnimDestroyable:updateImg()
 	self.currentImg = self.sprites[self.currentAnim.name][self.currentPos]
 end
 
 -- NETWORK
-function AnimBloc:getImgInfo()
+function AnimDestroyable:getImgInfo()
 	return {self.currentAnim.name,self.currentPos}
 end

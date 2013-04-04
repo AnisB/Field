@@ -79,10 +79,10 @@
   <object x="2432" y="1152" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#ff0000" name="metalman" width="200" height="20">
-  <object x="5824" y="640" width="64" height="64"/>
+  <object x="1984" y="576" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#ff0000" name="themagnet" width="200" height="20">
-  <object x="5632" y="640" width="64" height="64"/>
+  <object x="1408" y="576" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#800000" name="generator" width="200" height="20">
   <object type="clockwise" x="1152" y="1024" width="64" height="64">
@@ -127,8 +127,16 @@
  </objectgroup>
  <objectgroup color="#e6e6e6" name="metal" width="200" height="20">
   <object type="steel" x="1600" y="1152" width="64" height="64"/>
-  <object type="aluminium" x="1728" y="1152" width="64" height="64"/>
-  <object type="lead" x="1856" y="1152" width="64" height="64"/>
+  <object type="aluminium" x="1728" y="1152" width="64" height="64">
+   <properties>
+    <property name="physic" value="aluminium"/>
+   </properties>
+  </object>
+  <object type="lead" x="1856" y="1152" width="64" height="64">
+   <properties>
+    <property name="magnet" value="static"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#333333" name="gate" width="200" height="20">
   <object x="3712" y="1088" width="64" height="128">
