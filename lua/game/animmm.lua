@@ -10,7 +10,9 @@ AnimMM.ANIMS = {  -- set of animations available :
 	stoprunning={},
 	returnanim={},
 	load1={},
-	load2={}
+	load2={},
+	mortelec={},
+	mort={}
 }
 
 AnimMM.DELAY = 0.0750  -- toutes les 200ms, on fait AnimMM.next()
@@ -25,6 +27,8 @@ AnimMM.ANIMS.stoprunning.name = "stoprunning"
 AnimMM.ANIMS.returnanim.name = "returnanim"
 AnimMM.ANIMS.load1.name = "load1"
 AnimMM.ANIMS.load2.name = "load2"
+AnimMM.ANIMS.mortelec.name = "mortelec"
+AnimMM.ANIMS.mort.name = "mort"
 
 
 -- delays
@@ -37,6 +41,8 @@ AnimMM.ANIMS.stoprunning.DELAY = 0.075
 AnimMM.ANIMS.returnanim.DELAY = 0.2
 AnimMM.ANIMS.load1.DELAY = 0.1
 AnimMM.ANIMS.load2.DELAY = 0.1
+AnimMM.ANIMS.mortelec.DELAY = 0.1
+AnimMM.ANIMS.mort.DELAY = 1
 
 
 -- number of sprites :
@@ -49,6 +55,8 @@ AnimMM.ANIMS.stoprunning.number = 1
 AnimMM.ANIMS.returnanim.number = 1
 AnimMM.ANIMS.load1.number = 10
 AnimMM.ANIMS.load2.number = 10
+AnimMM.ANIMS.mortelec.number = 8
+AnimMM.ANIMS.mort.number = 1
 
 
 
@@ -62,6 +70,8 @@ AnimMM.ANIMS.stoprunning.priority = 20
 AnimMM.ANIMS.returnanim.priority = 20
 AnimMM.ANIMS.load1.priority = 20
 AnimMM.ANIMS.load2.priority = 20
+AnimMM.ANIMS.mortelec.priority = 20
+AnimMM.ANIMS.mort.priority = 1
 
 
 -- automatic loopings or automatic switch :
@@ -74,6 +84,8 @@ AnimMM.ANIMS.stoprunning.switch = AnimMM.ANIMS.standing
 AnimMM.ANIMS.returnanim.switch = AnimMM.ANIMS.running
 AnimMM.ANIMS.load1.switch = AnimMM.ANIMS.standing
 AnimMM.ANIMS.load2.switch = AnimMM.ANIMS.standing
+AnimMM.ANIMS.mortelec.switch = AnimMM.ANIMS.mort
+AnimMM.ANIMS.mort.loop = true
 
 
 -- next anim available :
@@ -180,4 +192,9 @@ end
 -- PRIVATE
 function AnimMM:updateImg()
 	self.currentImg = self.sprites[self.currentAnim.name][self.currentPos]
+end
+
+-- NETWORK
+function AnimMM:getImgInfo()
+	return {self.currentAnim.name,self.currentPos}
 end

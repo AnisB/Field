@@ -295,6 +295,68 @@ function MapLoader:draw(pos)
           p:draw(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
+    --print(self:toSend(pos))
+end
+
+function MapLoader:toSend(pos)
+
+    local returnSend=""
+    for i,p in pairs(self.metals) do
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          returnSend=returnSend..p:send(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end
+
+    for i,p in pairs(self.destroyables) do
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          returnSend=returnSend..p:send(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end
+
+
+    for i,p in pairs(self.platforms) do
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          -- returnSend=returnSend..p:send(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end
+
+    for i,p in pairs(self.walls) do
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          -- returnSend=returnSend..p:send(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end
+
+    for i,p in pairs(self.movables) do
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          returnSend=returnSend..p:send(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end
+
+    for i,p in pairs(self.interruptors) do
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          -- returnSend=returnSend..p:send(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end
+
+    for i,p in pairs(self.generators) do
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          -- returnSend=returnSend..p:send(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end
+    
+    for i,p in pairs(self.gateinterruptors) do
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          -- returnSend=returnSend..:send(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end    
+
+    for i,p in pairs(self.gates) do
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          -- returnSend=returnSend..:send(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end
+
+    return returnSend
 end
 
 function MapLoader:firstPlanDraw(pos)

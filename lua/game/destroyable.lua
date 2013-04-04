@@ -33,6 +33,10 @@
     end
 
     function Destroyable:update(dt)
+        if (not self.destroy)  then
+         self.position.x=self.pc.body:getX()
+         self.position.y=self.pc.body:getY()
+     end
     end
    
 
@@ -64,13 +68,19 @@ function Destroyable:unCollideWith( object, collision )
 end
     function Destroyable:draw(x, y)
         if (not self.destroy)  then
-         self.position.x=self.pc.body:getX()
-         self.position.y=self.pc.body:getY()
          love.graphics.setColor(255,255,255,255)
          if self.shapeType=='sphere' then
             love.graphics.circle( "fill", self.position.x-x,self.position.y+y,self.w/2, 1000 )
             elseif self.shapeType =='rectangle' then
                 love.graphics.rectangle( "fill", self.position.x-x,self.position.y+y, self.w, self.h )
             end
+        end
+    end
+
+
+
+        function Destroyable:send(x, y)
+        if (not self.destroy)  then
+            return ("@destroyable".."img/img.png".."#"..(self.position.x-x).."#"..(self.position.y+y))
         end
     end

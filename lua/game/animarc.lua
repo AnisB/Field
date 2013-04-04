@@ -121,3 +121,8 @@ end
 function AnimArc:updateImg()
 	self.currentImg = self.sprites[self.currentAnim.name][self.currentPos]
 end
+
+-- NETWORK
+function AnimArc:getImgInfo()
+	return {self.currentAnim.name,self.currentPos}
+end

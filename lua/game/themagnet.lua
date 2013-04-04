@@ -50,7 +50,7 @@ function TheMagnet.new(camera,pos)
 		-- Particle field managing
 		self.field= Field.new(FieldTypes.Static,pos)
 		self.field.isActive=false
-	
+
 	    -- Other field attributes
 	    self.appliesField=false
 	    self.fieldType=FieldTypes.None
@@ -64,21 +64,40 @@ function TheMagnet.new(camera,pos)
 	    -- Sound
 	    self.fieldSound=Sound.getSound("field")
 
-	return self
-end
+
+	    self.alive=true
+
+	    return self
+	end
+
+
+
+
+	function TheMagnet:die()
+		if self.alive then
+			self:disableField()
+			self:disableStaticField()
+			self:loadAnimation("mortelec",true)	
+			self.alive=false
+			
+		end
+	end
+
 
 
 -- This method handles a jump try
 function TheMagnet:jump()
 	-- Trying to jump
-	if self.canjump then
-		-- The physics impulse
-		self.pc.body:applyLinearImpulse(0, TheMagnetConst.jumpImpulse)
+	if self.alive then
 
-		-- Animaiton and state changing
-		self:setState("startjumping")
-		self:loadAnimation("startjumping",true)
-		self.canjump=false
+		if self.canjump then
+		   -- The physics impulse
+		   self.pc.body:applyLinearImpulse(0, TheMagnetConst.jumpImpulse)
+		   -- Animaiton and state changing
+		   self:setState("startjumping")
+		   self:loadAnimation("startjumping",true)
+		   self.canjump=false
+		end
 	end
 end
 
@@ -122,17 +141,19 @@ end
 
 -- Method that handles the collision
 function TheMagnet:collideWith( object, collision )
-	if(object:getPosition().y>self.position.y) and (not self.canjump)  then
-		self.canjump=true
-		if self.animCounter>0 then 
-			self:loadAnimation("running",true)
-		else
-			self:setState('landing')
-			self:loadAnimation("landing",true)
-		end	
+	if self.alive then
+
+		if(object:getPosition().y>self.position.y) and (not self.canjump)  then
+			self.canjump=true
+			if self.animCounter>0 then 
+				self:loadAnimation("running",true)
+			else
+				self:setState('landing')
+				self:loadAnimation("landing",true)
+			end	
+		end
 	end
 end
-
 -- Method that handles the uncollision
 function TheMagnet:unCollideWith( object, collision )
 end
@@ -140,120 +161,148 @@ end
 
 -- Add a static metal to the ones wich are affected by the static field
 function TheMagnet:addStatMetal(metal)
-  for _, value in pairs(self.statMetals) do
-    if value == metal then
-      return 
-    end
-  end
-  metal:initStaticField()
-  table.insert(self.statMetals,metal)
+	for _, value in pairs(self.statMetals) do
+		if value == metal then
+			return 
+		end
+	end
+	metal:initStaticField()
+	table.insert(self.statMetals,metal)
 end
 
 -- Enabling fields
 function TheMagnet:enableRepulsiveField()
-	self.field= Field.new(FieldTypes.Repulsive,pos)
-	self.field.isActive=true
-	self.appliesField=true
-	self.fieldType=FieldTypes.Repulsive
-	self:loadAnimation("launchfield",true)
+	if self.alive then
+		self.field= Field.new(FieldTypes.Repulsive,pos)
+		self.field.isActive=true
+		self.appliesField=true
+		self.fieldType=FieldTypes.Repulsive
+		self:loadAnimation("launchfield",true)
+	end
 end
 
 function TheMagnet:enableAttractiveField()
-	self.field= AttField.new(pos)
-	self.field.isActive=true
-	self.appliesField=true
-	self.fieldType=FieldTypes.Attractive
-	self:loadAnimation("launchfield",true)
-    Sound.playSound("field")
+
+	if self.alive then
+		self.field= AttField.new(pos)
+		self.field.isActive=true
+		self.appliesField=true
+		self.fieldType=FieldTypes.Attractive
+		self:loadAnimation("launchfield",true)
+		Sound.playSound("field")
+	end
 end
+
+
 function TheMagnet:enableStaticField()
-	self.field= Field.new(FieldTypes.Static,pos)
-	self.field.isActive=true
-	self.appliesField=true
-	self.fieldType=FieldTypes.Static
-	self:loadAnimation("launchfield",true)
-    Sound.playSound("field")
+	if self.alive then
+		self.field= Field.new(FieldTypes.Static,pos)
+		self.field.isActive=true
+		self.appliesField=true
+		self.fieldType=FieldTypes.Static
+		self:loadAnimation("launchfield",true)
+		Sound.playSound("field")
+	end
 end
 
 function TheMagnet:enableRotativeLField()
-	self.field= Field.new(FieldTypes.RotativeL,pos)
-	self.field.isActive=true
-	self.appliesField=true
-	self:loadAnimation("launchfield",true)
-	self.fieldType=FieldTypes.RotativeL
-    Sound.playSound("field")
+	if self.alive then
+		self.field= Field.new(FieldTypes.RotativeL,pos)
+		self.field.isActive=true
+		self.appliesField=true
+		self:loadAnimation("launchfield",true)
+		self.fieldType=FieldTypes.RotativeL
+		Sound.playSound("field")
+	end
 end
 function TheMagnet:enableRotativeRField()
-	self.field= Field.new(FieldTypes.RotativeR,pos)
-	self.field.isActive=true
-	self.appliesField=true
-	self.fieldType=FieldTypes.RotativeR
-	self:loadAnimation("launchfield",true)
-    Sound.playSound("field")
+	if self.alive then
+		self.field= Field.new(FieldTypes.RotativeR,pos)
+		self.field.isActive=true
+		self.appliesField=true
+		self.fieldType=FieldTypes.RotativeR
+		self:loadAnimation("launchfield",true)
+		Sound.playSound("field")
+	end
 end
-
 
 -- In case of a static Metal
 function TheMagnet:rotativeLField(pos)
-	local vx=self.position.x-pos.x
-	local vy=self.position.y-pos.y
-	local n = math.sqrt(vx*vx+vy*vy)
-	local vrx = vx/n
-	local vry= vy/n
-	self.pc.body:applyLinearImpulse(-vry*TheMagnetConst.Rot.x,vrx*TheMagnetConst.Rot.y)
-	self:loadAnimation("launchfield",true)
+	if self.alive then
+
+		local vx=self.position.x-pos.x
+		local vy=self.position.y-pos.y
+		local n = math.sqrt(vx*vx+vy*vy)
+		local vrx = vx/n
+		local vry= vy/n
+		self.pc.body:applyLinearImpulse(-vry*TheMagnetConst.Rot.x,vrx*TheMagnetConst.Rot.y)
+		self:loadAnimation("launchfield",true)
+	end
 end
 
 function TheMagnet:rotativeRField(pos)
-	local vx=self.position.x-pos.x
-	local vy=self.position.y-pos.y
-	local n = math.sqrt(vx*vx+vy*vy)
-	local vrx = vx/n
-	local vry= vy/n
-	self.pc.body:applyLinearImpulse(vry*TheMagnetConst.Rot.x,-vrx*TheMagnetConst.Rot.y)
-	self:loadAnimation("launchfield",true)
+	if self.alive then
+
+		local vx=self.position.x-pos.x
+		local vy=self.position.y-pos.y
+		local n = math.sqrt(vx*vx+vy*vy)
+		local vrx = vx/n
+		local vry= vy/n
+		self.pc.body:applyLinearImpulse(vry*TheMagnetConst.Rot.x,-vrx*TheMagnetConst.Rot.y)
+		self:loadAnimation("launchfield",true)
+	end
 end
 
 function TheMagnet:attractiveField(pos)
-	
+	if self.alive then
+
 		local vx=self.position.x-pos.x
-	local vy=self.position.y-pos.y
-	local n = math.sqrt(vx*vx+vy*vy)
-	local vrx = vx/n
-	local vry= vy/n
-	if(n>(unitWorldSize)) then 
+		local vy=self.position.y-pos.y
+		local n = math.sqrt(vx*vx+vy*vy)
+		local vrx = vx/n
+		local vry= vy/n
+		if(n>(unitWorldSize)) then 
 			self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Att.x,-vry*TheMagnetConst.Att.y)
+		end
+		self:loadAnimation("launchfield",true)
 	end
-	self:loadAnimation("launchfield",true)
 	
-	end
+end
 
 
 function TheMagnet:repulsiveField(pos)
-local vx=-self.position.x+pos.x
-	local vy=-self.position.y+pos.y
-	local n = math.sqrt(vx*vx+vy*vy)
-	local vrx = vx/n
-	local vry= vy/n
+	if self.alive then
 
-	if(n>(unitWorldSize)) then 
-		self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Rep.x,-vry*TheMagnetConst.Rep.y)
-	end
-	self:loadAnimation("launchfield",true)
+		local vx=-self.position.x+pos.x
+		local vy=-self.position.y+pos.y
+		local n = math.sqrt(vx*vx+vy*vy)
+		local vrx = vx/n
+		local vry= vy/n
 
+		if(n>(unitWorldSize)) then 
+			self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Rep.x,-vry*TheMagnetConst.Rep.y)
+		end
+		self:loadAnimation("launchfield",true)
 	end
+
+end
 
 -- Disabling fields
 
 function TheMagnet:disableField()
+	if self.alive then
+
 	self.field.isActive=false
 	self.appliesField=false
 	self.fieldType=FieldTypes.None
 	self:loadAnimation("standing",true)
 	self.field.isActive=false
 end
+end
 
 function TheMagnet:disableStaticField()
+	if self.alive then
+
 	self.field.isActive=false
 	self.appliesField=false
 	self.fieldType=FieldTypes.None
@@ -263,35 +312,40 @@ function TheMagnet:disableStaticField()
 	self.statMetals={}
 	self:loadAnimation("standing",true)
 end
+end
 
 -- Method that handles the begining of a movement
 function TheMagnet:startMove(  )
-	self.animCounter=self.animCounter+1
+	if self.alive then
 
-	if self.canjump and not self.isStatic then
-		x,y=self.pc.body:getLinearVelocity()
-		if((not self.goF and x>=0) or ( self.goF and x<=0))then
-		self:loadAnimation("running",true)
-	    else
-		self:loadAnimation("returnanim",true)
-	    end
+		self.animCounter=self.animCounter+1
+
+		if self.canjump and not self.isStatic then
+			x,y=self.pc.body:getLinearVelocity()
+			if((not self.goF and x>=0) or ( self.goF and x<=0))then
+				self:loadAnimation("running",true)
+			else
+				self:loadAnimation("returnanim",true)
+			end
+		end
 	end
 end
 
-
 -- Method that handles the begining of a movement
 function TheMagnet:stopMove( )
-		self.animCounter=self.animCounter-1
-	x,y=self.pc.body:getLinearVelocity()
-	self.pc.body:setLinearVelocity(x/TheMagnetConst.BreakFactor,y/TheMagnetConst.BreakFactor)
-	if self.canjump and not self.isStatic  and self.animCounter==0 then
-		self:loadAnimation("stoprunning",true)	end
-end
+	if self.alive then
 
+		self.animCounter=self.animCounter-1
+		x,y=self.pc.body:getLinearVelocity()
+		self.pc.body:setLinearVelocity(x/TheMagnetConst.BreakFactor,y/TheMagnetConst.BreakFactor)
+		if self.canjump and not self.isStatic  and self.animCounter==0 then
+			self:loadAnimation("stoprunning",true)	end
+		end
+	end
 
 -- Method that loads an animation
 function TheMagnet:loadAnimation(anim, force)
-		self.anim:load(anim, force)
+	self.anim:load(anim, force)
 end
 
 
@@ -315,7 +369,7 @@ function TheMagnet:update(seconds)
 	x,y =self.pc.body:getPosition()
 	self.position.x=x
 	self.position.y=y
-
+	if self.alive then
   if love.keyboard.isDown("right") then --press the right arrow key to push the ball to the right
   	self.goF=true
   	self.pc.body:applyForce(TheMagnetConst.MovingForce, 0)
@@ -323,10 +377,11 @@ function TheMagnet:update(seconds)
   	self.pc.body:applyForce(-TheMagnetConst.MovingForce,0)
   	self.goF=false
   end
-  for i,m in ipairs(self.statMetals)  do
-  	m:setVelocity(self.pc.body:getLinearVelocity())
-  end
-  	self.camera:newPosition(self.position.x,self.position.y)
+end
+for i,m in ipairs(self.statMetals)  do
+	m:setVelocity(self.pc.body:getLinearVelocity())
+end
+self.camera:newPosition(self.position.x,self.position.y)
 end
 
 
@@ -338,20 +393,39 @@ function TheMagnet:secondDraw(x,y)
 	-- Draws the character
 	love.graphics.setColor(255,255,255,255)
 	if not self.goF then
-	love.graphics.draw(self.anim:getSprite(), self.position.x-x+unitWorldSize/2, self.position.y+y-unitWorldSize/2, 0, -1,1)
+		love.graphics.draw(self.anim:getSprite(), self.position.x-x+unitWorldSize/2, self.position.y+y-unitWorldSize/2, 0, -1,1)
 	else
-	love.graphics.draw(self.anim:getSprite(), self.position.x-x-unitWorldSize/2, self.position.y+y-unitWorldSize/2, 0, 1,1)
+		love.graphics.draw(self.anim:getSprite(), self.position.x-x-unitWorldSize/2, self.position.y+y-unitWorldSize/2, 0, 1,1)
 	end
 end
 
 
 function TheMagnet:draw()
 	-- Draws the field
-		self.field:draw(windowW/2+unitWorldSize/4, windowH/2+unitWorldSize/4)
-    	love.graphics.setColor(255,255,255,255)
-    	if 	 self.goF then
-    		love.graphics.draw(self.anim:getSprite(), windowW/2-unitWorldSize/2,windowH/2-unitWorldSize/2, 0, 1,1)
-    	else
-    		love.graphics.draw(self.anim:getSprite(), windowW/2+unitWorldSize/2,windowH/2-unitWorldSize/2,0 , -1,1)
-    	end
+	self.field:draw(windowW/2+unitWorldSize/4, windowH/2+unitWorldSize/4)
+	love.graphics.setColor(255,255,255,255)
+	if 	 self.goF then
+		love.graphics.draw(self.anim:getSprite(), windowW/2-unitWorldSize/2,windowH/2-unitWorldSize/2, 0, 1,1)
+	else
+		love.graphics.draw(self.anim:getSprite(), windowW/2+unitWorldSize/2,windowH/2-unitWorldSize/2,0 , -1,1)
+	end
+end
+
+
+-- Return the character to screen
+function TheMagnet:secondSend(x,y)
+if self.goF then
+	return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..(self.position.x-x-unitWorldSize/2).."#"..( self.position.y+y-unitWorldSize/2).."#".."1")
+else
+	return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..(self.position.x-x+unitWorldSize/2).."#"..( self.position.y+y-unitWorldSize/2).."#".."-1")
+end
+end
+
+-- Return the character to screen
+function TheMagnet:mainSend(x,y)
+if self.goF then
+	return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..(windowW/2-unitWorldSize/2).."#"..( windowH/2-unitWorldSize/2).."#".."1")
+else
+	return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..(windowW/2+unitWorldSize/2).."#"..( windowH/2-unitWorldSize/2).."#".."-1")
+end
 end

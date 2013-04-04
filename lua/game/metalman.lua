@@ -42,11 +42,22 @@ function MetalMan.new(camera,pos)
 	self.oldType=MetalTypes.Normal
 	self.type='MetalMan'
 
+	self.alive=true
+
 	return self
 end
 
 function MetalMan:reset()
 end
+
+
+function MetalMan:die()
+	if self.alive then
+		self.alive=false
+		self:loadAnimation("mortelec",true)	
+	end
+end
+
 
 function MetalMan:jump()
 	if self.canjump and not self.isStatic then
@@ -117,19 +128,19 @@ function MetalMan:staticField(magnet)
 end
 
 function MetalMan:changeMass()
-	print("Old mass"..self.pc.body:getMass())
-	if 	self.metalWeight==MetalMTypes.Alu then
-		self.anim = AnimMM.new('metalman/acier')
-		self:loadAnimation("standing",true)
-		self:loadAnimation("load1",true)
-		self.metalWeight=MetalMTypes.Acier
-	elseif 	self.metalWeight==MetalMTypes.Acier then
-		self.metalWeight=MetalMTypes.Alu
-		self.anim = AnimMM.new('metalman/alu')
-		self:loadAnimation("load2",true)
+	if self.alive then
+		if 	self.metalWeight==MetalMTypes.Alu then
+			self.anim = AnimMM.new('metalman/acier')
+			self:loadAnimation("standing",true)
+			self:loadAnimation("load1",true)
+			self.metalWeight=MetalMTypes.Acier
+		elseif 	self.metalWeight==MetalMTypes.Acier then
+			self.metalWeight=MetalMTypes.Alu
+			self.anim = AnimMM.new('metalman/alu')
+			self:loadAnimation("load2",true)
+		end
+		self.pc.body:setMass(self.metalWeight*unitWorldSize)
 	end
-	print("New Mass"..self.metalWeight*unitWorldSize)
-	self.pc.body:setMass(self.metalWeight*unitWorldSize)
 end
 
 function MetalMan:cancelStaticField()
@@ -142,6 +153,8 @@ function MetalMan:setState( state )
 end
 
 function MetalMan:switchType()
+if self.alive then
+
 	if self.metalType ==MetalTypes.Normal then
 		self.oldMetal = self.metalType
 		self.metalType=MetalTypes.Static
@@ -149,9 +162,9 @@ function MetalMan:switchType()
 			
 		if 	self.metalWeight==MetalMTypes.Alu then
 			self:loadAnimation("load1",true)
-			elseif 	self.metalWeight==MetalMTypes.Acier then
+		elseif 	self.metalWeight==MetalMTypes.Acier then
 				self:loadAnimation("load2",true)
-			end
+		end
 		self.isStatic=true
 	elseif self.metalType ==MetalTypes.Static then
 		self.oldMetal = self.metalType
@@ -160,27 +173,30 @@ function MetalMan:switchType()
 		if 	self.metalWeight==MetalMTypes.Alu then
 			self.anim = AnimMM.new('metalman/alu')
 			self:loadAnimation("load1",true)
-			elseif 	self.metalWeight==MetalMTypes.Acier then
-				self.anim = AnimMM.new('metalman/acier')
-				self:loadAnimation("load2",true)
-			end
+		elseif 	self.metalWeight==MetalMTypes.Acier then
+			self.anim = AnimMM.new('metalman/acier')
+			self:loadAnimation("load2",true)
+		end
 	end
+end
 end
 
 function MetalMan:getSpeed(  )
 end
 
 function MetalMan:collideWith( object, collision )
-	if(object:getPosition().y>self.position.y) and (not self.canjump)  then
-		self.canjump=true
-		if self.animCounter>0 then 
-			self:loadAnimation("running",true)
-		else
-			self:setState('landing')
-			self:loadAnimation("landing",true)
-		end
-	
-end
+
+	if self.alive then
+		if(object:getPosition().y>self.position.y) and (not self.canjump)  then
+			self.canjump=true
+			if self.animCounter>0 then 
+				self:loadAnimation("running",true)
+			else
+				self:setState('landing')
+				self:loadAnimation("landing",true)
+			end
+		end	
+	end
 end
 
 function MetalMan:unCollideWith( object, collision )
@@ -197,24 +213,30 @@ function MetalMan:left( )
 end
 
 function MetalMan:startMove(  )
-	self.animCounter=self.animCounter+1
 
-	if self.canjump and not self.isStatic then
-		x,y=self.pc.body:getLinearVelocity()
-		if((not self.goF and x>=0) or ( self.goF and x<=0))then
-		self:loadAnimation("running",true)
-	    else
-		self:loadAnimation("returnanim",true)
-	    end
+	if self.alive then
+		self.animCounter=self.animCounter+1
+		if self.canjump and not self.isStatic then
+			x,y=self.pc.body:getLinearVelocity()
+			if((not self.goF and x>=0) or ( self.goF and x<=0))then
+				self:loadAnimation("running",true)
+			else
+				self:loadAnimation("returnanim",true)
+			end
+		end
+	end
 end
 
-end
+
 function MetalMan:stopMove( )
-	self.animCounter=self.animCounter-1
-	x,y=self.pc.body:getLinearVelocity()
-	self.pc.body:setLinearVelocity(x/MetalManBreakFactor,y/MetalManBreakFactor)
-	if self.canjump and not self.isStatic  and self.animCounter==0 then
-		self:loadAnimation("stoprunning",true)	end
+	if self.alive then
+		self.animCounter=self.animCounter-1
+		x,y=self.pc.body:getLinearVelocity()
+		self.pc.body:setLinearVelocity(x/MetalManBreakFactor,y/MetalManBreakFactor)
+		if self.canjump and not self.isStatic  and self.animCounter==0 then
+			self:loadAnimation("stoprunning",true)	
+		end
+	end
 end
 
 
@@ -239,25 +261,26 @@ function MetalMan:update(seconds)
 	x,y =self.pc.body:getPosition()
 	self.position.x=x
 	self.position.y=y
-	if not self.isStatic  then
-  if love.keyboard.isDown("d") then
-  	if self.metalWeight==MetalMTypes.Alu then
-  		 self.pc.body:applyForce(MetalManMovingForce.Alu, 0)
-  	else
-  		self.pc.body:applyForce(MetalManMovingForce.Acier, 0)
-  	end
-  		self.goF=true
+	if self.alive then
+		if not self.isStatic  then
+			if love.keyboard.isDown("d") then
+				if self.metalWeight==MetalMTypes.Alu then
+					self.pc.body:applyForce(MetalManMovingForce.Alu, 0)
+				else
+					self.pc.body:applyForce(MetalManMovingForce.Acier, 0)
+				end
+				self.goF=true
 
-  elseif love.keyboard.isDown("q") then 
-  	if self.metalWeight==MetalMTypes.Alu then
-  		 self.pc.body:applyForce(-MetalManMovingForce.Alu, 0)
-  	else
-  		self.pc.body:applyForce(-MetalManMovingForce.Acier, 0)
-  	end
-  	self.goF=false
-
-  end
-end
+			elseif love.keyboard.isDown("q") then 
+				if self.metalWeight==MetalMTypes.Alu then
+					self.pc.body:applyForce(-MetalManMovingForce.Alu, 0)
+				else
+					self.pc.body:applyForce(-MetalManMovingForce.Acier, 0)
+				end
+				self.goF=false
+			end
+		end
+	end
 	self.camera:newPosition(self.position.x,self.position.y)
 end
 
@@ -280,4 +303,22 @@ function MetalMan:secondDraw(x,y)
 	else
 	love.graphics.draw(self.anim:getSprite(), self.position.x-x+unitWorldSize/2, self.position.y+y-unitWorldSize/2, 0, -1,1)
 	end
+end
+
+-- Return the character to screen
+function MetalMan:secondSend(x,y)
+	if self.goF then
+    	return ("@metalman".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..(self.position.x-x-unitWorldSize/2).."#"..( self.position.y+y-unitWorldSize/2).."#".."1")
+	else
+    	return ("@metalman".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..(self.position.x-x+unitWorldSize/2).."#"..( self.position.y+y-unitWorldSize/2).."#".."-1")
+    end
+end
+
+-- Return the character to screen
+function MetalMan:mainSend(x,y)
+	if self.goF then
+    	return ("@metalman".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..(windowW/2-unitWorldSize/2).."#"..( windowH/2-unitWorldSize/2).."#".."1")
+	else
+    	return ("@metalman".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..(windowW/2+unitWorldSize/2).."#"..( windowH/2-unitWorldSize/2).."#".."-1")
+    end
 end

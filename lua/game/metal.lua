@@ -3,6 +3,7 @@ This file is part of the Field project]]
 
 
 require("game.camera")
+require("game.animbloc")
 
 Metal = {}
 Metal.__index = Metal
@@ -41,11 +42,22 @@ function Metal.new(pos,shapeType,typeP,material,typemetal)
 	if IsStaticMetal then
 		self.metalType=MetalTypes.Static
 	else
-	self.metalType=MetalTypes.Normal
+		self.metalType=MetalTypes.Normal
 	end
 	self.type='Metal'
 	self.metalWeight=material
-	print(self.pc.body:getMass())
+	print(typemetal)
+	if typemetal =="static" then
+		self.anim = AnimBloc.new('bloc/static')
+	else
+		if self.metalWeight==MetalMTypes.Alu then
+			self.anim = AnimBloc.new('bloc/alu')
+			elseif self.metalWeight==MetalMTypes.Acier then
+			self.anim = AnimBloc.new('bloc/acier')
+
+		end
+	end
+	self:loadAnimation("normal",true)		
 	self.pc.body:setMass(self.metalWeight*unitWorldSize)
 	self.gs=self.pc.body:getGravityScale()
 	return self
@@ -75,16 +87,16 @@ function Metal:rotativeRField(pos)
 end
 
 function Metal:attractiveField(pos)
-if not self.isStatic then
-	local vx=-self.position.x+pos.x+0.01
-	local vy=-self.position.y+pos.y
-	local n = math.sqrt(vx*vx+vy*vy)
-	local vrx = vx/n
-	local vry= vy/n
-	if(n>(unitWorldSize)) then 
-		self.pc.body:applyLinearImpulse(vrx*self.strenght,vry*self.strenght)
+	if not self.isStatic then
+		local vx=-self.position.x+pos.x+0.01
+		local vy=-self.position.y+pos.y
+		local n = math.sqrt(vx*vx+vy*vy)
+		local vrx = vx/n
+		local vry= vy/n
+		if(n>(unitWorldSize)) then 
+			self.pc.body:applyLinearImpulse(vrx*self.strenght,vry*self.strenght)
+		end
 	end
-end
 
 end
 
@@ -114,35 +126,40 @@ function Metal:staticField(magnet)
 
 end
 
-	function Metal:cancelStaticField()
-		self.isStatic=false
-		self.pc.body:setGravityScale(self.gs)
-		self.pc.body:applyLinearImpulse(0, 1)
-	end
+function Metal:cancelStaticField()
+	self.isStatic=false
+	self.pc.body:setGravityScale(self.gs)
+	self.pc.body:applyLinearImpulse(0, 1)
+end
 
-		function Metal:collideWith( object, collision )
-		end
+function Metal:collideWith( object, collision )
+end
 
-		function Metal:unCollideWith( object, collision )
+function Metal:unCollideWith( object, collision )
 
-		end
+end
 
-		function Metal:getPosition(  )
-			return self.position
-		end
+function Metal:getPosition(  )
+	return self.position
+end
 
 
-		function Metal:update(seconds)
-			x,y =self.pc.body:getPosition()
-			self.position.x=x
-			self.position.y=y
-		end
+function Metal:update(seconds)
+	x,y =self.pc.body:getPosition()
+	self.position.x=x
+	self.position.y=y
+end
+
+function Metal:loadAnimation(anim, force)
+	self.anim:load(anim, force)
+end
 
 function Metal:draw(x,y)
-	love.graphics.setColor(20,255,175,255)
-      if self.shapeType=='sphere' then
-            love.graphics.circle( "fill", self.position.x-x,self.position.y+y,unitWorldSize/2, 1000 )
-            elseif self.shapeType =='rectangle' then
-                love.graphics.rectangle( "fill", self.position.x-x,self.position.y+y, unitWorldSize, unitWorldSize )
-            end
-        end
+	love.graphics.setColor(255,255,255,255)
+	love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
+end
+function Metal:send(x,y)
+return ("@metal".."img/img.png".."#"..(self.position.x-x).."#"..(self.position.y+y))
+end
+
+

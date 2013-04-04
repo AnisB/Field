@@ -84,3 +84,7 @@ function Gate:draw(x,y)
     love.graphics.rectangle( "fill", self.position.x-x,self.position.y+y, self.w, self.h )
 	end
 end
+
+function Gate:send(x,y)
+	return ("@gate".."img/img.png".."#"..(self.position.x-x).."#"..(self.position.y+y))
+end

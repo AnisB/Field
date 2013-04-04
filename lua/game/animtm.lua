@@ -10,7 +10,9 @@ AnimTM.ANIMS = {  -- set of animations available :
 	stoprunning={},
 	field={},
 	returnanim={},
-	launchfield={}
+	launchfield={},
+	mortelec={},
+	mort={}
 }
 
 AnimTM.DELAY = 0.100  -- toutes les 200ms, on fait AnimTM.next()
@@ -25,6 +27,8 @@ AnimTM.ANIMS.stoprunning.name = "stoprunning"
 AnimTM.ANIMS.field.name = "field"
 AnimTM.ANIMS.launchfield.name = "launchfield"
 AnimTM.ANIMS.returnanim.name = "returnanim"
+AnimTM.ANIMS.mortelec.name = "mortelec"
+AnimTM.ANIMS.mort.name = "mort"
 
 
 -- number of sprites :
@@ -37,6 +41,8 @@ AnimTM.ANIMS.stoprunning.number = 1
 AnimTM.ANIMS.field.number = 2
 AnimTM.ANIMS.returnanim.number = 1
 AnimTM.ANIMS.launchfield.number = 1
+AnimTM.ANIMS.mortelec.number = 8
+AnimTM.ANIMS.mort.number = 1
 
 
 -- delays
@@ -49,6 +55,8 @@ AnimTM.ANIMS.stoprunning.DELAY = 0.075
 AnimTM.ANIMS.returnanim.DELAY = 0.2
 AnimTM.ANIMS.field.DELAY = 0.3
 AnimTM.ANIMS.launchfield.DELAY = 0.2
+AnimTM.ANIMS.mortelec.DELAY = 0.1
+AnimTM.ANIMS.mort.DELAY = 1
 
 -- priority :
 AnimTM.ANIMS.running.priority = 10
@@ -60,6 +68,8 @@ AnimTM.ANIMS.stoprunning.priority = 20
 AnimTM.ANIMS.field.priority = 20
 AnimTM.ANIMS.launchfield.priority = 20
 AnimTM.ANIMS.returnanim.priority = 20
+AnimTM.ANIMS.mortelec.priority = 20
+AnimTM.ANIMS.mort.priority = 20
 
 
 -- automatic loopings or automatic switch :
@@ -72,6 +82,8 @@ AnimTM.ANIMS.stoprunning.switch = AnimTM.ANIMS.standing
 AnimTM.ANIMS.field.loop = true
 AnimTM.ANIMS.returnanim.switch = AnimTM.ANIMS.running
 AnimTM.ANIMS.launchfield.switch = AnimTM.ANIMS.field
+AnimTM.ANIMS.mortelec.switch=AnimTM.ANIMS.mort
+AnimTM.ANIMS.mort.loop=true
 
 
 -- next AnimTM available :
@@ -178,4 +190,9 @@ end
 -- PRIVATE
 function AnimTM:updateImg()
 	self.currentImg = self.sprites[self.currentAnim.name][self.currentPos]
+end
+
+-- NETWORK
+function AnimTM:getImgInfo()
+	return {self.currentAnim.name,self.currentPos}
 end

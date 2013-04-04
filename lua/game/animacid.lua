@@ -121,3 +121,8 @@ end
 function AnimAcid:updateImg()
 	self.currentImg = self.sprites[self.currentAnim.name][self.currentPos]
 end
+
+-- NETWORK
+function AnimAcid:getImgInfo()
+	return {self.currentAnim.name,self.currentPos}
+end

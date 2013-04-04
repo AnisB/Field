@@ -5,7 +5,7 @@ require("game.animarc")
 Arc = {}
 Arc.__index = Arc
 
-TimerArc =0.5
+TimerArc =1
 
 ArcType={DebutH='DebutH',MillieuH='MillieuH',FinH='FinH',DebutV='DebutV',MillieuV='MillieuV',FinV='FinV'}
 function Arc.new(pos,w,h,typeArc)
@@ -47,8 +47,8 @@ end
 
 function Arc:collideWith( object, collision )
 	if object.type=='MetalMan' or object.type =='TheMagnet' then
-		print("He is dead now")
 		self.isTouched=true
+		object:die()
 	end
 end
 

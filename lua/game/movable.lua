@@ -55,3 +55,9 @@ end
                 love.graphics.rectangle( "fill", self.position.x-x,self.position.y+y, unitWorldSize, unitWorldSize )
             end
     end
+
+
+
+    function Movable:send(x, y)
+        return ("@movable".."img/img.png".."#"..(self.position.x-x).."#"..(self.position.y+y))
+    end
