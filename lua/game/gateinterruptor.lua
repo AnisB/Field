@@ -57,12 +57,11 @@ function GateInterruptor:handleTry()
 	if self.canBeEnable>0 then
 		self.on= not self.on
 		if self.on then
-			print ("coucou"..self.gateID)
 			self.mapLoader:openG(self.gateID)
 			self:loadAnimation("launching",true)
 
 		else
-			self:loadAnimation("off",true)
+			self:loadAnimation("shutdown",true)
 			self.mapLoader:closeG(self.gateID)
 
 		end

@@ -726,7 +726,7 @@ return {
       objects = {
         {
           name = "",
-          type = "clockwise",
+          type = "RotativeR",
           shape = "rectangle",
           x = 1152,
           y = 1024,
@@ -739,7 +739,7 @@ return {
         },
         {
           name = "",
-          type = "clockwise",
+          type = "RotativeR",
           shape = "rectangle",
           x = 3840,
           y = 960,
@@ -752,7 +752,7 @@ return {
         },
         {
           name = "",
-          type = "anticlockwise",
+          type = "RotativeL",
           shape = "rectangle",
           x = 4800,
           y = 960,
@@ -765,7 +765,7 @@ return {
         },
         {
           name = "",
-          type = "repulse",
+          type = "Repulsive",
           shape = "rectangle",
           x = 4480,
           y = 960,
@@ -778,7 +778,7 @@ return {
         },
         {
           name = "",
-          type = "attract",
+          type = "Attractive",
           shape = "rectangle",
           x = 4160,
           y = 960,

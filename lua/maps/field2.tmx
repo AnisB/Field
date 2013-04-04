@@ -85,27 +85,27 @@
   <object x="1408" y="576" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#800000" name="generator" width="200" height="20">
-  <object type="clockwise" x="1152" y="1024" width="64" height="64">
+  <object type="RotativeR" x="1152" y="1024" width="64" height="64">
    <properties>
     <property name="id" value="42"/>
    </properties>
   </object>
-  <object type="clockwise" x="3840" y="960" width="64" height="64">
+  <object type="RotativeR" x="3840" y="960" width="64" height="64">
    <properties>
     <property name="id" value="12345"/>
    </properties>
   </object>
-  <object type="anticlockwise" x="4800" y="960" width="64" height="64">
+  <object type="RotativeL" x="4800" y="960" width="64" height="64">
    <properties>
     <property name="id" value="12345"/>
    </properties>
   </object>
-  <object type="repulse" x="4480" y="960" width="64" height="64">
+  <object type="Repulsive" x="4480" y="960" width="64" height="64">
    <properties>
     <property name="id" value="12345"/>
    </properties>
   </object>
-  <object type="attract" x="4160" y="960" width="64" height="64">
+  <object type="Attractive" x="4160" y="960" width="64" height="64">
    <properties>
     <property name="id" value="12345"/>
    </properties>

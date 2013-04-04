@@ -3,10 +3,11 @@
     ]]
 
     require("const")
+    require("game.animbloc")
     Movable = {}
     Movable.__index =  Movable
     
-    function Movable.new(position,type,sprite)
+    function Movable.new(position,type)
         local self = {}
         setmetatable(self, Movable)
 
@@ -15,7 +16,7 @@
         self.w=unitWorldSize
         self.h=unitWorldSize
         -- Sprite
-        self.sprite=sprite
+        self.anim = AnimBloc.new('bloc/nonmetal')
 
         -- Type
         self.type='Movable'
@@ -31,6 +32,7 @@
     end
 
     function Movable:update(dt)
+        self.anim:update(dt)
         self.position.x=self.pc.body:getX()
         self.position.y=self.pc.body:getY()
     end
@@ -46,14 +48,9 @@ end
 function Movable:unCollideWith( object, collision )
 
 end
-    function Movable:draw(x, y)
-  
-         love.graphics.setColor(100,200,200,255)
-         if self.shapeType=='sphere' then
-            love.graphics.circle( "fill", self.position.x-x,self.position.y+y,unitWorldSize/2, 1000 )
-            elseif self.shapeType =='rectangle' then
-                love.graphics.rectangle( "fill", self.position.x-x,self.position.y+y, unitWorldSize, unitWorldSize )
-            end
+    function Movable:draw(x, y)  
+       love.graphics.setColor(255,255,255,255)
+       love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
     end
 
 

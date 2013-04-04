@@ -4,7 +4,8 @@ AnimInter.__index = AnimInter
 AnimInter.ANIMS = {  -- set of animations available :
 	off = {},
 	on = {},
-	launching = {}
+	launching = {},
+	shutdown ={}
 }
 
 
@@ -12,12 +13,14 @@ AnimInter.ANIMS = {  -- set of animations available :
 AnimInter.ANIMS.off.name = "off"
 AnimInter.ANIMS.on.name = "on"
 AnimInter.ANIMS.launching.name = "launching"
+AnimInter.ANIMS.shutdown.name = "shutdown"
 
 
 -- delays
 AnimInter.ANIMS.off.DELAY = 0.075
 AnimInter.ANIMS.on.DELAY = 0.075
 AnimInter.ANIMS.launching.DELAY = 0.075
+AnimInter.ANIMS.shutdown.DELAY = 0.075
 
 
 
@@ -25,6 +28,7 @@ AnimInter.ANIMS.launching.DELAY = 0.075
 AnimInter.ANIMS.off.number = 1
 AnimInter.ANIMS.on.number = 2
 AnimInter.ANIMS.launching.number = 11
+AnimInter.ANIMS.shutdown.number = 2
 
 
 
@@ -33,6 +37,7 @@ AnimInter.ANIMS.launching.number = 11
 AnimInter.ANIMS.off.priority = 10
 AnimInter.ANIMS.on.priority = 20
 AnimInter.ANIMS.launching.priority = 20
+AnimInter.ANIMS.shutdown.priority = 20
 
 
 
@@ -40,6 +45,7 @@ AnimInter.ANIMS.launching.priority = 20
 AnimInter.ANIMS.off.loop = true
 AnimInter.ANIMS.on.loop = true
 AnimInter.ANIMS.launching.switch = AnimInter.ANIMS.on
+AnimInter.ANIMS.shutdown.switch = AnimInter.ANIMS.off
 
 
 

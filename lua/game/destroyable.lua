@@ -36,6 +36,7 @@
         end
 
         function Destroyable:update(dt)
+            self.anim:update(dt)
             if (not self.destroy)  then
                self.position.x=self.pc.body:getX()
                self.position.y=self.pc.body:getY()
@@ -72,11 +73,6 @@
     end
     function Destroyable:draw(x, y)
      love.graphics.setColor(255,255,255,255)
-    if self.destroy then
-        print("des"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2])
-    else
-        print("alive"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2])
-    end
      love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
  end
  function Destroyable:loadAnimation(anim, force)

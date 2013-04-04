@@ -2,6 +2,7 @@
 
 require("game.field")
 require("game.attfield")
+require("game.animgene")
 
 
 Generator = {}
@@ -23,7 +24,7 @@ function Generator.new(pos,type,typeField,ID)
 	self.typeField=FieldTypes.Repulsive
 	elseif typeField=="Attractive" then
 	self.typeField=FieldTypes.Attractive
-	elseif typeField=="RorativeR" then
+	elseif typeField=="RotativeR" then
 	self.typeField=FieldTypes.RotativeR
 	elseif typeField=="RotativeL" then
 	self.typeField=FieldTypes.RotativeL
@@ -42,6 +43,9 @@ function Generator.new(pos,type,typeField,ID)
 	end
 	self.w=unitWorldSize
 	self.h=unitWorldSize
+
+	self.anim = AnimGene.new('gene')
+	self:loadAnimation("off",true)
 
 	return self
 end
@@ -70,10 +74,9 @@ end
 	end
 
 	function Generator:enableG( )
-		print("Youhouw"..self.typeField)
+		self:loadAnimation("launching",true)
 		self.field.isActive=true
 		if self.typeField == FieldTypes.RotativeL then
-			print("lol")
 			self:enableRotativeLField()
 		--
 		elseif self.typeField == FieldTypes.RotativeR then
@@ -91,8 +94,7 @@ end
 	end
 
 	function Generator:disableG( )
-		print("DOH")
-
+		self:loadAnimation("shutdown",true)
 		self.field.isActive=false
 		if self.typeField == FieldTypes.Static then
 			self:disableStaticField()
@@ -205,6 +207,8 @@ end
 
 function Generator:update(seconds)
 	self.field:update(seconds)
+	self.anim:update(seconds)
+
 	x,y =self.pc.body:getPosition()
 	self.position.x=x
 	self.position.y=y
@@ -213,8 +217,17 @@ function Generator:update(seconds)
 	end
 end
 
+
+function Generator:loadAnimation(anim, force)
+		self.anim:load(anim, force)
+end
+
 function Generator:draw(x,y)
-	self.field:draw(self.pc.body:getX()-x, self.pc.body:getY()+y)
-	love.graphics.setColor(255,100,100,255)
-	love.graphics.circle("fill", self.pc.body:getX()-x, self.pc.body:getY()+y, self.pc.shape:getRadius())
+	if self.typeField =="Attractive" then
+	self.field:draw(self.pc.body:getX()-x+unitWorldSize/2, self.pc.body:getY()+y+unitWorldSize/2)
+else
+	self.field:draw(self.pc.body:getX()-x+unitWorldSize, self.pc.body:getY()+y+unitWorldSize)
+end
+	love.graphics.setColor(255,255,255,255)
+    	love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
 end

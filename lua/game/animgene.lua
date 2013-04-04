@@ -1,48 +1,61 @@
-AnimDestroyable = {}
-AnimDestroyable.__index = AnimDestroyable
+AnimGene = {}
+AnimGene.__index = AnimGene
 
-AnimDestroyable.ANIMS = {  -- set of animations available :
-	normal = {},
-	breaking = {},
-	destroyed = {}
+AnimGene.ANIMS = {  -- set of animations available :
+	off = {},
+	on = {},
+	launching = {},
+	shutdown ={}
 }
 
 
 -- name
-AnimDestroyable.ANIMS.normal.name = "normal"
-AnimDestroyable.ANIMS.breaking.name = "breaking"
-AnimDestroyable.ANIMS.destroyed.name = "destroyed"
+AnimGene.ANIMS.off.name = "off"
+AnimGene.ANIMS.on.name = "on"
+AnimGene.ANIMS.launching.name = "launching"
+AnimGene.ANIMS.shutdown.name = "shutdown"
+
+
+-- delays
+AnimGene.ANIMS.off.DELAY = 0.075
+AnimGene.ANIMS.on.DELAY = 0.075
+AnimGene.ANIMS.launching.DELAY = 0.075
+AnimGene.ANIMS.shutdown.DELAY = 0.075
+
 
 
 -- number of sprites :
-AnimDestroyable.ANIMS.normal.number = 1
-AnimDestroyable.ANIMS.breaking.number = 3
-AnimDestroyable.ANIMS.destroyed.number = 1
+AnimGene.ANIMS.off.number = 1
+AnimGene.ANIMS.on.number = 8
+AnimGene.ANIMS.launching.number = 8
+AnimGene.ANIMS.shutdown.number = 2
 
 
-AnimDestroyable.ANIMS.normal.DELAY= 0.2
-AnimDestroyable.ANIMS.breaking.DELAY= 0.075
-AnimDestroyable.ANIMS.destroyed.DELAY= 0.2
--- priority 
-AnimDestroyable.ANIMS.normal.priority = 10
-AnimDestroyable.ANIMS.breaking.priority = 20
-AnimDestroyable.ANIMS.destroyed.priority = 10
+
+
+-- priority :
+AnimGene.ANIMS.off.priority = 10
+AnimGene.ANIMS.on.priority = 20
+AnimGene.ANIMS.launching.priority = 20
+AnimGene.ANIMS.shutdown.priority = 20
+
 
 
 -- automatic loopings or automatic switch :
-AnimDestroyable.ANIMS.normal.loop = true
-AnimDestroyable.ANIMS.breaking.switch = AnimDestroyable.ANIMS.destroyed
-AnimDestroyable.ANIMS.destroyed.loop = true
+AnimGene.ANIMS.off.loop = true
+AnimGene.ANIMS.on.loop = true
+AnimGene.ANIMS.launching.switch = AnimGene.ANIMS.on
+AnimGene.ANIMS.shutdown.switch = AnimGene.ANIMS.off
 
 
 
 -- PUBLIC : constructor
-function AnimDestroyable.new(folder)
+function AnimGene.new(folder)
 	local self = {}
-	setmetatable(self, AnimDestroyable)
+	setmetatable(self, AnimGene)
 	self.time = 0.0
 	self.sprites = {}
-	for key,val in pairs(AnimDestroyable.ANIMS) do
+	for key,val in pairs(AnimGene.ANIMS) do
 		self.sprites[key] = {}
 		for i=1, val.number do
 			local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
@@ -50,7 +63,7 @@ function AnimDestroyable.new(folder)
 			self.sprites[key][i] = love.graphics.newImage(path)
 		end
 	end
-	self.currentAnim = AnimDestroyable.ANIMS.normal
+	self.currentAnim = AnimGene.ANIMS.off
 	self.currentPos = 1
 	-- begin of an animation
 	if self.currentAnim.beginCallback then
@@ -61,14 +74,14 @@ function AnimDestroyable.new(folder)
 end
 
 -- PUBLIC : getter for the sprite
-function AnimDestroyable:getSprite()
+function AnimGene:getSprite()
 	return self.currentImg
 end
 
 -- PUBLIC : change animation (you can force it)
-function AnimDestroyable:load(anim, force)
-	local newAnim = AnimDestroyable.ANIMS[anim]
-	if force or newAnimDestroyable.priority > self.currentAnim.priority then
+function AnimGene:load(anim, force)
+	local newAnim = AnimGene.ANIMS[anim]
+	if force or newAnimGene.priority > self.currentAnim.priority then
 		self.currentAnim = newAnim
 		self.currentPos = 1
 		-- begin of an animation
@@ -82,7 +95,7 @@ function AnimDestroyable:load(anim, force)
 end
 
 -- PUBLIC : update l'anim
-function AnimDestroyable:update(seconds)
+function AnimGene:update(seconds)
 	self.time = self.time + seconds
 	if self.time > self.currentAnim.DELAY then
 		self:next()
@@ -91,7 +104,7 @@ function AnimDestroyable:update(seconds)
 end
 
 -- PRIVATE : go to next sprite
-function AnimDestroyable:next()
+function AnimGene:next()
 	self.currentPos = self.currentPos + 1
 	if self.currentPos > self.currentAnim.number then
 		-- end of an animation
@@ -117,11 +130,11 @@ function AnimDestroyable:next()
 end
 
 -- PRIVATE
-function AnimDestroyable:updateImg()
+function AnimGene:updateImg()
 	self.currentImg = self.sprites[self.currentAnim.name][self.currentPos]
 end
 
 -- NETWORK
-function AnimDestroyable:getImgInfo()
+function AnimGene:getImgInfo()
 	return {self.currentAnim.name,self.currentPos}
 end
