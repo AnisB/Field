@@ -416,9 +416,9 @@ end
 function TheMagnet:secondSend(x,y)
 if self.goF then
 	print(x..y)
-	return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x-unitWorldSize/2).."#"..math.floor( self.position.y+y-unitWorldSize/2).."#".."1")
+	return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x-unitWorldSize/2).."#"..math.floor( self.position.y+y-unitWorldSize/2).."#".."1".."#"..tostring(self.appliesField).."#"..self.fieldType)
 else
-	return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x+unitWorldSize/2).."#"..math.floor( self.position.y+y-unitWorldSize/2).."#".."-1")
+	return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x+unitWorldSize/2).."#"..math.floor( self.position.y+y-unitWorldSize/2).."#".."-1".."#"..tostring(self.appliesField).."#"..self.fieldType)
 end
 end
 

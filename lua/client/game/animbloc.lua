@@ -51,6 +51,16 @@ function AnimBloc:getSprite()
 	return self.currentImg
 end
 
+
+function AnimBloc:syncronize(anim, pos)
+	local newAnim = AnimBloc.ANIMS[anim]
+	    print(newAnim)
+		self.currentAnim = newAnim
+		self.currentPos = pos
+		self:updateImg()
+		self.currentAnim.after = newAnim		
+end
+
 -- PUBLIC : change animation (you can force it)
 function AnimBloc:load(anim, force)
 	local newAnim = AnimBloc.ANIMS[anim]

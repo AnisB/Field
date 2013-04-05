@@ -113,6 +113,7 @@ AnimMM.ANIMS.landing.nexts = {
 function AnimMM.new(folder)
 	local self = {}
 	setmetatable(self, AnimMM)
+	self.folder=folder
 	self.time = 0.0
 	self.sprites = {}
 	for key,val in pairs(AnimMM.ANIMS) do
@@ -136,6 +137,14 @@ end
 -- PUBLIC : getter for the sprite
 function AnimMM:getSprite()
 	return self.currentImg
+end
+-- PUBLIC : change animation (you can force it)
+function AnimMM:syncronize(anim, pos)
+	local newAnim = AnimMM.ANIMS[anim]
+		self.currentAnim = newAnim
+		self.currentPos = pos
+		self:updateImg()
+		self.currentAnim.after = newAnim		
 end
 
 -- PUBLIC : change animation (you can force it)

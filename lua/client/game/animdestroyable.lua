@@ -81,6 +81,16 @@ function AnimDestroyable:load(anim, force)
 	end
 end
 
+
+function AnimDestroyable:syncronize(anim, pos)
+	local newAnim = AnimDestroyable.ANIMS[anim]
+		self.currentAnim = newAnim
+		self.currentPos = pos
+		self:updateImg()
+		self.currentAnim.after = newAnim		
+end
+
+
 -- PUBLIC : update l'anim
 function AnimDestroyable:update(seconds)
 	self.time = self.time + seconds

@@ -152,6 +152,16 @@ function AnimTM:load(anim, force)
 	end
 end
 
+-- PUBLIC : change animation (you can force it)
+function AnimTM:syncronize(anim, pos)
+	local newAnim = AnimTM.ANIMS[anim]
+		self.currentAnim = newAnim
+		self.currentPos = pos
+		self:updateImg()
+		self.currentAnim.after = newAnim		
+end
+
+
 -- PUBLIC : update l'AnimTM
 function AnimTM:update(seconds)
 	self.time = self.time + seconds

@@ -103,6 +103,14 @@ function AnimInter:update(seconds)
 	end
 end
 
+function AnimInter:syncronize(anim, pos)
+	local newAnim = AnimInter.ANIMS[anim]
+		self.currentAnim = newAnim
+		self.currentPos = pos
+		self:updateImg()
+		self.currentAnim.after = newAnim		
+end
+
 -- PRIVATE : go to next sprite
 function AnimInter:next()
 	self.currentPos = self.currentPos + 1

@@ -113,6 +113,7 @@ AnimMM.ANIMS.landing.nexts = {
 function AnimMM.new(folder)
 	local self = {}
 	setmetatable(self, AnimMM)
+	self.folder=folder
 	self.time = 0.0
 	self.sprites = {}
 	for key,val in pairs(AnimMM.ANIMS) do

@@ -308,17 +308,17 @@ end
 -- Return the character to screen
 function MetalMan:secondSend(x,y)
 	if self.goF then
-    	return ("@metalman".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x-unitWorldSize/2).."#"..math.floor( self.position.y+y-unitWorldSize/2).."#".."1")
+    	return ("@metalman".."#"..self.anim.folder.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x-unitWorldSize/2).."#"..math.floor( self.position.y+y-unitWorldSize/2).."#".."1")
 	else
-    	return ("@metalman".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x+unitWorldSize/2).."#"..math.floor( self.position.y+y-unitWorldSize/2).."#".."-1")
+    	return ("@metalman".."#"..self.anim.folder.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x+unitWorldSize/2).."#"..math.floor( self.position.y+y-unitWorldSize/2).."#".."-1")
     end
 end
 
 -- Return the character to screen
 function MetalMan:mainSend(x,y)
 	if self.goF then
-    	return ("@metalman".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(windowW/2-unitWorldSize/2).."#"..math.floor( windowH/2-unitWorldSize/2).."#".."1")
+    	return ("@metalman".."#"..self.anim.folder.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(windowW/2-unitWorldSize/2).."#"..math.floor( windowH/2-unitWorldSize/2).."#".."1")
 	else
-    	return ("@metalman".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(windowW/2+unitWorldSize/2).."#"..math.floor( windowH/2-unitWorldSize/2).."#".."-1")
+    	return ("@metalman".."#"..self.anim.folder.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(windowW/2+unitWorldSize/2).."#"..math.floor( windowH/2-unitWorldSize/2).."#".."-1")
     end
 end

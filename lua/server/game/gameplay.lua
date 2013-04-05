@@ -162,10 +162,12 @@ function Gameplay.new(mapFile)
         if key=="c" then
             toReturn=""
             if self.drawWho==1 then
+                toReturn=toReturn..self.cameraMM:toSend()
                 toReturn=toReturn..self.mapLoader:toSend(self.cameraMM:getPos())
                 toReturn=toReturn..self.metalMan:mainSend(self.cameraMM:getPos())
                 toReturn=toReturn..self.theMagnet:secondSend(self.cameraMM:getPos().x-windowW/2,windowH/2-self.cameraMM:getPos().y)
             else
+                toReturn=toReturn..self.cameraTM:toSend()
                 toReturn=toReturn..self.mapLoader:toSend(self.cameraTM:getPos())
                 toReturn=toReturn..self.theMagnet:mainSend(self.cameraTM:getPos())
                 toReturn=toReturn..self.metalMan:secondSend(self.cameraTM:getPos().x-windowW/2,windowH/2-self.cameraTM:getPos().y)

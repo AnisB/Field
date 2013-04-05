@@ -56,5 +56,5 @@ end
 
 
     function Movable:send(x, y)
-        return ("@movable".."img/img.png".."#"..(self.position.x-x).."#"..(self.position.y+y))
+    return ("@movable".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
     end

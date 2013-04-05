@@ -29,3 +29,7 @@ end
 
 function Camera:draw()
 end
+
+function Camera:toSend()
+	return "@camera".."#"..self.position.x.."#"..self.position.y
+end

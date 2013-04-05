@@ -3,13 +3,8 @@ This file is part of the Field project]]
 
 require("game.themagnet")
 require("game.metalman")
-require("game.map")
 require("game.camera")
-require("game.magnetmanager")
-require("game.generator")
-require("game.metal")
 require("game.maploader")
-require("game.interruptor")
 require("game.sound")
 require("const")
 
@@ -19,76 +14,80 @@ Gameplay.__index = Gameplay
 function Gameplay.new(mapFile)
     local self = {}
     setmetatable(self, Gameplay)
-    Sound.playMusic("theme")
-
-        -- Physics
-        love.physics.setMeter( unitWorldSize) --the height of a meter our worlds will be 64px
-        world = love.physics.newWorld( 0, 18*unitWorldSize, false )
-        print(world:getGravity())
-        world:setCallbacks(beginContact, endContact, preSolve, postSolve)
-        -- Custom physics
-        self.magnetmanager = MagnetManager.new()
-
         --Map
-        self.mapLoader = MapLoader.new("maps.field2",self.magnetmanager)
-        -- self.mapLoader = MapLoader.new("maps.level9",self.magnetmanager)
-
-        -- Camera Metal Man
-        self.cameraMM =Camera.new(0,0)
-        -- Camera The Magnet
-        self.cameraTM =Camera.new(0,0)
-
+        self.mapLoader = MapLoader.new("maps.field2")
         
         --Characters
-        self.metalMan = MetalMan.new(self.cameraMM,self.mapLoader.metalManPos)
-        self.theMagnet = TheMagnet.new(self.cameraTM,self.mapLoader.theMagnetPos)
-        self.magnetmanager:addGenerator(self.theMagnet)
-        self.magnetmanager:addMetal(self.metalMan)
+        self.metalMan = MetalMan.new()
+        self.theMagnet = TheMagnet.new()
 
-        -- Temp var
-        self.drawWho=1
-        print(world:getGravity())
-        self.shouldEnd=false
+    --     packet= {
+    --     camera="@camera#1984#1184.6802978516",
+    --     map={
+    --     metal="@metal#acier#normal#1#256#326@metal#aluminium#normal#1#384#326@metal#static#normal#1#512#326",
+    --     destroyable="@destroyable#normal#1#960#327@destroyable#normal#1#960#263@destroyable#normal#1#960#199@destroyable#normal#1#960#135@destroyable#normal#1#960#71@destroyable#normal#1#960#7@destroyable#normal#1#1024#7@destroyable#normal#1#1024#71@destroyable#normal#1#1024#135@destroyable#normal#1#1024#199@destroyable#normal#1#1024#263@destroyable#normal#1#1024#327@destroyable#normal#1#1088#7@destroyable#normal#1#1088#71@destroyable#normal#1#1088#135@destroyable#normal#1#1088#199@destroyable#normal#1#1088#263@destroyable#normal#1#1088#327",
+    --     },
+    --     metalman="@metalman#standing#3#608#328#1",
+    --     themagnet="@themagnet#jumping#2#32#328#1"
+    -- }
 
-        return self
-    end
-    
-    function Gameplay:reset()
-        self.shouldEnd=false
-        world:setCallbacks(nil, function() collectgarbage() end)
-        world:destroy()
-        world=nil
-        world = love.physics.newWorld( 0, 18*unitWorldSize, false )
-        print(world:getGravity())
-        world:setCallbacks(beginContact, endContact, preSolve, postSolve)
-        -- Custom physics
-        self.magnetmanager= nil
-        self.magnetmanager = MagnetManager.new()
+    --     packet= {
+    --     camera="@camera#2782.0810546875#1184.6800537109",
+    --     map={
+    --     movable="@movable#normal#1#800#326@movable#normal#1#865#326@movable#normal#1#930#326@movable#normal#1#995#326@movable#normal#1#864#261@movable#normal#1#929#261@movable#normal#1#929#196@movable#normal#1#994#261@movable#normal#1#1060#326",
+    --     metal="",
+    --     destroyable="@destroyable#destroyed#1#143#327@destroyable#normal#1#143#263@destroyable#normal#1#143#199@destroyable#normal#1#143#135@destroyable#normal#1#143#71@destroyable#normal#1#143#7@destroyable#normal#1#207#7@destroyable#normal#1#207#71@destroyable#normal#1#207#135@destroyable#normal#1#207#199@destroyable#normal#1#207#263@destroyable#destroyed#1#207#327@destroyable#normal#1#271#7@destroyable#normal#1#271#71@destroyable#normal#1#271#135@destroyable#normal#1#271#199@destroyable#normal#1#271#263@destroyable#destroyed#1#271#327",
+    --     },
+    --     metalman="@metalman#metalman/static#standing#4#608#328#1",
+    --     themagnet="@themagnet#jumping#1#436#191#1"
+    -- }
+
+        packet= {
+        camera="@camera#1121.2181396484#1184.6802978516",
+        map={
+        -- movable="@movable#normal#1#800#326@movable#normal#1#865#326@movable#normal#1#930#326@movable#normal#1#995#326@movable#normal#1#864#261@movable#normal#1#929#261@movable#normal#1#929#196@movable#normal#1#994#261@movable#normal#1#1060#326",
+        metal="@metal#acier#normal#2#690#326@metal#aluminium#normal#2#1246#326",
+        -- destroyable="@destroyable#destroyed#1#143#327@destroyable#normal#1#143#263@destroyable#normal#1#143#199@destroyable#normal#1#143#135@destroyable#normal#1#143#71@destroyable#normal#1#143#7@destroyable#normal#1#207#7@destroyable#normal#1#207#71@destroyable#normal#1#207#135@destroyable#normal#1#207#199@destroyable#normal#1#207#263@destroyable#destroyed#1#207#327@destroyable#normal#1#271#7@destroyable#normal#1#271#71@destroyable#normal#1#271#135@destroyable#normal#1#271#199@destroyable#normal#1#271#263@destroyable#destroyed#1#271#327",
+        interruptor="@interruptor#off#1#286#327",
+        generator="@generator#off#1#670.78186035156#199.31970214844"
+        },
+        metalman="@metalman#metalman/acier#standing#6#672#328#-1",
+        themagnet="@themagnet#field#1#200#328#1#true#Attractive"
+    }
+
+    self.camera=Camera.new(0,0)
+
+    self:handlePacket(packet)
+
+    return self
+end
+
+function Gameplay:reset()
+    self.shouldEnd=false
 
         --Map
-        self.mapLoader = MapLoader.new("maps.field2",self.magnetmanager)
-        -- self.mapLoader = MapLoader.new("maps.level9",self.magnetmanager)
-
-        -- Camera Metal Man
-        self.cameraMM =Camera.new(0,0)
-        -- Camera The Magnet
-        self.cameraTM =Camera.new(0,0)
-
+        self.mapLoader = MapLoader.new("maps.field2")
         
         --Characters
-        self.metalMan = MetalMan.new(self.cameraMM,self.mapLoader.metalManPos)
-        self.theMagnet = TheMagnet.new(self.cameraTM,self.mapLoader.theMagnetPos)
-        self.magnetmanager:addGenerator(self.theMagnet)
-        self.magnetmanager:addMetal(self.metalMan)
-
-        -- Temp var
-        self.drawWho=1
-        print(world:getGravity())
-
+        self.metalMan = MetalMan.new()
+        self.theMagnet = TheMagnet.new()
     end
 
+    function Gameplay:handlePacket(packet)
+        if  packet.themagnet~=nil then
+            self.theMagnet:handlePacket(packet.themagnet)
+        end
+        if  packet.metalman~=nil then
+            self.metalMan:handlePacket(packet.metalman)
+        end
+        if  packet.camera~=nil then
+            self.camera:handlePacket(packet.camera)
+        end        
+        if  packet.map~=nil then
+            self.mapLoader:handlePacket(packet.map)
+        end
+    end
     function Gameplay:finish()
-        self.shouldEnd=true
     end
 
     function Gameplay:mousePressed(x, y, button)
@@ -99,171 +98,26 @@ function Gameplay.new(mapFile)
     
     
     function Gameplay:keyPressed(key, unicode)
-        if key=="z" then
-            self.metalMan:jump()     
-        end
-        if key=="up" then
-            self.theMagnet:jump()
-        end 
 
-        if key =="i" then
-            self.theMagnet:enableStaticField()
-        end
-
-        if key =="o" then
-            self.theMagnet:enableAttractiveField()
-        end
-        if key =="p" then
-            self.theMagnet:enableRepulsiveField()
-        end
-
-        if key =="k" then
-            self.theMagnet:enableRotativeLField()
-        end
-        if key =="l" then
-            self.theMagnet:enableRotativeRField()
-        end
-
-        if key =="e" then
-            self.mapLoader:handleTry()
-        end
-
-        if key =="y" then
-            self.drawWho= (self.drawWho+1)%2
-        end
-
-        if not self.metalMan.isStatic then
-            if key =="b" then
-                self.metalMan:changeMass()
-            end
-        end
-        if key =="d" then
-            self.metalMan:startMove()
-        end
-
-        if key =="q" then
-            self.metalMan:startMove()
-        end
-
-
-        if key =="left" then
-            self.theMagnet:startMove()
-        end
-
-        if key =="right" then
-            self.theMagnet:startMove()
-        end
-
-        if key=="n" then
-            self.metalMan:switchType()
-            self.magnetmanager:changeMetalType(self.metalMan,self.metalMan.oldMetal,self.metalMan.metalType)
-        end
-
-        if key=="c" then
-            toReturn=""
-            if self.drawWho==1 then
-                toReturn=toReturn..self.mapLoader:toSend(self.cameraMM:getPos())
-                toReturn=toReturn..self.metalMan:mainSend(self.cameraMM:getPos())
-                toReturn=toReturn..self.theMagnet:secondSend(self.cameraMM:getPos().x-windowW/2,windowH/2-self.cameraMM:getPos().y)
-            else
-                toReturn=toReturn..self.mapLoader:toSend(self.cameraTM:getPos())
-                toReturn=toReturn..self.theMagnet:mainSend(self.cameraTM:getPos())
-                toReturn=toReturn..self.metalMan:secondSend(self.cameraTM:getPos().x-windowW/2,windowH/2-self.cameraTM:getPos().y)
-            end
-            print(toReturn)
-        end
     end
 
 
 
     function Gameplay:keyReleased(key, unicode)
-        if key =="i" then
-            self.theMagnet:disableStaticField()
-        end
-
-        if key =="o" or key =="p" or key =="k"or key =="l"then
-            self.theMagnet:disableField()
-        end
-        if key =="d" then
-            self.metalMan:stopMove()
-        end
-
-        if key =="q" then
-            self.metalMan:stopMove()
-        end
-
-        if key =="left" then
-            self.theMagnet:stopMove()
-        end
-
-        if key =="right" then
-            self.theMagnet:stopMove()
-        end
 
     end
     
     
     function Gameplay:update(dt)
-
-        -- Physics managers
-        if(self.shouldEnd) then
-        gameStateManager:reset()
-
-            return
-        end
-        world:update(dt) 
-        self.magnetmanager:update(dt)   
-
-        -- Other stuff
         self.theMagnet:update(dt)
         self.metalMan:update(dt)
         self.mapLoader:update(dt)
     end
     
     function Gameplay:draw()
-        if self.drawWho==1 then
-            self.mapLoader:draw(self.cameraMM:getPos())
-            self.theMagnet:secondDraw(self.cameraMM:getPos().x-windowW/2,windowH/2-self.cameraMM:getPos().y)
-            self.metalMan:draw()
-            self.mapLoader:firstPlanDraw(self.cameraMM:getPos())
-
-        else
-            self.mapLoader:draw(self.cameraTM:getPos())
-            self.metalMan:secondDraw(self.cameraTM:getPos().x-windowW/2,windowH/2-self.cameraTM:getPos().y)
-            self.theMagnet:draw() 
-            self.mapLoader:firstPlanDraw(self.cameraTM:getPos())
-
-        end
+        self.mapLoader:draw(self.camera:getPos())
+        self.theMagnet:draw()
+        self.metalMan:draw()
+        -- self.mapLoader:firstPlanDraw(self.cameraMM:getPos())
     end
     
-    
-    function beginContact(a, b, coll)
-        local x,y = coll:getNormal()
-        b:getUserData():collideWith(a:getUserData(), coll)
-        a:getUserData():collideWith(b:getUserData(), coll)
-
-    end
-    
-    function endContact(a, b, coll)
-    local x,y = coll:getNormal()
-    b:getUserData():unCollideWith(a:getUserData(), coll)
-    a:getUserData():unCollideWith(b:getUserData(), coll)
-    collectgarbage()
-end
-
-function preSolve(a, b, coll)
-    local o1 = a:getUserData()
-    local o2 = b:getUserData()
-
-    if o1.preSolve then
-    	o1:preSolve(o2, coll)
-    end
-
-    if o2.preSolve then
-    	o2:preSolve(o1, coll)
-    end
-end
-
-function Gameplay:postSolve(a, b, coll)
--- we won't do anything with this function
-end
