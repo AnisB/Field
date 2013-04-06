@@ -54,7 +54,6 @@ end
 
 function AnimBloc:syncronize(anim, pos)
 	local newAnim = AnimBloc.ANIMS[anim]
-	    print(newAnim)
 		self.currentAnim = newAnim
 		self.currentPos = pos
 		self:updateImg()

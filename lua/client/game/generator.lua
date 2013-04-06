@@ -82,6 +82,7 @@ function Generator.new(pos,typeField,anim,id)
 					else
 						self.field:draw(self.position.x,self.position.y)
 					end
+					print(self.position.x)
 					love.graphics.setColor(255,255,255,255)
 					love.graphics.draw(self.anim:getSprite(), self.position.x, self.position.y)
 				end

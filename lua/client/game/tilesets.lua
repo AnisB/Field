@@ -21,7 +21,6 @@ function Tilesets:getTiles(tiles)
 	for i,v in pairs(tiles) do
 		local tile ={}
 		tile.id = v.firstgid
-		print("Image "..v.name)
 		tile.img = love.graphics.newImage("maps/"..v.image)
 		table.insert(self.tiles,tile)
 	end
