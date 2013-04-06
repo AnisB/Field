@@ -25,6 +25,12 @@
     function Movable:update(dt)
         self.anim:update(dt)
     end
+    function Movable:syncronize(pos,anim,id)
+        self.drawed=true
+        self.anim:syncronize(anim,id)
+        self.position.x=pos.x
+        self.position.y=pos.y    
+    end
 
 
     function Movable:getPosition()

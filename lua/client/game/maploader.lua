@@ -205,7 +205,7 @@ if  maps.movable~=nil then
         if self.movables[tonumber(t[2])]==nil then
             self.movables[tonumber(t[2])]=Movable.new({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
         else
-            self.movables[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[3],t[4],tonumber(t[5]))
+            self.movables[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
         end
     end
 end
@@ -235,7 +235,7 @@ if  maps.gateinterruptor~=nil then
         if self.gateinterruptors[tonumber(t[2])]==nil then
             self.gateinterruptors[tonumber(t[2])]=GateInterruptor.new({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
         else
-            self.gateinterruptors[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[3],t[4],tonumber(t[5]))
+            self.gateinterruptors[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
         end            
     end
 end    

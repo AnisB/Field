@@ -27,6 +27,7 @@ end
         self.anim:syncronize(anim,id)   
         self.position.x=pos.x
         self.position.y=pos.y
+        self.drawed=true
     end
 
 function GateInterruptor:loadAnimation(anim, force)

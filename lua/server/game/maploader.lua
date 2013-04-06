@@ -119,7 +119,7 @@ end
 
 function MapLoader:createMovables(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.movables, Movable.new({x=(j.x),y=(j.y)},j.shape, false,nil,i))
+        table.insert(self.movables, Movable.new({x=(j.x),y=(j.y)},j.shape,i))
     end
 end
 
