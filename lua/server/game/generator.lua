@@ -13,6 +13,7 @@ function Generator.new(pos,type,typeField,ID,netid)
 	local self = {}
 	setmetatable(self, Generator)
 	print(pos)
+	self.netid=netid
 	self.id=ID
 	self.position={x=pos.x,y=pos.y}
 	self.pc = Physics.newSphere(self.position.x,self.position.y,unitWorldSize/2,type)

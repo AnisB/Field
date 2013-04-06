@@ -10,7 +10,7 @@
     function Destroyable.new(position,anim,pos)
         local self = {}
         setmetatable(self, Destroyable)
-
+        self.drawed=true
         -- Position
         self.position={x=position.x,y=position.y}
 
@@ -26,6 +26,11 @@
     function Destroyable:update(dt)
         self.anim:update(dt)
  end
+    function Destroyable:syncronize(pos,anim,id)
+        self.anim:syncronize(anim,id)   
+        self.position.x=pos.x
+        self.position.y=pos.y
+    end
 
 
  function Destroyable:getPosition()

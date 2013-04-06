@@ -48,21 +48,21 @@ end
 function MapLoader:update(dt)
 
     for i,b in pairs(self.destroyables) do
-          b:update(dt)
-    end
+      b:update(dt)
+  end
 
 
-    for i,p in pairs(self.metals) do
-        p:update(dt)
-    end
+  for i,p in pairs(self.metals) do
+    p:update(dt)
+end
 
-    for i,p in pairs(self.movables) do
-        p:update(dt)
-    end
+for i,p in pairs(self.movables) do
+    p:update(dt)
+end
 
-    for i,p in pairs(self.interruptors) do
-        p:update(dt)
-    end
+for i,p in pairs(self.interruptors) do
+    p:update(dt)
+end
 
     -- for i,p in pairs(self.generators) do
     --     p:update(dt)
@@ -90,30 +90,38 @@ function MapLoader:draw(pos)
     self.tilesets:draw({x=pos.x-windowW/2,y=windowH/2-pos.y})
 
     for i,p in pairs(self.metals) do
+        if p.drawed==true then
           p:draw()
-	end
+      end
+  end
 
-    for i,p in pairs(self.destroyables) do
-          p:draw()
-    end
+  for i,p in pairs(self.destroyables) do
+    if p.drawed==true then
+      p:draw()
+  end
+end
 
-    for i,p in pairs(self.movables) do
-          p:draw()
-    end
+for i,p in pairs(self.movables) do
+    if p.drawed==true then
+      p:draw()
+  end
+end
 
-    for i,p in pairs(self.interruptors) do
-          p:draw()
-    end
+for i,p in pairs(self.interruptors) do
+    if p.drawed==true then
+      p:draw()
+  end
+end
 
  --    for i,p in pairs(self.generators) do
  --        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
  --          p:draw(pos.x-windowW/2,windowH/2-pos.y)
  --        end
  --    end
-    
-    for i,p in pairs(self.gateinterruptors) do
-          p:draw()
-    end    
+
+ for i,p in pairs(self.gateinterruptors) do
+  p:draw()
+end    
 
  --    for i,p in pairs(self.gates) do
  --        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
@@ -124,67 +132,99 @@ end
 
 
 function MapLoader:handlePacket(maps)
-    self.metals={}
-    self.destroyables={}
-    self.movables={}
-    self.interruptors={}
-    self.gateinterruptors={}
-    if  maps.metal~=nil then
-        print("not nil")
-        for v in string.gmatch(maps.metal, "[^@]+") do
-                t={}
-                for d in string.gmatch(v, "[^#]+") do
-                    table.insert(t,d)
-                end
-                table.insert(self.metals,Metal.new({x=tonumber(t[5]),y=tonumber(t[6])},t[2],t[3],tonumber(t[4])))
+    for i,p in pairs(self.metals) do
+      p.drawed=false
+  end
 
-            end
+  for i,p in pairs(self.destroyables) do
+      p.drawed=false
+  end
+
+  for i,p in pairs(self.movables) do
+      p.drawed=false
+  end
+
+  for i,p in pairs(self.interruptors) do
+      p.drawed=false
+  end    
+  for i,p in pairs(self.gateinterruptors) do
+      p.drawed=false
+  end   
+  if  maps.metal~=nil then
+    print("not nil")
+    for v in string.gmatch(maps.metal, "[^@]+") do
+        t={}
+        for d in string.gmatch(v, "[^#]+") do
+            table.insert(t,d)
+        end
+        if self.metals[tonumber(t[2])]==nil then
+            self.metals[tonumber(t[2])]=Metal.new({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
+        else
+            self.metals[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
+        end
     end
+end
 
-    if  maps.destroyable~=nil then
-        for v in string.gmatch(maps.destroyable, "[^@]+") do
-                t={}
-                for d in string.gmatch(v, "[^#]+") do
-                    table.insert(t,d)
-                end
-                table.insert(self.destroyables,Destroyable.new({x=tonumber(t[4]),y=tonumber(t[5])},t[2],tonumber(t[3])))
-            end
+if  maps.destroyable~=nil then
+    for v in string.gmatch(maps.destroyable, "[^@]+") do
+        t={}
+        for d in string.gmatch(v, "[^#]+") do
+            table.insert(t,d)
+        end
+        if self.destroyables[tonumber(t[2])]==nil then
+            self.destroyables[tonumber(t[2])]=Destroyable.new({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
+        else
+            self.destroyables[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
+        end
     end
+end
 
-    if  maps.movable~=nil then
-        for v in string.gmatch(maps.movable, "[^@]+") do
-                t={}
-                for d in string.gmatch(v, "[^#]+") do
-                    table.insert(t,d)
-                end
-                table.insert(self.movables,Movable.new({x=tonumber(t[4]),y=tonumber(t[5])},t[2],tonumber(t[3])))
-            end
+if  maps.movable~=nil then
+    for v in string.gmatch(maps.movable, "[^@]+") do
+        t={}
+        for d in string.gmatch(v, "[^#]+") do
+            table.insert(t,d)
+        end
+        if self.movables[tonumber(t[2])]==nil then
+            self.movables[tonumber(t[2])]=Movable.new({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
+        else
+            self.movables[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
+        end
     end
+end
 
-    if  maps.interruptor~=nil then
-        for v in string.gmatch(maps.interruptor, "[^@]+") do
-                t={}
-                for d in string.gmatch(v, "[^#]+") do
-                    table.insert(t,d)
-                end
-                table.insert(self.interruptors,Interruptor.new({x=tonumber(t[4]),y=tonumber(t[5])},t[2],tonumber(t[3])))
-            end
+if  maps.interruptor~=nil then
+    for v in string.gmatch(maps.interruptor, "[^@]+") do
+        t={}
+        for d in string.gmatch(v, "[^#]+") do
+            table.insert(t,d)
+        end
+        if self.interruptors[tonumber(t[2])]==nil then
+            self.interruptors[tonumber(t[2])]=Interruptor.new({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
+        else
+            self.interruptors[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
+        end
     end
+end
 
 
-    if  maps.gateinterruptor~=nil then
-        for v in string.gmatch(maps.gateinterruptor, "[^@]+") do
-                t={}
-                for d in string.gmatch(v, "[^#]+") do
-                    table.insert(t,d)
-                end
-                table.insert(self.gateinterruptors,GateInterruptor.new({x=tonumber(t[4]),y=tonumber(t[5])},t[2],tonumber(t[3])))
-            end
-    end    
+if  maps.gateinterruptor~=nil then
+    for v in string.gmatch(maps.gateinterruptor, "[^@]+") do
+        t={}
+        for d in string.gmatch(v, "[^#]+") do
+            table.insert(t,d)
+        end
+        if self.gateinterruptors[tonumber(t[2])]==nil then
+            self.gateinterruptors[tonumber(t[2])]=GateInterruptor.new({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
+        else
+            self.gateinterruptors[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
+        end            
+    end
+end    
 
 end
 function MapLoader:firstPlanDraw(pos)
- 
+
     -- for i,p in pairs(self.acids) do
     --     if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
     --       p:draw(pos.x-windowW/2,windowH/2-pos.y)

@@ -14,7 +14,7 @@ function Metal.new(pos,typemetal,anim,id)
 	setmetatable(self, Metal)
 
 	self.position={x=pos.x,y=pos.y}
-
+	self.drawed=true
 	if typemetal =="static" then
 		self.anim = AnimBloc.new('bloc/static')
 	else
@@ -25,12 +25,16 @@ function Metal.new(pos,typemetal,anim,id)
 			end
 
 		end
-		--self:loadAnimation("normal",true)	
 		print(anim..id)
 		self.anim:syncronize(anim,id)	
 		return self
 	end
 
+	function Metal:syncronize(pos,anim,id)
+		self.anim:syncronize(anim,id)	
+		self.position.x=pos.x
+		self.position.y=pos.y
+	end
 
 	function Metal:getPosition(  )
 		return self.position
