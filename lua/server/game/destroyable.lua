@@ -7,10 +7,11 @@
     Destroyable = {}
     Destroyable.__index =  Destroyable
     
-    function Destroyable.new(position,type,sprite,w,h)
+    function Destroyable.new(position,type,sprite,w,h,netid)
         local self = {}
         setmetatable(self, Destroyable)
 
+        self.netid=netid
         -- Position
         self.position={x=position.x,y=position.y}
         self.w=w
@@ -81,5 +82,5 @@ end
 
 
 function Destroyable:send(x, y)
-    return ("@destroyable".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
+    return ("@destroyable".."#"..self.netid.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
 end

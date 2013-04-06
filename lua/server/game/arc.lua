@@ -8,9 +8,11 @@ Arc.__index = Arc
 TimerArc =1
 
 ArcType={DebutH='DebutH',MillieuH='MillieuH',FinH='FinH',DebutV='DebutV',MillieuV='MillieuV',FinV='FinV'}
-function Arc.new(pos,w,h,typeArc)
+function Arc.new(pos,w,h,typeArc,netid)
 	local self = {}
 	setmetatable(self, Arc)
+
+	self.netid=netid
 	self.position={x=pos.x,y=pos.y}
 	self.w=w
 	self.h=h
@@ -85,5 +87,5 @@ function Arc:draw(x,y)
 end
 
 function Arc:send(x,y)
-		return ("@arc".."#"..self.arcType.."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
+		return ("@arc".."#"..self.netid.."#"..self.arcType.."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
 end

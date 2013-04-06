@@ -119,20 +119,20 @@ end
 
 function MapLoader:createMovables(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.movables, Movable.new({x=(j.x),y=(j.y)},j.shape, false,nil))
+        table.insert(self.movables, Movable.new({x=(j.x),y=(j.y)},j.shape, false,nil,i))
     end
 end
 
 function MapLoader:createDestroyables(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.destroyables, Destroyable.new({x=(j.x),y=(j.y)},j.shape,nil,j.width,j.height))
+        table.insert(self.destroyables, Destroyable.new({x=(j.x),y=(j.y)},j.shape,nil,j.width,j.height,i))
     end
 end
 
 
 function MapLoader:createGenerators(map)
     for i,j in pairs(map.objects) do
-        local g =Generator.new({x=(j.x),y=(j.y)},true,j.type,j.properties["id"])
+        local g =Generator.new({x=(j.x),y=(j.y)},true,j.type,j.properties["id"],i)
         self.magnetManager:addGenerator(g)
         table.insert(self.generators,g)
     end
@@ -140,27 +140,27 @@ end
 
 function MapLoader:createInterruptors(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.interruptors, Interruptor.new({x=(j.x),y=(j.y)},true,j.properties["id"],self.magnetManager,j.properties["image"]))
+        table.insert(self.interruptors, Interruptor.new({x=(j.x),y=(j.y)},true,j.properties["id"],self.magnetManager,j.properties["image"],i))
     end
 end
 
 function MapLoader:createGateInterruptors(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.gateinterruptors, GateInterruptor.new({x=(j.x),y=(j.y)},true,j.properties["id"],self,j.properties["enabled"]))
+        table.insert(self.gateinterruptors, GateInterruptor.new({x=(j.x),y=(j.y)},true,j.properties["id"],self,j.properties["enabled"],i))
     end
 end
 
 function MapLoader:createGates(map)
     for i,j in pairs(map.objects) do
         print("Door")
-        table.insert(self.gates, Gate.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["id"],j.properties["enabled"]));
+        table.insert(self.gates, Gate.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["id"],j.properties["enabled"],i));
     end
 end
 
 function MapLoader:createAcids(map)
     for i,j in pairs(map.objects) do
         print("acid")
-        table.insert(self.acids, Acid.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["type"]))
+        table.insert(self.acids, Acid.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["type"],i))
     end
 end
 
@@ -172,7 +172,7 @@ end
 
 function MapLoader:createArcs(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.arcs, Arc.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["type"]))
+        table.insert(self.arcs, Arc.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["type"],i))
     end
 end
 
@@ -180,7 +180,7 @@ end
 function MapLoader:createMetals(map)
     for i,j in pairs(map.objects) do
         print(j.properties["physic"])
-        local m =Metal.new({x=j.x,y=j.y},j.shape,j.properties["physic"],j.type,j.properties["magnet"])
+        local m =Metal.new({x=j.x,y=j.y},j.shape,j.properties["physic"],j.type,j.properties["magnet"],i)
         self.magnetManager:addMetal(m)        
         table.insert(self.metals,m)
     end

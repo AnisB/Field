@@ -7,10 +7,11 @@
     Movable = {}
     Movable.__index =  Movable
     
-    function Movable.new(position,type)
+    function Movable.new(position,type,netid)
         local self = {}
         setmetatable(self, Movable)
 
+        self.netid=id
         -- Position
         self.position={x=position.x,y=position.y}
         self.w=unitWorldSize
@@ -56,5 +57,5 @@ end
 
 
     function Movable:send(x, y)
-    return ("@movable".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
+    return ("@movable".."#"..self.netid.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
     end

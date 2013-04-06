@@ -7,9 +7,10 @@ Interruptor = {}
 Interruptor.__index = Interruptor
 
 
-function Interruptor.new(pos,type,generatorID,magnetManager,sprite)
+function Interruptor.new(pos,type,generatorID,magnetManager,sprite,netid)
 	local self = {}
 	setmetatable(self, Interruptor)
+	self.netid=netid
 	self.position={x=pos.x,y=pos.y}
 	local decalage={unitWorldSize/2,unitWorldSize/2}
 	self.pc = Physics.newInterruptor(self.position.x,self.position.y,unitWorldSize,unitWorldSize,type,decalage)
@@ -117,5 +118,5 @@ function Interruptor:draw(x,y)
 end
 
 function Interruptor:send(x,y)
-    return ("@interruptor".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor( self.position.y+y))
+    return ("@interruptor".."#"..self.netid.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor( self.position.y+y))
 end

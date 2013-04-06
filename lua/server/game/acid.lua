@@ -6,9 +6,11 @@ Acid = {}
 Acid.__index = Acid
 Acid.Types ={hg='hg',hm='hm',hd='hd',mg='mg',mm='mm',md='md',bg='bg',bm='bm',bd='bd'}
 
-function Acid.new(pos,w,h,type)
+function Acid.new(pos,w,h,type,netid)
 	local self = {}
 	setmetatable(self, Acid)
+
+	self.netid=netid
 	self.position={x=pos.x,y=pos.y}
 	print(type)
 	print(Acid.Types.hg)
@@ -70,6 +72,5 @@ end
 
 
 function Acid:send(x,y)
-	love.graphics.setColor(255,255,255,255)
-	love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
+		return ("@acid".."#"..self.netid.."#"..self.arcType.."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
 end

@@ -8,9 +8,11 @@ GateInterruptor = {}
 GateInterruptor.__index = GateInterruptor
 
 
-function GateInterruptor.new(pos,type,gateID,mapLoader,enabled)
+function GateInterruptor.new(pos,type,gateID,mapLoader,enabled,netid)
 	local self = {}
 	setmetatable(self, GateInterruptor)
+
+	self.netid=netid
 	self.position={x=pos.x,y=pos.y}
 	local decalage={unitWorldSize/4,unitWorldSize/4}
 	self.pc = Physics.newInterruptor(self.position.x,self.position.y,unitWorldSize/2,unitWorldSize/2,type,decalage)
@@ -124,5 +126,5 @@ function GateInterruptor:draw(x,y)
 end
 
 function GateInterruptor:send(x,y)
-    return ("@gateinterruptor".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
+    return ("@gateinterruptor".."#"..self.netid.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
 end

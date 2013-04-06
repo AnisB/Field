@@ -9,7 +9,7 @@ Generator = {}
 Generator.__index = Generator
 
 
-function Generator.new(pos,type,typeField,ID)
+function Generator.new(pos,type,typeField,ID,netid)
 	local self = {}
 	setmetatable(self, Generator)
 	print(pos)
@@ -234,11 +234,11 @@ end
 
 function Generator:send(x,y)
 	toReturn=""
-	toReturn= toReturn..("@generator".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..(self.position.x-x).."#"..( self.position.y+y))
+	toReturn= toReturn..("@generator".."#"..self.netid.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..(self.position.x-x).."#"..( self.position.y+y))
 	if self.typeField =="Attractive" then
-		toReturn= toReturn..self.field:send(self.pc.body:getX()-x+unitWorldSize/2, self.pc.body:getY()+y+unitWorldSize/2)
+		--toReturn= toReturn..self.field:send(self.pc.body:getX()-x+unitWorldSize/2, self.pc.body:getY()+y+unitWorldSize/2)
 	else
-		toReturn= toReturn..self.field:send(self.pc.body:getX()-x+unitWorldSize, self.pc.body:getY()+y+unitWorldSize)
+		--toReturn= toReturn..self.field:send(self.pc.body:getX()-x+unitWorldSize, self.pc.body:getY()+y+unitWorldSize)
 	end
 	return toReturn
 end

@@ -10,9 +10,12 @@ Metal.__index = Metal
 
 MetalMTypes={Alu =0.05,Acier =0.1}
 
-function Metal.new(pos,shapeType,typeP,material,typemetal)
+function Metal.new(pos,shapeType,typeP,material,typemetal,netid)
 	local self = {}
 	setmetatable(self, Metal)
+
+
+	self.netid=netid
 	local type =false
 	if typeP =="static" then
 		type=true
@@ -161,12 +164,12 @@ function Metal.new(pos,shapeType,typeP,material,typemetal)
 
 function Metal:send(x,y)
 	if typemetal =="static" then
-		return ("@metal".."#".."static".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor( self.position.y+y))
+		return ("@metal".."#"..self.netid.."#".."static".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor( self.position.y+y))
 	else
 		if self.metalWeight==MetalMTypes.Alu then
-			return ("@metal".."#".."aluminium".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor( self.position.y+y))
+			return ("@metal".."#"..self.netid.."#".."aluminium".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor( self.position.y+y))
 		elseif self.metalWeight==MetalMTypes.Acier then
-			return ("@metal".."#".."acier".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor( self.position.y+y))
+			return ("@metal".."#"..self.netid.."#".."acier".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor( self.position.y+y))
 		end
 	end
 end

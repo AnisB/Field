@@ -8,9 +8,11 @@ Gate = {}
 Gate.__index = Gate
 
 
-function Gate.new(pos,w,h,ID,enabled)
+function Gate.new(pos,w,h,ID,enabled,netid)
 	local self = {}
 	setmetatable(self, Gate)
+
+	self.netid=netid
 	self.id=ID
 	self.position={x=pos.x,y=pos.y}
     -- Type
@@ -86,5 +88,5 @@ function Gate:draw(x,y)
 end
 
 function Gate:send(x,y)
-	return ("@gate".."img/img.png".."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
+	return ("@gate".."#"..self.netid.."#".."img/img.png".."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
 end
