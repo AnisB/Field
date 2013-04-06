@@ -78,7 +78,81 @@
   <object x="1984" y="128" width="64" height="384"/>
  </objectgroup>
  <objectgroup color="#004080" name="acid" width="60" height="10">
-  <object x="1024" y="512" width="960" height="64"/>
+  <object x="1664" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1152" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1280" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1408" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1600" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1536" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1856" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1728" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1472" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1024" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hg"/>
+   </properties>
+  </object>
+  <object x="1088" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1920" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hd"/>
+   </properties>
+  </object>
+  <object x="1792" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1216" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1344" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ffff00" name="arc" width="60" height="10"/>
  <objectgroup color="#ffff00" name="levelend" width="60" height="10">
