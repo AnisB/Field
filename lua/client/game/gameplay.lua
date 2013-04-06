@@ -20,6 +20,7 @@ function Gameplay.new(mapFile)
         --Characters
         self.metalMan = MetalMan.new()
         self.theMagnet = TheMagnet.new()
+		self.keyPacket={}
 
     self.camera=Camera.new(0,0)
 
@@ -62,14 +63,13 @@ function Gameplay:reset()
     end
     
     
-    function Gameplay:keyPressed(key, unicode)
-
+    function Gameplay:keyPressed(inputKey, unicode)
+		serveur:send({type="input", pck={character="metalMan", key=inputKey, state=true}})
     end
 
-
-
-    function Gameplay:keyReleased(key, unicode)
-
+	
+    function Gameplay:keyReleased(inputKey, unicode)
+		serveur:send({type="input", pck={character="metalMan", key=inputKey, state=false}})
     end
     
     

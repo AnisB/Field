@@ -263,7 +263,7 @@ function MetalMan:update(seconds)
 	self.position.y=y
 	if self.alive then
 		if not self.isStatic  then
-			if love.keyboard.isDown("d") then
+			if inputManager:isKeyDown("d") then
 				if self.metalWeight==MetalMTypes.Alu then
 					self.pc.body:applyForce(MetalManMovingForce.Alu, 0)
 				else
@@ -271,7 +271,7 @@ function MetalMan:update(seconds)
 				end
 				self.goF=true
 
-			elseif love.keyboard.isDown("q") then 
+			elseif inputManager:isKeyDown("q") then 
 				if self.metalWeight==MetalMTypes.Alu then
 					self.pc.body:applyForce(-MetalManMovingForce.Alu, 0)
 				else
