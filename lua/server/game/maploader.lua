@@ -300,50 +300,64 @@ end
 
 function MapLoader:toSend(pos)
 
-    local returnSend=""
+	local maptable={}
+    local metals=""
     for i,p in pairs(self.metals) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-          returnSend=returnSend..p:send(pos.x-windowW/2,windowH/2-pos.y)
+          metals=metals..p:send(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
+	maptable.metal=metals
 
+	local destroyables=""
     for i,p in pairs(self.destroyables) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-          returnSend=returnSend..p:send(pos.x-windowW/2,windowH/2-pos.y)
+          destroyables=destroyables..p:send(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
+	maptable.destroyable=destroyables
 
+	local movables=""
     for i,p in pairs(self.movables) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-          returnSend=returnSend..p:send(pos.x-windowW/2,windowH/2-pos.y)
+          movables=movables..p:send(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
+	maptable.movable=movables
 
+	local interruptors=""
     for i,p in pairs(self.interruptors) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-          returnSend=returnSend..p:send(pos.x-windowW/2,windowH/2-pos.y)
+          interruptors=interruptors..p:send(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
+	maptable.interruptor=interruptors
 
+	local generators=""
     for i,p in pairs(self.generators) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-          returnSend=returnSend..p:send(pos.x-windowW/2,windowH/2-pos.y)
+          generators=generators..p:send(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
+	maptable.generator=interruptors
     
+	local gateinterruptors=""
     for i,p in pairs(self.gateinterruptors) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-          returnSend=returnSend..p:send(pos.x-windowW/2,windowH/2-pos.y)
-        end
-    end    
-
-    for i,p in pairs(self.gates) do
-        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-          returnSend=returnSend..p:send(pos.x-windowW/2,windowH/2-pos.y)
+          gateinterruptors=gateinterruptors..p:send(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
+	maptable.gateinterruptor=gateinterruptors    
 
-    return returnSend
+	local gates=""
+    for i,p in pairs(self.gates) do
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          gates=gates..p:send(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end
+	maptable.gates=gate
+
+    return maptable
 end
 
 function MapLoader:firstPlanDraw(pos)

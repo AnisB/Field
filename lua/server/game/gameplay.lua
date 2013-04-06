@@ -160,19 +160,19 @@ function Gameplay.new(mapFile)
         end
 
         if key=="c" then
-            toReturn=""
+            local packet{}
             if self.drawWho==1 then
-                toReturn=toReturn..self.cameraMM:toSend()
-                toReturn=toReturn..self.mapLoader:toSend(self.cameraMM:getPos())
-                toReturn=toReturn..self.metalMan:mainSend(self.cameraMM:getPos())
-                toReturn=toReturn..self.theMagnet:secondSend(self.cameraMM:getPos().x-windowW/2,windowH/2-self.cameraMM:getPos().y)
+                packet.camera=self.cameraMM:toSend()
+                packet.map=self.mapLoader:toSend(self.cameraMM:getPos())
+                packet.metalMan=self.metalMan:mainSend(self.cameraMM:getPos())
+                packet.theMagnet=self.theMagnet:secondSend(self.cameraMM:getPos().x-windowW/2,windowH/2-self.cameraMM:getPos().y)
             else
-                toReturn=toReturn..self.cameraTM:toSend()
-                toReturn=toReturn..self.mapLoader:toSend(self.cameraTM:getPos())
-                toReturn=toReturn..self.theMagnet:mainSend(self.cameraTM:getPos())
-                toReturn=toReturn..self.metalMan:secondSend(self.cameraTM:getPos().x-windowW/2,windowH/2-self.cameraTM:getPos().y)
+                packet.camera=self.cameraTM:toSend()
+                packet.map=self.mapLoader:toSend(self.cameraTM:getPos())
+                packet.theMagnet=self.theMagnet:mainSend(self.cameraTM:getPos())
+                packet.metalMan=metalMan:secondSend(self.cameraTM:getPos().x-windowW/2,windowH/2-self.cameraTM:getPos().y)
             end
-            print(toReturn)
+            -- Envoyer ici packet (seld.Send(packet))
         end
     end
 
