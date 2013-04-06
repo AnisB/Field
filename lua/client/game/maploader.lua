@@ -166,7 +166,6 @@ function MapLoader:handlePacket(maps)
 
 
   if  maps.metal~=nil then
-    print("not nil")
     for v in string.gmatch(maps.metal, "[^@]+") do
         t={}
         for d in string.gmatch(v, "[^#]+") do
@@ -175,8 +174,6 @@ function MapLoader:handlePacket(maps)
         if self.metals[tonumber(t[2])]==nil then
             self.metals[tonumber(t[2])]=Metal.new({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
         else
-        print(tonumber(t[6])..tonumber(t[7]))
-
             self.metals[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[4],tonumber(t[5]))
         end
     end
@@ -216,7 +213,6 @@ if  maps.interruptor~=nil then
         for d in string.gmatch(v, "[^#]+") do
             table.insert(t,d)
         end
-        print(v)
         if self.interruptors[tonumber(t[2])]==nil then
             self.interruptors[tonumber(t[2])]=Interruptor.new({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
         else

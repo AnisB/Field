@@ -11,6 +11,7 @@ require("lubeboth.lube")
 require("lubeboth.TSerial")
 require("lubeboth.client")
 table2 = require("lubeboth.table2")
+cron = require("lubeboth.cron")
 
 
 SourceDirectory="./"
@@ -115,6 +116,7 @@ end
 
 function love.update(dt)
 	conn:update(dt)
+	cron.update(dt)
 	gameStateManager:update(dt)
 end	
 

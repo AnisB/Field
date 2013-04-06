@@ -37,7 +37,6 @@ function MetalMan:handlePacket( string )
 	for v in string.gmatch(string, "[^#]+") do
 		table.insert(t,v)
 	end
-	print(t[2])
 	if self.anim.folder~=t[2] then
 		self.anim = AnimMM.new(t[2])
 	end
