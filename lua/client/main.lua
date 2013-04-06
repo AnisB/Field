@@ -25,7 +25,7 @@ end
 -- "high level" events :
 
 function onMessage(msg)
-	print("Received : " .. table2.tostring(msg))
+	-- print("Received : " .. table2.tostring(msg))
 	if msg.type == "gameplaypacket" then
 		gameStateManager.state['Gameplay']:handlePacket(msg.pk)
 	else
