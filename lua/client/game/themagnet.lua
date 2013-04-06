@@ -69,7 +69,9 @@ function TheMagnet:handlePacket( string )
 		table.insert(t,v)
 	end
 
-	self.anim:syncronize(t[2],tonumber(t[3]))
+	-- if (self.anim.currentAnim.name~=t[2]) then
+		self.anim:syncronize(t[2],tonumber(t[3]))
+	-- end
 	self.position.x=tonumber(t[4])
 	self.position.y=tonumber(t[5])
 	if t[6]=="1" then
@@ -113,7 +115,7 @@ end
 
 -- Method that updates the character state
 function TheMagnet:update(seconds)
-	self.anim:update(seconds)
+	-- self.anim:update(seconds)
 	self.field:update(seconds,self.position.x,self.position.y)
 
 end
@@ -126,6 +128,6 @@ function TheMagnet:draw()
 	if 	 self.goF then
 		love.graphics.draw(self.anim:getSprite(), self.position.x,self.position.y, 0, 1,1)
 	else
-		love.graphics.draw(self.anim:getSprite(), windowW/2+unitWorldSize/2,windowH/2-unitWorldSize/2,0 , -1,1)
+		love.graphics.draw(self.anim:getSprite(), self.position.x,self.position.y, 0, -1,1)
 	end
 end

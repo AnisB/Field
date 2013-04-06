@@ -25,7 +25,6 @@ function Metal.new(pos,typemetal,anim,id)
 			end
 
 		end
-		print(anim..id)
 		self.anim:syncronize(anim,id)	
 		return self
 	end
