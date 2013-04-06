@@ -103,6 +103,14 @@ function AnimGene:update(seconds)
 	end
 end
 
+function AnimGene:syncronize(anim, pos)
+	local newAnim = AnimGene.ANIMS[anim]
+	    print(newAnim)
+		self.currentAnim = newAnim
+		self.currentPos = pos
+		self:updateImg()
+		self.currentAnim.after = newAnim		
+end
 -- PRIVATE : go to next sprite
 function AnimGene:next()
 	self.currentPos = self.currentPos + 1

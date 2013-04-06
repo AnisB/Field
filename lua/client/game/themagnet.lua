@@ -91,7 +91,7 @@ function TheMagnet:handlePacket( string )
 		self.fieldType="None"
 		self.appliesField=false
 		self.field= Field.new(t[8])
-		self.field.isActive=true
+		self.field.isActive=false
 	elseif 	self.appliesField and t[7]=="true" then
 		if self.fieldType==t[8] then
 		else
