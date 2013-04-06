@@ -47,9 +47,9 @@ AnimTM.ANIMS.mort.number = 1
 
 -- delays
 AnimTM.ANIMS.running.DELAY = 0.075
-AnimTM.ANIMS.startjumping.DELAY = 0.075
+AnimTM.ANIMS.startjumping.DELAY = 0.1
 AnimTM.ANIMS.jumping.DELAY = 0.300
-AnimTM.ANIMS.landing.DELAY = 0.075
+AnimTM.ANIMS.landing.DELAY = 0.1
 AnimTM.ANIMS.standing.DELAY = 0.150
 AnimTM.ANIMS.stoprunning.DELAY = 0.075
 AnimTM.ANIMS.returnanim.DELAY = 0.2
@@ -74,7 +74,7 @@ AnimTM.ANIMS.mort.priority = 20
 
 -- automatic loopings or automatic switch :
 AnimTM.ANIMS.running.loop = true
-AnimTM.ANIMS.startjumping.switch = AnimTM.ANIMS.jumping
+-- AnimTM.ANIMS.startjumping.switch = AnimTM.ANIMS.jumping
 AnimTM.ANIMS.jumping.loop = true
 AnimTM.ANIMS.landing.switch = AnimTM.ANIMS.standing
 AnimTM.ANIMS.standing.loop = true
@@ -186,6 +186,7 @@ function AnimTM:next()
 		elseif self.currentAnim.loop then
 			-- I don't switch
 		else
+			return
 			print("FUCKING AnimTM SWITCHING ERROR")
 		end
 		self.currentPos = 1

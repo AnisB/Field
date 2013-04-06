@@ -46,11 +46,12 @@ function Generator.new(pos,typeField,anim,id)
 			function Generator:syncronize(pos,typeField,anim,id,applies)
 				self.drawed=true
 
-
-				self.anim:syncronize(anim,id)
+				if (self.anim.currentAnim.name~=anim) then
+					self.anim:syncronize(anim,id)
+				end
 				self.position.x=pos.x
 				self.position.y=pos.y
-				
+				print(applies)
 				if not self.appliesField and applies=="true" then
 					self.appliesField=true
 					self.field.isActive=true

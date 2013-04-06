@@ -242,10 +242,11 @@ if  maps.generator~=nil then
         for d in string.gmatch(v, "[^#]+") do
             table.insert(t,d)
         end
+        print(v)
         if self.generators[tonumber(t[2])]==nil then
             self.generators[tonumber(t[2])]=Generator.new({x=tonumber(t[5]),y=tonumber(t[6])},t[8],t[3],tonumber(t[4]))
         else
-            self.generators[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[8],t[3],tonumber(t[4]))
+            self.generators[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[8],t[3],tonumber(t[4]),t[7])
         end            
     end
 end 

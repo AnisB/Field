@@ -78,10 +78,10 @@ AnimMM.ANIMS.mort.priority = 1
 AnimMM.ANIMS.running.loop = true
 AnimMM.ANIMS.startjumping.switch = AnimMM.ANIMS.jumping
 AnimMM.ANIMS.jumping.loop = true
-AnimMM.ANIMS.landing.switch = AnimMM.ANIMS.standing
+-- AnimMM.ANIMS.landing.switch = AnimMM.ANIMS.standing
 AnimMM.ANIMS.standing.loop = true
 AnimMM.ANIMS.stoprunning.switch = AnimMM.ANIMS.standing
-AnimMM.ANIMS.returnanim.switch = AnimMM.ANIMS.running
+AnimMM.ANIMS.returnanim.loop = true
 AnimMM.ANIMS.load1.switch = AnimMM.ANIMS.standing
 AnimMM.ANIMS.load2.switch = AnimMM.ANIMS.standing
 AnimMM.ANIMS.mortelec.switch = AnimMM.ANIMS.mort
@@ -187,6 +187,7 @@ function AnimMM:next()
 		elseif self.currentAnim.loop then
 			-- I don't switch
 		else
+			return
 			print("FUCKING ANIM SWITCHING ERROR")
 		end
 		self.currentPos = 1
