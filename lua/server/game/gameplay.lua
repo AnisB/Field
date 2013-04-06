@@ -49,7 +49,7 @@ function Gameplay.new(mapFile)
         self.drawWho=1
         print(world:getGravity())
         self.shouldEnd=false
-        self.maxTime = 0.030 -- 50 ms
+        self.maxTime = 0.016 -- 50 ms
         self.lastTime = 42
 
         return self

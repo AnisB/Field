@@ -235,11 +235,6 @@ end
 
 function Generator:send(x,y)
 	toReturn=""
-	toReturn= toReturn..("@generator".."#"..self.netid.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..(self.position.x-x).."#"..( self.position.y+y))
-	if self.typeField =="Attractive" then
-		--toReturn= toReturn..self.field:send(self.pc.body:getX()-x+unitWorldSize/2, self.pc.body:getY()+y+unitWorldSize/2)
-	else
-		--toReturn= toReturn..self.field:send(self.pc.body:getX()-x+unitWorldSize, self.pc.body:getY()+y+unitWorldSize)
-	end
+	toReturn= toReturn..("@generator".."#"..self.netid.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..(self.position.x-x).."#"..( self.position.y+y).."#"..tostring(self.appliesField).."#"..self.typeField)
 	return toReturn
 end

@@ -8,7 +8,6 @@ require("game.animtm")
 require("game.field")
 require("game.attfield")
 require("game.themagnetconst")
-require("game.inputManager")
 -- Class Init
 TheMagnet = {}
 TheMagnet.__index = TheMagnet
