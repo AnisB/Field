@@ -8,6 +8,7 @@ require("game.animtm")
 require("game.field")
 require("game.attfield")
 require("game.themagnetconst")
+require("game.inputManager")
 -- Class Init
 TheMagnet = {}
 TheMagnet.__index = TheMagnet
@@ -370,10 +371,10 @@ function TheMagnet:update(seconds)
 	self.position.x=x
 	self.position.y=y
 	if self.alive then
-  if love.keyboard.isDown("right") then --press the right arrow key to push the ball to the right
+  if inputManager:isKeyDown("right") then --press the right arrow key to push the ball to the right
   	self.goF=true
   	self.pc.body:applyForce(TheMagnetConst.MovingForce, 0)
-  elseif love.keyboard.isDown("left") then --press the left arrow key to push the ball to the left
+  elseif inputManager:isKeyDown("left") then --press the left arrow key to push the ball to the left
   	self.pc.body:applyForce(-TheMagnetConst.MovingForce,0)
   	self.goF=false
   end

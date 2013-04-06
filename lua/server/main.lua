@@ -3,6 +3,7 @@ This file is part of the Field project
 ]]
 
 require("game.gamestatemanager")
+require("game.inputmanager")
 
 package.path = "./lubeboth/?.lua;" .. package.path
 require("lubeboth.class")
@@ -15,6 +16,7 @@ table2 = require("lubeboth.table2")
 SourceDirectory="./"
 ImgDirectory="img/"
 gameStateManager = nil
+inputManager = nil
 
 -- lube :
 -- "low level" events :
@@ -43,6 +45,10 @@ function onConnect(client)
 end
 
 function onMessage(msg, client)
+	
+	if (msg.type == "input") then
+		inputManager:handlePacket(msg.pck)
+	end
 	-- if msg.english then
 	-- 	print("received english message with "..tostring(#msg.tags).." tags.")
 	-- 	client:send({msg= "Hello, Sir.", understood= true})
@@ -62,6 +68,7 @@ end
 -- /lube
 
 function love.load()
+	inputManager = InputManager:new()
 	-- lube :
 	monde = {} -- messy world.
 	clients = {} -- map { idClient => client }
