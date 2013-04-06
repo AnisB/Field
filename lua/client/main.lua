@@ -42,7 +42,7 @@ function love.load()
 	local okay = nil
 	while okay ~= true do
 		print(okay)
-		okay = conn:connect("localhost", 3410, true)
+		okay = conn:connect("192.168.37.10", 3410, true)
 	end
 
 	print(okay)
