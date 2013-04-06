@@ -15,7 +15,7 @@ require("game.interruptor")
 require("game.gate")
 require("game.acid")
 require("game.arc")
-require("game.levelend")
+require("game.generator")
 
 
 MapLoader = {}
@@ -64,21 +64,21 @@ for i,p in pairs(self.interruptors) do
     p:update(dt)
 end
 
-    -- for i,p in pairs(self.generators) do
-    --     p:update(dt)
-    -- end
-    
-    -- for i,p in pairs(self.gateinterruptors) do
-    --     p:update(dt)
-    -- end    
+for i,p in pairs(self.generators) do
+    p:update(dt)
+end
+
+for i,p in pairs(self.gateinterruptors) do
+    p:update(dt)
+end    
 
     -- for i,p in pairs(self.gates) do
     --     p:update(dt)
     -- end
 
-    -- for i,p in pairs(self.acids) do
-    --     p:update(dt)
-    -- end
+    for i,p in pairs(self.acids) do
+        p:update(dt)
+    end
 
     -- for i,p in pairs(self.arcs) do
     --     p:update(dt)
@@ -113,16 +113,23 @@ for i,p in pairs(self.interruptors) do
   end
 end
 
- --    for i,p in pairs(self.generators) do
- --        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
- --          p:draw(pos.x-windowW/2,windowH/2-pos.y)
- --        end
- --    end
+for i,p in pairs(self.generators) do
 
- for i,p in pairs(self.gateinterruptors) do
-  p:draw()
+    if p.drawed==true then
+      p:draw()
+  end
+end
+
+for i,p in pairs(self.gateinterruptors) do
+    if p.drawed==true then
+      p:draw()
+  end
 end    
-
+for i,p in pairs(self.acids) do
+    if p.drawed==true then
+      p:acids()
+    end
+end    
  --    for i,p in pairs(self.gates) do
  --        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
  --          p:draw(pos.x-windowW/2,windowH/2-pos.y)
@@ -149,7 +156,15 @@ function MapLoader:handlePacket(maps)
   end    
   for i,p in pairs(self.gateinterruptors) do
       p.drawed=false
-  end   
+  end
+  for i,p in pairs(self.generators) do
+      p.drawed=false
+  end  
+  for i,p in pairs(self.acids) do
+      p.drawed=false
+  end 
+
+
   if  maps.metal~=nil then
     print("not nil")
     for v in string.gmatch(maps.metal, "[^@]+") do
@@ -222,6 +237,33 @@ if  maps.gateinterruptor~=nil then
     end
 end    
 
+if  maps.generator~=nil then
+    for v in string.gmatch(maps.generator, "[^@]+") do
+        t={}
+        for d in string.gmatch(v, "[^#]+") do
+            table.insert(t,d)
+        end
+        if self.generators[tonumber(t[2])]==nil then
+            self.generators[tonumber(t[2])]=Generator.new({x=tonumber(t[5]),y=tonumber(t[6])},t[8],t[3],tonumber(t[4]))
+        else
+            self.generators[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[8],t[3],tonumber(t[4]))
+        end            
+    end
+end 
+
+if  maps.acid~=nil then
+    for v in string.gmatch(maps.acid, "[^@]+") do
+        t={}
+        for d in string.gmatch(v, "[^#]+") do
+            table.insert(t,d)
+        end
+        if self.acid[tonumber(t[2])]==nil then
+            self.acid[tonumber(t[2])]=Acid.new({x=tonumber(t[5]),y=tonumber(t[6])},t[3],t[4],tonumber(t[5]))
+        else
+            self.acid[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[4],tonumber(t[5]))
+        end            
+    end
+end     
 end
 function MapLoader:firstPlanDraw(pos)
 
