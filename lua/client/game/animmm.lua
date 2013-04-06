@@ -48,7 +48,7 @@ AnimMM.ANIMS.mort.DELAY = 1
 -- number of sprites :
 AnimMM.ANIMS.running.number = 9
 AnimMM.ANIMS.startjumping.number = 3
-AnimMM.ANIMS.jumping.number = 2
+AnimMM.ANIMS.jumping.number = 1
 AnimMM.ANIMS.landing.number = 3
 AnimMM.ANIMS.standing.number = 6
 AnimMM.ANIMS.stoprunning.number = 1

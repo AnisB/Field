@@ -58,7 +58,8 @@ end
 function love.update(dt)
 	-- lube :
 	conn:update(dt)
-	cron.update(dt)
+	-- cron.update(dt)
+	
 	-- /lube
 
 	gameStateManager:update(dt)

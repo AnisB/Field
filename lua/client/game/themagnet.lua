@@ -69,9 +69,10 @@ function TheMagnet:handlePacket( string )
 		table.insert(t,v)
 	end
 
-	-- if (self.anim.currentAnim.name~=t[2]) then
+	if (self.anim.currentAnim.name~=t[2]) then
+		print("correcting")
 		self.anim:syncronize(t[2],tonumber(t[3]))
-	-- end
+	end
 	self.position.x=tonumber(t[4])
 	self.position.y=tonumber(t[5])
 	if t[6]=="1" then
@@ -92,7 +93,6 @@ function TheMagnet:handlePacket( string )
 	elseif self.appliesField and t[7]=="false" then
 		self.fieldType="None"
 		self.appliesField=false
-		self.field= Field.new(t[8])
 		self.field.isActive=false
 	elseif 	self.appliesField and t[7]=="true" then
 		if self.fieldType==t[8] then
@@ -115,7 +115,7 @@ end
 
 -- Method that updates the character state
 function TheMagnet:update(seconds)
-	-- self.anim:update(seconds)
+	self.anim:update(seconds)
 	self.field:update(seconds,self.position.x,self.position.y)
 
 end

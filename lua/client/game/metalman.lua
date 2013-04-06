@@ -40,9 +40,9 @@ function MetalMan:handlePacket( string )
 	if self.anim.folder~=t[2] then
 		self.anim = AnimMM.new(t[2])
 	end
-	-- if (self.anim.currentAnim.name~=t[3]) then
+	if (self.anim.currentAnim.name~=t[3]) then
 		self.anim:syncronize(t[3],tonumber(t[4]))
-	-- end
+	end
 	self.position.x=tonumber(t[5])
 	self.position.y=tonumber(t[6])
 	if t[7]=="1" then
@@ -59,7 +59,7 @@ function MetalMan:loadAnimation(anim, force)
 end
 
 function MetalMan:update(seconds)
-	-- self.anim:update(seconds)
+	self.anim:update(seconds)
 end
 
 function MetalMan:draw()

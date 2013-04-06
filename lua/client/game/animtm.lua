@@ -34,7 +34,7 @@ AnimTM.ANIMS.mort.name = "mort"
 -- number of sprites :
 AnimTM.ANIMS.running.number = 9
 AnimTM.ANIMS.startjumping.number = 3
-AnimTM.ANIMS.jumping.number = 2
+AnimTM.ANIMS.jumping.number = 1
 AnimTM.ANIMS.landing.number = 3
 AnimTM.ANIMS.standing.number = 6
 AnimTM.ANIMS.stoprunning.number = 1
@@ -80,7 +80,7 @@ AnimTM.ANIMS.landing.switch = AnimTM.ANIMS.standing
 AnimTM.ANIMS.standing.loop = true
 AnimTM.ANIMS.stoprunning.switch = AnimTM.ANIMS.standing
 AnimTM.ANIMS.field.loop = true
-AnimTM.ANIMS.returnanim.switch = AnimTM.ANIMS.running
+AnimTM.ANIMS.returnanim.loop = true
 AnimTM.ANIMS.launchfield.switch = AnimTM.ANIMS.field
 AnimTM.ANIMS.mortelec.switch=AnimTM.ANIMS.mort
 AnimTM.ANIMS.mort.loop=true
