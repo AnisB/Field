@@ -144,7 +144,7 @@ function AnimMM:syncronize(anim, pos)
 		self.currentAnim = newAnim
 		self.currentPos = pos
 		self:updateImg()
-		self.currentAnim.after = newAnim		
+		--self.currentAnim.after = newAnim		
 end
 
 -- PUBLIC : change animation (you can force it)
