@@ -105,7 +105,6 @@ end
 
 function AnimGene:syncronize(anim, pos)
 	local newAnim = AnimGene.ANIMS[anim]
-	    print(newAnim)
 		self.currentAnim = newAnim
 		self.currentPos = pos
 		self:updateImg()
