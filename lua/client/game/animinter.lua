@@ -126,6 +126,7 @@ function AnimInter:next()
 		elseif self.currentAnim.loop then
 			-- I don't switch
 		else
+			return
 			print("FUCKING ANIM SWITCHING ERROR")
 		end
 		self.currentPos = 1

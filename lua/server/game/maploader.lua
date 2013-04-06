@@ -357,6 +357,22 @@ function MapLoader:toSend(pos)
     end
 	maptable.gates=gates
 
+    local acids=""
+    for i,p in pairs(self.acids) do
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          acids=acids..p:send(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end
+    maptable.acid=acids
+
+    local arcs=""
+    for i,p in pairs(self.arcs) do
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          arcs=arcs..p:send(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end
+    maptable.arc=arcs
+
     return maptable
 end
 

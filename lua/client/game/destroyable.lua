@@ -28,7 +28,10 @@
         self.anim:update(dt)
  end
     function Destroyable:syncronize(pos,anim,id)
-        self.anim:syncronize(anim,id) 
+        if (self.anim.currentAnim.name~=anim) then
+            print(self.anim.currentAnim.name.."syncro"..anim)    
+            self.anim:syncronize(anim,id) 
+        end
         self.position.x=pos.x
         self.position.y=pos.y
         self.drawed=true

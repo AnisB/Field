@@ -84,7 +84,7 @@ function Gameplay:reset()
         self.mapLoader:draw(self.camera:getPos())
         self.theMagnet:draw()
         self.metalMan:draw()
-        -- self.mapLoader:firstPlanDraw(self.cameraMM:getPos())
+        self.mapLoader:firstPlanDraw()
         love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
     end
     

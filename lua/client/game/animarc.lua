@@ -82,6 +82,14 @@ function AnimArc:load(anim, force)
 	end
 end
 
+function AnimArc:syncronize(anim, pos)
+	local newAnim = AnimArc.ANIMS[anim]
+	self.currentAnim = newAnim
+	self.currentPos = pos
+	self:updateImg()
+	self.currentAnim.after = newAnim		
+end
+
 -- PUBLIC : update l'anim
 function AnimArc:update(seconds)
 	self.time = self.time + seconds

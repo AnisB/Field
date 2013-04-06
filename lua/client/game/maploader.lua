@@ -80,9 +80,9 @@ end
         p:update(dt)
     end
 
-    -- for i,p in pairs(self.arcs) do
-    --     p:update(dt)
-    -- end
+    for i,p in pairs(self.arcs) do
+        p:update(dt)
+    end
 end
 
 
@@ -124,12 +124,7 @@ for i,p in pairs(self.gateinterruptors) do
     if p.drawed==true then
       p:draw()
   end
-end    
-for i,p in pairs(self.acids) do
-    if p.drawed==true then
-      p:acids()
-    end
-end    
+end     
  --    for i,p in pairs(self.gates) do
  --        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
  --          p:draw(pos.x-windowW/2,windowH/2-pos.y)
@@ -161,6 +156,10 @@ function MapLoader:handlePacket(maps)
       p.drawed=false
   end  
   for i,p in pairs(self.acids) do
+      p.drawed=false
+  end 
+
+  for i,p in pairs(self.arcs) do
       p.drawed=false
   end 
 
@@ -242,7 +241,6 @@ if  maps.generator~=nil then
         for d in string.gmatch(v, "[^#]+") do
             table.insert(t,d)
         end
-        print(v)
         if self.generators[tonumber(t[2])]==nil then
             self.generators[tonumber(t[2])]=Generator.new({x=tonumber(t[5]),y=tonumber(t[6])},t[8],t[3],tonumber(t[4]))
         else
@@ -257,26 +255,42 @@ if  maps.acid~=nil then
         for d in string.gmatch(v, "[^#]+") do
             table.insert(t,d)
         end
-        if self.acid[tonumber(t[2])]==nil then
-            self.acid[tonumber(t[2])]=Acid.new({x=tonumber(t[5]),y=tonumber(t[6])},t[3],t[4],tonumber(t[5]))
+        if self.acids[tonumber(t[2])]==nil then
+            self.acids[tonumber(t[2])]=Acid.new({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
         else
-            self.acid[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[4],tonumber(t[5]))
+            self.acids[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[4],tonumber(t[5]))
         end            
     end
-end     
+end
+
+
+if  maps.arc~=nil then
+    for v in string.gmatch(maps.arc, "[^@]+") do
+        t={}
+        for d in string.gmatch(v, "[^#]+") do
+            table.insert(t,d)
+        end
+        if self.arcs[tonumber(t[2])]==nil then
+          print(v)
+            self.arcs[tonumber(t[2])]=Arc.new({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
+        else
+            self.arcs[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[4],tonumber(t[5]))
+        end            
+    end
+end          
 end
 function MapLoader:firstPlanDraw(pos)
 
-    -- for i,p in pairs(self.acids) do
-    --     if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-    --       p:draw(pos.x-windowW/2,windowH/2-pos.y)
-    --     end
-    -- end
+    for i,p in pairs(self.acids) do
+      if p.drawed then
+          p:draw()
+        end
+    end
 
+    for i,p in pairs(self.arcs) do
+      if p.drawed then
+          p:draw()
+        end
+    end
 
-    -- for i,p in pairs(self.arcs) do
-    --     if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-    --       p:draw(pos.x-windowW/2,windowH/2-pos.y)
-    --     end
-    -- end
 end

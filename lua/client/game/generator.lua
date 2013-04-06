@@ -51,7 +51,6 @@ function Generator.new(pos,typeField,anim,id)
 				end
 				self.position.x=pos.x
 				self.position.y=pos.y
-				print(applies)
 				if not self.appliesField and applies=="true" then
 					self.appliesField=true
 					self.field.isActive=true

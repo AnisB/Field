@@ -82,6 +82,14 @@ function AnimAcid:load(anim, force)
 	end
 end
 
+function AnimAcid:syncronize(anim, pos)
+	local newAnim = AnimAcid.ANIMS[anim]
+	self.currentAnim = newAnim
+	self.currentPos = pos
+	self:updateImg()
+	self.currentAnim.after = newAnim		
+end
+
 -- PUBLIC : update l'anim
 function AnimAcid:update(seconds)
 	self.time = self.time + seconds
