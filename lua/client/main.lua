@@ -5,12 +5,12 @@ This file is part of the Field project
 require("game.gamestatemanager")
 
 package.path = "./lubeboth/?.lua;" .. package.path
-require("class")
-require("lube")
-require("TSerial")
-require("client")
-cron = require("cron")
-table2 = require("table2")
+require("lubeboth.class")
+require("lubeboth.lube")
+require("lubeboth.TSerial")
+require("lubeboth.client")
+cron = require("lubeboth.cron")
+table2 = require("lubeboth.table2")
 
 SourceDirectory="./"
 ImgDirectory="img/"
