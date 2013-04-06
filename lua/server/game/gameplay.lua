@@ -160,7 +160,7 @@ function Gameplay.new(mapFile)
         end
 
         if key=="c" then
-            local packet{}
+            local packet={}
             if self.drawWho==1 then
                 packet.camera=self.cameraMM:toSend()
                 packet.map=self.mapLoader:toSend(self.cameraMM:getPos())
