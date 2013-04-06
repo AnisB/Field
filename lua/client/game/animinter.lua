@@ -44,8 +44,8 @@ AnimInter.ANIMS.shutdown.priority = 20
 -- automatic loopings or automatic switch :
 AnimInter.ANIMS.off.loop = true
 AnimInter.ANIMS.on.loop = true
-AnimInter.ANIMS.launching.switch = AnimInter.ANIMS.on
-AnimInter.ANIMS.shutdown.switch = AnimInter.ANIMS.off
+-- AnimInter.ANIMS.launching.switch = AnimInter.ANIMS.on
+-- AnimInter.ANIMS.shutdown.switch = AnimInter.ANIMS.off
 
 
 

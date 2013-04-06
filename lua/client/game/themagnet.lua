@@ -70,7 +70,6 @@ function TheMagnet:handlePacket( string )
 	end
 
 	if (self.anim.currentAnim.name~=t[2]) then
-		print("correcting")
 		self.anim:syncronize(t[2],tonumber(t[3]))
 	end
 	self.position.x=tonumber(t[4])
@@ -80,7 +79,6 @@ function TheMagnet:handlePacket( string )
 	else
 		self.goF=false
 	end
-
 	if not self.appliesField and t[7]=="true" then
 		self.fieldType=t[8]
 		self.appliesField=true
@@ -116,7 +114,7 @@ end
 -- Method that updates the character state
 function TheMagnet:update(seconds)
 	self.anim:update(seconds)
-	self.field:update(seconds,self.position.x,self.position.y)
+	self.field:update(seconds)
 
 end
 
@@ -124,7 +122,11 @@ end
 
 function TheMagnet:draw()
 	-- Draws the field
-	self.field:draw(self.position.x+unitWorldSize*1/2,self.position.y+unitWorldSize*1/2)
+	if self.fieldType=="Attractive" then
+		self.field:draw(self.position.x+unitWorldSize/2,self.position.y+unitWorldSize/2)
+	else
+		self.field:draw(self.position.x+unitWorldSize*0.75,self.position.y+unitWorldSize*0.75)
+	end
 	if 	 self.goF then
 		love.graphics.draw(self.anim:getSprite(), self.position.x,self.position.y, 0, 1,1)
 	else

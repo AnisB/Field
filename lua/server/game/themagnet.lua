@@ -425,8 +425,8 @@ end
 -- Return the character to screen
 function TheMagnet:mainSend(x,y)
 if self.goF then
-	return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(windowW/2-unitWorldSize/2).."#"..math.floor( windowH/2-unitWorldSize/2).."#".."1")
+	return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(windowW/2-unitWorldSize/2).."#"..math.floor( windowH/2-unitWorldSize/2).."#".."1".."#"..tostring(self.appliesField).."#"..self.fieldType)
 else
-	return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(windowW/2+unitWorldSize/2).."#"..math.floor( windowH/2-unitWorldSize/2).."#".."-1")
+	return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(windowW/2+unitWorldSize/2).."#"..math.floor( windowH/2-unitWorldSize/2).."#".."-1".."#"..tostring(self.appliesField).."#"..self.fieldType)
 end
 end

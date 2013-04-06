@@ -35,7 +35,10 @@ end
 function Acid:syncronize(pos,anim,id)
 	self.position.x=pos.x
 	self.position.y=pos.y
-	self:syncronize(anim,id)	
+	self.drawed=true
+	if (self.anim.currentAnim.name~=anim) then
+		self.anim:syncronize(anim,id)
+	end
 end
 
 

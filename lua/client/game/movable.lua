@@ -27,7 +27,9 @@
     end
     function Movable:syncronize(pos,anim,id)
         self.drawed=true
-        self.anim:syncronize(anim,id)
+        if (self.anim.currentAnim.name~=anim) then
+            self.anim:syncronize(anim,id)
+            end        
         self.position.x=pos.x
         self.position.y=pos.y    
     end

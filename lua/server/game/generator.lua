@@ -225,12 +225,12 @@ end
 
 function Generator:draw(x,y)
 	if self.typeField =="Attractive" then
-		self.field:draw(self.pc.body:getX()-x+unitWorldSize/2, self.pc.body:getY()+y+unitWorldSize/2)
+		self.field:draw(self.pc.body:getX()-x-unitWorldSize/2, self.pc.body:getY()+y-unitWorldSize/2)
 	else
-		self.field:draw(self.pc.body:getX()-x+unitWorldSize, self.pc.body:getY()+y+unitWorldSize)
+		self.field:draw(self.pc.body:getX()-x, self.pc.body:getY()+y)
 	end
 	love.graphics.setColor(255,255,255,255)
-	love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
+	love.graphics.draw(self.anim:getSprite(), self.position.x-x-unitWorldSize/2, self.position.y+y-unitWorldSize/2)
 end
 
 function Generator:send(x,y)

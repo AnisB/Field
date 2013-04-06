@@ -24,6 +24,9 @@ function GateInterruptor:getPosition()
 	return self.position
 end
     function GateInterruptor:syncronize(pos,anim,id)
+		if (self.anim.currentAnim.name~=anim) then
+			self.anim:syncronize(anim,id)
+		end        
         self.anim:syncronize(anim,id)   
         self.position.x=pos.x
         self.position.y=pos.y
