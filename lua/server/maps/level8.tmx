@@ -20,7 +20,7 @@
  </tileset>
  <layer name="Calque de Tile 1" width="60" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYAFi1mGO2YCYEYpJAaSqp5ZeagBK/MtIJh5IQO/4pSZAD0N8NCVhPpjjipEAmxL/DjQgNn7RxYZq/JIDhqq7yQXklrHUimN6hzXIPlBbg2mEYFCbAwDjdQHy
+   eJxjZGBgYAFi1mGO2YCYEYpJAaSqp5ZeagBK/MtIJh5IQO/4pSZAD0N8NCVhPpjjipEAmxL/DjQgNn7RxYZq/JIDhqq7yQXklrGU5P2BBCD7QW0NphGCQW0OAOOFAfI=
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="60" height="10">
@@ -34,7 +34,7 @@
  <objectgroup color="#0000ff" name="platform" width="60" height="10">
   <object x="0" y="576" width="3840" height="64"/>
   <object x="64" y="0" width="3712" height="64"/>
-  <object x="1984" y="512" width="64" height="64"/>
+  <object x="1728" y="512" width="64" height="64"/>
   <object x="64" y="512" width="960" height="64"/>
   <object x="832" y="384" width="128" height="64"/>
   <object x="896" y="128" width="832" height="64"/>
@@ -65,7 +65,7 @@
  </objectgroup>
  <objectgroup color="#e6e6e6" name="metal" width="60" height="10"/>
  <objectgroup color="#333333" name="gate" width="60" height="10">
-  <object x="1152" y="448" width="832" height="64">
+  <object x="1152" y="448" width="576" height="64">
    <properties>
     <property name="enabled" value="true"/>
     <property name="id" value="1"/>
@@ -79,7 +79,61 @@
   </object>
  </objectgroup>
  <objectgroup color="#004080" name="acid" width="60" height="10">
-  <object x="1024" y="512" width="960" height="64"/>
+  <object x="1152" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1280" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1408" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1600" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1536" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1472" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1024" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hg"/>
+   </properties>
+  </object>
+  <object x="1088" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1664" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hd"/>
+   </properties>
+  </object>
+  <object x="1216" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="1344" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ffff00" name="arc" width="60" height="10"/>
  <objectgroup color="#ffff00" name="levelend" width="60" height="10">

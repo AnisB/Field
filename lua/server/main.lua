@@ -5,11 +5,11 @@ This file is part of the Field project
 require("game.gamestatemanager")
 
 package.path = "./lubeboth/?.lua;" .. package.path
-require("class")
-require("lube")
-require("TSerial")
-require("client")
-table2 = require("table2")
+require("lubeboth.class")
+require("lubeboth.lube")
+require("lubeboth.TSerial")
+require("lubeboth.client")
+table2 = require("lubeboth.table2")
 
 
 SourceDirectory="./"
