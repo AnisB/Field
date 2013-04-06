@@ -49,6 +49,8 @@ function Gameplay.new(mapFile)
         self.drawWho=1
         print(world:getGravity())
         self.shouldEnd=false
+        self.maxTime = 0.030 -- 50 ms
+        self.lastTime = 42
 
         return self
     end
@@ -214,7 +216,11 @@ function Gameplay.new(mapFile)
     
     function Gameplay:update(dt)
         -- print("DELTA TIME IS ==", dt)
-        self:sendTheWorld()
+        self.lastTime = self.lastTime + dt
+        if self.lastTime > self.maxTime then
+            self:sendTheWorld()
+            self.lastTime = 0
+        end
 
         -- Physics managers
         if(self.shouldEnd) then
