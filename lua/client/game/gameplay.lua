@@ -111,12 +111,12 @@ function Gameplay:reset()
     
     
     function Gameplay:keyPressed(inputKey, unicode)
-		serveur:send({type="input", pck={key=inputKey, state=true}})
+		serveur:send({type="input", pck={character="metalMan", key=inputKey, state=true}})
     end
 
 	
     function Gameplay:keyReleased(inputKey, unicode)
-		serveur:send({type="input", pck={key=inputKey, state=false}})
+		serveur:send({type="input", pck={character="metalMan", key=inputKey, state=false}})
     end
     
     
