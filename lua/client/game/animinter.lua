@@ -19,7 +19,7 @@ AnimInter.ANIMS.shutdown.name = "shutdown"
 -- delays
 AnimInter.ANIMS.off.DELAY = 0.075
 AnimInter.ANIMS.on.DELAY = 0.075
-AnimInter.ANIMS.launching.DELAY = 0.075
+AnimInter.ANIMS.launching.DELAY = 0.1
 AnimInter.ANIMS.shutdown.DELAY = 0.075
 
 
