@@ -4,17 +4,58 @@ This file is part of the Field project
 
 require("game.gamestatemanager")
 
+package.path = "./lubeboth/?.lua;" .. package.path
+require("class")
+require("lube")
+require("TSerial")
+require("client")
+cron = require("cron")
+table2 = require("table2")
 
 SourceDirectory="./"
 ImgDirectory="img/"
 gameStateManager = nil
 
+-- "low level" events :
+
+function rcvCallback(data)
+    serveur:gotData(data, onConnect)
+end
+
+-- "high level" events :
+
+function onMessage(msg)
+	print("Received : " .. table2.tostring(msg))
+end
+
 function love.load()
+	-- lube :
+    conn = lube.tcpClient()
+	conn.handshake = "hello"
+	serveur = common.instance(Client, conn) -- oui, le serveur est un "client" :)
+
+	local okay = nil
+	while okay ~= true do
+		print(okay)
+		okay = conn:connect("localhost", 3410, true)
+	end
+	
+	print(okay)
+
+	conn.callbacks.recv = rcvCallback
+	print("CONNECTED !!")
+	-- /lube
+
 	love.graphics.setIcon( love.graphics.newImage(ImgDirectory.."icon.png" ))
 	gameStateManager = GameStateManager:new()
 end
 
 function love.update(dt)
+	-- lube :
+	conn:update(dt)
+	cron.update(dt)
+	-- /lube
+
 	gameStateManager:update(dt)
 end	
 
