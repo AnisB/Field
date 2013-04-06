@@ -175,7 +175,9 @@ function MapLoader:handlePacket(maps)
         if self.metals[tonumber(t[2])]==nil then
             self.metals[tonumber(t[2])]=Metal.new({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
         else
-            self.metals[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
+        print(tonumber(t[6])..tonumber(t[7]))
+
+            self.metals[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[4],tonumber(t[5]))
         end
     end
 end
@@ -189,7 +191,7 @@ if  maps.destroyable~=nil then
         if self.destroyables[tonumber(t[2])]==nil then
             self.destroyables[tonumber(t[2])]=Destroyable.new({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
         else
-            self.destroyables[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
+            self.destroyables[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
         end
     end
 end
@@ -203,7 +205,7 @@ if  maps.movable~=nil then
         if self.movables[tonumber(t[2])]==nil then
             self.movables[tonumber(t[2])]=Movable.new({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
         else
-            self.movables[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
+            self.movables[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[3],t[4],tonumber(t[5]))
         end
     end
 end
@@ -214,10 +216,11 @@ if  maps.interruptor~=nil then
         for d in string.gmatch(v, "[^#]+") do
             table.insert(t,d)
         end
+        print(v)
         if self.interruptors[tonumber(t[2])]==nil then
             self.interruptors[tonumber(t[2])]=Interruptor.new({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
         else
-            self.interruptors[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
+            self.interruptors[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
         end
     end
 end
@@ -232,7 +235,7 @@ if  maps.gateinterruptor~=nil then
         if self.gateinterruptors[tonumber(t[2])]==nil then
             self.gateinterruptors[tonumber(t[2])]=GateInterruptor.new({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
         else
-            self.gateinterruptors[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
+            self.gateinterruptors[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[3],t[4],tonumber(t[5]))
         end            
     end
 end    

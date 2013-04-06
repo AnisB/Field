@@ -34,6 +34,7 @@ function Metal.new(pos,typemetal,anim,id)
 		self.anim:syncronize(anim,id)	
 		self.position.x=pos.x
 		self.position.y=pos.y
+		self.drawed=true
 	end
 
 	function Metal:getPosition(  )

@@ -14,6 +14,7 @@ function Interruptor.new(pos,anim,id)
 	self.drawed=true	
 	self.type='Interruptor'
 	self.anim = AnimInter.new('inter')
+	self:loadAnimation("off",true)
 	self.anim:syncronize(anim,id)
 	return self
 end
@@ -27,6 +28,7 @@ end
         self.anim:syncronize(anim,id)   
         self.position.x=pos.x
         self.position.y=pos.y
+        self.drawed=true
     end
 function Interruptor:loadAnimation(anim, force)
 		self.anim:load(anim, force)

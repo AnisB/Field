@@ -11,7 +11,7 @@
         local self = {}
         setmetatable(self, Movable)
 
-        self.netid=id
+        self.netid=netid
         -- Position
         self.position={x=position.x,y=position.y}
         self.w=unitWorldSize

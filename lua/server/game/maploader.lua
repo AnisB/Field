@@ -339,7 +339,7 @@ function MapLoader:toSend(pos)
           generators=generators..p:send(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
-	maptable.generator=interruptors
+	maptable.generator=generators
     
 	local gateinterruptors=""
     for i,p in pairs(self.gateinterruptors) do
@@ -355,7 +355,7 @@ function MapLoader:toSend(pos)
           gates=gates..p:send(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
-	maptable.gates=gate
+	maptable.gates=gates
 
     return maptable
 end

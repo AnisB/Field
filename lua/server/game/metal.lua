@@ -163,7 +163,7 @@ function Metal.new(pos,shapeType,typeP,material,typemetal,netid)
 
 
 function Metal:send(x,y)
-	if typemetal =="static" then
+	if self.metalType==MetalTypes.Static then
 		return ("@metal".."#"..self.netid.."#".."static".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor( self.position.y+y))
 	else
 		if self.metalWeight==MetalMTypes.Alu then
