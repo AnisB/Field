@@ -227,7 +227,7 @@ function TheMagnet:enableRotativeRField()
 end
 
 -- In case of a static Metal
-function TheMagnet:rotativeLField(pos)
+function TheMagnet:rotativeLField(pos,factor)
 	if self.alive then
 
 		local vx=self.position.x-pos.x
@@ -235,12 +235,12 @@ function TheMagnet:rotativeLField(pos)
 		local n = math.sqrt(vx*vx+vy*vy)
 		local vrx = vx/n
 		local vry= vy/n
-		self.pc.body:applyLinearImpulse(-vry*TheMagnetConst.Rot.x,vrx*TheMagnetConst.Rot.y)
+		self.pc.body:applyLinearImpulse(-vry*TheMagnetConst.Rot.x*factor,vrx*TheMagnetConst.Rot.y*factor)
 		self:loadAnimation("launchfield",true)
 	end
 end
 
-function TheMagnet:rotativeRField(pos)
+function TheMagnet:rotativeRField(pos,factor)
 	if self.alive then
 
 		local vx=self.position.x-pos.x
@@ -248,12 +248,12 @@ function TheMagnet:rotativeRField(pos)
 		local n = math.sqrt(vx*vx+vy*vy)
 		local vrx = vx/n
 		local vry= vy/n
-		self.pc.body:applyLinearImpulse(vry*TheMagnetConst.Rot.x,-vrx*TheMagnetConst.Rot.y)
+		self.pc.body:applyLinearImpulse(vry*TheMagnetConst.Rot.x*factor,-vrx*TheMagnetConst.Rot.y*factor)
 		self:loadAnimation("launchfield",true)
 	end
 end
 
-function TheMagnet:attractiveField(pos)
+function TheMagnet:attractiveField(pos,factor)
 	if self.alive then
 
 		local vx=self.position.x-pos.x
@@ -262,7 +262,7 @@ function TheMagnet:attractiveField(pos)
 		local vrx = vx/n
 		local vry= vy/n
 		if(n>(unitWorldSize)) then 
-			self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Att.x,-vry*TheMagnetConst.Att.y)
+			self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Att.x*factor,-vry*TheMagnetConst.Att.y*factor)
 		end
 		self:loadAnimation("launchfield",true)
 	end
@@ -270,7 +270,7 @@ function TheMagnet:attractiveField(pos)
 end
 
 
-function TheMagnet:repulsiveField(pos)
+function TheMagnet:repulsiveField(pos,factor)
 	if self.alive then
 
 		local vx=-self.position.x+pos.x
@@ -280,7 +280,7 @@ function TheMagnet:repulsiveField(pos)
 		local vry= vy/n
 
 		if(n>(unitWorldSize)) then 
-			self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Rep.x,-vry*TheMagnetConst.Rep.y)
+			self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Rep.x*factor,-vry*TheMagnetConst.Rep.y*factor)
 		end
 		self:loadAnimation("launchfield",true)
 	end

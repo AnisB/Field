@@ -88,21 +88,21 @@ function TheMagnet:handlePacket( string )
 			self.field= AttField.new(t[8])
 		end
 		self.field.isActive=true
-	elseif self.appliesField and t[7]=="false" then
-		self.fieldType="None"
-		self.appliesField=false
-		self.field.isActive=false
-	elseif 	self.appliesField and t[7]=="true" then
-		if self.fieldType==t[8] then
-		else
-			if t[8]~="Attractive" then
-				self.field= Field.new(t[8])
-			else
-				self.field= AttField.new(t[8])
-			end			
+		elseif self.appliesField and t[7]=="false" then
+			-- self.fieldType="None"
+			self.appliesField=false
+			self.field.isActive=false
+			elseif 	self.appliesField and t[7]=="true" then
+				if self.fieldType==t[8] then
+				else
+					if t[8]~="Attractive" then
+						self.field= Field.new(t[8])
+					else
+						self.field= AttField.new(t[8])
+					end			
+				end
+			end
 		end
-	end
-end
 
 
 -- Method that loads an animation
@@ -122,14 +122,20 @@ end
 
 function TheMagnet:draw()
 	-- Draws the field
-	if self.fieldType=="Attractive" then
-		self.field:draw(self.position.x+unitWorldSize/2,self.position.y+unitWorldSize/2)
-	else
-		self.field:draw(self.position.x+unitWorldSize*0.75,self.position.y+unitWorldSize*0.75)
-	end
+
 	if 	 self.goF then
+		if self.fieldType=="Attractive" then
+			self.field:draw(self.position.x+unitWorldSize/2,self.position.y+unitWorldSize/2)
+		else
+			self.field:draw(self.position.x+unitWorldSize*0.75,self.position.y+unitWorldSize*0.75)
+		end
 		love.graphics.draw(self.anim:getSprite(), self.position.x,self.position.y, 0, 1,1)
 	else
-		love.graphics.draw(self.anim:getSprite(), self.position.x,self.position.y, 0, -1,1)
+		if self.fieldType=="Attractive" then
+			self.field:draw(self.position.x-unitWorldSize*0.25,self.position.y+unitWorldSize/2)
+		else
+			self.field:draw(self.position.x,self.position.y+unitWorldSize*0.75)
+		end
+		love.graphics.draw(self.anim:getSprite(), self.position.x,self.position.y, 0, -1,1)		
 	end
 end
