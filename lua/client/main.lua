@@ -26,6 +26,11 @@ end
 
 function onMessage(msg)
 	print("Received : " .. table2.tostring(msg))
+	if msg.type == "gameplaypacket" then
+		gameStateManager.state['Gameplay']:handlePacket(msg.pk)
+	else
+		print("Pkg has no type gameplaypacket !")
+	end
 end
 
 function love.load()
@@ -39,7 +44,7 @@ function love.load()
 		print(okay)
 		okay = conn:connect("localhost", 3410, true)
 	end
-	
+
 	print(okay)
 
 	conn.callbacks.recv = rcvCallback
@@ -77,10 +82,6 @@ end
 function love.keyreleased(key, unicode)
 	gameStateManager:keyReleased(key, unicode)
 end
-
-function love.update(dt)
-	gameStateManager:update(dt)
-end	
 
 function love.draw()
 	gameStateManager:draw()

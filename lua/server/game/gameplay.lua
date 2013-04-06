@@ -173,6 +173,11 @@ function Gameplay.new(mapFile)
                 packet.metalMan=metalMan:secondSend(self.cameraTM:getPos().x-windowW/2,windowH/2-self.cameraTM:getPos().y)
             end
             -- Envoyer ici packet (seld.Send(packet))
+            print("Envoi de :", table2.tostring(packet))
+            for k,c in pairs(clients) do
+                print("envoi a un client")
+                c:send({type= "gameplaypacket", pk= packet})
+            end
         end
     end
 

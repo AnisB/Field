@@ -36,6 +36,8 @@ end
 
 function onConnect(client)
 	client:speak("bonjour bonjour !")
+	print("on va envoyer coucou !")
+	client:send({type="coucou"})
 	clients[client.id] = client -- ajout a la liste des clients
 	nb_clients = nb_clients + 1
 end
