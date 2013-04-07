@@ -5,6 +5,8 @@
 LevelEnd = {}
 LevelEnd.__index = LevelEnd
 
+TimerLevelEnd =1
+
 
 function LevelEnd.new(pos,w,h,next)
 	local self = {}
@@ -18,6 +20,8 @@ function LevelEnd.new(pos,w,h,next)
 	self.type='LevelEnd'
 	self.counter=0
 	self.next=next
+	self.isTouched=false
+	self.timer=0	
 	return self
 end
 
@@ -38,8 +42,7 @@ function LevelEnd:collideWith( object, collision )
 		self.counter=self.counter+1;
 	end
 	if(self.counter==2) then
-		print ("level finished")
-		print(self.next)
+		self.isTouched=true
 	end
 end
 
@@ -50,9 +53,16 @@ function LevelEnd:unCollideWith( object, collision )
 end
 
 function LevelEnd:update(seconds)
+	if self.isTouched then
+		self.timer=self.timer+seconds
+	end
 	x,y =self.pc.body:getPosition()
 	self.position.x=x
 	self.position.y=y
+	if(self.timer>=TimerLevelEnd) then
+		self.isTouched=false
+		gameStateManager:finish()
+	end	
 end
 
 function LevelEnd:draw(x,y)

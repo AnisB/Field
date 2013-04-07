@@ -12,6 +12,7 @@ require("game.maploader")
 require("game.interruptor")
 require("game.sound")
 require("game.levelending")
+require("game.levelfailed")
 require("const")
 
 Gameplay = {}
@@ -53,9 +54,13 @@ function Gameplay.new(mapFile,continuous)
         self.shouldEnd=false
         self.maxTime = 0.016 -- 50 ms
         self.lastTime = 42
-
+        self.levelFinished=false
         return self
     end
+
+
+
+
       function Gameplay:destroy()
         self.shouldEnd=false
         world:setCallbacks(nil, function() collectgarbage() end)
@@ -99,9 +104,14 @@ function Gameplay.new(mapFile,continuous)
 
     end
 
-    function Gameplay:finish()
+    function Gameplay:failed()
         self.shouldEnd=true
     end
+
+    function Gameplay:finish()
+        self.levelFinished=true
+    end
+
 
     function Gameplay:mousePressed(x, y, button)
     end
@@ -172,7 +182,7 @@ function Gameplay.new(mapFile,continuous)
         end
 
         if key=="c" then
-            self.shouldEnd=true
+            self.levelFinished=true
         end
     end
 
@@ -232,12 +242,30 @@ function Gameplay.new(mapFile,continuous)
             self.lastTime = 0
         end
 
-        if(self.shouldEnd) then
-            print(self.continuous)
+        if(self.levelFinished) then
             gameStateManager.state['LevelEnding']=LevelEnding.new(self.mapLoader.levelends[1].next,self.continuous)
             gameStateManager:changeState('LevelEnding')
-            return
+            packet={
+            levelfinish=true,
+            continuous=self.continuous,
+            next=self.mapLoader.levelends[1].next
+        }
+        for k,c in pairs(clients) do
+            c:send({type= "gameplaypacket", pk= packet})
+        end            return
         end
+
+        if(self.shouldEnd) then
+            gameStateManager.state['LevelFailed']=LevelFailed.new()
+            gameStateManager:changeState('LevelFailed')
+            packet={
+            levelfailed=true
+        }           
+        for k,c in pairs(clients) do
+            c:send({type= "gameplaypacket", pk= packet})
+        end
+        return
+        end        
         world:update(dt) 
         self.magnetmanager:update(dt)   
 

@@ -7,6 +7,9 @@ require("game.camera")
 require("game.maploader")
 require("game.sound")
 require("const")
+require("game.levelending")
+require("game.levelfailed")
+
 
 Gameplay = {}
 Gameplay.__index = Gameplay
@@ -40,6 +43,17 @@ function Gameplay:reset()
     end
 
     function Gameplay:handlePacket(packet)
+
+        if packet.levelfailed~=nil then
+            gameStateManager.state['LevelFailed']=LevelFailed.new()
+            gameStateManager:changeState('LevelFailed')
+        end
+
+        if packet.levelfinish~=nil then
+            gameStateManager.state['LevelEnding']=LevelEnding.new(next,continuous)
+            gameStateManager:changeState('LevelEnding')
+        end
+
         if  packet.themagnet~=nil then
             self.theMagnet:handlePacket(packet.themagnet)
         end
