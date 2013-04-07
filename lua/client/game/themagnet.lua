@@ -83,6 +83,7 @@ function TheMagnet:handlePacket( string )
 		--lancement du champ
 		local newSound = FieldSound.new(t[8])
 		table.insert(self.mapSounds, newSound)
+		newSound:play()
 		self.fieldType=t[8]
 		newSound:play()
 		self.appliesField=true
@@ -100,9 +101,7 @@ function TheMagnet:handlePacket( string )
 			-- self.fieldType="None"
 			self.appliesField=false
 			self.field.isActive=false
-			elseif 	self.appliesField and t[7]=="true" then
-
-				
+			elseif 	self.appliesField and t[7]=="true" then				
 				if self.fieldType==t[8] then
 				else
 					-- mauvais champ lancé donc nouveau champ lancé
@@ -111,6 +110,7 @@ function TheMagnet:handlePacket( string )
 					end
 					local newSound = FieldSound.new(t[8])
 					table.insert(self.mapSounds, newSound)
+					newSound:play()
 					if t[8]~="Attractive" then
 						self.field= Field.new(t[8])
 					else

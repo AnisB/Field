@@ -4,8 +4,8 @@ FieldSound.__index = FieldSound
 FieldSound.SOUND_ROOT = "sound/"
 FieldSound.SOUND_LOOP = ""--"loop"
 
-FADING_DURATION = 0.5 --durée des fading in et out
-SOUND_VOLUME = 1
+FADING_DURATION = 2 --durée des fading in et out
+FIELD_SOUND_VOLUME = 2
 
 
 function FieldSound.new(soundName)
@@ -26,10 +26,10 @@ function FieldSound.new(soundName)
 	self.srcLoop = love.audio.newSource(pathLoop, "static")
 	self.isFadingIn = false
 	self.isFadingOut = false
-	self.currentVolume = 1
+	self.currentVolume = 0
 	self.isDone = false
-	self.totalPlayed = 0
 	self.isPlaying = false
+	self.isStopped = false
     return self
 end
 
@@ -37,19 +37,19 @@ function FieldSound:play()
 	self.isFadingIn = true
 	self.isPlaying = true
 	self.src:play()
+	self.src:setLooping(false)
 end
 
 function FieldSound:update(dt)
 	if self.isPlaying then
-		self.totalPlayed = self.totalPlayed+dt
 		if self.isFadingIn then
-			self.currentVolume = self.totalPlayed*FADING_DURATION/SOUND_VOLUME
-			if self.currentVolume >= SOUND_VOLUME then
-				self.currentVolume = SOUND_VOLUME
+			self.currentVolume = self.currentVolume + ((dt*FIELD_SOUND_VOLUME)/FADING_DURATION)
+			if self.currentVolume >= FIELD_SOUND_VOLUME then
+				self.currentVolume = FIELD_SOUND_VOLUME
 				self.isFadingIn = false
 			end
 		elseif self.isFadingOut then
-			self.currentVolume = self.totalPlayed*FADING_DURATION/SOUND_VOLUME
+			self.currentVolume = self.currentVolume - ((dt*FIELD_SOUND_VOLUME)/FADING_DURATION)
 			if self.currentVolume <= 0 then
 				self.srcLoop:setLooping(false)
 				self.currentVolume = 0
@@ -58,8 +58,12 @@ function FieldSound:update(dt)
 			end
 		end
 		if self.src:isStopped() then
-			self.srcLoop:setLooping(true)
-			self.srcLoop:play()
+			if self.isStopped~=true then
+				if self.srcLoop:isStopped() then
+					self.srcLoop:setLooping(true)
+					self.srcLoop:play()
+				end
+			end
 		end
 		print(self.currentVolume)
 		self.src:setVolume(self.currentVolume)
@@ -70,6 +74,8 @@ end
 function FieldSound:stop()
 	self.isFadingOut = true
 	self.isFadingIn = false
+	self.isStopped = true
+	self.srcLoop:setLooping(false)
 end
 
 function FieldSound:done()
