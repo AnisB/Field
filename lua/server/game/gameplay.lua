@@ -11,16 +11,19 @@ require("game.metal")
 require("game.maploader")
 require("game.interruptor")
 require("game.sound")
+require("game.levelending")
+require("game.levelfailed")
 require("const")
 
 Gameplay = {}
 Gameplay.__index = Gameplay
 
-function Gameplay.new(mapFile)
+function Gameplay.new(mapFile,continuous)
     local self = {}
     setmetatable(self, Gameplay)
     Sound.playMusic("theme")
 
+    self.continuous=true
         -- Physics
         love.physics.setMeter( unitWorldSize) --the height of a meter our worlds will be 64px
         world = love.physics.newWorld( 0, 18*unitWorldSize, false )
@@ -29,9 +32,10 @@ function Gameplay.new(mapFile)
         -- Custom physics
         self.magnetmanager = MagnetManager.new()
 
+        self.mapFile=mapFile
         --Map
-        -- self.mapLoader = MapLoader.new("maps.field2",self.magnetmanager)
-        self.mapLoader = MapLoader.new("maps.level1",self.magnetmanager)
+        self.mapLoader = MapLoader.new(mapFile,self.magnetmanager)
+        -- self.mapLoader = MapLoader.new("maps.level1",self.magnetmanager)
 
         -- Camera Metal Man
         self.cameraMM =Camera.new(0,0)
@@ -51,10 +55,20 @@ function Gameplay.new(mapFile)
         self.shouldEnd=false
         self.maxTime = 0.016 -- 50 ms
         self.lastTime = 42
-
+        self.levelFinished=false
         return self
     end
-    
+
+    function Gameplay:destroy()
+        self.shouldEnd=false
+        world:setCallbacks(nil, function() collectgarbage() end)
+        world:destroy()
+        world=nil
+        world = love.physics.newWorld( 0, 18*unitWorldSize, false )
+        print(world:getGravity())
+        world:setCallbacks(beginContact, endContact, preSolve, postSolve)
+    end  
+
     function Gameplay:reset()
         self.shouldEnd=false
         world:setCallbacks(nil, function() collectgarbage() end)
@@ -67,9 +81,8 @@ function Gameplay.new(mapFile)
         self.magnetmanager= nil
         self.magnetmanager = MagnetManager.new()
 
-        --Map
-        -- self.mapLoader = MapLoader.new("maps.field2",self.magnetmanager)
-        self.mapLoader = MapLoader.new("maps.level1",self.magnetmanager)
+        print("LOADING FILE =", self.mapFile)
+        self.mapLoader = MapLoader.new(self.mapFile, self.magnetmanager)
 
         -- Camera Metal Man
         self.cameraMM =Camera.new(0,0)
@@ -89,9 +102,14 @@ function Gameplay.new(mapFile)
 
     end
 
-    function Gameplay:finish()
+    function Gameplay:failed()
         self.shouldEnd=true
     end
+
+    function Gameplay:finish()
+        self.levelFinished=true
+    end
+
 
     function Gameplay:mousePressed(x, y, button)
     end
@@ -162,26 +180,27 @@ function Gameplay.new(mapFile)
         end
 
         if key=="c" then
-            self:sendTheWorld()
+            self.levelFinished=true
         end
     end
 
     function Gameplay:sendTheWorld()
-        local packet={}
-        if self.drawWho==1 then
-            packet.camera=self.cameraMM:toSend()
-            packet.map=self.mapLoader:toSend(self.cameraMM:getPos())
-            packet.metalman=self.metalMan:mainSend(self.cameraMM:getPos())
-            packet.themagnet=self.theMagnet:secondSend(self.cameraMM:getPos().x-windowW/2,windowH/2-self.cameraMM:getPos().y)
-        else
-            packet.camera=self.cameraTM:toSend()
-            packet.map=self.mapLoader:toSend(self.cameraTM:getPos())
-            packet.themagnet=self.theMagnet:mainSend(self.cameraTM:getPos())
-            packet.metalman=self.metalMan:secondSend(self.cameraTM:getPos().x-windowW/2,windowH/2-self.cameraTM:getPos().y)
-        end
+        for k,c in pairs(clients) do    
+            local packet={}
+            if c.perso=="metalman" then
+                packet.camera=self.cameraMM:toSend()
+                packet.map=self.mapLoader:toSend(self.cameraMM:getPos())
+                packet.metalman=self.metalMan:mainSend(self.cameraMM:getPos())
+                packet.themagnet=self.theMagnet:secondSend(self.cameraMM:getPos().x-windowW/2,windowH/2-self.cameraMM:getPos().y)
+            elseif c.perso=="themagnet" then
+                packet.camera=self.cameraTM:toSend()
+                packet.map=self.mapLoader:toSend(self.cameraTM:getPos())
+                packet.themagnet=self.theMagnet:mainSend(self.cameraTM:getPos())
+                packet.metalman=self.metalMan:secondSend(self.cameraTM:getPos().x-windowW/2,windowH/2-self.cameraTM:getPos().y)
+            end
         -- Envoyer ici packet (seld.Send(packet))
         -- print("Envoi de :", table2.tostring(packet))
-        for k,c in pairs(clients) do
+
             c:send({type= "gameplaypacket", pk= packet})
         end
     end
@@ -222,11 +241,30 @@ function Gameplay.new(mapFile)
             self.lastTime = 0
         end
 
-        -- Physics managers
-        if(self.shouldEnd) then
-            gameStateManager:reset()
-            return
+        if(self.levelFinished) then
+            gameStateManager.state['LevelEnding']=LevelEnding.new(self.mapLoader.levelends[1].next,self.continuous)
+            gameStateManager:changeState('LevelEnding')
+            packet={
+            levelfinish=true,
+            continuous=self.continuous,
+            next=self.mapLoader.levelends[1].next
+        }
+        for k,c in pairs(clients) do
+            c:send({type= "gameplaypacket", pk= packet})
+        end            return
         end
+
+        if(self.shouldEnd) then
+            gameStateManager.state['LevelFailed']=LevelFailed.new()
+            gameStateManager:changeState('LevelFailed')
+            packet={
+            levelfailed=true
+        }           
+        for k,c in pairs(clients) do
+            c:send({type= "gameplaypacket", pk= packet})
+        end
+        return
+        end        
         world:update(dt) 
         self.magnetmanager:update(dt)   
 

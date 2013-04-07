@@ -37,8 +37,11 @@ function Attente:onMessage(msg, client)
 					local histories = load_history(monde.player1.cookie, monde.player2.cookie)
 					monde.player1.history, monde.player2.history = histories
 					gameStateManager:changeState("choixTypeJeu")
+					monde.maps = listmaps()
+					print("MAAAPS =", table2.tostring(monde.maps))
 					for k,c in pairs(clients) do
 						c:send({type= "attenteFinie"})
+						c:send({type= "listmaps", maps= monde.maps})
 					end
 				else
 					debug_warn("[login] same cookies")

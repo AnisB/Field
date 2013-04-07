@@ -16,6 +16,7 @@ function InputManager.new()
 end
 
 function InputManager:handlePacket(pck)
+	print("J'ai recu qq chose"..pck.key)
 	if pck.key~=nil then
 		if pck.state~=nil then
 			if(pck.state==true) then

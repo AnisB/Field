@@ -68,7 +68,7 @@ function Arc:update(seconds)
 	self.position.y=y
 	if(self.timer>=TimerArc) then
 		self.isTouched=false
-		gameStateManager:finish()
+		gameStateManager:failed()
 	end
 end
 

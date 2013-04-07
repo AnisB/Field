@@ -7,6 +7,10 @@ require("game.camera")
 require("game.maploader")
 require("game.sound")
 require("const")
+require("game.levelending")
+require("game.levelfailed")
+require("game.inputmanager")
+
 
 Gameplay = {}
 Gameplay.__index = Gameplay
@@ -14,32 +18,49 @@ Gameplay.__index = Gameplay
 function Gameplay.new(mapFile)
     local self = {}
     setmetatable(self, Gameplay)
-        --Map
-        self.mapLoader = MapLoader.new("maps.field2")
-        
-        --Characters
-        self.metalMan = MetalMan.new()
-        self.theMagnet = TheMagnet.new()
-		self.keyPacket = {}
-		
+    --Map
+    if mapFile == nil then
+        mapFile = "maps.field2"
+    end
+    self.mapFile=mapFile
+    self.mapLoader = MapLoader.new(mapFile)
+    
+    --Characters
+    self.metalMan = MetalMan.new()
+    self.theMagnet = TheMagnet.new()
+	self.keyPacket={}
+
     self.camera=Camera.new(0,0)
-
-
+    self.inputManager = InputManager.new()
     return self
 end
 
 function Gameplay:reset()
     self.shouldEnd=false
 
-        --Map
-        self.mapLoader = MapLoader.new("maps.field2")
-        
-        --Characters
-        self.metalMan = MetalMan.new()
-        self.theMagnet = TheMagnet.new()
-    end
+    --Map
+    print("LOADING FILE =", self.mapFile)
+    self.mapLoader = MapLoader.new(self.mapFile)
+    
+    --Characters
+    self.metalMan = MetalMan.new()
+    self.theMagnet = TheMagnet.new()
+    self.keyPacket={}
+    self.camera=Camera.new(0,0)
+end
 
     function Gameplay:handlePacket(packet)
+
+        if packet.levelfailed~=nil then
+            gameStateManager.state['LevelFailed']=LevelFailed.new()
+            gameStateManager:changeState('LevelFailed')
+        end
+
+        if packet.levelfinish~=nil then
+            gameStateManager.state['LevelEnding']=LevelEnding.new(packet.next,packet.continuous)
+            gameStateManager:changeState('LevelEnding')
+        end
+
         if  packet.themagnet~=nil then
             self.theMagnet:handlePacket(packet.themagnet)
         end
@@ -64,12 +85,15 @@ function Gameplay:reset()
     
     
     function Gameplay:keyPressed(inputKey, unicode)
-		serveur:send({type="input", pck={character="metalMan", key=inputKey, state=true}})
+        self.inputManager:keyPressed(inputKey, unicode)
+		-- serveur:send({type="input", pck={character="metalMan", key=inputKey, state=true}})
     end
 
 	
     function Gameplay:keyReleased(inputKey, unicode)
-		serveur:send({type="input", pck={character="metalMan", key=inputKey, state=false}})
+        self.inputManager:keyReleased(inputKey, unicode)
+
+		-- serveur:send({type="input", pck={character="metalMan", key=inputKey, state=false}})
     end
     
     

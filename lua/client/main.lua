@@ -28,6 +28,9 @@ function onMessage(msg)
 	-- print("Received : " .. table2.tostring(msg))
 	if msg.type == "gameplaypacket" then
 		gameStateManager.state['Gameplay']:handlePacket(msg.pk)
+	elseif msg.type == "listmaps" then
+		print("MAPS =", table2.tostring(msg))
+		monde.availableMaps = msg.maps
 	else
 		gameStateManager:onMessage(msg)
 	end
