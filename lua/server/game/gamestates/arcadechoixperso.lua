@@ -22,7 +22,7 @@ function ArcadeChoixPerso:onMessage(msg, client)
 				end
 				monde[monde.player1.perso] = monde.player1
 				monde[monde.player2.perso] = monde.player2
-				gameStateManager:changeState("Gameplay") -- arcadeChoixNiveau
+				gameStateManager:changeState("arcadeChoixNiveau")
 				-- TODO : envoyer la liste des niveau possibles ?
 			else
 				client:send({type= "err", msg="choix des personnages pas fini"})

@@ -55,7 +55,7 @@ function Gameplay.new(mapFile)
         return self
     end
     
-    function Gameplay:reset()
+    function Gameplay:reset(mapFile)
         self.shouldEnd=false
         world:setCallbacks(nil, function() collectgarbage() end)
         world:destroy()
@@ -68,7 +68,11 @@ function Gameplay.new(mapFile)
         self.magnetmanager = MagnetManager.new()
 
         --Map
-        self.mapLoader = MapLoader.new("maps.field2",self.magnetmanager)
+        if mapFile == nil then
+            mapFile = "maps.field2"
+        end
+        print("LOADING FILE =", mapFile)
+        self.mapLoader = MapLoader.new(mapFile, self.magnetmanager)
         -- self.mapLoader = MapLoader.new("maps.level9",self.magnetmanager)
 
         -- Camera Metal Man

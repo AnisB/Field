@@ -37,6 +37,7 @@ function Gameplay:reset(mapFile)
     if mapFile == nil then
         mapFile = "maps.field2"
     end
+    print("LOADING FILE =", mapFile)
     self.mapLoader = MapLoader.new(mapFile)
     
     --Characters

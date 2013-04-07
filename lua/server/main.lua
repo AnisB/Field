@@ -13,9 +13,9 @@ require("lubeboth.client")
 table2 = require("lubeboth.table2")
 cron = require("lubeboth.cron")
 
-
 SourceDirectory="./"
 ImgDirectory="img/"
+MapDirectory="maps/"
 gameStateManager = nil
 inputManager = nil
 
@@ -139,4 +139,15 @@ function all(f, t)
 		end
 	end
 	return true
+end
+
+function listmaps()
+	local files = love.filesystem.enumerate(MapDirectory)
+	local m = {}
+	for k,v in pairs(files) do
+		if string.sub(v, -4) == ".lua" then
+			table.insert(m, "maps."..string.sub(v, 0, -5))
+		end
+	end
+	return m
 end

@@ -38,7 +38,9 @@ function ChoixPerso:onMessage(msg)
 			monde[msg.perso] = monde.lui
 		end
 	elseif msg.type == "choixPersoFini" then
-		gameStateManager:changeState('Gameplay')
+		if monde.typeJeu == "arcade" then
+			gameStateManager:changeState('ChoixNiveau')
+		end
 	elseif msg.type == "err" then
 		self.err = true
 	else
