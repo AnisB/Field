@@ -14,30 +14,37 @@ Gameplay.__index = Gameplay
 function Gameplay.new(mapFile)
     local self = {}
     setmetatable(self, Gameplay)
-        --Map
-        self.mapLoader = MapLoader.new("maps.field2")
-        
-        --Characters
-        self.metalMan = MetalMan.new()
-        self.theMagnet = TheMagnet.new()
-		self.keyPacket={}
+    --Map
+    if mapFile == nil then
+        mapFile = "maps.field2"
+    end
+    self.mapLoader = MapLoader.new(mapFile)
+    
+    --Characters
+    self.metalMan = MetalMan.new()
+    self.theMagnet = TheMagnet.new()
+	self.keyPacket={}
 
     self.camera=Camera.new(0,0)
-
 
     return self
 end
 
-function Gameplay:reset()
+function Gameplay:reset(mapFile)
     self.shouldEnd=false
 
-        --Map
-        self.mapLoader = MapLoader.new("maps.field2")
-        
-        --Characters
-        self.metalMan = MetalMan.new()
-        self.theMagnet = TheMagnet.new()
+    --Map
+    if mapFile == nil then
+        mapFile = "maps.field2"
     end
+    self.mapLoader = MapLoader.new(mapFile)
+    
+    --Characters
+    self.metalMan = MetalMan.new()
+    self.theMagnet = TheMagnet.new()
+    self.keyPacket={}
+    self.camera=Camera.new(0,0)
+end
 
     function Gameplay:handlePacket(packet)
         if  packet.themagnet~=nil then
