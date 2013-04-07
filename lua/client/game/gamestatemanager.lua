@@ -6,6 +6,8 @@ require("game.prelude")
 require("game.storyline")
 require("game.firstenter")
 require("game.connecttoserver")
+require("game.choixtypejeu")
+require("game.choixperso")
 require("game.waitingfordistant")
 require("game.levelbegin")
 require("game.gameplay")
@@ -22,13 +24,19 @@ function GameStateManager.new()
 	self.state['Storyline'] = Storyline.new()
 	self.state['FirstEnter'] = FirstEnter.new()
 	self.state['ConnectToServer'] = ConnectToServer.new()
+	self.state['ChoixTypeJeu'] = ChoixTypeJeu.new()
+	self.state['ChoixPerso'] = ChoixPerso.new()
 	self.state['WaitingForDistant'] = WaitingForDistant.new()
 	self.state['LevelBegin'] = LevelBegin.new()
 	self.state['Gameplay'] = Gameplay.new()
 	--self.state['LevelChange'] = LevelChange.new()
 	--self.state['PartyEnd'] = PartyEnd.new()
-	self.currentState='Gameplay'
+	self.currentState='ConnectToServer'
 	return self
+end
+
+function GameStateManager:onMessage(msg)
+	self.state[self.currentState]:onMessage(msg)
 end
 
 function GameStateManager:mousePressed(x, y, button)

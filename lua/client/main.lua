@@ -29,35 +29,21 @@ function onMessage(msg)
 	if msg.type == "gameplaypacket" then
 		gameStateManager.state['Gameplay']:handlePacket(msg.pk)
 	else
-		print("Pkg has no type gameplaypacket !")
+		gameStateManager:onMessage(msg)
 	end
 end
 
 function love.load()
-	-- lube :
-    conn = lube.tcpClient()
-	conn.handshake = "hello"
-	serveur = common.instance(Client, conn) -- oui, le serveur est un "client" :)
-
-	local okay = nil
-	while okay ~= true do
-		print(okay)
-		okay = conn:connect("localhost", 3410, true)
-	end
-
-	print(okay)
-
-	conn.callbacks.recv = rcvCallback
-	print("CONNECTED !!")
-	-- /lube
-
+	monde = {}
 	love.graphics.setIcon( love.graphics.newImage(ImgDirectory.."icon.png" ))
 	gameStateManager = GameStateManager:new()
 end
 
 function love.update(dt)
 	-- lube :
-	conn:update(dt)
+	if conn ~= nil then
+		conn:update(dt)
+	end
 	-- cron.update(dt)
 	
 	-- /lube
