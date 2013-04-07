@@ -30,8 +30,8 @@ function Gameplay.new(mapFile)
         self.magnetmanager = MagnetManager.new()
 
         --Map
-        self.mapLoader = MapLoader.new("maps.field2",self.magnetmanager)
-        -- self.mapLoader = MapLoader.new("maps.level9",self.magnetmanager)
+        -- self.mapLoader = MapLoader.new("maps.field2",self.magnetmanager)
+        self.mapLoader = MapLoader.new("maps.level1",self.magnetmanager)
 
         -- Camera Metal Man
         self.cameraMM =Camera.new(0,0)
@@ -68,8 +68,8 @@ function Gameplay.new(mapFile)
         self.magnetmanager = MagnetManager.new()
 
         --Map
-        self.mapLoader = MapLoader.new("maps.field2",self.magnetmanager)
-        -- self.mapLoader = MapLoader.new("maps.level9",self.magnetmanager)
+        -- self.mapLoader = MapLoader.new("maps.field2",self.magnetmanager)
+        self.mapLoader = MapLoader.new("maps.level1",self.magnetmanager)
 
         -- Camera Metal Man
         self.cameraMM =Camera.new(0,0)
@@ -224,8 +224,7 @@ function Gameplay.new(mapFile)
 
         -- Physics managers
         if(self.shouldEnd) then
-        gameStateManager:reset()
-
+            gameStateManager:reset()
             return
         end
         world:update(dt) 
