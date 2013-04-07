@@ -26,10 +26,9 @@
 
     function Destroyable:update(dt)
         self.anim:update(dt)
- end
+    end
     function Destroyable:syncronize(pos,anim,id)
-        if (self.anim.currentAnim.name~=anim) then
-            print(self.anim.currentAnim.name.."syncro"..anim)    
+        if (self.anim.currentAnim.name~=anim) then          
             self.anim:syncronize(anim,id) 
         end
         self.position.x=pos.x
@@ -38,17 +37,17 @@
     end
 
 
- function Destroyable:getPosition()
-    return self.position
-end 
+    function Destroyable:getPosition()
+        return self.position
+    end 
 
-function Destroyable:unCollideWith( object, collision )
+    function Destroyable:unCollideWith( object, collision )
 
-end
-function Destroyable:draw()
-     love.graphics.draw(self.anim:getSprite(), self.position.x, self.position.y)
-end
+    end
+    function Destroyable:draw()
+        love.graphics.draw(self.anim:getSprite(), self.position.x, self.position.y)
+    end
 
-function Destroyable:loadAnimation(anim, force)
-    self.anim:load(anim, force)
-end
+    function Destroyable:loadAnimation(anim, force)
+        self.anim:load(anim, force)
+    end
