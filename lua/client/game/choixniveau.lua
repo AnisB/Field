@@ -34,9 +34,6 @@ function ChoixNiveau:update(dt) end
 function ChoixNiveau:onMessage(msg)
 	if msg.type == "choixNiveau" then
 		monde.niveau = msg.level
-		if self.continuous then
-			gameStateManager.state['Gameplay']:destroy()
-        end
             gameStateManager.state['Gameplay']=Gameplay.new("maps."..msg.level,true)
             gameStateManager:changeState('Gameplay')	
 	else

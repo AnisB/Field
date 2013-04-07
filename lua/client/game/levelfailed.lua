@@ -28,7 +28,7 @@ This file is part of the Field project]]
            gameStateManager.state['Gameplay']:reset()
            gameStateManager:changeState('Gameplay')		
        else
-           gameStateManager.state['Gameplay']:destroy()        
+           -- gameStateManager.state['Gameplay']:destroy()        
            gameStateManager:changeState('choixTypeJeu')     
        end            
 end
