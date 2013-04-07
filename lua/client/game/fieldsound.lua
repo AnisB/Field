@@ -4,8 +4,8 @@ FieldSound.__index = FieldSound
 FieldSound.SOUND_ROOT = "sound/"
 FieldSound.SOUND_LOOP = ""--"loop"
 
-FADING_DURATION = 0.5 --durée des fading in et out
-SOUND_VOLUME = 1
+FADING_DURATION = 2 --durée des fading in et out
+FIELD_SOUND_VOLUME = 2
 
 
 function FieldSound.new(soundName)
@@ -26,7 +26,7 @@ function FieldSound.new(soundName)
 	self.srcLoop = love.audio.newSource(pathLoop, "static")
 	self.isFadingIn = false
 	self.isFadingOut = false
-	self.currentVolume = 1
+	self.currentVolume = 0
 	self.isDone = false
 	self.isPlaying = false
 	self.isStopped = false
@@ -43,13 +43,13 @@ end
 function FieldSound:update(dt)
 	if self.isPlaying then
 		if self.isFadingIn then
-			self.currentVolume = self.currentVolume + ((dt*SOUND_VOLUME)/FADING_DURATION)
-			if self.currentVolume >= SOUND_VOLUME then
-				self.currentVolume = SOUND_VOLUME
+			self.currentVolume = self.currentVolume + ((dt*FIELD_SOUND_VOLUME)/FADING_DURATION)
+			if self.currentVolume >= FIELD_SOUND_VOLUME then
+				self.currentVolume = FIELD_SOUND_VOLUME
 				self.isFadingIn = false
 			end
 		elseif self.isFadingOut then
-			self.currentVolume = self.currentVolume - ((dt*SOUND_VOLUME)/FADING_DURATION)
+			self.currentVolume = self.currentVolume - ((dt*FIELD_SOUND_VOLUME)/FADING_DURATION)
 			if self.currentVolume <= 0 then
 				self.srcLoop:setLooping(false)
 				self.currentVolume = 0
@@ -59,8 +59,10 @@ function FieldSound:update(dt)
 		end
 		if self.src:isStopped() then
 			if self.isStopped~=true then
-				self.srcLoop:setLooping(true)
-				self.srcLoop:play()
+				if self.srcLoop:isStopped() then
+					self.srcLoop:setLooping(true)
+					self.srcLoop:play()
+				end
 			end
 		end
 		
