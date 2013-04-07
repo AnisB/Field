@@ -21,7 +21,9 @@ function LevelEnding:mouseReleased(x, y, button)
 end
 
 
-function LevelEnding:keyPressed(key, unicode)
+function LevelEnding:keyPressed(akey, unicode)
+    print("lol",monde.moi.perso, akey)
+    serveur:send({type="input", pck={character=monde.moi.perso, key=akey, state=true}})    
 	if unicode==13 then
 		if self.continuous then
 			gameStateManager.state['Gameplay']:destroy()
