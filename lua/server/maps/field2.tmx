@@ -79,10 +79,10 @@
   <object x="2432" y="1152" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#ff0000" name="metalman" width="200" height="20">
-  <object x="1984" y="576" width="64" height="64"/>
+  <object x="2048" y="960" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#ff0000" name="themagnet" width="200" height="20">
-  <object x="1408" y="576" width="64" height="64"/>
+  <object x="2176" y="960" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#800000" name="generator" width="200" height="20">
   <object type="RotativeR" x="1152" y="1024" width="64" height="64">
@@ -240,9 +240,9 @@
   </object>
  </objectgroup>
  <objectgroup color="#ffff00" name="levelend" width="200" height="20">
-  <object x="2176" y="1024" width="128" height="192">
+  <object x="6336" y="1024" width="128" height="192">
    <properties>
-    <property name="next" value="map3"/>
+    <property name="next" value="level1"/>
    </properties>
   </object>
  </objectgroup>

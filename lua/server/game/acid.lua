@@ -6,6 +6,10 @@ Acid = {}
 Acid.__index = Acid
 Acid.Types ={hg='hg',hm='hm',hd='hd',mg='mg',mm='mm',md='md',bg='bg',bm='bm',bd='bd'}
 
+
+TimerAcid =1
+
+
 function Acid.new(pos,w,h,type,netid)
 	local self = {}
 	setmetatable(self, Acid)
@@ -29,6 +33,8 @@ function Acid.new(pos,w,h,type,netid)
 	self.acidType=type
 	self.anim = AnimAcid.new('acid/'..type)
 	self:loadAnimation("normal",true)
+	self.isTouched=false
+	self.timer=0	
 	return self
 end
 
@@ -50,7 +56,8 @@ end
 
 function Acid:collideWith( object, collision )
 	if object.type=='MetalMan' or object.type =='TheMagnet' then
-		print("He is dead now")
+		self.isTouched=true
+		object:die()
 	end
 end
 
@@ -59,10 +66,17 @@ function Acid:unCollideWith( object, collision )
 end
 
 function Acid:update(seconds)
+	if self.isTouched then
+		self.timer=self.timer+seconds
+	end
 	self.anim:update(seconds)
 	x,y =self.pc.body:getPosition()
 	self.position.x=x
 	self.position.y=y-self.dec
+	if(self.timer>=TimerArc) then
+		self.isTouched=false
+		gameStateManager:failed()
+	end	
 end
 
 function Acid:draw(x,y)

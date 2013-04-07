@@ -231,6 +231,9 @@ function MapLoader:update(dt)
     for i,p in pairs(self.arcs) do
         p:update(dt)
     end
+    for i,p in pairs(self.levelends) do
+        p:update(dt)
+    end
 end
 
 function MapLoader:isSeen(pos1,pos2,w,h)

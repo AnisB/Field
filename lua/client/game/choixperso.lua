@@ -7,14 +7,17 @@ function ChoixPerso:new()
     local self = {}
     setmetatable(self, ChoixPerso)
     self.err = false
+    self.isRed=0
     return self
 end
 
 function ChoixPerso:mousePressed(x, y, button)
 	if x > 200 and x < 250 and y > 200 and y < 250 then
 		serveur:send({type="choixPerso", confirm=false, perso="metalman"})
+		self.isRed=1
 	elseif x > 200 and x < 250 and y > 300 and y < 350 then
 		serveur:send({type="choixPerso", confirm=false, perso="themagnet"})
+		self.isRed=2
 	else
 		serveur:send({type="choixPerso", confirm=true})
 	end
@@ -49,8 +52,21 @@ function ChoixPerso:onMessage(msg)
 end
 
 function ChoixPerso:draw()
+		if self.isRed==1 then
+		love.graphics.setColor(255, 0, 0, 255)
+	else
+		love.graphics.setColor(255, 255, 255, 255)
+	end
 	love.graphics.print("metalman", 200, 200)
+
+	if self.isRed==2 then
+		love.graphics.setColor(255, 0, 0, 255)
+	else
+		love.graphics.setColor(255, 255, 255, 255)
+	end
 	love.graphics.print("themagnet", 200, 300)
+	love.graphics.setColor(255, 255, 255, 255)
+
 	love.graphics.print("PLAY", 200, 400)
 	if self.err then
 		love.graphics.print("ERR", 600, 100)

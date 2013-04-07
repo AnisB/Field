@@ -6,6 +6,7 @@ ChoixTypeJeu.__index = ChoixTypeJeu
 function ChoixTypeJeu:new()
     local self = {}
     setmetatable(self, ChoixTypeJeu)
+    self.isRed=0
     return self
 end
 
@@ -40,4 +41,5 @@ end
 function ChoixTypeJeu:draw()
 	love.graphics.print("arcade", 200, 200)
 	love.graphics.print("histoire", 200, 300)
+
 end
