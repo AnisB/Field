@@ -8,15 +8,10 @@ Arc.__index = Arc
 TimerArc =1
 
 ArcType={DebutH='DebutH',MillieuH='MillieuH',FinH='FinH',DebutV='DebutV',MillieuV='MillieuV',FinV='FinV'}
-function Arc.new(pos,w,h,typeArc)
+function Arc.new(pos,typeArc,anim,id)
 	local self = {}
 	setmetatable(self, Arc)
 	self.position={x=pos.x,y=pos.y}
-	self.w=w
-	self.h=h
-	local decalage={w/2,h/2}
-	self.pc = Physics.newZone(self.position.x,self.position.y,w,h,decalage)
-	self.pc.fixture:setUserData(self)
 	self.type='Arc'
 	self.arcType=typeArc
 	if( self.arcType==ArcType.MillieuV or self.arcType==ArcType.MillieuH ) then
@@ -24,9 +19,7 @@ function Arc.new(pos,w,h,typeArc)
 	else
 		self.anim = AnimArc.new('arc/arcside')
 	end
-	self:loadAnimation("on",true)
-	self.isTouched=false
-	self.timer=0
+	self.anim:syncronize(anim,id)
 	return self
 end
 
@@ -39,51 +32,31 @@ function Arc:getPosition()
 	return self.position
 end
 
-
-function Arc:preSolve(b,coll)
-end
-
-
-
-function Arc:collideWith( object, collision )
-	if object.type=='MetalMan' or object.type =='TheMagnet' then
-		self.isTouched=true
-		object:die()
+function Arc:syncronize(pos,anim,id)
+	self.position.x=pos.x
+	self.position.y=pos.y
+	self.drawed=true
+	if (self.anim.currentAnim.name~=anim) then
+		self.anim:syncronize(anim,id)
 	end
 end
 
-function Arc:unCollideWith( object, collision )
 
-end
 
 function Arc:update(seconds)
-	if self.isTouched then
-		self.timer=self.timer+seconds
-	end
 	self.anim:update(seconds)
-	x,y =self.pc.body:getPosition()
-	self.position.x=x
-	self.position.y=y
-	if(self.timer>=TimerArc) then
-		self.isTouched=false
-		gameStateManager:finish()
-	end
 end
 
-function Arc:draw(x,y)
-	love.graphics.setColor(255,255,255,255)
+function Arc:draw()
 
 	if( self.arcType==ArcType.MillieuH or self.arcType==ArcType.DebutH) then
-		love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
+		love.graphics.draw(self.anim:getSprite(), self.position.x, self.position.y)
 	elseif (  self.arcType==ArcType.MillieuV or self.arcType==ArcType.DebutV) then
-		love.graphics.draw(self.anim:getSprite(), self.position.x-x +unitWorldSize, self.position.y+y,math.pi/2)
+		love.graphics.draw(self.anim:getSprite(), self.position.x +unitWorldSize, self.position.y,math.pi/2)
 	elseif (  self.arcType==ArcType.FinV) then
-		love.graphics.draw(self.anim:getSprite(), self.position.x-x , self.position.y+y+unitWorldSize,-math.pi/2)
+		love.graphics.draw(self.anim:getSprite(), self.position.x , self.position.y+unitWorldSize,-math.pi/2)
 	elseif (  self.arcType==ArcType.FinH) then
-		love.graphics.draw(self.anim:getSprite(), self.position.x-x+unitWorldSize , self.position.y+y,0,-1,1)
+		love.graphics.draw(self.anim:getSprite(), self.position.x+unitWorldSize , self.position.y,0,-1,1)
 	end
 end
 
-function Arc:send(x,y)
-		return ("@arc".."#"..self.arcType.."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
-end

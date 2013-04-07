@@ -72,44 +72,44 @@ function MetalMan:jump()
 	end
 end
 
-function MetalMan:rotativeLField(pos)
+function MetalMan:rotativeLField(pos,factor)
 	local vx=self.position.x-pos.x +0.01
 	local vy=self.position.y-pos.y
 	local n = math.sqrt(vx*vx+vy*vy)
 	local vrx = vx/n
 	local vry= vy/n
-	self.pc.body:applyLinearImpulse(-vry*MetaManRotFieldS.x,vrx*MetaManRotFieldS.y)
+	self.pc.body:applyLinearImpulse(-vry*MetaManRotFieldS.x*factor,vrx*MetaManRotFieldS.y*factor)
 end
 
-function MetalMan:rotativeRField(pos)
+function MetalMan:rotativeRField(pos,factor)
 	local vx=self.position.x-pos.x+0.01
 	local vy=self.position.y-pos.y
 	local n = math.sqrt(vx*vx+vy*vy)
 	local vrx = vx/n
 	local vry= vy/n
-	self.pc.body:applyLinearImpulse(vry*MetaManRotFieldS.x,-vrx*MetaManRotFieldS.y)
+	self.pc.body:applyLinearImpulse(vry*MetaManRotFieldS.x*factor,-vrx*MetaManRotFieldS.y*factor)
 end
 
-function MetalMan:attractiveField(pos)
+function MetalMan:attractiveField(pos,factor)
 	local vx=-self.position.x+pos.x+0.01
 	local vy=-self.position.y+pos.y
 	local n = math.sqrt(vx*vx+vy*vy)
 	local vrx = vx/n
 	local vry= vy/n
 	if(n>(unitWorldSize)) then 
-		self.pc.body:applyLinearImpulse(vrx*MetaManAttFieldS.x,vry*MetaManAttFieldS.y)
+		self.pc.body:applyLinearImpulse(vrx*MetaManAttFieldS.x*factor,vry*MetaManAttFieldS.y*factor)
 	end
 end
 
 
-function MetalMan:repulsiveField(pos)
+function MetalMan:repulsiveField(pos,factor)
 	local vx=self.position.x-pos.x
 	local vy=self.position.y-pos.y
 	local n = math.sqrt(vx*vx+vy*vy)
 	local vrx = vx/n
 	local vry = vy/(n*n)
 	if(n>(unitWorldSize)) then 
-		self.pc.body:applyLinearImpulse(vrx*MetaManRepFieldS.x,vry*MetaManRepFieldS.y*100)
+		self.pc.body:applyLinearImpulse(vrx*MetaManRepFieldS.x*factor,vry*MetaManRepFieldS.y*100*factor)
 	end
 end
 

@@ -72,5 +72,5 @@ end
 
 
 function Acid:send(x,y)
-		return ("@acid".."#"..self.netid.."#"..self.arcType.."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
+		return ("@acid".."#"..self.netid.."#"..self.acidType.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
 end

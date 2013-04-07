@@ -18,7 +18,9 @@ function Acid.new(pos,type,anim,id)
 	self.type='Acid'
 	self.acidType=type
 	self.anim = AnimAcid.new('acid/'..type)
-	self:syncronize(anim,id)
+	print(anim)
+	self.anim:syncronize(anim,id)
+	print(anim)
 	return self
 end
 

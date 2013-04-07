@@ -9,6 +9,16 @@ require("game.connecttoserver")
 require("game.waitingfordistant")
 require("game.levelbegin")
 require("game.gameplay")
+
+require('game.gamestates.attentetest')
+require('game.gamestates.attente')
+require('game.gamestates.choixtypejeu')
+require('game.gamestates.arcadechoixperso')
+require('game.gamestates.arcadechoixniveau')
+require('game.gamestates.arcade')
+require('game.gamestates.histoirechoixperso')
+require('game.gamestates.histoire')
+
 --require("game.levelchange")
 --require()
 GameStateManager = {}
@@ -17,18 +27,25 @@ GameStateManager.__index = GameStateManager
 function GameStateManager.new()
 	local self = {}
 	setmetatable(self, GameStateManager)
-	self.state = {}
-	self.state['Prelude'] = Prelude.new()
-	self.state['Storyline'] = Storyline.new()
-	self.state['FirstEnter'] = FirstEnter.new()
-	self.state['ConnectToServer'] = ConnectToServer.new()
-	self.state['WaitingForDistant'] = WaitingForDistant.new()
-	self.state['LevelBegin'] = LevelBegin.new()
+	self.state = {
+		attenteTest= common.instance(AttenteTest),
+		attente= common.instance(Attente),
+		choixTypeJeu= common.instance(ChoixTypeJeu),
+		arcadeChoixPerso= common.instance(ArcadeChoixPerso),
+		arcadeChoixNiveau= common.instance(ArcadeChoixNiveau),
+		arcade= common.instance(Arcade),
+		histoireChoixPerso= common.instance(HistoireChoixPerso),
+		histoire= common.instance(Histoire)
+	}
 	self.state['Gameplay'] = Gameplay.new()
 	--self.state['LevelChange'] = LevelChange.new()
 	--self.state['PartyEnd'] = PartyEnd.new()
-	self.currentState='Gameplay'
+	self.currentState='attente'
 	return self
+end
+
+function GameStateManager:onMessage(msg, client)
+	self.state[self.currentState]:onMessage(msg, client)
 end
 
 function GameStateManager:mousePressed(x, y, button)

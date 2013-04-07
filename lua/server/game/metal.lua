@@ -65,29 +65,29 @@ function Metal.new(pos,shapeType,typeP,material,typemetal,netid)
 	end
 
 
-	function Metal:rotativeLField(pos)
+	function Metal:rotativeLField(pos,factor)
 		if not self.isStatic then
 			local vx=self.position.x-pos.x+0.01
 			local vy=self.position.y-pos.y
 			local n = math.sqrt(vx*vx+vy*vy)
 			local vrx = vx/n
 			local vry= vy/n
-			self.pc.body:applyLinearImpulse(-vry*self.strenght/5,vrx*self.strenght/5)
+			self.pc.body:applyLinearImpulse(-vry*self.strenght/3*factor,vrx*self.strenght/3*factor)
 		end
 	end
 
-	function Metal:rotativeRField(pos)
+	function Metal:rotativeRField(pos,factor)
 		if not self.isStatic then
 			local vx=self.position.x-pos.x+0.01
 			local vy=self.position.y-pos.y
 			local n = math.sqrt(vx*vx+vy*vy)
 			local vrx = vx/n
 			local vry= vy/n
-			self.pc.body:applyLinearImpulse(vry*self.strenght/3,-vrx*self.strenght/3)
+			self.pc.body:applyLinearImpulse(vry*self.strenght/3*factor,-vrx*self.strenght/3*factor)
 		end
 	end
 
-	function Metal:attractiveField(pos)
+	function Metal:attractiveField(pos,factor)
 		if not self.isStatic then
 			local vx=-self.position.x+pos.x+0.01
 			local vy=-self.position.y+pos.y
@@ -95,21 +95,21 @@ function Metal.new(pos,shapeType,typeP,material,typemetal,netid)
 			local vrx = vx/n
 			local vry= vy/n
 			if(n>(unitWorldSize)) then 
-				self.pc.body:applyLinearImpulse(vrx*self.strenght,vry*self.strenght)
+				self.pc.body:applyLinearImpulse(vrx*self.strenght*factor,vry*self.strenght*factor)
 			end
 		end
 
 	end
 
 
-	function Metal:repulsiveField(pos)
+	function Metal:repulsiveField(pos,factor)
 		if not self.isStatic then	
 			local vx=self.position.x-pos.x+0.01
 			local vy=self.position.y-pos.y
 			local n = math.sqrt(vx*vx+vy*vy)
 			local vrx = vx/n
 			local vry= vy/n
-			self.pc.body:applyLinearImpulse(vrx*self.strenght,vry*self.strenght)
+			self.pc.body:applyLinearImpulse(vrx*self.strenght*factor/2,vry*self.strenght*factor/2)
 		end
 	end
 

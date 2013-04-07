@@ -19,9 +19,11 @@ function InputManager:handlePacket(pck)
 	if pck.key~=nil then
 		if pck.state~=nil then
 			if(pck.state==true) then
+				print("Pressed"..pck.key)
 				love.event.push('keypressed', pck.key)
 				self.listKeys[pck.key]=true
 			else
+				print("Released"..pck.key)
 				love.event.push('keyreleased', pck.key)
 				self.listKeys[pck.key]=nil
 			end

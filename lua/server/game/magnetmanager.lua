@@ -37,7 +37,6 @@ function MagnetManager:update(dt)
 	end
 
 
-
 	for i,g in ipairs(self.activeGenerators) do
 			for i,m in ipairs(self.normalMetals) do
 				if g:isAppliable(m:getPosition())  then
@@ -45,13 +44,13 @@ function MagnetManager:update(dt)
 						g:addStatMetal(m)
 						m:staticField()
 					elseif g.fieldType==FieldTypes.RotativeL then
-						m:rotativeLField(g:getPosition())
+						m:rotativeLField(g:getPosition(),dt*60)
 					elseif g.fieldType==FieldTypes.RotativeR then
-						m:rotativeRField(g:getPosition())
+						m:rotativeRField(g:getPosition(),dt*60)
 					elseif g.fieldType==FieldTypes.Repulsive then
-						m:repulsiveField(g:getPosition())
+						m:repulsiveField(g:getPosition(),dt*60)
 					elseif g.fieldType==FieldTypes.Attractive then
-						m:attractiveField(g:getPosition())
+						m:attractiveField(g:getPosition(),dt*60)
 					end	
 				end		
 			end
@@ -59,13 +58,13 @@ function MagnetManager:update(dt)
 			for i,m in ipairs(self.staticMetals) do
 				if g:isAppliable(m:getPosition())  then
 					if g.fieldType==FieldTypes.RotativeL then
-						g:rotativeLField(m:getPosition())
+						g:rotativeLField(m:getPosition(),dt*60)
 					elseif g.fieldType==FieldTypes.RotativeR then
-						g:rotativeRField(m:getPosition())
+						g:rotativeRField(m:getPosition(),dt*60)
 					elseif g.fieldType==FieldTypes.Repulsive then
-						g:repulsiveField(m:getPosition())
+						g:repulsiveField(m:getPosition(),dt*60)
 					elseif g.fieldType==FieldTypes.Attractive then
-						g:attractiveField(m:getPosition())
+						g:attractiveField(m:getPosition(),dt*60)
 					end	
 				end		
 			end

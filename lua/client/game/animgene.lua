@@ -19,7 +19,7 @@ AnimGene.ANIMS.shutdown.name = "shutdown"
 -- delays
 AnimGene.ANIMS.off.DELAY = 0.075
 AnimGene.ANIMS.on.DELAY = 0.075
-AnimGene.ANIMS.launching.DELAY = 0.075
+AnimGene.ANIMS.launching.DELAY = 0.125
 AnimGene.ANIMS.shutdown.DELAY = 0.075
 
 

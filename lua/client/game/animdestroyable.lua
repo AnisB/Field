@@ -31,8 +31,9 @@ AnimDestroyable.ANIMS.destroyed.priority = 10
 
 -- automatic loopings or automatic switch :
 AnimDestroyable.ANIMS.normal.loop = true
-AnimDestroyable.ANIMS.breaking.switch = AnimDestroyable.ANIMS.destroyed
+-- AnimDestroyable.ANIMS.breaking.switch = AnimDestroyable.ANIMS.destroyed
 AnimDestroyable.ANIMS.destroyed.loop = true
+AnimDestroyable.ANIMS.breaking.loop = false
 
 
 
@@ -104,6 +105,11 @@ end
 function AnimDestroyable:next()
 	self.currentPos = self.currentPos + 1
 	if self.currentPos > self.currentAnim.number then
+
+		if self.currentAnim.loop==false then
+			self.currentPos=self.currentAnim.number
+			return
+		end
 		-- end of an animation
 		if self.currentAnim.endCallback then
 			self.currentAnim.endCallback()
@@ -114,8 +120,8 @@ function AnimDestroyable:next()
 			self.currentAnim = self.currentAnim.switch
 		elseif self.currentAnim.loop then
 			-- I don't switch
-		else
-			print("FUCKING ANIM SWITCHING ERROR")
+		else 
+			print("FUCKING ANIM SWITCHING ERRORLAUL")
 		end
 		self.currentPos = 1
 		-- begin of an animation

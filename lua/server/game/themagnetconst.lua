@@ -12,7 +12,7 @@ TheMagnetConst.Mass=(0.05*unitWorldSize)
 -- Field Radius
 TheMagnetConst.fieldRadius=4*unitWorldSize
 -- Rotative Field Strengh
-TheMagnetConst.Rot={x=2*unitWorldSize,y=2*unitWorldSize}
+TheMagnetConst.Rot={x=1.5*unitWorldSize,y=1.5*unitWorldSize}
 -- Attractive Field Strengh
 TheMagnetConst.Att={x=2*unitWorldSize,y=2*unitWorldSize}
 -- Repulsive Field Strengh

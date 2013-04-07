@@ -87,5 +87,5 @@ function Arc:draw(x,y)
 end
 
 function Arc:send(x,y)
-		return ("@arc".."#"..self.netid.."#"..self.arcType.."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
+		return ("@arc".."#"..self.netid.."#"..self.arcType.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
 end
