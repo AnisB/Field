@@ -37,10 +37,12 @@ function GameStateManager.new()
 		histoireChoixPerso= common.instance(HistoireChoixPerso),
 		histoire= common.instance(Histoire)
 	}
-	self.state['Gameplay'] = Gameplay.new()
+	self.state['Gameplay'] = Gameplay.new("maps.field2")
 	--self.state['LevelChange'] = LevelChange.new()
 	--self.state['PartyEnd'] = PartyEnd.new()
-	self.currentState='attente'
+	-- self.currentState='attente'
+	self.currentState='Gameplay'
+
 	return self
 end
 

@@ -1165,7 +1165,7 @@ return {
           height = 192,
           visible = true,
           properties = {
-            ["next"] = "map3"
+            ["next"] = "level1"
           }
         }
       }

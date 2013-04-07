@@ -11,16 +11,18 @@ require("game.metal")
 require("game.maploader")
 require("game.interruptor")
 require("game.sound")
+require("game.levelending")
 require("const")
 
 Gameplay = {}
 Gameplay.__index = Gameplay
 
-function Gameplay.new(mapFile)
+function Gameplay.new(mapFile,continuous)
     local self = {}
     setmetatable(self, Gameplay)
     Sound.playMusic("theme")
 
+    self.continuous=true
         -- Physics
         love.physics.setMeter( unitWorldSize) --the height of a meter our worlds will be 64px
         world = love.physics.newWorld( 0, 18*unitWorldSize, false )
@@ -30,8 +32,8 @@ function Gameplay.new(mapFile)
         self.magnetmanager = MagnetManager.new()
 
         --Map
-        -- self.mapLoader = MapLoader.new("maps.field2",self.magnetmanager)
-        self.mapLoader = MapLoader.new("maps.level1",self.magnetmanager)
+        self.mapLoader = MapLoader.new(mapFile,self.magnetmanager)
+        -- self.mapLoader = MapLoader.new("maps.level1",self.magnetmanager)
 
         -- Camera Metal Man
         self.cameraMM =Camera.new(0,0)
@@ -54,7 +56,15 @@ function Gameplay.new(mapFile)
 
         return self
     end
-    
+      function Gameplay:destroy()
+        self.shouldEnd=false
+        world:setCallbacks(nil, function() collectgarbage() end)
+        world:destroy()
+        world=nil
+        world = love.physics.newWorld( 0, 18*unitWorldSize, false )
+        print(world:getGravity())
+        world:setCallbacks(beginContact, endContact, preSolve, postSolve)
+    end  
     function Gameplay:reset()
         self.shouldEnd=false
         world:setCallbacks(nil, function() collectgarbage() end)
@@ -68,8 +78,8 @@ function Gameplay.new(mapFile)
         self.magnetmanager = MagnetManager.new()
 
         --Map
-        -- self.mapLoader = MapLoader.new("maps.field2",self.magnetmanager)
-        self.mapLoader = MapLoader.new("maps.level1",self.magnetmanager)
+        self.mapLoader = MapLoader.new("maps.field2",self.magnetmanager)
+        -- self.mapLoader = MapLoader.new("maps.level1",self.magnetmanager)
 
         -- Camera Metal Man
         self.cameraMM =Camera.new(0,0)
@@ -162,7 +172,7 @@ function Gameplay.new(mapFile)
         end
 
         if key=="c" then
-            self:sendTheWorld()
+            self.shouldEnd=true
         end
     end
 
@@ -222,9 +232,10 @@ function Gameplay.new(mapFile)
             self.lastTime = 0
         end
 
-        -- Physics managers
         if(self.shouldEnd) then
-            gameStateManager:reset()
+            print(self.continuous)
+            gameStateManager.state['LevelEnding']=LevelEnding.new(self.mapLoader.levelends[1].next,self.continuous)
+            gameStateManager:changeState('LevelEnding')
             return
         end
         world:update(dt) 

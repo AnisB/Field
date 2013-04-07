@@ -242,7 +242,7 @@
  <objectgroup color="#ffff00" name="levelend" width="200" height="20">
   <object x="2176" y="1024" width="128" height="192">
    <properties>
-    <property name="next" value="map3"/>
+    <property name="next" value="level1"/>
    </properties>
   </object>
  </objectgroup>
