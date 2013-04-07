@@ -5,6 +5,7 @@ This file is part of the Field project]]
 require("game.camera")
 require("game.animmm")
 require("game.metalmanconst")
+
 MetalMan = {}
 MetalMan.__index = MetalMan
 

@@ -8,6 +8,7 @@ require("game.animtm")
 require("game.field")
 require("game.attfield")
 require("game.themagnetconst")
+require("game.fieldsound")
 -- Class Init
 TheMagnet = {}
 TheMagnet.__index = TheMagnet
@@ -36,25 +37,24 @@ function TheMagnet.new(camera,pos)
 
 	-- Field init
 
-		-- Particle field managing
-		self.field= Field.new(FieldTypes.Static,pos)
-		self.field.isActive=false
+	-- Particle field managing
+	self.field= Field.new(FieldTypes.Static,pos)
+	self.field.isActive=false
 
-	    -- Other field attributes
-	    self.appliesField=false
-	    self.fieldType=FieldTypes.None
+	-- Other field attributes
+	self.appliesField=false
+	self.fieldType=FieldTypes.None
 
-	    -- Static Field attributes
-	    self.statMetals={}
+	-- Static Field attributes
+	self.statMetals={}
 
-	    -- Sound
-	    self.fieldSound=Sound.getSound("field")
+	-- Sound
+	self.mapSounds={}
 
+	self.alive=true
 
-	    self.alive=true
-
-	    return self
-	end
+	return self
+end
 
 
 -- This methods handles the object's state change
@@ -80,6 +80,9 @@ function TheMagnet:handlePacket( string )
 		self.goF=false
 	end
 	if not self.appliesField and t[7]=="true" then
+		--lancement du champ
+		local newSound = FieldSound.new(t[8])
+		table.insert(self.mapSounds, newSound)
 		self.fieldType=t[8]
 		self.appliesField=true
 		if t[8]~="Attractive" then
@@ -89,12 +92,24 @@ function TheMagnet:handlePacket( string )
 		end
 		self.field.isActive=true
 		elseif self.appliesField and t[7]=="false" then
+			-- fermeture de champ, on fadeout les sons lancés
+			for i,k in pairs(self.mapSounds) do
+				self.mapSounds[i]:stop()
+			end
 			-- self.fieldType="None"
 			self.appliesField=false
 			self.field.isActive=false
 			elseif 	self.appliesField and t[7]=="true" then
+
+				
 				if self.fieldType==t[8] then
 				else
+					-- mauvais champ lancé donc nouveau champ lancé
+					for i,k in pairs(self.mapSounds) do --on fadeout les sons lancés
+						self.mapSounds[i]:stop()
+					end
+					local newSound = FieldSound.new(t[8])
+					table.insert(self.mapSounds, newSound)
 					if t[8]~="Attractive" then
 						self.field= Field.new(t[8])
 					else
@@ -115,7 +130,14 @@ end
 function TheMagnet:update(seconds)
 	self.anim:update(seconds)
 	self.field:update(seconds)
-
+	for i,k in pairs(self.mapSounds) do
+		local ok = self.mapSounds[i]:done()
+		if ok then 
+			self.mapSounds[i] = nil
+		else
+			self.mapSounds[i]:update(seconds)
+		end
+	end
 end
 
 

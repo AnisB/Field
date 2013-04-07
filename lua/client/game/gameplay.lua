@@ -20,8 +20,8 @@ function Gameplay.new(mapFile)
         --Characters
         self.metalMan = MetalMan.new()
         self.theMagnet = TheMagnet.new()
-		self.keyPacket={}
-
+		self.keyPacket = {}
+		
     self.camera=Camera.new(0,0)
 
 
