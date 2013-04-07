@@ -32,6 +32,7 @@ function Gameplay.new(mapFile,continuous)
         -- Custom physics
         self.magnetmanager = MagnetManager.new()
 
+        self.mapFile=mapFile
         --Map
         self.mapLoader = MapLoader.new(mapFile,self.magnetmanager)
         -- self.mapLoader = MapLoader.new("maps.level1",self.magnetmanager)
@@ -68,7 +69,7 @@ function Gameplay.new(mapFile,continuous)
         world:setCallbacks(beginContact, endContact, preSolve, postSolve)
     end  
 
-    function Gameplay:reset(mapFile)
+    function Gameplay:reset()
         self.shouldEnd=false
         world:setCallbacks(nil, function() collectgarbage() end)
         world:destroy()
@@ -80,12 +81,8 @@ function Gameplay.new(mapFile,continuous)
         self.magnetmanager= nil
         self.magnetmanager = MagnetManager.new()
 
-        --Map
-        if mapFile == nil then
-            mapFile = "maps.field2"
-        end
-        print("LOADING FILE =", mapFile)
-        self.mapLoader = MapLoader.new(mapFile, self.magnetmanager)
+        print("LOADING FILE =", self.mapFile)
+        self.mapLoader = MapLoader.new(self.mapFile, self.magnetmanager)
 
         -- Camera Metal Man
         self.cameraMM =Camera.new(0,0)

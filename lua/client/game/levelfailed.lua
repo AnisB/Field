@@ -21,7 +21,9 @@ This file is part of the Field project]]
     end
 
 
-    function LevelFailed:keyPressed(key, unicode)
+    function LevelFailed:keyPressed(akey, unicode)
+      print("levelending",monde.moi.perso, akey)
+      serveur:send({type="input", pck={character=monde.moi.perso, key=akey, state=true}})            
         if unicode==13 then
            gameStateManager.state['Gameplay']:reset()
            gameStateManager:changeState('Gameplay')		

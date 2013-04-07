@@ -22,14 +22,14 @@ end
 
 
 function LevelEnding:keyPressed(key, unicode)
-	if unicode==13 then
+	if key=="return" then
 		if self.continuous then
 			gameStateManager.state['Gameplay']:destroy()
             gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
             print(self.next)
             gameStateManager:changeState('Gameplay')		
-        else
-            gameStateManager:changeState('choixTypeJeu')
+        -- else
+        --     gameStateManager:changeState('choixTypeJeu')
         end		
 	end
 end

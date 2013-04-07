@@ -21,6 +21,7 @@ function Gameplay.new(mapFile)
     if mapFile == nil then
         mapFile = "maps.field2"
     end
+    self.mapFile=mapFile
     self.mapLoader = MapLoader.new(mapFile)
     
     --Characters
@@ -33,15 +34,12 @@ function Gameplay.new(mapFile)
     return self
 end
 
-function Gameplay:reset(mapFile)
+function Gameplay:reset()
     self.shouldEnd=false
 
     --Map
-    if mapFile == nil then
-        mapFile = "maps.field2"
-    end
-    print("LOADING FILE =", mapFile)
-    self.mapLoader = MapLoader.new(mapFile)
+    print("LOADING FILE =", self.mapFile)
+    self.mapLoader = MapLoader.new(self.mapFile)
     
     --Characters
     self.metalMan = MetalMan.new()
@@ -58,7 +56,7 @@ end
         end
 
         if packet.levelfinish~=nil then
-            gameStateManager.state['LevelEnding']=LevelEnding.new(next,continuous)
+            gameStateManager.state['LevelEnding']=LevelEnding.new(packet.next,packet.continuous)
             gameStateManager:changeState('LevelEnding')
         end
 

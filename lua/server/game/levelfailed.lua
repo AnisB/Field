@@ -22,12 +22,12 @@ This file is part of the Field project]]
 
 
     function LevelFailed:keyPressed(key, unicode)
-        if unicode==13 then
+        if key=="return" then
            gameStateManager.state['Gameplay']:reset()
            gameStateManager:changeState('Gameplay')		
-       else
-           gameStateManager.state['Gameplay']:destroy()        
-           gameStateManager:changeState('choixTypeJeu')     
+       -- else
+       --     gameStateManager.state['Gameplay']:destroy()        
+       --     gameStateManager:changeState('choixTypeJeu')     
        end            
 end
 

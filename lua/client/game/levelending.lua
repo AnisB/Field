@@ -22,18 +22,14 @@ end
 
 
 function LevelEnding:keyPressed(akey, unicode)
-    print("lol",monde.moi.perso, akey)
+    print("levelending",monde.moi.perso, akey)
     serveur:send({type="input", pck={character=monde.moi.perso, key=akey, state=true}})    
 	if unicode==13 then
-		if self.continuous then
-			gameStateManager.state['Gameplay']:destroy()
-            gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
-            print(self.next)
-            gameStateManager:changeState('Gameplay')		
-        else
-            gameStateManager:changeState('choixTypeJeu')
-        end		
-	end
+        gameStateManager.state['Gameplay']=Gameplay.new("maps."..self.next,true)
+        gameStateManager:changeState('Gameplay')		
+    else
+        gameStateManager:changeState('choixTypeJeu')
+    end		
 end
 
 function LevelEnding:keyReleased(key, unicode)

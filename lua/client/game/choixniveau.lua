@@ -34,8 +34,11 @@ function ChoixNiveau:update(dt) end
 function ChoixNiveau:onMessage(msg)
 	if msg.type == "choixNiveau" then
 		monde.niveau = msg.level
-		gameStateManager.state['Gameplay']:reset(msg.level)
-		gameStateManager:changeState('Gameplay')
+		if self.continuous then
+			gameStateManager.state['Gameplay']:destroy()
+        end
+            gameStateManager.state['Gameplay']=Gameplay.new("maps."..msg.level,true)
+            gameStateManager:changeState('Gameplay')	
 	else
 		print("[ChoixNiveau] wrong type :", table2.tostring(msg))
 	end

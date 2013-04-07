@@ -49,7 +49,7 @@ function onMessage(msg, client)
 	else
 		gameStateManager:onMessage(msg, client)
 	end
-	client:speak(table2.tostring(msg))
+	-- client:speak(table2.tostring(msg))
 end
 
 function onDisconnect(client)
@@ -146,7 +146,7 @@ function listmaps()
 	local m = {}
 	for k,v in pairs(files) do
 		if string.sub(v, -4) == ".lua" then
-			table.insert(m, "maps."..string.sub(v, 0, -5))
+			table.insert(m, string.sub(v, 0, -5))
 		end
 	end
 	return m
