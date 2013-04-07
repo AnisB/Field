@@ -9,6 +9,7 @@ require("game.sound")
 require("const")
 require("game.levelending")
 require("game.levelfailed")
+require("game.inputmanager")
 
 
 Gameplay = {}
@@ -30,7 +31,7 @@ function Gameplay.new(mapFile)
 	self.keyPacket={}
 
     self.camera=Camera.new(0,0)
-
+    self.inputManager = InputManager.new()
     return self
 end
 
@@ -84,12 +85,15 @@ end
     
     
     function Gameplay:keyPressed(inputKey, unicode)
-		serveur:send({type="input", pck={character="metalMan", key=inputKey, state=true}})
+        self.inputManager:keyPressed(inputKey, unicode)
+		-- serveur:send({type="input", pck={character="metalMan", key=inputKey, state=true}})
     end
 
 	
     function Gameplay:keyReleased(inputKey, unicode)
-		serveur:send({type="input", pck={character="metalMan", key=inputKey, state=false}})
+        self.inputManager:keyReleased(inputKey, unicode)
+
+		-- serveur:send({type="input", pck={character="metalMan", key=inputKey, state=false}})
     end
     
     
