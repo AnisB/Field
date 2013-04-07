@@ -28,8 +28,8 @@ function FieldSound.new(soundName)
 	self.isFadingOut = false
 	self.currentVolume = 1
 	self.isDone = false
-	self.totalPlayed = 0
 	self.isPlaying = false
+	self.isStopped = false
     return self
 end
 
@@ -37,19 +37,19 @@ function FieldSound:play()
 	self.isFadingIn = true
 	self.isPlaying = true
 	self.src:play()
+	self.src:setLooping(false)
 end
 
 function FieldSound:update(dt)
 	if self.isPlaying then
-		self.totalPlayed = self.totalPlayed+dt
 		if self.isFadingIn then
-			self.currentVolume = self.totalPlayed*FADING_DURATION/SOUND_VOLUME
+			self.currentVolume = self.currentVolume + ((dt*SOUND_VOLUME)/FADING_DURATION)
 			if self.currentVolume >= SOUND_VOLUME then
 				self.currentVolume = SOUND_VOLUME
 				self.isFadingIn = false
 			end
 		elseif self.isFadingOut then
-			self.currentVolume = self.totalPlayed*FADING_DURATION/SOUND_VOLUME
+			self.currentVolume = self.currentVolume - ((dt*SOUND_VOLUME)/FADING_DURATION)
 			if self.currentVolume <= 0 then
 				self.srcLoop:setLooping(false)
 				self.currentVolume = 0
@@ -58,8 +58,10 @@ function FieldSound:update(dt)
 			end
 		end
 		if self.src:isStopped() then
-			self.srcLoop:setLooping(true)
-			self.srcLoop:play()
+			if self.isStopped~=true then
+				self.srcLoop:setLooping(true)
+				self.srcLoop:play()
+			end
 		end
 		
 		self.src:setVolume(self.currentVolume)
@@ -70,6 +72,8 @@ end
 function FieldSound:stop()
 	self.isFadingOut = true
 	self.isFadingIn = false
+	self.isStopped = true
+	self.srcLoop:setLooping(false)
 end
 
 function FieldSound:done()

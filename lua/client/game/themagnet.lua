@@ -100,9 +100,7 @@ function TheMagnet:handlePacket( string )
 			-- self.fieldType="None"
 			self.appliesField=false
 			self.field.isActive=false
-			elseif 	self.appliesField and t[7]=="true" then
-
-				
+			elseif 	self.appliesField and t[7]=="true" then				
 				if self.fieldType==t[8] then
 				else
 					-- mauvais champ lancé donc nouveau champ lancé
