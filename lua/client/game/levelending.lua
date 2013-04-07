@@ -28,7 +28,7 @@ function LevelEnding:keyPressed(akey, unicode)
         gameStateManager.state['Gameplay']=Gameplay.new("maps."..self.next,true)
         gameStateManager:changeState('Gameplay')		
     else
-        gameStateManager:changeState('choixTypeJeu')
+        gameStateManager:changeState('ChoixTypeJeu')
     end		
 end
 
