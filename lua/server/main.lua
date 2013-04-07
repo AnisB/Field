@@ -39,26 +39,17 @@ end
 
 function onConnect(client)
 	client:speak("bonjour bonjour !")
-	print("on va envoyer coucou !")
-	client:send({type="coucou"})
 	clients[client.id] = client -- ajout a la liste des clients
 	nb_clients = nb_clients + 1
 end
 
 function onMessage(msg, client)
-	
 	if (msg.type == "input") then
 		inputManager:handlePacket(msg.pck)
+	else
+		gameStateManager:onMessage(msg, client)
 	end
-	-- if msg.english then
-	-- 	print("received english message with "..tostring(#msg.tags).." tags.")
-	-- 	client:send({msg= "Hello, Sir.", understood= true})
-	-- else
-	-- 	print("received some characters..")
-	-- 	client:send({msg= "wtf?", understood= false, details= "Shut up, stranger."})
-	-- end
 	client:speak(table2.tostring(msg))
-	--gameStateManager:onMessage(msg, client)
 end
 
 function onDisconnect(client)
@@ -74,10 +65,7 @@ function love.load()
 	monde = {} -- messy world.
 	clients = {} -- map { idClient => client }
 	nb_clients = 0
-	-- gameStateManager = common.instance(GameStateManager)
     print("Ready !")
-    -- local h1, h2 = load_history("lol", "lil")
-    -- print("HIST :", table2.tostring(h2))
     conn = lube.tcpServer()
 	conn.handshake = "hello"
 	conn:listen(3410)
@@ -125,6 +113,16 @@ function love.draw()
 end
 
 -- utils for lube :
+
+debug_lvl = 10
+function debug_warn(msg, lvl)
+	if lvl == nil then
+		lvl = 0
+	end
+	if debug_lvl >= lvl then
+		print("[WARNING]"..msg)
+	end
+end
 
 function map(f, t)
 	local t2 = {}
