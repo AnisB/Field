@@ -84,6 +84,7 @@ function TheMagnet:handlePacket( string )
 		local newSound = FieldSound.new(t[8])
 		table.insert(self.mapSounds, newSound)
 		self.fieldType=t[8]
+		newSound:play()
 		self.appliesField=true
 		if t[8]~="Attractive" then
 			self.field= Field.new(t[8])

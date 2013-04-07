@@ -21,8 +21,8 @@ UTILISATION :
 
 --]]--
 
-MUSIC_VOLUME = 1
-SOUND_VOLUME = 0.1
+MUSIC_VOLUME = 0
+SOUND_VOLUME = 0
 Sound.isPaused = false
 
 Sound.play = function ()

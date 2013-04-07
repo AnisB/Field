@@ -61,7 +61,7 @@ function FieldSound:update(dt)
 			self.srcLoop:setLooping(true)
 			self.srcLoop:play()
 		end
-		
+		print(self.currentVolume)
 		self.src:setVolume(self.currentVolume)
 		self.srcLoop:setVolume(self.currentVolume)
 	end
