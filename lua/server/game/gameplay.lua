@@ -185,21 +185,22 @@ function Gameplay.new(mapFile,continuous)
     end
 
     function Gameplay:sendTheWorld()
-        local packet={}
-        if self.drawWho==1 then
-            packet.camera=self.cameraMM:toSend()
-            packet.map=self.mapLoader:toSend(self.cameraMM:getPos())
-            packet.metalman=self.metalMan:mainSend(self.cameraMM:getPos())
-            packet.themagnet=self.theMagnet:secondSend(self.cameraMM:getPos().x-windowW/2,windowH/2-self.cameraMM:getPos().y)
-        else
-            packet.camera=self.cameraTM:toSend()
-            packet.map=self.mapLoader:toSend(self.cameraTM:getPos())
-            packet.themagnet=self.theMagnet:mainSend(self.cameraTM:getPos())
-            packet.metalman=self.metalMan:secondSend(self.cameraTM:getPos().x-windowW/2,windowH/2-self.cameraTM:getPos().y)
-        end
+        for k,c in pairs(clients) do    
+            local packet={}
+            if c.perso=="metalman" then
+                packet.camera=self.cameraMM:toSend()
+                packet.map=self.mapLoader:toSend(self.cameraMM:getPos())
+                packet.metalman=self.metalMan:mainSend(self.cameraMM:getPos())
+                packet.themagnet=self.theMagnet:secondSend(self.cameraMM:getPos().x-windowW/2,windowH/2-self.cameraMM:getPos().y)
+            elseif c.perso=="themagnet" then
+                packet.camera=self.cameraTM:toSend()
+                packet.map=self.mapLoader:toSend(self.cameraTM:getPos())
+                packet.themagnet=self.theMagnet:mainSend(self.cameraTM:getPos())
+                packet.metalman=self.metalMan:secondSend(self.cameraTM:getPos().x-windowW/2,windowH/2-self.cameraTM:getPos().y)
+            end
         -- Envoyer ici packet (seld.Send(packet))
         -- print("Envoi de :", table2.tostring(packet))
-        for k,c in pairs(clients) do
+
             c:send({type= "gameplaypacket", pk= packet})
         end
     end
