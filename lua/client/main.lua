@@ -51,6 +51,11 @@ function love.update(dt)
 	if conn ~= nil then
 		conn:update(dt)
 	end
+
+	-- Music managing
+	musicM:update(dt)
+
+	
 	-- cron.update(dt)
 	
 	-- /lube
