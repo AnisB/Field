@@ -13,8 +13,8 @@ function MusicManager.new()
 	
 	local introPath = MusicManager.SOUND_ROOT.."theme"..'.ogg'
 	local mainLoopPath = MusicManager.SOUND_ROOT.."theme"..'.ogg'
-	self.srcIntro = love.audio.newSource(introPath, "static")
-	self.srcMainLoop = love.audio.newSource(mainLoopPath, "static")
+	self.srcIntro = love.audio.newSource(introPath)
+	self.srcMainLoop = love.audio.newSource(mainLoopPath)
 
 	self.introIsDone = false
     return self

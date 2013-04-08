@@ -79,12 +79,12 @@ end
 
 function love.joystickpressed(joystick, key)
 	gameStateManager:joystickPressed(joystick, key)
-	print("touche "..key.." du joystick "..joystick "appuyée !\n")
+	print("touche "..key.." du joystick "..joystick.."appuyée !\n")
 end
 
 function love.joystickreleased(joystick, key)
 	gameStateManager:joystickReleased(joystick, key)
-	print("touche "..key.." du joystick "..joystick "relachée !\n")
+	print("touche "..key.." du joystick "..joystick.."relachée !\n")
 end
 
 function love.draw()

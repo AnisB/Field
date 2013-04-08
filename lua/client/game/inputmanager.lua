@@ -1,10 +1,12 @@
 --[[ 
 This file is part of the Field project]]
 
+--les touches telles qu'elles doivent être envoyées au serveur
+MetalManKEYS={up="z",down="q",left="s",right="d",changeweight="b",changestatic="n", interact="e"}
+TheMagnetKEYS={up="up",down="down",left="left",right="right",repulsive="p",attractive="o",rotativel="k",rotativer="l",static="i", interact="e"}
 
-MetalManKEYS={up="z",down="s",left="q",right="d",changeweight="b",changestatic="n"}
-TheMagnetKEYS={up="up",down="down",left="left",right="right",repulsive="p",attractive="o",rotativel="k",rotativer="l",static="i"}
-
+--les touches choisies par l'utilisateur
+--insérer code ici
 
 InputManager = {}
 InputManager.__index = InputManager
