@@ -4,8 +4,8 @@ FieldSound.__index = FieldSound
 FieldSound.SOUND_ROOT = "sound/"
 FieldSound.SOUND_LOOP = ""--"loop"
 
-FADING_DURATION = 2 --durée des fading in et out
-FIELD_SOUND_VOLUME = 2
+FADING_DURATION = 1 --durée des fading in et out
+FIELD_SOUND_VOLUME = 0.5
 
 
 function FieldSound.new(soundName)
@@ -61,7 +61,7 @@ function FieldSound:update(dt)
 				if self.srcLoop:isStopped() then
 					self.srcLoop:setLooping(true)
 					self.srcLoop:play()
-					self.stop()
+					self:stop()
 				end
 			end
 		end

@@ -9,12 +9,16 @@ require("lubeboth.class")
 require("lubeboth.lube")
 require("lubeboth.TSerial")
 require("lubeboth.client")
+require("game.musicmanager")
 cron = require("lubeboth.cron")
 table2 = require("lubeboth.table2")
 
 SourceDirectory="./"
 ImgDirectory="img/"
 gameStateManager = nil
+
+musicM = MusicManager.new()
+musicM:play()
 
 -- "low level" events :
 
