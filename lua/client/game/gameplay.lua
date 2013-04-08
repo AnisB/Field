@@ -106,6 +106,7 @@ end
         self.theMagnet:update(dt)
         self.metalMan:update(dt)
         self.mapLoader:update(dt)
+		self.inputManager:update()
     end
     
     

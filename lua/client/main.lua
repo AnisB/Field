@@ -17,6 +17,8 @@ SourceDirectory="./"
 ImgDirectory="img/"
 gameStateManager = nil
 
+gamePaused = false
+
 musicM = MusicManager.new()
 musicM:play()
 
@@ -61,6 +63,7 @@ function love.update(dt)
 	-- /lube
 
 	gameStateManager:update(dt)
+	
 end	
 
 function love.mousepressed(x, y, button)
@@ -84,14 +87,20 @@ end
 
 function love.joystickpressed(joystick, key)
 	gameStateManager:joystickPressed(joystick, key)
-	print("touche "..key.." du joystick "..joystick.."appuyée !\n")
 end
 
 function love.joystickreleased(joystick, key)
 	gameStateManager:joystickReleased(joystick, key)
-	print("touche "..key.." du joystick "..joystick.."relachée !\n")
 end
 
 function love.draw()
 	gameStateManager:draw()
+end
+
+function love.focus(b)
+    if not b then
+        gamePaused = true
+	else 
+		gamePaused = false
+	end
 end
