@@ -11,6 +11,21 @@ function Attente:update(dt)
 	-- print("Weeee !", dt)
 end
 
+
+    function Attente:mousePressed(x, y, button)
+    end
+    
+    function Attente:mouseReleased(x, y, button)
+    end
+    
+    
+    function Attente:keyPressed(key, unicode)
+    end
+
+    function Attente:keyReleased(key, unicode)
+
+    end
+    
 function Attente:draw() end
 
 function Attente:onMessage(msg, client)

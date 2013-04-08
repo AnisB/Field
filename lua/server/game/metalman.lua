@@ -187,15 +187,19 @@ end
 function MetalMan:collideWith( object, collision )
 
 	if self.alive then
-		if(object:getPosition().y>self.position.y) and (not self.canjump)  then
-			self.canjump=true
-			if self.animCounter>0 then 
-				self:loadAnimation("running",true)
-			else
-				self:setState('landing')
-				self:loadAnimation("landing",true)
-			end
-		end	
+		if object.type=='GateInterruptor' or object.type=='Interruptor' or object.type=='TheMagnet' then
+			--Ghost dude
+		else
+			if(object:getPosition().y>self.position.y) and (not self.canjump)  then
+				self.canjump=true
+				if self.animCounter>0 then 
+					self:loadAnimation("running",true)
+				else
+					self:setState('landing')
+					self:loadAnimation("landing",true)
+				end
+			end	
+		end
 	end
 end
 
@@ -262,6 +266,9 @@ function MetalMan:update(seconds)
 	self.position.x=x
 	self.position.y=y
 	if self.alive then
+		if self.animCounter >=1 and self.anim.currentAnim.name=="standing" then
+			self:loadAnimation("running",true)	
+		end
 		if not self.isStatic  then
 			if inputManager:isKeyDown("d") then
 				if self.metalWeight==MetalMTypes.Alu then

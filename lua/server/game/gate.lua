@@ -88,5 +88,5 @@ function Gate:draw(x,y)
 end
 
 function Gate:send(x,y)
-	return ("@gate".."#"..self.netid.."#".."img/img.png".."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
+	return ("@gate".."#"..self.netid.."#".."img/img.png".."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y).."#"..self.w.."#"..self.h.."#"..tostring(self.open))
 end

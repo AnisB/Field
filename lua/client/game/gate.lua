@@ -8,64 +8,37 @@ Gate = {}
 Gate.__index = Gate
 
 
-function Gate.new(pos,w,h,ID,enabled)
+function Gate.new(pos,w,h,open)
 	local self = {}
 	setmetatable(self, Gate)
-	self.id=ID
 	self.position={x=pos.x,y=pos.y}
     -- Type
     self.type='Gate' 
     self.w=w
     self.h=h
-    decalage={w/2,h/2}
-    self.pc = Physics.newRectangle(self.position.x,self.position.y,w,h,true,decalage)
-    self.pc.fixture:setUserData(self)    
-    if enabled then
-        self.pc.fixture:setFilterData(1,1,-1)    	
+    if open=="true" then
     	self.open=true
-    else
-    	self.pc.fixture:setFilterData(1,1,0)
-	self.open= false
+	else
+		self.open=false
 	end
-	return self
+	self.drawed=true
+    return self
 end
 
-	function Gate:isAppliable(pos)
-		local ax =pos.x-self.position.x
-		local ay =pos.y-self.position.y
-		if math.abs(math.sqrt(ax*ax+ay*ay))<=self.fieldRadius then
-			return true
-		else
-			return false
-		end
+-- function Gate:syncronize(pos,anim,id)
+function Gate:syncronize(pos,open)
+	-- if (self.anim.currentAnim.name~=anim) then
+	-- 	self.anim:syncronize(anim,id)
+	-- end        
+	self.position.x=pos.x
+	self.position.y=pos.y
+    if open=="true" then
+    	self.open=true
+	else
+		self.open=false
 	end
-	
-	function Gate:getPosition()
-		return self.position
-	end
-	
-
-	
-	function Gate:collideWith( object, collision )
-	end
-	
-	function Gate:unCollideWith( object, collision )
-
-	end
-
-	function Gate:openG( )
-	self.open= true
-	self.pc.fixture:setFilterData(1,1,-1)
-	Sound.playSound("door")
-
-	end
-
-	function Gate:closeG( )
-	self.open= false
-	self.pc.fixture:setFilterData(1,1,0)
-	Sound.playSound("door")
-
-	end
+	self.drawed=true	
+end
 
 
 function Gate:getPosition(  )
@@ -73,18 +46,12 @@ function Gate:getPosition(  )
 end
 
 function Gate:update(seconds)
-	x,y =self.pc.body:getPosition()
-	self.position.x=x
-	self.position.y=y
 end
 
-function Gate:draw(x,y)
+function Gate:draw()
 	love.graphics.setColor(255,100,100,255)
 	if self.open==false then
-    love.graphics.rectangle( "fill", self.position.x-x,self.position.y+y, self.w, self.h )
+		love.graphics.rectangle( "fill", self.position.x,self.position.y, self.w, self.h )
 	end
-end
-
-function Gate:send(x,y)
-	return ("@gate".."img/img.png".."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
+	love.graphics.setColor(255,255,255,255)
 end

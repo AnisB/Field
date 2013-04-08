@@ -358,7 +358,7 @@ function MapLoader:toSend(pos)
           gates=gates..p:send(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
-	maptable.gates=gates
+	maptable.gate=gates
 
     local acids=""
     for i,p in pairs(self.acids) do
