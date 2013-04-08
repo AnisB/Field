@@ -11,9 +11,9 @@ function ChoixTypeJeu:new()
 end
 
 function ChoixTypeJeu:mousePressed(x, y, button)
-	if x > 200 and x < 250 and y > 200 and y < 250 then
+	if x > 90 and x < 90+150 and y > 105 and y < 105+35 then
 		serveur:send({type="choixTypeJeu", typeJeu="arcade"})
-	else
+	elseif x > 90 and x < 90+150 and y > 205 and y < 205+35 then
 		serveur:send({type="choixTypeJeu", typeJeu="histoire"})
 	end
 end
@@ -39,7 +39,39 @@ function ChoixTypeJeu:onMessage(msg)
 end
 
 function ChoixTypeJeu:draw()
-	love.graphics.print("arcade", 200, 200)
-	love.graphics.print("histoire", 200, 300)
+	local hover = false
+	x, y = love.mouse.getPosition()
 
+	-- background :
+	love.graphics.draw(gameStateManager.state['ConnectToServer'].bg, 0, 0)
+
+	-- rectangles :
+	if x > 90 and x < 90+150 and y > 105 and y < 105+35 then
+		love.graphics.setColor(150, 150, 150, 255)
+		hover = true
+	else
+		love.graphics.setColor(50, 50, 50, 255)
+	end
+	love.graphics.rectangle("fill", 90, 105, 150, 35)
+
+	if x > 90 and x < 90+150 and y > 205 and y < 205+35 then
+		love.graphics.setColor(150, 150, 150, 255)
+		hover = true
+	else
+		love.graphics.setColor(50, 50, 50, 255)
+	end
+	love.graphics.rectangle("fill", 90, 205, 150, 35)
+
+	-- text :
+	love.graphics.setColor(255, 255, 255, 255)
+	love.graphics.print("arcade", 100, 100)
+	love.graphics.print("histoire", 100, 200)
+
+	-- cursor :
+	if hover then
+		love.mouse.setVisible(false)
+		love.graphics.draw(gameStateManager.state['ConnectToServer'].handcursor, x-17, y-17)
+	else
+		love.mouse.setVisible(true)
+	end
 end
