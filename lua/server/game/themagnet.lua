@@ -142,15 +142,21 @@ end
 -- Method that handles the collision
 function TheMagnet:collideWith( object, collision )
 	if self.alive then
-
-		if(object:getPosition().y>self.position.y) and (not self.canjump)  then
-			self.canjump=true
-			if self.animCounter>0 then 
-				self:loadAnimation("running",true)
-			else
-				self:setState('landing')
-				self:loadAnimation("landing",true)
-			end	
+		if object.type=='GateInterruptor' or object.type=='Interruptor' or object.type=='MetalMan' then
+			-- Ghost object dude
+		else
+			if(object:getPosition().y>self.position.y) and (not self.canjump)  then
+				self.canjump=true
+				if self.animCounter>0 then 
+					self:loadAnimation("running",true)
+				else
+					if self.appliesField==true then
+						self:loadAnimation("field",true)
+					else
+						self:loadAnimation("landing",true)
+					end
+				end	
+			end
 		end
 	end
 end
@@ -177,7 +183,9 @@ function TheMagnet:enableRepulsiveField()
 		self.field.isActive=true
 		self.appliesField=true
 		self.fieldType=FieldTypes.Repulsive
-		self:loadAnimation("launchfield",true)
+		if self.animCounter==0 then
+			self:loadAnimation("launchfield",true)
+		end
 	end
 end
 
@@ -188,8 +196,9 @@ function TheMagnet:enableAttractiveField()
 		self.field.isActive=true
 		self.appliesField=true
 		self.fieldType=FieldTypes.Attractive
-		self:loadAnimation("launchfield",true)
-		Sound.playSound("field")
+		if self.animCounter==0 then
+			self:loadAnimation("launchfield",true)
+		end		
 	end
 end
 
@@ -200,8 +209,9 @@ function TheMagnet:enableStaticField()
 		self.field.isActive=true
 		self.appliesField=true
 		self.fieldType=FieldTypes.Static
-		self:loadAnimation("launchfield",true)
-		Sound.playSound("field")
+		if self.animCounter==0 then
+			self:loadAnimation("launchfield",true)
+		end
 	end
 end
 
@@ -210,9 +220,10 @@ function TheMagnet:enableRotativeLField()
 		self.field= Field.new(FieldTypes.RotativeL,pos)
 		self.field.isActive=true
 		self.appliesField=true
-		self:loadAnimation("launchfield",true)
+		if self.animCounter==0 then
+			self:loadAnimation("launchfield",true)
+		end
 		self.fieldType=FieldTypes.RotativeL
-		Sound.playSound("field")
 	end
 end
 function TheMagnet:enableRotativeRField()
@@ -221,9 +232,10 @@ function TheMagnet:enableRotativeRField()
 		self.field.isActive=true
 		self.appliesField=true
 		self.fieldType=FieldTypes.RotativeR
-		self:loadAnimation("launchfield",true)
-		Sound.playSound("field")
-	end
+		if self.animCounter==0 then
+			self:loadAnimation("launchfield",true)
+		end
+		end
 end
 
 -- In case of a static Metal
@@ -236,7 +248,9 @@ function TheMagnet:rotativeLField(pos,factor)
 		local vrx = vx/n
 		local vry= vy/n
 		self.pc.body:applyLinearImpulse(-vry*TheMagnetConst.Rot.x*factor,vrx*TheMagnetConst.Rot.y*factor)
-		self:loadAnimation("launchfield",true)
+		if self.animCounter==0 then
+			self:loadAnimation("launchfield",true)
+		end
 	end
 end
 
@@ -249,7 +263,9 @@ function TheMagnet:rotativeRField(pos,factor)
 		local vrx = vx/n
 		local vry= vy/n
 		self.pc.body:applyLinearImpulse(vry*TheMagnetConst.Rot.x*factor,-vrx*TheMagnetConst.Rot.y*factor)
-		self:loadAnimation("launchfield",true)
+		if self.animCounter==0 then
+			self:loadAnimation("launchfield",true)
+		end
 	end
 end
 
@@ -264,7 +280,9 @@ function TheMagnet:attractiveField(pos,factor)
 		if(n>(unitWorldSize)) then 
 			self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Att.x*factor,-vry*TheMagnetConst.Att.y*factor)
 		end
-		self:loadAnimation("launchfield",true)
+		if self.animCounter==0 then
+			self:loadAnimation("launchfield",true)
+		end
 	end
 	
 end
@@ -282,7 +300,9 @@ function TheMagnet:repulsiveField(pos,factor)
 		if(n>(unitWorldSize)) then 
 			self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Rep.x*factor,-vry*TheMagnetConst.Rep.y*factor)
 		end
-		self:loadAnimation("launchfield",true)
+		if self.animCounter==0 then
+			self:loadAnimation("launchfield",true)
+		end
 	end
 
 end
@@ -291,35 +311,38 @@ end
 
 function TheMagnet:disableField()
 	if self.alive then
-
-	self.field.isActive=false
-	self.appliesField=false
-	self.fieldType=FieldTypes.None
-	self:loadAnimation("standing",true)
-	self.field.isActive=false
-end
+		self.field.isActive=false
+		self.appliesField=false
+		self.fieldType=FieldTypes.None
+		if self.animCounter>=1 then
+			self:loadAnimation("running",true)
+		else
+			self:loadAnimation("standing",true)
+		end
+		self.field.isActive=false
+	end
 end
 
 function TheMagnet:disableStaticField()
 	if self.alive then
-
-	self.field.isActive=false
-	self.appliesField=false
-	self.fieldType=FieldTypes.None
-	for i,m in ipairs(self.statMetals)  do
-		m:cancelStaticField()
+		self.field.isActive=false
+		self.appliesField=false
+		self.fieldType=FieldTypes.None
+		for i,m in ipairs(self.statMetals)  do
+			m:cancelStaticField()
+		end
+		self.statMetals={}
+		if self.animCounter>=1 then
+			self:loadAnimation("running",true)
+		else
+			self:loadAnimation("standing",true)
+		end
 	end
-	self.statMetals={}
-	self:loadAnimation("standing",true)
 end
-end
-
 -- Method that handles the begining of a movement
 function TheMagnet:startMove(  )
 	if self.alive then
-
 		self.animCounter=self.animCounter+1
-
 		if self.canjump and not self.isStatic then
 			x,y=self.pc.body:getLinearVelocity()
 			if((not self.goF and x>=0) or ( self.goF and x<=0))then
@@ -329,19 +352,23 @@ function TheMagnet:startMove(  )
 			end
 		end
 	end
-end
+	end
 
 -- Method that handles the begining of a movement
 function TheMagnet:stopMove( )
 	if self.alive then
-
 		self.animCounter=self.animCounter-1
 		x,y=self.pc.body:getLinearVelocity()
 		self.pc.body:setLinearVelocity(x/TheMagnetConst.BreakFactor,y/TheMagnetConst.BreakFactor)
 		if self.canjump and not self.isStatic  and self.animCounter==0 then
-			self:loadAnimation("stoprunning",true)	end
+			if self.appliesField then
+				self:loadAnimation("field",true)		
+			else
+				self:loadAnimation("stoprunning",true)
+			end
 		end
 	end
+end
 
 -- Method that loads an animation
 function TheMagnet:loadAnimation(anim, force)

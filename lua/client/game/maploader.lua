@@ -72,9 +72,9 @@ for i,p in pairs(self.gateinterruptors) do
     p:update(dt)
 end    
 
-    -- for i,p in pairs(self.gates) do
-    --     p:update(dt)
-    -- end
+    for i,p in pairs(self.gates) do
+        p:update(dt)
+    end
 
     for i,p in pairs(self.acids) do
         p:update(dt)
@@ -125,11 +125,11 @@ for i,p in pairs(self.gateinterruptors) do
       p:draw()
   end
 end     
- --    for i,p in pairs(self.gates) do
- --        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
- --          p:draw(pos.x-windowW/2,windowH/2-pos.y)
- --        end
- --    end
+    for i,p in pairs(self.gates) do
+    if p.drawed==true then
+          p:draw()
+        end
+    end
 end
 
 
@@ -162,7 +162,9 @@ function MapLoader:handlePacket(maps)
   for i,p in pairs(self.arcs) do
       p.drawed=false
   end 
-
+  for i,p in pairs(self.gates) do
+      p.drawed=false
+  end 
 
   if  maps.metal~=nil then
     for v in string.gmatch(maps.metal, "[^@]+") do
@@ -271,13 +273,31 @@ if  maps.arc~=nil then
             table.insert(t,d)
         end
         if self.arcs[tonumber(t[2])]==nil then
-          print(v)
             self.arcs[tonumber(t[2])]=Arc.new({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
         else
             self.arcs[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[4],tonumber(t[5]))
         end            
     end
-end          
+end
+
+print("On va traiter gate")
+if  maps.gate~=nil then
+    for v in string.gmatch(maps.gate, "[^@]+") do
+      print("Une porte")
+
+        t={}
+        for d in string.gmatch(v, "[^#]+") do
+            table.insert(t,d)
+        end
+        if self.gates[tonumber(t[2])]==nil then
+          print(v)
+            self.gates[tonumber(t[2])]=Gate.new({x=tonumber(t[4]),y=tonumber(t[5])},tonumber(t[6]),tonumber(t[7]),t[8])
+        else
+            self.gates[tonumber(t[2])]:syncronize({x=tonumber(t[4]),y=tonumber(t[5])},t[8])
+        end            
+    end
+end 
+
 end
 function MapLoader:firstPlanDraw(pos)
 
