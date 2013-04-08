@@ -17,7 +17,7 @@ function MusicManager.new()
 	self.srcMainLoop = love.audio.newSource(mainLoopPath, "static")
 	self.secondaryLoop={}
 	self.introIsDone = false
-	self.update=true
+	self.upondate=true
     return self
 end
 
@@ -28,7 +28,7 @@ function MusicManager:addSound(name)
 	sound.isActive=false
 	sound.shouldBeActive=true
 	self.secondaryLoop[name]=sound
-	self.update=false
+	self.upondate=false
 
 end
 
@@ -38,7 +38,7 @@ function MusicManager:removeSound(name)
 		self.secondaryLoop[name].isActive=false
 		self.secondaryLoop[name].shouldBeActive=false
 		self.secondaryLoop[name].src:stop()
-		self.update=false
+		self.upondate=false
 	end
 end
 
@@ -54,17 +54,15 @@ end
 function MusicManager:reset()
 -- TODO
 end
+
+
 function MusicManager:update(dt)
 	if self.isPlaying then
 		if self.srcIntro:isStopped()  and not self.introIsDone then
 			self.introIsDone =true
-			if self.isStopped~=true then
-				if self.srcLoop:isStopped() then
-					self.srcMainLoop:setLooping(true)
-					self.srcMainLoop:play()
-					self.srcMainLoop:setVolume(MUSIC_VOL)
-				end
-			end
+			self.srcMainLoop:setLooping(true)
+			self.srcMainLoop:play()
+			self.srcMainLoop:setVolume(MUSIC_VOL)
 		end
 	end
 end
