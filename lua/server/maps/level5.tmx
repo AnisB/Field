@@ -20,7 +20,7 @@
  </tileset>
  <layer name="Calque de Tile 1" width="60" height="20">
   <data encoding="base64" compression="zlib">
-   eJztVosKgCAM1F7//8kxKJBI3cs50YNRSN3t8tRiCOGcpOJTWFCerb2H5eJq5rgs/Eqw/Mq4ll8bbSz/KH45fY7ql8pb4vfkNzaomqYEHL/We5YHv5aee/pNcQTav9wl6FELPfJJhQe/0rndiT3mxtP+S9fanpgCvHGz2BJ/vcfKvUWe0yxofjfs/H7HPJ9Hb7a0dCk8Pc4ibW0sB2W9t4CWPrwLmdkmKVgbN/uzAtI=
+   eJztVosKgCAMnL3+/5NjUDCidNO5TexgFFK7uzy1BAD7JJWu4kLyrBY0OX+/dtwenL9fO25u/1H81ugc1a+0b65/JL+pQ5U4W1Dj13rPiuDX0rOnX4oNZP9yR4NGLXjkU4oIflvndhVq/Bqn+nPX0p5Igd5qs9gTb9pT4d4izzQLmt+NO7/Pscjn0Z0tLV5JH4+zSJub20Oy3ntAix/fxcwskxSujRPY7wLQ
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="60" height="20">
@@ -47,7 +47,6 @@
   <object x="2496" y="1024" width="128" height="64"/>
   <object x="896" y="704" width="832" height="64"/>
   <object x="768" y="576" width="64" height="64"/>
-  <object x="832" y="1024" width="1664" height="64"/>
   <object x="960" y="512" width="1344" height="64"/>
   <object x="512" y="896" width="128" height="64"/>
   <object x="1408" y="384" width="64" height="64"/>
