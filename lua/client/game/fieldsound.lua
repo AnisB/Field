@@ -19,9 +19,8 @@ function FieldSound.new(soundName)
 	elseif soundName == "Repulsive" then name = "rep"
 	elseif soundName == "Static" then name = "stat"
 	end
-	-- init
-	local path = FieldSound.SOUND_ROOT..name..'.wav'
-	local pathLoop = FieldSound.SOUND_ROOT..name..FieldSound.SOUND_LOOP..'.wav'
+	local path = FieldSound.SOUND_ROOT..name..'.ogg'
+	local pathLoop = FieldSound.SOUND_ROOT..name..FieldSound.SOUND_LOOP..'.ogg'
 	self.src = love.audio.newSource(path, "static")
 	self.srcLoop = love.audio.newSource(pathLoop, "static")
 	self.isFadingIn = false
@@ -37,7 +36,7 @@ function FieldSound:play()
 	self.isFadingIn = true
 	self.isPlaying = true
 	self.src:play()
-	self.src:setLooping(false)
+	self.src:setLooping(true)
 end
 
 function FieldSound:update(dt)
@@ -62,10 +61,10 @@ function FieldSound:update(dt)
 				if self.srcLoop:isStopped() then
 					self.srcLoop:setLooping(true)
 					self.srcLoop:play()
+					self.stop()
 				end
 			end
 		end
-		print(self.currentVolume)
 		self.src:setVolume(self.currentVolume)
 		self.srcLoop:setVolume(self.currentVolume)
 	end

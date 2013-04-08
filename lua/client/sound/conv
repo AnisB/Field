@@ -1,0 +1,4 @@
+oggenc rot.wav -q 10
+oggenc att.wav -q 10
+oggenc rep.wav -q 10
+oggenc stat.wav -q 10
