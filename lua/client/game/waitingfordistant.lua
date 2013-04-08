@@ -26,6 +26,11 @@ end
 function WaitingForDistant:keyReleased(key, unicode)
 end
 
+function WaitingForDistant:joystickPressed(joystick, button)
+end
+
+function WaitingForDistant:joystickReleased(joystick, button)
+end
 
 function WaitingForDistant:update(dt)
 	self.timer= self.timer-dt

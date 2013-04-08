@@ -57,6 +57,14 @@ function GameStateManager:keyReleased(key, unicode)
 	self.state[self.currentState]:keyReleased(key, unicode)
 end
 
+function GameStateManager:joystickPressed(joystick, button)
+	self.state[self.currentState]:joystickPressed(joystick, button)
+end
+
+function GameStateManager:joystickReleased(joystick, button)
+	self.state[self.currentState]:joystickReleased(joystick, button)
+end
+
 function GameStateManager:update(dt)
 	self.state[self.currentState]:update(dt)
 end

@@ -25,6 +25,11 @@ end
 function FirstEnter:keyReleased(key, unicode)
 end
 
+function FirstEnter:joystickPressed(joystick, button)
+end
+
+function FirstEnter:joystickReleased(joystick, button)
+end
 
 function FirstEnter:update(dt)
 	self.timer= self.timer-dt

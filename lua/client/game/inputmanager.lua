@@ -53,4 +53,10 @@ function InputManager:keyPressed(akey, unicode)
       end
     end
   end
+  
+function InputManager:joystickPressed(joystick, button)
+end
+
+function InputManager:joystickReleased(joystick, button)
+end
 

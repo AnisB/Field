@@ -82,7 +82,6 @@ end
     function Gameplay:mouseReleased(x, y, button)
     end
     
-    
     function Gameplay:keyPressed(inputKey, unicode)
         self.inputManager:keyPressed(inputKey, unicode)
 		-- serveur:send({type="input", pck={character="metalMan", key=inputKey, state=true}})
@@ -95,6 +94,13 @@ end
 		-- serveur:send({type="input", pck={character="metalMan", key=inputKey, state=false}})
     end
     
+	function Gameplay:joystickPressed(joystick, button)
+		self.inputManager:joystickPressed(joystick, button)
+	end
+
+	function Gameplay:joystickReleased(joystick, button)
+		self.inputManager:joystickReleased(joystick, button)
+	end
     
     function Gameplay:update(dt)
         self.theMagnet:update(dt)

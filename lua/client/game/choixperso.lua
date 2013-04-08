@@ -26,6 +26,13 @@ end
 function ChoixPerso:mouseReleased(x, y, button) end
 function ChoixPerso:keyPressed(key, unicode) end
 function ChoixPerso:keyReleased(key, unicode) end
+
+function ChoixPerso:joystickPressed(joystick, button)
+end
+
+function ChoixPerso:joystickReleased(joystick, button)
+end
+
 function ChoixPerso:update(dt) end
 
 function ChoixPerso:onMessage(msg)

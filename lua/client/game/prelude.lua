@@ -25,6 +25,11 @@ end
 function Prelude:keyReleased(key, unicode)
 end
 
+function Prelude:joystickPressed(joystick, button)
+end
+
+function Prelude:joystickReleased(joystick, button)
+end
 
 function Prelude:update(dt)
 	self.timer= self.timer-dt

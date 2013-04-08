@@ -25,6 +25,11 @@ end
 function Storyline:keyReleased(key, unicode)
 end
 
+function Storyline:joystickPressed(joystick, button)
+end
+
+function Storyline:joystickReleased(joystick, button)
+end
 
 function Storyline:update(dt)
 	self.timer= self.timer-dt

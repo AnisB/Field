@@ -64,6 +64,12 @@ end
 
 function ConnectToServer:keyReleased(key, unicode) end
 
+function ConnectToServer:joystickPressed(joystick, button)
+end
+
+function ConnectToServer:joystickReleased(joystick, button)
+end
+
 function ConnectToServer:update(dt)
 	self.timer = self.timer + dt
 end

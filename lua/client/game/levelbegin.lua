@@ -25,6 +25,11 @@ end
 function LevelBegin:keyReleased(key, unicode)
 end
 
+function LevelBegin:joystickPressed(joystick, button)
+end
+
+function LevelBegin:joystickReleased(joystick, button)
+end
 
 function LevelBegin:update(dt)
 	self.timer= self.timer-dt

@@ -21,6 +21,13 @@ end
 function ChoixTypeJeu:mouseReleased(x, y, button) end
 function ChoixTypeJeu:keyPressed(key, unicode) end
 function ChoixTypeJeu:keyReleased(key, unicode) end
+
+function ChoixTypeJeu:joystickPressed(joystick, button)
+end
+
+function ChoixTypeJeu:joystickReleased(joystick, button)
+end
+
 function ChoixTypeJeu:update(dt) end
 
 function ChoixTypeJeu:onMessage(msg)

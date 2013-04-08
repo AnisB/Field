@@ -29,6 +29,13 @@ function ChoixNiveau:keyPressed(key, unicode)
 end
 
 function ChoixNiveau:keyReleased(key, unicode) end
+
+function ChoixNiveau:joystickPressed(joystick, button)
+end
+
+function ChoixNiveau:joystickReleased(joystick, button)
+end
+
 function ChoixNiveau:update(dt) end
 
 function ChoixNiveau:onMessage(msg)

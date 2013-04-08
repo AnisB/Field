@@ -3,7 +3,7 @@
 require("game.field")
 require("game.attfield")
 require("game.animgene")
-
+require("game.fieldsound")
 
 Generator = {}
 Generator.__index = Generator
@@ -35,6 +35,7 @@ function Generator.new(pos,typeField,anim,id)
 				self:loadAnimation("off",true)
 				self.anim:syncronize(anim,id)
 				self.drawed=true
+				self.fieldSound = FieldSound.new(self.typeField)
 				return self
 			end
 
@@ -54,7 +55,9 @@ function Generator.new(pos,typeField,anim,id)
 				if not self.appliesField and applies=="true" then
 					self.appliesField=true
 					self.field.isActive=true
+					self.fieldSound:play()
 					elseif self.appliesField and applies=="false" then
+						self.fieldSound:stop()
 						self.appliesField=false
 						self.field.isActive=false
 					end

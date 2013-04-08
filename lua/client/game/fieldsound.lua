@@ -27,47 +27,45 @@ function FieldSound.new(soundName)
 	self.isFadingOut = false
 	self.currentVolume = 0
 	self.isDone = false
-	self.isPlaying = false
 	self.isStopped = false
     return self
 end
 
 function FieldSound:play()
+	self.isDone = false
 	self.isFadingIn = true
-	self.isPlaying = true
+	self.isStopped = false
 	self.src:play()
 	self.src:setLooping(true)
 end
 
 function FieldSound:update(dt)
-	if self.isPlaying then
-		if self.isFadingIn then
-			self.currentVolume = self.currentVolume + ((dt*FIELD_SOUND_VOLUME)/FADING_DURATION)
-			if self.currentVolume >= FIELD_SOUND_VOLUME then
-				self.currentVolume = FIELD_SOUND_VOLUME
-				self.isFadingIn = false
-			end
-		elseif self.isFadingOut then
-			self.currentVolume = self.currentVolume - ((dt*FIELD_SOUND_VOLUME)/FADING_DURATION)
-			if self.currentVolume <= 0 then
-				self.srcLoop:setLooping(false)
-				self.currentVolume = 0
-				self.isFadingOut = false
-				self.isDone = true
-			end
+	if self.isFadingIn then
+		self.currentVolume = self.currentVolume + ((dt*FIELD_SOUND_VOLUME)/FADING_DURATION)
+		if self.currentVolume >= FIELD_SOUND_VOLUME then
+			self.currentVolume = FIELD_SOUND_VOLUME
+			self.isFadingIn = false
 		end
-		if self.src:isStopped() then
-			if self.isStopped~=true then
-				if self.srcLoop:isStopped() then
-					self.srcLoop:setLooping(true)
-					self.srcLoop:play()
-					self:stop()
-				end
-			end
+	elseif self.isFadingOut then
+		self.currentVolume = self.currentVolume - ((dt*FIELD_SOUND_VOLUME)/FADING_DURATION)
+		if self.currentVolume <= 0 then
+			self.srcLoop:setLooping(false)
+			self.currentVolume = 0
+			self.isFadingOut = false
+			self.isDone = true
 		end
-		self.src:setVolume(self.currentVolume)
-		self.srcLoop:setVolume(self.currentVolume)
 	end
+	if self.src:isStopped() then
+		if self.isStopped~=true then
+			if self.srcLoop:isStopped() then
+				self.srcLoop:setLooping(true)
+				self.srcLoop:play()
+				self:stop()
+			end
+		end
+	end
+	self.src:setVolume(self.currentVolume)
+	self.srcLoop:setVolume(self.currentVolume)
 end
 
 function FieldSound:stop()
