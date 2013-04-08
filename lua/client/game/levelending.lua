@@ -35,6 +35,11 @@ end
 function LevelEnding:keyReleased(key, unicode)
 end
 
+function LevelEnding:joystickPressed(joystick, button)
+end
+
+function LevelEnding:joystickReleased(joystick, button)
+end
 
 function LevelEnding:update(dt)
 	
