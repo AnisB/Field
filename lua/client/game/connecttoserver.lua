@@ -8,8 +8,10 @@ function ConnectToServer:new()
     local self = {}
     setmetatable(self, ConnectToServer)
     self.timer=0
-    --self.police = love.graphics.newFont("/home/fred/trucs/anyfont.ttf", 20)
-    --love.graphics.setFont(self.police)
+    self.font = love.graphics.newFont(FontDirectory .. "font.ttf", 30)
+    love.graphics.setFont(self.font)
+    self.bg = love.graphics.newImage(ImgDirectory .. "fondgui.png")
+    self.handcursor = love.graphics.newImage(ImgDirectory .. "handcursor.png")
     self.ipaddr = "127.0.0.1"
     self.pseudo = "luc"
     self.focused = "ipaddr"
@@ -17,12 +19,14 @@ function ConnectToServer:new()
     return self
 end
 
-
 function ConnectToServer:mousePressed(x, y, button)
-	if x > 200 and x < 250 and y > 200 and y < 250 then
+	print(x, y)
+	if x > 50 and x < 650 and y > 100 and y < 150 then
 		self.focused = "ipaddr"
-	else
+	elseif x > 50 and x < 650 and y > 200 and y < 250 then
 		self.focused = "pseudo"
+	elseif x > 198 and x < 198+100 and y > 600 and y < 600+50 then
+		self:keyPressed("", 13)
 	end
 end
 
@@ -100,9 +104,38 @@ function ConnectToServer:onMessage(msg)
 end
 
 function ConnectToServer:draw()
-	love.graphics.print("Entrez l'adresse IP du serveur si vous y arrivez :", 100, 100)
-	love.graphics.print(self.ipaddr, 200, 200)
-	love.graphics.print(self.pseudo, 200, 300)
+	local hover = false
+	x, y = love.mouse.getPosition()
+	if (x > 50 and x < 650 and y > 100 and y < 150) or
+	   (x > 50 and x < 650 and y > 200 and y < 250) then
+		hover = true
+	end
+
+	-- background :
+	love.graphics.draw(self.bg, 0, 0)
+
+	-- rectangles :
+	if self.focused == "ipaddr" then
+		love.graphics.setColor(150, 150, 150, 255)
+	else
+		love.graphics.setColor(50, 50, 50, 255)
+	end
+	love.graphics.rectangle("fill", 370, 105, 250, 35)
+
+	if self.focused == "pseudo" then
+		love.graphics.setColor(150, 150, 150, 255)
+	else
+		love.graphics.setColor(50, 50, 50, 255)
+	end
+	love.graphics.rectangle("fill", 370, 205, 250, 35)
+	
+
+	-- text :
+	love.graphics.setColor(255, 255, 255, 255)
+	love.graphics.print("IP du serveur :", 100, 100)
+	love.graphics.print(self.ipaddr, 380, 100)
+	love.graphics.print("Pseudo :", 100, 200)
+	love.graphics.print(self.pseudo, 380, 200)
 	if self.waiting then
 		love.graphics.setColor(255, 0, 0, 255)
 		local nb_dots = self.timer % 3
@@ -113,6 +146,25 @@ function ConnectToServer:draw()
 		end
 		love.graphics.print(wait, 400, 400)
 		love.graphics.setColor(255, 255, 255, 255)
+	end
+
+	-- bouton play :
+	if x > 198 and x < 198+100 and y > 600 and y < 600+50 then
+		love.graphics.setColor(150, 150, 150, 255)
+		hover = true
+	else
+		love.graphics.setColor(50, 50, 50, 255)
+	end
+	love.graphics.rectangle("fill", 198, 600, 100, 50)
+	love.graphics.setColor(255, 255, 255, 255)
+	love.graphics.print("PLAY", 198+10, 600)
+
+	-- cursor :
+	if hover then
+		love.mouse.setVisible(false)
+		love.graphics.draw(self.handcursor, x-17, y-17)
+	else
+		love.mouse.setVisible(true)
 	end
 end
 

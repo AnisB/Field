@@ -15,6 +15,7 @@ table2 = require("lubeboth.table2")
 
 SourceDirectory="./"
 ImgDirectory="img/"
+FontDirectory="font/"
 gameStateManager = nil
 
 gamePaused = false
