@@ -49,7 +49,7 @@ function TheMagnet.new(camera,pos)
 	self.statMetals={}
 
 	-- Sound
-	self.mapSounds={}
+	self.soundPlaying=nil
 
 	self.alive=true
 
@@ -81,11 +81,9 @@ function TheMagnet:handlePacket( string )
 	end
 	if not self.appliesField and t[7]=="true" then
 		--lancement du champ
-		local newSound = FieldSound.new(t[8])
-		table.insert(self.mapSounds, newSound)
-		newSound:play()
+		self.soundPlaying = FieldSound.new(t[8])
+		self.soundPlaying:play()
 		self.fieldType=t[8]
-		newSound:play()
 		self.appliesField=true
 		if t[8]~="Attractive" then
 			self.field= Field.new(t[8])
@@ -93,32 +91,28 @@ function TheMagnet:handlePacket( string )
 			self.field= AttField.new(t[8])
 		end
 		self.field.isActive=true
-		elseif self.appliesField and t[7]=="false" then
-			-- fermeture de champ, on fadeout les sons lancés
-			for i,k in pairs(self.mapSounds) do
-				self.mapSounds[i]:stop()
-			end
-			-- self.fieldType="None"
-			self.appliesField=false
-			self.field.isActive=false
-			elseif 	self.appliesField and t[7]=="true" then				
-				if self.fieldType==t[8] then
-				else
-					-- mauvais champ lancé donc nouveau champ lancé
-					for i,k in pairs(self.mapSounds) do --on fadeout les sons lancés
-						self.mapSounds[i]:stop()
-					end
-					local newSound = FieldSound.new(t[8])
-					table.insert(self.mapSounds, newSound)
-					newSound:play()
-					if t[8]~="Attractive" then
-						self.field= Field.new(t[8])
-					else
-						self.field= AttField.new(t[8])
-					end			
-				end
-			end
+	elseif self.appliesField and t[7]=="false" then
+		-- fermeture de champ, on fadeout les sons lancés
+		self.soundPlaying:stop()
+		-- self.fieldType="None"
+		self.appliesField=false
+		self.field.isActive=false
+	elseif 	self.appliesField and t[7]=="true" then				
+		if self.fieldType==t[8] then
+		else
+			-- mauvais champ lancé donc nouveau champ lancé
+			self.soundPlaying:immediateStop()
+			self.soundPlaying=nil
+			self.soundPlaying = FieldSound.new(t[8])
+			self.soundPlaying:play()
+			if t[8]~="Attractive" then
+				self.field= Field.new(t[8])
+			else
+				self.field= AttField.new(t[8])
+			end			
 		end
+	end
+end
 
 
 -- Method that loads an animation
@@ -131,12 +125,10 @@ end
 function TheMagnet:update(seconds)
 	self.anim:update(seconds)
 	self.field:update(seconds)
-	for i,k in pairs(self.mapSounds) do
-		local ok = self.mapSounds[i]:done()
-		if ok then 
-			self.mapSounds[i] = nil
-		else
-			self.mapSounds[i]:update(seconds)
+	if self.soundPlaying then
+		self.soundPlaying:update(seconds)
+		if self.soundPlaying:done() then
+			self.soundPlaying=nil
 		end
 	end
 end
