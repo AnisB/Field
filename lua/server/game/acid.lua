@@ -57,7 +57,7 @@ end
 function Acid:collideWith( object, collision )
 	if object.type=='MetalMan' or object.type =='TheMagnet' then
 		self.isTouched=true
-		object:die()
+		-- object:die()
 	end
 end
 

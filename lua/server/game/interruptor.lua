@@ -20,7 +20,8 @@ function Interruptor.new(pos,type,generatorID,magnetManager,sprite,netid)
 	self.pc.fixture:setUserData(self)
 	self.type='Interruptor'
 	self.on= false
-	self.canBeEnable=0
+	self.canBeEnableMM=0
+	self.canBeEnableTM=0
 	self.magnetManager=magnetManager
 	self.generatorID= generatorID
 	self.anim = AnimInter.new('inter')
@@ -45,18 +46,33 @@ function Interruptor:getPosition()
 	return self.position
 end
 
-function Interruptor:handleTry()
-	if self.canBeEnable>0 then
-		self.on= not self.on
-		if self.on then
-			self.magnetManager:enableG(self.generatorID)
-			self:loadAnimation("launching",true)
+function Interruptor:handleTry(tryer)
 
-		else
-			self.magnetManager:disableG(self.generatorID)
-			self:loadAnimation("shutdown",true)
+	if tryer=='MetalMan' then
+		if self.canBeEnableMM>0 then
+			self.on= not self.on
+			if self.on then
+				self.magnetManager:enableG(self.generatorID)
+				self:loadAnimation("launching",true)
+
+			else
+				self.magnetManager:disableG(self.generatorID)
+				self:loadAnimation("shutdown",true)
 
 
+			end
+		end
+	elseif tryer=='TheMagnet' then
+		if self.canBeEnableTM>0 then
+			self.on= not self.on
+			if self.on then
+				self.magnetManager:enableG(self.generatorID)
+				self:loadAnimation("launching",true)
+
+			else
+				self.magnetManager:disableG(self.generatorID)
+				self:loadAnimation("shutdown",true)
+			end
 		end
 	end
 end
@@ -69,14 +85,20 @@ end
 
 
 function Interruptor:collideWith( object, collision )
-	if object.type=='MetalMan' or object.type =='TheMagnet' then
-		self.canBeEnable =self.canBeEnable+1
+	if object.type=='MetalMan' then
+		self.canBeEnableMM =self.canBeEnableMM+1
+	end
+	if object.type =='TheMagnet' then
+		self.canBeEnableTM =self.canBeEnableTM+1
 	end
 end
 
 function Interruptor:unCollideWith( object, collision )
-	if object.type=='MetalMan' or object.type =='TheMagnet' then
-		self.canBeEnable =self.canBeEnable-1
+	if object.type=='MetalMan' then
+		self.canBeEnableMM =self.canBeEnableMM-1
+	end
+	if object.type =='TheMagnet' then
+		self.canBeEnableTM =self.canBeEnableTM-1
 	end
 end
 

@@ -58,7 +58,7 @@ end
 
 
 -- This methods handles the object's state change
-function TheMagnet:setState( state )
+function TheMagnet:setState( state )d
 	self.currentState=state
 end
 
@@ -110,10 +110,10 @@ function TheMagnet:handlePacket( string )
 			else
 				self.field= AttField.new(t[8])
 			end			
+			self.field.isActive=true
 		end
 	end
 end
-
 
 -- Method that loads an animation
 function TheMagnet:loadAnimation(anim, force)
