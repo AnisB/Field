@@ -88,3 +88,16 @@ end
 function FieldSound:done()
 	return self.isDone
 end
+
+function FieldSound:immediateStop() --should be called before deleting the object
+	self.srcLoop:setLooping(false)
+	self.src:setVolume(0)
+	self.srcLoop:setVolume(0)
+	self.isStopped=true
+	self.isDone=true
+	self.isPlaying=false
+	self.src:stop()
+	self.srcLoop:stop()
+	self.src=nil
+	self.srcLoop=nil
+-end
