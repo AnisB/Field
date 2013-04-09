@@ -4,7 +4,7 @@ MusicManager.__index = MusicManager
 MusicManager.SOUND_ROOT = "sound/"
 MusicManager.SOUND_LOOP = ""--"loop"
 
-MUSIC_VOL = 0
+MUSIC_VOL = 1
 
 
 function MusicManager.new()
