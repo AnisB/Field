@@ -5,7 +5,7 @@ FieldSound.SOUND_ROOT = "sound/"
 FieldSound.SOUND_LOOP = ""--"loop"
 
 FADING_DURATION = 1 --durée des fading in et out
-FIELD_SOUND_VOLUME = 0.5
+FIELD_SOUND_VOLUME = 1
 
 
 
@@ -41,7 +41,7 @@ function FieldSound:play()
 	self.isFadingIn = true
 	self.isStopped = false
 	self.src:play()
-	self.src:setLooping(true)
+	self.src:setLooping(false)
 end
 
 function FieldSound:update(dt)
@@ -58,6 +58,7 @@ function FieldSound:update(dt)
 			self.currentVolume = 0
 			self.isFadingOut = false
 			self.isDone = true
+			self.isStopped = true
 		end
 	end
 	if self.src:isStopped() then
@@ -65,7 +66,6 @@ function FieldSound:update(dt)
 			if self.srcLoop:isStopped() then
 				self.srcLoop:setLooping(true)
 				self.srcLoop:play()
-				self:stop()
 			end
 		end
 	end
@@ -100,4 +100,4 @@ function FieldSound:immediateStop() --should be called before deleting the objec
 	self.srcLoop:stop()
 	self.src=nil
 	self.srcLoop=nil
--end
+end
