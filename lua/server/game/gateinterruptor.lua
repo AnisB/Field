@@ -29,7 +29,8 @@ function GateInterruptor.new(pos,type,gateID,mapLoader,enabled,netid)
 		self:loadAnimation("off",true)
 
 	end
-	self.canBeEnable=0
+	self.canBeEnableTM=0
+	self.canBeEnableMM=0
 	self.mapLoader=mapLoader
 	self.gateID= gateID
 	self.w=unitWorldSize/2
@@ -54,25 +55,38 @@ end
 function GateInterruptor:getPosition()
 	return self.position
 end
+function GateInterruptor:handleTry(tryer)
 
-function GateInterruptor:handleTry()
-	if self.canBeEnable>0 then
-		self.on= not self.on
-		if self.on then
-			self.mapLoader:openG(self.gateID)
-			self:loadAnimation("launching",true)
+	if tryer=='MetalMan' then
+		if self.canBeEnableMM>0 then
+			self.on= not self.on
+			if self.on then
+				self.magnetManager:enableG(self.gateID)
+				self:loadAnimation("launching",true)
 
-		else
-			self:loadAnimation("shutdown",true)
-			self.mapLoader:closeG(self.gateID)
+			else
+				self.magnetManager:disableG(self.gateID)
+				self:loadAnimation("shutdown",true)
 
+
+			end
+		end
+	elseif tryer=='TheMagnet' then
+		if self.canBeEnableTM>0 then
+			self.on= not self.on
+			if self.on then
+				self.mapLoader:openG(self.gateID)
+				self:loadAnimation("launching",true)
+
+			else
+				self.mapLoader:closeG(self.gateID)
+				self:loadAnimation("shutdown",true)
+			end
 		end
 	end
 end
 
-function GateInterruptor:loadAnimation(anim, force)
-		self.anim:load(anim, force)
-end
+
 
 function GateInterruptor:preSolve(b,coll)
 end
@@ -80,15 +94,20 @@ end
 
 
 function GateInterruptor:collideWith( object, collision )
-	if object.type=='MetalMan' or object.type =='TheMagnet' then
-		self.canBeEnable =self.canBeEnable+1
-		collision:resetRestitution( )
+	if object.type=='MetalMan' then
+		self.canBeEnableMM =self.canBeEnableMM+1
+	end
+	if object.type =='TheMagnet' then
+		self.canBeEnableTM =self.canBeEnableTM+1
 	end
 end
 
 function GateInterruptor:unCollideWith( object, collision )
-	if object.type=='MetalMan' or object.type =='TheMagnet' then
-		self.canBeEnable =self.canBeEnable-1
+	if object.type=='MetalMan' then
+		self.canBeEnableMM =self.canBeEnableMM-1
+	end
+	if object.type =='TheMagnet' then
+		self.canBeEnableTM =self.canBeEnableTM-1
 	end
 end
 
@@ -117,6 +136,12 @@ function GateInterruptor:update(seconds)
 	x,y =self.pc.body:getPosition()
 	self.position.x=x
 	self.position.y=y
+end
+
+
+
+function GateInterruptor:loadAnimation(anim, force)
+		self.anim:load(anim, force)
 end
 
 function GateInterruptor:draw(x,y)

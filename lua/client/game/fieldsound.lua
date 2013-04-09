@@ -8,6 +8,8 @@ FADING_DURATION = 1 --durée des fading in et out
 FIELD_SOUND_VOLUME = 0.5
 
 
+
+
 function FieldSound.new(soundName)
     local self = {}
     setmetatable(self, FieldSound)

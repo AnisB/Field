@@ -14,7 +14,7 @@ function ChoixTypeJeu:mousePressed(x, y, button)
 	if x > 90 and x < 90+150 and y > 105 and y < 105+35 then
 		serveur:send({type="choixTypeJeu", typeJeu="arcade"})
 	elseif x > 90 and x < 90+150 and y > 205 and y < 205+35 then
-		serveur:send({type="choixTypeJeu", typeJeu="histoire"})
+		--serveur:send({type="choixTypeJeu", typeJeu="histoire"})
 	end
 end
 

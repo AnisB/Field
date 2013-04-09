@@ -411,11 +411,11 @@ function MapLoader:closeG(id)
     end
 end
 
-function MapLoader:handleTry()
+function MapLoader:handleTry(tryer)
     for i,p in pairs(self.interruptors) do
-        p:handleTry()
+        p:handleTry(tryer)
     end    
     for i,p in pairs(self.gateinterruptors) do
-        p:handleTry()
+        p:handleTry(tryer)
     end    
 end

@@ -104,6 +104,7 @@ function TheMagnet:handlePacket( string )
 			elseif 	self.appliesField and t[7]=="true" then				
 				if self.fieldType==t[8] then
 				else
+					self.fieldType=t[8]
 					-- mauvais champ lancé donc nouveau champ lancé
 					for i,k in pairs(self.mapSounds) do --on fadeout les sons lancés
 						self.mapSounds[i]:stop()
@@ -115,7 +116,9 @@ function TheMagnet:handlePacket( string )
 						self.field= Field.new(t[8])
 					else
 						self.field= AttField.new(t[8])
-					end			
+					end
+					self.field.isActive=true
+					print("Changed field")							
 				end
 			end
 		end

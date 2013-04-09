@@ -145,7 +145,10 @@ function Gameplay.new(mapFile,continuous)
         end
 
         if key =="e" then
-            self.mapLoader:handleTry()
+            self.mapLoader:handleTry('MetalMan')
+        end
+        if key =="f" then
+            self.mapLoader:handleTry('TheMagnet')
         end
 
         if key =="y" then
