@@ -77,7 +77,10 @@ function TheMagnet.new(camera,pos)
 		if self.alive then
 			self:disableField()
 			self:disableStaticField()
-			self:loadAnimation("mortelec",true)	
+			if(type=="acid") then
+			else
+				self:loadAnimation("mortelec",true)	
+			end
 			self.alive=false
 			
 		end

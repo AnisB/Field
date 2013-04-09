@@ -43,9 +43,9 @@ end
 
 function LevelFailed:draw()
 	if self.continuous then
-		love.graphics.print("On est à la fin du niveau, appuitey sur entrée pour le niveau suivant", 200, 200)
+		love.graphics.print("On est à la fin du niveau,\n appuiyez sur entrée pour le niveau suivant", 200, 200)
 	else
-		love.graphics.print("On est à la fin du niveau, appuitey sur entrée pour revenir au menu", 200, 200)
+		love.graphics.print("On est à la fin du niveau,\n appuiyez sur entrée pour revenir au menu", 200, 200)
 	end
 end
 

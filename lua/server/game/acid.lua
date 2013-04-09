@@ -60,10 +60,9 @@ function Acid:collideWith( object, collision )
 		if self.acidType==Acid.Types.hg  or self.acidType==Acid.Types.hm or self.acidType==Acid.Types.hd then
 			self.splash:load("kill",true)
 			pos=object:getPosition()
-			print(pos.x,pos.y)			
 			self.splashpos={x=pos.x,y=pos.y}
 		end
-		-- object:die()
+		object:die("acid")
 	end
 end
 
@@ -101,7 +100,7 @@ end
 
 function Acid:send(x,y)
 	if self.acidType==Acid.Types.hg  or self.acidType==Acid.Types.hm or self.acidType==Acid.Types.hd then
-		return ("@acid".."#"..self.netid.."#"..self.acidType.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y).."#".."true".."#"..self.splash:getImgInfo()[1].."#"..self.splash:getImgInfo()[2].."#"..math.floor(self.splashpos.x-x-unitWorldSize/2).."#"..math.floor(self.splashpos.y+y-unitWorldSize+self.dec))
+		return ("@acid".."#"..self.netid.."#"..self.acidType.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y).."#".."true".."#"..self.splash:getImgInfo()[1].."#"..self.splash:getImgInfo()[2].."#"..math.floor(self.splashpos.x-x-unitWorldSize/2).."#"..math.floor(self.splashpos.y+y-unitWorldSize+self.dec+3))
 	else
 		return ("@acid".."#"..self.netid.."#"..self.acidType.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y).."#".."false")
 	end

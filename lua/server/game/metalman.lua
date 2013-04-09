@@ -51,10 +51,13 @@ function MetalMan:reset()
 end
 
 
-function MetalMan:die()
+function MetalMan:die(type)
 	if self.alive then
 		self.alive=false
-		self:loadAnimation("mortelec",true)	
+		if(type=="acid") then
+		else
+			self:loadAnimation("mortelec",true)	
+		end
 	end
 end
 

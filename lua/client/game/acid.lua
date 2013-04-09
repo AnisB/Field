@@ -67,9 +67,9 @@ function Acid:update(seconds)
 end
 
 function Acid:draw(x,y)
-	love.graphics.draw(self.anim:getSprite(), self.position.x, self.position.y)
 	if self.acidType==Acid.Types.hg  or self.acidType==Acid.Types.hm or self.acidType==Acid.Types.hd then
 		love.graphics.draw(self.splash:getSprite(), self.splashpos.x, self.splashpos.y)
-	end
+	end	
+	love.graphics.draw(self.anim:getSprite(), self.position.x, self.position.y)
 end
 

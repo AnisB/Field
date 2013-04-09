@@ -29,7 +29,7 @@ function Gameplay.new(mapFile)
     self.theMagnet = TheMagnet.new()
 	self.keyPacket={}
 
-    self.camera=Camera.new(0,0)
+    self.camera=Camera.new(-1000,-1000)
     self.inputManager = InputManager.new()
     return self
 end
@@ -45,7 +45,7 @@ function Gameplay:reset()
     self.metalMan = MetalMan.new()
     self.theMagnet = TheMagnet.new()
     self.keyPacket={}
-    self.camera=Camera.new(0,0)
+    self.camera=Camera.new(-1000,-1000)
 end
 
     function Gameplay:handlePacket(packet)
