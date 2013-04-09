@@ -58,7 +58,7 @@ end
 
 
 -- This methods handles the object's state change
-function TheMagnet:setState( state )d
+function TheMagnet:setState( state )
 	self.currentState=state
 end
 
