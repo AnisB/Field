@@ -23,99 +23,96 @@ function Generator.new(pos,type,typeField,ID,netid)
 
 	if typeField=="Repulsive" then
 		self.typeField=FieldTypes.Repulsive
-		elseif typeField=="Attractive" then
-			self.typeField=FieldTypes.Attractive
-			elseif typeField=="RotativeR" then
-				self.typeField=FieldTypes.RotativeR
-				elseif typeField=="RotativeL" then
-					self.typeField=FieldTypes.RotativeL
-				end
+	elseif typeField=="Attractive" then
+		self.typeField=FieldTypes.Attractive
+	elseif typeField=="RotativeR" then
+		self.typeField=FieldTypes.RotativeR
+	elseif typeField=="RotativeL" then
+		self.typeField=FieldTypes.RotativeL
+	end
 
-				self.appliesField=false
-				self.fieldType=FieldTypes.None
-				self.statMetals={}
-				self.fieldRadius=4*unitWorldSize
-				self.strenght=5*unitWorldSize
-				self.on= false
-				if self.typeField==FieldTypes.Attractive then
-					self.field=AttField.new({x=0,y=0})
-				else
-					self.field=Field.new(self.typeField,{x=0,y=0})
-				end
-				self.w=unitWorldSize
-				self.h=unitWorldSize
+	self.appliesField=false
+	self.fieldType=FieldTypes.None
+	self.statMetals={}
+	self.fieldRadius=4*unitWorldSize
+	self.strenght=5*unitWorldSize
+	self.on= false
+	if self.typeField==FieldTypes.Attractive then
+		self.field=AttField.new({x=0,y=0})
+	else
+		self.field=Field.new(self.typeField,{x=0,y=0})
+	end
+	self.w=unitWorldSize
+	self.h=unitWorldSize
 
-				self.anim = AnimGene.new('gene')
-				self:loadAnimation("off",true)
+	self.anim = AnimGene.new('gene')
+	self:loadAnimation("off",true)
 
-				return self
-			end
+	return self
+end
 
-			function Generator:isAppliable(pos)
-				local ax =pos.x-self.position.x
-				local ay =pos.y-self.position.y
-				if math.abs(math.sqrt(ax*ax+ay*ay))<=self.fieldRadius then
-					return true
-				else
-					return false
-				end
-			end
+function Generator:isAppliable(pos)
+	local ax =pos.x-self.position.x
+	local ay =pos.y-self.position.y
+	if math.abs(math.sqrt(ax*ax+ay*ay))<=self.fieldRadius then
+		return true
+	else
+		return false
+	end
+end
 
-			function Generator:getPosition()
-				return self.position
-			end
+function Generator:getPosition()
+	return self.position
+end
 
+function Generator:collideWith( object, collision )
+end
 
+function Generator:unCollideWith( object, collision )
 
-			function Generator:collideWith( object, collision )
-			end
+end
 
-			function Generator:unCollideWith( object, collision )
+function Generator:enableG( )
+	self:loadAnimation("launching",true)
+	self.field.isActive=true
+	if self.typeField == FieldTypes.RotativeL then
+		self:enableRotativeLField()
+	--
+	elseif self.typeField == FieldTypes.RotativeR then
+		self:enableRotativeRField()
+	--
+	elseif self.typeField == FieldTypes.Repulsive then
+		self:enableRepulsiveField()
+	--
+	elseif self.typeField == FieldTypes.Attractive then
+		self:enableAttractiveField()
+	--
+	elseif self.typeField == FieldTypes.Static then
+		self:enableStaticField()
+	end
+end
 
-			end
-
-			function Generator:enableG( )
-				self:loadAnimation("launching",true)
-				self.field.isActive=true
-				if self.typeField == FieldTypes.RotativeL then
-					self:enableRotativeLField()
-		--
-		elseif self.typeField == FieldTypes.RotativeR then
-			self:enableRotativeRField()
-		--
-		elseif self.typeField == FieldTypes.Repulsive then
-			self:enableRepulsiveField()
-	    --
-	    elseif self.typeField == FieldTypes.Attractive then
-	    	self:enableAttractiveField()
-	     --
-	     elseif self.typeField == FieldTypes.Static then
-	     	self:enableStaticField()
-	     end
-	 end
-
-	 function Generator:disableG( )
-	 	self:loadAnimation("shutdown",true)
-	 	self.field.isActive=false
-	 	if self.typeField == FieldTypes.Static then
-	 		self:disableStaticField()
-	 	else
-	 		self:disableField()
-	 	end
-	 	self.appliesField=false
-
-	 end
+function Generator:disableG( )
+	self:loadAnimation("shutdown",true)
+	self.field.isActive=false
+	if self.typeField == FieldTypes.Static then
+		self:disableStaticField()
+	else
+		self:disableField()
+	end
+	self.appliesField=false
+end
 
 
-	 function Generator:addStatMetal(metal)
-	 	for _, value in pairs(self.statMetals) do
-	 		if value == metal then
-	 			return 
-	 		end
-	 	end
-	 	metal:initStaticField()
-	 	table.insert(self.statMetals,metal)
-	 end
+function Generator:addStatMetal(metal)
+	for _, value in pairs(self.statMetals) do
+		if value == metal then
+			return 
+		end
+	end
+	metal:initStaticField()
+	table.insert(self.statMetals,metal)
+end
 
 -- Enabling fields
 function Generator:enableRepulsiveField()
@@ -237,4 +234,8 @@ function Generator:send(x,y)
 	toReturn=""
 	toReturn= toReturn..("@generator".."#"..self.netid.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..(self.position.x-x).."#"..( self.position.y+y).."#"..tostring(self.appliesField).."#"..self.typeField)
 	return toReturn
+end
+
+function Generator:isTurnedOn()
+	return self.field.isActive
 end

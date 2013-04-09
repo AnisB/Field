@@ -243,6 +243,7 @@ function MapLoader:isSeen(pos1,pos2,w,h)
         return true
     end
 end
+
 function MapLoader:draw(pos)
     self.tilesets:draw({x=pos.x-windowW/2,y=windowH/2-pos.y})
 
@@ -307,7 +308,7 @@ function MapLoader:toSend(pos)
     local metals=""
     for i,p in pairs(self.metals) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-          metals=metals..p:send(pos.x-windowW/2,windowH/2-pos.y)
+			metals=metals..p:send(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
 	maptable.metal=metals
@@ -315,7 +316,7 @@ function MapLoader:toSend(pos)
 	local destroyables=""
     for i,p in pairs(self.destroyables) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-          destroyables=destroyables..p:send(pos.x-windowW/2,windowH/2-pos.y)
+			destroyables=destroyables..p:send(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
 	maptable.destroyable=destroyables
@@ -323,7 +324,7 @@ function MapLoader:toSend(pos)
 	local movables=""
     for i,p in pairs(self.movables) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-          movables=movables..p:send(pos.x-windowW/2,windowH/2-pos.y)
+			movables=movables..p:send(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
 	maptable.movable=movables
@@ -331,23 +332,23 @@ function MapLoader:toSend(pos)
 	local interruptors=""
     for i,p in pairs(self.interruptors) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-          interruptors=interruptors..p:send(pos.x-windowW/2,windowH/2-pos.y)
+			interruptors=interruptors..p:send(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
 	maptable.interruptor=interruptors
 
 	local generators=""
     for i,p in pairs(self.generators) do
-        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-          generators=generators..p:send(pos.x-windowW/2,windowH/2-pos.y)
-        end
+        --if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+			generators=generators..p:send(pos.x-windowW/2,windowH/2-pos.y)
+        --end
     end
 	maptable.generator=generators
     
 	local gateinterruptors=""
     for i,p in pairs(self.gateinterruptors) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-          gateinterruptors=gateinterruptors..p:send(pos.x-windowW/2,windowH/2-pos.y)
+			gateinterruptors=gateinterruptors..p:send(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
 	maptable.gateinterruptor=gateinterruptors    
@@ -355,7 +356,7 @@ function MapLoader:toSend(pos)
 	local gates=""
     for i,p in pairs(self.gates) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-          gates=gates..p:send(pos.x-windowW/2,windowH/2-pos.y)
+			gates=gates..p:send(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
 	maptable.gate=gates
@@ -363,7 +364,7 @@ function MapLoader:toSend(pos)
     local acids=""
     for i,p in pairs(self.acids) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-          acids=acids..p:send(pos.x-windowW/2,windowH/2-pos.y)
+			acids=acids..p:send(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
     maptable.acid=acids
@@ -371,7 +372,7 @@ function MapLoader:toSend(pos)
     local arcs=""
     for i,p in pairs(self.arcs) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-          arcs=arcs..p:send(pos.x-windowW/2,windowH/2-pos.y)
+			arcs=arcs..p:send(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
     maptable.arc=arcs

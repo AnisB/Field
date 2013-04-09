@@ -23,14 +23,15 @@ function Interruptor:getPosition()
 	return self.position
 end
 
-    function Interruptor:syncronize(pos,anim,id)
-    	if (self.anim.currentAnim.name~=anim) then
-    		self.anim:syncronize(anim,id)   
-    	end
-        self.position.x=pos.x
-        self.position.y=pos.y
-        self.drawed=true
-    end
+function Interruptor:syncronize(pos,anim,id)
+	if (self.anim.currentAnim.name~=anim) then
+		self.anim:syncronize(anim,id)   
+	end
+	self.position.x=pos.x
+	self.position.y=pos.y
+	self.drawed=true
+end
+
 function Interruptor:loadAnimation(anim, force)
 		self.anim:load(anim, force)
 end
