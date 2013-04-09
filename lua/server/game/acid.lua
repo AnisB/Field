@@ -1,5 +1,6 @@
 
 require("game.animacid")
+require("game.animsplash")
 
 
 Acid = {}
@@ -16,11 +17,9 @@ function Acid.new(pos,w,h,type,netid)
 
 	self.netid=netid
 	self.position={x=pos.x,y=pos.y}
-	print(type)
-	print(Acid.Types.hg)
-
 	if type==Acid.Types.hg  or type==Acid.Types.hm or type==Acid.Types.hd then
 		self.dec=20
+		self.splash=AnimSplash.new('splash')
 	else
 		self.dec=0
 	end
@@ -34,7 +33,8 @@ function Acid.new(pos,w,h,type,netid)
 	self.anim = AnimAcid.new('acid/'..type)
 	self:loadAnimation("normal",true)
 	self.isTouched=false
-	self.timer=0	
+	self.timer=0
+	self.splashpos={x=0,y=0}	
 	return self
 end
 
@@ -57,6 +57,12 @@ end
 function Acid:collideWith( object, collision )
 	if object.type=='MetalMan' or object.type =='TheMagnet' then
 		self.isTouched=true
+		if self.acidType==Acid.Types.hg  or self.acidType==Acid.Types.hm or self.acidType==Acid.Types.hd then
+			self.splash:load("kill",true)
+			pos=object:getPosition()
+			print(pos.x,pos.y)			
+			self.splashpos={x=pos.x,y=pos.y}
+		end
 		-- object:die()
 	end
 end
@@ -68,6 +74,10 @@ end
 function Acid:update(seconds)
 	if self.isTouched then
 		self.timer=self.timer+seconds
+	end
+
+	if self.acidType==Acid.Types.hg  or self.acidType==Acid.Types.hm or self.acidType==Acid.Types.hd then
+		self.splash:update(seconds)
 	end
 	self.anim:update(seconds)
 	x,y =self.pc.body:getPosition()
@@ -81,10 +91,18 @@ end
 
 function Acid:draw(x,y)
 	love.graphics.setColor(255,255,255,255)
+	if self.acidType==Acid.Types.hg  or self.acidType==Acid.Types.hm or self.acidType==Acid.Types.hd then
+		love.graphics.draw(self.splash:getSprite(), self.splashpos.x-x-32, self.splashpos.y+y-64+self.dec)
+	end
 	love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
+
 end
 
 
 function Acid:send(x,y)
-		return ("@acid".."#"..self.netid.."#"..self.acidType.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
+	if self.acidType==Acid.Types.hg  or self.acidType==Acid.Types.hm or self.acidType==Acid.Types.hd then
+		return ("@acid".."#"..self.netid.."#"..self.acidType.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y).."#".."true".."#"..self.splash:getImgInfo()[1].."#"..self.splash:getImgInfo()[2].."#"..math.floor(self.splashpos.x-x-unitWorldSize/2).."#"..math.floor(self.splashpos.y+y-unitWorldSize+self.dec))
+	else
+		return ("@acid".."#"..self.netid.."#"..self.acidType.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y).."#".."false")
+	end
 end

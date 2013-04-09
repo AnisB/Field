@@ -108,9 +108,9 @@ function love.update(dt)
 	gameStateManager:update(dt)
 end	
 
--- function love.draw()
--- 	gameStateManager:draw()
--- end
+function love.draw()
+	gameStateManager:draw()
+end
 
 -- utils for lube :
 
