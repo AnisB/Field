@@ -73,7 +73,7 @@ function TheMagnet.new(camera,pos)
 
 
 
-	function TheMagnet:die()
+	function TheMagnet:die(type)
 		if self.alive then
 			self:disableField()
 			self:disableStaticField()
