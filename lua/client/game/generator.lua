@@ -71,7 +71,7 @@ function Generator.new(pos,typeField,anim,id)
 				function Generator:update(seconds)
 					self.field:update(seconds)
 					self.anim:update(seconds)
-
+					self.fieldSound:update(seconds)
 				end
 
 
