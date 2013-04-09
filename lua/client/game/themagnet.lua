@@ -128,6 +128,7 @@ function TheMagnet:update(seconds)
 	self.anim:update(seconds)
 	self.field:update(seconds)
 	if self.soundPlaying then
+		self.soundPlaying:setPosition(self.position)
 		self.soundPlaying:update(seconds)
 		if self.soundPlaying:done() then
 			self.soundPlaying=nil

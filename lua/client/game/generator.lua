@@ -44,51 +44,51 @@ function Generator.new(pos,typeField,anim,id)
 				return self.position
 			end
 
-			function Generator:syncronize(pos,typeField,anim,id,applies,drawed)
-
-				if(drawed=="true") then
-					self.drawed=true
-				else
-					self.drawed=false
-				end
-				if (self.anim.currentAnim.name~=anim) then
-					self.anim:syncronize(anim,id)
-				end
-				self.position.x=pos.x
-				self.position.y=pos.y
-				if not self.appliesField and applies=="true" then
-					self.appliesField=true
-					self.field.isActive=true
-					self.fieldSound:play()
-					elseif self.appliesField and applies=="false" then
-						self.fieldSound:stop()
-						self.appliesField=false
-						self.field.isActive=false
-					end
-				end
-
-
-				function Generator:getPosition(  )
-					return self.position
-				end
-
-				function Generator:update(seconds)
-					self.field:update(seconds)
-					self.anim:update(seconds)
-					self.fieldSound:update(seconds)
-				end
+function Generator:syncronize(pos,typeField,anim,id,applies,drawed)
+	if(drawed=="true") then
+		self.drawed=true
+	else
+		self.drawed=false
+	end
+	if (self.anim.currentAnim.name~=anim) then
+		self.anim:syncronize(anim,id)
+	end
+	self.position.x=pos.x
+	self.position.y=pos.y
+	self.fieldSound:setPosition(self.position)
+	if not self.appliesField and applies=="true" then
+		self.appliesField=true
+		self.field.isActive=true
+		self.fieldSound:play()
+	elseif self.appliesField and applies=="false" then
+		self.fieldSound:stop()
+		self.appliesField=false
+		self.field.isActive=false
+	end
+end
 
 
-				function Generator:loadAnimation(anim, force)
-					self.anim:load(anim, force)
-				end
+function Generator:getPosition(  )
+	return self.position
+end
 
-				function Generator:draw(x,y)
-					if self.typeField =="Attractive" then
-						self.field:draw(self.position.x+unitWorldSize/2,self.position.y+unitWorldSize/2)
-					else
-						self.field:draw(self.position.x+unitWorldSize/2,self.position.y+unitWorldSize/2)
-					end
-					love.graphics.setColor(255,255,255,255)
-					love.graphics.draw(self.anim:getSprite(), self.position.x-unitWorldSize/2, self.position.y-unitWorldSize/2)
-				end
+function Generator:update(seconds)
+	self.field:update(seconds)
+	self.anim:update(seconds)
+	self.fieldSound:update(seconds)
+end
+
+
+function Generator:loadAnimation(anim, force)
+	self.anim:load(anim, force)
+end
+
+function Generator:draw(x,y)
+	if self.typeField =="Attractive" then
+		self.field:draw(self.position.x+unitWorldSize/2,self.position.y+unitWorldSize/2)
+	else
+		self.field:draw(self.position.x+unitWorldSize/2,self.position.y+unitWorldSize/2)
+	end
+	love.graphics.setColor(255,255,255,255)
+	love.graphics.draw(self.anim:getSprite(), self.position.x-unitWorldSize/2, self.position.y-unitWorldSize/2)
+end

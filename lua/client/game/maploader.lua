@@ -284,7 +284,6 @@ function MapLoader:handlePacket(maps)
 		end
 	end
 
-	print("On va traiter gate")
 	if  maps.gate~=nil then
 		for v in string.gmatch(maps.gate, "[^@]+") do
 			t={}

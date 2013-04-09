@@ -8,10 +8,13 @@ FADING_DURATION = 1 --durée des fading in et out
 FIELD_SOUND_VOLUME = 1
 
 
+
+
 function FieldSound.new(soundName)
+
     local self = {}
     setmetatable(self, FieldSound)
-
+	
 	local name = ""
 	if soundName == "Attractive" then name="att"
 	elseif soundName == "RotativeR" then name = "rot"
@@ -23,6 +26,8 @@ function FieldSound.new(soundName)
 	local pathLoop = FieldSound.SOUND_ROOT..name..FieldSound.SOUND_LOOP..'.ogg'
 	self.src = love.audio.newSource(path, "static")
 	self.srcLoop = love.audio.newSource(pathLoop, "static")
+	self.src:setDistance(200,1000)
+	self.srcLoop:setDistance(200,1000)
 	self.isFadingIn = false
 	self.isFadingOut = false
 	self.currentVolume = 0
@@ -53,6 +58,7 @@ function FieldSound:update(dt)
 			self.currentVolume = 0
 			self.isFadingOut = false
 			self.isDone = true
+			self.isStopped = true
 		end
 	end
 	if self.src:isStopped() then
@@ -67,11 +73,20 @@ function FieldSound:update(dt)
 	self.srcLoop:setVolume(self.currentVolume)
 end
 
+function FieldSound:setPosition(position)
+	self.src:setPosition(position.x, position.y, 0)
+	self.srcLoop:setPosition(position.x, position.y, 0)
+end
+
 function FieldSound:stop()
 	self.isFadingOut = true
 	self.isFadingIn = false
 	self.isStopped = true
 	self.srcLoop:setLooping(false)
+end
+
+function FieldSound:done()
+	return self.isDone
 end
 
 function FieldSound:immediateStop() --should be called before deleting the object
@@ -85,8 +100,4 @@ function FieldSound:immediateStop() --should be called before deleting the objec
 	self.srcLoop:stop()
 	self.src=nil
 	self.srcLoop=nil
-end
-
-function FieldSound:done()
-	return self.isDone
 end
