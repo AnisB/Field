@@ -39,7 +39,7 @@ function ConnectToServer:keyPressed(key, unicode)
 		self.waiting = true
 		self:connect()
 	elseif self.focused == "ipaddr" then
-		if unicode == 8 then
+		if key == "backspace" then
 			self.ipaddr = string.sub(self.ipaddr, 0, -2)
 		else
 			local car
@@ -58,7 +58,7 @@ function ConnectToServer:keyPressed(key, unicode)
 			self.ipaddr = self.ipaddr .. car
 		end
 	else
-		if unicode == 8 then
+		if key=="backspace" then
 			self.pseudo = string.sub(self.pseudo, 0, -2)
 		else
 			self.pseudo = self.pseudo .. key

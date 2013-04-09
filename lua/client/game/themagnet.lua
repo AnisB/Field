@@ -100,6 +100,7 @@ function TheMagnet:handlePacket( string )
 	elseif 	self.appliesField and t[7]=="true" then				
 		if self.fieldType==t[8] then
 		else
+			self.fieldType=t[8]
 			-- mauvais champ lancé donc nouveau champ lancé
 			self.soundPlaying:immediateStop()
 			self.soundPlaying=nil
@@ -110,6 +111,7 @@ function TheMagnet:handlePacket( string )
 			else
 				self.field= AttField.new(t[8])
 			end			
+			print "Activating"
 			self.field.isActive=true
 		end
 	end
