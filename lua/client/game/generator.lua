@@ -17,38 +17,39 @@ function Generator.new(pos,typeField,anim,id)
 
 	if typeField=="Repulsive" then
 		self.typeField=FieldTypes.Repulsive
-	elseif typeField=="Attractive" then
+		elseif typeField=="Attractive" then
 			self.typeField=FieldTypes.Attractive
-	elseif typeField=="RotativeR" then
+			elseif typeField=="RotativeR" then
 				self.typeField=FieldTypes.RotativeR
-	elseif typeField=="RotativeL" then
+				elseif typeField=="RotativeL" then
 					self.typeField=FieldTypes.RotativeL
-	end
+				end
 
-	self.appliesField=false
-	if self.typeField==FieldTypes.Attractive then
-		self.field=AttField.new({x=0,y=0})
+				self.appliesField=false
+				if self.typeField==FieldTypes.Attractive then
+					self.field=AttField.new({x=0,y=0})
+				else
+					self.field=Field.new(self.typeField,{x=0,y=0})
+				end
+				self.anim = AnimGene.new('gene')
+				self:loadAnimation("off",true)
+				self.anim:syncronize(anim,id)
+				self.drawed=true
+				self.fieldSound = FieldSound.new(self.typeField)
+				return self
+			end
+
+
+			function Generator:getPosition()
+				return self.position
+			end
+
+function Generator:syncronize(pos,typeField,anim,id,applies,drawed)
+	if(drawed=="true") then
+		self.drawed=true
 	else
-		self.field=Field.new(self.typeField,{x=0,y=0})
+		self.drawed=false
 	end
-	self.anim = AnimGene.new('gene')
-	self:loadAnimation("off",true)
-	self.anim:syncronize(anim,id)
-	self.drawed=true
-	self.fieldSound = FieldSound.new(self.typeField)
-	self.fieldSound:setPosition(self.position)
-	
-	return self
-end
-
-
-function Generator:getPosition()
-	return self.position
-end
-
-function Generator:syncronize(pos,typeField,anim,id,applies)
-	self.drawed=true
-
 	if (self.anim.currentAnim.name~=anim) then
 		self.anim:syncronize(anim,id)
 	end
@@ -59,10 +60,10 @@ function Generator:syncronize(pos,typeField,anim,id,applies)
 		self.appliesField=true
 		self.field.isActive=true
 		self.fieldSound:play()
-		elseif self.appliesField and applies=="false" then
-			self.fieldSound:stop()
-			self.appliesField=false
-			self.field.isActive=false
+	elseif self.appliesField and applies=="false" then
+		self.fieldSound:stop()
+		self.appliesField=false
+		self.field.isActive=false
 	end
 end
 
