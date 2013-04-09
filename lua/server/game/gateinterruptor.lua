@@ -61,11 +61,11 @@ function GateInterruptor:handleTry(tryer)
 		if self.canBeEnableMM>0 then
 			self.on= not self.on
 			if self.on then
-				self.magnetManager:enableG(self.gateID)
+				self.mapLoader:openG(self.gateID)
 				self:loadAnimation("launching",true)
 
 			else
-				self.magnetManager:disableG(self.gateID)
+				self.mapLoader:closeG(self.gateID)
 				self:loadAnimation("shutdown",true)
 
 
