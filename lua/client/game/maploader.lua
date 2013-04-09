@@ -246,7 +246,7 @@ function MapLoader:handlePacket(maps)
 			if self.generators[tonumber(t[2])]==nil then
 				self.generators[tonumber(t[2])]=Generator.new({x=tonumber(t[5]),y=tonumber(t[6])},t[8],t[3],tonumber(t[4]))
 			else
-				self.generators[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[8],t[3],tonumber(t[4]),t[7])
+				self.generators[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[8],t[3],tonumber(t[4]),t[7],t[9])
 			end            
 		end
 	end 
@@ -283,8 +283,6 @@ function MapLoader:handlePacket(maps)
 	print("On va traiter gate")
 	if  maps.gate~=nil then
 		for v in string.gmatch(maps.gate, "[^@]+") do
-		  print("Une porte")
-
 			t={}
 			for d in string.gmatch(v, "[^#]+") do
 				table.insert(t,d)

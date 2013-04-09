@@ -44,9 +44,13 @@ function Generator.new(pos,typeField,anim,id)
 				return self.position
 			end
 
-			function Generator:syncronize(pos,typeField,anim,id,applies)
-				self.drawed=true
+			function Generator:syncronize(pos,typeField,anim,id,applies,drawed)
 
+				if(drawed=="true") then
+					self.drawed=true
+				else
+					self.drawed=false
+				end
 				if (self.anim.currentAnim.name~=anim) then
 					self.anim:syncronize(anim,id)
 				end

@@ -339,9 +339,11 @@ function MapLoader:toSend(pos)
 
 	local generators=""
     for i,p in pairs(self.generators) do
-        --if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-			generators=generators..p:send(pos.x-windowW/2,windowH/2-pos.y)
-        --end
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+			generators=generators..p:send(pos.x-windowW/2,windowH/2-pos.y).."#".."true"
+        else
+            generators=generators..p:send(pos.x-windowW/2,windowH/2-pos.y).."#".."false"
+        end
     end
 	maptable.generator=generators
     
