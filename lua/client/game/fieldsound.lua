@@ -11,6 +11,7 @@ FIELD_SOUND_VOLUME = 1
 
 
 function FieldSound.new(soundName)
+
     local self = {}
     setmetatable(self, FieldSound)
 	
@@ -25,6 +26,8 @@ function FieldSound.new(soundName)
 	local pathLoop = FieldSound.SOUND_ROOT..name..FieldSound.SOUND_LOOP..'.ogg'
 	self.src = love.audio.newSource(path, "static")
 	self.srcLoop = love.audio.newSource(pathLoop, "static")
+	self.src:setDistance(200,1000)
+	self.srcLoop:setDistance(200,1000)
 	self.isFadingIn = false
 	self.isFadingOut = false
 	self.currentVolume = 0
@@ -67,6 +70,11 @@ function FieldSound:update(dt)
 	end
 	self.src:setVolume(self.currentVolume)
 	self.srcLoop:setVolume(self.currentVolume)
+end
+
+function FieldSound:setPosition(position)
+	self.src:setPosition(position.x, position.y, 0)
+	self.srcLoop:setPosition(position.x, position.y, 0)
 end
 
 function FieldSound:stop()

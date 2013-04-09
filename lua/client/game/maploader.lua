@@ -280,11 +280,8 @@ function MapLoader:handlePacket(maps)
 		end
 	end
 
-	print("On va traiter gate")
 	if  maps.gate~=nil then
 		for v in string.gmatch(maps.gate, "[^@]+") do
-		  print("Une porte")
-
 			t={}
 			for d in string.gmatch(v, "[^#]+") do
 				table.insert(t,d)
