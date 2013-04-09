@@ -688,8 +688,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 1984,
-          y = 576,
+          x = 3456,
+          y = 1088,
           width = 64,
           height = 64,
           visible = true,
@@ -708,8 +708,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 1408,
-          y = 576,
+          x = 3968,
+          y = 1088,
           width = 64,
           height = 64,
           visible = true,
@@ -888,10 +888,25 @@ return {
           x = 3712,
           y = 1088,
           width = 64,
-          height = 128,
+          height = 64,
           visible = true,
           properties = {
-            ["id"] = "1337"
+            ["id"] = "1337",
+            ["type"] = "VAloneH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 3712,
+          y = 1152,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "1337",
+            ["type"] = "VAloneB"
           }
         }
       }
@@ -1159,13 +1174,13 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 2176,
+          x = 6336,
           y = 1024,
           width = 128,
           height = 192,
           visible = true,
           properties = {
-            ["next"] = "map3"
+            ["next"] = "level1"
           }
         }
       }

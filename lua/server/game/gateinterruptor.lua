@@ -7,8 +7,8 @@ require("game.animinter")
 GateInterruptor = {}
 GateInterruptor.__index = GateInterruptor
 
-
-function GateInterruptor.new(pos,type,gateID,mapLoader,enabled,netid)
+GateInterruptorTimer =0.5
+function GateInterruptor.new(pos,type,gateOpenID,gateCloseID,mapLoader,enabled,netid)
 	local self = {}
 	setmetatable(self, GateInterruptor)
 
@@ -32,9 +32,12 @@ function GateInterruptor.new(pos,type,gateID,mapLoader,enabled,netid)
 	self.canBeEnableTM=0
 	self.canBeEnableMM=0
 	self.mapLoader=mapLoader
-	self.gateID= gateID
+	self.gateOpenID= gateOpenID
+	self.gateCloseID= gateCloseID
 	self.w=unitWorldSize/2
 	self.h=unitWorldSize/2
+
+	self.timer=0
 
 	return self
 end
@@ -57,35 +60,37 @@ function GateInterruptor:getPosition()
 end
 function GateInterruptor:handleTry(tryer)
 
-	if tryer=='MetalMan' then
-		if self.canBeEnableMM>0 then
-			self.on= not self.on
-			if self.on then
-				self.mapLoader:openG(self.gateID)
-				self:loadAnimation("launching",true)
+	if self.timer ==0 then
+		self.timer=GateInterruptorTimer 
+		if tryer=='MetalMan' then
+			if self.canBeEnableMM>0 then
+				self.on= not self.on
+				if self.on then
+					self.mapLoader:openG(self.gateOpenID)
+					self:loadAnimation("launching",true)
 
-			else
-				self.mapLoader:closeG(self.gateID)
-				self:loadAnimation("shutdown",true)
+				else
+					self.mapLoader:closeG(self.gateCloseID)
+					self:loadAnimation("shutdown",true)
 
 
+				end
 			end
-		end
-	elseif tryer=='TheMagnet' then
-		if self.canBeEnableTM>0 then
-			self.on= not self.on
-			if self.on then
-				self.mapLoader:openG(self.gateID)
-				self:loadAnimation("launching",true)
+		elseif tryer=='TheMagnet' then
+			if self.canBeEnableTM>0 then
+				self.on= not self.on
+				if self.on then
+					self.mapLoader:openG(self.gateOpenID)
+					self:loadAnimation("launching",true)
 
-			else
-				self.mapLoader:closeG(self.gateID)
-				self:loadAnimation("shutdown",true)
+				else
+					self.mapLoader:closeG(self.gateCloseID)
+					self:loadAnimation("shutdown",true)
+				end
 			end
 		end
 	end
 end
-
 
 
 function GateInterruptor:preSolve(b,coll)
@@ -132,6 +137,12 @@ function GateInterruptor:getPosition(  )
 end
 
 function GateInterruptor:update(seconds)
+	if self.timer>0 then
+		self.timer=self.timer-seconds
+		if self.timer<=0 then
+			self.timer=0
+		end
+	end
 	self.anim:update(seconds)
 	x,y =self.pc.body:getPosition()
 	self.position.x=x

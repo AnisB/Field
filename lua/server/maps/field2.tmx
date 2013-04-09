@@ -139,9 +139,16 @@
   </object>
  </objectgroup>
  <objectgroup color="#333333" name="gate" width="200" height="20">
-  <object x="3712" y="1088" width="64" height="128">
+  <object x="3712" y="1088" width="64" height="64">
    <properties>
     <property name="id" value="1337"/>
+    <property name="type" value="VAloneH"/>
+   </properties>
+  </object>
+  <object x="3712" y="1152" width="64" height="64">
+   <properties>
+    <property name="id" value="1337"/>
+    <property name="type" value="VAloneB"/>
    </properties>
   </object>
  </objectgroup>

@@ -293,9 +293,9 @@ function MapLoader:handlePacket(maps)
 			end
 			if self.gates[tonumber(t[2])]==nil then
 				print(v)
-				self.gates[tonumber(t[2])]=Gate.new({x=tonumber(t[4]),y=tonumber(t[5])},tonumber(t[6]),tonumber(t[7]),t[8])
+				self.gates[tonumber(t[2])]=Gate.new({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]),tonumber(t[8]),tonumber(t[9]))
 			else
-				self.gates[tonumber(t[2])]:syncronize({x=tonumber(t[4]),y=tonumber(t[5])},t[8])
+				self.gates[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[4],tonumber(t[5]))
 			end            
 		end
 	end 

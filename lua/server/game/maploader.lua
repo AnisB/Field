@@ -146,14 +146,14 @@ end
 
 function MapLoader:createGateInterruptors(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.gateinterruptors, GateInterruptor.new({x=(j.x),y=(j.y)},true,j.properties["id"],self,j.properties["enabled"],i))
+        table.insert(self.gateinterruptors, GateInterruptor.new({x=(j.x),y=(j.y)},true,j.properties["openid"],j.properties["closeid"],self,j.properties["enabled"],i))
     end
 end
 
 function MapLoader:createGates(map)
     for i,j in pairs(map.objects) do
         print("Door")
-        table.insert(self.gates, Gate.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["id"],j.properties["enabled"],i));
+        table.insert(self.gates, Gate.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["openid"],j.properties["closeid"],j.properties["prev"],j.properties["next"],j.properties["animid"],j.properties["enabled"],j.properties["type"],self,i));
     end
 end
 
@@ -295,11 +295,7 @@ function MapLoader:draw(pos)
         end
     end    
 
-    for i,p in pairs(self.gates) do
-        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
-          p:draw(pos.x-windowW/2,windowH/2-pos.y)
-        end
-    end
+
 end
 
 function MapLoader:toSend(pos)
@@ -396,11 +392,17 @@ function MapLoader:firstPlanDraw(pos)
           p:draw(pos.x-windowW/2,windowH/2-pos.y)
         end
     end
+
+    for i,p in pairs(self.gates) do
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end
 end
 
 function MapLoader:openG(id)
     for i,p in pairs(self.gates) do
-        if(p.id==id) then
+        if(p.openID==id) then
             p:openG()
         end
     end
@@ -408,7 +410,23 @@ end
 
 function MapLoader:closeG(id)
     for i,p in pairs(self.gates) do
-        if(p.id==id) then
+        if(p.closeID==id) then
+            p:closeG()
+        end
+    end
+end
+
+function MapLoader:openPG(id)
+    for i,p in pairs(self.gates) do
+        if(p.animid==id) then
+            p:openG()
+        end
+    end
+end
+
+function MapLoader:closeNG(id)
+    for i,p in pairs(self.gates) do
+        if(p.animid==id) then
             p:closeG()
         end
     end

@@ -888,10 +888,25 @@ return {
           x = 3712,
           y = 1088,
           width = 64,
-          height = 128,
+          height = 64,
           visible = true,
           properties = {
-            ["id"] = "1337"
+            ["id"] = "1337",
+            ["type"] = "VAloneH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 3712,
+          y = 1152,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "1337",
+            ["type"] = "VAloneB"
           }
         }
       }
