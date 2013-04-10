@@ -15,6 +15,9 @@ end
 
 
 function LevelEnding:mousePressed(x, y, button)
+    if x > 90 and x < 90+266 and y > 205 and y < 205+35 then
+        self:keyPressed("return")
+    end
 end
 
 function LevelEnding:onMessage(x, y, button)
@@ -49,10 +52,38 @@ function LevelEnding:update(dt)
 end
 
 function LevelEnding:draw()
+    local hover = false
+    x, y = love.mouse.getPosition()
+
+    -- background :
+    love.graphics.draw(gameStateManager.state['ConnectToServer'].bg, 0, 0)
+
+    -- rectangles :
+    if x > 90 and x < 90+266 and y > 205 and y < 205+35 then
+        love.graphics.setColor(150, 150, 150, 255)
+        hover = true
+    else
+        love.graphics.setColor(50, 50, 50, 255)
+    end
+    love.graphics.rectangle("fill", 90, 205, 266, 35)
+
+    -- text :
+    love.graphics.setColor(20, 240, 135, 255)
+    love.graphics.print("success !", 150, 100)    
+    love.graphics.setColor(255, 255, 255, 255)
+
 	if self.continuous then
-		love.graphics.print("On est à la fin du niveau, appuitey sur entrée pour le niveau suivant", 200, 200)
+		love.graphics.print("niveau suivant", 100, 200)
 	else
-		love.graphics.print("On est à la fin du niveau, appuitey sur entrée pour revenir au menu", 200, 200)
+		love.graphics.print("retour au menu", 100, 200)
 	end
+
+    -- cursor :
+    if hover then
+        love.mouse.setVisible(false)
+        love.graphics.draw(gameStateManager.state['ConnectToServer'].handcursor, x-17, y-17)
+    else
+        love.mouse.setVisible(true)
+    end
 end
 
