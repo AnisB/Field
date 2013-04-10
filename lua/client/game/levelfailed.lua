@@ -16,8 +16,11 @@ This file is part of the Field project]]
 
     function LevelFailed:mousePressed(x, y, button)
       if x > 90 and x < 90+282 and y > 205 and y < 205+35 then
-          self:keyPressed("return")
-      end
+        serveur:send({type="input", pck={character=monde.moi.perso, key="return", state=true}})            
+
+           gameStateManager.state['Gameplay']:reset()
+           gameStateManager:changeState('Gameplay') 
+         end
     end
 
     function LevelFailed:mouseReleased(x, y, button)
