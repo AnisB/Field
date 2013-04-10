@@ -21,7 +21,6 @@ Gameplay.__index = Gameplay
 function Gameplay.new(mapFile,continuous)
     local self = {}
     setmetatable(self, Gameplay)
-    Sound.playMusic("theme")
 
     self.continuous=true
         -- Physics
