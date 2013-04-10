@@ -260,6 +260,7 @@ function MapLoader:handlePacket(maps)
 			if self.acids[tonumber(t[2])]==nil then
 				self.acids[tonumber(t[2])]=Acid.new({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
 			else
+			print(v)
         if(t[8]=="true") then
           self.acids[tonumber(t[2])]:syncronizeSplash({x=tonumber(t[6]),y=tonumber(t[7])},t[4],tonumber(t[5]),{x=tonumber(t[11]),y=tonumber(t[12])},t[9],tonumber(t[10]))
         else

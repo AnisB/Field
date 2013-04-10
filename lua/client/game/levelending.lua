@@ -17,6 +17,9 @@ end
 function LevelEnding:mousePressed(x, y, button)
 end
 
+function LevelEnding:onMessage(x, y, button)
+end
+
 function LevelEnding:mouseReleased(x, y, button)
 end
 
@@ -24,7 +27,7 @@ end
 function LevelEnding:keyPressed(akey, unicode)
     print("levelending",monde.moi.perso, akey)
     serveur:send({type="input", pck={character=monde.moi.perso, key=akey, state=true}})    
-	if unicode==13 then
+	if akey=="return" then
         gameStateManager.state['Gameplay']=Gameplay.new("maps."..self.next,true)
         gameStateManager:changeState('Gameplay')		
     else

@@ -49,3 +49,6 @@ function LevelFailed:draw()
 	end
 end
 
+function LevelFailed:onMessage(x, y, button)
+end
+

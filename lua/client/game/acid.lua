@@ -45,6 +45,7 @@ function Acid:syncronize(pos,anim,id)
 end
 
 function Acid:syncronizeSplash(pos,anim,id,pos2,anim2,id2)
+	print(self.acidType)
 	self.position.x=pos.x
 	self.position.y=pos.y
 	self.drawed=true
