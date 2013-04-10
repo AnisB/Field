@@ -20,13 +20,15 @@ function ConnectToServer:new()
 end
 
 function ConnectToServer:mousePressed(x, y, button)
-	print(x, y)
 	if x > 50 and x < 650 and y > 100 and y < 150 then
 		self.focused = "ipaddr"
 	elseif x > 50 and x < 650 and y > 200 and y < 250 then
 		self.focused = "pseudo"
 	elseif x > 198 and x < 198+100 and y > 600 and y < 600+50 then
-		self:keyPressed("", 13)
+		if self.waiting==false then
+			self.waiting = true
+			self:connect()
+		end
 	end
 end
 
