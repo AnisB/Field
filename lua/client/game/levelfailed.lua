@@ -29,7 +29,7 @@ This file is part of the Field project]]
            gameStateManager:changeState('Gameplay')		
        else
            -- gameStateManager.state['Gameplay']:destroy()        
-           gameStateManager:changeState('choixTypeJeu')     
+           -- gameStateManager:changeState('choixTypeJeu')     
        end            
 end
 

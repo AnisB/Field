@@ -44,6 +44,8 @@ function MetalMan.new(camera,pos)
 
 	self.alive=true
 
+	self.willrotate=false
+
 	return self
 end
 
@@ -82,6 +84,7 @@ function MetalMan:rotativeLField(pos,factor)
 	local vrx = vx/n
 	local vry= vy/n
 	self.pc.body:applyLinearImpulse(-vry*MetaManRotFieldS.x*factor,vrx*MetaManRotFieldS.y*factor)
+	self.willrotate=true
 end
 
 function MetalMan:rotativeRField(pos,factor)
@@ -91,6 +94,7 @@ function MetalMan:rotativeRField(pos,factor)
 	local vrx = vx/n
 	local vry= vy/n
 	self.pc.body:applyLinearImpulse(vry*MetaManRotFieldS.x*factor,-vrx*MetaManRotFieldS.y*factor)
+	self.willrotate=true	
 end
 
 function MetalMan:attractiveField(pos,factor)
@@ -102,6 +106,7 @@ function MetalMan:attractiveField(pos,factor)
 	if(n>(unitWorldSize)) then 
 		self.pc.body:applyLinearImpulse(vrx*MetaManAttFieldS.x*factor,vry*MetaManAttFieldS.y*factor)
 	end
+	self.willrotate=false	
 end
 
 
@@ -114,6 +119,7 @@ function MetalMan:repulsiveField(pos,factor)
 	if(n>(unitWorldSize)) then 
 		self.pc.body:applyLinearImpulse(vrx*MetaManRepFieldS.x*factor,vry*MetaManRepFieldS.y*100*factor)
 	end
+	self.willrotate=false
 end
 
 function MetalMan:setVelocity(x,y)
@@ -193,7 +199,7 @@ function MetalMan:collideWith( object, collision )
 		if object.type=='GateInterruptor' or object.type=='Interruptor' or object.type=='TheMagnet' then
 			--Ghost dude
 		else
-			if(object:getPosition().y>self.position.y) and (not self.canjump)  then
+			if(object:getPosition().y>self.position.y) then
 				self.canjump=true
 				if self.animCounter>0 then 
 					self:loadAnimation("running",true)
@@ -207,7 +213,10 @@ function MetalMan:collideWith( object, collision )
 end
 
 function MetalMan:unCollideWith( object, collision )
-
+	if self.willrotate then
+		self:loadAnimation("startjumping",true)
+		self.canjump=false
+	end
 end
 
 function MetalMan:still(  )

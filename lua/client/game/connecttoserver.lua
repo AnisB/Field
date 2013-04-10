@@ -35,12 +35,18 @@ end
 
 
 function ConnectToServer:keyPressed(key, unicode)
-	if unicode == 13 then
-		self.waiting = true
-		self:connect()
+
+if self.waiting==false then
+	if key == "return" then
+		if self.waiting==false then
+			self.waiting = true
+			self:connect()
+		end
 	elseif self.focused == "ipaddr" then
 		if key == "backspace" then
 			self.ipaddr = string.sub(self.ipaddr, 0, -2)
+		elseif key == "tab" then
+			self.focused="pseudo"
 		else
 			local car
 			if key == "a" or key == "1" then car = "1"
@@ -60,10 +66,14 @@ function ConnectToServer:keyPressed(key, unicode)
 	else
 		if key=="backspace" then
 			self.pseudo = string.sub(self.pseudo, 0, -2)
+			elseif key == "tab" then
+				self.focused="ipaddr"
+			elseif key == "lshift" or  key == "rshift" or  key == "rctrl"  or  key == "lctrl"  then
 		else
 			self.pseudo = self.pseudo .. key
 		end
 	end
+end
 end
 
 function ConnectToServer:keyReleased(key, unicode) end

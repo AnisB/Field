@@ -9,7 +9,7 @@ require("const")
 require("game.levelending")
 require("game.levelfailed")
 require("game.inputmanager")
-
+require("game.background")
 
 Gameplay = {}
 Gameplay.__index = Gameplay
@@ -28,6 +28,8 @@ function Gameplay.new(mapFile)
     self.metalMan = MetalMan.new()
     self.theMagnet = TheMagnet.new()
 	self.keyPacket={}
+	self.background1=Background.new("img/background.jpg",self.mapLoader.map.width*self.mapLoader.map.tilewidth,self.mapLoader.map.height*self.mapLoader.map.tileheight,1,1)
+	self.background2=Background.new("img/brouillard.png",self.mapLoader.map.width*self.mapLoader.map.tilewidth,self.mapLoader.map.height*self.mapLoader.map.tileheight,2,2)
 
     self.camera=Camera.new(-1000,-1000)
     self.inputManager = InputManager.new()
@@ -112,10 +114,17 @@ end
 
 
 function Gameplay:draw()
+	self.background1:draw(self.camera:getPos())
+
+
 	self.mapLoader:draw(self.camera:getPos())
 	self.theMagnet:draw()
 	self.metalMan:draw()
 	self.mapLoader:firstPlanDraw()
+		love.graphics.setColor(255,255,255,255)
+	self.background2:draw(self.camera:getPos())
+	love.graphics.setColor(255,255,255,255)
 	love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
+
 end
     
