@@ -391,10 +391,29 @@ return {
           x = 2304,
           y = 64,
           width = 64,
-          height = 128,
+          height = 64,
           visible = true,
           properties = {
-            ["id"] = "1"
+            ["animid"] = "1",
+            ["closeid"] = "1",
+            ["next"] = "2",
+            ["type"] = "DebutVH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2304,
+          y = 128,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "2",
+            ["openid"] = "1",
+            ["prev"] = "1",
+            ["type"] = "FinVH"
           }
         }
       }
@@ -793,7 +812,8 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "1"
+            ["closeid"] = "1",
+            ["openid"] = "1"
           }
         }
       }

@@ -14,8 +14,8 @@ function GateInterruptor.new(pos,type,gateOpenID,gateCloseID,mapLoader,enabled,n
 
 	self.netid=netid
 	self.position={x=pos.x,y=pos.y}
-	local decalage={unitWorldSize/4,unitWorldSize/4}
-	self.pc = Physics.newInterruptor(self.position.x,self.position.y,unitWorldSize/2,unitWorldSize/2,type,decalage)
+	local decalage={unitWorldSize/2,unitWorldSize/2}
+	self.pc = Physics.newInterruptor(self.position.x,self.position.y,unitWorldSize,unitWorldSize,type,decalage)
 	self.typeG=type
 	self.anim = AnimInter.new('inter')
 	self.pc.fixture:setUserData(self)
@@ -34,8 +34,8 @@ function GateInterruptor.new(pos,type,gateOpenID,gateCloseID,mapLoader,enabled,n
 	self.mapLoader=mapLoader
 	self.gateOpenID= gateOpenID
 	self.gateCloseID= gateCloseID
-	self.w=unitWorldSize/2
-	self.h=unitWorldSize/2
+	self.w=unitWorldSize
+	self.h=unitWorldSize
 
 	self.timer=0
 
