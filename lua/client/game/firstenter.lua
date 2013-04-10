@@ -59,10 +59,10 @@ function FirstEnter:update(dt)
 end
 
 function FirstEnter:draw()
-	love.graphics.setColor(255,255,255,self.trans)
-	love.graphics.draw(self.img,300,100)
+	love.graphics.setColor(255,150,150,self.trans)
+	love.graphics.print("Press Enter",550,500)
 	love.graphics.setColor(255,255,255,255)
-	love.graphics.print("Press Enter",500,500)
+	love.graphics.draw(self.img,300,100)
 
 
 end
