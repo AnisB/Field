@@ -6,14 +6,14 @@
 Background = {}
 Background.__index =  Background
 
-function Background.new(path,xmap,ymap,scale1,scale2)
+function Background.new(path,scale,ymap)
     local self = {}
     setmetatable(self, Background)
 
 	self.img=love.graphics.newImage(path)
-    self.xmap=xmap
+    self.scale=scale
     self.ymap=ymap
-    self.scale={x=scale1,y=scale2}
+    self.scale=scale
     return self
 end
 
@@ -25,5 +25,8 @@ end
 
 
 function Background:draw(pos)
-		love.graphics.draw(self.img, -(self.img:getWidth()*self.scale.x-windowW)*pos.x/self.xmap, -(self.img:getHeight()*self.scale.y-windowH)*pos.y/self.ymap,0,self.scale.x,self.scale.y)
+		love.graphics.draw(self.img, -(pos.x)*self.scale%1280-1280, -(self.img:getHeight()-windowH)*pos.y/self.ymap)
+		love.graphics.draw(self.img, -(pos.x)*self.scale%1280, -(self.img:getHeight()-windowH)*pos.y/self.ymap)
+		-- love.graphics.draw(self.img, -(pos.x)*self.scale%1280+1280, -(self.img:getHeight()-windowH)*pos.y/self.ymap)
+
 end

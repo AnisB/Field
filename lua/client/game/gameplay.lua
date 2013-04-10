@@ -28,8 +28,16 @@ function Gameplay.new(mapFile)
     self.metalMan = MetalMan.new()
     self.theMagnet = TheMagnet.new()
 	self.keyPacket={}
-	self.background1=Background.new("img/background.jpg",self.mapLoader.map.width*self.mapLoader.map.tilewidth,self.mapLoader.map.height*self.mapLoader.map.tileheight,1,1)
-	self.background2=Background.new("img/brouillard.png",self.mapLoader.map.width*self.mapLoader.map.tilewidth,self.mapLoader.map.height*self.mapLoader.map.tileheight,2,2)
+	self.mapx=self.mapLoader.map.width*self.mapLoader.map.tilewidth
+	self.mapy= self.mapLoader.map.height*self.mapLoader.map.tileheight
+	self.background1=Background.new("img/background/1.png",1,self.mapy)
+	self.background2=Background.new("img/background/2.png",0.75,self.mapy)
+	self.background3=Background.new("img/background/3.png",0.5,self.mapy)
+	self.background4=Background.new("img/background/4.png",0.25,self.mapy)
+	self.background5=Background.new("img/background/5.png",0.125,self.mapy)
+	self.background6=Background.new("img/background/6.png",0,self.mapy)
+	-- self.background5=Background.new("img/brouillard.png",self.mapLoader.map.width*self.mapLoader.map.tilewidth,self.mapLoader.map.height*self.mapLoader.map.tileheight,2,2)
+	-- self.background5=Background.new("img/brouillard.png",self.mapLoader.map.width*self.mapLoader.map.tilewidth,self.mapLoader.map.height*self.mapLoader.map.tileheight,2,2)
 
     self.camera=Camera.new(-1000,-1000)
     self.inputManager = InputManager.new()
@@ -114,16 +122,25 @@ end
 
 
 function Gameplay:draw()
+	self.background6:draw(self.camera:getPos())
+
+	self.background5:draw(self.camera:getPos())	
+	
+	self.background4:draw(self.camera:getPos())
+
+	self.background3:draw(self.camera:getPos())
+
+	self.background2:draw(self.camera:getPos())
+
+
 	self.background1:draw(self.camera:getPos())
+
 
 
 	self.mapLoader:draw(self.camera:getPos())
 	self.theMagnet:draw()
 	self.metalMan:draw()
 	self.mapLoader:firstPlanDraw()
-		love.graphics.setColor(255,255,255,255)
-	self.background2:draw(self.camera:getPos())
-	love.graphics.setColor(255,255,255,255)
 	love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
 
 end
