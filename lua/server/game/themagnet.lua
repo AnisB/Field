@@ -61,10 +61,6 @@ function TheMagnet.new(camera,pos)
 	    -- Field Radius
 	    self.fieldRadius=TheMagnetConst.fieldRadius
 
-	    -- Sound
-	    self.fieldSound=Sound.getSound("field")
-
-
 	    self.alive=true
 
 	    return self
@@ -391,9 +387,6 @@ function TheMagnet:update(seconds)
 		self.pc.body:setLinearVelocity(-MetalManMaxSpeed,y)
 	end
 	self.field:update(seconds,self.position.x,self.position.y)
-	if self.appliesField then
-		self.fieldSound:play()
-	end
 
 	self.anim:update(seconds)
 	x,y =self.pc.body:getPosition()
