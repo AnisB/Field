@@ -370,8 +370,7 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "2",
-            ["image"] = "switch.png"
+            ["id"] = "2"
           }
         }
       }
@@ -395,28 +394,170 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 1152,
-          y = 448,
-          width = 576,
-          height = 64,
-          visible = true,
-          properties = {
-            ["enabled"] = "true",
-            ["id"] = "1"
-          }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
           x = 832,
           y = 128,
           width = 64,
           height = 64,
           visible = true,
           properties = {
+            ["animid"] = "1",
+            ["closeid"] = "1",
             ["enabled"] = "true",
-            ["id"] = "1"
+            ["openid"] = "1",
+            ["type"] = "HAloneG"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1152,
+          y = 448,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "10",
+            ["enabled"] = "true",
+            ["openid"] = "1",
+            ["prev"] = "9",
+            ["type"] = "FinHD"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1600,
+          y = 448,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "3",
+            ["enabled"] = "true",
+            ["next"] = "4",
+            ["prev"] = "2",
+            ["type"] = "MillieuHD"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1664,
+          y = 448,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "2",
+            ["closeid"] = "1",
+            ["enabled"] = "true",
+            ["next"] = "3",
+            ["type"] = "DebutHD"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1536,
+          y = 448,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "4",
+            ["enabled"] = "true",
+            ["next"] = "5",
+            ["prev"] = "3",
+            ["type"] = "MillieuHD"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1472,
+          y = 448,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "5",
+            ["enabled"] = "true",
+            ["next"] = "6",
+            ["prev"] = "4",
+            ["type"] = "MillieuHD"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1408,
+          y = 448,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "6",
+            ["enabled"] = "true",
+            ["next"] = "7",
+            ["prev"] = "5",
+            ["type"] = "MillieuHD"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1344,
+          y = 448,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "7",
+            ["enabled"] = "true",
+            ["next"] = "8",
+            ["prev"] = "6",
+            ["type"] = "MillieuHD"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1216,
+          y = 448,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "9",
+            ["enabled"] = "true",
+            ["next"] = "10",
+            ["prev"] = "8",
+            ["type"] = "MillieuHD"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1280,
+          y = 448,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "8",
+            ["enabled"] = "true",
+            ["next"] = "9",
+            ["prev"] = "7",
+            ["type"] = "MillieuHD"
           }
         }
       }
@@ -620,8 +761,9 @@ return {
           height = 64,
           visible = true,
           properties = {
+            ["closeid"] = "1",
             ["enabled"] = "true",
-            ["id"] = "1"
+            ["openid"] = "1"
           }
         }
       }

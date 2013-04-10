@@ -20,27 +20,21 @@
  </tileset>
  <layer name="Calque de Tile 1" width="60" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYAFi1mGO2YCYEYpJAYxoNKUAlznUMh/dTHLNHUn+RdbHSAFmYCDfv7jMwUZjs5dUMNDxi83tjATYgyH/kguIjV90MUrjl9r+pmU4DnT+JZS3qQ1oafZgBCC/gtoaTCMEg9ocACl0AgI=
+   eJxjZGBgYAFi1mGO2YCYEYppDehhBzFg1L/km4EL0wqg24GPHgg3UdtObOYwEmDTKz3TAhAbv+hiQ9W/5IBR/5JnBi3VUxOA7Aa1NZhGCAa1OQCKRQHb
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="60" height="10">
   <object x="0" y="0" width="64" height="576"/>
   <object x="3776" y="0" width="64" height="576"/>
-  <object x="2048" y="64" width="64" height="256"/>
-  <object x="896" y="64" width="64" height="448"/>
-  <object x="2432" y="64" width="64" height="256"/>
+  <object x="1600" y="64" width="64" height="128"/>
  </objectgroup>
  <objectgroup color="#0000ff" name="platform" width="60" height="10">
   <object x="0" y="576" width="3840" height="64"/>
   <object x="64" y="0" width="3712" height="64"/>
-  <object x="2304" y="384" width="64" height="64"/>
-  <object x="1024" y="192" width="960" height="64"/>
-  <object x="1024" y="384" width="64" height="64"/>
-  <object x="1024" y="448" width="1408" height="64"/>
-  <object x="832" y="448" width="64" height="64"/>
-  <object x="768" y="320" width="64" height="64"/>
-  <object x="832" y="192" width="64" height="64"/>
-  <object x="768" y="64" width="64" height="64"/>
+  <object x="1792" y="512" width="64" height="64"/>
+  <object x="1024" y="192" width="512" height="64"/>
+  <object x="1024" y="512" width="64" height="64"/>
+  <object x="1472" y="256" width="448" height="64"/>
  </objectgroup>
  <objectgroup color="#ffffff" name="movable" width="60" height="10"/>
  <objectgroup color="#ff6666" name="destroyable" width="60" height="10"/>
@@ -54,115 +48,64 @@
  <objectgroup color="#66ccff" name="switch" width="60" height="10"/>
  <objectgroup color="#e6e6e6" name="metal" width="60" height="10"/>
  <objectgroup color="#333333" name="gate" width="60" height="10">
-  <object x="2432" y="320" width="64" height="256">
+  <object x="1600" y="192" width="64" height="64">
    <properties>
     <property name="id" value="1"/>
-   </properties>
-  </object>
-  <object x="1984" y="192" width="64" height="64">
-   <properties>
-    <property name="id" value="1"/>
-   </properties>
-  </object>
-  <object x="960" y="192" width="64" height="64">
-   <properties>
-    <property name="enabled" value="true"/>
-    <property name="id" value="2"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup color="#004080" name="acid" width="60" height="10">
-  <object x="1216" y="384" width="64" height="64">
+  <object x="1216" y="512" width="64" height="64">
    <properties>
     <property name="type" value="hm"/>
    </properties>
   </object>
-  <object x="1344" y="384" width="64" height="64">
+  <object x="1344" y="512" width="64" height="64">
    <properties>
     <property name="type" value="hm"/>
    </properties>
   </object>
-  <object x="1472" y="384" width="64" height="64">
+  <object x="1472" y="512" width="64" height="64">
    <properties>
     <property name="type" value="hm"/>
    </properties>
   </object>
-  <object x="1664" y="384" width="64" height="64">
+  <object x="1600" y="512" width="64" height="64">
    <properties>
     <property name="type" value="hm"/>
    </properties>
   </object>
-  <object x="1600" y="384" width="64" height="64">
+  <object x="1536" y="512" width="64" height="64">
    <properties>
     <property name="type" value="hm"/>
    </properties>
   </object>
-  <object x="1536" y="384" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="1088" y="384" width="64" height="64">
+  <object x="1088" y="512" width="64" height="64">
    <properties>
     <property name="type" value="hg"/>
    </properties>
   </object>
-  <object x="1152" y="384" width="64" height="64">
+  <object x="1152" y="512" width="64" height="64">
    <properties>
     <property name="type" value="hm"/>
    </properties>
   </object>
-  <object x="2240" y="384" width="64" height="64">
+  <object x="1728" y="512" width="64" height="64">
    <properties>
     <property name="type" value="hd"/>
    </properties>
   </object>
-  <object x="1280" y="384" width="64" height="64">
+  <object x="1280" y="512" width="64" height="64">
    <properties>
     <property name="type" value="hm"/>
    </properties>
   </object>
-  <object x="1408" y="384" width="64" height="64">
+  <object x="1408" y="512" width="64" height="64">
    <properties>
     <property name="type" value="hm"/>
    </properties>
   </object>
-  <object x="2112" y="384" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="2048" y="384" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="1728" y="384" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="2176" y="384" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="1792" y="384" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="1920" y="384" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="1984" y="384" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="1856" y="384" width="64" height="64">
+  <object x="1664" y="512" width="64" height="64">
    <properties>
     <property name="type" value="hm"/>
    </properties>
@@ -177,15 +120,9 @@
   </object>
  </objectgroup>
  <objectgroup color="#800080" name="gateswitch" width="60" height="10">
-  <object x="1920" y="128" width="64" height="64">
+  <object x="1984" y="512" width="64" height="64">
    <properties>
     <property name="id" value="1"/>
-   </properties>
-  </object>
-  <object x="1920" y="128" width="64" height="64">
-   <properties>
-    <property name="enabled" value="true"/>
-    <property name="id" value="2"/>
    </properties>
   </object>
  </objectgroup>

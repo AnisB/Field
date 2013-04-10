@@ -20,7 +20,7 @@
  </tileset>
  <layer name="Calque de Tile 1" width="60" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYAFi1mGO2YCYEYpJAYxoNKUAlznUMh/dTHLNHUn+RdbHSAFmYCDfv7jMwUZjs5dUMNDxi83tjATYgyH/kguIjV90MUrjl9r+pmU4DnT+JZS3qQ1oafZgBCC/gtoaTCMEg9ocACl0AgI=
+   eJxjZGBgYAFi1mGO2YCYEYrJAeTqI9YcapmPbuaof0nTx0gBZmAg37+4zMFGY7OXVDDQ8YvN7YwE2OT4l1C80AsQG7/oYpTGL7X9TctwHOj8SyhvUxvQ0uzBCEB+BbU1mEYIBrU5ACE0AgE=
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="60" height="10">
@@ -40,7 +40,6 @@
   <object x="832" y="448" width="64" height="64"/>
   <object x="768" y="320" width="64" height="64"/>
   <object x="832" y="192" width="64" height="64"/>
-  <object x="768" y="64" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#ffffff" name="movable" width="60" height="10"/>
  <objectgroup color="#ff6666" name="destroyable" width="60" height="10"/>

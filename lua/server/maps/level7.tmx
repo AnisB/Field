@@ -18,9 +18,15 @@
  <tileset firstgid="6" name="right" tilewidth="64" tileheight="64">
   <image source="right.png" width="64" height="64"/>
  </tileset>
+ <tileset firstgid="7" name="portebas" tilewidth="64" tileheight="64">
+  <image source="portebas.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="8" name="portehaut" tilewidth="64" tileheight="64">
+  <image source="portehaut.png" width="64" height="64"/>
+ </tileset>
  <layer name="Calque de Tile 1" width="60" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYAFi1mGO2YCYEYpHCqCGfxkpwPQGlNo7kGkDPdzw0dQI54HOC9jsZyTApnX80jI9Exu/6GLk2DvQcUsuGKruJhdQUrZSK03SE4DsA7U1mEYIBrU5AOcNAfU=
+   eJzlk0EKACEMA1t11f+/WAOeV2jEogbmJCUNjSoiqfNdTu7o4BWtyGvtRiZ9LWLzntYNJm8kZr3E3jdO3v+67tXnaphDDo99WSFv8V5io3QBrP9OwQ/dDI+AP9gAEA4CVQ==
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="60" height="10">
@@ -222,7 +228,7 @@
   <object x="2560" y="512" width="64" height="64">
    <properties>
     <property name="closeid" value="2"/>
-    <property name="openid" value=""/>
+    <property name="openid" value="2"/>
    </properties>
   </object>
  </objectgroup>

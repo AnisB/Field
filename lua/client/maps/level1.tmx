@@ -18,9 +18,18 @@
  <tileset firstgid="6" name="right" tilewidth="64" tileheight="64">
   <image source="right.png" width="64" height="64"/>
  </tileset>
+ <tileset firstgid="7" name="portebas" tilewidth="64" tileheight="64">
+  <image source="portebas.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="8" name="portehaut" tilewidth="64" tileheight="64">
+  <image source="portehaut.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="9" name="fin" tilewidth="192" tileheight="128">
+  <image source="fin.png" width="192" height="128"/>
+ </tileset>
  <layer name="Calque de Tile 1" width="60" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYAFi1mGO2YCYEYpHChj179ABjAyo7sdHo+OhCLC5nZEAezj4l1D8oovRwr+kph96pTdamE9OfqFXHqO22djcTa5/aZXuQG0NphGCQW0OAGS5AeY=
+   eJxjZGBgYAFi1mGO2YCYEYpHChj17/AGo/4d3oBW/mVEw9RWT4m7OGhgJqX+pZWfQeayU9k8avmXWn7mRLMH1NZgGiEY1OYAACV9Aec=
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="60" height="10">
@@ -135,7 +144,7 @@
  </objectgroup>
  <objectgroup color="#ffff00" name="arc" width="60" height="10"/>
  <objectgroup color="#ffff00" name="levelend" width="60" height="10">
-  <object x="3456" y="384" width="320" height="192">
+  <object x="3584" y="448" width="192" height="128">
    <properties>
     <property name="next" value="level2"/>
    </properties>

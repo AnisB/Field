@@ -59,22 +59,99 @@
   <object x="896" y="64" width="64" height="64">
    <properties>
     <property name="id" value="2"/>
-    <property name="image" value="switch.png"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup color="#e6e6e6" name="metal" width="60" height="10"/>
  <objectgroup color="#333333" name="gate" width="60" height="10">
-  <object x="1152" y="448" width="576" height="64">
-   <properties>
-    <property name="enabled" value="true"/>
-    <property name="id" value="1"/>
-   </properties>
-  </object>
   <object x="832" y="128" width="64" height="64">
    <properties>
+    <property name="animid" value="1"/>
+    <property name="closeid" value="1"/>
     <property name="enabled" value="true"/>
-    <property name="id" value="1"/>
+    <property name="openid" value="1"/>
+    <property name="type" value="HAloneG"/>
+   </properties>
+  </object>
+  <object x="1152" y="448" width="64" height="64">
+   <properties>
+    <property name="animid" value="10"/>
+    <property name="enabled" value="true"/>
+    <property name="openid" value="1"/>
+    <property name="prev" value="9"/>
+    <property name="type" value="FinHD"/>
+   </properties>
+  </object>
+  <object x="1600" y="448" width="64" height="64">
+   <properties>
+    <property name="animid" value="3"/>
+    <property name="enabled" value="true"/>
+    <property name="next" value="4"/>
+    <property name="prev" value="2"/>
+    <property name="type" value="MillieuHD"/>
+   </properties>
+  </object>
+  <object x="1664" y="448" width="64" height="64">
+   <properties>
+    <property name="animid" value="2"/>
+    <property name="closeid" value="1"/>
+    <property name="enabled" value="true"/>
+    <property name="next" value="3"/>
+    <property name="type" value="DebutHD"/>
+   </properties>
+  </object>
+  <object x="1536" y="448" width="64" height="64">
+   <properties>
+    <property name="animid" value="4"/>
+    <property name="enabled" value="true"/>
+    <property name="next" value="5"/>
+    <property name="prev" value="3"/>
+    <property name="type" value="MillieuHD"/>
+   </properties>
+  </object>
+  <object x="1472" y="448" width="64" height="64">
+   <properties>
+    <property name="animid" value="5"/>
+    <property name="enabled" value="true"/>
+    <property name="next" value="6"/>
+    <property name="prev" value="4"/>
+    <property name="type" value="MillieuHD"/>
+   </properties>
+  </object>
+  <object x="1408" y="448" width="64" height="64">
+   <properties>
+    <property name="animid" value="6"/>
+    <property name="enabled" value="true"/>
+    <property name="next" value="7"/>
+    <property name="prev" value="5"/>
+    <property name="type" value="MillieuHD"/>
+   </properties>
+  </object>
+  <object x="1344" y="448" width="64" height="64">
+   <properties>
+    <property name="animid" value="7"/>
+    <property name="enabled" value="true"/>
+    <property name="next" value="8"/>
+    <property name="prev" value="6"/>
+    <property name="type" value="MillieuHD"/>
+   </properties>
+  </object>
+  <object x="1216" y="448" width="64" height="64">
+   <properties>
+    <property name="animid" value="9"/>
+    <property name="enabled" value="true"/>
+    <property name="next" value="10"/>
+    <property name="prev" value="8"/>
+    <property name="type" value="MillieuHD"/>
+   </properties>
+  </object>
+  <object x="1280" y="448" width="64" height="64">
+   <properties>
+    <property name="animid" value="8"/>
+    <property name="enabled" value="true"/>
+    <property name="next" value="9"/>
+    <property name="prev" value="7"/>
+    <property name="type" value="MillieuHD"/>
    </properties>
   </object>
  </objectgroup>
@@ -146,8 +223,9 @@
  <objectgroup color="#800080" name="gateswitch" width="60" height="10">
   <object x="1664" y="64" width="64" height="64">
    <properties>
+    <property name="closeid" value="1"/>
     <property name="enabled" value="true"/>
-    <property name="id" value="1"/>
+    <property name="openid" value="1"/>
    </properties>
   </object>
  </objectgroup>
