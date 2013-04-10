@@ -19,7 +19,7 @@ function ChoixNiveau:mousePressed(x, y, button)
 	elseif x > 365 and x < 365+40 and y > 105 and y < 105+35 then
 		self:keyPressed("d")
 	elseif x > 198 and x < 198+100 and y > 600 and y < 600+50 then
-		self:keyPressed("", 13)
+		self:keyPressed("return", 13)
 	end
 end
 
@@ -30,7 +30,7 @@ function ChoixNiveau:keyPressed(key, unicode)
 		self.num_level = self.num_level - 1
 	elseif key == "d" then
 		self.num_level = self.num_level + 1
-	elseif unicode == 13 then
+	elseif key == "return" then
 		serveur:send({type= "choixNiveau", level=self.level})
 	end
 	if self.num_level < 1 then self.num_level = 1 end
