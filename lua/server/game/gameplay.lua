@@ -245,6 +245,7 @@ function Gameplay.new(mapFile,continuous)
         end
 
         if(self.levelFinished) then
+			inputManager:clearInputs()
             gameStateManager.state['LevelEnding']=LevelEnding.new(self.mapLoader.levelends[1].next,self.continuous)
             gameStateManager:changeState('LevelEnding')
             packet={

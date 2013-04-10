@@ -39,3 +39,8 @@ function InputManager:isKeyDown(key)
 	end
 	return ok
 end
+
+
+function InputManager:clearInputs()
+	self.listKeys = {}
+end
