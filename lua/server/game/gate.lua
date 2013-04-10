@@ -52,10 +52,10 @@ function Gate.new(pos,w,h,openID,closeID,prev,next,animid,enabled,type,mapLoader
 	
     if enabled then
         self.pc.fixture:setFilterData(1,1,-1)    	
-    	self.open=true
+    	self.anim:load("open",true)
     else
     	self.pc.fixture:setFilterData(1,1,0)
-	self.open= false
+    	self.anim:load("close",true)
 	end
 	return self
 end
