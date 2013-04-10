@@ -20,7 +20,6 @@ function Gate.new(pos,w,h,openID,closeID,prev,next,animid,enabled,type,mapLoader
 	local self = {}
 	setmetatable(self, Gate)
 
-	print(type)
 	self.animid=animid
 	self.netid=netid
 	self.openID=openID

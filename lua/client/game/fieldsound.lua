@@ -2,7 +2,7 @@ FieldSound = {}
 FieldSound.__index = FieldSound
 
 FieldSound.SOUND_ROOT = "sound/"
-FieldSound.SOUND_LOOP = ""--"loop"
+FieldSound.SOUND_LOOP = "loop"
 
 FADING_DURATION = 1 --durée des fading in et out
 FIELD_SOUND_VOLUME = 1

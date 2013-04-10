@@ -258,6 +258,7 @@ function Gameplay.new(mapFile,continuous)
         end
 
         if(self.shouldEnd) then
+            inputManager:clearInputs()
             gameStateManager.state['LevelFailed']=LevelFailed.new()
             gameStateManager:changeState('LevelFailed')
             packet={
