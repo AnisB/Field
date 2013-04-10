@@ -18,9 +18,12 @@
  <tileset firstgid="6" name="right" tilewidth="64" tileheight="64">
   <image source="right.png" width="64" height="64"/>
  </tileset>
+ <tileset firstgid="7" name="fin" tilewidth="64" tileheight="64">
+  <image source="fin.png" width="192" height="128"/>
+ </tileset>
  <layer name="Calque de Tile 1" width="60" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYAFi1mGO2YCYEYpHChj1L/UAuXmEjUjzGRlQ3Y+PRseUApDfiHUnOWZjCwtsbmckwB7K6ZnY+EUXo7Z/KTGT2ukOl/nUNo9a/h1McYHLLGr7l9rxASoPmEYIBpV3ALjPAkk=
+   eJztlM0KwCAMg9Oxud/3f96l4EFkpzUymAa+a5oUrQGYyfJzErFMLxp9dXr7R1KjPC5VX+/WKme5t+iM8Z6/9bQKtdS+0ax1X0W2lWxkF3oCmpxPfaP5DnKSK3v5PZg6we/dDaAvAm0=
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="60" height="10">

@@ -86,7 +86,6 @@ end
 	function Gate:openG( )
 	self.open= true
 	self.pc.fixture:setFilterData(1,1,-1)
-	Sound.playSound("door")
 	self.anim:load("opening",true)
 	self.isOpening=true
 	end
@@ -95,7 +94,6 @@ end
 	self.open= false
     self.isClosing=true
 	self.pc.fixture:setFilterData(1,1,0)
-	Sound.playSound("door")
 	self.anim:load("closing",true)
 	end
 
