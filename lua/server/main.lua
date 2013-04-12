@@ -73,15 +73,15 @@ function love.load()
 	conn.callbacks.recv = rcvCallback
 	conn.callbacks.connect = connCallback
 	conn.callbacks.disconnect = disconnCallback
+
+	discoveryBroadcaster = lube.udpClient()
+	discoveryBroadcaster:connect("255.255.255.255", 3411, false)
+	discoveryBroadcaster:setOption("broadcast", true)
 	-- /lube
 
 	love.graphics.setIcon( love.graphics.newImage(ImgDirectory.."icon.png" ))
 	gameStateManager = GameStateManager:new()
 end
-
-function love.update(dt)
-	gameStateManager:update(dt)
-end	
 
 function love.mousepressed(x, y, button)
 	gameStateManager:mousePressed(x, y, button)

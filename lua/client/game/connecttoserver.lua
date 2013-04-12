@@ -15,6 +15,7 @@ function ConnectToServer:new()
     self.ipaddr = "127.0.0.1"
     self.pseudo = "luc"
     self.focused = "ipaddr"
+    self.discovered = false
     self.waiting = false
     return self
 end
@@ -87,6 +88,7 @@ function ConnectToServer:joystickReleased(joystick, button)
 end
 
 function ConnectToServer:update(dt)
+	discoveryListener:update(dt)
 	self.timer = self.timer + dt
 end
 
@@ -110,6 +112,12 @@ end
 function ConnectToServer:onMessage(msg)
 	if msg.type == "attenteFinie" then
 		gameStateManager:changeState('ChoixTypeJeu') -- WaitingForDistant
+	elseif msg.type == "discovery" then
+		if self.discovered == true then
+			return
+		end
+		self.ipaddr = msg.ip
+		self.discovered = true
 	else
 		print("[ConnectToServer] wrong type :", table2.tostring(msg))
 	end

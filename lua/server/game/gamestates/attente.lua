@@ -4,11 +4,18 @@ require("game.history")
 Attente = {}
 
 function Attente:init()
-	self.x = 42
+	self.discoveryLast = 42
+	self.discoveryInterval = 0.2
 end
 
 function Attente:update(dt)
 	-- print("Weeee !", dt)
+	self.discoveryLast = self.discoveryLast + dt
+	if self.discoveryLast > self.discoveryInterval then
+		discoveryBroadcaster:send("hi")
+		self.discoveryLast = 0
+	end
+	discoveryBroadcaster:update(dt)
 end
 
 
