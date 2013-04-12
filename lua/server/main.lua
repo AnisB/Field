@@ -15,9 +15,12 @@ cron = require("lubeboth.cron")
 
 SourceDirectory="./"
 ImgDirectory="img/"
+FontDirectory="font/"
 MapDirectory="maps/"
 gameStateManager = nil
 inputManager = nil
+
+graphic_stuff_enabled = true
 
 -- lube :
 -- "low level" events :
@@ -79,7 +82,17 @@ function love.load()
 	discoveryBroadcaster:setOption("broadcast", true)
 	-- /lube
 
-	love.graphics.setIcon( love.graphics.newImage(ImgDirectory.."icon.png" ))
+	if graphic_stuff_enabled then
+		load_graphic_stuff()
+	end
+
+	-- recuperer ip publique :
+	local http = require("socket.http")
+	local b, c, h = http.request("http://fspot.org/ip.php")
+	if b ~= nil then
+		ip_externe = b
+	end
+
 	gameStateManager = GameStateManager:new()
 end
 
@@ -111,6 +124,24 @@ end
 -- function love.draw()
 -- 	gameStateManager:draw()
 -- end
+
+function load_graphic_stuff()
+	local ip_font = love.graphics.newFont(FontDirectory .. "font.ttf", 40)
+	love.graphics.setFont(ip_font)
+	ip_background = love.graphics.newImage(ImgDirectory .. "ipbg.png")
+end
+
+function love.draw()
+	if graphic_stuff_enabled then
+		love.graphics.draw(ip_background, 0, 0)
+		love.graphics.print("IP externe :", 20, 40)
+		if ip_externe ~= nil then
+			love.graphics.print(ip_externe, 100, 120)
+		else
+			love.graphics.print("?", 40, 120)
+		end
+	end
+end
 
 -- utils for lube :
 

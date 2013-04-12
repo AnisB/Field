@@ -118,6 +118,7 @@ function ConnectToServer:onMessage(msg)
 		end
 		self.ipaddr = msg.ip
 		self.discovered = true
+		print('IP DISCOVER =', msg.ip)
 	else
 		print("[ConnectToServer] wrong type :", table2.tostring(msg))
 	end
