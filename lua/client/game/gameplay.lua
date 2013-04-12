@@ -35,9 +35,6 @@ function Gameplay.new(mapFile)
 	self.background3=Background.new("img/background/3.png",0.5,self.mapy)
 	self.background4=Background.new("img/background/4.png",0.0,self.mapy)
 	self.background5=Background.new("img/background/5.png",0.0,self.mapy)
-	-- self.background6=Background.new("img/background/6.png",0,self.mapy)
-	-- self.background5=Background.new("img/brouillard.png",self.mapLoader.map.width*self.mapLoader.map.tilewidth,self.mapLoader.map.height*self.mapLoader.map.tileheight,2,2)
-	-- self.background5=Background.new("img/brouillard.png",self.mapLoader.map.width*self.mapLoader.map.tilewidth,self.mapLoader.map.height*self.mapLoader.map.tileheight,2,2)
 
     self.camera=Camera.new(-1000,-1000)
     self.inputManager = InputManager.new()
@@ -78,6 +75,8 @@ function Gameplay:handlePacket(packet)
 	end
 	if  packet.camera~=nil then
 		self.camera:handlePacket(packet.camera)
+	else
+		print "camera nil"
 	end        
 	if  packet.map~=nil then
 		self.mapLoader:handlePacket(packet.map)

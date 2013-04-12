@@ -63,6 +63,7 @@ end
 -- /lube
 
 function love.load()
+	success = love.graphics.setMode( 400, 250)
 	inputManager = InputManager:new()
 	-- lube :
 	monde = {} -- messy world.

@@ -1,7 +1,7 @@
 --[[ 
 This file is part of the field project
 ]]
-windowH= 250
-windowW=400
+windowH= 720
+windowW=1280
 unitWorldSize ={}
 unitWorldSize=64
