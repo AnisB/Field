@@ -22,6 +22,8 @@ gamePaused = false
 
 musicM = MusicManager.new()
 musicM:play()
+canvas=love.graphics.newCanvas( 1280, 720 )
+
 
 -- "low level" events :
 
@@ -110,7 +112,16 @@ function love.joystickreleased(joystick, button)
 end
 
 function love.draw()
-	gameStateManager:draw()
+-- love.graphics.setBackgroundColor( 0, 0, 0, 255 )
+canvas:clear()
+love.graphics.setCanvas( canvas )
+gameStateManager:draw()
+love.graphics.setCanvas()	
+-- draw scaled canvas to screen
+love.graphics.setColor(255,255,255)
+
+love.graphics.draw(canvas, 0,0, 0, 1,1)
+
 end
 
 function love.focus(b)
