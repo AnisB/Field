@@ -33,7 +33,7 @@ function GameStateManager.new()
 	self.state['Gameplay'] = Gameplay.new()
 	--self.state['LevelChange'] = LevelChange.new()
 	--self.state['PartyEnd'] = PartyEnd.new()
-	self.currentState='ConnectToServer'
+	self.currentState='FirstEnter'
 	return self
 end
 

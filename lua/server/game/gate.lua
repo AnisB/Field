@@ -20,7 +20,6 @@ function Gate.new(pos,w,h,openID,closeID,prev,next,animid,enabled,type,mapLoader
 	local self = {}
 	setmetatable(self, Gate)
 
-	print(type)
 	self.animid=animid
 	self.netid=netid
 	self.openID=openID
@@ -86,7 +85,6 @@ end
 	function Gate:openG( )
 	self.open= true
 	self.pc.fixture:setFilterData(1,1,-1)
-	Sound.playSound("door")
 	self.anim:load("opening",true)
 	self.isOpening=true
 	end
@@ -95,7 +93,6 @@ end
 	self.open= false
     self.isClosing=true
 	self.pc.fixture:setFilterData(1,1,0)
-	Sound.playSound("door")
 	self.anim:load("closing",true)
 	end
 

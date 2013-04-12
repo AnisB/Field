@@ -104,12 +104,22 @@ function love.keyreleased(key, unicode)
 	gameStateManager:keyReleased(key, unicode)
 end
 
-function love.joystickpressed(joystick, key)
-	gameStateManager:joystickPressed(joystick, key)
+function love.joystickpressed(joystick, button)
+	if not gamePaused then
+		if button==10 then --start manette = touche return du clavier
+			love.event.push('keypressed', "return")
+		end
+		gameStateManager:joystickPressed(joystick, button)
+	end
 end
 
-function love.joystickreleased(joystick, key)
-	gameStateManager:joystickReleased(joystick, key)
+function love.joystickreleased(joystick, button)
+	if not gamePaused then
+		if button==10 then --start manette = touche return du clavier
+			love.event.push('keyreleased', "return")
+		end
+		gameStateManager:joystickReleased(joystick, button)
+	end
 end
 
 function love.draw()

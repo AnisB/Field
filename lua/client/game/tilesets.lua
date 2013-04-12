@@ -35,7 +35,6 @@ function Tilesets:draw(pos)
 	for i=0,self.layer.height-1,1 do
 		for j=1,self.layer.width,1 do
 			if self.layer.data[i*self.layer.width+j]>0 then
-				
 				love.graphics.draw(self.tiles[self.layer.data[i*self.layer.width+j]].img, (j-1)*64-pos.x, (i)*64+pos.y)
 			end
 		end
