@@ -47,7 +47,20 @@ function onMessage(msg)
 	end
 end
 
+function discoveryCallback(data, id)
+    ip_addr = id:sub(0, id:find(':')-1)
+    -- print("Got data :", data, "From :", ip_addr)
+    if data == "hi" then
+    	gameStateManager:onMessage({type="discovery", ip=ip_addr})
+    end
+end
+
 function love.load()
+	-- lube :
+	discoveryListener = lube.udpServer()
+	discoveryListener:listen(3411)
+	discoveryListener.callbacks.recv = discoveryCallback
+	-- /lube
 	monde = {}
 	love.graphics.setIcon( love.graphics.newImage(ImgDirectory.."icon.png" ))
 	gameStateManager = GameStateManager:new()
