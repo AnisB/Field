@@ -5,6 +5,9 @@ This file is part of the Field project]]
 require("game.camera")
 require("game.animmm")
 require("game.metalmanconst")
+require ("game.middleclass")
+require ("game.shadereffect")
+require ("game.shader.shockwave")
 
 MetalMan = {}
 MetalMan.__index = MetalMan
@@ -24,7 +27,12 @@ function MetalMan.new()
 
 	-- Other states
 	self.type='MetalMan'
-
+	self.s= ShockwaveEffect()
+	self.s:setParameter{
+		center = {0.5,0.5},
+		shockParams = {20,0.8,0.1},
+	}
+	self.s.time=10
 
 	return self
 end
@@ -40,12 +48,16 @@ function MetalMan:handlePacket( string )
 	end
 	if self.anim.folder~=t[2] then
 		self.anim = AnimMM.new(t[2])
+		self.s.time=0
 	end
 	if (self.anim.currentAnim.name~=t[3]) then
 		self.anim:syncronize(t[3],tonumber(t[4]))
 	end
 	self.position.x=tonumber(t[5])
 	self.position.y=tonumber(t[6])
+	self.s:setParameter{
+		center = {self.position.x/windowW,(self.position.y+unitWorldSize)/windowH}
+	}
 	if t[7]=="1" then
 		self.goF=true
 	else
@@ -61,9 +73,29 @@ end
 
 function MetalMan:update(seconds)
 	self.anim:update(seconds)
+	self.s:update(seconds)
 end
 
+function MetalMan:preDraw()
+
+		-- love.graphics.setCanvas( canvas )
+		self.s:predraw()
+		-- love.graphics.setCanvas(  )
+		-- love.graphics.draw(canvas, 0,0, 0, 1,1)
+
+end
+
+function MetalMan:postDraw()
+
+		-- love.graphics.setCanvas( canvas )
+		self.s:postdraw()
+		-- love.graphics.setCanvas(  )
+		-- love.graphics.draw(canvas, 0,0, 0, 1,1)
+
+end
 function MetalMan:draw()
+
+		self.s:postdraw()
     	if 	self.goF then
     		love.graphics.draw(self.anim:getSprite(), self.position.x,self.position.y, 0, 1,1)
     	else

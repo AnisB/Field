@@ -52,6 +52,7 @@ function Metal.new(pos,typemetal,anim,id)
 	end
 
 	function Metal:draw()
+
 		love.graphics.draw(self.anim:getSprite(), self.position.x, self.position.y)
 	end
 

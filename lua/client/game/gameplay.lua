@@ -123,9 +123,13 @@ end
 function Gameplay:draw()
 	-- self.background6:draw(self.camera:getPos())
 
+	self.metalMan:preDraw()
+
 	self.background5:draw(self.camera:getPos())	
 	
 	self.background4:draw(self.camera:getPos())
+	self.metalMan:postDraw()
+
 
 	self.background3:draw(self.camera:getPos())
 

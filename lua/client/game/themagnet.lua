@@ -140,7 +140,7 @@ end
 
 function TheMagnet:draw()
 	-- Draws the field
-
+	love.graphics.setColor(255,255,255,255)
 	if 	 self.goF then
 		if self.fieldType=="Attractive" then
 			self.field:draw(self.position.x+unitWorldSize/2,self.position.y+unitWorldSize/2)

@@ -126,14 +126,12 @@ end
 
 function love.draw()
 -- love.graphics.setBackgroundColor( 0, 0, 0, 255 )
-canvas:clear()
-love.graphics.setCanvas( canvas )
+-- canvas:clear()
 gameStateManager:draw()
-love.graphics.setCanvas()	
+-- love.graphics.setCanvas()	
 -- draw scaled canvas to screen
 love.graphics.setColor(255,255,255)
 
-love.graphics.draw(canvas, 0,0, 0, 1,1)
 
 end
 
