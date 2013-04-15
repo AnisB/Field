@@ -39,8 +39,8 @@ AnimMM.ANIMS.landing.DELAY = 0.075
 AnimMM.ANIMS.standing.DELAY = 0.150
 AnimMM.ANIMS.stoprunning.DELAY = 0.075
 AnimMM.ANIMS.returnanim.DELAY = 0.2
-AnimMM.ANIMS.load1.DELAY = 0.1
-AnimMM.ANIMS.load2.DELAY = 0.1
+AnimMM.ANIMS.load1.DELAY = 0.06
+AnimMM.ANIMS.load2.DELAY = 0.06
 AnimMM.ANIMS.mortelec.DELAY = 0.1
 AnimMM.ANIMS.mort.DELAY = 1
 

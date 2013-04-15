@@ -199,6 +199,21 @@ function MetalMan:collideWith( object, collision )
 		if object.type=='GateInterruptor' or object.type=='Interruptor' or object.type=='TheMagnet' then
 			--Ghost dude
 		else
+			if self.metalWeight==MetalMTypes.Acier then
+				if object.type=='Wall' then
+					self.camera:shakeOnX(2,100,0.2)
+				elseif object.type=='Platform' then
+					self.camera:shakeOnY(2,100,0.2)
+				end
+			end
+			if self.isStatic==true  then
+				if object.type=='Wall' then
+					self.camera:shakeOnX(5,100,0.2)
+				elseif object.type=='Platform' then
+					self.camera:shakeOnY(5,100,0.2)
+				end
+			end
+
 			if(object:getPosition().y>self.position.y) then
 				self.canjump=true
 				if self.animCounter>0 then 
@@ -277,6 +292,8 @@ function MetalMan:update(seconds)
 	x,y =self.pc.body:getPosition()
 	self.position.x=x
 	self.position.y=y
+	self.camera:newPosition(x,y)
+
 	if self.alive then
 		if self.animCounter >=1 and self.anim.currentAnim.name=="standing" then
 			self:loadAnimation("running",true)	
@@ -300,7 +317,7 @@ function MetalMan:update(seconds)
 			end
 		end
 	end
-	self.camera:newPosition(self.position.x,self.position.y)
+	-- print "update MM"
 end
 
 function MetalMan:draw()

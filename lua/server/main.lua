@@ -63,7 +63,7 @@ end
 -- /lube
 
 function love.load()
-	success = love.graphics.setMode( 400, 250)
+	-- success = love.graphics.setMode( 400, 250)
 	inputManager = InputManager:new()
 	-- lube :
 	monde = {} -- messy world.
@@ -122,9 +122,9 @@ function love.update(dt)
 	gameStateManager:update(dt)
 end	
 
--- function love.draw()
--- 	gameStateManager:draw()
--- end
+function love.draw()
+	gameStateManager:draw()
+end
 
 function load_graphic_stuff()
 	local ip_font = love.graphics.newFont(FontDirectory .. "font.ttf", 40)
@@ -132,17 +132,17 @@ function load_graphic_stuff()
 	ip_background = love.graphics.newImage(ImgDirectory .. "ipbg.png")
 end
 
-function love.draw()
-	if graphic_stuff_enabled then
-		love.graphics.draw(ip_background, 0, 0)
-		love.graphics.print("IP externe :", 20, 40)
-		if ip_externe ~= nil then
-			love.graphics.print(ip_externe, 100, 120)
-		else
-			love.graphics.print("?", 40, 120)
-		end
-	end
-end
+-- function love.draw()
+-- 	if graphic_stuff_enabled then
+-- 		love.graphics.draw(ip_background, 0, 0)
+-- 		love.graphics.print("IP externe :", 20, 40)
+-- 		if ip_externe ~= nil then
+-- 			love.graphics.print(ip_externe, 100, 120)
+-- 		else
+-- 			love.graphics.print("?", 40, 120)
+-- 		end
+-- 	end
+-- end
 
 -- utils for lube :
 

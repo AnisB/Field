@@ -273,6 +273,8 @@ function Gameplay.new(mapFile,continuous)
         self.magnetmanager:update(dt)   
 
         -- Other stuff
+        self.cameraMM:update(dt)
+        self.cameraTM:update(dt)
         self.theMagnet:update(dt)
         self.metalMan:update(dt)
         self.mapLoader:update(dt)

@@ -40,8 +40,8 @@ function GameStateManager.new()
 	self.state['Gameplay'] = Gameplay.new("maps.level1")
 	--self.state['LevelChange'] = LevelChange.new()
 	--self.state['PartyEnd'] = PartyEnd.new()
-	self.currentState='attente'
-	-- self.currentState='Gameplay'
+	-- self.currentState='attente'
+	self.currentState='Gameplay'
 
 	return self
 end
