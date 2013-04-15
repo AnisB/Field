@@ -327,3 +327,13 @@ end
 function Gameplay:postSolve(a, b, coll)
 -- we won't do anything with this function
 end
+
+function Gameplay:shakeOnX(dx,speed,duration)
+    self.cameraMM:shakeOnX(dx,speed,duration)
+    self.cameraTM:shakeOnX(dx,speed,duration)
+end
+
+function Gameplay:shakeOnY(dy,speed,duration)
+    self.cameraMM:shakeOnY(dy,speed,duration)
+    self.cameraTM:shakeOnY(dy,speed,duration)
+end
