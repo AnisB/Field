@@ -56,14 +56,12 @@
             if(kinEnergyX>10.5) and object.position.y>self.position.y then
                 self.pc.body:destroy()
                 self.destroy=true
-                Sound.playSound('break')
                 self:loadAnimation("breaking",true)
             end
 
             if(kinEnergyY>11.2) and object.position.x>self.position.x then
                 self.pc.body:destroy()
                 self.destroy=true
-                Sound.playSound('break')
                 self:loadAnimation("breaking",true)            
             end
         end

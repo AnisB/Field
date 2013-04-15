@@ -200,16 +200,16 @@ function MetalMan:collideWith( object, collision )
 			--Ghost dude
 		else
 			if self.metalWeight==MetalMTypes.Acier then
-				if object.type=='Wall' then
+				if (object:getPosition().x >(self.position.x+unitWorldSize)) or (object:getPosition().x <(self.position.x-unitWorldSize)) then
 					self.camera:shakeOnX(2,100,0.2)
-				elseif object.type=='Platform' then
+				elseif (object:getPosition().y >(self.position.y+unitWorldSize)) or (object:getPosition().y <(self.position.y-unitWorldSize)) then
 					self.camera:shakeOnY(2,100,0.2)
 				end
 			end
 			if self.isStatic==true  then
-				if object.type=='Wall' then
+				if (object:getPosition().x >(self.position.x+unitWorldSize)) or (object:getPosition().x <(self.position.x-unitWorldSize)) then
 					self.camera:shakeOnX(5,100,0.2)
-				elseif object.type=='Platform' then
+				elseif (object:getPosition().y >(self.position.y+unitWorldSize)) or (object:getPosition().y <(self.position.y-unitWorldSize)) then
 					self.camera:shakeOnY(5,100,0.2)
 				end
 			end
