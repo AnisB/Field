@@ -46,6 +46,8 @@ function MetalMan.new(camera,pos)
 
 	self.willrotate=false
 
+	self.collisionCounter=0
+
 	return self
 end
 
@@ -132,7 +134,7 @@ function MetalMan:initStaticField()
 	self.pc.body:setGravityScale(0)
 end
 
-function MetalMan:staticField(magnet)
+function MetalMan:disableField()
 
 end
 
@@ -199,17 +201,18 @@ function MetalMan:collideWith( object, collision )
 		if object.type=='GateInterruptor' or object.type=='Interruptor' or object.type=='TheMagnet' then
 			--Ghost dude
 		else
+			self.collisionCounter=self.collisionCounter+1
 			if self.metalWeight==MetalMTypes.Acier then
-				if (object:getPosition().x >(self.position.x+unitWorldSize)) or (object:getPosition().x <(self.position.x-unitWorldSize)) then
+				if (object:getPosition().x >=(self.position.x+unitWorldSize)) or (object:getPosition().x =<(self.position.x-unitWorldSize)) then
 					self.camera:shakeOnX(2,100,0.2)
-				elseif (object:getPosition().y >(self.position.y+unitWorldSize)) or (object:getPosition().y <(self.position.y-unitWorldSize)) then
+				elseif (object:getPosition().y >=(self.position.y+unitWorldSize)) or (object:getPosition().y =<(self.position.y-unitWorldSize)) then
 					self.camera:shakeOnY(2,100,0.2)
 				end
 			end
 			if self.isStatic==true  then
-				if (object:getPosition().x >(self.position.x+unitWorldSize)) or (object:getPosition().x <(self.position.x-unitWorldSize)) then
+				if (object:getPosition().x >=(self.position.x+unitWorldSize)) or (object:getPosition().x =<(self.position.x-unitWorldSize)) then
 					self.camera:shakeOnX(5,100,0.2)
-				elseif (object:getPosition().y >(self.position.y+unitWorldSize)) or (object:getPosition().y <(self.position.y-unitWorldSize)) then
+				elseif (object:getPosition().y >=(self.position.y+unitWorldSize)) or (object:getPosition().y =<(self.position.y-unitWorldSize)) then
 					self.camera:shakeOnY(5,100,0.2)
 				end
 			end
@@ -228,7 +231,14 @@ function MetalMan:collideWith( object, collision )
 end
 
 function MetalMan:unCollideWith( object, collision )
-	if self.willrotate then
+	if self.alive then
+		if object.type=='GateInterruptor' or object.type=='Interruptor' or object.type=='TheMagnet' then
+			--Ghost dude
+		else
+			self.collisionCounter=self.collisionCounter-1
+		end
+	end
+	if self.willrotate and self.collisionCounter==0 then
 		self:loadAnimation("startjumping",true)
 		self.canjump=false
 	end
