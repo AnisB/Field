@@ -279,7 +279,10 @@ function MetalMan:stopMove( )
 		end
 	end
 end
-
+	
+	function MetalMan:staticField(magnet)
+		
+	end
 
 function MetalMan:getPosition(  )
 	return self.position
