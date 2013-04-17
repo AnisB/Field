@@ -5,8 +5,6 @@ This file is part of the Field project]]
 require("game.camera")
 require("game.animmm")
 require("game.metalmanconst")
-require ("game.middleclass")
-require ("game.shadereffect")
 require ("game.shader.shockwave")
 
 MetalMan = {}
@@ -27,7 +25,7 @@ function MetalMan.new()
 
 	-- Other states
 	self.type='MetalMan'
-	self.s= ShockwaveEffect()
+	self.s= ShockwaveEffect.new()
 	self.s:setParameter{
 		center = {0.5,0.5},
 		shockParams = {20,0.8,0.1},
