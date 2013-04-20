@@ -1,6 +1,6 @@
 --[[ 
 This file is part of the Field project]]
-
+require("game.sound")
 
 FirstEnter = {}
 FirstEnter.__index = FirstEnter
@@ -11,6 +11,8 @@ function FirstEnter:new()
     self.img=love.graphics.newImage("img/title.png")
     self.trans=255
     self.up=true
+    self.shouldPass=false
+    self.passTimer=1
     return self
 end
 
@@ -23,8 +25,9 @@ end
 
 
 function FirstEnter:keyPressed(key, unicode)
-	if key=="return" then
-				gameStateManager:changeState('ConnectToServer')
+	if key=="return" and self.shouldPass==false then
+		self.shouldPass=true
+		Sound.playSound("firstenter")
 	end
 	
 end
@@ -56,12 +59,19 @@ function FirstEnter:update(dt)
 			self.trans=255
 		end
 	end
+
+	if self.shouldPass then
+		self.passTimer= self.passTimer - dt
+		if self.passTimer<=0 then
+			gameStateManager:changeState('Menu')
+		end
+	end
 end
 
 function FirstEnter:draw()
-	love.graphics.setColor(255,150,150,self.trans)
+	love.graphics.setColor(255,150,150,self.trans*self.passTimer)
 	love.graphics.print("Press Enter",550,500)
-	love.graphics.setColor(255,255,255,255)
+	love.graphics.setColor(255,255,255,255*self.passTimer)
 	love.graphics.draw(self.img,300,100)
 
 

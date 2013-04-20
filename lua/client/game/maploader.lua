@@ -39,7 +39,10 @@ function MapLoader.new(MapLoaderFile)
     self.arcs={}
 
     -- Creation du Layer
-    self.tilesets= Tilesets.new(self.map.tilesets,self.map.layers[1])
+    self.tilesets={}
+    table.insert(self.tilesets,Tilesets.new(self.map.tilesets,self.map.layers[1]))
+    -- table.insert(self.tilesets,Tilesets.new(self.map.tilesets,self.map.layers[2]))
+
 
     return self
 end
@@ -86,7 +89,8 @@ end
 
 
 function MapLoader:draw(pos)
-	self.tilesets:draw({x=pos.x-windowW/2,y=windowH/2-pos.y})
+	self.tilesets[1]:draw({x=pos.x-windowW/2,y=windowH/2-pos.y})
+	-- self.tilesets[2]:draw({x=pos.x-windowW/2,y=windowH/2-pos.y})
 
 	for i,p in pairs(self.metals) do
         if p.drawed==true then

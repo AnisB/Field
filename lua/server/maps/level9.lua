@@ -504,11 +504,270 @@ return {
           shape = "rectangle",
           x = 1024,
           y = 640,
-          width = 960,
+          width = 64,
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "1"
+            ["animid"] = "1",
+            ["closeid"] = "1",
+            ["next"] = "2",
+            ["type"] = "DebutHG"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1088,
+          y = 640,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "2",
+            ["next"] = "3",
+            ["prev"] = "1",
+            ["type"] = "MillieuHG"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1472,
+          y = 640,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "8",
+            ["openid"] = "1",
+            ["prev"] = "7",
+            ["type"] = "FinHG"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1152,
+          y = 640,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "3",
+            ["next"] = "4",
+            ["prev"] = "2",
+            ["type"] = "MillieuHG"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1216,
+          y = 640,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "4",
+            ["next"] = "5",
+            ["prev"] = "3",
+            ["type"] = "MillieuHG"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1280,
+          y = 640,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "5",
+            ["next"] = "6",
+            ["prev"] = "4",
+            ["type"] = "MillieuHG"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1344,
+          y = 640,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "6",
+            ["next"] = "7",
+            ["prev"] = "5",
+            ["type"] = "MillieuHG"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1408,
+          y = 640,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "7",
+            ["next"] = "8",
+            ["prev"] = "6",
+            ["type"] = "MillieuHG"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1856,
+          y = 640,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "12",
+            ["next"] = "13",
+            ["prev"] = "11",
+            ["type"] = "MillieuHD"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1920,
+          y = 640,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "11",
+            ["closeid"] = "1",
+            ["next"] = "12",
+            ["type"] = "DebutHD"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1664,
+          y = 640,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "15",
+            ["next"] = "16",
+            ["prev"] = "14",
+            ["type"] = "MillieuHD"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1536,
+          y = 640,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "17",
+            ["openid"] = "1",
+            ["prev"] = "16",
+            ["type"] = "FinHD"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1600,
+          y = 640,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "16",
+            ["next"] = "17",
+            ["prev"] = "15",
+            ["type"] = "MillieuHD"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1792,
+          y = 640,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "13",
+            ["next"] = "14",
+            ["prev"] = "12",
+            ["type"] = "MillieuHD"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1728,
+          y = 640,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "14",
+            ["next"] = "15",
+            ["prev"] = "13",
+            ["type"] = "MillieuHD"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1984,
+          y = 640,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "29",
+            ["openid"] = "2",
+            ["prev"] = "28",
+            ["type"] = "FinVH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1984,
+          y = 256,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "23",
+            ["next"] = "24",
+            ["prev"] = "22",
+            ["type"] = "MillieuVH"
           }
         },
         {
@@ -518,10 +777,109 @@ return {
           x = 1984,
           y = 128,
           width = 64,
-          height = 576,
+          height = 64,
           visible = true,
           properties = {
-            ["id"] = "2"
+            ["animid"] = "21",
+            ["closeid"] = "2",
+            ["next"] = "22",
+            ["type"] = "DebutVH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1984,
+          y = 192,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "22",
+            ["next"] = "23",
+            ["prev"] = "21",
+            ["type"] = "MillieuVH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1984,
+          y = 320,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "24",
+            ["next"] = "25",
+            ["prev"] = "23",
+            ["type"] = "MillieuVH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1984,
+          y = 384,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "25",
+            ["next"] = "26",
+            ["prev"] = "24",
+            ["type"] = "MillieuVH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1984,
+          y = 448,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "26",
+            ["next"] = "27",
+            ["prev"] = "25",
+            ["type"] = "MillieuVH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1984,
+          y = 512,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "27",
+            ["next"] = "28",
+            ["prev"] = "26",
+            ["type"] = "MillieuVH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1984,
+          y = 576,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "28",
+            ["next"] = "29",
+            ["prev"] = "27",
+            ["type"] = "MillieuVH"
           }
         }
       }
@@ -771,13 +1129,14 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 1024,
-          y = 128,
+          x = 960,
+          y = 640,
           width = 64,
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "1"
+            ["closeid"] = "1",
+            ["openid"] = "1"
           }
         },
         {
@@ -790,7 +1149,8 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "2"
+            ["closeid"] = "2",
+            ["openid"] = "2"
           }
         },
         {
@@ -803,7 +1163,8 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "1"
+            ["closeid"] = "1",
+            ["openid"] = "1"
           }
         }
       }

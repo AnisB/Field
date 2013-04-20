@@ -31,6 +31,11 @@ function ConnectToServer:mousePressed(x, y, button)
 			self:connect()
 		end
 	end
+	if x > 400 and x < 400+100 and y > 600 and y < 600+50 then
+		gameStateManager:changeState('Menu')
+		love.mouse.setVisible(true)
+	end
+
 end
 
 function ConnectToServer:mouseReleased(x, y, button)
@@ -179,6 +184,18 @@ function ConnectToServer:draw()
 	love.graphics.rectangle("fill", 198, 600, 100, 50)
 	love.graphics.setColor(255, 255, 255, 255)
 	love.graphics.print("PLAY", 198+10, 600)
+
+	-- bouton play :
+	if x > 400 and x < 400+100 and y > 600 and y < 600+50 then
+		love.graphics.setColor(150, 150, 150, 255)
+		hover = true
+	else
+		love.graphics.setColor(50, 50, 50, 255)
+	end
+	love.graphics.rectangle("fill", 400, 600, 150, 50)
+	love.graphics.setColor(255, 255, 255, 255)
+	love.graphics.print("Return", 400+10, 600)
+
 
 	-- cursor :
 	if hover then

@@ -65,14 +65,196 @@
  <objectgroup color="#66ccff" name="switch" width="60" height="13"/>
  <objectgroup color="#e6e6e6" name="metal" width="60" height="13"/>
  <objectgroup color="#333333" name="gate" width="60" height="13">
-  <object x="1024" y="640" width="960" height="64">
+  <object x="1024" y="640" width="64" height="64">
    <properties>
-    <property name="id" value="1"/>
+    <property name="animid" value="1"/>
+    <property name="closeid" value="1"/>
+    <property name="next" value="2"/>
+    <property name="type" value="DebutHG"/>
    </properties>
   </object>
-  <object x="1984" y="128" width="64" height="576">
+  <object x="1088" y="640" width="64" height="64">
    <properties>
-    <property name="id" value="2"/>
+    <property name="animid" value="2"/>
+    <property name="next" value="3"/>
+    <property name="prev" value="1"/>
+    <property name="type" value="MillieuHG"/>
+   </properties>
+  </object>
+  <object x="1472" y="640" width="64" height="64">
+   <properties>
+    <property name="animid" value="8"/>
+    <property name="openid" value="1"/>
+    <property name="prev" value="7"/>
+    <property name="type" value="FinHG"/>
+   </properties>
+  </object>
+  <object x="1152" y="640" width="64" height="64">
+   <properties>
+    <property name="animid" value="3"/>
+    <property name="next" value="4"/>
+    <property name="prev" value="2"/>
+    <property name="type" value="MillieuHG"/>
+   </properties>
+  </object>
+  <object x="1216" y="640" width="64" height="64">
+   <properties>
+    <property name="animid" value="4"/>
+    <property name="next" value="5"/>
+    <property name="prev" value="3"/>
+    <property name="type" value="MillieuHG"/>
+   </properties>
+  </object>
+  <object x="1280" y="640" width="64" height="64">
+   <properties>
+    <property name="animid" value="5"/>
+    <property name="next" value="6"/>
+    <property name="prev" value="4"/>
+    <property name="type" value="MillieuHG"/>
+   </properties>
+  </object>
+  <object x="1344" y="640" width="64" height="64">
+   <properties>
+    <property name="animid" value="6"/>
+    <property name="next" value="7"/>
+    <property name="prev" value="5"/>
+    <property name="type" value="MillieuHG"/>
+   </properties>
+  </object>
+  <object x="1408" y="640" width="64" height="64">
+   <properties>
+    <property name="animid" value="7"/>
+    <property name="next" value="8"/>
+    <property name="prev" value="6"/>
+    <property name="type" value="MillieuHG"/>
+   </properties>
+  </object>
+  <object x="1856" y="640" width="64" height="64">
+   <properties>
+    <property name="animid" value="12"/>
+    <property name="next" value="13"/>
+    <property name="prev" value="11"/>
+    <property name="type" value="MillieuHD"/>
+   </properties>
+  </object>
+  <object x="1920" y="640" width="64" height="64">
+   <properties>
+    <property name="animid" value="11"/>
+    <property name="closeid" value="1"/>
+    <property name="next" value="12"/>
+    <property name="type" value="DebutHD"/>
+   </properties>
+  </object>
+  <object x="1664" y="640" width="64" height="64">
+   <properties>
+    <property name="animid" value="15"/>
+    <property name="next" value="16"/>
+    <property name="prev" value="14"/>
+    <property name="type" value="MillieuHD"/>
+   </properties>
+  </object>
+  <object x="1536" y="640" width="64" height="64">
+   <properties>
+    <property name="animid" value="17"/>
+    <property name="openid" value="1"/>
+    <property name="prev" value="16"/>
+    <property name="type" value="FinHD"/>
+   </properties>
+  </object>
+  <object x="1600" y="640" width="64" height="64">
+   <properties>
+    <property name="animid" value="16"/>
+    <property name="next" value="17"/>
+    <property name="prev" value="15"/>
+    <property name="type" value="MillieuHD"/>
+   </properties>
+  </object>
+  <object x="1792" y="640" width="64" height="64">
+   <properties>
+    <property name="animid" value="13"/>
+    <property name="next" value="14"/>
+    <property name="prev" value="12"/>
+    <property name="type" value="MillieuHD"/>
+   </properties>
+  </object>
+  <object x="1728" y="640" width="64" height="64">
+   <properties>
+    <property name="animid" value="14"/>
+    <property name="next" value="15"/>
+    <property name="prev" value="13"/>
+    <property name="type" value="MillieuHD"/>
+   </properties>
+  </object>
+  <object x="1984" y="640" width="64" height="64">
+   <properties>
+    <property name="animid" value="29"/>
+    <property name="openid" value="2"/>
+    <property name="prev" value="28"/>
+    <property name="type" value="FinVH"/>
+   </properties>
+  </object>
+  <object x="1984" y="256" width="64" height="64">
+   <properties>
+    <property name="animid" value="23"/>
+    <property name="next" value="24"/>
+    <property name="prev" value="22"/>
+    <property name="type" value="MillieuVH"/>
+   </properties>
+  </object>
+  <object x="1984" y="128" width="64" height="64">
+   <properties>
+    <property name="animid" value="21"/>
+    <property name="closeid" value="2"/>
+    <property name="next" value="22"/>
+    <property name="type" value="DebutVH"/>
+   </properties>
+  </object>
+  <object x="1984" y="192" width="64" height="64">
+   <properties>
+    <property name="animid" value="22"/>
+    <property name="next" value="23"/>
+    <property name="prev" value="21"/>
+    <property name="type" value="MillieuVH"/>
+   </properties>
+  </object>
+  <object x="1984" y="320" width="64" height="64">
+   <properties>
+    <property name="animid" value="24"/>
+    <property name="next" value="25"/>
+    <property name="prev" value="23"/>
+    <property name="type" value="MillieuVH"/>
+   </properties>
+  </object>
+  <object x="1984" y="384" width="64" height="64">
+   <properties>
+    <property name="animid" value="25"/>
+    <property name="next" value="26"/>
+    <property name="prev" value="24"/>
+    <property name="type" value="MillieuVH"/>
+   </properties>
+  </object>
+  <object x="1984" y="448" width="64" height="64">
+   <properties>
+    <property name="animid" value="26"/>
+    <property name="next" value="27"/>
+    <property name="prev" value="25"/>
+    <property name="type" value="MillieuVH"/>
+   </properties>
+  </object>
+  <object x="1984" y="512" width="64" height="64">
+   <properties>
+    <property name="animid" value="27"/>
+    <property name="next" value="28"/>
+    <property name="prev" value="26"/>
+    <property name="type" value="MillieuVH"/>
+   </properties>
+  </object>
+  <object x="1984" y="576" width="64" height="64">
+   <properties>
+    <property name="animid" value="28"/>
+    <property name="next" value="29"/>
+    <property name="prev" value="27"/>
+    <property name="type" value="MillieuVH"/>
    </properties>
   </object>
  </objectgroup>
@@ -162,19 +344,22 @@
   </object>
  </objectgroup>
  <objectgroup color="#800080" name="gateswitch" width="60" height="13">
-  <object x="1024" y="128" width="64" height="64">
+  <object x="960" y="640" width="64" height="64">
    <properties>
-    <property name="id" value="1"/>
+    <property name="closeid" value="1"/>
+    <property name="openid" value="1"/>
    </properties>
   </object>
   <object x="2624" y="704" width="64" height="64">
    <properties>
-    <property name="id" value="2"/>
+    <property name="closeid" value="2"/>
+    <property name="openid" value="2"/>
    </properties>
   </object>
   <object x="2624" y="64" width="64" height="64">
    <properties>
-    <property name="id" value="1"/>
+    <property name="closeid" value="1"/>
+    <property name="openid" value="1"/>
    </properties>
   </object>
  </objectgroup>

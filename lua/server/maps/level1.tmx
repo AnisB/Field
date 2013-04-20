@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="70" height="10" tilewidth="64" tileheight="64">
- <tileset firstgid="1" name="mur" tilewidth="64" tileheight="64">
-  <image source="mur.png" trans="ffffff" width="64" height="64"/>
- </tileset>
+ <tileset firstgid="1" source="../../../data/mm/cable1.tsx"/>
  <tileset firstgid="2" name="sol" tilewidth="64" tileheight="64">
   <image source="sol.png" trans="ffffff" width="64" height="64"/>
  </tileset>
@@ -26,6 +24,27 @@
  </tileset>
  <tileset firstgid="9" name="fin" tilewidth="192" tileheight="128">
   <image source="fin.png" width="192" height="128"/>
+ </tileset>
+ <tileset firstgid="10" name="cable1" tilewidth="64" tileheight="64">
+  <image source="../../../data/mm/cable1.png" width="77" height="372"/>
+ </tileset>
+ <tileset firstgid="15" name="cable2" tilewidth="46" tileheight="64">
+  <image source="../../../data/mm/cable2.png" width="46" height="243"/>
+ </tileset>
+ <tileset firstgid="18" name="citerne" tilewidth="64" tileheight="64">
+  <image source="../../../data/mm/citerne.png" width="418" height="632"/>
+ </tileset>
+ <tileset firstgid="72" name="container1" tilewidth="64" tileheight="64">
+  <image source="../../../data/mm/container1.png" width="610" height="276"/>
+ </tileset>
+ <tileset firstgid="108" name="container2" tilewidth="64" tileheight="64">
+  <image source="../../../data/mm/container2.png" width="480" height="330"/>
+ </tileset>
+ <tileset firstgid="143" name="passerelle1" tilewidth="64" tileheight="64">
+  <image source="../../../data/mm/passerelle1.png" width="198" height="342"/>
+ </tileset>
+ <tileset firstgid="158" name="passerelle2" tilewidth="64" tileheight="64">
+  <image source="../../../data/mm/passerelle2.png" width="122" height="599"/>
  </tileset>
  <layer name="Calque de Tile 1" width="70" height="10">
   <data encoding="base64" compression="zlib">
