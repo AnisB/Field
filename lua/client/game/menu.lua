@@ -19,7 +19,7 @@ end
 function Menu:mousePressed(x, y, button)
 	if not self.shouldQuit then
 		if x > 550 and x < 550+200 and y > 350 and y < 350+50 then
-		  -- gameStateManager:changeState('Menu')
+		  gameStateManager:changeState('ChoixTypeJeuSolo')
 		end
 
 
@@ -32,6 +32,9 @@ function Menu:mousePressed(x, y, button)
 			gameStateManager:changeState('Options')
 		end
 
+		if x > 550 and x < 550+200 and y > 650 and y < 650+50 then
+			gameStateManager:changeState('Credits')
+		end
 
 		if x > 1050 and x < 1050+200 and y > 650 and y < 650+50 then
 			self.shouldQuit=true
@@ -115,6 +118,17 @@ function Menu:draw()
 	 	love.graphics.rectangle("fill", 550, 550, 200, 50)
 	 	love.graphics.setColor(255, 100, 100, 255)
 	 	love.graphics.print("Options",600,555)
+
+	 	if x > 550 and x < 550+200 and y > 650 and y < 650+50 then
+	 		love.graphics.setColor(150, 150, 150, 255)
+	 	else
+	 		love.graphics.setColor(50, 50, 50, 255)
+	 	end
+	 	love.graphics.rectangle("fill", 550, 650, 200, 50)
+	 	love.graphics.setColor(255, 100, 100, 255)
+	 	love.graphics.print("Credits",600,655)
+
+
 	 	if x > 1050 and x < 1050+200 and y > 650 and y < 650+50 then
 	 		love.graphics.setColor(150, 150, 150, 255)
 	 	else

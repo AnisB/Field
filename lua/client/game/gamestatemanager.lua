@@ -13,6 +13,10 @@ require("game.waitingfordistant")
 require("game.levelbegin")
 require("game.gameplay")
 require("game.menu")
+require("game.credits")
+require("game.solo.choixniveausolo")
+require("game.solo.choixtypejeusolo")
+require("game.solo.choixpersosolo")
 --require("game.levelchange")
 --require()
 GameStateManager = {}
@@ -26,6 +30,9 @@ function GameStateManager.new()
 	self.state['Storyline'] = Storyline.new()
 	self.state['FirstEnter'] = FirstEnter.new()
 	self.state['Menu'] = Menu.new()
+	self.state['Credits'] = Credits.new()
+
+	-- Jeu Réseau
 	self.state['ConnectToServer'] = ConnectToServer.new()
 	self.state['ChoixTypeJeu'] = ChoixTypeJeu.new()
 	self.state['ChoixPerso'] = ChoixPerso.new()
@@ -35,6 +42,12 @@ function GameStateManager.new()
 	self.state['Gameplay'] = Gameplay.new()
 	--self.state['LevelChange'] = LevelChange.new()
 	--self.state['PartyEnd'] = PartyEnd.new()
+
+
+	-- Jeu Solo
+	self.state['ChoixTypeJeuSolo'] = ChoixTypeJeuSolo.new()	
+	self.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new()
+	self.state['ChoixPersoSolo'] = ChoixPersoSolo.new()
 	self.currentState='FirstEnter'
 	return self
 end
