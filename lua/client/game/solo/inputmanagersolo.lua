@@ -9,22 +9,22 @@ MetalManKEYS={hands="e", up="z",down="s",left="q",right="d",changeweight="b",cha
 TheMagnetKEYS={hands="f", up="up",down="down",left="left",right="right",repulsive="p",attractive="o",rotativel="k",rotativer="l",static="i"}
 
 
-InputManager = {}
-InputManager.__index = InputManager
-function InputManager.new()
+InputManagerSolo = {}
+InputManagerSolo.__index = InputManagerSolo
+function InputManagerSolo.new()
   local self = {}
-  setmetatable(self, InputManager)
+  setmetatable(self, InputManagerSolo)
   self.keys=require("other.keys")
   self.joystickKeyPressed = {"released", "released", "released", "released"}
   self.joystickHat = {"up", "down", "left", "right"}
   return self
 end
 
-function InputManager:keyPressed(akey, unicode)
+function InputManagerSolo:keyPressed(akey, unicode)
   if(monde.moi.perso=="metalman") then 
     for i,v in pairs(self.keys.MetalManKEYS) do
       if(v==akey) then
-        serveur:send({type="input", pck={character="metalman", key=MetalManKEYS[i], state=true}})
+        -- gameStateManager.state['GamePlay']:Input(akey)
       end
     end
     return
@@ -37,7 +37,7 @@ function InputManager:keyPressed(akey, unicode)
     end
   end
 
-  function InputManager:keyReleased(akey, unicode)
+  function InputManagerSolo:keyReleased(akey, unicode)
   print("J'ai un input à handler"..akey)
   if(monde.moi.perso=="metalman") then 
     print("C'est un metalman, recherche de la clé")
@@ -59,7 +59,7 @@ function InputManager:keyPressed(akey, unicode)
     end
   end
   
-function InputManager:joystickPressed(joystick, button)
+function InputManagerSolo:joystickPressed(joystick, button)
 	if not gamePaused then
 		if(monde.moi.perso=="metalman") then 
 		for i,v in pairs(self.keys.MetalManJoystickKEYS) do
@@ -78,7 +78,7 @@ function InputManager:joystickPressed(joystick, button)
 	end
 end
 
-function InputManager:joystickReleased(joystick, button)
+function InputManagerSolo:joystickReleased(joystick, button)
 	if not gamePaused then
 		if(monde.moi.perso=="metalman") then 
 		print("C'est un metalman, recherche de la clé")
@@ -100,7 +100,7 @@ function InputManager:joystickReleased(joystick, button)
 	end
 end
 
-function InputManager:update()
+function InputManagerSolo:update()
 	direction = love.joystick.getHat(1, 1)
 	
 	local newJoystickKeyPressed = {"released", "released", "released", "released"}
@@ -139,7 +139,7 @@ function InputManager:update()
 end
 
 
-function InputManager:isKeyDown(key)
+function InputManagerSolo:isKeyDown(key)
 	local ok=false
 	if self.listKeys[key]~=nil then
 		ok=true

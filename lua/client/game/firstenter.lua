@@ -28,6 +28,7 @@ function FirstEnter:keyPressed(key, unicode)
 	if key=="return" and self.shouldPass==false then
 		self.shouldPass=true
 		Sound.playSound("firstenter")
+		print "merde"
 	end
 	
 end

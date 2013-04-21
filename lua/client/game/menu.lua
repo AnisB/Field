@@ -19,20 +19,28 @@ end
 function Menu:mousePressed(x, y, button)
 	if not self.shouldQuit then
 		if x > 550 and x < 550+200 and y > 350 and y < 350+50 then
-		  gameStateManager:changeState('ChoixTypeJeuSolo')
+			self.timer=0
+			self.enteringDone=false
+			gameStateManager:changeState('ChoixTypeJeuSolo')
 		end
 
 
 		if x > 550 and x < 550+200 and y > 450 and y < 450+50 then
+			self.timer=0
+			self.enteringDone=false			
 			gameStateManager:changeState('ConnectToServer')
 		end
 
 
 		if x > 550 and x < 550+200 and y > 550 and y < 550+50 then
+			self.timer=0
+			self.enteringDone=false			
 			gameStateManager:changeState('Options')
 		end
 
 		if x > 550 and x < 550+200 and y > 650 and y < 650+50 then
+			self.timer=0
+			self.enteringDone=false			
 			gameStateManager:changeState('Credits')
 		end
 
@@ -89,72 +97,72 @@ function Menu:draw()
 	-- rectangles :
 	 if not self.shouldQuit then
 	 	if x > 550 and x < 550+200 and y > 350 and y < 350+50 then
-	 		love.graphics.setColor(150, 150, 150, 255)
+	 		love.graphics.setColor(150, 150, 150, 255*self.timer)
 	 	else
-	 		love.graphics.setColor(50, 50, 50, 255)
+	 		love.graphics.setColor(50, 50, 50, 255*self.timer)
 	 	end
 	 	love.graphics.rectangle("fill", 550, 350, 200, 50)
 
-	 	love.graphics.setColor(255, 100, 100, 255)
+	 	love.graphics.setColor(255, 255,255, 255*self.timer)
 	 	love.graphics.print("Solo",620,355)
 
 
 	 	if x > 550 and x < 550+200 and y > 450 and y < 450+50 then
-	 		love.graphics.setColor(150, 150, 150, 255)
+	 		love.graphics.setColor(150, 150, 150, 255*self.timer)
 	 	else
-	 		love.graphics.setColor(50, 50, 50, 255)
+	 		love.graphics.setColor(50, 50, 50, 255*self.timer)
 	 	end
 	 	love.graphics.rectangle("fill", 550, 450, 200, 50)
 
-	 	love.graphics.setColor(255, 100, 100, 255)
+	 	love.graphics.setColor(255, 255,255, 255*self.timer)
 	 	love.graphics.print("Coop",620,455)
 
 
 	 	if x > 550 and x < 550+200 and y > 550 and y < 550+50 then
-	 		love.graphics.setColor(150, 150, 150, 255)
+	 		love.graphics.setColor(150, 150, 150, 255*self.timer)
 	 	else
-	 		love.graphics.setColor(50, 50, 50, 255)
+	 		love.graphics.setColor(50, 50, 50, 255*self.timer)
 	 	end
 	 	love.graphics.rectangle("fill", 550, 550, 200, 50)
-	 	love.graphics.setColor(255, 100, 100, 255)
+	 	love.graphics.setColor(255, 255,255, 255*self.timer)
 	 	love.graphics.print("Options",600,555)
 
 	 	if x > 550 and x < 550+200 and y > 650 and y < 650+50 then
-	 		love.graphics.setColor(150, 150, 150, 255)
+	 		love.graphics.setColor(150, 150, 150, 255*self.timer)
 	 	else
-	 		love.graphics.setColor(50, 50, 50, 255)
+	 		love.graphics.setColor(50, 50, 50, 255*self.timer)
 	 	end
 	 	love.graphics.rectangle("fill", 550, 650, 200, 50)
-	 	love.graphics.setColor(255, 100, 100, 255)
+	 	love.graphics.setColor(255, 255,255, 255*self.timer)
 	 	love.graphics.print("Credits",600,655)
 
 
 	 	if x > 1050 and x < 1050+200 and y > 650 and y < 650+50 then
-	 		love.graphics.setColor(150, 150, 150, 255)
+	 		love.graphics.setColor(150, 150, 150, 255*self.timer)
 	 	else
-	 		love.graphics.setColor(50, 50, 50, 255)
+	 		love.graphics.setColor(50, 50, 50, 255*self.timer)
 	 	end
 	 	love.graphics.rectangle("fill", 1050, 650, 200, 50)
-	 	love.graphics.setColor(255, 100, 100, 255)
+	 	love.graphics.setColor(255, 255,255, 255*self.timer)
 	 	love.graphics.print("Quit",1050+70,655)
 	 else
 
 	 	love.graphics.setColor(50, 50, 50, 255*self.filter)
 	 	love.graphics.rectangle("fill", 550, 350, 200, 50)
-	 	love.graphics.setColor(255, 100, 100, 255*self.filter)
+	 	love.graphics.setColor(255, 255,255, 255*self.filter)
 	 	love.graphics.print("Solo",620,355)
 	 	love.graphics.setColor(50, 50, 50, 255*self.filter)
 	 	love.graphics.rectangle("fill", 550, 450, 200, 50)
-	 	love.graphics.setColor(255, 100, 100, 255*self.filter)
+	 	love.graphics.setColor(255, 255,255, 255*self.filter)
 	 	love.graphics.print("Coop",620,455)
 	 	love.graphics.setColor(50, 50, 50, 255*self.filter)
 	 	love.graphics.rectangle("fill", 550, 550, 200, 50)
-	 	love.graphics.setColor(255, 100, 100, 255*self.filter)
+	 	love.graphics.setColor(255, 255,255, 255*self.filter)
 	 	love.graphics.print("Options",600,555)
 	 	love.graphics.setColor(150, 150, 150, 255*self.filter)
 	 	love.graphics.setColor(50, 50, 50, 255)
 	 	love.graphics.rectangle("fill", 1050, 650, 200, 50)
-	 	love.graphics.setColor(255, 100, 100, 255*self.filter)
+	 	love.graphics.setColor(255, 255,255, 255*self.filter)
 	 	love.graphics.print("Quit",1050+70,655)
 
 
@@ -170,7 +178,7 @@ function Menu:draw()
 	 		love.graphics.setColor(50, 50, 50, 255)
 	 	end
 	 	love.graphics.rectangle("fill", 540, 550, 100, 50)
-	 	love.graphics.setColor(255, 100, 100, 255)
+	 	love.graphics.setColor(255, 100,100, 255)
 	 	love.graphics.print("Oui",570,555)
 	 	if x > 640 and x < 640+100 and y > 550 and y < 550+50 then
 	 		love.graphics.setColor(150, 150, 150, 255)

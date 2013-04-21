@@ -3,7 +3,7 @@ This file is part of the Field project]]
 
 ChoixTypeJeuSolo = {}
 ChoixTypeJeuSolo.__index = ChoixTypeJeuSolo
-function ChoixTypeJeuSolo:new()
+function ChoixTypeJeuSolo.new()
     local self = {}
     setmetatable(self, ChoixTypeJeuSolo)
     self.isRed=0
@@ -12,9 +12,11 @@ end
 
 function ChoixTypeJeuSolo:mousePressed(x, y, button)
 	if x > 90 and x < 90+150 and y > 105 and y < 105+35 then
+		gameStateManager.state['ChoixPersoSolo'] = ChoixPersoSolo.new(false)
 		gameStateManager:changeState('ChoixPersoSolo')
 		love.mouse.setVisible(true)
 	elseif x > 90 and x < 90+150 and y > 205 and y < 205+35 then
+		gameStateManager.state['ChoixPersoSolo'] = ChoixPersoSolo.new(true)
 		gameStateManager:changeState('ChoixPersoSolo')
 		love.mouse.setVisible(true)
 	elseif x > 90 and x < 90+150 and y > 605 and y < 605+35 then

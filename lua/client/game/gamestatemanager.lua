@@ -14,6 +14,7 @@ require("game.levelbegin")
 require("game.gameplay")
 require("game.menu")
 require("game.credits")
+require("game.options")
 require("game.solo.choixniveausolo")
 require("game.solo.choixtypejeusolo")
 require("game.solo.choixpersosolo")
@@ -25,12 +26,15 @@ GameStateManager.__index = GameStateManager
 function GameStateManager.new()
 	local self = {}
 	setmetatable(self, GameStateManager)
+
+	-- Global States
 	self.state = {}
 	self.state['Prelude'] = Prelude.new()
 	self.state['Storyline'] = Storyline.new()
 	self.state['FirstEnter'] = FirstEnter.new()
 	self.state['Menu'] = Menu.new()
 	self.state['Credits'] = Credits.new()
+	self.state['Options'] = Options.new()
 
 	-- Jeu Réseau
 	self.state['ConnectToServer'] = ConnectToServer.new()
@@ -46,8 +50,10 @@ function GameStateManager.new()
 
 	-- Jeu Solo
 	self.state['ChoixTypeJeuSolo'] = ChoixTypeJeuSolo.new()	
-	self.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new()
-	self.state['ChoixPersoSolo'] = ChoixPersoSolo.new()
+	self.state['ChoixNiveauSolo'] = nil
+	self.state['ChoixPersoSolo'] = nil
+
+	-- Init
 	self.currentState='FirstEnter'
 	return self
 end
@@ -96,6 +102,11 @@ function GameStateManager:draw()
 end
 function GameStateManager:changeState(newState)
 	self.currentState=newState
+end
+
+function GameStateManager:failed()
+	print(self.currentState)
+	self.state[self.currentState]:failed()
 end
 
 function GameStateManager:finish()
