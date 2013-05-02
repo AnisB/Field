@@ -161,17 +161,3 @@ function MetalSolo.new(pos,shapeType,typeP,material,typemetalSolo,netid)
 		love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
 	end
 
-
-function MetalSolo:send(x,y)
-	if self.metalSoloType==MetalSoloTypes.Static then
-		return ("@metalSolo".."#"..self.netid.."#".."static".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor( self.position.y+y))
-	else
-		if self.metalSoloWeight==MetalSoloMTypes.Alu then
-			return ("@metalSolo".."#"..self.netid.."#".."aluminium".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor( self.position.y+y))
-		elseif self.metalSoloWeight==MetalSoloMTypes.Acier then
-			return ("@metalSolo".."#"..self.netid.."#".."acier".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor( self.position.y+y))
-		end
-	end
-end
-
-

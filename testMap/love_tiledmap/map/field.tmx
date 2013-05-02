@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
+<map version="1.0" orientation="orthogonal" width="20" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="sol" tilewidth="32" tileheight="32">
+  <image source="sol.png" trans="ffffff" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="2" name="mur" tilewidth="32" tileheight="32">
+  <image source="mur.png" trans="ffffff" width="32" height="32"/>
+ </tileset>
+ <layer name="decor" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYmBgYKQSZoJiaoGhYh7M/8SC4RR+6O6n1Dx0eVqbhx4HlJpHSP1QNo8YQI/0jC3vUGIetcBQMI9aZT0MAwDz5wCc
+  </data>
+ </layer>
+ <objectgroup color="#80ff00" name="mur" width="20" height="20">
+  <object x="0" y="0" width="32" height="608"/>
+  <object x="224" y="224" width="32" height="192"/>
+  <object x="384" y="320" width="32" height="96"/>
+  <object x="608" y="0" width="32" height="608"/>
+ </objectgroup>
+ <objectgroup color="#0000ff" name="plateforme" width="20" height="20">
+  <object x="32" y="0" width="576" height="32"/>
+  <object x="416" y="128" width="192" height="32"/>
+  <object x="32" y="128" width="64" height="32"/>
+  <object x="128" y="224" width="96" height="32"/>
+  <object x="32" y="480" width="160" height="32"/>
+  <object x="0" y="608" width="640" height="32"/>
+  <object x="512" y="416" width="96" height="32"/>
+  <object x="384" y="288" width="128" height="32"/>
+ </objectgroup>
+ <objectgroup color="#804000" name="bloc_cassable" width="20" height="20">
+  <object x="224" y="576" width="32" height="32"/>
+  <object x="224" y="544" width="32" height="32"/>
+  <object x="224" y="512" width="32" height="32"/>
+  <object x="480" y="576" width="32" height="32"/>
+  <object x="224" y="480" width="32" height="32"/>
+  <object x="224" y="448" width="32" height="32"/>
+  <object x="224" y="416" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup color="#cccccc" name="bloc_deplacable" width="20" height="20">
+  <object x="32" y="448" width="32" height="32"/>
+  <object x="64" y="576" width="32" height="32"/>
+  <object x="32" y="96" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="sphere" width="20" height="20">
+  <object type="statique" x="320" y="160" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="joueurs" width="20" height="20">
+  <object name="metalman" x="64" y="448" width="32" height="32"/>
+  <object name="magnetman" x="128" y="448" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup color="#ff0080" name="generateur" width="20" height="20">
+  <object x="544" y="64" width="32" height="32"/>
+ </objectgroup>
+</map>

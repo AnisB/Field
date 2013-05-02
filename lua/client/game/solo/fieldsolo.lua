@@ -142,11 +142,3 @@ function FieldSolo:draw(x,y)
 	love.graphics.draw(self.back, x-unitWorldSize/4,y-unitWorldSize/4)
   love.graphics.draw(self.mov, x-unitWorldSize/4,y-unitWorldSize/4)
 end
-
-function FieldSolo:send(x,y)
-  if  self.isActive then
-    return ("@fieldSolo".."#"..self.fieldSoloType.."#".."1".."#"..math.floor(x-unitWorldSize/4).."#"..math.floor(y-unitWorldSize/4))
-  else
-    return ("@fieldSolo".."#"..self.fieldSoloType.."#".."0".."#"..math.floor(x-unitWorldSize/4).."#"..math.floor(y-unitWorldSize/4))
-  end
-end

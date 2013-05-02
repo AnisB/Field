@@ -44,7 +44,3 @@ end
 function WallSolo:draw(x,y)
 
 end
-
-function WallSolo:send(x,y)
-    return "@wallSolo"
-end

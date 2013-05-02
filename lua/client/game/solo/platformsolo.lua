@@ -43,7 +43,3 @@ function PlatformSolo:unCollideWith( object, collision )
 end
 function PlatformSolo:draw(x,y)
 end
-
-function PlatformSolo:send(x,y)
-    return "@platformSolo".."#"
-end

@@ -75,8 +75,3 @@ function CameraSolo:shakeOnY(dy,speed,duration)
 	self.shake.y.enable=true
 
 end
-
-
-function CameraSolo:toSend()
-	return "@cameraSolo".."#"..self.position.x.."#"..self.position.y
-end

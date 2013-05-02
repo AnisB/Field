@@ -230,11 +230,7 @@ function GeneratorSolo:draw(x,y)
 	love.graphics.draw(self.anim:getSprite(), self.position.x-x-unitWorldSize/2, self.position.y+y-unitWorldSize/2)
 end
 
-function GeneratorSolo:send(x,y)
-	toReturn=""
-	toReturn= toReturn..("@generatorSolo".."#"..self.netid.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..(self.position.x-x).."#"..( self.position.y+y).."#"..tostring(self.appliesField).."#"..self.typeField)
-	return toReturn
-end
+
 
 function GeneratorSolo:isTurnedOn()
 	return self.field.isActive

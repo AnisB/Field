@@ -53,9 +53,3 @@ end
        love.graphics.setColor(255,255,255,255)
        love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
     end
-
-
-
-    function MovableSolo:send(x, y)
-    return ("@movableSolo".."#"..self.netid.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
-    end

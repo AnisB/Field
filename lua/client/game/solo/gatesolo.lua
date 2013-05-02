@@ -137,15 +137,3 @@ function GateSolo:draw(x,y)
 	end
 
 end
-
-function GateSolo:send(x,y)
-	if( self.gateSoloType==GateSoloTypes.DebutHG or self.gateSoloType==GateSoloTypes.MillieuHG or self.gateSoloType==GateSoloTypes.FinHG or self.gateSoloType==GateSoloTypes.HAloneG  ) then
-		return ("@gateSolo".."#"..self.netid.."#"..self.gateSoloType.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y).."#".."0".."#".."1")
-	elseif ( self.gateSoloType==GateSoloTypes.DebutHD or self.gateSoloType==GateSoloTypes.MillieuHD or self.gateSoloType==GateSoloTypes.FinHD or self.gateSoloType==GateSoloTypes.HAloneD )then
-		return ("@gateSolo".."#"..self.netid.."#"..self.gateSoloType.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x+unitWorldSize).."#"..math.floor(self.position.y+y).."#".."0".."#".."-1")
-	elseif ( self.gateSoloType==GateSoloTypes.DebutVH or self.gateSoloType==GateSoloTypes.MillieuVH or self.gateSoloType==GateSoloTypes.FinVH  or self.gateSoloType==GateSoloTypes.VAloneH)then
-		return ("@gateSolo".."#"..self.netid.."#"..self.gateSoloType.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x+unitWorldSize).."#"..math.floor(self.position.y+y).."#"..tostring(RotConst).."#".."1")
-	elseif ( self.gateSoloType==GateSoloTypes.DebutVB or self.gateSoloType==GateSoloTypes.MillieuVB or self.gateSoloType==GateSoloTypes.FinVB or self.gateSoloType==GateSoloTypes.VAloneB )then
-		return ("@gateSolo".."#"..self.netid.."#"..self.gateSoloType.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y+unitWorldSize).."#"..tostring(-RotConst).."#".."1")
-	end
-end

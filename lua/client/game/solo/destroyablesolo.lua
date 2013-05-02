@@ -77,8 +77,3 @@
  function DestroyableSolo:loadAnimation(anim, force)
     self.anim:load(anim, force)
 end
-
-
-function DestroyableSolo:send(x, y)
-    return ("@destroyableSolo".."#"..self.netid.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
-end

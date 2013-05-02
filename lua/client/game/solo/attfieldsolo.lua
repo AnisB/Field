@@ -274,11 +274,3 @@ function AttFieldSolo:draw(x,y)
   love.graphics.draw(self.mov7, x,y)
   love.graphics.draw(self.mov8, x,y)
 end
-
-function AttFieldSolo:send(x,y)
-  if  self.isActive then
-    return ("@field".."#".."Attractive".."#".."1".."#"..math.floor(x).."#"..math.floor(y))
-  else
-    return ("@field".."#".."Attractive".."#".."0".."#"..math.floor(x).."#"..math.floor(y))
-  end
-end

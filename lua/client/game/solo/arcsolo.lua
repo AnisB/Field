@@ -85,7 +85,3 @@ function ArcSolo:draw(x,y)
 		love.graphics.draw(self.anim:getSprite(), self.position.x-x+unitWorldSize , self.position.y+y,0,-1,1)
 	end
 end
-
-function ArcSolo:send(x,y)
-		return ("@arcSolo".."#"..self.netid.."#"..self.arcSoloType.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
-end
