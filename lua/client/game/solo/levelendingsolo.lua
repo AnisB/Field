@@ -26,10 +26,9 @@ function LevelEndingSolo:keyPressed(key, unicode)
 		if self.continuous then
 			gameStateManager.state['Gameplay']:destroy()
             gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
-            print(self.next)
             gameStateManager:changeState('Gameplay')		
-        -- else
-        --     gameStateManager:changeState('choixTypeJeu')
+        else
+            gameStateManager:changeState('ChoixNiveauSolo')
         end		
 	end
 end
@@ -43,10 +42,31 @@ function LevelEndingSolo:update(dt)
 end
 
 function LevelEndingSolo:draw()
-	if self.continuous then
-		love.graphics.print("On est à la fin du niveau, appuitey sur entrée pour le niveau suivant", 200, 200)
-	else
-		love.graphics.print("On est à la fin du niveau, appuitey sur entrée pour revenir au menu", 200, 200)
-	end
+    local hover = false
+    x, y = love.mouse.getPosition()
+
+    -- background :
+    love.graphics.draw(gameStateManager.state['ConnectToServer'].bg, 0, 0)
+
+    -- rectangles :
+    if x > 90 and x < 90+266 and y > 205 and y < 205+35 then
+        love.graphics.setColor(150, 150, 150, 255)
+        hover = true
+    else
+        love.graphics.setColor(50, 50, 50, 255)
+    end
+    love.graphics.rectangle("fill", 90, 205, 266, 35)
+
+    -- text :
+    love.graphics.setColor(20, 240, 135, 255)
+    love.graphics.print("success !", 150, 100)    
+    love.graphics.setColor(255, 255, 255, 255)
+
+    if self.continuous then
+        love.graphics.print("niveau suivant", 100, 200)
+    else
+        love.graphics.print("retour au menu", 100, 200)
+    end
+
 end
 

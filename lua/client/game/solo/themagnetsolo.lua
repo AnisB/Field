@@ -431,7 +431,6 @@ end
 function TheMagnetSolo:draw()
 	-- Draws the field
 	self.field:draw(windowW/2+unitWorldSize/4, windowH/2+unitWorldSize/4)
-	love.graphics.setColor(255,255,255,255)
 	if 	 self.goF then
 		love.graphics.draw(self.anim:getSprite(), windowW/2-unitWorldSize/2,windowH/2-unitWorldSize/2, 0, 1,1)
 	else

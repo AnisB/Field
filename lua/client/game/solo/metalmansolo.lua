@@ -55,6 +55,9 @@ function MetalManSolo.new(camera,pos)
 		shockParams = {20,0.8,0.1},
 	}
 	self.s.time=10
+
+
+	self.tranfSound=Sound.getSound("tranf")
 	return self
 end
 
@@ -147,6 +150,8 @@ end
 
 function MetalManSolo:changeMass()
 	if self.alive then
+		self.tranfSound:stop()
+		self.tranfSound:play()
 		if 	self.metalWeight==MetalMTypes.Alu then
 			self.anim = AnimMMSolo.new('metalman/acier')
 			self:loadAnimation("standing",true)
@@ -175,12 +180,12 @@ end
 
 function MetalManSolo:switchType()
 if self.alive then
-
+	self.tranfSound:stop()
+	self.tranfSound:play()
 	if self.metalType ==MetalTypes.Normal then
 		self.oldMetal = self.metalType
 		self.metalType=MetalTypes.Static
 		self.anim = AnimMMSolo.new('metalman/static')
-			
 		if 	self.metalWeight==MetalMTypes.Alu then
 			self:loadAnimation("load1",true)
 			self.s.time=0

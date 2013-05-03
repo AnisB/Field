@@ -58,9 +58,15 @@ function GameplaySolo.new(mapFile,continuous,player)
     -- self.inputManager= InputManager.new()
     self.shouldEnd=false
     self.levelFinished=false
-    print(self.player)
+    
+    self.gameIsPaused=false
     return self
 end
+
+function GameplaySolo:finish()
+    self.levelFinished=true
+end
+
 
     function GameplaySolo:destroy()
         self.shouldEnd=false
@@ -102,12 +108,12 @@ end
 
 end
 
-    function GameplaySolo:failed()
-        self.shouldEnd=true
-    end
+    function GameplaySolo:failed(state)
+        self.shouldEnd=state
+    end    
 
-    function GameplaySolo:finish()
-        self.levelFinished=true
+    function GameplaySolo:setPaused(state)
+        self.gameIsPaused=state
     end
 
 
@@ -119,131 +125,147 @@ end
     
     
     function GameplaySolo:keyPressed(key, unicode)
-        if self.player=="metalman" then
-            if key=="z" then
-                self.metalMan:jump()     
-            end
-            if key =="e" then
-                self.mapLoader:handleTry('MetalMan')
-            end
-            if not self.metalMan.isStatic then
-                if key =="b" then
-                    self.metalMan:changeMass()
+
+        if not self.gameIsPaused then
+            if self.player=="metalman" then
+                if key=="z" then
+                    self.metalMan:jump()     
                 end
-            end
-            if key =="d" then
-                self.metalMan:startMove()
-            end
+                if key =="e" then
+                    self.mapLoader:handleTry('MetalMan')
+                end
+                if not self.metalMan.isStatic then
+                    if key =="b" then
+                        self.metalMan:changeMass()
+                    end
+                end
+                if key =="d" then
+                    self.metalMan:startMove()
+                end
 
-            if key =="q" then
-                self.metalMan:startMove()
-            end  
+                if key =="q" then
+                    self.metalMan:startMove()
+                end  
 
-            if key=="n" then
-                self.metalMan:switchType()
-                self.magnetmanager:changeMetalType(self.metalMan,self.metalMan.oldMetal,self.metalMan.metalType)
-            end     
-        elseif self.player=="themagnet" then
-            if key=="up" then
-                self.theMagnet:jump()
-            end 
-            if key =="i" then
-                self.theMagnet:enableStaticField()
-            end
-            if key =="o" then
-                self.theMagnet:enableAttractiveField()
-            end
-            if key =="p" then
-                self.theMagnet:enableRepulsiveField()
-            end
+                if key=="n" then
+                    self.metalMan:switchType()
+                    self.magnetmanager:changeMetalType(self.metalMan,self.metalMan.oldMetal,self.metalMan.metalType)
+                end     
+            elseif self.player=="themagnet" then
+                if key=="up" then
+                    self.theMagnet:jump()
+                end 
+                if key =="i" then
+                    self.theMagnet:enableStaticField()
+                end
+                if key =="o" then
+                    self.theMagnet:enableAttractiveField()
+                end
+                if key =="p" then
+                    self.theMagnet:enableRepulsiveField()
+                end
 
-            if key =="k" then
-                self.theMagnet:enableRotativeLField()
-            end
-            if key =="l" then
-                self.theMagnet:enableRotativeRField()
-            end
-            if key =="f" then
-                self.mapLoader:handleTry('TheMagnet')
-            end
+                if key =="k" then
+                    self.theMagnet:enableRotativeLField()
+                end
+                if key =="l" then
+                    self.theMagnet:enableRotativeRField()
+                end
+                if key =="f" then
+                    self.mapLoader:handleTry('TheMagnet')
+                end
 
-            if key =="left" then
-                self.theMagnet:startMove()
-            end
+                if key =="left" then
+                    self.theMagnet:startMove()
+                end
 
-            if key =="right" then
-                self.theMagnet:startMove()
-            end            
+                if key =="right" then
+                    self.theMagnet:startMove()
+                end            
+            end
         end
 
         if key=="c" then
             self.levelFinished=true
         end
+
+            if key =="u" then
+                self:setPaused( not self.gameIsPaused)
+            end   
     end
 
 
     function GameplaySolo:keyReleased(key, unicode)
 
-        if self.player=="metalman" then
-            if key =="d" then
-                self.metalMan:stopMove()
-            end
-            if key =="q" then
-                self.metalMan:stopMove()
-            end
+        if not self.gameIsPaused then
+            if self.player=="metalman" then
+                if key =="d" then
+                    self.metalMan:stopMove()
+                end
+                if key =="q" then
+                    self.metalMan:stopMove()
+                end
 
-        elseif self.player=="themagnet" then
-            if key =="i" then
-                self.theMagnet:disableStaticField()
-            end
+                elseif self.player=="themagnet" then
+                    if key =="i" then
+                        self.theMagnet:disableStaticField()
+                    end
 
-            if key =="o" or key =="p" or key =="k"or key =="l"then
-                self.theMagnet:disableField()
-            end
+                    if key =="o" or key =="p" or key =="k"or key =="l"then
+                        self.theMagnet:disableField()
+                    end
 
-            if key =="left" then
-                self.theMagnet:stopMove()
-            end
+                    if key =="left" then
+                        self.theMagnet:stopMove()
+                    end
 
-            if key =="right" then
-                self.theMagnet:stopMove()
+                    if key =="right" then
+                        self.theMagnet:stopMove()
+                    end
+                end
             end
         end
-    end
     
     
     function GameplaySolo:update(dt)
 
-        if(self.levelFinished) then
-			-- inputManager:clearInputs()
-            gameStateManager.state['LevelEndingSolo']=LevelEndingSolo.new(self.mapLoader.levelends[1].next,self.continuous)
-            gameStateManager:changeState('LevelEndingSolo')
-            return
-        end
+        if  not self.gameIsPaused then
+            if(self.levelFinished) then
+			   -- inputManager:clearInputs()
+               gameStateManager.state['LevelEndingSolo']=LevelEndingSolo.new(self.mapLoader.levelends[1].next,self.continuous)
+               gameStateManager:changeState('LevelEndingSolo')
+               return
+           end
 
-        if(self.shouldEnd) then
-            -- inputManager:clearInputs()
-            gameStateManager.state['LevelFailedSolo']=LevelFailedSolo.new()
-            gameStateManager:changeState('LevelFailedSolo')
-            return        
-        end        
-        world:update(dt) 
-        self.magnetmanager:update(dt)   
+           if(self.shouldEnd) then
+              -- inputManager:clearInputs()
+              gameStateManager.state['LevelFailedSolo']=LevelFailedSolo.new()
+              gameStateManager:changeState('LevelFailedSolo')
+              return        
+          end        
+          world:update(dt) 
+          self.magnetmanager:update(dt)   
 
-        -- Other stuff
-        if self.player=="metalman" then
+          -- Other stuff
+          if self.player=="metalman" then
             self.cameraMM:update(dt)
             self.metalMan:update(dt)
-        elseif self.player=="themagnet" then
-            self.cameraTM:update(dt)
-            self.theMagnet:update(dt)
+            elseif self.player=="themagnet" then
+                self.cameraTM:update(dt)
+                self.theMagnet:update(dt)
+            end
+            self.mapLoader:update(dt)
         end
-        self.mapLoader:update(dt)
     end
     
     function GameplaySolo:draw()
 
 
+        if  self.gameIsPaused then
+            love.graphics.setColor(150,150,150,255)
+        else
+            love.graphics.setColor(255,255,255,255)
+        end
         if self.player=="metalman" then
             self.metalMan:preDraw()
             self.background5:draw(self.cameraMM:getPos()) 
