@@ -99,11 +99,4 @@ function ChoixNiveau:draw()
 	love.graphics.setColor(255, 255, 255, 255)
 	love.graphics.print("PLAY", 198+10, 600)
 
-	-- cursor :
-	if hover then
-		love.mouse.setVisible(false)
-		love.graphics.draw(gameStateManager.state['ConnectToServer'].handcursor, x-17, y-17)
-	else
-		love.mouse.setVisible(true)
-	end
 end

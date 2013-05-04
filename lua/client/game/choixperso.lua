@@ -121,11 +121,4 @@ function ChoixPerso:draw()
 		love.graphics.setColor(255, 255, 255, 255)
 	end
 
-	-- cursor :
-	if hover then
-		love.mouse.setVisible(false)
-		love.graphics.draw(gameStateManager.state['ConnectToServer'].handcursor, x-17, y-17)
-	else
-		love.mouse.setVisible(true)
-	end
 end

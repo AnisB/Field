@@ -49,7 +49,7 @@ local hover = false
     x, y = love.mouse.getPosition()
 
     -- background :
-    love.graphics.draw(gameStateManager.state['ConnectToServer'].bg, 0, 0)
+    -- love.graphics.draw(gameStateManager.state['ConnectToServer'].bg, 0, 0)
 
     -- rectangles :
     if x > 90 and x < 90+282 and y > 205 and y < 205+35 then
@@ -71,13 +71,6 @@ local hover = false
     love.graphics.print("recommencer", 100, 200)
   end
 
-    -- cursor :
-    if hover then
-        love.mouse.setVisible(false)
-        love.graphics.draw(gameStateManager.state['ConnectToServer'].handcursor, x-17, y-17)
-    else
-        love.mouse.setVisible(true)
-    end
 end
 
 function LevelFailed:onMessage(x, y, button)

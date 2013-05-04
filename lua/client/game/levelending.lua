@@ -58,7 +58,7 @@ function LevelEnding:draw()
     x, y = love.mouse.getPosition()
 
     -- background :
-    love.graphics.draw(gameStateManager.state['ConnectToServer'].bg, 0, 0)
+    -- love.graphics.draw(gameStateManager.state['ConnectToServer'].bg, 0, 0)
 
     -- rectangles :
     if x > 90 and x < 90+266 and y > 205 and y < 205+35 then
@@ -80,12 +80,6 @@ function LevelEnding:draw()
 		love.graphics.print("retour au menu", 100, 200)
 	end
 
-    -- cursor :
-    if hover then
-        love.mouse.setVisible(false)
-        love.graphics.draw(gameStateManager.state['ConnectToServer'].handcursor, x-17, y-17)
-    else
-        love.mouse.setVisible(true)
-    end
+
 end
 
