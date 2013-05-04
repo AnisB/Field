@@ -10,10 +10,9 @@ function ConnectToServer:new()
     self.timer=0
     self.font = love.graphics.newFont(FontDirectory .. "font.ttf", 25)
     love.graphics.setFont(self.font)
-    self.bg = love.graphics.newImage(ImgDirectory .. "fondgui.png")
-    self.handcursor = love.graphics.newImage(ImgDirectory .. "handcursor.png")
+    self.back = love.graphics.newImage("backgrounds/connect/back.png")
     self.ipaddr = "127.0.0.1"
-    self.pseudo = "luc"
+    self.pseudo = ""
     self.focused = "ipaddr"
     self.discovered = false
     self.waiting = false
@@ -138,7 +137,7 @@ function ConnectToServer:draw()
 	end
 
 	-- background :
-	love.graphics.draw(self.bg, 0, 0)
+	love.graphics.draw(self.back, 0, 0)
 
 	-- rectangles :
 	if self.focused == "ipaddr" then
@@ -196,13 +195,5 @@ function ConnectToServer:draw()
 	love.graphics.setColor(255, 255, 255, 255)
 	love.graphics.print("Return", 400+10, 600)
 
-
-	-- cursor :
-	if hover then
-		love.mouse.setVisible(false)
-		love.graphics.draw(self.handcursor, x-17, y-17)
-	else
-		love.mouse.setVisible(true)
-	end
 end
 

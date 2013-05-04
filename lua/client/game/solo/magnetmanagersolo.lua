@@ -25,7 +25,6 @@ function MagnetManagerSolo:update(dt)
 -- Managing
 	for i,g in ipairs(self.passiveGenerators) do
 		if g.appliesField  then
-			print "applied field donc active generator"
 			table.insert(self.activeGenerators,g)
 			table.remove(self.passiveGenerators,i)
 		end
@@ -57,9 +56,7 @@ function MagnetManagerSolo:update(dt)
 			end
 
 			for i,m in ipairs(self.staticMetals) do
-				print "un static metal a handler"
 				if g:isAppliable(m:getPosition())  then
-					print "applicable"
 					if g.fieldType==FieldTypes.RotativeL then
 						g:rotativeLField(m:getPosition(),dt*60)
 					elseif g.fieldType==FieldTypes.RotativeR then
@@ -67,7 +64,6 @@ function MagnetManagerSolo:update(dt)
 					elseif g.fieldType==FieldTypes.Repulsive then
 						g:repulsiveField(m:getPosition(),dt*60)
 					elseif g.fieldType==FieldTypes.Attractive then
-						print "appliqué"
 						g:attractiveField(m:getPosition(),dt*60)
 					end	
 				end		

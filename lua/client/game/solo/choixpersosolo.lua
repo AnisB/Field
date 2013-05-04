@@ -19,6 +19,10 @@ function ChoixPersoSolo.new(continuous)
     self.continuous=continuous
 
     self.selected=-1
+
+
+    self.enteringDone=false
+    self.timer=0
     return self
 end
 
@@ -42,10 +46,12 @@ function ChoixPersoSolo:mousePressed(x, y, button)
 				gameStateManager.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new("themagnet",self.continuous)
 			end
 			gameStateManager:changeState('ChoixNiveauSolo')
+			self.enteringDone=false
 		end
 	
 	elseif self.returnB:isCliked(x,y) then
 		gameStateManager:changeState("ChoixTypeJeuSolo")
+		self.enteringDone=false		
 	end
 end
 
@@ -63,6 +69,13 @@ function ChoixPersoSolo:joystickReleased(joystick, button)
 end
 
 function ChoixPersoSolo:update(dt) 
+		if not self.enteringDone then
+		self.timer =self.timer +dt
+		if self.timer>=1 then
+			self.timer=1
+			self.enteringDone=true
+		end
+	end
 end
 
 
@@ -71,13 +84,15 @@ function ChoixPersoSolo:draw()
 	x, y = love.mouse.getPosition()
 
 	-- background :
+	love.graphics.setColor(255,255,255,255*self.timer)
 	love.graphics.draw(self.back, 0, 0)
 
-	self.themagnet:draw(x,y,1)
-    self.metalman:draw(x,y,1)
-    self.play:draw(x,y,1)
-    self.returnB:draw(x,y,1)
+	self.themagnet:draw(x,y,self.timer)
+    self.metalman:draw(x,y,self.timer)
+    self.play:draw(x,y,self.timer)
+    self.returnB:draw(x,y,self.timer)
 
+	love.graphics.setColor(255,255,255,255*self.timer)
     love.graphics.draw(self.tm,300,210)
     love.graphics.draw(self.mm,710,210)
 

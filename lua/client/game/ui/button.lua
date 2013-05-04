@@ -63,9 +63,9 @@ function Button:basicDraw(x,y,filter)
 	if self.type==ButtonType.Large then
 		love.graphics.draw(self.img, self.position.x+25+self.dec.x, self.position.y+20+self.dec.y)
 	elseif self.type==ButtonType.Small then
-		love.graphics.draw(self.img, self.position.x+15+self.dec.x, self.position.y+15+self.dec.y)
+		love.graphics.draw(self.img, self.position.x+25+self.dec.x, self.position.y+15+self.dec.y)
 	elseif self.type==ButtonType.Perso then
-		love.graphics.draw(self.img, self.position.x+15+self.dec.x, self.position.y+20+self.dec.y)
+		love.graphics.draw(self.img, self.position.x+25+self.dec.x, self.position.y+20+self.dec.y)
 	else
 		love.graphics.draw(self.img, self.position.x+self.dec.x, self.position.y+self.dec.y)
 	end
@@ -84,9 +84,9 @@ function Button:selectedDraw(x,y,filter)
 	if self.type==ButtonType.Large then
 		love.graphics.draw(self.img, self.position.x+25+self.dec.x, self.position.y+20+self.dec.y)
 	elseif self.type==ButtonType.Small then
-		love.graphics.draw(self.img, self.position.x+15+self.dec.x, self.position.y+15+self.dec.y)
+		love.graphics.draw(self.img, self.position.x+25+self.dec.x, self.position.y+15+self.dec.y)
 	elseif self.type==ButtonType.Perso then
-		love.graphics.draw(self.img, self.position.x+15+self.dec.x, self.position.y+20+self.dec.y)
+		love.graphics.draw(self.img, self.position.x+25+self.dec.x, self.position.y+20+self.dec.y)
 	else
 		love.graphics.draw(self.img, self.position.x+self.dec.x, self.position.y+self.dec.y)
 	end
@@ -102,9 +102,9 @@ function Button:disabledDraw(x,y,filter)
 	if self.type==ButtonType.Large then
 		love.graphics.draw(self.img, self.position.x+25+self.dec.x, self.position.y+20+self.dec.y)
 	elseif self.type==ButtonType.Small then
-		love.graphics.draw(self.img, self.position.x+15+self.dec.x, self.position.y+15+self.dec.y)
+		love.graphics.draw(self.img, self.position.x+25+self.dec.x, self.position.y+15+self.dec.y)
 	elseif self.type==ButtonType.Perso then
-		love.graphics.draw(self.img, self.position.x+15+self.dec.x, self.position.y+20+self.dec.y)
+		love.graphics.draw(self.img, self.position.x+25+self.dec.x, self.position.y+20+self.dec.y)
 	else
 		love.graphics.draw(self.img, self.position.x+self.dec.x, self.position.y+self.dec.y)
 	end

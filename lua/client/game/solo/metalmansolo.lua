@@ -241,7 +241,9 @@ function MetalManSolo:collideWith( object, collision )
 			if(object:getPosition().y>self.position.y) then
 				self.canjump=true
 				if self.animCounter>0 then 
-					self:loadAnimation("running",true)
+					if self.anim.currentAnim.name~="running" then
+						self:loadAnimation("running",true)
+					end
 				else
 					self:setState('landing')
 					self:loadAnimation("landing",true)
@@ -331,6 +333,7 @@ function MetalManSolo:update(seconds)
 
 	if self.alive then
 		if self.animCounter >=1 and self.anim.currentAnim.name=="standing" then
+			print "lol"
 			self:loadAnimation("running",true)	
 		end
 		if not self.isStatic  then

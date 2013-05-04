@@ -20,13 +20,17 @@ function ChoixNiveauSolo.new(player,continuous)
     self.num_level = 1
     self.availableMaps = self:listmaps()
     self.level = self.availableMaps[self.num_level]
-    self.prev=love.graphics.newImage("maps/"..self.level..".fieldmap/prev.png")
+    self.prev={}
+    self.prev[self.level]=love.graphics.newImage("maps/"..self.level..".fieldmap/prev.png")
 
     self.player = player
     self.continuous=continuous
 
     self.font = love.graphics.newFont(FontDirectory .. "font.ttf", 30)
     love.graphics.setFont(self.font)
+
+    self.timerPrev=1
+    self.fonduDone=true
     return self
 end
 
@@ -71,15 +75,31 @@ function ChoixNiveauSolo:mouseReleased(x, y, button) end
 function ChoixNiveauSolo:keyPressed(key, unicode)
 	if key == "q" or key== "left" then
 		self.num_level = self.num_level - 1
+		if self.num_level < 1 then self.num_level = 1 end
+		if self.num_level > #self.availableMaps then self.num_level = #self.availableMaps end
+		self.level = self.availableMaps[self.num_level]
+		if self.prev[self.level]==nil then
+			self.prev[self.level]=love.graphics.newImage("maps/"..self.level..".fieldmap/prev.png")
+			print "new img"
+		end
+		self.fonduDone=false
+		self.timerPrev=0
 	elseif key == "d" or key== "right" then
 		self.num_level = self.num_level + 1
+		if self.num_level < 1 then self.num_level = 1 end
+		if self.num_level > #self.availableMaps then self.num_level = #self.availableMaps end
+		self.level = self.availableMaps[self.num_level]
+		if self.prev[self.level]==nil then
+			self.prev[self.level]=love.graphics.newImage("maps/"..self.level..".fieldmap/prev.png")
+			print "new img"
+		end
+		self.fonduDone=false
+		self.timerPrev=0
 	elseif key == "return" then
-
+		gameStateManager.state['GameplaySolo']= GameplaySolo.new(self.level,self.continuous,self.player)
+		gameStateManager:changeState('GameplaySolo')
 	end
-	if self.num_level < 1 then self.num_level = 1 end
-	if self.num_level > #self.availableMaps then self.num_level = #self.availableMaps end
-	self.level = self.availableMaps[self.num_level]
-    self.prev=love.graphics.newImage("maps/"..self.level..".fieldmap/prev.png")
+
 
 end
 
@@ -91,7 +111,15 @@ end
 function ChoixNiveauSolo:joystickReleased(joystick, button)
 end
 
-function ChoixNiveauSolo:update(dt) end
+function ChoixNiveauSolo:update(dt)
+	if not self.fonduDone then
+		self.timerPrev =self.timerPrev +dt
+		if self.timerPrev>=1 then
+			self.timerPrev=1
+			self.fonduDone=true
+		end
+	end
+end
 
 
 function ChoixNiveauSolo:draw()
@@ -103,11 +131,14 @@ function ChoixNiveauSolo:draw()
 	love.graphics.draw(self.levellabel, 420, 200)
 
 	love.graphics.print(self.level, 620, 200)
-	love.graphics.draw(self.prev, 400, 300,0,0.35,0.35)
-
 	self.right:draw(x,y,1)
 	self.left:draw(x,y,1)
     self.play:draw(x,y,1)
     self.returnB:draw(x,y,1)
+
+	love.graphics.setColor(255,255,255,255*self.timerPrev)
+	love.graphics.draw(self.prev[self.level], 400, 300,0,0.35,0.35)
+
+
 
 end
