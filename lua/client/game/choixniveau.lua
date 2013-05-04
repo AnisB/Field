@@ -63,7 +63,7 @@ function ChoixNiveau:draw()
 	x, y = love.mouse.getPosition()
 
 	-- background :
-	love.graphics.draw(gameStateManager.state['ConnectToServer'].bg, 0, 0)
+	-- love.graphics.draw(gameStateManager.state['ConnectToServer'].bg, 0, 0)
 
 	-- rectangles :
 	if x > 90 and x < 90+40 and y > 105 and y < 105+35 then

@@ -65,7 +65,7 @@ function ChoixPerso:draw()
 	x, y = love.mouse.getPosition()
 
 	-- background :
-	love.graphics.draw(gameStateManager.state['ConnectToServer'].bg, 0, 0)
+	-- love.graphics.draw(gameStateManager.state['ConnectToServer'].bg, 0, 0)
 
 	-- rectangles :
 	if x > 90 and x < 90+300 and y > 90 and y < 90+420 then
