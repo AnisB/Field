@@ -50,8 +50,8 @@ function GameStateManager.new()
 
 	-- Jeu Solo
 	self.state['ChoixTypeJeuSolo'] = ChoixTypeJeuSolo.new()	
-	-- self.state['ChoixNiveauSolo'] = nil
-	-- self.state['ChoixPersoSolo'] = nil
+	-- self.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new("themagnet",false)
+	self.state['ChoixPersoSolo'] = nil
 	-- self.state['GameplaySolo'] = GameplaySolo.new("level8",false,"themagnet")
 
 	-- Init
@@ -60,8 +60,9 @@ function GameStateManager.new()
 end
 
 function GameStateManager:onMessage(msg)
-	--assert(self.state[self.currentState].onMessage)
-	self.state[self.currentState]:onMessage(msg)
+	if self.state[self.currentState].onMessage then
+		self.state[self.currentState]:onMessage(msg)
+	end
 end
 
 function GameStateManager:mousePressed(x, y, button)

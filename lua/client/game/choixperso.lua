@@ -7,20 +7,39 @@ function ChoixPerso:new()
     local self = {}
     setmetatable(self, ChoixPerso)
     self.err = false
-    self.isRed=0
-    self.mm = love.graphics.newImage(ImgDirectory .. "metalman.png")
-    self.tm = love.graphics.newImage(ImgDirectory .. "themagnet.png")
+    self.mm = love.graphics.newImage("backgrounds/choixperso/metalmanimg.png")
+    self.tm = love.graphics.newImage("backgrounds/choixperso/magnetimg.png")
+
+    self.back= love.graphics.newImage("backgrounds/choixperso/back.png")
+    self.themagnet = Button.newDec(200,200,420,300,ButtonType.Perso,"backgrounds/choixperso/magnet.png",0,300)
+    self.metalman= Button.newDec(670,200,420,300,ButtonType.Perso,"backgrounds/choixperso/metalman.png",0,300)
+    self.play= Button.new(550,640,200,50,ButtonType.Small,"backgrounds/choixperso/play.png")
+    self.returnB= Button.newDec(1000,640,250,50,ButtonType.Large,"backgrounds/choixperso/return.png",10,0)
+
+    self.play:setEnable(false)
+    self.continuous=continuous
+
+    self.selected=-1
+
+    self.enteringDone=false
+    self.timer=0
     return self
 end
 
 function ChoixPerso:mousePressed(x, y, button)
-	if x > 90 and x < 90+300 and y > 90 and y < 90+420 then
+	if self.metalman:isCliked(x,y) then
 		serveur:send({type="choixPerso", confirm=false, perso="metalman"})
 		self.isRed=1
-	elseif x > 490 and x < 490+340 and y > 90 and y < 90+420 then
+		self.metalman:setSelected(true)
+		self.themagnet:setSelected(false)
+		self.play:setEnable(true)
+	elseif self.themagnet:isCliked(x,y) then
 		serveur:send({type="choixPerso", confirm=false, perso="themagnet"})
 		self.isRed=2
-	elseif x > 390 and x < 390+100 and y > 600 and y < 600+50 then
+		self.themagnet:setSelected(true)
+		self.metalman:setSelected(false)
+		self.play:setEnable(true)
+	elseif self.play:isCliked(x,y) then
 		serveur:send({type="choixPerso", confirm=true})
 	end
 end
@@ -35,7 +54,15 @@ end
 function ChoixPerso:joystickReleased(joystick, button)
 end
 
-function ChoixPerso:update(dt) end
+function ChoixPerso:update(dt) 
+		if not self.enteringDone then
+		self.timer =self.timer +dt
+		if self.timer>=1 then
+			self.timer=1
+			self.enteringDone=true
+		end
+	end
+end
 
 function ChoixPerso:onMessage(msg)
 	if msg.type == "choixPerso" then
@@ -49,7 +76,7 @@ function ChoixPerso:onMessage(msg)
 			monde.lui.cookie = msg.player
 			monde[msg.perso] = monde.lui
 		end
-	elseif msg.type == "choixPersoFini" then
+		elseif msg.type == "choixPersoFini" then
 		if monde.typeJeu == "arcade" then
 			gameStateManager:changeState('ChoixNiveau')
 		end
@@ -65,55 +92,17 @@ function ChoixPerso:draw()
 	x, y = love.mouse.getPosition()
 
 	-- background :
-	-- love.graphics.draw(gameStateManager.state['ConnectToServer'].bg, 0, 0)
+	love.graphics.setColor(255,255,255,255*self.timer)
+	love.graphics.draw(self.back, 0, 0)
 
-	-- rectangles :
-	if x > 90 and x < 90+300 and y > 90 and y < 90+420 then
-		love.graphics.setColor(150, 150, 150, 255)
-		hover = true
-	else
-		love.graphics.setColor(50, 50, 50, 255)
-	end
-	love.graphics.rectangle("fill", 90, 90, 300, 420)
+	self.themagnet:draw(x,y,self.timer)
+    self.metalman:draw(x,y,self.timer)
+    self.play:draw(x,y,self.timer)
+    self.returnB:draw(x,y,self.timer)
 
-	if x > 490 and x < 490+340 and y > 90 and y < 90+420 then
-		love.graphics.setColor(150, 150, 150, 255)
-		hover = true
-	else
-		love.graphics.setColor(50, 50, 50, 255)
-	end
-	love.graphics.rectangle("fill", 490, 90, 340, 420)
-
-	if x > 390 and x < 390+100 and y > 600 and y < 600+50 then
-		love.graphics.setColor(150, 150, 150, 255)
-		hover = true
-	else
-		love.graphics.setColor(50, 50, 50, 255)
-	end
-	love.graphics.rectangle("fill", 390, 600, 100, 50)
-
-	-- text :
-	love.graphics.setColor(255, 255, 255, 255)
-
-	love.graphics.draw(self.mm, 100, 100)
-	love.graphics.draw(self.tm, 500, 100)
-
-	if self.isRed==1 then
-		love.graphics.setColor(255, 0, 0, 255)
-	else
-		love.graphics.setColor(255, 255, 255, 255)
-	end
-	love.graphics.print("metalman", 150, 450)
-
-	if self.isRed==2 then
-		love.graphics.setColor(255, 0, 0, 255)
-	else
-		love.graphics.setColor(255, 255, 255, 255)
-	end
-	love.graphics.print("the magnet", 570, 450)
-
-	love.graphics.setColor(255, 255, 255, 255)
-	love.graphics.print("PLAY", 400, 600)
+	love.graphics.setColor(255,255,255,255*self.timer)
+    love.graphics.draw(self.tm,300,210)
+    love.graphics.draw(self.mm,710,210)
 
 	if self.err then
 		love.graphics.setColor(255, 0, 0, 255)

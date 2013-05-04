@@ -18,9 +18,9 @@ end
 
 function LevelFailedSolo:mousePressed(x, y, button)
 	if self.retry:isCliked(x,y) then
-	
-	elseif  self.retry:isCliked(x,y) then
-	
+	   gameStateManager:resetAndChangeState('GameplaySolo')		
+	elseif  self.quit:isCliked(x,y) then
+	   gameStateManager:changeState('ChoixNiveauSolo')	
 	end
 end
 
@@ -31,10 +31,7 @@ end
 function LevelFailedSolo:keyPressed(key, unicode)
 	if key=="return" then
 	   gameStateManager.state['GameplaySolo']:reset()
-	   gameStateManager:changeState('GameplaySolo')		
-   -- else
-   --     gameStateManager.state['Gameplay']:destroy()        
-   --     gameStateManager:changeState('choixTypeJeu')     
+	   gameStateManager:changeState('GameplaySolo')		 
    end            
 end
 

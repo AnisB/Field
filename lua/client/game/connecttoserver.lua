@@ -10,7 +10,15 @@ function ConnectToServer:new()
     self.timer=0
     self.font = love.graphics.newFont(FontDirectory .. "font.ttf", 25)
     love.graphics.setFont(self.font)
+
     self.back = love.graphics.newImage("backgrounds/connect/back.png")
+
+    self.ipaddrlabel=love.graphics.newImage("backgrounds/connect/serverip.png")
+    self.login=love.graphics.newImage("backgrounds/connect/login.png")
+    self.pass=love.graphics.newImage("backgrounds/connect/pass.png")
+
+    self.play= Button.new(550,640,200,50,ButtonType.Small,"backgrounds/choixniveau/play.png")
+    self.returnB= Button.newDec(1000,640,250,50,ButtonType.Large,"backgrounds/choixniveau/return.png",10,0)
     self.ipaddr = "127.0.0.1"
     self.pseudo = ""
     self.focused = "ipaddr"
@@ -24,13 +32,13 @@ function ConnectToServer:mousePressed(x, y, button)
 		self.focused = "ipaddr"
 	elseif x > 50 and x < 650 and y > 200 and y < 250 then
 		self.focused = "pseudo"
-	elseif x > 198 and x < 198+100 and y > 600 and y < 600+50 then
+	elseif self.play:isCliked(x,y) then
 		if self.waiting==false then
 			self.waiting = true
 			self:connect()
 		end
 	end
-	if x > 400 and x < 400+100 and y > 600 and y < 600+50 then
+	if self.returnB:isCliked(x,y) then
 		gameStateManager:changeState('Menu')
 		love.mouse.setVisible(true)
 	end
@@ -129,38 +137,37 @@ function ConnectToServer:onMessage(msg)
 end
 
 function ConnectToServer:draw()
-	local hover = false
 	x, y = love.mouse.getPosition()
-	if (x > 50 and x < 650 and y > 100 and y < 150) or
-	   (x > 50 and x < 650 and y > 200 and y < 250) then
-		hover = true
-	end
+
+
 
 	-- background :
 	love.graphics.draw(self.back, 0, 0)
 
+
+    love.graphics.draw(self.ipaddrlabel,90,200)
+    love.graphics.draw(self.login,90,300)
+    love.graphics.draw(self.pass,90,400)
 	-- rectangles :
 	if self.focused == "ipaddr" then
 		love.graphics.setColor(150, 150, 150, 255)
 	else
 		love.graphics.setColor(50, 50, 50, 255)
 	end
-	love.graphics.rectangle("fill", 370, 105, 250, 35)
+	love.graphics.rectangle("fill", 450, 205, 250, 35)
 
 	if self.focused == "pseudo" then
 		love.graphics.setColor(150, 150, 150, 255)
 	else
 		love.graphics.setColor(50, 50, 50, 255)
 	end
-	love.graphics.rectangle("fill", 370, 205, 250, 35)
+	love.graphics.rectangle("fill", 450, 305, 250, 35)
 	
 
 	-- text :
 	love.graphics.setColor(255, 255, 255, 255)
-	love.graphics.print("IP du serveur :", 100, 100)
-	love.graphics.print(self.ipaddr, 380, 100)
-	love.graphics.print("Pseudo :", 100, 200)
-	love.graphics.print(self.pseudo, 380, 200)
+	love.graphics.print(self.ipaddr, 470, 205)
+	love.graphics.print(self.pseudo, 470, 305)
 	if self.waiting then
 		love.graphics.setColor(255, 0, 0, 255)
 		local nb_dots = self.timer % 3
@@ -173,27 +180,8 @@ function ConnectToServer:draw()
 		love.graphics.setColor(255, 255, 255, 255)
 	end
 
-	-- bouton play :
-	if x > 198 and x < 198+100 and y > 600 and y < 600+50 then
-		love.graphics.setColor(150, 150, 150, 255)
-		hover = true
-	else
-		love.graphics.setColor(50, 50, 50, 255)
-	end
-	love.graphics.rectangle("fill", 198, 600, 100, 50)
-	love.graphics.setColor(255, 255, 255, 255)
-	love.graphics.print("PLAY", 198+10, 600)
-
-	-- bouton play :
-	if x > 400 and x < 400+100 and y > 600 and y < 600+50 then
-		love.graphics.setColor(150, 150, 150, 255)
-		hover = true
-	else
-		love.graphics.setColor(50, 50, 50, 255)
-	end
-	love.graphics.rectangle("fill", 400, 600, 150, 50)
-	love.graphics.setColor(255, 255, 255, 255)
-	love.graphics.print("Return", 400+10, 600)
+	self.play:draw(x,y,1)
+	self.returnB:draw(x,y,1)
 
 end
 

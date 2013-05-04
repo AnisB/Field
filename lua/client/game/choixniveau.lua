@@ -6,19 +6,30 @@ ChoixNiveau.__index = ChoixNiveau
 function ChoixNiveau:new()
     local self = {}
     setmetatable(self, ChoixNiveau)
+    self.back=love.graphics.newImage("backgrounds/choixniveau/back.png")
+    self.levellabel=love.graphics.newImage("backgrounds/choixniveau/level.png")
+
+    self.play= Button.new(550,640,200,50,ButtonType.Small,"backgrounds/choixniveau/play.png")
+    self.returnB= Button.newDec(1000,640,250,50,ButtonType.Large,"backgrounds/choixniveau/return.png",10,0)
+
+    self.right= Button.new(1000,350,123,155,ButtonType.Arrow,"backgrounds/choixniveau/right.png")
+    self.left= Button.newDec(90,350,123,155,ButtonType.Arrow,"backgrounds/choixniveau/left.png",10,0)
+
     self.err = false
     self.num_level = 1
-    monde.availableMaps = {"level1", "level2", "level28"}
+    monde.availableMaps = {"NONE"}
     self.level = monde.availableMaps[self.num_level]
     return self
 end
 
 function ChoixNiveau:mousePressed(x, y, button)
-	if x > 90 and x < 90+40 and y > 105 and y < 105+35 then
+	if self.left:isCliked(x,y) then
 		self:keyPressed("q")
-	elseif x > 365 and x < 365+40 and y > 105 and y < 105+35 then
+	elseif self.right:isCliked(x,y) then
 		self:keyPressed("d")
-	elseif x > 198 and x < 198+100 and y > 600 and y < 600+50 then
+	elseif self.returnB:isCliked(x,y) then
+		-- PAS ENCORE PROGRAMME
+	elseif self.play:isCliked(x,y) then
 		self:keyPressed("return", 13)
 	end
 end
@@ -59,44 +70,17 @@ function ChoixNiveau:onMessage(msg)
 end
 
 function ChoixNiveau:draw()
-	local hover = false
 	x, y = love.mouse.getPosition()
 
 	-- background :
-	-- love.graphics.draw(gameStateManager.state['ConnectToServer'].bg, 0, 0)
+	love.graphics.draw(self.back, 0, 0)
 
-	-- rectangles :
-	if x > 90 and x < 90+40 and y > 105 and y < 105+35 then
-		love.graphics.setColor(150, 150, 150, 255)
-		hover = true
-	else
-		love.graphics.setColor(50, 50, 50, 255)
-	end
-	love.graphics.rectangle("fill", 90, 105, 40, 35)
+	love.graphics.draw(self.levellabel, 420, 200)
 
-	if x > 365 and x < 365+40 and y > 105 and y < 105+35 then
-		love.graphics.setColor(150, 150, 150, 255)
-		hover = true
-	else
-		love.graphics.setColor(50, 50, 50, 255)
-	end
-	love.graphics.rectangle("fill", 365, 105, 40, 35)
-
-	-- text :
-	love.graphics.setColor(255, 255, 255, 255)
-	love.graphics.print("<", 100, 100)
-	love.graphics.print(">", 380, 100)
-
-	love.graphics.print(self.level, 190, 100)
-
-	if x > 198 and x < 198+100 and y > 600 and y < 600+50 then
-		love.graphics.setColor(150, 150, 150, 255)
-		hover = true
-	else
-		love.graphics.setColor(50, 50, 50, 255)
-	end
-	love.graphics.rectangle("fill", 198, 600, 100, 50)
-	love.graphics.setColor(255, 255, 255, 255)
-	love.graphics.print("PLAY", 198+10, 600)
+	love.graphics.print(self.level, 620, 200)
+	self.right:draw(x,y,1)
+	self.left:draw(x,y,1)
+    self.play:draw(x,y,1)
+    self.returnB:draw(x,y,1)
 
 end

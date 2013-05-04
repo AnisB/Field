@@ -9,23 +9,24 @@ function LevelFailed.new()
 	setmetatable(self, LevelFailed)
 	self.next=next
 	self.continuous=continuous
-	print(self.continuous)
+  self.back=love.graphics.newImage("backgrounds/failed/back.png")
+  self.retry=Button.new(800,300,200,50,ButtonType.Large,"backgrounds/failed/retry.png")
+  self.quit=Button.new(800,400,200,50,ButtonType.Small,"backgrounds/failed/quit.png")
 	return self
 end
 
 
 function LevelFailed:mousePressed(x, y, button)
-  if x > 90 and x < 90+282 and y > 205 and y < 205+35 then
+  if self.retry:isCliked(x,y) then
 	  self:keyPressed("return", 13)
   end
 end
-
+  
 function LevelFailed:mouseReleased(x, y, button)
 end
 
 
 function LevelFailed:keyPressed(akey, unicode)
-  print("levelending",monde.moi.perso, akey)
   serveur:send({type="input", pck={character=monde.moi.perso, key=akey, state=true}})            
 	if akey=="return" then
 	   gameStateManager.state['Gameplay']:reset()
@@ -45,31 +46,10 @@ function LevelFailed:update(dt)
 end
 
 function LevelFailed:draw()
-local hover = false
-    x, y = love.mouse.getPosition()
-
-    -- background :
-    -- love.graphics.draw(gameStateManager.state['ConnectToServer'].bg, 0, 0)
-
-    -- rectangles :
-    if x > 90 and x < 90+282 and y > 205 and y < 205+35 then
-        love.graphics.setColor(150, 150, 150, 255)
-        hover = true
-    else
-        love.graphics.setColor(50, 50, 50, 255)
-    end
-    love.graphics.rectangle("fill", 90, 205, 282, 35)
-
-    -- text :
-    love.graphics.setColor(240, 10, 20, 255)
-    love.graphics.print("Failed !", 160, 100)    
-    love.graphics.setColor(255, 255, 255, 255)
-
-  if self.continuous then
-    love.graphics.print("recommencer", 100, 200)
-  else
-    love.graphics.print("recommencer", 100, 200)
-  end
+  love.graphics.draw(self.back,0,0)
+  x, y = love.mouse.getPosition()
+  self.retry:draw(x,y,1)
+  self.quit:draw(x,y,1)
 
 end
 
