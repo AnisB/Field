@@ -13,7 +13,7 @@ function InterruptorSolo.new(pos,type,generatorID,magnetManager,sprite,netid)
 	self.netid=netid
 	self.position={x=pos.x,y=pos.y}
 	local decalage={unitWorldSize/2,unitWorldSize/2}
-	self.pc = Physics.newInterruptorSolo(self.position.x,self.position.y,unitWorldSize,unitWorldSize,type,decalage)
+	self.pc = Physics.newInterruptor(self.position.x,self.position.y,unitWorldSize,unitWorldSize,type,decalage)
 	self.typeG=type
 	self.w=unitWorldSize
 	self.h=unitWorldSize

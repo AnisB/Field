@@ -52,10 +52,10 @@ function GameStateManager.new()
 	self.state['ChoixTypeJeuSolo'] = ChoixTypeJeuSolo.new()	
 	self.state['ChoixNiveauSolo'] = nil
 	self.state['ChoixPersoSolo'] = nil
-	-- self.state['GameplaySolo'] = GameplaySolo.new("level4",false,"themagnet")
+	self.state['GameplaySolo'] = GameplaySolo.new("level8",false,"themagnet")
 
 	-- Init
-	self.currentState='FirstEnter'
+	self.currentState='GameplaySolo'
 	return self
 end
 

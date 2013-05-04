@@ -323,7 +323,9 @@ end
 
 function TheMagnetSolo:disableField()
 	if self.alive then
-		self.fieldSound:stop()
+		if self.fieldSound~=nil then
+			self.fieldSound:stop()
+		end
 		self.field.isActive=false
 		self.appliesField=false
 		self.fieldType=FieldTypes.None
@@ -338,7 +340,9 @@ end
 
 function TheMagnetSolo:disableStaticField()
 	if self.alive then
-		self.fieldSound:stop()
+		if self.fieldSound~=nil then
+			self.fieldSound:stop()
+		end
 		self.field.isActive=false
 		self.appliesField=false
 		self.fieldType=FieldTypes.None

@@ -9,12 +9,19 @@ function LevelFailedSolo.new()
 	setmetatable(self, LevelFailedSolo)
 	self.next=next
 	self.continuous=continuous
-	print(self.continuous)
+	self.back=love.graphics.newImage("backgrounds/failed/back.png")
+	self.retry=Button.new(800,300,200,50,ButtonType.Large,"backgrounds/failed/retry.png")
+	self.quit=Button.new(800,400,200,50,ButtonType.Small,"backgrounds/failed/quit.png")
 	return self
 end
 
 
 function LevelFailedSolo:mousePressed(x, y, button)
+	if self.retry:isCliked(x,y) then
+	
+	elseif  self.retry:isCliked(x,y) then
+	
+	end
 end
 
 function LevelFailedSolo:mouseReleased(x, y, button)
@@ -39,10 +46,9 @@ function LevelFailedSolo:update(dt)
 end
 
 function LevelFailedSolo:draw()
-	if self.continuous then
-		love.graphics.print("On est à la fin du niveau, appuitey sur entrée pour le niveau suivant", 200, 200)
-	else
-		love.graphics.print("On est à la fin du niveau, appuitey sur entrée pour revenir au menu", 200, 200)
-	end
+	love.graphics.draw(self.back,0,0)
+	x, y = love.mouse.getPosition()
+	self.retry:draw(x,y,1)
+	self.quit:draw(x,y,1)
 end
 
