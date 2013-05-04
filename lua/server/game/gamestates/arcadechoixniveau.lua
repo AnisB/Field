@@ -12,7 +12,7 @@ function ArcadeChoixNiveau:onMessage(msg, client)
 		for k,c in pairs(clients) do
 			c:send({type= "choixNiveau", level= msg.level})
 		end
-		if gameStateManager.state['Gameplay']==nil then
+		if gameStateManager.state['Gameplay']~=nil then
 		gameStateManager.state['Gameplay']:destroy()
 	end
 		gameStateManager.state['Gameplay']=Gameplay.new("maps/"..msg.level,true)

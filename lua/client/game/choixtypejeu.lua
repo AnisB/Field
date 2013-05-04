@@ -6,14 +6,17 @@ ChoixTypeJeu.__index = ChoixTypeJeu
 function ChoixTypeJeu:new()
     local self = {}
     setmetatable(self, ChoixTypeJeu)
-    self.isRed=0
+    self.back=love.graphics.newImage("backgrounds/solo/back.png")
+    self.story=Button.new(150,325,200,50,ButtonType.Large,"backgrounds/solo/story.png")
+    self.arcade=Button.new(150,400,250,50,ButtonType.Large,"backgrounds/solo/arcade.png")
+    self.returnB=Button.new(50,625,250,50,ButtonType.Large,"backgrounds/solo/return.png")
     return self
 end
 
 function ChoixTypeJeu:mousePressed(x, y, button)
-	if x > 90 and x < 90+150 and y > 105 and y < 105+35 then
+	if self.arcade:isCliked(x,y) then
 		serveur:send({type="choixTypeJeu", typeJeu="arcade"})
-	elseif x > 90 and x < 90+150 and y > 205 and y < 205+35 then
+	elseif self.story:isCliked(x,y) then
 		--serveur:send({type="choixTypeJeu", typeJeu="histoire"})
 	end
 end
@@ -46,39 +49,12 @@ function ChoixTypeJeu:onMessage(msg)
 end
 
 function ChoixTypeJeu:draw()
-	local hover = false
 	x, y = love.mouse.getPosition()
 
 	-- background :
-	love.graphics.draw(gameStateManager.state['ConnectToServer'].bg, 0, 0)
+	love.graphics.draw(self.back, 0, 0)
 
-	-- rectangles :
-	if x > 90 and x < 90+150 and y > 105 and y < 105+35 then
-		love.graphics.setColor(150, 150, 150, 255)
-		hover = true
-	else
-		love.graphics.setColor(50, 50, 50, 255)
-	end
-	love.graphics.rectangle("fill", 90, 105, 150, 35)
-
-	if x > 90 and x < 90+150 and y > 205 and y < 205+35 then
-		love.graphics.setColor(150, 150, 150, 255)
-		hover = true
-	else
-		love.graphics.setColor(50, 50, 50, 255)
-	end
-	love.graphics.rectangle("fill", 90, 205, 150, 35)
-
-	-- text :
-	love.graphics.setColor(255, 255, 255, 255)
-	love.graphics.print("arcade", 100, 100)
-	love.graphics.print("histoire", 100, 200)
-
-	-- cursor :
-	if hover then
-		love.mouse.setVisible(false)
-		love.graphics.draw(gameStateManager.state['ConnectToServer'].handcursor, x-17, y-17)
-	else
-		love.mouse.setVisible(true)
-	end
+	self.story:draw(x,y,1)
+	self.arcade:draw(x,y,1)
+	self.returnB:draw(x,y,1)
 end

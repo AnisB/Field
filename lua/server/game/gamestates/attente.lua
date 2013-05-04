@@ -36,6 +36,7 @@ end
 function Attente:draw() end
 
 function Attente:onMessage(msg, client)
+	print "bing"
 	if msg.type == "login" then
 		client.pseudo = msg.pseudo or debug_warn("[login] missing pseudo")
 		client.cookie = msg.cookie or debug_warn("[login] missing cookie")

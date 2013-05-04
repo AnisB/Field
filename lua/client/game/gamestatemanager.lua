@@ -50,8 +50,9 @@ function GameStateManager.new()
 
 	-- Jeu Solo
 	self.state['ChoixTypeJeuSolo'] = ChoixTypeJeuSolo.new()	
-	self.state['ChoixNiveauSolo'] = nil
-	self.state['ChoixPersoSolo'] = nil
+	self.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new("metalman",false)
+	self.state['ChoixPersoSolo'] = ChoixPersoSolo.new(false)
+	self.state['GameplaySolo'] = GameplaySolo.new("level4",false,"themagnet")
 
 	-- Init
 	self.currentState='FirstEnter'
@@ -59,6 +60,7 @@ function GameStateManager.new()
 end
 
 function GameStateManager:onMessage(msg)
+	--assert(self.state[self.currentState].onMessage)
 	self.state[self.currentState]:onMessage(msg)
 end
 
@@ -101,6 +103,11 @@ function GameStateManager:draw()
 	self.state[self.currentState]:draw()
 end
 function GameStateManager:changeState(newState)
+	self.currentState=newState
+end
+
+function GameStateManager:resetAndChangeState(newState)
+	self.state[newState]:reset()
 	self.currentState=newState
 end
 

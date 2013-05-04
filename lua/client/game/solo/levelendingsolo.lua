@@ -24,9 +24,9 @@ end
 function LevelEndingSolo:keyPressed(key, unicode)
 	if key=="return" then
 		if self.continuous then
-			gameStateManager.state['Gameplay']:destroy()
-            gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
-            gameStateManager:changeState('Gameplay')		
+			gameStateManager.state['GameplaySolo']:destroy()
+            gameStateManager.state['GameplaySolo']=GameplaySolo.new("maps/"..self.next,true)
+            gameStateManager:changeState('GameplaySolo')		
         else
             gameStateManager:changeState('ChoixNiveauSolo')
         end		

@@ -30,11 +30,11 @@ function Gameplay.new(mapFile)
 	self.keyPacket={}
 	self.mapx=self.mapLoader.map.width*self.mapLoader.map.tilewidth
 	self.mapy= self.mapLoader.map.height*self.mapLoader.map.tileheight
-	self.background1=Background.new("img/background/1.png",1,self.mapy)
-	self.background2=Background.new("img/background/2.png",0.75,self.mapy)
-	self.background3=Background.new("img/background/3.png",0.5,self.mapy)
-	self.background4=Background.new("img/background/4.png",0.0,self.mapy)
-	self.background5=Background.new("img/background/5.png",0.0,self.mapy)
+	self.background1=Background.new(ParalaxImg.."1.png",1,self.mapy)
+	self.background2=Background.new(ParalaxImg.."2.png",0.75,self.mapy)
+	self.background3=Background.new(ParalaxImg.."3.png",0.5,self.mapy)
+	self.background4=Background.new(ParalaxImg.."4.png",0.0,self.mapy)
+	self.background5=Background.new(ParalaxImg.."5.png",0.0,self.mapy)
 
     self.camera=Camera.new(-1000,-1000)
     self.inputManager = InputManager.new()

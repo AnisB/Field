@@ -60,13 +60,13 @@ function Credits:update(dt)
 end
 
 function Credits:draw()
-	self.field:draw(770, 400)
-	love.graphics.draw(self.mm:getSprite(), 450, 300,0,2,2)
-	love.graphics.draw(self.tm:getSprite(), 700, 300,0,2,2)
-	love.graphics.printf("Ce jeu est une création d'un groupe de passionés de développement de jeu vidéo, c'est un jeu réseau coopératif à gameplay assymétrique basé sur les forces éléctromagnétiques.", 100, 100,1000)
-	love.graphics.printf("L'équipe est composée de Pierre Germain(Graphisme), Anthony Clerc(Sound Design), Julien Deville(Level Design), Anis Benyoub(Game Design, Lead and network Dev), Frédéric Matigot et Florent Weillaert(Network Dev).", 100, 450, 1000)
+	self.field:draw(770, 375)
+	love.graphics.draw(self.mm:getSprite(), 450, 275,0,2,2)
+	love.graphics.draw(self.tm:getSprite(), 700, 275,0,2,2)
+	love.graphics.printf("This game was created by an indie team. It's a network cooperative game based on an assymetric gameplay about electromagnetic forces.", 100, 75,1000)
+	love.graphics.printf("The team is composed of:\n Pierre Germain(Infography), Anthony Clerc(Sound Design), Julien Deville(Level Design), Anis Benyoub(Game Design, Gameplay and network Dev), Frédéric Matigot and Florent Weillaert(Network Dev).", 100, 425, 1100)
 	love.graphics.setColor(200,100,100,255*self.timer)
-	love.graphics.printf("Appuyez sur entrée pour sortir", 0, 650, 1280, "center")
+	love.graphics.printf("Press return to exit", 0, 650, 1280, "center")
 
 
 end

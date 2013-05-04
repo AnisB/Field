@@ -28,7 +28,6 @@ function FirstEnter:keyPressed(key, unicode)
 	if key=="return" and self.shouldPass==false then
 		self.shouldPass=true
 		Sound.playSound("firstenter")
-		print "merde"
 	end
 	
 end
@@ -64,14 +63,14 @@ function FirstEnter:update(dt)
 	if self.shouldPass then
 		self.passTimer= self.passTimer - dt
 		if self.passTimer<=0 then
-			gameStateManager:changeState('Menu')
+			gameStateManager:resetAndChangeState('Menu')
 		end
 	end
 end
 
 function FirstEnter:draw()
 	love.graphics.setColor(255,150,150,self.trans*self.passTimer)
-	love.graphics.print("Press Enter",550,500)
+	love.graphics.print("Press Return",500,500)
 	love.graphics.setColor(255,255,255,255*self.passTimer)
 	love.graphics.draw(self.img,300,100)
 

@@ -24,9 +24,9 @@ function MetalSolo.new(pos,shapeType,typeP,material,typemetalSolo,netid)
 	end
 
 	if typemetalSolo =="static" then
-		self.metalSoloType=MetalSoloTypes.Static
+		self.metalType=MetalTypes.Static
 	else
-		self.metalSoloType=MetalSoloTypes.Normal
+		self.metalType=MetalTypes.Normal
 	end
 	self.w=unitWorldSize
 	self.h=unitWorldSize

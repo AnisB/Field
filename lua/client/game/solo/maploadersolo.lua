@@ -177,7 +177,6 @@ end
 
 function MapLoaderSolo:createMetals(map)
     for i,j in pairs(map.objects) do
-        print(j.properties["physic"])
         local m =MetalSolo.new({x=j.x,y=j.y},j.shape,j.properties["physic"],j.type,j.properties["magnet"],i)
         self.magnetManager:addMetal(m)        
         table.insert(self.metals,m)

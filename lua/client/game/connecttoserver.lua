@@ -8,7 +8,7 @@ function ConnectToServer:new()
     local self = {}
     setmetatable(self, ConnectToServer)
     self.timer=0
-    self.font = love.graphics.newFont(FontDirectory .. "font.ttf", 30)
+    self.font = love.graphics.newFont(FontDirectory .. "font.ttf", 25)
     love.graphics.setFont(self.font)
     self.bg = love.graphics.newImage(ImgDirectory .. "fondgui.png")
     self.handcursor = love.graphics.newImage(ImgDirectory .. "handcursor.png")

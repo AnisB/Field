@@ -1,6 +1,8 @@
 --[[ 
 This file is part of the Field project]]
 
+
+require("game.ui.button")
 Menu = {}
 Menu.__index = Menu
 function Menu:new()
@@ -8,43 +10,54 @@ function Menu:new()
     setmetatable(self, Menu)
     self.err = false
     self.isRed=0
-    self.img=love.graphics.newImage("img/title.png")
     self.timer=0
     self.enteringDone=false
     self.shouldQuit=false
     self.filter=1
+
+    self.back=love.graphics.newImage("backgrounds/menu/back.png")
+    self.solo=Button.new(150,250,200,50,ButtonType.Small,"backgrounds/menu/solo.png")
+    self.coop=Button.new(150,325,200,50,ButtonType.Small,"backgrounds/menu/coop.png")
+    self.options=Button.new(150,400,250,50,ButtonType.Large,"backgrounds/menu/options.png")
+    self.credits=Button.new(150,475,250,50,ButtonType.Large,"backgrounds/menu/credits.png")
+    self.quit=Button.new(165,600,200,50,ButtonType.Small,"backgrounds/menu/quit.png")
+
+    self.font = love.graphics.newFont(FontDirectory .. "font.ttf", 25)
+    love.graphics.setFont(self.font)
+
+
     return self
 end
 
 function Menu:mousePressed(x, y, button)
 	if not self.shouldQuit then
-		if x > 550 and x < 550+200 and y > 350 and y < 350+50 then
+		if self.solo:isCliked(x,y) then
 			self.timer=0
 			self.enteringDone=false
 			gameStateManager:changeState('ChoixTypeJeuSolo')
 		end
 
 
-		if x > 550 and x < 550+200 and y > 450 and y < 450+50 then
+		if self.coop:isCliked(x,y) then
 			self.timer=0
 			self.enteringDone=false			
 			gameStateManager:changeState('ConnectToServer')
 		end
 
 
-		if x > 550 and x < 550+200 and y > 550 and y < 550+50 then
+		if self.options:isCliked(x,y) then
 			self.timer=0
 			self.enteringDone=false			
 			gameStateManager:changeState('Options')
 		end
 
-		if x > 550 and x < 550+200 and y > 650 and y < 650+50 then
+		if self.credits:isCliked(x,y) then
 			self.timer=0
 			self.enteringDone=false			
 			gameStateManager:changeState('Credits')
 		end
 
-		if x > 1050 and x < 1050+200 and y > 650 and y < 650+50 then
+		if self.quit:isCliked(x,y) then
 			self.shouldQuit=true
 			self.filter=0.5
 		end
@@ -60,6 +73,10 @@ function Menu:mousePressed(x, y, button)
 	end
 end
 
+function Menu:reset()
+    self.font = love.graphics.newFont(FontDirectory .. "font.ttf", 25)
+    love.graphics.setFont(self.font)
+end
 function Menu:mouseReleased(x, y, button) 
 end
 
@@ -88,106 +105,48 @@ end
 
 function Menu:draw()
 	love.graphics.setColor(255,255,255,255*self.timer*self.filter)
-	love.graphics.draw(gameStateManager.state['ConnectToServer'].bg, 0, 0)	
-	love.graphics.draw(self.img,300,100)
+	love.graphics.draw(self.back,0,0)
 	x, y = love.mouse.getPosition()
 
 
 
 	-- rectangles :
 	 if not self.shouldQuit then
-	 	if x > 550 and x < 550+200 and y > 350 and y < 350+50 then
-	 		love.graphics.setColor(150, 150, 150, 255*self.timer)
-	 	else
-	 		love.graphics.setColor(50, 50, 50, 255*self.timer)
-	 	end
-	 	love.graphics.rectangle("fill", 550, 350, 200, 50)
-
-	 	love.graphics.setColor(255, 255,255, 255*self.timer)
-	 	love.graphics.print("Solo",620,355)
-
-
-	 	if x > 550 and x < 550+200 and y > 450 and y < 450+50 then
-	 		love.graphics.setColor(150, 150, 150, 255*self.timer)
-	 	else
-	 		love.graphics.setColor(50, 50, 50, 255*self.timer)
-	 	end
-	 	love.graphics.rectangle("fill", 550, 450, 200, 50)
-
-	 	love.graphics.setColor(255, 255,255, 255*self.timer)
-	 	love.graphics.print("Coop",620,455)
-
-
-	 	if x > 550 and x < 550+200 and y > 550 and y < 550+50 then
-	 		love.graphics.setColor(150, 150, 150, 255*self.timer)
-	 	else
-	 		love.graphics.setColor(50, 50, 50, 255*self.timer)
-	 	end
-	 	love.graphics.rectangle("fill", 550, 550, 200, 50)
-	 	love.graphics.setColor(255, 255,255, 255*self.timer)
-	 	love.graphics.print("Options",600,555)
-
-	 	if x > 550 and x < 550+200 and y > 650 and y < 650+50 then
-	 		love.graphics.setColor(150, 150, 150, 255*self.timer)
-	 	else
-	 		love.graphics.setColor(50, 50, 50, 255*self.timer)
-	 	end
-	 	love.graphics.rectangle("fill", 550, 650, 200, 50)
-	 	love.graphics.setColor(255, 255,255, 255*self.timer)
-	 	love.graphics.print("Credits",600,655)
-
-
-	 	if x > 1050 and x < 1050+200 and y > 650 and y < 650+50 then
-	 		love.graphics.setColor(150, 150, 150, 255*self.timer)
-	 	else
-	 		love.graphics.setColor(50, 50, 50, 255*self.timer)
-	 	end
-	 	love.graphics.rectangle("fill", 1050, 650, 200, 50)
-	 	love.graphics.setColor(255, 255,255, 255*self.timer)
-	 	love.graphics.print("Quit",1050+70,655)
+	 	self.solo:draw(x,y,self.timer)
+	 	self.coop:draw(x,y,self.timer)
+	 	self.options:draw(x,y,self.timer)
+	 	self.credits:draw(x,y,self.timer)
+	 	self.quit:draw(x,y,self.timer)
 	 else
-
-	 	love.graphics.setColor(50, 50, 50, 255*self.filter)
-	 	love.graphics.rectangle("fill", 550, 350, 200, 50)
-	 	love.graphics.setColor(255, 255,255, 255*self.filter)
-	 	love.graphics.print("Solo",620,355)
-	 	love.graphics.setColor(50, 50, 50, 255*self.filter)
-	 	love.graphics.rectangle("fill", 550, 450, 200, 50)
-	 	love.graphics.setColor(255, 255,255, 255*self.filter)
-	 	love.graphics.print("Coop",620,455)
-	 	love.graphics.setColor(50, 50, 50, 255*self.filter)
-	 	love.graphics.rectangle("fill", 550, 550, 200, 50)
-	 	love.graphics.setColor(255, 255,255, 255*self.filter)
-	 	love.graphics.print("Options",600,555)
-	 	love.graphics.setColor(150, 150, 150, 255*self.filter)
-	 	love.graphics.setColor(50, 50, 50, 255)
-	 	love.graphics.rectangle("fill", 1050, 650, 200, 50)
-	 	love.graphics.setColor(255, 255,255, 255*self.filter)
-	 	love.graphics.print("Quit",1050+70,655)
+	 	self.solo:draw(0,0,self.filter)
+	 	self.coop:draw(0,0,self.filter)
+	 	self.options:draw(0,0,self.filter)
+	 	self.credits:draw(0,0,self.filter)
+	 	self.quit:draw(0,0,self.filter)
 
 
-	 	love.graphics.setColor(50, 50, 50, 255)
+	 	love.graphics.setColor(50, 50, 50, 120)
 	 	love.graphics.rectangle("fill", 400, 300, 500, 350)
 	 	love.graphics.setColor(255, 255, 255, 255)
-	 	love.graphics.print("Etes-vous sûr de vouloir ",430,320)
-	 	love.graphics.print("quitter?",590,360)
+	 	love.graphics.print("Are you sure about",450,320)
+	 	love.graphics.print("quitting?",560,360)
 
 	 	if x > 540 and x < 540+100 and y > 550 and y < 550+50 then
 	 		love.graphics.setColor(150, 150, 150, 255)
 	 	else
 	 		love.graphics.setColor(50, 50, 50, 255)
 	 	end
-	 	love.graphics.rectangle("fill", 540, 550, 100, 50)
+	 	love.graphics.rectangle("fill", 530, 550, 100, 50)
 	 	love.graphics.setColor(255, 100,100, 255)
-	 	love.graphics.print("Oui",570,555)
+	 	love.graphics.print("Yes",550,555)
 	 	if x > 640 and x < 640+100 and y > 550 and y < 550+50 then
 	 		love.graphics.setColor(150, 150, 150, 255)
 	 	else
 	 		love.graphics.setColor(50, 50, 50, 255)
 	 	end
-	 	love.graphics.rectangle("fill", 640, 550, 100, 50)
+	 	love.graphics.rectangle("fill", 660, 550, 100, 50)
 	 	love.graphics.setColor(255, 255, 255, 255)
-	 	love.graphics.print("Non",660,555)
+	 	love.graphics.print("No",675,555)
 
 	 end
 
