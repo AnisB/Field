@@ -2,7 +2,7 @@
 
 require("game.field")
 require("game.attfield")
-require("game.solo.animgenesolo")
+require("game.animgene")
 require("game.fieldsound")
 
 Generator = {}
@@ -31,7 +31,7 @@ function Generator.new(pos,typeField,anim,id)
 				else
 					self.field=Field.new(self.typeField,{x=0,y=0})
 				end
-				self.anim = AnimGeneSolo.new('gene')
+				self.anim = AnimGene.new('gene')
 				self:loadAnimation("off",true)
 				self.anim:syncronize(anim,id)
 				self.drawed=true

@@ -16,7 +16,7 @@ function GeneratorSolo.new(pos,type,typeField,ID,netid)
 	self.netid=netid
 	self.id=ID
 	self.position={x=pos.x,y=pos.y}
-	self.pc = Physics.newSphere(self.position.x,self.position.y,unitWorldSize/2,type)
+	self.pc = Physics.newSphere(self.position.x+unitWorldSize/2,self.position.y+unitWorldSize/2,unitWorldSize/2,type)
 	self.typeG=type
 	self.pc.fixture:setUserData(self)
 	self.type='GeneratorSolo'
