@@ -128,7 +128,7 @@ return {
     {
       type = "objectgroup",
       name = "wall",
-      visible = true,
+      visible = false,
       opacity = 1,
       properties = {},
       objects = {
@@ -203,7 +203,7 @@ return {
     {
       type = "objectgroup",
       name = "platform",
-      visible = true,
+      visible = false,
       opacity = 1,
       properties = {},
       objects = {
@@ -509,7 +509,7 @@ return {
     {
       type = "objectgroup",
       name = "movable",
-      visible = true,
+      visible = false,
       opacity = 1,
       properties = {},
       objects = {}
@@ -517,7 +517,7 @@ return {
     {
       type = "objectgroup",
       name = "destroyable",
-      visible = true,
+      visible = false,
       opacity = 1,
       properties = {},
       objects = {
@@ -724,7 +724,7 @@ return {
     {
       type = "objectgroup",
       name = "metalman",
-      visible = true,
+      visible = false,
       opacity = 1,
       properties = {},
       objects = {
@@ -744,7 +744,7 @@ return {
     {
       type = "objectgroup",
       name = "themagnet",
-      visible = true,
+      visible = false,
       opacity = 1,
       properties = {},
       objects = {
@@ -812,7 +812,7 @@ return {
     {
       type = "objectgroup",
       name = "switch",
-      visible = true,
+      visible = false,
       opacity = 1,
       properties = {},
       objects = {
@@ -864,7 +864,7 @@ return {
     {
       type = "objectgroup",
       name = "metal",
-      visible = true,
+      visible = false,
       opacity = 1,
       properties = {},
       objects = {
@@ -1094,7 +1094,7 @@ return {
             ["animid"] = "24",
             ["closeid"] = "1",
             ["openid"] = "1",
-            ["type"] = "HAloneD"
+            ["type"] = "VAloneH"
           }
         },
         {
@@ -1110,7 +1110,7 @@ return {
             ["animid"] = "23",
             ["closeid"] = "1",
             ["openid"] = "1",
-            ["type"] = "HAloneD"
+            ["type"] = "HAloneG"
           }
         },
         {
@@ -1175,7 +1175,7 @@ return {
           visible = true,
           properties = {
             ["animid"] = "41",
-            ["closeid"] = "5",
+            ["openid"] = "5",
             ["prev"] = "40",
             ["type"] = "FinVH"
           }
@@ -1642,7 +1642,7 @@ return {
     {
       type = "objectgroup",
       name = "acid",
-      visible = true,
+      visible = false,
       opacity = 1,
       properties = {},
       objects = {
@@ -2613,7 +2613,7 @@ return {
     {
       type = "objectgroup",
       name = "arc",
-      visible = true,
+      visible = false,
       opacity = 1,
       properties = {},
       objects = {}
@@ -2621,7 +2621,7 @@ return {
     {
       type = "objectgroup",
       name = "levelend",
-      visible = true,
+      visible = false,
       opacity = 1,
       properties = {},
       objects = {
@@ -2686,7 +2686,8 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "5"
+            ["closeid"] = "5",
+            ["openid"] = "5"
           }
         },
         {
@@ -2713,8 +2714,9 @@ return {
           height = 64,
           visible = true,
           properties = {
+            ["closeid"] = "2",
             ["enabled"] = "true",
-            ["id"] = "2"
+            ["openid"] = "2"
           }
         }
       }
