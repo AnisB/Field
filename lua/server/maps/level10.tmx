@@ -32,7 +32,7 @@
   <object x="1600" y="832" width="64" height="320"/>
  </objectgroup>
  <objectgroup color="#0000ff" name="platform" width="60" height="21">
-  <object x="0" y="1280" width="3840" height="64"/>
+  <object x="-1" y="1288" width="3840" height="64"/>
   <object x="64" y="0" width="3712" height="64"/>
   <object x="2688" y="1088" width="64" height="64"/>
   <object x="2752" y="1152" width="64" height="64"/>
@@ -214,9 +214,9 @@
    <properties>
     <property name="animid" value="25"/>
     <property name="enabled" value="true"/>
-    <property name="next" value="26"/>
     <property name="openid" value="2"/>
-    <property name="type" value="DebutHG"/>
+    <property name="prev" value="26"/>
+    <property name="type" value="FinHD"/>
    </properties>
   </object>
   <object x="1472" y="960" width="64" height="64">
@@ -283,18 +283,18 @@
    <properties>
     <property name="animid" value="26"/>
     <property name="enabled" value="true"/>
-    <property name="next" value="27"/>
-    <property name="prev" value="25"/>
-    <property name="type" value="MilieuHG"/>
+    <property name="next" value="25"/>
+    <property name="prev" value="27"/>
+    <property name="type" value="MillieuHD"/>
    </properties>
   </object>
   <object x="2176" y="1088" width="64" height="64">
    <properties>
     <property name="animid" value="32"/>
-    <property name="closeid" value="2"/>
     <property name="enabled" value="true"/>
+    <property name="next" value="31"/>
     <property name="prev" value="33"/>
-    <property name="type" value="FinHD"/>
+    <property name="type" value="MillieuHD"/>
    </properties>
   </object>
   <object x="2240" y="1088" width="64" height="64">
@@ -303,15 +303,16 @@
     <property name="enabled" value="true"/>
     <property name="next" value="32"/>
     <property name="prev" value="34"/>
-    <property name="type" value="MilieuHD"/>
+    <property name="type" value="MillieuHD"/>
    </properties>
   </object>
   <object x="2560" y="1088" width="64" height="64">
    <properties>
     <property name="animid" value="38"/>
+    <property name="closeid" value="2"/>
     <property name="enabled" value="true"/>
     <property name="next" value="37"/>
-    <property name="openid" value="2"/>
+    <property name="type" value="DebutHD"/>
    </properties>
   </object>
   <object x="896" y="1088" width="64" height="64">
@@ -320,7 +321,7 @@
     <property name="enabled" value="true"/>
     <property name="next" value="14"/>
     <property name="prev" value="12"/>
-    <property name="type" value="MilieuHD"/>
+    <property name="type" value="MillieuHG"/>
    </properties>
   </object>
   <object x="1344" y="1088" width="64" height="64">
@@ -381,7 +382,7 @@
     <property name="enabled" value="true"/>
     <property name="next" value="15"/>
     <property name="prev" value="13"/>
-    <property name="type" value="MilieuHD"/>
+    <property name="type" value="MillieuHG"/>
    </properties>
   </object>
   <object x="1024" y="1088" width="64" height="64">
@@ -390,7 +391,7 @@
     <property name="enabled" value="true"/>
     <property name="next" value="16"/>
     <property name="prev" value="14"/>
-    <property name="type" value="MilieuHD"/>
+    <property name="type" value="MillieuHG"/>
    </properties>
   </object>
   <object x="1088" y="1088" width="64" height="64">
@@ -399,7 +400,7 @@
     <property name="enabled" value="true"/>
     <property name="next" value="17"/>
     <property name="prev" value="15"/>
-    <property name="type" value="MilieuHD"/>
+    <property name="type" value="MillieuHG"/>
    </properties>
   </object>
   <object x="1152" y="1088" width="64" height="64">
@@ -408,7 +409,7 @@
     <property name="enabled" value="true"/>
     <property name="next" value="18"/>
     <property name="prev" value="16"/>
-    <property name="type" value="MilieuHD"/>
+    <property name="type" value="MillieuHG"/>
    </properties>
   </object>
   <object x="1216" y="1088" width="64" height="64">
@@ -417,7 +418,7 @@
     <property name="enabled" value="true"/>
     <property name="next" value="19"/>
     <property name="prev" value="17"/>
-    <property name="type" value="MilieuHD"/>
+    <property name="type" value="MillieuHG"/>
    </properties>
   </object>
   <object x="1280" y="1088" width="64" height="64">
@@ -426,7 +427,7 @@
     <property name="enabled" value="true"/>
     <property name="next" value="20"/>
     <property name="prev" value="18"/>
-    <property name="type" value="MilieuHD"/>
+    <property name="type" value="MillieuHG"/>
    </properties>
   </object>
   <object x="1536" y="896" width="64" height="64">
@@ -442,45 +443,45 @@
    <properties>
     <property name="animid" value="27"/>
     <property name="enabled" value="true"/>
-    <property name="next" value="28"/>
-    <property name="prev" value="26"/>
-    <property name="type" value="MilieuHG"/>
+    <property name="next" value="26"/>
+    <property name="prev" value="28"/>
+    <property name="type" value="MillieuHD"/>
    </properties>
   </object>
   <object x="1920" y="1088" width="64" height="64">
    <properties>
     <property name="animid" value="28"/>
     <property name="enabled" value="true"/>
-    <property name="next" value="29"/>
-    <property name="prev" value="27"/>
-    <property name="type" value="MilieuHG"/>
+    <property name="next" value="27"/>
+    <property name="prev" value="29"/>
+    <property name="type" value="MillieuHD"/>
    </properties>
   </object>
   <object x="1984" y="1088" width="64" height="64">
    <properties>
     <property name="animid" value="29"/>
     <property name="enabled" value="true"/>
-    <property name="next" value="30"/>
-    <property name="prev" value="28"/>
-    <property name="type" value="MilieuHG"/>
+    <property name="next" value="28"/>
+    <property name="prev" value="30"/>
+    <property name="type" value="MillieuHD"/>
    </properties>
   </object>
   <object x="2048" y="1088" width="64" height="64">
    <properties>
     <property name="animid" value="30"/>
     <property name="enabled" value="true"/>
-    <property name="next" value="31"/>
-    <property name="prev" value="29"/>
-    <property name="type" value="MilieuHG"/>
+    <property name="next" value="29"/>
+    <property name="prev" value="31"/>
+    <property name="type" value="MillieuHD"/>
    </properties>
   </object>
   <object x="2112" y="1088" width="64" height="64">
    <properties>
     <property name="animid" value="31"/>
-    <property name="closeid" value="2"/>
     <property name="enabled" value="true"/>
-    <property name="prev" value="30"/>
-    <property name="type" value="FinHG"/>
+    <property name="next" value="30"/>
+    <property name="prev" value="32"/>
+    <property name="type" value="MillieuHD"/>
    </properties>
   </object>
   <object x="2304" y="1088" width="64" height="64">
@@ -489,7 +490,7 @@
     <property name="enabled" value="true"/>
     <property name="next" value="33"/>
     <property name="prev" value="35"/>
-    <property name="type" value="MilieuHD"/>
+    <property name="type" value="MillieuHD"/>
    </properties>
   </object>
   <object x="2368" y="1088" width="64" height="64">
@@ -498,7 +499,7 @@
     <property name="enabled" value="true"/>
     <property name="next" value="34"/>
     <property name="prev" value="36"/>
-    <property name="type" value="MilieuHD"/>
+    <property name="type" value="MillieuHD"/>
    </properties>
   </object>
   <object x="2432" y="1088" width="64" height="64">
@@ -507,7 +508,7 @@
     <property name="enabled" value="true"/>
     <property name="next" value="35"/>
     <property name="prev" value="37"/>
-    <property name="type" value="MilieuHD"/>
+    <property name="type" value="MillieuHD"/>
    </properties>
   </object>
   <object x="2496" y="1088" width="64" height="64">
@@ -516,7 +517,7 @@
     <property name="enabled" value="true"/>
     <property name="next" value="36"/>
     <property name="prev" value="38"/>
-    <property name="type" value="MilieuHD"/>
+    <property name="type" value="MillieuHD"/>
    </properties>
   </object>
  </objectgroup>
