@@ -28,7 +28,7 @@
                 decalage={w/2,h/2}
                 self.pc = Physics.newRectangle(self.position.x,self.position.y,w,h,true,decalage)
             end
-            self.anim = AnimDestroyableSolo.new('destroyableSolo')
+            self.anim = AnimDestroyableSolo.new('destroyable')
             self:loadAnimation("normal",true)
             self.pc.fixture:setUserData(self)    
             self.kinPallier = 90    
@@ -49,7 +49,7 @@
         return self.position
     end 
     function DestroyableSolo:collideWith( object, collision )
-        if object.type=='MetalMan' then
+        if object.type=='MetalManSolo' then
             x,y =object.pc.body:getLinearVelocity()
             local kinEnergyX = math.log(0.5*object.pc.body:getMass()*object.pc.body:getMass()*object.pc.body:getMass()*math.abs(x))
             local kinEnergyY = math.log(0.5*object.pc.body:getMass()*object.pc.body:getMass()*object.pc.body:getMass()*math.abs(y))

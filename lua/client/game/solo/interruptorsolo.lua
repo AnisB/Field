@@ -1,6 +1,6 @@
 
 
-require("game.animinter")
+require("game.solo.animintersolo")
 
 
 InterruptorSolo = {}
@@ -24,7 +24,7 @@ function InterruptorSolo.new(pos,type,generatorID,magnetManager,sprite,netid)
 	self.canBeEnableTM=0
 	self.magnetManager=magnetManager
 	self.generatorID= generatorID
-	self.anim = AnimInter.new('inter')
+	self.anim = AnimInterSolo.new('inter')
 	self:loadAnimation("off",true)
 	return self
 end
@@ -85,19 +85,19 @@ end
 
 
 function InterruptorSolo:collideWith( object, collision )
-	if object.type=='MetalMan' then
+	if object.type=='MetalManSolo' then
 		self.canBeEnableMM =self.canBeEnableMM+1
 	end
-	if object.type =='TheMagnet' then
+	if object.type =='TheMagnetSolo' then
 		self.canBeEnableTM =self.canBeEnableTM+1
 	end
 end
 
 function InterruptorSolo:unCollideWith( object, collision )
-	if object.type=='MetalMan' then
+	if object.type=='MetalManSolo' then
 		self.canBeEnableMM =self.canBeEnableMM-1
 	end
-	if object.type =='TheMagnet' then
+	if object.type =='TheMagnetSolo' then
 		self.canBeEnableTM =self.canBeEnableTM-1
 	end
 end

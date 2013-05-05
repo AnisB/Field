@@ -70,22 +70,25 @@ function MetalManSolo:die(type)
 		self.alive=false
 		if(type=="acid") then
 		else
-			self:loadAnimation("mortelec",true)	
+			self:loadAnimation("mortelec",true)
+			Sound.playSound("electroc")
 		end
 	end
 end
 
 
 function MetalManSolo:jump()
-	if self.canjump and not self.isStatic then
-		if 	self.metalWeight==MetalMTypes.Alu then
-			self.pc.body:applyLinearImpulse(0, MetalManJumpImpulse.Alu)
-		else
-			self.pc.body:applyLinearImpulse(0, MetalManJumpImpulse.Acier)
+	if self.alive then
+		if self.canjump and not self.isStatic then
+			if 	self.metalWeight==MetalMTypes.Alu then
+				self.pc.body:applyLinearImpulse(0, MetalManJumpImpulse.Alu)
+			else
+				self.pc.body:applyLinearImpulse(0, MetalManJumpImpulse.Acier)
+			end
+			self:setState("startjumping")
+			self:loadAnimation("startjumping",true)
+			self.canjump=false
 		end
-	self:setState("startjumping")
-	self:loadAnimation("startjumping",true)
-	self.canjump=false
 	end
 end
 
@@ -222,20 +225,23 @@ function MetalManSolo:collideWith( object, collision )
 		else
 			self.collisionCounter=self.collisionCounter+1
 			if self.metalWeight==MetalMTypes.Acier then
-				if (object:getPosition().x >=(self.position.x+unitWorldSize)) or (object:getPosition().x <=(self.position.x-unitWorldSize)) then
+				vx,vy =self.pc.body:getLinearVelocity() 
+				local kinEnergyX = math.log(0.5*self.pc.body:getMass()*self.pc.body:getMass()*self.pc.body:getMass()*math.abs(vx))
+				local kinEnergyY = math.log(0.5*self.pc.body:getMass()*self.pc.body:getMass()*self.pc.body:getMass()*math.abs(vy))
+				print(kinEnergyX)
+				print (kinEnergyY)
+				if kinEnergyX>10.9 or kinEnergyY>11 then
 					gameStateManager.state["GameplaySolo"]:shakeOnX(2,100,0.2)
-				end
-				if (object:getPosition().y >=(self.position.y+unitWorldSize)) or (object:getPosition().y <=(self.position.y-unitWorldSize)) then
 					gameStateManager.state["GameplaySolo"]:shakeOnY(2,100,0.2)
 				end
 			end
 			if self.isStatic==true  then
-				if (object:getPosition().x >=(self.position.x+unitWorldSize)) or (object:getPosition().x <=(self.position.x-unitWorldSize)) then
+				-- if (object:getPosition().x >=(self.position.x+unitWorldSize)) or (object:getPosition().x <=(self.position.x-unitWorldSize)) then
 					gameStateManager.state["GameplaySolo"]:shakeOnX(5,100,0.2)
-				end
-				if (object:getPosition().y >=(self.position.y+unitWorldSize)) or (object:getPosition().y <=(self.position.y-unitWorldSize)) then
+				-- end
+				-- if (object:getPosition().y >=(self.position.y+unitWorldSize)) or (object:getPosition().y <=(self.position.y-unitWorldSize)) then
 					gameStateManager.state["GameplaySolo"]:shakeOnY(5,100,0.2)
-				end
+				-- end
 			end
 
 			if(object:getPosition().y>self.position.y) then

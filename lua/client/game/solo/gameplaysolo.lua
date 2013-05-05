@@ -60,12 +60,22 @@ function GameplaySolo.new(mapFile,continuous,player)
     self.levelFinished=false
     
     self.gameIsPaused=false
+
+    -- Slow timer
+    self.slowTimer=1
+    self.isSlowing=false
     return self
 end
 
 function GameplaySolo:finish()
     self.levelFinished=true
 end
+
+function GameplaySolo:slow()
+    self.isSlowing=true
+    self.slowTimer=0.2
+end
+
 
 
     function GameplaySolo:destroy()
@@ -227,8 +237,15 @@ end
         end
     
     
-    function GameplaySolo:update(dt)
-
+    function GameplaySolo:update(dttheo)
+        if self.isSlowing then
+        self.slowTimer =self.slowTimer +dttheo
+        if self.slowTimer>=1 then
+            self.slowTimer=1
+            self.isSlowing=false
+        end
+    end
+        dt=dttheo*self.slowTimer
         if  not self.gameIsPaused then
             if(self.levelFinished) then
 			   -- inputManager:clearInputs()
@@ -260,12 +277,12 @@ end
     
     function GameplaySolo:draw()
 
-
         if  self.gameIsPaused then
             love.graphics.setColor(150,150,150,255)
         else
             love.graphics.setColor(255,255,255,255)
         end
+
         if self.player=="metalman" then
             self.metalMan:preDraw()
             self.background5:draw(self.cameraMM:getPos()) 

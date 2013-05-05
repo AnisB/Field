@@ -17,7 +17,7 @@ function GateInterruptorSolo.new(pos,type,gateOpenID,gateCloseID,mapLoader,enabl
 	local decalage={unitWorldSize/2,unitWorldSize/2}
 	self.pc = Physics.newInterruptor(self.position.x,self.position.y,unitWorldSize,unitWorldSize,type,decalage)
 	self.typeG=type
-	self.anim = AnimInter.new('inter')
+	self.anim = AnimInterSolo.new('inter')
 	self.pc.fixture:setUserData(self)
 	self.type='GateInterruptorSolo'
 
@@ -99,19 +99,19 @@ end
 
 
 function GateInterruptorSolo:collideWith( object, collision )
-	if object.type=='MetalMan' then
+	if object.type=='MetalManSolo' then
 		self.canBeEnableMM =self.canBeEnableMM+1
 	end
-	if object.type =='TheMagnet' then
+	if object.type =='TheMagnetSolo' then
 		self.canBeEnableTM =self.canBeEnableTM+1
 	end
 end
 
 function GateInterruptorSolo:unCollideWith( object, collision )
-	if object.type=='MetalMan' then
+	if object.type=='MetalManSolo' then
 		self.canBeEnableMM =self.canBeEnableMM-1
 	end
-	if object.type =='TheMagnet' then
+	if object.type =='TheMagnetSolo' then
 		self.canBeEnableTM =self.canBeEnableTM-1
 	end
 end
