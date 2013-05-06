@@ -47,9 +47,36 @@
  <objectgroup color="#66ccff" name="switch" width="60" height="10"/>
  <objectgroup color="#e6e6e6" name="metal" width="60" height="10"/>
  <objectgroup color="#333333" name="gate" width="60" height="10">
-  <object x="2432" y="320" width="64" height="256">
+  <object x="2432" y="320" width="64" height="64">
    <properties>
-    <property name="id" value="1"/>
+    <property name="animid" value="1"/>
+    <property name="closeid" value="1"/>
+    <property name="next" value="2"/>
+    <property name="type" value="DebutVH"/>
+   </properties>
+  </object>
+  <object x="2432" y="384" width="64" height="64">
+   <properties>
+    <property name="animid" value="2"/>
+    <property name="next" value="3"/>
+    <property name="prev" value="1"/>
+    <property name="type" value="MillieuVH"/>
+   </properties>
+  </object>
+  <object x="2432" y="448" width="64" height="64">
+   <properties>
+    <property name="animid" value="3"/>
+    <property name="next" value="4"/>
+    <property name="prev" value="2"/>
+    <property name="type" value="MillieuVH"/>
+   </properties>
+  </object>
+  <object x="2432" y="512" width="64" height="64">
+   <properties>
+    <property name="animid" value="4"/>
+    <property name="openid" value="1"/>
+    <property name="prev" value="3"/>
+    <property name="type" value="FinVH"/>
    </properties>
   </object>
  </objectgroup>
@@ -161,7 +188,8 @@
  <objectgroup color="#800080" name="gateswitch" width="60" height="10">
   <object x="2368" y="384" width="64" height="64">
    <properties>
-    <property name="id" value="1"/>
+    <property name="closeid" value="1"/>
+    <property name="openid" value="1"/>
    </properties>
   </object>
  </objectgroup>

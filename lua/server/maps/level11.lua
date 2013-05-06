@@ -314,10 +314,61 @@ return {
           x = 2432,
           y = 320,
           width = 64,
-          height = 256,
+          height = 64,
           visible = true,
           properties = {
-            ["id"] = "1"
+            ["animid"] = "1",
+            ["closeid"] = "1",
+            ["next"] = "2",
+            ["type"] = "DebutVH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2432,
+          y = 384,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "2",
+            ["next"] = "3",
+            ["prev"] = "1",
+            ["type"] = "MillieuVH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2432,
+          y = 448,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "3",
+            ["next"] = "4",
+            ["prev"] = "2",
+            ["type"] = "MillieuVH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2432,
+          y = 512,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "4",
+            ["openid"] = "1",
+            ["prev"] = "3",
+            ["type"] = "FinVH"
           }
         }
       }
@@ -625,7 +676,8 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "1"
+            ["closeid"] = "1",
+            ["openid"] = "1"
           }
         }
       }
