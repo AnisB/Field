@@ -380,10 +380,13 @@ return {
           x = 2432,
           y = 320,
           width = 64,
-          height = 256,
+          height = 64,
           visible = true,
           properties = {
-            ["id"] = "1"
+            ["animid"] = "3",
+            ["closeid"] = "1",
+            ["next"] = "2",
+            ["type"] = "DebutVH"
           }
         },
         {
@@ -396,7 +399,10 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "1"
+            ["animid"] = "2",
+            ["closeid"] = "1",
+            ["openid"] = "1",
+            ["type"] = "HAloneD"
           }
         },
         {
@@ -409,8 +415,59 @@ return {
           height = 64,
           visible = true,
           properties = {
+            ["animid"] = "1",
+            ["closeid"] = "2",
             ["enabled"] = "true",
-            ["id"] = "2"
+            ["openid"] = "2",
+            ["type"] = "HAloneG"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2432,
+          y = 384,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "4",
+            ["next"] = "5",
+            ["prev"] = "3",
+            ["type"] = "MillieuVH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2432,
+          y = 448,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "5",
+            ["next"] = "6",
+            ["prev"] = "4",
+            ["type"] = "MillieuVH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2432,
+          y = 512,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "6",
+            ["openid"] = "1",
+            ["prev"] = "5",
+            ["type"] = "FinVH"
           }
         }
       }
@@ -718,7 +775,8 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "1"
+            ["closeid"] = "1",
+            ["openid"] = "1"
           }
         },
         {
@@ -731,8 +789,9 @@ return {
           height = 64,
           visible = true,
           properties = {
+            ["closeid"] = "2",
             ["enabled"] = "true",
-            ["id"] = "2"
+            ["openid"] = "2"
           }
         }
       }
