@@ -15,7 +15,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "mur.png",
+      image = "data/mur.png",
       imagewidth = 64,
       imageheight = 64,
       transparentcolor = "#ffffff",
@@ -29,7 +29,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "sol.png",
+      image = "data/sol.png",
       imagewidth = 64,
       imageheight = 64,
       transparentcolor = "#ffffff",
@@ -43,7 +43,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "alone.png",
+      image = "data/alone.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -56,7 +56,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "left.png",
+      image = "data/left.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -69,7 +69,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "mid.png",
+      image = "data/mid.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -82,7 +82,150 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "right.png",
+      image = "data/right.png",
+      imagewidth = 64,
+      imageheight = 64,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "portebas",
+      firstgid = 7,
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      image = "data/portebas.png",
+      imagewidth = 64,
+      imageheight = 64,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "portehaut",
+      firstgid = 8,
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      image = "data/portehaut.png",
+      imagewidth = 64,
+      imageheight = 64,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "fin",
+      firstgid = 9,
+      tilewidth = 192,
+      tileheight = 128,
+      spacing = 0,
+      margin = 0,
+      image = "data/fin.png",
+      imagewidth = 192,
+      imageheight = 128,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "citerne",
+      firstgid = 10,
+      tilewidth = 418,
+      tileheight = 632,
+      spacing = 0,
+      margin = 0,
+      image = "data/citerne.png",
+      imagewidth = 418,
+      imageheight = 632,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "container1",
+      firstgid = 11,
+      tilewidth = 610,
+      tileheight = 276,
+      spacing = 0,
+      margin = 0,
+      image = "data/container1.png",
+      imagewidth = 610,
+      imageheight = 276,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "container2",
+      firstgid = 12,
+      tilewidth = 480,
+      tileheight = 330,
+      spacing = 0,
+      margin = 0,
+      image = "data/container2.png",
+      imagewidth = 480,
+      imageheight = 330,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "cable1",
+      firstgid = 13,
+      tilewidth = 77,
+      tileheight = 372,
+      spacing = 0,
+      margin = 0,
+      image = "data/cable1.png",
+      imagewidth = 77,
+      imageheight = 372,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "passerelle1",
+      firstgid = 14,
+      tilewidth = 198,
+      tileheight = 342,
+      spacing = 0,
+      margin = 0,
+      image = "data/passerelle1.png",
+      imagewidth = 198,
+      imageheight = 342,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "passerelle2",
+      firstgid = 15,
+      tilewidth = 122,
+      tileheight = 599,
+      spacing = 0,
+      margin = 0,
+      image = "data/passerelle2.png",
+      imagewidth = 122,
+      imageheight = 599,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "cable2",
+      firstgid = 16,
+      tilewidth = 46,
+      tileheight = 243,
+      spacing = 0,
+      margin = 0,
+      image = "data/cable2.png",
+      imagewidth = 46,
+      imageheight = 243,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "mur2",
+      firstgid = 17,
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      image = "data/mur2.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -115,11 +258,11 @@ return {
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 1,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6
@@ -128,7 +271,7 @@ return {
     {
       type = "objectgroup",
       name = "wall",
-      visible = false,
+      visible = true,
       opacity = 1,
       properties = {},
       objects = {
@@ -203,7 +346,7 @@ return {
     {
       type = "objectgroup",
       name = "platform",
-      visible = false,
+      visible = true,
       opacity = 1,
       properties = {},
       objects = {
@@ -509,7 +652,7 @@ return {
     {
       type = "objectgroup",
       name = "movable",
-      visible = false,
+      visible = true,
       opacity = 1,
       properties = {},
       objects = {}
@@ -517,7 +660,7 @@ return {
     {
       type = "objectgroup",
       name = "destroyable",
-      visible = false,
+      visible = true,
       opacity = 1,
       properties = {},
       objects = {
@@ -724,7 +867,7 @@ return {
     {
       type = "objectgroup",
       name = "metalman",
-      visible = false,
+      visible = true,
       opacity = 1,
       properties = {},
       objects = {
@@ -744,7 +887,7 @@ return {
     {
       type = "objectgroup",
       name = "themagnet",
-      visible = false,
+      visible = true,
       opacity = 1,
       properties = {},
       objects = {
@@ -812,7 +955,7 @@ return {
     {
       type = "objectgroup",
       name = "switch",
-      visible = false,
+      visible = true,
       opacity = 1,
       properties = {},
       objects = {
@@ -864,7 +1007,7 @@ return {
     {
       type = "objectgroup",
       name = "metal",
-      visible = false,
+      visible = true,
       opacity = 1,
       properties = {},
       objects = {
@@ -1094,7 +1237,7 @@ return {
             ["animid"] = "24",
             ["closeid"] = "1",
             ["openid"] = "1",
-            ["type"] = "VAloneH"
+            ["type"] = "HAloneD"
           }
         },
         {
@@ -1110,7 +1253,7 @@ return {
             ["animid"] = "23",
             ["closeid"] = "1",
             ["openid"] = "1",
-            ["type"] = "HAloneG"
+            ["type"] = "HAloneD"
           }
         },
         {
@@ -1175,7 +1318,7 @@ return {
           visible = true,
           properties = {
             ["animid"] = "41",
-            ["openid"] = "5",
+            ["closeid"] = "5",
             ["prev"] = "40",
             ["type"] = "FinVH"
           }
@@ -1642,7 +1785,7 @@ return {
     {
       type = "objectgroup",
       name = "acid",
-      visible = false,
+      visible = true,
       opacity = 1,
       properties = {},
       objects = {
@@ -2613,7 +2756,7 @@ return {
     {
       type = "objectgroup",
       name = "arc",
-      visible = false,
+      visible = true,
       opacity = 1,
       properties = {},
       objects = {}
@@ -2621,7 +2764,7 @@ return {
     {
       type = "objectgroup",
       name = "levelend",
-      visible = false,
+      visible = true,
       opacity = 1,
       properties = {},
       objects = {
@@ -2629,10 +2772,10 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 3456,
-          y = 1024,
-          width = 320,
-          height = 192,
+          x = 3584,
+          y = 1088,
+          width = 192,
+          height = 128,
           visible = true,
           properties = {
             ["next"] = "level6"
@@ -2686,8 +2829,7 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["closeid"] = "5",
-            ["openid"] = "5"
+            ["id"] = "5"
           }
         },
         {
@@ -2714,9 +2856,8 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["closeid"] = "2",
             ["enabled"] = "true",
-            ["openid"] = "2"
+            ["id"] = "2"
           }
         }
       }

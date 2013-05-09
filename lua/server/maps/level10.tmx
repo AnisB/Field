@@ -1,26 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="60" height="21" tilewidth="64" tileheight="64">
  <tileset firstgid="1" name="mur" tilewidth="64" tileheight="64">
-  <image source="mur.png" trans="ffffff" width="64" height="64"/>
+  <image source="data/mur.png" trans="ffffff" width="64" height="64"/>
  </tileset>
  <tileset firstgid="2" name="sol" tilewidth="64" tileheight="64">
-  <image source="sol.png" trans="ffffff" width="64" height="64"/>
+  <image source="data/sol.png" trans="ffffff" width="64" height="64"/>
  </tileset>
  <tileset firstgid="3" name="alone" tilewidth="64" tileheight="64">
-  <image source="alone.png" width="64" height="64"/>
+  <image source="data/alone.png" width="64" height="64"/>
  </tileset>
  <tileset firstgid="4" name="left" tilewidth="64" tileheight="64">
-  <image source="left.png" width="64" height="64"/>
+  <image source="data/left.png" width="64" height="64"/>
  </tileset>
  <tileset firstgid="5" name="mid" tilewidth="64" tileheight="64">
-  <image source="mid.png" width="64" height="64"/>
+  <image source="data/mid.png" width="64" height="64"/>
  </tileset>
  <tileset firstgid="6" name="right" tilewidth="64" tileheight="64">
-  <image source="right.png" width="64" height="64"/>
+  <image source="data/right.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="7" name="portebas" tilewidth="64" tileheight="64">
+  <image source="data/portebas.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="8" name="portehaut" tilewidth="64" tileheight="64">
+  <image source="data/portehaut.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="9" name="fin" tilewidth="192" tileheight="128">
+  <image source="data/fin.png" width="192" height="128"/>
+ </tileset>
+ <tileset firstgid="10" name="citerne" tilewidth="418" tileheight="632">
+  <tileoffset x="0" y="632"/>
+  <image source="data/citerne.png" width="418" height="632"/>
+ </tileset>
+ <tileset firstgid="11" name="container1" tilewidth="610" tileheight="276">
+  <tileoffset x="0" y="195"/>
+  <image source="data/container1.png" width="610" height="276"/>
+ </tileset>
+ <tileset firstgid="12" name="container2" tilewidth="480" tileheight="330">
+  <tileoffset x="0" y="280"/>
+  <image source="data/container2.png" width="480" height="330"/>
+ </tileset>
+ <tileset firstgid="13" name="cable1" tilewidth="77" tileheight="372">
+  <tileoffset x="0" y="372"/>
+  <image source="data/cable1.png" width="77" height="372"/>
+ </tileset>
+ <tileset firstgid="14" name="passerelle1" tilewidth="198" tileheight="342">
+  <tileoffset x="0" y="342"/>
+  <image source="data/passerelle1.png" width="198" height="342"/>
+ </tileset>
+ <tileset firstgid="15" name="passerelle2" tilewidth="122" tileheight="599">
+  <tileoffset x="0" y="599"/>
+  <image source="data/passerelle2.png" width="122" height="599"/>
+ </tileset>
+ <tileset firstgid="16" name="cable2" tilewidth="46" tileheight="243">
+  <tileoffset x="0" y="243"/>
+  <image source="data/cable2.png" width="46" height="243"/>
+ </tileset>
+ <tileset firstgid="17" name="mur2" tilewidth="64" tileheight="64">
+  <image source="data/mur2.png" width="64" height="64"/>
  </tileset>
  <layer name="Calque de Tile 1" width="60" height="21">
   <data encoding="base64" compression="zlib">
-   eJztVtEKwCAIVNj2/588YgyGrFV2mrEOJOjhzkMtmYj24MFAnhTRgcpx+Y2J5VfPs/za6Wn5PP2yUbTmiUBJ26rXI/nd6PqbDyVXbV1baj/ze6V5L2b2W6sre8FLdyRYnAg+D7+9GrmZfub/dfb8DRpYaLzlnpsB6d0aln5L9ZV3HvXu5R01v9q8EfOL8NzC4znvVtoeuy8CqJ09xb0//iHSjnwCNkADCA==
+   eJztVssKwCAMa2Eb7P9/eMjYxcs0TWtFA8WTSUN9REXkTF5K5CmVHawet9+c2H5xnu3XTw/li/SrTtXbJwN/2l5nPZPfQ96/+QK5WufaM/uZ3yvkvZjZb6tufRaidEdCq5XBF+HXqrGaXxZW9WvJAj06lv0j+kD7ZtxflOMGeTznH6UdkX0ZYOb2Lz+uUCUjP9U1Avw=
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="60" height="21">
@@ -895,7 +935,7 @@
  </objectgroup>
  <objectgroup color="#ffff00" name="arc" width="60" height="21"/>
  <objectgroup color="#ffff00" name="levelend" width="60" height="21">
-  <object x="3456" y="1024" width="320" height="192">
+  <object x="3584" y="1088" width="192" height="128">
    <properties>
     <property name="next" value="level6"/>
    </properties>

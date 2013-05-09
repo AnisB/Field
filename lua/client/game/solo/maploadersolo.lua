@@ -42,11 +42,14 @@ function MapLoaderSolo.new(MapLoaderSoloFile,magnetManager)
     self.allowedPowers={}
     -- Creation du Layer
     self.tilesets={}
-    table.insert(self.tilesets,Tilesets.new(self.map.tilesets,self.map.layers[1]))
 
     for i,d in pairs(self.map.layers) do
         if d.name=="wall" then
             self:createWalls(d)
+            elseif d.name=="foreground" then
+                table.insert(self.tilesets,TilesetsSolo.new(self.map.tilesets,d,MapLoaderSoloFile))
+                elseif d.name=="Calque de Tile 1" then
+                table.insert(self.tilesets,TilesetsSolo.new(self.map.tilesets,d,MapLoaderSoloFile))
             elseif  d.name=="platform" then
                 -- Gestion des platformes
                 self:createPlatforms(d)    
@@ -150,14 +153,12 @@ end
 
 function MapLoaderSolo:createGates(map)
     for i,j in pairs(map.objects) do
-        print("Door")
         table.insert(self.gates, GateSolo.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["openid"],j.properties["closeid"],j.properties["prev"],j.properties["next"],j.properties["animid"],j.properties["enabled"],j.properties["type"],self,i));
     end
 end
 
 function MapLoaderSolo:createAcids(map)
     for i,j in pairs(map.objects) do
-        print("acid")
         table.insert(self.acids, AcidSolo.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["type"],i))
     end
 end
@@ -242,8 +243,10 @@ function MapLoaderSolo:isSeen(pos1,pos2,w,h)
 end
 
 function MapLoaderSolo:draw(pos)
-    self.tilesets[1]:draw({x=pos.x-windowW/2,y=windowH/2-pos.y})
-
+    
+    for i,p in pairs(self.tilesets) do
+            p:draw({x=pos.x-windowW/2,y=windowH/2-pos.y})
+    end
     for i,p in pairs(self.metals) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
           p:draw(pos.x-windowW/2,windowH/2-pos.y)

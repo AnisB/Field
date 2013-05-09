@@ -12,6 +12,8 @@ require("game.solo.interruptorsolo")
 require("game.sound")
 require("game.solo.levelendingsolo")
 require("game.solo.levelfailedsolo")
+require("game.shader.bloomshadereffect")
+require("game.shader.lightshader")
 require("const")
 
 GameplaySolo = {}
@@ -41,7 +43,7 @@ function GameplaySolo.new(mapFile,continuous,player)
     self.background1=Background.new(ParalaxImg.."1.png",1,self.mapy)
     self.background2=Background.new(ParalaxImg.."2.png",0.75,self.mapy)
     self.background3=Background.new(ParalaxImg.."3.png",0.5,self.mapy)
-    self.background4=Background.new(ParalaxImg.."4.png",0.0,self.mapy)
+    self.background4=Background.new(ParalaxImg.."4.png",0.25,self.mapy)
     self.background5=Background.new(ParalaxImg.."5.png",0.0,self.mapy)
 
     self.player= player
@@ -64,6 +66,18 @@ function GameplaySolo.new(mapFile,continuous,player)
     -- Slow timer
     self.slowTimer=1
     self.isSlowing=false
+
+    -- Shaders
+        -- Bloom Shader
+        self.bloom=CreateBloomEffect(1280,800)
+        -- Light Shader
+        self.light = LightShader.new()
+
+        self.light:setParameter{
+        light_vec = {windowW/2+unitWorldSize,windowH/2+unitWorldSize/2,30}
+    }
+
+
     return self
 end
 
@@ -73,7 +87,7 @@ end
 
 function GameplaySolo:slow()
     self.isSlowing=true
-    self.slowTimer=0.2
+    self.slowTimer=0
 end
 
 
@@ -135,7 +149,9 @@ end
     
     
     function GameplaySolo:keyPressed(key, unicode)
-
+        if key=="y" then
+            self.bloom:refresh(200,200)
+        end
         if not self.gameIsPaused then
             if self.player=="metalman" then
                 if key=="z" then
@@ -239,12 +255,12 @@ end
     
     function GameplaySolo:update(dttheo)
         if self.isSlowing then
-        self.slowTimer =self.slowTimer +dttheo
-        if self.slowTimer>=1 then
-            self.slowTimer=1
-            self.isSlowing=false
+            self.slowTimer =self.slowTimer +dttheo
+            if self.slowTimer>=1 then
+                self.slowTimer=1
+                self.isSlowing=false
+            end
         end
-    end
         dt=dttheo*self.slowTimer
         if  not self.gameIsPaused then
             if(self.levelFinished) then
@@ -254,14 +270,14 @@ end
                return
            end
 
-           if(self.shouldEnd) then
-              -- inputManager:clearInputs()
-              gameStateManager.state['LevelFailedSolo']=LevelFailedSolo.new()
-              gameStateManager:changeState('LevelFailedSolo')
-              return        
-          end        
-          world:update(dt) 
-          self.magnetmanager:update(dt)   
+            if(self.shouldEnd) then
+                -- inputManager:clearInputs()
+                gameStateManager.state['LevelFailedSolo']=LevelFailedSolo.new()
+                gameStateManager:changeState('LevelFailedSolo')
+                return        
+            end        
+            world:update(dt) 
+            self.magnetmanager:update(dt)   
 
           -- Other stuff
           if self.player=="metalman" then
@@ -272,39 +288,64 @@ end
                 self.theMagnet:update(dt)
             end
             self.mapLoader:update(dt)
+
         end
     end
     
     function GameplaySolo:draw()
-
-        if  self.gameIsPaused then
-            love.graphics.setColor(150,150,150,255)
-        else
-            love.graphics.setColor(255,255,255,255)
-        end
-
         if self.player=="metalman" then
+
             self.metalMan:preDraw()
+
             self.background5:draw(self.cameraMM:getPos()) 
-            self.background4:draw(self.cameraMM:getPos())
             self.metalMan:postDraw()
+
+            self.bloom:predraw()
+            self.light:predraw()
+
+            self.background4:draw(self.cameraMM:getPos())
+
+
             self.background3:draw(self.cameraMM:getPos())
             self.background2:draw(self.cameraMM:getPos())
             self.background1:draw(self.cameraMM:getPos())
+
             self.mapLoader:draw(self.cameraMM:getPos())
+            self.light:postdraw()
+
             self.metalMan:draw()
+            self.light:predraw()
             self.mapLoader:firstPlanDraw(self.cameraMM:getPos())
+
+            -- self.mapLoader:draw(self.cameraTM:getPos())
+            self.light:postdraw()
+            self.bloom:postdraw() 
+    
         elseif self.player=="themagnet" then
+
             self.background5:draw(self.cameraTM:getPos()) 
             self.background4:draw(self.cameraTM:getPos())
+            self.bloom:predraw()
+
+            self.light:predraw()
+
             self.background3:draw(self.cameraTM:getPos())
             self.background2:draw(self.cameraTM:getPos())
             self.background1:draw(self.cameraTM:getPos())
+
             self.mapLoader:draw(self.cameraTM:getPos())
-            self.mapLoader:draw(self.cameraTM:getPos())
+            self.light:postdraw()
+
             self.theMagnet:draw() 
+            self.light:predraw()
             self.mapLoader:firstPlanDraw(self.cameraTM:getPos())
+            self.light:postdraw()
+            self.bloom:postdraw() 
+
+
+
         end
+
     end
     
     

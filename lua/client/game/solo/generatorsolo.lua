@@ -226,7 +226,6 @@ function GeneratorSolo:draw(x,y)
 	else
 		self.field:draw(self.pc.body:getX()-x, self.pc.body:getY()+y)
 	end
-	love.graphics.setColor(255,255,255,255)
 	love.graphics.draw(self.anim:getSprite(), self.position.x-x-unitWorldSize/2, self.position.y+y-unitWorldSize/2)
 end
 

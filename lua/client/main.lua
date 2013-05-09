@@ -22,7 +22,6 @@ gamePaused = false
 
 musicM = MusicManager.new()
 musicM:play()
-canvas=love.graphics.newCanvas( 1280, 720 )
 
 
 -- "low level" events :

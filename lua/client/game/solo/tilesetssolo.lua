@@ -6,23 +6,21 @@ This file is part of the Field project
 TilesetsSolo = {}
 TilesetsSolo.__index =  TilesetsSolo
 
-function TilesetsSolo.new(tile,layer)
+function TilesetsSolo.new(tile,layer,map)
     local self = {}
     setmetatable(self, TilesetsSolo)
     self.layer=layer
-    print(layer.name)
     self.tiles ={}
-    self:getTiles(tile)
-    print(layer.data)
+    self:getTiles(tile,map)
+    self.map=map
     return self
 end
 
-function TilesetsSolo:getTiles(tiles)
+function TilesetsSolo:getTiles(tiles,map)
 	for i,v in pairs(tiles) do
 		local tile ={}
 		tile.id = v.firstgid
-		print("Image "..v.name)
-		tile.img = love.graphics.newImage("maps/"..v.image)
+		tile.img = love.graphics.newImage("maps/"..map..".fieldmap/"..v.image)
 		table.insert(self.tiles,tile)
 	end
 end

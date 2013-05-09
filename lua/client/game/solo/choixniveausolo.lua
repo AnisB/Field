@@ -18,10 +18,10 @@ function ChoixNiveauSolo.new(player,continuous)
     self.left= Button.newDec(90,350,123,155,ButtonType.Arrow,"backgrounds/choixniveau/left.png",10,0)
     
     self.num_level = 1
-    self.availableMaps = self:listmapslua()
+    self.availableMaps = self:listmaps()
     self.level = self.availableMaps[self.num_level]
-    -- self.prev={}
-    -- self.prev[self.level]=love.graphics.newImage("maps/"..self.level..".fieldmap/prev.png")
+    self.prev={}
+    self.prev[self.level]=love.graphics.newImage("maps/"..self.level..".fieldmap/prev.png")
 
     self.player = player
     self.continuous=continuous
@@ -78,10 +78,9 @@ function ChoixNiveauSolo:keyPressed(key, unicode)
 		if self.num_level < 1 then self.num_level = 1 end
 		if self.num_level > #self.availableMaps then self.num_level = #self.availableMaps end
 		self.level = self.availableMaps[self.num_level]
-		-- if self.prev[self.level]==nil then
-			-- self.prev[self.level]=love.graphics.newImage("maps/"..self.level..".fieldmap/prev.png")
-			print "new img"
-		--end
+		if self.prev[self.level]==nil then
+			self.prev[self.level]=love.graphics.newImage("maps/"..self.level..".fieldmap/prev.png")
+		end
 		self.fonduDone=false
 		self.timerPrev=0
 	elseif key == "d" or key== "right" then
@@ -89,10 +88,9 @@ function ChoixNiveauSolo:keyPressed(key, unicode)
 		if self.num_level < 1 then self.num_level = 1 end
 		if self.num_level > #self.availableMaps then self.num_level = #self.availableMaps end
 		self.level = self.availableMaps[self.num_level]
-		-- if self.prev[self.level]==nil then
-			-- self.prev[self.level]=love.graphics.newImage("maps/"..self.level..".fieldmap/prev.png")
-			print "new img"
-		--end
+		if self.prev[self.level]==nil then
+			self.prev[self.level]=love.graphics.newImage("maps/"..self.level..".fieldmap/prev.png")
+		end
 		self.fonduDone=false
 		self.timerPrev=0
 	elseif key == "return" then
@@ -137,7 +135,7 @@ function ChoixNiveauSolo:draw()
     self.returnB:draw(x,y,1)
 
 	love.graphics.setColor(255,255,255,255*self.timerPrev)
-	-- love.graphics.draw(self.prev[self.level], 400, 300,0,0.35,0.35)
+	love.graphics.draw(self.prev[self.level], 400, 300,0,0.35,0.35)
 
 
 
