@@ -328,7 +328,10 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "1"
+            ["animid"] = "1",
+            ["closeid"] = "1",
+            ["openid"] = "1",
+            ["type"] = "VAloneH"
           }
         }
       }
@@ -532,7 +535,8 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "1"
+            ["closeid"] = "1",
+            ["openid"] = "1"
           }
         }
       }
