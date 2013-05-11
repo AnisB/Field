@@ -270,7 +270,7 @@ function CreateBloomEffect(xsize, ysize)
    
    bloom:refresh(xsize, ysize)
    
-   bloom:setIntensity(0.4, 1)
+   bloom:setIntensity(0.6, 1)
    bloom:setSaturation(1, 1)
    bloom:setThreshold(0.5)
    

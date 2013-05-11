@@ -35,6 +35,8 @@ function AcidSolo.new(pos,w,h,type,netid)
 	self.isTouched=false
 	self.timer=0
 	self.splashpos={x=0,y=0}	
+	self.quad= love.graphics.newQuad(0, 0, unitWorldSize, unitWorldSize, unitWorldSize*2,unitWorldSize)
+
 	return self
 end
 
@@ -91,8 +93,8 @@ end
 function AcidSolo:draw(x,y)
 	love.graphics.setColor(255,255,255,255)
 	if self.acidSoloType==AcidSolo.Types.hg  or self.acidSoloType==AcidSolo.Types.hm or self.acidSoloType==AcidSolo.Types.hd then
-		love.graphics.draw(self.splash:getSprite(), self.splashpos.x-x-32, self.splashpos.y+y-64+self.dec)
+		love.graphics.drawq(self.splash:getSprite(), self.quad,self.splashpos.x-x-32, self.splashpos.y+y-64+self.dec)
 	end
-	love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
+	love.graphics.drawq(self.anim:getSprite(), self.quad, self.position.x-x, self.position.y+y)
 
 end

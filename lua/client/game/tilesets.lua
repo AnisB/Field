@@ -10,10 +10,8 @@ function Tilesets.new(tile,layer)
     local self = {}
     setmetatable(self, Tilesets)
     self.layer=layer
-    print(layer.name)
     self.tiles ={}
     self:getTiles(tile)
-    print(layer.data)
     return self
 end
 

@@ -38,6 +38,7 @@ function GateInterruptorSolo.new(pos,type,gateOpenID,gateCloseID,mapLoader,enabl
 	self.h=unitWorldSize
 
 	self.timer=0
+	self.quad= love.graphics.newQuad(0, 0, unitWorldSize, unitWorldSize, unitWorldSize*2,unitWorldSize)
 
 	return self
 end
@@ -156,8 +157,7 @@ function GateInterruptorSolo:loadAnimation(anim, force)
 end
 
 function GateInterruptorSolo:draw(x,y)
-	love.graphics.setColor(255,255,255,255)
-    	love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
+    	love.graphics.drawq(self.anim:getSprite(), self.quad,self.position.x-x, self.position.y+y)
 
 end
 

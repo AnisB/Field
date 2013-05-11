@@ -25,7 +25,6 @@ function MapLoader.new(MapLoaderFile)
     local self = {}
     setmetatable(self, MapLoader)
     self.map = require(MapLoaderFile)
-    print(MapLoaderFile)
     self.magnetManager=magnetManager
 
     -- Init

@@ -28,7 +28,8 @@
             decalage={unitWorldSize/2,unitWorldSize/2}
             self.pc = Physics.newRectangle(self.position.x,self.position.y,unitWorldSize,unitWorldSize,false,decalage)
         end
-        self.pc.fixture:setUserData(self)    
+        self.pc.fixture:setUserData(self) 
+        self.quad  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)    
         return self
     end
 
@@ -50,6 +51,5 @@ function MovableSolo:unCollideWith( object, collision )
 
 end
     function MovableSolo:draw(x, y)  
-       love.graphics.setColor(255,255,255,255)
-       love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
+       love.graphics.drawq(self.anim:getSprite(), self.quad,self.position.x-x, self.position.y+y)
     end

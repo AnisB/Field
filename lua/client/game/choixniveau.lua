@@ -42,7 +42,9 @@ function ChoixNiveau:keyPressed(key, unicode)
 	elseif key == "d" then
 		self.num_level = self.num_level + 1
 	elseif key == "return" then
-		serveur:send({type= "choixNiveau", level=self.level})
+		if self.level~="NONE" then
+			serveur:send({type= "choixNiveau", level=self.level})
+		end
 	end
 	if self.num_level < 1 then self.num_level = 1 end
 	if self.num_level > #monde.availableMaps then self.num_level = #monde.availableMaps end

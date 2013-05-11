@@ -47,6 +47,7 @@ function GeneratorSolo.new(pos,type,typeField,ID,netid)
 
 	self.anim = AnimGene.new('gene')
 	self:loadAnimation("off",true)
+	self.quad  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
 
 	return self
 end
@@ -226,7 +227,7 @@ function GeneratorSolo:draw(x,y)
 	else
 		self.field:draw(self.pc.body:getX()-x, self.pc.body:getY()+y)
 	end
-	love.graphics.draw(self.anim:getSprite(), self.position.x-x-unitWorldSize/2, self.position.y+y-unitWorldSize/2)
+	love.graphics.drawq(self.anim:getSprite(), self.quad,self.position.x-x-unitWorldSize/2, self.position.y+y-unitWorldSize/2)
 end
 
 

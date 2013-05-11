@@ -14,6 +14,8 @@ require("game.solo.levelendingsolo")
 require("game.solo.levelfailedsolo")
 require("game.shader.bloomshadereffect")
 require("game.shader.lightshader")
+require("game.shader.backlightshader")
+require("game.simplebackground")
 require("const")
 
 GameplaySolo = {}
@@ -27,7 +29,6 @@ function GameplaySolo.new(mapFile,continuous,player)
     -- Physics
         love.physics.setMeter( unitWorldSize) --the height of a meter our worlds will be 64px
         world = love.physics.newWorld( 0, 18*unitWorldSize, false )
-        print(world:getGravity())
         world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 
     -- Custom physics
@@ -44,7 +45,7 @@ function GameplaySolo.new(mapFile,continuous,player)
     self.background2=Background.new(ParalaxImg.."2.png",0.75,self.mapy)
     self.background3=Background.new(ParalaxImg.."3.png",0.5,self.mapy)
     self.background4=Background.new(ParalaxImg.."4.png",0.25,self.mapy)
-    self.background5=Background.new(ParalaxImg.."5.png",0.0,self.mapy)
+    self.background5=SimpleBackground.new(ParalaxImg.."5.png",0.0,self.mapy)
 
     self.player= player
 
@@ -71,10 +72,17 @@ function GameplaySolo.new(mapFile,continuous,player)
         -- Bloom Shader
         self.bloom=CreateBloomEffect(1280,800)
         -- Light Shader
+        self.lightback = BackLightShader.new()
+
+        self.lightback:setParameter{
+        light_pos = {windowW/2,windowH/2,30}
+    }
+
+        -- Light Shader
         self.light = LightShader.new()
 
         self.light:setParameter{
-        light_vec = {windowW/2+unitWorldSize,windowH/2+unitWorldSize/2,30}
+        light_pos = {windowW/2,windowH/2,30}
     }
 
 
@@ -301,23 +309,21 @@ end
             self.metalMan:postDraw()
 
             self.bloom:predraw()
-            self.light:predraw()
+            self.lightback:predraw()
 
             self.background4:draw(self.cameraMM:getPos())
-
-
             self.background3:draw(self.cameraMM:getPos())
             self.background2:draw(self.cameraMM:getPos())
             self.background1:draw(self.cameraMM:getPos())
+            self.lightback:postdraw()
+            
+            self.light:predraw()
 
             self.mapLoader:draw(self.cameraMM:getPos())
-            self.light:postdraw()
 
             self.metalMan:draw()
-            self.light:predraw()
             self.mapLoader:firstPlanDraw(self.cameraMM:getPos())
 
-            -- self.mapLoader:draw(self.cameraTM:getPos())
             self.light:postdraw()
             self.bloom:postdraw() 
     

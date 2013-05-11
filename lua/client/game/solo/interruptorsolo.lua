@@ -26,6 +26,8 @@ function InterruptorSolo.new(pos,type,generatorID,magnetManager,sprite,netid)
 	self.generatorID= generatorID
 	self.anim = AnimInterSolo.new('inter')
 	self:loadAnimation("off",true)
+	self.quad= love.graphics.newQuad(0, 0, unitWorldSize, unitWorldSize, unitWorldSize*2,unitWorldSize)
+
 	return self
 end
 
@@ -134,8 +136,7 @@ function InterruptorSolo:update(seconds)
 end
 
 function InterruptorSolo:draw(x,y)
-	love.graphics.setColor(255,255,255,255)
-    	love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
+    	love.graphics.drawq(self.anim:getSprite(), self.quad,self.position.x-x, self.position.y+y)
 
 end
 

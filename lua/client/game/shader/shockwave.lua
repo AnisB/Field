@@ -21,7 +21,7 @@ function ShockwaveEffect:init()
 		
 		vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 pixel_coords)
 		{
-			
+
 			// Calcul de la distance par rapport au centre
 			number dis = distance(texture_coords,center);
 

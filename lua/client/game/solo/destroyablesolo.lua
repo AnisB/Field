@@ -33,6 +33,8 @@
             self.pc.fixture:setUserData(self)    
             self.kinPallier = 90    
             self.destroy=false
+            self.quad  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
+
             return self
         end
 
@@ -71,8 +73,7 @@
 
     end
     function DestroyableSolo:draw(x, y)
-     love.graphics.setColor(255,255,255,255)
-     love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
+     love.graphics.drawq(self.anim:getSprite(), self.quad,self.position.x-x, self.position.y+y)
  end
  function DestroyableSolo:loadAnimation(anim, force)
     self.anim:load(anim, force)

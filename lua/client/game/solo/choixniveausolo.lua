@@ -21,7 +21,7 @@ function ChoixNiveauSolo.new(player,continuous)
     self.availableMaps = self:listmaps()
     self.level = self.availableMaps[self.num_level]
     self.prev={}
-    self.prev[self.level]=love.graphics.newImage("maps/"..self.level..".fieldmap/prev.png")
+    self.prev[self.level]=love.graphics.newImage("maps/"..self.level.."-fieldmap/prev.png")
 
     self.player = player
     self.continuous=continuous
@@ -49,7 +49,7 @@ function ChoixNiveauSolo:listmaps()
 	local files = love.filesystem.enumerate(SoloMapDirectory)
 	local m = {}
 	for k,v in pairs(files) do
-		if string.sub(v, -9) == ".fieldmap" then
+		if string.sub(v, -9) == "-fieldmap" then
 			table.insert(m, string.sub(v, 0, -10))
 		end
 	end
@@ -79,7 +79,7 @@ function ChoixNiveauSolo:keyPressed(key, unicode)
 		if self.num_level > #self.availableMaps then self.num_level = #self.availableMaps end
 		self.level = self.availableMaps[self.num_level]
 		if self.prev[self.level]==nil then
-			self.prev[self.level]=love.graphics.newImage("maps/"..self.level..".fieldmap/prev.png")
+			self.prev[self.level]=love.graphics.newImage("maps/"..self.level.."-fieldmap/prev.png")
 		end
 		self.fonduDone=false
 		self.timerPrev=0
@@ -89,7 +89,7 @@ function ChoixNiveauSolo:keyPressed(key, unicode)
 		if self.num_level > #self.availableMaps then self.num_level = #self.availableMaps end
 		self.level = self.availableMaps[self.num_level]
 		if self.prev[self.level]==nil then
-			self.prev[self.level]=love.graphics.newImage("maps/"..self.level..".fieldmap/prev.png")
+			self.prev[self.level]=love.graphics.newImage("maps/"..self.level.."-fieldmap/prev.png")
 		end
 		self.fonduDone=false
 		self.timerPrev=0

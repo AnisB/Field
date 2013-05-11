@@ -36,6 +36,7 @@ function Gate.new(pos,type,anim,id,rot,scale)
 	self.rot=rot
 	self.scale=scale
 	self.drawed=true
+
     return self
 end
 

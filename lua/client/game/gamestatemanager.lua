@@ -43,7 +43,7 @@ function GameStateManager.new()
 	self.state['ChoixNiveau'] = ChoixNiveau.new()
 	self.state['WaitingForDistant'] = WaitingForDistant.new()
 	self.state['LevelBegin'] = LevelBegin.new()
-	self.state['Gameplay'] = Gameplay.new()
+	-- self.state['Gameplay'] = Gameplay.new()
 	--self.state['LevelChange'] = LevelChange.new()
 	--self.state['PartyEnd'] = PartyEnd.new()
 
@@ -51,9 +51,10 @@ function GameStateManager.new()
 	-- Jeu Solo
 	self.state['ChoixTypeJeuSolo'] = ChoixTypeJeuSolo.new()	
 	self.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new("metalman",false)
-	self.state['ChoixPersoSolo'] = nil
-	-- self.state['GameplaySolo'] = GameplaySolo.new("level1",false,"themagnet")
 
+	self.state['ChoixPersoSolo'] = nil
+	-- self.state['GameplaySolo'] = GameplaySolo.new("level1",false,"metalman")
+-- 
 	-- Init
 	self.currentState='ChoixNiveauSolo'
 	return self

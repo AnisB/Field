@@ -61,6 +61,8 @@ function MetalSolo.new(pos,shapeType,typeP,material,typemetalSolo,netid)
 		self:loadAnimation("normal",true)		
 		self.pc.body:setMass(self.metalSoloWeight*unitWorldSize)
 		self.gs=self.pc.body:getGravityScale()
+		self.quad  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
+
 		return self
 	end
 
@@ -158,6 +160,6 @@ function MetalSolo.new(pos,shapeType,typeP,material,typemetalSolo,netid)
 
 	function MetalSolo:draw(x,y)
 		love.graphics.setColor(255,255,255,255)
-		love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
+		love.graphics.drawq(self.anim:getSprite(), self.quad, self.position.x-x, self.position.y+y)
 	end
 
