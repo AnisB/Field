@@ -49,8 +49,10 @@ function MapLoaderSolo.new(MapLoaderSoloFile,magnetManager)
             self:createWalls(d)
             elseif d.name=="foreground" then
                 table.insert(self.tilesets,TilesetsSolo.new(self.map.tilesets,d,MapLoaderSoloFile))
-                elseif d.name=="Calque de Tile 1" then
+            elseif d.name=="Calque de Tile 1" then
                 table.insert(self.tilesets,TilesetsSolo.new(self.map.tilesets,d,MapLoaderSoloFile))
+            elseif d.name=="front" then
+                table.insert(self.tilesets,Tilesets.new(self.map.tilesets,d,MapLoaderFile))
             elseif  d.name=="platform" then
                 -- Gestion des platformes
                 self:createPlatforms(d)    

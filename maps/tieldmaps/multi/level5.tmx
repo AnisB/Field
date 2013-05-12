@@ -67,7 +67,7 @@
   <tileset firstgid="20" name="cable" tilewidth="64" tileheight="64">
   <image source="data/cable.png" width="64" height="64"/>
  </tileset>
- <layer name="Calque de Tile 1" width="60" height="20">
+ <layer name="front" width="60" height="20">
   <data encoding="base64" compression="zlib">
    eJztVosKgCAMnL3+/5NjUDCidNO5TexgFFK7uzy1BAD7JJWu4kLyrBY0OX+/dtwenL9fO25u/1H81ugc1a+0b65/JL+pQ5U4W1Dj13rPiuDX0rOnX4oNZP9yR4NGLXjkU4oIflvndhVq/Bqn+nPX0p5Igd5qs9gTb9pT4d4izzQLmt+NO7/Pscjn0Z0tLV5JH4+zSJub20Oy3ntAix/fxcwskxSujRPY7wLQ
   </data>

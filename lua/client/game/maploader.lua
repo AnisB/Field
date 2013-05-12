@@ -44,9 +44,10 @@ function MapLoader.new(MapLoaderFile)
   	if d.name=="foreground" then
   		print("here"..MapLoaderFile)
   		table.insert(self.tilesets,Tilesets.new(self.map.tilesets,d,MapLoaderFile))
-  		elseif d.name=="Calque de Tile 1" then
-  		print("here"..MapLoaderFile)
   			
+  		elseif d.name=="Calque de Tile 1" then
+  			table.insert(self.tilesets,Tilesets.new(self.map.tilesets,d,MapLoaderFile))
+  		elseif d.name=="front" then
   			table.insert(self.tilesets,Tilesets.new(self.map.tilesets,d,MapLoaderFile))
   		end
 end

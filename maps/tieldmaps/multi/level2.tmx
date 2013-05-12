@@ -72,7 +72,7 @@
    eJxjYKAvEKBALx/VXDEKRsEoGMpAEIqR2YJI8tx0dxHtgCABPNwAIf8ONz+PNP+OJAAAdoUCOQ==
   </data>
  </layer>
- <layer name="Calque de Tile 1" width="60" height="10">
+ <layer name="front" width="60" height="10">
   <data encoding="base64" compression="zlib">
    eJxjZGBgYAFi1mGO2YCYEYpHChj17/AGtPAvqCxgo7KZ1AKj8Ut980lRS+uwp5UdjAykm02OHmIAJxY7qAkYGSj3L63iGWQuqHxhGiEYVI4CACQ1Adc=
   </data>

@@ -58,7 +58,7 @@
  <tileset firstgid="17" name="mur2" tilewidth="64" tileheight="64">
   <image source="data/mur2.png" width="64" height="64"/>
  </tileset>
- <layer name="Calque de Tile 1" width="200" height="20">
+ <layer name="front" width="200" height="20">
   <data encoding="base64" compression="zlib">
    eJzt2+0KgjAYBtDZ1/1fcg60zPZmQqVt58CD5H6ZPI4p61JKpz4HEbnl0qcbAjzTD4jpB8T0A2L6ATH9gJh+QGzaj3eP0IqxH8fh99IRWjKdP3QDHs3XH7oBd6X1ea3dsH5irdL6PAXn/l1N18JvvHq/a/6gdVE/autGph+s1dL3wW9fZ95DcwnOT/cUROOlMbY1//5RUuNc8mljN0od7FaMsy9L/XDfluX/6Jz0o0bjvdl6L6PIHpOfWVf6iwQM
   </data>
