@@ -66,6 +66,8 @@ function TheMagnetSolo.new(camera,pos)
 
 	    self.fieldSound=nil
 
+	    self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
+
 	    return self
 	end
 
@@ -436,8 +438,8 @@ function TheMagnetSolo:draw()
 	-- Draws the field
 	self.field:draw(windowW/2+unitWorldSize/4, windowH/2+unitWorldSize/4)
 	if 	 self.goF then
-		love.graphics.draw(self.anim:getSprite(), windowW/2-unitWorldSize/2,windowH/2-unitWorldSize/2, 0, 1,1)
+		love.graphics.drawq(self.anim:getSprite(), self.diffuse,windowW/2-unitWorldSize/2,windowH/2-unitWorldSize/2, 0, 1,1)
 	else
-		love.graphics.draw(self.anim:getSprite(), windowW/2+unitWorldSize/2,windowH/2-unitWorldSize/2,0 , -1,1)
+		love.graphics.drawq(self.anim:getSprite(),self.diffuse, windowW/2+unitWorldSize/2,windowH/2-unitWorldSize/2,0 , -1,1)
 	end
 end

@@ -31,7 +31,7 @@ function MetalMan.new()
 		shockParams = {20,0.8,0.1},
 	}
 	self.s.time=10
-
+	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
 	return self
 end
 
@@ -95,8 +95,8 @@ function MetalMan:draw()
 
 		self.s:postdraw()
     	if 	self.goF then
-    		love.graphics.draw(self.anim:getSprite(), self.position.x,self.position.y, 0, 1,1)
+    		love.graphics.drawq(self.anim:getSprite(), self.diffuse,self.position.x,self.position.y, 0, 1,1)
     	else
-    		love.graphics.draw(self.anim:getSprite(), self.position.x,self.position.y,0 , -1,1)
+    		love.graphics.drawq(self.anim:getSprite(), self.diffuse,self.position.x,self.position.y,0 , -1,1)
     	end
 end

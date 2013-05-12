@@ -24,6 +24,8 @@ function LevelEndingSolo.new(next,continuous,perso)
     end
     self.perso:load("running",true)
     self.pos=-50
+    self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
+
     return self
 end
 
@@ -79,7 +81,7 @@ function LevelEndingSolo:draw()
 
     self.continue:draw(x,y,1)
     self.returnB:draw(x,y,1)
-    love.graphics.draw(self.perso:getSprite(), self.pos,530 )
+    love.graphics.drawq(self.perso:getSprite(), self.diffuse, self.pos,530 )
 
 end
 

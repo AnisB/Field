@@ -129,12 +129,12 @@ end
 function load_graphic_stuff()
 	local ip_font = love.graphics.newFont(FontDirectory .. "font.ttf", 40)
 	love.graphics.setFont(ip_font)
-	ip_background = love.graphics.newImage(ImgDirectory .. "ipbg.png")
+	-- ip_background = love.graphics.newImage(ImgDirectory .. "ipbg.png")
 end
 
 function love.draw()
 	if graphic_stuff_enabled then
-		love.graphics.draw(ip_background, 0, 0)
+		-- love.graphics.draw(ip_background, 0, 0)
 		love.graphics.print("IP externe :", 20, 40)
 		if ip_externe ~= nil then
 			love.graphics.print(ip_externe, 100, 120)

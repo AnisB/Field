@@ -21,7 +21,9 @@ function Acid.new(pos,type,anim,id)
 	self.acidType=type
 	self.anim = AnimAcid.new('acid/'..type)
 	self.anim:syncronize(anim,id)
-	self.splashpos={x=0,y=0}	
+	self.splashpos={x=0,y=0}
+	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
+
 	return self
 end
 
@@ -45,7 +47,6 @@ function Acid:syncronize(pos,anim,id)
 end
 
 function Acid:syncronizeSplash(pos,anim,id,pos2,anim2,id2)
-	print(self.acidType)
 	self.position.x=pos.x
 	self.position.y=pos.y
 	self.drawed=true
@@ -69,8 +70,8 @@ end
 
 function Acid:draw(x,y)
 	if self.acidType==Acid.Types.hg  or self.acidType==Acid.Types.hm or self.acidType==Acid.Types.hd then
-		love.graphics.draw(self.splash:getSprite(), self.splashpos.x, self.splashpos.y)
+		love.graphics.drawq(self.splash:getSprite(), self.diffuse,self.splashpos.x, self.splashpos.y)
 	end	
-	love.graphics.draw(self.anim:getSprite(), self.position.x, self.position.y)
+	love.graphics.drawq(self.anim:getSprite(), self.diffuse,self.position.x, self.position.y)
 end
 

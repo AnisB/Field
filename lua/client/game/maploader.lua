@@ -24,7 +24,7 @@ MapLoader.__index =  MapLoader
 function MapLoader.new(MapLoaderFile)
     local self = {}
     setmetatable(self, MapLoader)
-    self.map = require(MapLoaderFile)
+    self.map = require(MapLoaderFile.."-fieldmap/map")
     self.magnetManager=magnetManager
 
     -- Init
@@ -40,10 +40,16 @@ function MapLoader.new(MapLoaderFile)
 
     -- Creation du Layer
     self.tilesets={}
-    table.insert(self.tilesets,Tilesets.new(self.map.tilesets,self.map.layers[1]))
-    -- table.insert(self.tilesets,Tilesets.new(self.map.tilesets,self.map.layers[2]))
-
-
+  for i,d in pairs(self.map.layers) do
+  	if d.name=="foreground" then
+  		print("here"..MapLoaderFile)
+  		table.insert(self.tilesets,Tilesets.new(self.map.tilesets,d,MapLoaderFile))
+  		elseif d.name=="Calque de Tile 1" then
+  		print("here"..MapLoaderFile)
+  			
+  			table.insert(self.tilesets,Tilesets.new(self.map.tilesets,d,MapLoaderFile))
+  		end
+end
     return self
 end
 
@@ -89,9 +95,9 @@ end
 
 
 function MapLoader:draw(pos)
-	self.tilesets[1]:draw({x=pos.x-windowW/2,y=windowH/2-pos.y})
-	-- self.tilesets[2]:draw({x=pos.x-windowW/2,y=windowH/2-pos.y})
-
+    for i,p in pairs(self.tilesets) do
+            p:draw({x=pos.x-windowW/2,y=windowH/2-pos.y})
+    end
 	for i,p in pairs(self.metals) do
         if p.drawed==true then
 			p:draw()

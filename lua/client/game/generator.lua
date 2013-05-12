@@ -36,6 +36,7 @@ function Generator.new(pos,typeField,anim,id)
 				self.anim:syncronize(anim,id)
 				self.drawed=true
 				self.fieldSound = FieldSound.new(self.typeField)
+				self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
 				return self
 			end
 
@@ -89,5 +90,5 @@ function Generator:draw(x,y)
 	else
 		self.field:draw(self.position.x+unitWorldSize/2,self.position.y+unitWorldSize/2)
 	end
-	love.graphics.draw(self.anim:getSprite(), self.position.x-unitWorldSize/2, self.position.y-unitWorldSize/2)
+	love.graphics.drawq(self.anim:getSprite(), self.diffuse,self.position.x-unitWorldSize/2, self.position.y-unitWorldSize/2)
 end

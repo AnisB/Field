@@ -371,9 +371,9 @@ function MetalManSolo:draw()
     	love.graphics.setColor(255,255,255,255)
     	if 	self.goF then
     		-- love.graphics.draw(self.anim:getSprite(), windowW/2-unitWorldSize/2,windowH/2-unitWorldSize/2, 0, 1,1)
-    		love.graphics.drawq(self.anim:getSprite(), self.diffuse, windowW/2+unitWorldSize/2,windowH/2-unitWorldSize/2, 0, -1,1)
+    		love.graphics.drawq(self.anim:getSprite(), self.diffuse, windowW/2-unitWorldSize/2,windowH/2-unitWorldSize/2, 0, 1,1)
     	else
-    		love.graphics.drawq(self.anim:getSprite(), self.diffuse, windowW/2-unitWorldSize/2,windowH/2-unitWorldSize/2,0 , 1,1)
+    		love.graphics.drawq(self.anim:getSprite(), self.diffuse, windowW/2+unitWorldSize/2,windowH/2-unitWorldSize/2,0 , -1,1)
 
     		-- love.graphics.draw(self.anim:getSprite(), windowW/2+unitWorldSize/2,windowH/2-unitWorldSize/2,0 , -1,1)
     	end

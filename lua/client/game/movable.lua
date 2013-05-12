@@ -18,7 +18,9 @@
 
         -- Type
         self.type='Movable'
-        self.anim:syncronize(anim,pos)        
+        self.anim:syncronize(anim,pos)   
+        self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
+
         return self
     end
 
@@ -46,5 +48,5 @@
 
     end
     function Movable:draw()  
-       love.graphics.draw(self.anim:getSprite(), self.position.x, self.position.y)
+       love.graphics.drawq(self.anim:getSprite(), self.diffuse,self.position.x, self.position.y)
    end

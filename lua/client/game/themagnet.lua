@@ -52,7 +52,7 @@ function TheMagnet.new(camera,pos)
 	self.soundPlaying=nil
 
 	self.alive=true
-
+	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
 	return self
 end
 
@@ -140,20 +140,19 @@ end
 
 function TheMagnet:draw()
 	-- Draws the field
-	love.graphics.setColor(255,255,255,255)
 	if 	 self.goF then
 		if self.fieldType=="Attractive" then
 			self.field:draw(self.position.x+unitWorldSize/2,self.position.y+unitWorldSize/2)
 		else
 			self.field:draw(self.position.x+unitWorldSize*0.75,self.position.y+unitWorldSize*0.75)
 		end
-		love.graphics.draw(self.anim:getSprite(), self.position.x,self.position.y, 0, 1,1)
+		love.graphics.drawq(self.anim:getSprite(), self.diffuse, self.position.x,self.position.y, 0, 1,1)
 	else
 		if self.fieldType=="Attractive" then
 			self.field:draw(self.position.x-unitWorldSize*0.25,self.position.y+unitWorldSize/2)
 		else
 			self.field:draw(self.position.x,self.position.y+unitWorldSize*0.75)
 		end
-		love.graphics.draw(self.anim:getSprite(), self.position.x,self.position.y, 0, -1,1)		
+		love.graphics.drawq(self.anim:getSprite(),self.diffuse, self.position.x,self.position.y, 0, -1,1)		
 	end
 end

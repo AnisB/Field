@@ -139,6 +139,10 @@ end
 
 
 function FieldSolo:draw(x,y)
+  canvas = love.graphics.getPixelEffect( )
+  love.graphics.setPixelEffect()
 	love.graphics.draw(self.back, x-unitWorldSize/4,y-unitWorldSize/4)
   love.graphics.draw(self.mov, x-unitWorldSize/4,y-unitWorldSize/4)
+  love.graphics.setPixelEffect(canvas)
+
 end

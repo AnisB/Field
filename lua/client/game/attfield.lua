@@ -263,6 +263,9 @@ end
 
 
 function AttField:draw(x,y)
+    effect = love.graphics.getPixelEffect( )
+  love.graphics.setPixelEffect()
+
 	love.graphics.draw(self.back, x,y)
   love.graphics.draw(self.mov1, x,y)
   love.graphics.draw(self.mov2, x,y)
@@ -273,6 +276,7 @@ function AttField:draw(x,y)
   love.graphics.draw(self.mov6, x,y)
   love.graphics.draw(self.mov7, x,y)
   love.graphics.draw(self.mov8, x,y)
+  love.graphics.setPixelEffect(effect)
 end
 
 function AttField:send(x,y)

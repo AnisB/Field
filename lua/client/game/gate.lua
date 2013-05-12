@@ -36,7 +36,7 @@ function Gate.new(pos,type,anim,id,rot,scale)
 	self.rot=rot
 	self.scale=scale
 	self.drawed=true
-
+	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
     return self
 end
 
@@ -60,5 +60,5 @@ function Gate:update(seconds)
 end
 
 function Gate:draw()
-		love.graphics.draw(self.anim:getSprite(), self.position.x, self.position.y,self.rot,self.scale,1)
+		love.graphics.drawq(self.anim:getSprite(), self.diffuse,self.position.x, self.position.y,self.rot,self.scale,1)
 end

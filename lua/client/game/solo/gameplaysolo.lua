@@ -333,17 +333,18 @@ end
             self.background4:draw(self.cameraTM:getPos())
             self.bloom:predraw()
 
-            self.light:predraw()
+            self.lightback:predraw()
 
             self.background3:draw(self.cameraTM:getPos())
             self.background2:draw(self.cameraTM:getPos())
             self.background1:draw(self.cameraTM:getPos())
 
             self.mapLoader:draw(self.cameraTM:getPos())
-            self.light:postdraw()
+            self.lightback:postdraw()
 
-            self.theMagnet:draw() 
             self.light:predraw()
+            self.theMagnet:draw() 
+            
             self.mapLoader:firstPlanDraw(self.cameraTM:getPos())
             self.light:postdraw()
             self.bloom:postdraw() 

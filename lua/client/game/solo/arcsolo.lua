@@ -29,6 +29,8 @@ function ArcSolo.new(pos,w,h,typeArcSolo,netid)
 	self:loadAnimation("on",true)
 	self.isTouched=false
 	self.timer=0
+	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
+
 	return self
 end
 
@@ -79,12 +81,12 @@ function ArcSolo:draw(x,y)
 	love.graphics.setColor(255,255,255,255)
 
 	if( self.arcSoloType==ArcSoloType.MillieuH or self.arcSoloType==ArcSoloType.DebutH) then
-		love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
+		love.graphics.drawq(self.anim:getSprite(),self.diffuse, self.position.x-x, self.position.y+y)
 	elseif (  self.arcSoloType==ArcSoloType.MillieuV or self.arcSoloType==ArcSoloType.DebutV) then
-		love.graphics.draw(self.anim:getSprite(), self.position.x-x +unitWorldSize, self.position.y+y,math.pi/2)
+		love.graphics.drawq(self.anim:getSprite(),self.diffuse, self.position.x-x +unitWorldSize, self.position.y+y,math.pi/2)
 	elseif (  self.arcSoloType==ArcSoloType.FinV) then
-		love.graphics.draw(self.anim:getSprite(), self.position.x-x , self.position.y+y+unitWorldSize,-math.pi/2)
+		love.graphics.drawq(self.anim:getSprite(), self.diffuse,self.position.x-x , self.position.y+y+unitWorldSize,-math.pi/2)
 	elseif (  self.arcSoloType==ArcSoloType.FinH) then
-		love.graphics.draw(self.anim:getSprite(), self.position.x-x+unitWorldSize , self.position.y+y,0,-1,1)
+		love.graphics.drawq(self.anim:getSprite(), self.diffuse,self.position.x-x+unitWorldSize , self.position.y+y,0,-1,1)
 	end
 end

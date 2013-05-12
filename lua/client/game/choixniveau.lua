@@ -18,7 +18,10 @@ function ChoixNiveau:new()
     self.err = false
     self.num_level = 1
     monde.availableMaps = {"NONE"}
+    self.prev={}
+
     self.level = monde.availableMaps[self.num_level]
+    print(#self.level)
     return self
 end
 
@@ -37,9 +40,9 @@ end
 function ChoixNiveau:mouseReleased(x, y, button) end
 
 function ChoixNiveau:keyPressed(key, unicode)
-	if key == "q" then
+	if key == "q" or key =="left" then
 		self.num_level = self.num_level - 1
-	elseif key == "d" then
+	elseif key == "d"  or key == "right" then
 		self.num_level = self.num_level + 1
 	elseif key == "return" then
 		if self.level~="NONE" then
@@ -49,6 +52,9 @@ function ChoixNiveau:keyPressed(key, unicode)
 	if self.num_level < 1 then self.num_level = 1 end
 	if self.num_level > #monde.availableMaps then self.num_level = #monde.availableMaps end
 	self.level = monde.availableMaps[self.num_level]
+	if self.prev[self.level]==nil then
+			self.prev[self.level]=love.graphics.newImage("maps/"..self.level.."-fieldmap/prev.png")
+	end
 end
 
 function ChoixNiveau:keyReleased(key, unicode) end
@@ -64,7 +70,7 @@ function ChoixNiveau:update(dt) end
 function ChoixNiveau:onMessage(msg)
 	if msg.type == "choixNiveau" then
 		monde.niveau = msg.level
-            gameStateManager.state['Gameplay']=Gameplay.new("maps."..msg.level,true)
+            gameStateManager.state['Gameplay']=Gameplay.new("maps/"..msg.level,true)
             gameStateManager:changeState('Gameplay')	
 	else
 		print("[ChoixNiveau] wrong type :", table2.tostring(msg))
@@ -84,5 +90,9 @@ function ChoixNiveau:draw()
 	self.left:draw(x,y,1)
     self.play:draw(x,y,1)
     self.returnB:draw(x,y,1)
+    if self.prev[self.level]~=nil then
+    	love.graphics.draw(self.prev[self.level], 400, 300,0,0.35,0.35)
+    end
+
 
 end

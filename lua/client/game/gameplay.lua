@@ -10,7 +10,9 @@ require("game.levelending")
 require("game.levelfailed")
 require("game.inputmanager")
 require("game.background")
-
+require("game.shader.bloomshadereffect")
+require("game.shader.lightshader")
+require("game.shader.backlightshader")
 Gameplay = {}
 Gameplay.__index = Gameplay
 
@@ -34,10 +36,27 @@ function Gameplay.new(mapFile)
 	self.background2=Background.new(ParalaxImg.."2.png",0.75,self.mapy)
 	self.background3=Background.new(ParalaxImg.."3.png",0.5,self.mapy)
 	self.background4=Background.new(ParalaxImg.."4.png",0.0,self.mapy)
-	self.background5=Background.new(ParalaxImg.."5.png",0.0,self.mapy)
+	self.background5=SimpleBackground.new(ParalaxImg.."5.png",0.0,self.mapy)
 
     self.camera=Camera.new(-1000,-1000)
     self.inputManager = InputManager.new()
+
+        -- Shaders
+        -- Bloom Shader
+        self.bloom=CreateBloomEffect(1280,800)
+        -- Light Shader
+        self.lightback = BackLightShader.new()
+
+        self.lightback:setParameter{
+        light_pos = {windowW/2,windowH/2,30}
+    }
+
+        -- Light Shader
+        self.light = LightShader.new()
+
+        self.light:setParameter{
+        light_pos = {windowW/2,windowH/2,30}
+    }
     return self
 end
 
@@ -123,12 +142,16 @@ end
 function Gameplay:draw()
 	-- self.background6:draw(self.camera:getPos())
 
+
 	self.metalMan:preDraw()
 
 	self.background5:draw(self.camera:getPos())	
 	
-	self.background4:draw(self.camera:getPos())
 	self.metalMan:postDraw()
+
+	self.bloom:predraw()
+	self.lightback:predraw()
+	self.background4:draw(self.camera:getPos())
 
 
 	self.background3:draw(self.camera:getPos())
@@ -137,14 +160,16 @@ function Gameplay:draw()
 
 
 	self.background1:draw(self.camera:getPos())
-
-
+	self.lightback:postdraw()
+	self.light:predraw()
 
 	self.mapLoader:draw(self.camera:getPos())
 	self.theMagnet:draw()
 	self.metalMan:draw()
 	self.mapLoader:firstPlanDraw()
-	love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
+	self.light:postdraw()
+	self.bloom:postdraw()
+	-- love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
 
 end
     

@@ -20,6 +20,8 @@ function Arc.new(pos,typeArc,anim,id)
 		self.anim = AnimArc.new('arc/arcside')
 	end
 	self.anim:syncronize(anim,id)
+	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
+
 	return self
 end
 
@@ -50,13 +52,13 @@ end
 function Arc:draw()
 
 	if( self.arcType==ArcType.MillieuH or self.arcType==ArcType.DebutH) then
-		love.graphics.draw(self.anim:getSprite(), self.position.x, self.position.y)
+		love.graphics.drawq(self.anim:getSprite(), self.diffuse,self.position.x, self.position.y)
 	elseif (  self.arcType==ArcType.MillieuV or self.arcType==ArcType.DebutV) then
-		love.graphics.draw(self.anim:getSprite(), self.position.x +unitWorldSize, self.position.y,math.pi/2)
+		love.graphics.drawq(self.anim:getSprite(), self.diffuse, self.position.x +unitWorldSize, self.position.y,math.pi/2)
 	elseif (  self.arcType==ArcType.FinV) then
-		love.graphics.draw(self.anim:getSprite(), self.position.x , self.position.y+unitWorldSize,-math.pi/2)
+		love.graphics.drawq(self.anim:getSprite(),self.diffuse, self.position.x , self.position.y+unitWorldSize,-math.pi/2)
 	elseif (  self.arcType==ArcType.FinH) then
-		love.graphics.draw(self.anim:getSprite(), self.position.x+unitWorldSize , self.position.y,0,-1,1)
+		love.graphics.drawq(self.anim:getSprite(), self.diffuse,self.position.x+unitWorldSize , self.position.y,0,-1,1)
 	end
 end
 

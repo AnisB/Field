@@ -25,7 +25,9 @@ function Metal.new(pos,typemetal,anim,id)
 			end
 
 		end
-		self.anim:syncronize(anim,id)	
+		self.anim:syncronize(anim,id)
+        self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
+
 		return self
 	end
 
@@ -53,7 +55,7 @@ function Metal.new(pos,typemetal,anim,id)
 
 	function Metal:draw()
 
-		love.graphics.draw(self.anim:getSprite(), self.position.x, self.position.y)
+		love.graphics.drawq(self.anim:getSprite(), self.diffuse,self.position.x, self.position.y)
 	end
 
 
