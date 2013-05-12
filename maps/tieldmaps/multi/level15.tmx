@@ -58,6 +58,24 @@
  <tileset firstgid="17" name="mur2" tilewidth="64" tileheight="64">
   <image source="data/mur2.png" width="64" height="64"/>
  </tileset>
+  <tileset firstgid="18" name="lamp1" tilewidth="64" tileheight="64">
+  <image source="data/lamp1.png" width="64" height="64"/>
+ </tileset>
+  <tileset firstgid="19" name="lamp2" tilewidth="64" tileheight="64">
+  <image source="data/lamp2.png" width="64" height="64"/>
+ </tileset>
+  <tileset firstgid="20" name="cable" tilewidth="64" tileheight="64">
+  <image source="data/cable.png" width="64" height="64"/>
+ </tileset>
+   <tileset firstgid="18" name="lamp1" tilewidth="64" tileheight="64">
+  <image source="data/lamp1.png" width="64" height="64"/>
+ </tileset>
+  <tileset firstgid="19" name="lamp2" tilewidth="64" tileheight="64">
+  <image source="data/lamp2.png" width="64" height="64"/>
+ </tileset>
+  <tileset firstgid="20" name="cable" tilewidth="64" tileheight="64">
+  <image source="data/cable.png" width="64" height="64"/>
+ </tileset>
  <layer name="Calque de Tile 1" width="60" height="20">
   <data encoding="base64" compression="zlib">
    eJztltsKwCAIhm2n93/kIewiIuYht5T8QDaGpv+yQwGAcxErj3GR+Hok9dL+kUm9tH9kUi/t34vnmAc0er3UriH7+bsYD4z05wGyu9w1WqwB0dejFK3e0bndlfXWtHv/21NyVqA2D73Y0qu9EO9/9HPdC5b/jTu/7bcI569VXsk4M+9KVrm5Y8y+G1rlx1hcX9sihvvHDXhUAqk=

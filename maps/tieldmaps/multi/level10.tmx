@@ -58,6 +58,15 @@
  <tileset firstgid="17" name="mur2" tilewidth="64" tileheight="64">
   <image source="data/mur2.png" width="64" height="64"/>
  </tileset>
+   <tileset firstgid="18" name="lamp1" tilewidth="64" tileheight="64">
+  <image source="data/lamp1.png" width="64" height="64"/>
+ </tileset>
+  <tileset firstgid="19" name="lamp2" tilewidth="64" tileheight="64">
+  <image source="data/lamp2.png" width="64" height="64"/>
+ </tileset>
+  <tileset firstgid="20" name="cable" tilewidth="64" tileheight="64">
+  <image source="data/cable.png" width="64" height="64"/>
+ </tileset>
  <layer name="Calque de Tile 1" width="60" height="21">
   <data encoding="base64" compression="zlib">
    eJztVssKwCAMa2Eb7P9/eMjYxcs0TWtFA8WTSUN9REXkTF5K5CmVHawet9+c2H5xnu3XTw/li/SrTtXbJwN/2l5nPZPfQ96/+QK5WufaM/uZ3yvkvZjZb6tufRaidEdCq5XBF+HXqrGaXxZW9WvJAj06lv0j+kD7ZtxflOMGeTznH6UdkX0ZYOb2Lz+uUCUjP9U1Avw=
