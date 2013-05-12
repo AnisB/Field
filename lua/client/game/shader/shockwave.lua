@@ -64,9 +64,12 @@ function ShockwaveEffect:update(dt)
 end
 
 function ShockwaveEffect:predraw()
+	self.prev=love.graphics.getPixelEffect()
 	love.graphics.setPixelEffect(self.xf)
 end
 
 function ShockwaveEffect:postdraw()
-	love.graphics.setPixelEffect()
+	if(self.prev~=nil) then
+		love.graphics.setPixelEffect(self.prev)
+	end
 end

@@ -164,9 +164,12 @@ function Gameplay:draw()
 	self.light:predraw()
 
 	self.mapLoader:draw(self.camera:getPos())
-	self.theMagnet:draw()
 	self.metalMan:draw()
+	
+	self.theMagnet:draw()
+
 	self.mapLoader:firstPlanDraw()
+
 	self.light:postdraw()
 	self.bloom:postdraw()
 	-- love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)

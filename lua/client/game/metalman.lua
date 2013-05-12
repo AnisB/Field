@@ -93,7 +93,6 @@ function MetalMan:postDraw()
 end
 function MetalMan:draw()
 
-		self.s:postdraw()
     	if 	self.goF then
     		love.graphics.drawq(self.anim:getSprite(), self.diffuse,self.position.x,self.position.y, 0, 1,1)
     	else

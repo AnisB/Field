@@ -17,7 +17,7 @@ end
 function LevelEnding:mousePressed(x, y, button)
     if x > 90 and x < 90+266 and y > 205 and y < 205+35 then
         serveur:send({type="input", pck={character=monde.moi.perso, key="return", state=true}})    
-        gameStateManager.state['Gameplay']=Gameplay.new("maps."..self.next,true)
+        gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
         gameStateManager:changeState('Gameplay')
     end
 end

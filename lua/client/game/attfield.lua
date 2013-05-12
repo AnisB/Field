@@ -263,7 +263,7 @@ end
 
 
 function AttField:draw(x,y)
-    effect = love.graphics.getPixelEffect( )
+  effect = love.graphics.getPixelEffect( )
   love.graphics.setPixelEffect()
 
 	love.graphics.draw(self.back, x,y)
