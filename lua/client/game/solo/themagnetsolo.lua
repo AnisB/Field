@@ -67,10 +67,9 @@ function TheMagnetSolo.new(camera,pos,powers)
 	    self.fieldSound=nil
 
 	    self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
+	    self.powers = {}
 
 	    if powers~=nil then
-	    	self.powers = {}
-	    	print(powers)
 	    	for k in string.gmatch(powers, "([^#]+)") do
 	    		self.powers[k] = true
 	    	end
