@@ -51,11 +51,11 @@ function GameplaySolo.new(mapFile,continuous,player)
 
     if self.player=="metalman" then
         self.cameraMM =CameraSolo.new(0,0)
-        self.metalMan = MetalManSolo.new(self.cameraMM,self.mapLoader.metalManPos)
+        self.metalMan = MetalManSolo.new(self.cameraMM,self.mapLoader.metalManPos,self.mapLoader.metalManPowers)
         self.magnetmanager:addMetal(self.metalMan)
     elseif self.player=="themagnet" then
         self.cameraTM =CameraSolo.new(0,0)
-        self.theMagnet = TheMagnetSolo.new(self.cameraTM,self.mapLoader.theMagnetPos)
+        self.theMagnet = TheMagnetSolo.new(self.cameraTM,self.mapLoader.theMagnetPos,self.mapLoader.theMagnetPowers)
         self.magnetmanager:addGenerator(self.theMagnet)
     end
     -- self.inputManager= InputManager.new()

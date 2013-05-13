@@ -15,7 +15,7 @@ TheMagnetSolo.__index = TheMagnetSolo
 
 
 -- Constructor
-function TheMagnetSolo.new(camera,pos)
+function TheMagnetSolo.new(camera,pos,powers)
 
 	-- Class init
 	local self = {}
@@ -68,6 +68,13 @@ function TheMagnetSolo.new(camera,pos)
 
 	    self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
 
+	    if powers~=nil then
+	    	self.powers = {}
+	    	print(powers)
+	    	for k in string.gmatch(powers, "([^#]+)") do
+	    		self.powers[k] = true
+	    	end
+	    end
 	    return self
 	end
 
@@ -182,143 +189,160 @@ end
 
 -- Enabling fields
 function TheMagnetSolo:enableRepulsiveField()
-	if self.alive then
-		self.fieldSound= FieldSound.new("Repulsive")
-		self.fieldSound:play()
-		self.field= Field.new(FieldTypes.Repulsive,pos)
-		self.field.isActive=true
-		self.appliesField=true
-		self.fieldType=FieldTypes.Repulsive
-		if self.animCounter==0 then
-			self:loadAnimation("launchfield",true)
+	if self.powers["Repulsive"]~=nil then
+		if self.alive then
+			self.fieldSound= FieldSound.new("Repulsive")
+			self.fieldSound:play()
+			self.field= Field.new(FieldTypes.Repulsive,pos)
+			self.field.isActive=true
+			self.appliesField=true
+			self.fieldType=FieldTypes.Repulsive
+			if self.animCounter==0 then
+				self:loadAnimation("launchfield",true)
+			end
 		end
 	end
 end
 
 function TheMagnetSolo:enableAttractiveField()
-
-	if self.alive then
-		self.fieldSound= FieldSound.new("Attractive")
-		self.fieldSound:play()
-		self.field= AttField.new(pos)
-		self.field.isActive=true
-		self.appliesField=true
-		self.fieldType=FieldTypes.Attractive
-		if self.animCounter==0 then
-			self:loadAnimation("launchfield",true)
-		end		
+	if self.powers["Attractive"]~=nil then
+		if self.alive then
+			self.fieldSound= FieldSound.new("Attractive")
+			self.fieldSound:play()
+			self.field= AttField.new(pos)
+			self.field.isActive=true
+			self.appliesField=true
+			self.fieldType=FieldTypes.Attractive
+			if self.animCounter==0 then
+				self:loadAnimation("launchfield",true)
+			end		
+		end
 	end
 end
 
 
+
 function TheMagnetSolo:enableStaticField()
-	if self.alive then
-		self.fieldSound= FieldSound.new("Static")
-		self.fieldSound:play()
-		self.field= Field.new(FieldTypes.Static,pos)
-		self.field.isActive=true
-		self.appliesField=true
-		self.fieldType=FieldTypes.Static
-		if self.animCounter==0 then
-			self:loadAnimation("launchfield",true)
+	if self.powers["Static"]~=nil then
+		if self.alive then
+			self.fieldSound= FieldSound.new("Static")
+			self.fieldSound:play()
+			self.field= Field.new(FieldTypes.Static,pos)
+			self.field.isActive=true
+			self.appliesField=true
+			self.fieldType=FieldTypes.Static
+			if self.animCounter==0 then
+				self:loadAnimation("launchfield",true)
+			end
 		end
 	end
 end
 
 function TheMagnetSolo:enableRotativeLField()
-	if self.alive then
-		self.fieldSound= FieldSound.new("RotativeL")
-		self.fieldSound:play()
-		self.field= Field.new(FieldTypes.RotativeL,pos)
-		self.field.isActive=true
-		self.appliesField=true
-		if self.animCounter==0 then
-			self:loadAnimation("launchfield",true)
+	if self.powers["RotativeL"]~=nil then
+		if self.alive then
+			self.fieldSound= FieldSound.new("RotativeL")
+			self.fieldSound:play()
+			self.field= Field.new(FieldTypes.RotativeL,pos)
+			self.field.isActive=true
+			self.appliesField=true
+			if self.animCounter==0 then
+				self:loadAnimation("launchfield",true)
+			end
+			self.fieldType=FieldTypes.RotativeL
 		end
-		self.fieldType=FieldTypes.RotativeL
 	end
 end
 function TheMagnetSolo:enableRotativeRField()
-	if self.alive then
-		self.fieldSound= FieldSound.new("RotativeR")
-		self.fieldSound:play()
-		self.field= Field.new(FieldTypes.RotativeR,pos)
-		self.field.isActive=true
-		self.appliesField=true
-		self.fieldType=FieldTypes.RotativeR
-		if self.animCounter==0 then
-			self:loadAnimation("launchfield",true)
+	if self.powers["RotativeR"]~=nil then
+		if self.alive then
+			self.fieldSound= FieldSound.new("RotativeR")
+			self.fieldSound:play()
+			self.field= Field.new(FieldTypes.RotativeR,pos)
+			self.field.isActive=true
+			self.appliesField=true
+			self.fieldType=FieldTypes.RotativeR
+			if self.animCounter==0 then
+				self:loadAnimation("launchfield",true)
+			end
 		end
-		end
+	end
 end
 
 -- In case of a static Metal
 function TheMagnetSolo:rotativeLField(pos,factor)
-	if self.alive then
-
-		local vx=self.position.x-pos.x
-		local vy=self.position.y-pos.y
-		local n = math.sqrt(vx*vx+vy*vy)
-		local vrx = vx/n
-		local vry= vy/n
-		self.pc.body:applyLinearImpulse(-vry*TheMagnetConst.Rot.x*factor,vrx*TheMagnetConst.Rot.y*factor)
-		if self.animCounter==0 then
-			self:loadAnimation("launchfield",true)
+	if self.powers["RotativeL"]~=nil then
+		if self.alive then
+			local vx=self.position.x-pos.x
+			local vy=self.position.y-pos.y
+			local n = math.sqrt(vx*vx+vy*vy)
+			local vrx = vx/n
+			local vry= vy/n
+			self.pc.body:applyLinearImpulse(-vry*TheMagnetConst.Rot.x*factor,vrx*TheMagnetConst.Rot.y*factor)
+			if self.animCounter==0 then
+				self:loadAnimation("launchfield",true)
+			end
 		end
 	end
 end
 
 function TheMagnetSolo:rotativeRField(pos,factor)
-	if self.alive then
+	if self.powers["RotativeR"]~=nil then
+		if self.alive then
 
-		local vx=self.position.x-pos.x
-		local vy=self.position.y-pos.y
-		local n = math.sqrt(vx*vx+vy*vy)
-		local vrx = vx/n
-		local vry= vy/n
-		self.pc.body:applyLinearImpulse(vry*TheMagnetConst.Rot.x*factor,-vrx*TheMagnetConst.Rot.y*factor)
-		if self.animCounter==0 then
-			self:loadAnimation("launchfield",true)
+			local vx=self.position.x-pos.x
+			local vy=self.position.y-pos.y
+			local n = math.sqrt(vx*vx+vy*vy)
+			local vrx = vx/n
+			local vry= vy/n
+			self.pc.body:applyLinearImpulse(vry*TheMagnetConst.Rot.x*factor,-vrx*TheMagnetConst.Rot.y*factor)
+			if self.animCounter==0 then
+				self:loadAnimation("launchfield",true)
+			end
 		end
 	end
 end
 
 function TheMagnetSolo:attractiveField(pos,factor)
-	if self.alive then
+	if self.powers["Attractive"]~=nil then
 
-		local vx=self.position.x-pos.x
-		local vy=self.position.y-pos.y
-		local n = math.sqrt(vx*vx+vy*vy)
-		local vrx = vx/n
-		local vry= vy/n
-		if(n>(unitWorldSize)) then 
-			self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Att.x*factor,-vry*TheMagnetConst.Att.y*factor)
-		end
-		if self.animCounter==0 then
-			self:loadAnimation("launchfield",true)
+		if self.alive then
+
+			local vx=self.position.x-pos.x
+			local vy=self.position.y-pos.y
+			local n = math.sqrt(vx*vx+vy*vy)
+			local vrx = vx/n
+			local vry= vy/n
+			if(n>(unitWorldSize)) then 
+				self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Att.x*factor,-vry*TheMagnetConst.Att.y*factor)
+			end
+			if self.animCounter==0 then
+				self:loadAnimation("launchfield",true)
+			end
 		end
 	end
-	
 end
 
 
 function TheMagnetSolo:repulsiveField(pos,factor)
-	if self.alive then
+	if self.powers["Repulsive"]~=nil then
 
-		local vx=-self.position.x+pos.x
-		local vy=-self.position.y+pos.y
-		local n = math.sqrt(vx*vx+vy*vy)
-		local vrx = vx/n
-		local vry= vy/n
+		if self.alive then
 
-		if(n>(unitWorldSize)) then 
-			self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Rep.x*factor,-vry*TheMagnetConst.Rep.y*factor)
-		end
-		if self.animCounter==0 then
-			self:loadAnimation("launchfield",true)
+			local vx=-self.position.x+pos.x
+			local vy=-self.position.y+pos.y
+			local n = math.sqrt(vx*vx+vy*vy)
+			local vrx = vx/n
+			local vry= vy/n
+
+			if(n>(unitWorldSize)) then 
+				self.pc.body:applyLinearImpulse(-vrx*TheMagnetConst.Rep.x*factor,-vry*TheMagnetConst.Rep.y*factor)
+			end
+			if self.animCounter==0 then
+				self:loadAnimation("launchfield",true)
+			end
 		end
 	end
-
 end
 
 -- Disabling fields

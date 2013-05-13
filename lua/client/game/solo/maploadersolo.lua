@@ -52,7 +52,7 @@ function MapLoaderSolo.new(MapLoaderSoloFile,magnetManager)
             elseif d.name=="Calque de Tile 1" then
                 table.insert(self.tilesets,TilesetsSolo.new(self.map.tilesets,d,MapLoaderSoloFile))
             elseif d.name=="front" then
-                table.insert(self.tilesets,Tilesets.new(self.map.tilesets,d,MapLoaderFile))
+                table.insert(self.tilesets,TilesetsSolo.new(self.map.tilesets,d,MapLoaderSoloFile))
             elseif  d.name=="platform" then
                 -- Gestion des platformes
                 self:createPlatforms(d)    
@@ -96,9 +96,11 @@ function MapLoaderSolo.new(MapLoaderSoloFile,magnetManager)
                 elseif  d.name=="metalman" then
                 -- Gestion de position
                 self.metalManPos={x=d.objects[1].x,y=d.objects[1].y}  
+                self.metalManPowers=d.objects[1].properties["powers"]
                 elseif  d.name=="themagnet" then
                 -- Gestion de position
-                self.theMagnetPos={x=d.objects[1].x,y=d.objects[1].y}             
+                self.theMagnetPos={x=d.objects[1].x,y=d.objects[1].y}
+                self.theMagnetPowers=d.objects[1].properties["powers"]
             end    
             
     end

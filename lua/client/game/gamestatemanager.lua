@@ -53,10 +53,10 @@ function GameStateManager.new()
 	self.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new("themagnet",false)
 
 	self.state['ChoixPersoSolo'] = nil
-	-- self.state['GameplaySolo'] = GameplaySolo.new("level1",false,"metalman")
+	self.state['GameplaySolo'] = GameplaySolo.new("level1",false,"metalman")
 -- 
 	-- Init
-	self.currentState='ConnectToServer'
+	self.currentState='GameplaySolo'
 	return self
 end
 

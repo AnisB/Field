@@ -2,6 +2,9 @@
 This file is part of the Field project]]
 
 
+speedPerso=300
+
+
 LevelEnding = {}
 LevelEnding.__index = LevelEnding
 function LevelEnding.new(next,continuous)
@@ -9,13 +12,22 @@ function LevelEnding.new(next,continuous)
     setmetatable(self, LevelEnding)
     self.next=next
     self.continuous=continuous
-    print(self.continuous)
+    self.back=love.graphics.newImage("backgrounds/ending/back.png")
+    self.continue=Button.newDec(300,300,300,50,ButtonType.VLarge,"backgrounds/ending/continue.png",30,5)
+    self.returnB=Button.new(800,300,250,50,ButtonType.Large,"backgrounds/ending/return.png")
+    self.perso1 = AnimMM.new("metalman/alu")
+    self.perso2 = AnimTM.new("themagnet")
+    self.perso1:load("running",true)
+    self.perso2:load("running",true)
+    self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
+    self.pos1=-50
+    self.pos2=-100
     return self
 end
 
 
 function LevelEnding:mousePressed(x, y, button)
-    if x > 90 and x < 90+266 and y > 205 and y < 205+35 then
+    if self.continue:isCliked(x,y) then
         serveur:send({type="input", pck={character=monde.moi.perso, key="return", state=true}})    
         gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
         gameStateManager:changeState('Gameplay')
@@ -30,7 +42,7 @@ end
 
 
 function LevelEnding:keyPressed(akey, unicode)
-    print("levelending",monde.moi.perso, akey)
+    -- print("levelending",monde.moi.perso, akey)
     serveur:send({type="input", pck={character=monde.moi.perso, key=akey, state=true}})    
 	if akey=="return" then
         gameStateManager.state['Gameplay']=Gameplay.new("maps."..self.next,true)
@@ -50,35 +62,28 @@ function LevelEnding:joystickReleased(joystick, button)
 end
 
 function LevelEnding:update(dt)
-	
+    self.perso1:update(dt)
+    self.perso2:update(dt)
+    if(self.pos1<windowW+200) then
+        self.pos1=self.pos1+dt*speedPerso
+    end 
+
+    if(self.pos2<windowW+200) then
+        self.pos2=self.pos2+dt*speedPerso
+    end
 end
 
 function LevelEnding:draw()
-    local hover = false
     x, y = love.mouse.getPosition()
 
     -- background :
-    -- love.graphics.draw(gameStateManager.state['ConnectToServer'].bg, 0, 0)
+    love.graphics.draw(self.back, 0, 0)
 
-    -- rectangles :
-    if x > 90 and x < 90+266 and y > 205 and y < 205+35 then
-        love.graphics.setColor(150, 150, 150, 255)
-        hover = true
-    else
-        love.graphics.setColor(50, 50, 50, 255)
-    end
-    love.graphics.rectangle("fill", 90, 205, 266, 35)
 
-    -- text :
-    love.graphics.setColor(20, 240, 135, 255)
-    love.graphics.print("success !", 150, 100)    
-    love.graphics.setColor(255, 255, 255, 255)
-
-	if self.continuous then
-		love.graphics.print("niveau suivant", 100, 200)
-	else
-		love.graphics.print("retour au menu", 100, 200)
-	end
+    self.continue:draw(x,y,1)
+    self.returnB:draw(x,y,1)
+    love.graphics.drawq(self.perso1:getSprite(), self.diffuse, self.pos1,530 )
+    love.graphics.drawq(self.perso2:getSprite(), self.diffuse, self.pos2,530 )
 
 
 end

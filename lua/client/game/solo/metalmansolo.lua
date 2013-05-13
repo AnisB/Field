@@ -10,7 +10,7 @@ require ("game.shader.shockwave")
 MetalManSolo = {}
 MetalManSolo.__index = MetalManSolo
 
-function MetalManSolo.new(camera,pos)
+function MetalManSolo.new(camera,pos,powers)
 	local self = {}
 	setmetatable(self, MetalManSolo)
 
@@ -59,6 +59,14 @@ function MetalManSolo.new(camera,pos)
 
 	self.tranfSound=Sound.getSound("tranf")
 	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
+	self.powers = {}
+
+	if powers~=nil then
+		for k in string.gmatch(powers, "([^#]+)") do
+			print(k)
+			self.powers[k] = true
+		end
+	end
 	return self
 end
 
@@ -154,20 +162,26 @@ end
 
 function MetalManSolo:changeMass()
 	if self.alive then
-		self.tranfSound:stop()
-		self.tranfSound:play()
-		if 	self.metalWeight==MetalMTypes.Alu then
-			self.anim = AnimMMSolo.new('metalman/acier')
-			self:loadAnimation("standing",true)
-			self:loadAnimation("load1",true)
-			self.s.time=0
-			self.metalWeight=MetalMTypes.Acier
-		elseif 	self.metalWeight==MetalMTypes.Acier then
-			self.metalWeight=MetalMTypes.Alu
-			self.anim = AnimMMSolo.new('metalman/alu')
-			self:loadAnimation("load2",true)
-			self.s.time=0
 
+		if 	self.metalWeight==MetalMTypes.Alu then
+			if self.powers["Acier"] then
+				self.anim = AnimMMSolo.new('metalman/acier')
+				self:loadAnimation("standing",true)
+				self:loadAnimation("load1",true)
+				self.s.time=0
+				self.metalWeight=MetalMTypes.Acier
+				self.tranfSound:stop()
+				self.tranfSound:play()
+			end
+		elseif 	self.metalWeight==MetalMTypes.Acier then
+			if self.powers["Alu"] then
+				self.metalWeight=MetalMTypes.Alu
+				self.anim = AnimMMSolo.new('metalman/alu')
+				self:loadAnimation("load2",true)
+				self.s.time=0
+				self.tranfSound:stop()
+				self.tranfSound:play()
+			end
 		end
 		self.pc.body:setMass(self.metalWeight*unitWorldSize)
 	end
@@ -184,33 +198,41 @@ end
 
 function MetalManSolo:switchType()
 if self.alive then
-	self.tranfSound:stop()
-	self.tranfSound:play()
+
 	if self.metalType ==MetalTypes.Normal then
-		self.oldMetal = self.metalType
-		self.metalType=MetalTypes.Static
-		self.anim = AnimMMSolo.new('metalman/static')
-		if 	self.metalWeight==MetalMTypes.Alu then
-			self:loadAnimation("load1",true)
-			self.s.time=0
-		elseif 	self.metalWeight==MetalMTypes.Acier then
-			self:loadAnimation("load2",true)
-			self.s.time=0			
+		if self.powers["Static"] then
+			self.oldMetal = self.metalType
+			self.metalType=MetalTypes.Static
+			self.anim = AnimMMSolo.new('metalman/static')
+			if 	self.metalWeight==MetalMTypes.Alu then
+				self:loadAnimation("load1",true)
+				self.s.time=0
+			elseif 	self.metalWeight==MetalMTypes.Acier then
+				self:loadAnimation("load2",true)
+				self.s.time=0			
+			end
+			self.isStatic=true
+			self.tranfSound:stop()
+			self.tranfSound:play()
 		end
-		self.isStatic=true
 	elseif self.metalType ==MetalTypes.Static then
-		self.oldMetal = self.metalType
-		self.metalType=MetalTypes.Normal
-		self.isStatic=false
-		if 	self.metalWeight==MetalMTypes.Alu then
-			self.anim = AnimMMSolo.new('metalman/alu')
-			self:loadAnimation("load1",true)
-			self.s.time=0				
-		elseif 	self.metalWeight==MetalMTypes.Acier then
-			self.anim = AnimMMSolo.new('metalman/acier')
-			self:loadAnimation("load2",true)
-			self.s.time=0			
+		if self.powers["Acier"] or  self.powers["Alu"] then
+			self.oldMetal = self.metalType
+			self.metalType=MetalTypes.Normal
+			self.isStatic=false
+			if 	self.metalWeight==MetalMTypes.Alu then
+				self.anim = AnimMMSolo.new('metalman/alu')
+				self:loadAnimation("load1",true)
+				self.s.time=0				
+			elseif 	self.metalWeight==MetalMTypes.Acier then
+				self.anim = AnimMMSolo.new('metalman/acier')
+				self:loadAnimation("load2",true)
+				self.s.time=0			
+			end
+			self.tranfSound:stop()
+			self.tranfSound:play()
 		end
+
 	end
 end
 end

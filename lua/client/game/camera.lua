@@ -34,7 +34,6 @@ function Camera:handlePacket( string )
 	end
 	self.position.x=tonumber(t[2])
 	self.position.y=tonumber(t[3])
-
 end
 
 function Camera:draw()

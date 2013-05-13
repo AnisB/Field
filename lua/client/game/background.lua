@@ -28,7 +28,4 @@ end
 function Background:draw(pos)
 		love.graphics.drawq(self.img, self.quad,-(pos.x)*self.scale%1280-1280, -(self.img:getHeight()-windowH)*pos.y/self.ymap)
 		love.graphics.drawq(self.img,self.quad, -(pos.x)*self.scale%1280, -(self.img:getHeight()-windowH)*pos.y/self.ymap)
-		-- love.graphics.draw(self.img, -(pos.x)*self.scale%1280+1280, -(self.img:getHeight()-windowH)*pos.y/self.ymap)
-        -- love.graphics.drawq(self.img,self.quad, 0,0)
-
 end

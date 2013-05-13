@@ -72,7 +72,6 @@ function LevelEndingSolo:update(dt)
 end
 
 function LevelEndingSolo:draw()
-    local hover = false
     x, y = love.mouse.getPosition()
 
     -- background :
