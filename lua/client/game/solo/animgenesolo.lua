@@ -47,22 +47,28 @@ AnimGeneSolo.ANIMS.on.loop = true
 AnimGeneSolo.ANIMS.launching.switch = AnimGeneSolo.ANIMS.on
 AnimGeneSolo.ANIMS.shutdown.switch = AnimGeneSolo.ANIMS.off
 
-
+AnimGeneSolo.sprites={}
 
 -- PUBLIC : constructor
 function AnimGeneSolo.new(folder)
 	local self = {}
 	setmetatable(self, AnimGeneSolo)
 	self.time = 0.0
-	self.sprites = {}
-	for key,val in pairs(AnimGeneSolo.ANIMS) do
-		self.sprites[key] = {}
-		for i=1, val.number do
-			local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
+	if AnimGeneSolo.sprites[folder]==nil then
+		AnimGeneSolo.sprites[folder]={}
+		for key,val in pairs(AnimGeneSolo.ANIMS) do
+			AnimGeneSolo.sprites[folder][key] = {}
+			for i=1, val.number do
+				local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
 			-- print("loading image =>", path)
-			gameStateManager.loader.newImage(self.sprites[key],i, path)
+			--self.sprites[key][i] = 
+			    gameStateManager.loader.newImage(AnimGeneSolo.sprites[folder][key],i, path)
+			    -- AnimGeneSolo.sprites[folder][key][i] = love.graphics.newImage(path)
+
+			end
 		end
 	end
+	self.folder=folder
 	self.currentAnim = AnimGeneSolo.ANIMS.off
 	self.currentPos = 1
 	-- begin of an animation

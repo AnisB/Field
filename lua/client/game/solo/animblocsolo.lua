@@ -21,21 +21,28 @@ AnimBlocSolo.ANIMS.normal.priority = 10
 AnimBlocSolo.ANIMS.normal.loop = true
 
 
+AnimBlocSolo.sprites={}
+
+
 
 -- PUBLIC : constructor
 function AnimBlocSolo.new(folder)
 	local self = {}
 	setmetatable(self, AnimBlocSolo)
 	self.time = 0.0
-	self.sprites = {}
-	for key,val in pairs(AnimBlocSolo.ANIMS) do
-		self.sprites[key] = {}
-		for i=1, val.number do
-			local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
+	if AnimBlocSolo.sprites[folder]==nil then
+		AnimBlocSolo.sprites[folder]={}
+		for key,val in pairs(AnimBlocSolo.ANIMS) do
+			AnimBlocSolo.sprites[folder][key] = {}
+			for i=1, val.number do
+				local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
 			-- print("loading image =>", path)
-			gameStateManager.loader.newImage(self.sprites[key],i, path)
+			--self.sprites[key][i] = 
+			    gameStateManager.loader.newImage(AnimBlocSolo.sprites[folder][key],i, path)
+			end
 		end
 	end
+	self.folder=folder
 	self.currentAnim = AnimBlocSolo.ANIMS.normal
 	self.currentPos = 1
 	-- begin of an animation
@@ -104,7 +111,7 @@ end
 
 -- PRIVATE
 function AnimBlocSolo:updateImg()
-	self.currentImg = self.sprites[self.currentAnim.name][self.currentPos]
+	self.currentImg = AnimBlocSolo.sprites[self.folder][self.currentAnim.name][self.currentPos]
 end
 
 -- NETWORK
