@@ -29,7 +29,6 @@
                 self.pc = Physics.newRectangle(self.position.x,self.position.y,w,h,true,decalage)
             end
             self.anim = AnimDestroyableSolo.new('destroyable')
-            self:loadAnimation("normal",true)
             self.pc.fixture:setUserData(self)    
             self.kinPallier = 90    
             self.destroy=false
@@ -37,6 +36,10 @@
 
             return self
         end
+
+        function DestroyableSolo:init()
+            self:loadAnimation("normal",true)
+       end
 
         function DestroyableSolo:update(dt)
             self.anim:update(dt)

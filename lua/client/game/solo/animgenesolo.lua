@@ -60,7 +60,7 @@ function AnimGeneSolo.new(folder)
 		for i=1, val.number do
 			local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
 			-- print("loading image =>", path)
-			self.sprites[key][i] = love.graphics.newImage(path)
+			gameStateManager.loader.newImage(self.sprites[key],i, path)
 		end
 	end
 	self.currentAnim = AnimGeneSolo.ANIMS.off

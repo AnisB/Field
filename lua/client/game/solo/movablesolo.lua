@@ -38,6 +38,8 @@
         self.position.x=self.pc.body:getX()
         self.position.y=self.pc.body:getY()
     end
+    function MovableSolo:init()
+    end
    
 
    function MovableSolo:getPosition()

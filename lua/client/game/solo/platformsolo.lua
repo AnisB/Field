@@ -34,6 +34,9 @@ end
 function PlatformSolo:update(dt)
 end
 
+function PlatformSolo:init()
+end
+
 function PlatformSolo:collideWith( object, collision )
 
 end

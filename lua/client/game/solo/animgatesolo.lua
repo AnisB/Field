@@ -47,6 +47,8 @@ AnimGateSolo.ANIMS.open.loop = 10
 AnimGateSolo.ANIMS.closing.switch = AnimGateSolo.ANIMS.close
 AnimGateSolo.ANIMS.opening.switch = AnimGateSolo.ANIMS.open
 
+AnimGateSolo.sprites={}
+
 
 
 -- PUBLIC : constructor
@@ -54,15 +56,20 @@ function AnimGateSolo.new(folder)
 	local self = {}
 	setmetatable(self, AnimGateSolo)
 	self.time = 0.0
-	self.sprites = {}
-	for key,val in pairs(AnimGateSolo.ANIMS) do
-		self.sprites[key] = {}
-		for i=1, val.number do
-			local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
+	if AnimGateSolo.sprites[folder]==nil then
+		print(folder)
+		AnimGateSolo.sprites[folder]={}
+		for key,val in pairs(AnimGateSolo.ANIMS) do
+			AnimGateSolo.sprites[folder][key] = {}
+			for i=1, val.number do
+				local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
 			-- print("loading image =>", path)
-			self.sprites[key][i] = love.graphics.newImage(path)
+			--self.sprites[key][i] = 
+			    gameStateManager.loader.newImage(AnimGateSolo.sprites[folder][key],i, path)
+			end
 		end
 	end
+	self.folder=folder
 	self.currentAnim = AnimGateSolo.ANIMS.close
 	self.currentPos = 1
 	-- begin of an animation
@@ -131,7 +138,7 @@ end
 
 -- PRIVATE
 function AnimGateSolo:updateImg()
-	self.currentImg = self.sprites[self.currentAnim.name][self.currentPos]
+	self.currentImg = AnimGateSolo.sprites[self.folder][self.currentAnim.name][self.currentPos]
 end
 
 -- NETWORK

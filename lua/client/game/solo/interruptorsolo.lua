@@ -25,13 +25,14 @@ function InterruptorSolo.new(pos,type,generatorID,magnetManager,sprite,netid)
 	self.magnetManager=magnetManager
 	self.generatorID= generatorID
 	self.anim = AnimInterSolo.new('inter')
-	self:loadAnimation("off",true)
 	self.quad= love.graphics.newQuad(0, 0, unitWorldSize, unitWorldSize, unitWorldSize*2,unitWorldSize)
 
 	return self
 end
 
-
+function InterruptorSolo:init()
+	self:loadAnimation("off",true)
+end
 function InterruptorSolo:isAppliable(pos)
 	local ax =pos.x-self.position.x
 	local ay =pos.y-self.position.y

@@ -50,15 +50,9 @@ function GateSolo.new(pos,w,h,openID,closeID,prev,next,animid,enabled,type,mapLo
 	end
 	
 	self.sound={open=Sound.getSound("open"),close=Sound.getSound("close")}
-    if enabled then
-        self.pc.fixture:setFilterData(1,1,-1)    	
-    	self.anim:load("open",true)
-    else
-    	self.pc.fixture:setFilterData(1,1,0)
-    	self.anim:load("close",true)
-	end
-	self.quad= love.graphics.newQuad(0, 0, unitWorldSize, unitWorldSize, unitWorldSize*2,unitWorldSize)
 
+	self.quad= love.graphics.newQuad(0, 0, unitWorldSize, unitWorldSize, unitWorldSize*2,unitWorldSize)
+	self.enabled=enabled
 	return self
 end
 
@@ -76,7 +70,16 @@ end
 		return self.position
 	end
 	
-
+	function GateSolo:init()
+    if self.enabled then
+        self.pc.fixture:setFilterData(1,1,-1)    	
+    	self.anim:load("open",true)
+    else
+    	self.pc.fixture:setFilterData(1,1,0)
+    	self.anim:load("close",true)
+	end
+	end
+	
 	
 	function GateSolo:collideWith( object, collision )
 	end

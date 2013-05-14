@@ -18,12 +18,15 @@ require("game.shader.backlightshader")
 require("game.simplebackground")
 require("const")
 
+
 GameplaySolo = {}
 GameplaySolo.__index = GameplaySolo
+
 
 function GameplaySolo.new(mapFile,continuous,player)
     local self = {}
     setmetatable(self, GameplaySolo)
+
 
     self.continuous=continuous
     -- Physics
@@ -39,7 +42,10 @@ function GameplaySolo.new(mapFile,continuous,player)
     self.mapFile=mapFile
     self.mapLoader = MapLoaderSolo.new(mapFile,self.magnetmanager)
 
-    self.mapx=self.mapLoader.map.width*self.mapLoader.map.tilewidth
+
+
+
+    -- self.mapx=self.mapLoader.map.width*self.mapLoader.map.tilewidth
     self.mapy= self.mapLoader.map.height*self.mapLoader.map.tileheight
     self.background1=Background.new(ParalaxImg.."1.png",1,self.mapy)
     self.background2=Background.new(ParalaxImg.."2.png",0.75,self.mapy)
@@ -85,9 +91,41 @@ function GameplaySolo.new(mapFile,continuous,player)
         light_pos = {windowW/2,windowH/2,30}
     }
 
+    -- Init de Loading
+    math.randomseed(os.time())
+
+    self.spiral = love.graphics.newImage('media/spiral.png')
+    self.spiralAngle = 0
+    self.screenWidth, self.screenHeight = love.graphics.getWidth(), love.graphics.getHeight()
+
+    -- Starting the multithreading loading
+    local returnF = GameplaySolo.loadFinished
+    self.loading=gameStateManager.loader.start(returnF, print)
 
     return self
 end
+
+
+ function GameplaySolo:loadFinished()
+    local gp = gameStateManager.state["GameplaySolo"]
+    gp:init()
+end
+
+
+function GameplaySolo:init()
+    -- Init mapLoader
+    self.mapLoader:init()
+
+
+    -- Init character
+    if self.player=="metalman" then
+        self.metalMan:init()
+    elseif self.player=="themagnet" then
+        self.theMagnet:init()
+    end
+    self.loading=false
+end
+
 
 function GameplaySolo:finish()
     self.levelFinished=true
@@ -138,6 +176,13 @@ end
         self.magnetmanager:addGenerator(self.theMagnet)
     end
 
+    -- Init de Loading
+    math.randomseed(os.time())
+
+    self.spiral = love.graphics.newImage('media/spiral.png')
+    self.spiralAngle = 0
+    self.screenWidth, self.screenHeight = love.graphics.getWidth(), love.graphics.getHeight()
+
 end
 
     function GameplaySolo:failed()
@@ -155,8 +200,35 @@ end
     function GameplaySolo:mouseReleased(x, y, button)
     end
     
+
+
+
+ function GameplaySolo:drawSpiral()
+  local w,h = self.spiral:getWidth(), self.spiral:getHeight()
+  local x,y = windowW/2, windowH/2
+  love.graphics.draw(self.spiral, x, y, self.spiralAngle, 1, 1, w/2, h/2)
+end
+
+ function GameplaySolo:drawLoadingBar()
+  local separation = 30;
+  local w = windowW - 2*separation
+  local h = 50;
+  local x,y = separation, windowH - separation - h;
+  love.graphics.rectangle("line", x, y, w, h)
+
+  x, y = x + 3, y + 3
+  w, h = w - 6, h - 7
+
+  if gameStateManager.loader.loadedCount > 0 then
+    w = w * (gameStateManager.loader.loadedCount / gameStateManager.loader.resourceCount)
+  end
+  love.graphics.rectangle("fill", x, y, w, h)
+end
+
+
     
     function GameplaySolo:keyPressed(key, unicode)
+        if not self.loading then
         if key=="y" then
             self.bloom:refresh(200,200)
         end
@@ -226,10 +298,12 @@ end
             if key =="u" then
                 self:setPaused( not self.gameIsPaused)
             end   
+        end
     end
 
 
     function GameplaySolo:keyReleased(key, unicode)
+        if not self.loading then
 
         if not self.gameIsPaused then
             if self.player=="metalman" then
@@ -259,9 +333,15 @@ end
                 end
             end
         end
+        end
     
     
     function GameplaySolo:update(dttheo)
+        if  self.loading then
+            gameStateManager.loader.update()
+            self.spiralAngle = self.spiralAngle + 2*dttheo
+        else
+
         if self.isSlowing then
             self.slowTimer =self.slowTimer +dttheo
             if self.slowTimer>=1 then
@@ -299,8 +379,13 @@ end
 
         end
     end
+    end
     
     function GameplaySolo:draw()
+        if  self.loading then
+          self:drawSpiral()
+          self:drawLoadingBar()
+        else
         if self.player=="metalman" then
 
             self.metalMan:preDraw()
@@ -352,7 +437,7 @@ end
 
 
         end
-
+    end
     end
     
     

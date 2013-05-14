@@ -32,7 +32,7 @@ function MetalManSolo.new(camera,pos,powers)
 	-- Animation state
 	self:setState("standing")
 	self.anim = AnimMMSolo.new('metalman/alu')
-	self:loadAnimation("standing",true)
+
 	self.goF=true
 	self.animCounter=0
 
@@ -68,6 +68,11 @@ function MetalManSolo.new(camera,pos,powers)
 		end
 	end
 	return self
+end
+
+
+function MetalManSolo:init()
+	self:loadAnimation("standing",true)
 end
 
 function MetalManSolo:reset()

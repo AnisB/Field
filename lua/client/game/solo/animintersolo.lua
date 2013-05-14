@@ -47,22 +47,26 @@ AnimInterSolo.ANIMS.on.loop = true
 AnimInterSolo.ANIMS.launching.switch = AnimInterSolo.ANIMS.on
 AnimInterSolo.ANIMS.shutdown.switch = AnimInterSolo.ANIMS.off
 
-
+AnimInterSolo.sprites={}
 
 -- PUBLIC : constructor
 function AnimInterSolo.new(folder)
 	local self = {}
 	setmetatable(self, AnimInterSolo)
 	self.time = 0.0
-	self.sprites = {}
-	for key,val in pairs(AnimInterSolo.ANIMS) do
-		self.sprites[key] = {}
-		for i=1, val.number do
-			local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
+	if AnimInterSolo.sprites[folder]==nil then
+		AnimInterSolo.sprites[folder]={}
+		for key,val in pairs(AnimInterSolo.ANIMS) do
+			AnimInterSolo.sprites[folder][key] = {}
+			for i=1, val.number do
+				local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
 			-- print("loading image =>", path)
-			self.sprites[key][i] = love.graphics.newImage(path)
+			--self.sprites[key][i] = 
+			    gameStateManager.loader.newImage(AnimInterSolo.sprites[folder][key],i, path)
+			end
 		end
 	end
+	self.folder=folder
 	self.currentAnim = AnimInterSolo.ANIMS.off
 	self.currentPos = 1
 	-- begin of an animation
@@ -131,7 +135,7 @@ end
 
 -- PRIVATE
 function AnimInterSolo:updateImg()
-	self.currentImg = self.sprites[self.currentAnim.name][self.currentPos]
+	self.currentImg = AnimInterSolo.sprites[self.folder][self.currentAnim.name][self.currentPos]
 end
 
 -- NETWORK

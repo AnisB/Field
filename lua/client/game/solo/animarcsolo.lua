@@ -35,6 +35,7 @@ AnimArcSolo.ANIMS.on.priority = 20
 AnimArcSolo.ANIMS.off.loop = true
 AnimArcSolo.ANIMS.on.loop = true
 
+AnimArcSolo.sprites={}
 
 
 -- PUBLIC : constructor
@@ -42,15 +43,19 @@ function AnimArcSolo.new(folder)
 	local self = {}
 	setmetatable(self, AnimArcSolo)
 	self.time = 0.0
-	self.sprites = {}
-	for key,val in pairs(AnimArcSolo.ANIMS) do
-		self.sprites[key] = {}
-		for i=1, val.number do
-			local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
+	if AnimArcSolo.sprites[folder]==nil then
+		AnimArcSolo.sprites[folder]={}
+		for key,val in pairs(AnimArcSolo.ANIMS) do
+			AnimArcSolo.sprites[folder][key] = {}
+			for i=1, val.number do
+				local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
 			-- print("loading image =>", path)
-			self.sprites[key][i] = love.graphics.newImage(path)
+			--self.sprites[key][i] = 
+			    gameStateManager.loader.newImage(AnimArcSolo.sprites[folder][key],i, path)
+			end
 		end
 	end
+	self.folder=folder
 	self.currentAnim = AnimArcSolo.ANIMS.off
 	self.currentPos = 1
 	-- begin of an animation
@@ -119,7 +124,7 @@ end
 
 -- PRIVATE
 function AnimArcSolo:updateImg()
-	self.currentImg = self.sprites[self.currentAnim.name][self.currentPos]
+	self.currentImg = AnimArcSolo.sprites[self.folder][self.currentAnim.name][self.currentPos]
 end
 
 -- NETWORK

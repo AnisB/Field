@@ -34,22 +34,29 @@ AnimDestroyableSolo.ANIMS.normal.loop = true
 AnimDestroyableSolo.ANIMS.breaking.switch = AnimDestroyableSolo.ANIMS.destroyed
 AnimDestroyableSolo.ANIMS.destroyed.loop = true
 
-
+AnimDestroyableSolo.sprites={}
 
 -- PUBLIC : constructor
 function AnimDestroyableSolo.new(folder)
 	local self = {}
 	setmetatable(self, AnimDestroyableSolo)
 	self.time = 0.0
-	self.sprites = {}
-	for key,val in pairs(AnimDestroyableSolo.ANIMS) do
-		self.sprites[key] = {}
-		for i=1, val.number do
-			local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
+	-- self.sprites = {}
+	if AnimDestroyableSolo.sprites[folder]==nil then
+		AnimDestroyableSolo.sprites[folder]={}
+		for key,val in pairs(AnimDestroyableSolo.ANIMS) do
+			AnimDestroyableSolo.sprites[folder][key] = {}
+			for i=1, val.number do
+				local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
 			-- print("loading image =>", path)
-			self.sprites[key][i] = love.graphics.newImage(path)
+			--self.sprites[key][i] = 
+			    gameStateManager.loader.newImage(AnimDestroyableSolo.sprites[folder][key],i, path)
+			    -- AnimDestroyableSolo.sprites[folder][key][i] = love.graphics.newImage(path)
+
+			end
 		end
 	end
+	self.folder=folder
 	self.currentAnim = AnimDestroyableSolo.ANIMS.normal
 	self.currentPos = 1
 	-- begin of an animation
@@ -118,7 +125,7 @@ end
 
 -- PRIVATE
 function AnimDestroyableSolo:updateImg()
-	self.currentImg = self.sprites[self.currentAnim.name][self.currentPos]
+	self.currentImg = AnimDestroyableSolo.sprites[self.folder][self.currentAnim.name][self.currentPos]
 end
 
 -- NETWORK

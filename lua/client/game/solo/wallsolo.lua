@@ -33,6 +33,9 @@ end
 function WallSolo:update(dt)
 end
 
+function WallSolo:init()
+end
+
 function WallSolo:collideWith( object, collision )
 
 end

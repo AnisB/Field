@@ -79,6 +79,9 @@ function TheMagnetSolo.new(camera,pos,powers)
 
 
 
+function TheMagnetSolo:init()
+	self:loadAnimation("standing",true)
+end
 
 	function TheMagnetSolo:die(type)
 		if self.alive then

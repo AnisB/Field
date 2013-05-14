@@ -18,6 +18,7 @@ require("game.options")
 require("game.solo.choixniveausolo")
 require("game.solo.choixtypejeusolo")
 require("game.solo.choixpersosolo")
+
 --require("game.levelchange")
 --require()
 GameStateManager = {}
@@ -26,6 +27,9 @@ GameStateManager.__index = GameStateManager
 function GameStateManager.new()
 	local self = {}
 	setmetatable(self, GameStateManager)
+
+    self.loader = require 'game/love-loader'
+
 
 	-- Global States
 	self.state = {}
@@ -50,13 +54,13 @@ function GameStateManager.new()
 
 	-- Jeu Solo
 	self.state['ChoixTypeJeuSolo'] = ChoixTypeJeuSolo.new()	
-	-- self.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new("themagnet",false)
+	self.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new("themagnet",false)
 
 	self.state['ChoixPersoSolo'] = nil
 	-- self.state['GameplaySolo'] = GameplaySolo.new("level1",false,"metalman")
 -- 
 	-- Init
-	self.currentState='FirstEnter'
+	self.currentState='ChoixNiveauSolo'
 	return self
 end
 
@@ -71,7 +75,9 @@ function GameStateManager:mousePressed(x, y, button)
 end
 
 function GameStateManager:mouseReleased(x, y, button)
-	self.state[self.currentState]:mouseReleased(x,y,button)
+	if self.state[self.currentState].mouseReleased then
+		self.state[self.currentState]:mouseReleased(x,y,button)
+	end
 end
 
 function GameStateManager:keyPressed(key, unicode)
@@ -105,7 +111,7 @@ function GameStateManager:draw()
 	self.state[self.currentState]:draw()
 end
 function GameStateManager:changeState(newState)
-	self.currentState=newState
+	self.currentState = newState
 end
 
 function GameStateManager:resetAndChangeState(newState)

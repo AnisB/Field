@@ -1,6 +1,9 @@
 AnimAcidSolo = {}
 AnimAcidSolo.__index = AnimAcidSolo
 
+
+
+
 AnimAcidSolo.ANIMS = {  -- set of animations available :
 	normal = {},
 	kill = {}
@@ -35,6 +38,7 @@ AnimAcidSolo.ANIMS.kill.priority = 20
 AnimAcidSolo.ANIMS.normal.loop = true
 AnimAcidSolo.ANIMS.kill.loop = true
 
+AnimAcidSolo.sprites={}
 
 
 -- PUBLIC : constructor
@@ -42,15 +46,22 @@ function AnimAcidSolo.new(folder)
 	local self = {}
 	setmetatable(self, AnimAcidSolo)
 	self.time = 0.0
-	self.sprites = {}
-	for key,val in pairs(AnimAcidSolo.ANIMS) do
-		self.sprites[key] = {}
-		for i=1, val.number do
-			local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
+	-- self.sprites = {}
+	if AnimAcidSolo.sprites[folder]==nil then
+		AnimAcidSolo.sprites[folder]={}
+		for key,val in pairs(AnimAcidSolo.ANIMS) do
+			AnimAcidSolo.sprites[folder][key] = {}
+			for i=1, val.number do
+				local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
 			-- print("loading image =>", path)
-			self.sprites[key][i] = love.graphics.newImage(path)
+			--self.sprites[key][i] = 
+			    gameStateManager.loader.newImage(AnimAcidSolo.sprites[folder][key],i, path)
+			    -- AnimAcidSolo.sprites[folder][key][i] = love.graphics.newImage(path)
+
+			end
 		end
 	end
+	self.folder=folder
 	self.currentAnim = AnimAcidSolo.ANIMS.normal
 	self.currentPos = 1
 	-- begin of an animation
@@ -119,7 +130,7 @@ end
 
 -- PRIVATE
 function AnimAcidSolo:updateImg()
-	self.currentImg = self.sprites[self.currentAnim.name][self.currentPos]
+	self.currentImg = AnimAcidSolo.sprites[self.folder][self.currentAnim.name][self.currentPos]
 end
 
 -- NETWORK

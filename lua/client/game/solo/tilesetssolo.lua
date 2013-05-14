@@ -26,6 +26,7 @@ function TilesetsSolo:getTiles(tiles,map)
 		tile.height=v.tileheight
 
 		table.insert(self.tiles,tile)
+		-- gameStateManager.loader.newImage(self.tiles[tile.id] ,"img", "maps/"..map.."-fieldmap/"..v.image)
 	end
 end
 

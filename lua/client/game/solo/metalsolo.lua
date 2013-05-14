@@ -58,7 +58,6 @@ function MetalSolo.new(pos,shapeType,typeP,material,typemetalSolo,netid)
 				self.anim = AnimBloc.new('bloc/acier')
 			end
 		end
-		self:loadAnimation("normal",true)		
 		self.pc.body:setMass(self.metalSoloWeight*unitWorldSize)
 		self.gs=self.pc.body:getGravityScale()
 		self.quad  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
@@ -66,6 +65,9 @@ function MetalSolo.new(pos,shapeType,typeP,material,typemetalSolo,netid)
 		return self
 	end
 
+	function MetalSolo:init()
+		self:loadAnimation("normal",true)		
+	end
 
 	function MetalSolo:rotativeLField(pos,factor)
 		if not self.isStatic then

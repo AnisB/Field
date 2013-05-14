@@ -21,14 +21,7 @@ function GateInterruptorSolo.new(pos,type,gateOpenID,gateCloseID,mapLoader,enabl
 	self.pc.fixture:setUserData(self)
 	self.type='GateInterruptorSolo'
 
-	if enabled then
-		self.on=true
-		self:loadAnimation("on",true)
-	else
-		self.on= false
-		self:loadAnimation("off",true)
 
-	end
 	self.canBeEnableTM=0
 	self.canBeEnableMM=0
 	self.mapLoader=mapLoader
@@ -42,7 +35,16 @@ function GateInterruptorSolo.new(pos,type,gateOpenID,gateCloseID,mapLoader,enabl
 
 	return self
 end
+function GateInterruptorSolo:init()
+	if enabled then
+		self.on=true
+		self:loadAnimation("on",true)
+	else
+		self.on= false
+		self:loadAnimation("off",true)
 
+	end
+end
 
 function GateInterruptorSolo:isAppliable(pos)
 	 local ax =pos.x-self.position.x

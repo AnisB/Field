@@ -239,6 +239,57 @@ function MapLoaderSolo:update(dt)
     end
 end
 
+
+function MapLoaderSolo:init()
+
+    for i,b in pairs(self.destroyables) do
+          b:init()
+    end
+
+    for i,p in pairs(self.platforms) do
+        p:init()
+    end
+
+    for i,p in pairs(self.metals) do
+        p:init()
+    end
+
+    for i,p in pairs(self.walls) do
+        p:init()
+    end
+
+    for i,p in pairs(self.movables) do
+        p:init()
+    end
+
+    for i,p in pairs(self.interruptors) do
+        p:init()
+    end
+
+    for i,p in pairs(self.generators) do
+        p:init()
+    end
+    
+    for i,p in pairs(self.gateinterruptors) do
+        p:init()
+    end    
+
+    for i,p in pairs(self.gates) do
+        p:init()
+    end
+
+    for i,p in pairs(self.acids) do
+        p:init()
+    end
+
+    -- for i,p in pairs(self.arcs) do
+    --     p:init(dt)
+    -- end
+    -- for i,p in pairs(self.levelends) do
+    --     p:init(dt)
+    -- end
+end
+
 function MapLoaderSolo:isSeen(pos1,pos2,w,h)
     if (pos1.x-pos2.x-w)>(windowW/2) or (pos1.x-pos2.x)<(-windowW/2) or (pos1.y-pos2.y-h)>(windowH/2) or (pos1.y-pos2.y)<(-windowH/2) then
         return false

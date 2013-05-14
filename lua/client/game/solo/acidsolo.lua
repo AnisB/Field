@@ -31,13 +31,16 @@ function AcidSolo.new(pos,w,h,type,netid)
 	self.type='AcidSolo'
 	self.acidSoloType=type
 	self.anim = AnimAcidSolo.new('acid/'..type)
-	self:loadAnimation("normal",true)
 	self.isTouched=false
 	self.timer=0
 	self.splashpos={x=0,y=0}	
 	self.quad= love.graphics.newQuad(0, 0, unitWorldSize, unitWorldSize, unitWorldSize*2,unitWorldSize)
 
 	return self
+end
+
+function AcidSolo:init()
+	self:loadAnimation("normal",true)
 end
 
 

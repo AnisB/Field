@@ -46,10 +46,12 @@ function GeneratorSolo.new(pos,type,typeField,ID,netid)
 	self.h=unitWorldSize
 
 	self.anim = AnimGene.new('gene')
-	self:loadAnimation("off",true)
 	self.quad  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
 
 	return self
+end
+
+function GeneratorSolo:init()
 end
 
 function GeneratorSolo:isAppliable(pos)
