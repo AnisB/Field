@@ -60,7 +60,7 @@ function GameStateManager.new()
 	-- self.state['GameplaySolo'] = GameplaySolo.new("level1",false,"metalman")
 -- 
 	-- Init
-	self.currentState='ChoixNiveauSolo'
+	self.currentState='FirstEnter'
 	return self
 end
 
