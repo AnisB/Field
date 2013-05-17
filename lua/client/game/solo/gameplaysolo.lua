@@ -23,6 +23,7 @@ require("game.shader.backlightshader")
 -- Inlcude Other
 require("game.simplebackground")
 require("game.ui.loadingscreen")
+require("game.ui.popup")
 require("const")
 
 
@@ -101,6 +102,11 @@ function GameplaySolo.new(mapFile,continuous,player)
         self.light:setParameter{
         light_pos = {windowW/2,windowH/2,30}
     }
+
+
+    -- Pause menu loading
+    self.pauseMenu=PopUp.new(200,100,900,550)
+
 
 
     -- Init de Loading
@@ -194,6 +200,7 @@ end
 
     function GameplaySolo:setPaused(state)
         self.gameIsPaused=state
+        self.pauseMenu.isActive=state
     end
 
 
@@ -368,9 +375,7 @@ end
             self.loadingScreen:draw()
         else
 
-        if self.gameIsPaused then
-            love.graphics.setColor(100,100,100,255)
-        end
+
         if self.player=="metalman" then
 
             self.metalMan:preDraw()
@@ -421,7 +426,10 @@ end
         end
     end
 
-    love.graphics.setColor(255,255,255,255)
+        if self.gameIsPaused then
+            x, y = love.mouse.getPosition()
+            self.pauseMenu:draw(x,y)
+        end
     end
     
     

@@ -8,20 +8,28 @@ BackLightShader.__index = BackLightShader
 function BackLightShader.new()
 	local self = {}
 	setmetatable(self, BackLightShader)
-	self:init()
-	return self
+   if not love.graphics.newPixelEffect
+     or not love.graphics.isSupported
+     or not love.graphics.isSupported("pixeleffect")
+     or not love.graphics.isSupported("canvas") then
+     self.isSupported=false
+     return self
+  end
+  self.isSupported=true
+  self:init()
+  return self
 end
 
 
 function BackLightShader:init()
 	local xf = love.graphics.newPixelEffect[[
-extern vec3 light_pos;
-extern float ao_toggle;
+   extern vec3 light_pos;
+   extern float ao_toggle;
 
-vec3 dark_color = vec3(0.0, 0.0, 0.0);
-vec3 light_color = vec3(1, 1, 1);
+   vec3 dark_color = vec3(0.0, 0.0, 0.0);
+   vec3 light_color = vec3(1, 1, 1);
 
-vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 pixel_coords) {
+   vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 pixel_coords) {
 
    // Récupération de la Diffuse
    vec4 diffuse  = Texel(texture, texture_coords);
@@ -47,26 +55,31 @@ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 pixel_coords) {
 
    return vec4(cel_light* diffuse.rgb, diffuse.a);
 }
-	]]
-	
-	self.xf = xf
-	self.time = 0
-end
+]]
 
+self.xf = xf
+self.time = 0
+end
 function BackLightShader:setParameter(p)
-	for k,v in pairs(p) do
-		self.xf:send(k,v)
-	end
+  if self.isSupported then
+    for k,v in pairs(p) do
+       self.xf:send(k,v)
+    end
+ end
 end
 
 function BackLightShader:update(dt)
-
+   
 end
 
 function BackLightShader:predraw()
-	love.graphics.setPixelEffect(self.xf)
+ if self.isSupported then
+   love.graphics.setPixelEffect(self.xf)
+end
 end
 
 function BackLightShader:postdraw()
-	love.graphics.setPixelEffect()
+ if self.isSupported then
+   love.graphics.setPixelEffect()
+end
 end

@@ -4,6 +4,7 @@ This file is a part of the Field project
 
 require("game.prelude")
 require("game.storyline")
+require("game.graphicchecks")
 require("game.firstenter")
 
 require("game.connecttoserver")
@@ -21,6 +22,8 @@ require("game.options")
 require("game.solo.choixniveausolo")
 require("game.solo.choixtypejeusolo")
 require("game.solo.choixpersosolo")
+require("game.solo.levelfailedsolo")
+require("game.solo.levelendingsolo")
 
 
 
@@ -39,6 +42,7 @@ function GameStateManager.new()
 	self.state = {}
 	self.state['Prelude'] = Prelude.new()
 	self.state['Storyline'] = Storyline.new()
+	self.state['GraphicChecks'] = GraphicChecks.new()
 	self.state['FirstEnter'] = FirstEnter.new()
 	self.state['Menu'] = Menu.new()
 	self.state['Credits'] = Credits.new()
@@ -60,10 +64,13 @@ function GameStateManager.new()
 	self.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new("metalman",false)
 	self.state['ChoixPersoSolo'] = nil
 	self.state['GameplaySolo'] = nil
+	self.state['LevelEndingSolo'] = nil
+	self.state['LevelFailedSolo'] = nil
 	-- self.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new("metalman",false)
 -- 
 	-- Init
-	self.currentState='FirstEnter'
+	self.currentState='GraphicChecks'
+	self.state[self.currentState]:reset()
 	return self
 end
 

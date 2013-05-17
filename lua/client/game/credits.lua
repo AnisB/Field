@@ -17,6 +17,8 @@ function Credits:new()
     self.field.isActive=true
     self.timer=1
     self.down=true
+	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
+
     return self
 end
 
@@ -61,8 +63,8 @@ end
 
 function Credits:draw()
 	self.field:draw(770, 375)
-	love.graphics.draw(self.mm:getSprite(), 450, 275,0,2,2)
-	love.graphics.draw(self.tm:getSprite(), 700, 275,0,2,2)
+	love.graphics.drawq(self.mm:getSprite(),self.diffuse, 450, 275,0,2,2)
+	love.graphics.drawq(self.tm:getSprite(),self.diffuse, 700, 275,0,2,2)
 	love.graphics.printf("This game was created by an indie team. It's a network cooperative game based on an assymetric gameplay about electromagnetic forces.", 100, 75,1000)
 	love.graphics.printf("The team is composed of:\n Pierre Germain(Infography), Anthony Clerc(Sound Design), Julien Deville(Level Design), Anis Benyoub(Game Design, Gameplay and network Dev), Frédéric Matigot and Florent Weillaert(Network Dev).", 100, 425, 1100)
 	love.graphics.setColor(200,100,100,255*self.timer)
