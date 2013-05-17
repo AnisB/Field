@@ -13,3 +13,6 @@ To launch on windows refer to the LOVE2D official doc. it has something to do wi
 
 
 Same stuff for the server.
+
+
+An official website will be available soon, you will find on in every information you could need on the project.
