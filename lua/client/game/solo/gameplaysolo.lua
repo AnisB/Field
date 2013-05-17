@@ -1,21 +1,28 @@
 --[[ 
 This file is part of the Field project]]
 
+-- Includes Persos
 require("game.solo.themagnetsolo")
 require("game.solo.metalmansolo")
+
+-- Include Camera
 require("game.solo.camerasolo")
+
+-- Include physics
 require("game.solo.magnetmanagersolo")
-require("game.solo.generatorsolo")
-require("game.solo.metalsolo")
+
+-- Inlclude objet managing
 require("game.solo.maploadersolo")
-require("game.solo.interruptorsolo")
 require("game.sound")
-require("game.solo.levelendingsolo")
-require("game.solo.levelfailedsolo")
+
+-- Include Shaders
 require("game.shader.bloomshadereffect")
 require("game.shader.lightshader")
 require("game.shader.backlightshader")
+
+-- Inlcude Other
 require("game.simplebackground")
+require("game.ui.loadingscreen")
 require("const")
 
 
@@ -27,25 +34,25 @@ function GameplaySolo.new(mapFile,continuous,player)
     local self = {}
     setmetatable(self, GameplaySolo)
 
-
+    -- Vars
     self.continuous=continuous
-    -- Physics
-        love.physics.setMeter( unitWorldSize) --the height of a meter our worlds will be 64px
-        world = love.physics.newWorld( 0, 18*unitWorldSize, false )
-        world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 
-    -- Custom physics
+
+    -- Physics
+    love.physics.setMeter( unitWorldSize) --the height of a meter our worlds will be 64px
+    world = love.physics.newWorld( 0, 18*unitWorldSize, false )
+    world:setCallbacks(beginContact, endContact, preSolve, postSolve)
+
+    -- Magnetics
     self.magnetmanager = MagnetManagerSolo.new()    
 
 
-    --Map
+    --Map loading
     self.mapFile=mapFile
     self.mapLoader = MapLoaderSolo.new(mapFile,self.magnetmanager)
 
 
-
-
-    -- self.mapx=self.mapLoader.map.width*self.mapLoader.map.tilewidth
+    -- Paralax Loading
     self.mapy= self.mapLoader.map.height*self.mapLoader.map.tileheight
     self.background1=Background.new(ParalaxImg.."1.png",1,self.mapy)
     self.background2=Background.new(ParalaxImg.."2.png",0.75,self.mapy)
@@ -53,8 +60,9 @@ function GameplaySolo.new(mapFile,continuous,player)
     self.background4=Background.new(ParalaxImg.."4.png",0.25,self.mapy)
     self.background5=SimpleBackground.new(ParalaxImg.."5.png",0.0,self.mapy)
 
-    self.player= player
 
+    -- Player loading
+    self.player= player
     if self.player=="metalman" then
         self.cameraMM =CameraSolo.new(0,0)
         self.metalMan = MetalManSolo.new(self.cameraMM,self.mapLoader.metalManPos,self.mapLoader.metalManPowers)
@@ -64,10 +72,13 @@ function GameplaySolo.new(mapFile,continuous,player)
         self.theMagnet = TheMagnetSolo.new(self.cameraTM,self.mapLoader.theMagnetPos,self.mapLoader.theMagnetPowers)
         self.magnetmanager:addGenerator(self.theMagnet)
     end
+
+    -- Input managing
     -- self.inputManager= InputManager.new()
+
+    -- State Variables
     self.shouldEnd=false
     self.levelFinished=false
-    
     self.gameIsPaused=false
 
     -- Slow timer
@@ -91,12 +102,9 @@ function GameplaySolo.new(mapFile,continuous,player)
         light_pos = {windowW/2,windowH/2,30}
     }
 
-    -- Init de Loading
-    math.randomseed(os.time())
 
-    self.spiral = love.graphics.newImage('media/spiral.png')
-    self.spiralAngle = 0
-    self.screenWidth, self.screenHeight = love.graphics.getWidth(), love.graphics.getHeight()
+    -- Init de Loading
+    self.loadingScreen=LoadingScreen.new()
 
     -- Starting the multithreading loading
     local returnF = GameplaySolo.loadFinished
@@ -106,35 +114,37 @@ function GameplaySolo.new(mapFile,continuous,player)
 end
 
 
- function GameplaySolo:loadFinished()
-    local gp = gameStateManager.state["GameplaySolo"]
-    gp:init()
-end
-
-
-function GameplaySolo:init()
-    -- Init mapLoader
-    self.mapLoader:init()
-
-
-    -- Init character
-    if self.player=="metalman" then
-        self.metalMan:init()
-    elseif self.player=="themagnet" then
-        self.theMagnet:init()
+    -- Fonction qui init l'état gameplay solo quand l'état est fini
+    function GameplaySolo:loadFinished()
+        local gp = gameStateManager.state["GameplaySolo"]
+        gp:init()
     end
-    self.loading=false
-end
 
 
-function GameplaySolo:finish()
-    self.levelFinished=true
-end
+-- Initialisation de début de partie
+    function GameplaySolo:init()
+        -- Principalement les anims
+        -- Init mapLoader
+        self.mapLoader:init()
 
-function GameplaySolo:slow()
-    self.isSlowing=true
-    self.slowTimer=0
-end
+        -- Init character
+        if self.player=="metalman" then
+            self.metalMan:init()
+        elseif self.player=="themagnet" then
+            self.theMagnet:init()
+        end
+        self.loading=false
+    end
+
+    
+    function GameplaySolo:finish()
+        self.levelFinished=true
+    end
+
+    function GameplaySolo:slow()
+        self.isSlowing=true
+        self.slowTimer=0
+    end
 
 
 
@@ -166,24 +176,17 @@ end
         self.cameraTM =Camera.new(0,0)
 
         
-    if self.player=="metalman" then
-        self.cameraMM =CameraSolo.new(0,0)
-        self.metalMan = MetalManSolo.new(self.cameraMM,self.mapLoader.metalManPos)
-        self.magnetmanager:addMetal(self.metalMan)
-    elseif self.player=="themagnet" then
-        self.cameraTM =CameraSolo.new(0,0)
-        self.theMagnet = TheMagnetSolo.new(self.cameraTM,self.mapLoader.theMagnetPos)
-        self.magnetmanager:addGenerator(self.theMagnet)
+        if self.player=="metalman" then
+            self.cameraMM =CameraSolo.new(0,0)
+            self.metalMan = MetalManSolo.new(self.cameraMM,self.mapLoader.metalManPos)
+            self.magnetmanager:addMetal(self.metalMan)
+        elseif self.player=="themagnet" then
+            self.cameraTM =CameraSolo.new(0,0)
+            self.theMagnet = TheMagnetSolo.new(self.cameraTM,self.mapLoader.theMagnetPos)
+            self.magnetmanager:addGenerator(self.theMagnet)
+        end
+
     end
-
-    -- Init de Loading
-    math.randomseed(os.time())
-
-    self.spiral = love.graphics.newImage('media/spiral.png')
-    self.spiralAngle = 0
-    self.screenWidth, self.screenHeight = love.graphics.getWidth(), love.graphics.getHeight()
-
-end
 
     function GameplaySolo:failed()
         self.shouldEnd=true
@@ -201,100 +204,79 @@ end
     end
     
 
-
-
- function GameplaySolo:drawSpiral()
-  local w,h = self.spiral:getWidth(), self.spiral:getHeight()
-  local x,y = windowW/2, windowH/2
-  love.graphics.draw(self.spiral, x, y, self.spiralAngle, 1, 1, w/2, h/2)
-end
-
- function GameplaySolo:drawLoadingBar()
-  local separation = 30;
-  local w = windowW - 2*separation
-  local h = 50;
-  local x,y = separation, windowH - separation - h;
-  love.graphics.rectangle("line", x, y, w, h)
-
-  x, y = x + 3, y + 3
-  w, h = w - 6, h - 7
-
-  if gameStateManager.loader.loadedCount > 0 then
-    w = w * (gameStateManager.loader.loadedCount / gameStateManager.loader.resourceCount)
-  end
-  love.graphics.rectangle("fill", x, y, w, h)
-end
-
-
-    
     function GameplaySolo:keyPressed(key, unicode)
         if not self.loading then
-        if key=="y" then
-            self.bloom:refresh(200,200)
-        end
-        if not self.gameIsPaused then
-            if self.player=="metalman" then
-                if key=="z" then
-                    self.metalMan:jump()     
-                end
-                if key =="e" then
-                    self.mapLoader:handleTry('MetalMan')
-                end
-                if not self.metalMan.isStatic then
-                    if key =="b" then
-                        self.metalMan:changeMass()
+
+
+            if not self.gameIsPaused then
+
+                -- Inputs for players
+                if self.player=="metalman" then
+                    if key=="z" then
+                        self.metalMan:jump()     
                     end
-                end
-                if key =="d" then
-                    self.metalMan:startMove()
-                end
+                    if key =="e" then
+                        self.mapLoader:handleTry('MetalMan')
+                    end
+                    if not self.metalMan.isStatic then
+                        if key =="b" then
+                            self.metalMan:changeMass()
+                        end
+                    end
+                    if key =="d" then
+                        self.metalMan:startMove()
+                    end
 
-                if key =="q" then
-                    self.metalMan:startMove()
-                end  
+                    if key =="q" then
+                        self.metalMan:startMove()
+                    end  
 
-                if key=="n" then
-                    self.metalMan:switchType()
-                    self.magnetmanager:changeMetalType(self.metalMan,self.metalMan.oldMetal,self.metalMan.metalType)
-                end     
-            elseif self.player=="themagnet" then
-                if key=="up" then
-                    self.theMagnet:jump()
-                end 
-                if key =="i" then
-                    self.theMagnet:enableStaticField()
-                end
-                if key =="o" then
-                    self.theMagnet:enableAttractiveField()
-                end
-                if key =="p" then
-                    self.theMagnet:enableRepulsiveField()
-                end
+                    if key=="n" then
+                        self.metalMan:switchType()
+                        self.magnetmanager:changeMetalType(self.metalMan,self.metalMan.oldMetal,self.metalMan.metalType)
+                    end     
+                elseif self.player=="themagnet" then
+                    if key=="up" then
+                        self.theMagnet:jump()
+                    end 
+                    if key =="i" then
+                        self.theMagnet:enableStaticField()
+                    end
+                    if key =="o" then
+                        self.theMagnet:enableAttractiveField()
+                    end
+                    if key =="p" then
+                        self.theMagnet:enableRepulsiveField()
+                    end
 
-                if key =="k" then
-                    self.theMagnet:enableRotativeLField()
-                end
-                if key =="l" then
-                    self.theMagnet:enableRotativeRField()
-                end
-                if key =="f" then
-                    self.mapLoader:handleTry('TheMagnet')
-                end
+                    if key =="k" then
+                        self.theMagnet:enableRotativeLField()
+                    end
+                    if key =="l" then
+                        self.theMagnet:enableRotativeRField()
+                    end
+                    if key =="f" then
+                        self.mapLoader:handleTry('TheMagnet')
+                    end
 
-                if key =="left" then
-                    self.theMagnet:startMove()
-                end
+                    if key =="left" then
+                        self.theMagnet:startMove()
+                    end
 
-                if key =="right" then
-                    self.theMagnet:startMove()
-                end            
+                    if key =="right" then
+                        self.theMagnet:startMove()
+                    end            
+                end
+            else
+
             end
-        end
+            -- Cheat Code
+            if key=="c" then
+                self.levelFinished=true
+            end
 
-        if key=="c" then
-            self.levelFinished=true
-        end
 
+            -- Pause
             if key =="u" then
                 self:setPaused( not self.gameIsPaused)
             end   
@@ -338,8 +320,8 @@ end
     
     function GameplaySolo:update(dttheo)
         if  self.loading then
-            gameStateManager.loader.update()
-            self.spiralAngle = self.spiralAngle + 2*dttheo
+            gameStateManager.loader.update(dttheo)
+            self.loadingScreen:update(dttheo)
         else
 
         if self.isSlowing then
@@ -383,9 +365,12 @@ end
     
     function GameplaySolo:draw()
         if  self.loading then
-          self:drawSpiral()
-          self:drawLoadingBar()
+            self.loadingScreen:draw()
         else
+
+        if self.gameIsPaused then
+            love.graphics.setColor(100,100,100,255)
+        end
         if self.player=="metalman" then
 
             self.metalMan:preDraw()
@@ -433,11 +418,10 @@ end
             self.mapLoader:firstPlanDraw(self.cameraTM:getPos())
             self.light:postdraw()
             self.bloom:postdraw() 
-
-
-
         end
     end
+
+    love.graphics.setColor(255,255,255,255)
     end
     
     

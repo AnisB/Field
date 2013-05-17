@@ -2,9 +2,17 @@
 This file is part of the Field project]]
 
 
+
+-- Include Camera
 require("game.solo.camerasolo")
+
+-- Include Anim
 require("game.solo.animmmsolo")
+
+-- Include const
 require("game.metalmanconst")
+
+-- Include shader
 require ("game.shader.shockwave")
 
 MetalManSolo = {}
@@ -264,12 +272,8 @@ function MetalManSolo:collideWith( object, collision )
 				end
 			end
 			if self.isStatic==true  then
-				-- if (object:getPosition().x >=(self.position.x+unitWorldSize)) or (object:getPosition().x <=(self.position.x-unitWorldSize)) then
 					gameStateManager.state["GameplaySolo"]:shakeOnX(5,100,0.2)
-				-- end
-				-- if (object:getPosition().y >=(self.position.y+unitWorldSize)) or (object:getPosition().y <=(self.position.y-unitWorldSize)) then
 					gameStateManager.state["GameplaySolo"]:shakeOnY(5,100,0.2)
-				-- end
 			end
 
 			if(object:getPosition().y>self.position.y) then
@@ -391,35 +395,21 @@ function MetalManSolo:update(seconds)
 			end
 		end
 	end
-	-- print "update MM"
 end
 
 function MetalManSolo:draw()
     	love.graphics.setColor(255,255,255,255)
     	if 	self.goF then
-    		-- love.graphics.draw(self.anim:getSprite(), windowW/2-unitWorldSize/2,windowH/2-unitWorldSize/2, 0, 1,1)
     		love.graphics.drawq(self.anim:getSprite(), self.diffuse, windowW/2-unitWorldSize/2,windowH/2-unitWorldSize/2, 0, 1,1)
     	else
     		love.graphics.drawq(self.anim:getSprite(), self.diffuse, windowW/2+unitWorldSize/2,windowH/2-unitWorldSize/2,0 , -1,1)
-
-    		-- love.graphics.draw(self.anim:getSprite(), windowW/2+unitWorldSize/2,windowH/2-unitWorldSize/2,0 , -1,1)
     	end
 end
 
 function MetalManSolo:preDraw()
-
-		-- love.graphics.setCanvas( canvas )
 		self.s:predraw()
-		-- love.graphics.setCanvas(  )
-		-- love.graphics.draw(canvas, 0,0, 0, 1,1)
-
 end
 
 function MetalManSolo:postDraw()
-
-		-- love.graphics.setCanvas( canvas )
 		self.s:postdraw()
-		-- love.graphics.setCanvas(  )
-		-- love.graphics.draw(canvas, 0,0, 0, 1,1)
-
 end

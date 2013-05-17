@@ -8,7 +8,7 @@ require("game.metalmanconst")
 MetalMan = {}
 MetalMan.__index = MetalMan
 
-function MetalMan.new(camera,pos)
+function MetalMan.new(camera,pos,powers)
 	local self = {}
 	setmetatable(self, MetalMan)
 
@@ -47,7 +47,12 @@ function MetalMan.new(camera,pos)
 	self.willrotate=false
 
 	self.collisionCounter=0
-
+	if powers~=nil then
+		for k in string.gmatch(powers, "([^#]+)") do
+			print(k)
+			self.powers[k] = true
+		end
+	end
 	return self
 end
 
@@ -138,17 +143,22 @@ function MetalMan:disableField()
 
 end
 
+
 function MetalMan:changeMass()
 	if self.alive then
 		if 	self.metalWeight==MetalMTypes.Alu then
-			self.anim = AnimMM.new('metalman/acier')
-			self:loadAnimation("standing",true)
-			self:loadAnimation("load1",true)
-			self.metalWeight=MetalMTypes.Acier
+			if self.powers["Acier"] then
+				self.anim = AnimMMSolo.new('metalman/acier')
+				self:loadAnimation("standing",true)
+				self:loadAnimation("load1",true)
+				self.metalWeight=MetalMTypes.Acier
+			end
 		elseif 	self.metalWeight==MetalMTypes.Acier then
-			self.metalWeight=MetalMTypes.Alu
-			self.anim = AnimMM.new('metalman/alu')
-			self:loadAnimation("load2",true)
+			if self.powers["Alu"] then
+				self.metalWeight=MetalMTypes.Alu
+				self.anim = AnimMMSolo.new('metalman/alu')
+				self:loadAnimation("load2",true)
+			end
 		end
 		self.pc.body:setMass(self.metalWeight*unitWorldSize)
 	end
@@ -167,27 +177,31 @@ function MetalMan:switchType()
 if self.alive then
 
 	if self.metalType ==MetalTypes.Normal then
-		self.oldMetal = self.metalType
-		self.metalType=MetalTypes.Static
-		self.anim = AnimMM.new('metalman/static')
-			
-		if 	self.metalWeight==MetalMTypes.Alu then
-			self:loadAnimation("load1",true)
-		elseif 	self.metalWeight==MetalMTypes.Acier then
+		if self.powers["Static"] then
+			self.oldMetal = self.metalType
+			self.metalType=MetalTypes.Static
+			self.anim = AnimMMSolo.new('metalman/static')
+			if 	self.metalWeight==MetalMTypes.Alu then
+				self:loadAnimation("load1",true)
+			elseif 	self.metalWeight==MetalMTypes.Acier then
 				self:loadAnimation("load2",true)
+			end
+			self.isStatic=true
 		end
-		self.isStatic=true
 	elseif self.metalType ==MetalTypes.Static then
-		self.oldMetal = self.metalType
-		self.metalType=MetalTypes.Normal
-		self.isStatic=false
-		if 	self.metalWeight==MetalMTypes.Alu then
-			self.anim = AnimMM.new('metalman/alu')
-			self:loadAnimation("load1",true)
-		elseif 	self.metalWeight==MetalMTypes.Acier then
-			self.anim = AnimMM.new('metalman/acier')
-			self:loadAnimation("load2",true)
+		if self.powers["Acier"] or  self.powers["Alu"] then
+			self.oldMetal = self.metalType
+			self.metalType=MetalTypes.Normal
+			self.isStatic=false
+			if 	self.metalWeight==MetalMTypes.Alu then
+				self.anim = AnimMMSolo.new('metalman/alu')
+				self:loadAnimation("load1",true)
+			elseif 	self.metalWeight==MetalMTypes.Acier then
+				self.anim = AnimMMSolo.new('metalman/acier')
+				self:loadAnimation("load2",true)
+			end
 		end
+
 	end
 end
 end
@@ -203,24 +217,25 @@ function MetalMan:collideWith( object, collision )
 		else
 			self.collisionCounter=self.collisionCounter+1
 			if self.metalWeight==MetalMTypes.Acier then
-				if (object:getPosition().x >=(self.position.x+unitWorldSize)) or (object:getPosition().x <=(self.position.x-unitWorldSize)) then
-					gameStateManager.state["Gameplay"]:shakeOnX(2,100,0.2)
-				elseif (object:getPosition().y >=(self.position.y+unitWorldSize)) or (object:getPosition().y <=(self.position.y-unitWorldSize)) then
-					gameStateManager.state["Gameplay"]:shakeOnY(2,100,0.2)
+				vx,vy =self.pc.body:getLinearVelocity() 
+				local kinEnergyX = math.log(0.5*self.pc.body:getMass()*self.pc.body:getMass()*self.pc.body:getMass()*math.abs(vx))
+				local kinEnergyY = math.log(0.5*self.pc.body:getMass()*self.pc.body:getMass()*self.pc.body:getMass()*math.abs(vy))
+				if kinEnergyX>10.9 or kinEnergyY>11 then
+					gameStateManager.state["GameplaySolo"]:shakeOnX(2,100,0.2)
+					gameStateManager.state["GameplaySolo"]:shakeOnY(2,100,0.2)
 				end
 			end
 			if self.isStatic==true  then
-				if (object:getPosition().x >=(self.position.x+unitWorldSize)) or (object:getPosition().x <=(self.position.x-unitWorldSize)) then
-					gameStateManager.state["Gameplay"]:shakeOnX(5,100,0.2)
-				elseif (object:getPosition().y >=(self.position.y+unitWorldSize)) or (object:getPosition().y <=(self.position.y-unitWorldSize)) then
-					gameStateManager.state["Gameplay"]:shakeOnY(5,100,0.2)
-				end
+					gameStateManager.state["GameplaySolo"]:shakeOnX(5,100,0.2)
+					gameStateManager.state["GameplaySolo"]:shakeOnY(5,100,0.2)
 			end
 
 			if(object:getPosition().y>self.position.y) then
 				self.canjump=true
 				if self.animCounter>0 then 
-					self:loadAnimation("running",true)
+					if self.anim.currentAnim.name~="running" then
+						self:loadAnimation("running",true)
+					end
 				else
 					self:setState('landing')
 					self:loadAnimation("landing",true)
@@ -229,6 +244,7 @@ function MetalMan:collideWith( object, collision )
 		end
 	end
 end
+
 
 function MetalMan:unCollideWith( object, collision )
 	if self.alive then
@@ -334,7 +350,6 @@ function MetalMan:update(seconds)
 end
 
 function MetalMan:draw()
-    	love.graphics.setColor(255,255,255,255)
     	if 	self.goF then
     		love.graphics.draw(self.anim:getSprite(), windowW/2-unitWorldSize/2,windowH/2-unitWorldSize/2, 0, 1,1)
     	else
@@ -346,7 +361,6 @@ end
 function MetalMan:secondDraw(x,y)
 
 	-- Draws the character
-	love.graphics.setColor(255,255,255,255)
 	if self.goF then
 	love.graphics.draw(self.anim:getSprite(), self.position.x-x-unitWorldSize/2, self.position.y+y-unitWorldSize/2, 0, 1,1)
 	else
