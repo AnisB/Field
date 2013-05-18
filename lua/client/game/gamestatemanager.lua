@@ -69,7 +69,7 @@ function GameStateManager.new()
 	-- self.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new("metalman",false)
 -- 
 	-- Init
-	self.currentState='ChoixNiveauSolo'
+	self.currentState='GraphicChecks'
 	-- self.state[self.currentState]:reset()
 	return self
 end
