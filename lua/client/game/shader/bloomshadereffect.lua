@@ -10,11 +10,8 @@ local function ScaleToPO2(xsize, ysize)
 end
 
 function CreateBloomEffect(xsize, ysize) 
-   if not love.graphics.newPixelEffect
-   or not love.graphics.isSupported
-   or not love.graphics.isSupported("pixeleffect")
-   or not love.graphics.isSupported("canvas") then
-      return
+   if not love.graphics.newPixelEffect or not love.graphics.isSupported("canvas","pixeleffect") then 
+      return 
    end
    
    local function newPixelEffect(code)

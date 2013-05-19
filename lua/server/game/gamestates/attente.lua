@@ -68,6 +68,7 @@ function Attente:onMessage(msg, client)
 					end
 				else
 					debug_warn("[login] same cookies")
+					-- WE SHOULD KICK BOTH PLAYERS HERE BY WARNING THE SAME USER LOGGED IN AND RESET THE SERVER
 				end
 			end
 		elseif nb_clients > 2 then

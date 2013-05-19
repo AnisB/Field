@@ -37,7 +37,7 @@ function Tilesets:draw(pos)
 		for j=1,self.layer.width,1 do
 			if self.layer.data[i*self.layer.width+j]>0 then
 				
-				love.graphics.draw(self.tiles[self.layer.data[i*self.layer.width+j]].img, (j-1)*64-pos.x, (i)*64+pos.y)
+				love.graphics.draw(self.tiles[self.layer.data[i*self.layer.width+j]].img, (j-1)*unitWorldSize-pos.x, (i)*unitWorldSize+pos.y)
 			end
 		end
 	end

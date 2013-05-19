@@ -48,4 +48,10 @@ function Client:send(aTable)
 	self.conn:send(str, self.id)
 end
 
+function Client:send(aTable)
+	local str = TSerial.pack(aTable)
+	str = tostring(str:len()) .. "_" .. str
+	self.conn:send(str, self.id)
+end
+
 Client = common.class("Client", Client)

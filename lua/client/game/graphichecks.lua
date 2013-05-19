@@ -8,14 +8,11 @@ function GraphicChecks.new()
     local self = {}
     setmetatable(self, GraphicChecks)
     self.timer=10
-    if not love.graphics.newPixelEffect
-     or not love.graphics.isSupported
-     or not love.graphics.isSupported("pixeleffect")
-     or not love.graphics.isSupported("canvas") then
-     self.isSupported=false
-     return self
-   end
-   self.isSupported=true
+    if not love.graphics.isSupported("pixeleffect","canvas") then
+    	self.isSupported=false
+    	return self
+    end
+    self.isSupported=true
     return self
 end
 

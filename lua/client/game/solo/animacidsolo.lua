@@ -57,7 +57,6 @@ function AnimAcidSolo.new(folder)
 			--self.sprites[key][i] = 
 			    gameStateManager.loader.newImage(AnimAcidSolo.sprites[folder][key],i, path)
 			    -- AnimAcidSolo.sprites[folder][key][i] = love.graphics.newImage(path)
-
 			end
 		end
 	end

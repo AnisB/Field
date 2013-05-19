@@ -70,13 +70,16 @@ function GameStateManager.new()
 -- 
 	-- Init
 	self.currentState='GraphicChecks'
-	-- self.state[self.currentState]:reset()
+	self.state[self.currentState]:reset()
 	return self
 end
 
 function GameStateManager:onMessage(msg)
 	if self.state[self.currentState].onMessage then
 		self.state[self.currentState]:onMessage(msg)
+	else
+		-- Problème sérieux
+		assert(false)
 	end
 end
 

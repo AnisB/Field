@@ -28,13 +28,23 @@ end
 
 function LevelEnding:mousePressed(x, y, button)
     if self.continue:isCliked(x,y) then
-        serveur:send({type="input", pck={character=monde.moi.perso, key="return", state=true}})    
-        gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
-        gameStateManager:changeState('Gameplay')
+        self:goGameplayOrder()       
+    elseif self.returnB:isCliked(x,y) then
+        self:backChoixNiveauOrder()        
     end
 end
 
-function LevelEnding:onMessage(x, y, button)
+function LevelEnding:onMessage(msg)
+    if msg.type=="syncro" and msg.pck.next=="Gameplay"then
+        self:goGameplayApply()     
+    elseif msg.type=="syncro" and msg.pck.next=="ChoixNiveau" then
+        self:backChoixNiveauApply()   
+    elseif msg.type=="reset" then
+        -- We got a problem
+        --gameStateManager:forceDisconnect()
+    else
+        -- Ce message n'est pas censé atterir ici
+    end 
 end
 
 function LevelEnding:mouseReleased(x, y, button)
@@ -42,14 +52,29 @@ end
 
 
 function LevelEnding:keyPressed(akey, unicode)
-    -- print("levelending",monde.moi.perso, akey)
-    serveur:send({type="input", pck={character=monde.moi.perso, key=akey, state=true}})    
 	if akey=="return" then
-        gameStateManager.state['Gameplay']=Gameplay.new("maps."..self.next,true)
-        gameStateManager:changeState('Gameplay')		
-    else
-        gameStateManager:changeState('ChoixTypeJeu')
+        self:goGameplayOrder()       
     end		
+end
+
+function LevelEnding:goGameplayOrder()
+    serveur:send({type="syncro", pck={character=monde.moi.perso, next="Gameplay", current="LevelEnding"}})    
+    gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
+    gameStateManager:changeState('Gameplay')
+end
+
+function LevelEnding:backChoixNiveauOrder()
+    serveur:send({type="syncro", pck={character=monde.moi.perso, next="ChoixNiveau", current="LevelEnding"}})    
+    gameStateManager:changeState('ChoixNiveau')        
+end
+
+function LevelEnding:goGameplayApply()
+    gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
+    gameStateManager:changeState('Gameplay')
+end
+
+function LevelEnding:backChoixNiveauApply()
+    gameStateManager:changeState('ChoixNiveau')        
 end
 
 function LevelEnding:keyReleased(key, unicode)

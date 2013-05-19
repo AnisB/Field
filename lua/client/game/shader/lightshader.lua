@@ -8,14 +8,7 @@ LightShader.__index = LightShader
   function LightShader.new()
    local self = {}
    setmetatable(self, LightShader)
-   if not love.graphics.newPixelEffect
-     or not love.graphics.isSupported
-     or not love.graphics.isSupported("pixeleffect")
-     or not love.graphics.isSupported("canvas") then
-     self.isSupported=false
-     return self
-   end
-   self.isSupported=true
+   self.isSupported=love.graphics.isSupported("canvas","pixeleffect")
    self:init()
    return self
  end
