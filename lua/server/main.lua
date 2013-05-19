@@ -127,7 +127,7 @@ end
 -- end
 
 function load_graphic_stuff()
-	local ip_font = love.graphics.newFont(FontDirectory .. "font.ttf", 40)
+	local ip_font = love.graphics.newFont(FontDirectory .. "font.ttf", 20)
 	love.graphics.setFont(ip_font)
 	-- ip_background = love.graphics.newImage(ImgDirectory .. "ipbg.png")
 end

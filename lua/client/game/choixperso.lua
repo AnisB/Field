@@ -23,6 +23,7 @@ function ChoixPerso:new()
 
     self.enteringDone=false
     self.timer=0
+    self.err={}
     return self
 end
 
@@ -81,7 +82,8 @@ function ChoixPerso:onMessage(msg)
 			gameStateManager:changeState('ChoixNiveau')
 		end
 	elseif msg.type == "err" then
-		self.err = true
+		self.err.enabled = true
+		self.err.content=msg.content
 	else
 		print("[ChoixPerso] wrong type :", table2.tostring(msg))
 	end
@@ -104,9 +106,9 @@ function ChoixPerso:draw()
     love.graphics.draw(self.tm,300,210)
     love.graphics.draw(self.mm,710,210)
 
-	if self.err then
+	if self.err.enabled==true then
 		love.graphics.setColor(255, 0, 0, 255)
-		love.graphics.print("err", 400, 650)
+		love.graphics.print(self.err.content, 200, 600)
 		love.graphics.setColor(255, 255, 255, 255)
 	end
 

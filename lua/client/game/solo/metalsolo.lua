@@ -3,7 +3,6 @@ This file is part of the Field project]]
 
 
 require("game.camera")
-require("game.animbloc")
 
 MetalSolo = {}
 MetalSolo.__index = MetalSolo

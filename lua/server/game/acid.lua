@@ -91,7 +91,7 @@ end
 function Acid:draw(x,y)
 	love.graphics.setColor(255,255,255,255)
 	if self.acidType==Acid.Types.hg  or self.acidType==Acid.Types.hm or self.acidType==Acid.Types.hd then
-		love.graphics.draw(self.splash:getSprite(), self.splashpos.x-x-32, self.splashpos.y+y-64+self.dec)
+		love.graphics.draw(self.splash:getSprite(), self.splashpos.x-x-unitWorldSize/2, self.splashpos.y+y-unitWorldSize+self.dec)
 	end
 	love.graphics.draw(self.anim:getSprite(), self.position.x-x, self.position.y+y)
 

@@ -41,8 +41,6 @@ function MapLoader.new(MapLoaderFile,magnetManager)
     self.levelends={}
     self.allowedPowers={}
 
-    -- self.metalManPos={}
-    -- self.theMagnetPos={}
 
     for i,d in pairs(self.map.layers) do
         if d.name=="wall" then
@@ -90,14 +88,16 @@ function MapLoader.new(MapLoaderFile,magnetManager)
                 elseif  d.name=="metalman" then
                 -- Gestion de position
                 self.metalManPos={x=d.objects[1].x,y=d.objects[1].y}  
+                self.metalManPowers=d.objects[1].properties["powers"]
                 elseif  d.name=="themagnet" then
                 -- Gestion de position
-                self.theMagnetPos={x=d.objects[1].x,y=d.objects[1].y}             
+                self.theMagnetPos={x=d.objects[1].x,y=d.objects[1].y}
+                self.theMagnetPowers=d.objects[1].properties["powers"]          
             end    
             
     end
-    -- Creation du Layer
-    self.tilesets= Tilesets.new(self.map.tilesets,self.map.layers[1])
+    -- -- Creation du Layer
+    -- self.tilesets= Tilesets.new(self.map.tilesets,self.map.layers[1])
 
     return self
 end
@@ -152,14 +152,12 @@ end
 
 function MapLoader:createGates(map)
     for i,j in pairs(map.objects) do
-        print("Door")
         table.insert(self.gates, Gate.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["openid"],j.properties["closeid"],j.properties["prev"],j.properties["next"],j.properties["animid"],j.properties["enabled"],j.properties["type"],self,i));
     end
 end
 
 function MapLoader:createAcids(map)
     for i,j in pairs(map.objects) do
-        print("acid")
         table.insert(self.acids, Acid.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["type"],i))
     end
 end
@@ -179,7 +177,6 @@ end
 
 function MapLoader:createMetals(map)
     for i,j in pairs(map.objects) do
-        print(j.properties["physic"])
         local m =Metal.new({x=j.x,y=j.y},j.shape,j.properties["physic"],j.type,j.properties["magnet"],i)
         self.magnetManager:addMetal(m)        
         table.insert(self.metals,m)
@@ -245,7 +242,7 @@ function MapLoader:isSeen(pos1,pos2,w,h)
 end
 
 function MapLoader:draw(pos)
-    self.tilesets:draw({x=pos.x-windowW/2,y=windowH/2-pos.y})
+    -- self.tilesets:draw({x=pos.x-windowW/2,y=windowH/2-pos.y})
 
     for i,p in pairs(self.metals) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then

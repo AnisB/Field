@@ -48,15 +48,15 @@ end
 
 function PopUp:draw(x,y)
         if  self.isActive then
-        	love.graphics.setColor(0,0,0,150)
+        	love.graphics.setColor(0,0,0,100)
             love.graphics.rectangle("fill", 0, 0, windowW, windowH)
-        	love.graphics.setColor(100,100,100,200)
+        	 love.graphics.setColor(100,100,100,200)
             love.graphics.rectangle("fill", self.position.x, self.position.y, self.dimension.w, self.dimension.l)
-            for i,b in self.buttons do
-            	b.draw(x,y)
-            end
-            for i,l in self.labels do
-            	l.draw(x,y)
-            end
+         --    for i,b in self.buttons do
+         --    	b.draw(x,y)
+         --    end
+         --    for i,l in self.labels do
+         --    	l.draw(x,y)
+            -- end
         end
 end

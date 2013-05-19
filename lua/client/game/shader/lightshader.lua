@@ -5,12 +5,13 @@ This file is part of the Field project
 LightShader = {}
 LightShader.__index = LightShader
 
-function LightShader.new()
-	local self = {}
-	setmetatable(self, LightShader)
-	self:init()
-	return self
-end
+  function LightShader.new()
+   local self = {}
+   setmetatable(self, LightShader)
+   self.isSupported=love.graphics.isSupported("canvas","pixeleffect")
+   self:init()
+   return self
+ end
 
 
 function LightShader:init()
@@ -64,20 +65,26 @@ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 pixel_coords) {
 	self.xf = xf
 end
 
-function LightShader:setParameter(p)
-	for k,v in pairs(p) do
-		self.xf:send(k,v)
-	end
-end
+  function LightShader:setParameter(p)
+    -- if self.isSupported then
+     for k,v in pairs(p) do
+        self.xf:send(k,v)
+    end
+  -- end
+  end
 
 function LightShader:update(dt)
 
 end
 
 function LightShader:predraw()
-	love.graphics.setPixelEffect(self.xf)
+  -- if self.isSupported then
+   love.graphics.setPixelEffect(self.xf)
+ -- end
 end
 
 function LightShader:postdraw()
-	love.graphics.setPixelEffect()
+  if self.isSupported then
+   love.graphics.setPixelEffect()
+ end
 end

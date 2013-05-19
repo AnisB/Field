@@ -4,7 +4,9 @@ This file is a part of the Field project
 
 require("game.prelude")
 require("game.storyline")
+require("game.graphicchecks")
 require("game.firstenter")
+
 require("game.connecttoserver")
 require("game.choixtypejeu")
 require("game.choixperso")
@@ -15,12 +17,16 @@ require("game.gameplay")
 require("game.menu")
 require("game.credits")
 require("game.options")
+
+
 require("game.solo.choixniveausolo")
 require("game.solo.choixtypejeusolo")
 require("game.solo.choixpersosolo")
+require("game.solo.levelfailedsolo")
+require("game.solo.levelendingsolo")
 
---require("game.levelchange")
---require()
+
+
 GameStateManager = {}
 GameStateManager.__index = GameStateManager
 
@@ -28,6 +34,7 @@ function GameStateManager.new()
 	local self = {}
 	setmetatable(self, GameStateManager)
 
+	-- Loader
     self.loader = require 'game/love-loader'
 
 
@@ -35,6 +42,7 @@ function GameStateManager.new()
 	self.state = {}
 	self.state['Prelude'] = Prelude.new()
 	self.state['Storyline'] = Storyline.new()
+	self.state['GraphicChecks'] = GraphicChecks.new()
 	self.state['FirstEnter'] = FirstEnter.new()
 	self.state['Menu'] = Menu.new()
 	self.state['Credits'] = Credits.new()
@@ -47,26 +55,31 @@ function GameStateManager.new()
 	self.state['ChoixNiveau'] = ChoixNiveau.new()
 	self.state['WaitingForDistant'] = WaitingForDistant.new()
 	self.state['LevelBegin'] = LevelBegin.new()
-	-- self.state['Gameplay'] = Gameplay.new()
-	--self.state['LevelChange'] = LevelChange.new()
-	--self.state['PartyEnd'] = PartyEnd.new()
+	self.state['Gameplay'] = nil
+
 
 
 	-- Jeu Solo
 	self.state['ChoixTypeJeuSolo'] = ChoixTypeJeuSolo.new()	
 	self.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new("metalman",false)
-
 	self.state['ChoixPersoSolo'] = nil
-	-- self.state['GameplaySolo'] = GameplaySolo.new("level1",false,"metalman")
+	self.state['GameplaySolo'] = nil
+	self.state['LevelEndingSolo'] = nil
+	self.state['LevelFailedSolo'] = nil
+	-- self.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new("metalman",false)
 -- 
 	-- Init
-	self.currentState='FirstEnter'
+	self.currentState='GraphicChecks'
+	self.state[self.currentState]:reset()
 	return self
 end
 
 function GameStateManager:onMessage(msg)
 	if self.state[self.currentState].onMessage then
 		self.state[self.currentState]:onMessage(msg)
+	else
+		-- Problème sérieux
+		assert(false)
 	end
 end
 
@@ -75,12 +88,11 @@ function GameStateManager:mousePressed(x, y, button)
 end
 
 function GameStateManager:mouseReleased(x, y, button)
-	if self.state[self.currentState].mouseReleased then
-		self.state[self.currentState]:mouseReleased(x,y,button)
-	end
+	self.state[self.currentState]:mouseReleased(x,y,button)
 end
 
 function GameStateManager:keyPressed(key, unicode)
+
 	self.state[self.currentState]:keyPressed(key, unicode)
 end
 
@@ -89,13 +101,13 @@ function GameStateManager:keyReleased(key, unicode)
 end
 
 function GameStateManager:joystickPressed(joystick, button)
-	if self.currentState=='Gameplay' then
+	if self.currentState=='Gameplay' or self.currentState=='GameplaySolo' then
 		self.state[self.currentState]:joystickPressed(joystick, button)
 	end
 end
 
 function GameStateManager:joystickReleased(joystick, button)
-	if self.currentState=='Gameplay' then
+	if self.currentState=='Gameplay' or self.currentState=='GameplaySolo' then
 		self.state[self.currentState]:joystickReleased(joystick, button)
 	end
 end
@@ -120,7 +132,6 @@ function GameStateManager:resetAndChangeState(newState)
 end
 
 function GameStateManager:failed()
-	print(self.currentState)
 	self.state[self.currentState]:failed()
 end
 

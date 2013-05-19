@@ -13,6 +13,8 @@ require("game.background")
 require("game.shader.bloomshadereffect")
 require("game.shader.lightshader")
 require("game.shader.backlightshader")
+
+
 Gameplay = {}
 Gameplay.__index = Gameplay
 

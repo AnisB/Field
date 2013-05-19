@@ -25,7 +25,7 @@ function ArcadeChoixPerso:onMessage(msg, client)
 				gameStateManager:changeState("arcadeChoixNiveau")
 				-- TODO : envoyer la liste des niveau possibles ?
 			else
-				client:send({type= "err", msg="choix des personnages pas fini"})
+				client:send({type= "err", content="Erreur dans le choix des personnages", msg="choix des personnages pas fini"})
 			end
 		end
 	else

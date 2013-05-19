@@ -33,11 +33,10 @@ end
 -- "high level" events :
 
 function onMessage(msg)
-	-- print("Received : " .. table2.tostring(msg))
 	if gameStateManager.currentState=='Gameplay' then
-	if msg.type == "gameplaypacket" then
-		gameStateManager.state['Gameplay']:handlePacket(msg.pk)
-	end
+		if msg.type == "gameplaypacket" then
+			gameStateManager.state['Gameplay']:handlePacket(msg.pk)
+		end
 	elseif msg.type == "listmaps" then
 		print("MAPS =", table2.tostring(msg))
 		monde.availableMaps = msg.maps
@@ -62,7 +61,7 @@ function love.load()
 	-- /lube
 	monde = {}
 	love.graphics.setIcon( love.graphics.newImage(ImgDirectory.."icon.png" ))
-	gameStateManager = GameStateManager:new()
+	gameStateManager = GameStateManager.new()
 	love.audio.setDistanceModel("exponent")
 	--love.audio.setOrientation(0,0,1, 0,1,0)
 	love.audio.setPosition(love.graphics.getWidth()/2, love.graphics.getHeight()/2,0)

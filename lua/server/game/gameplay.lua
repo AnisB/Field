@@ -42,15 +42,14 @@ function Gameplay.new(mapFile,continuous)
         self.cameraTM =Camera.new(0,0)
 
         
-        --Characters
-        self.metalMan = MetalMan.new(self.cameraMM,self.mapLoader.metalManPos)
-        self.theMagnet = TheMagnet.new(self.cameraTM,self.mapLoader.theMagnetPos)
+    -- Player loading
+        self.metalMan = MetalMan.new(self.cameraMM,self.mapLoader.metalManPos,self.mapLoader.metalManPowers)
+        self.theMagnet = TheMagnet.new(self.cameraTM,self.mapLoader.theMagnetPos,self.mapLoader.theMagnetPowers)
         self.magnetmanager:addGenerator(self.theMagnet)
         self.magnetmanager:addMetal(self.metalMan)
 
         -- Temp var
         self.drawWho=1
-        print(world:getGravity())
         self.shouldEnd=false
         self.maxTime = 0.016 -- 50 ms
         self.lastTime = 42

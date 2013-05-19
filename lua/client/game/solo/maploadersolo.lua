@@ -14,7 +14,11 @@ require("game.solo.gateinterruptorsolo")
 require("game.solo.gatesolo")
 require("game.solo.acidsolo")
 require("game.solo.arcsolo")
+require("game.solo.generatorsolo")
+require("game.solo.interruptorsolo")
+require("game.solo.metalsolo")
 require("game.solo.levelendsolo")
+
 
 
 MapLoaderSolo = {}

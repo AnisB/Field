@@ -35,14 +35,25 @@ function GameStateManager.new()
 		histoireChoixPerso= common.instance(HistoireChoixPerso),
 		histoire= common.instance(Histoire)
 	}
-	--self.state['Gameplay'] = Gameplay.new("maps.level9")
-	--self.state['LevelChange'] = LevelChange.new()
-	--self.state['PartyEnd'] = PartyEnd.new()
 	self.currentState='attente'
-	-- self.currentState='Gameplay'
-
 	return self
 end
+
+
+function GameStateManager:reset()
+	self.state = {
+		attenteTest= common.instance(AttenteTest),
+		attente= common.instance(Attente),
+		choixTypeJeu= common.instance(ChoixTypeJeu),
+		arcadeChoixPerso= common.instance(ArcadeChoixPerso),
+		arcadeChoixNiveau= common.instance(ArcadeChoixNiveau),
+		arcade= common.instance(Arcade),
+		histoireChoixPerso= common.instance(HistoireChoixPerso),
+		histoire= common.instance(Histoire)
+	}
+	self.currentState='attente'
+end
+
 
 function GameStateManager:onMessage(msg, client)
 	self.state[self.currentState]:onMessage(msg, client)
@@ -84,4 +95,15 @@ end
 
 function GameStateManager:finish()
 	self.state[self.currentState]:finish()
+end
+
+
+function GameStateManager:kickAndReset(type)
+	type="SYNCRO ERROR"	
+	for k,c in pairs(clients) do    
+        c:send({type= "reset",pck={type=type}})
+        -- c:disconnect()
+    end
+	self.state={}
+	self:reset()
 end
