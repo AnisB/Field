@@ -56,13 +56,6 @@ function LevelEnding:onMessage(msg,client)
 end
 
 function LevelEnding:keyPressed(key, unicode)
-	if key=="return" then
-		if self.continuous then
-			gameStateManager.state['Gameplay']:destroy()
-            gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
-            gameStateManager:changeState('Gameplay')		
-        end		
-	end
 end
 
 function LevelEnding:keyReleased(key, unicode)

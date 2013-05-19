@@ -108,6 +108,9 @@ function Gameplay.new(mapFile,continuous)
         self.levelFinished=true
     end
 
+    function Gameplay:mousePressed(x, y, button)
+    end
+    
 
     function Gameplay:mousePressed(x, y, button)
     end

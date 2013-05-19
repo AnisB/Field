@@ -72,6 +72,7 @@ function GameStateManager:keyPressed(key, unicode)
 end
 
 function GameStateManager:keyReleased(key, unicode)
+	print(self.currentState)
 	self.state[self.currentState]:keyReleased(key, unicode)
 end
 

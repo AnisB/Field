@@ -58,13 +58,13 @@ function LevelEnding:keyPressed(akey, unicode)
 end
 
 function LevelEnding:goGameplayOrder()
-    serveur:send({type="syncro", pck={character=monde.moi.perso, next="Gameplay", current="LevelEnding"}})    
+    serveur:send({type="syncro", pck={perso=monde.moi.perso, next="Gameplay", current="LevelEnding"}})    
     gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
     gameStateManager:changeState('Gameplay')
 end
 
 function LevelEnding:backChoixNiveauOrder()
-    serveur:send({type="syncro", pck={character=monde.moi.perso, next="ChoixNiveau", current="LevelEnding"}})    
+    serveur:send({type="syncro", pck={perso=monde.moi.perso, next="ChoixNiveau", current="LevelEnding"}})    
     gameStateManager:changeState('ChoixNiveau')        
 end
 

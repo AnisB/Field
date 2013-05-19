@@ -7,8 +7,6 @@ LevelFailed.__index = LevelFailed
 function LevelFailed.new()
 	local self = {}
 	setmetatable(self, LevelFailed)
-	self.next=next
-	self.continuous=continuous
   self.back=love.graphics.newImage("backgrounds/failed/back.png")
   self.retry=Button.new(800,300,200,50,ButtonType.Large,"backgrounds/failed/retry.png")
   self.quit=Button.new(800,400,200,50,ButtonType.Small,"backgrounds/failed/quit.png")
@@ -16,6 +14,16 @@ function LevelFailed.new()
 end
 
 
+
+
+
+function LevelFailed:mousePressed(x, y, button)
+    if self.retry:isCliked(x,y) then
+        self:goGameplayOrder()       
+    elseif self.quit:isCliked(x,y) then
+        self:backChoixNiveauOrder()        
+    end
+end
 
 function LevelFailed:onMessage(msg)
     if msg.type=="syncro" and msg.pck.next=="Gameplay"then
@@ -33,17 +41,6 @@ end
 function LevelFailed:mouseReleased(x, y, button)
 end
 
-function LevelFailed:mousePressed(x, y, button)
-    if self.continue:isCliked(x,y) then
-        serveur:send({type="input", pck={character=monde.moi.perso, key="return", state=true}})    
-        gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
-        gameStateManager:changeState('Gameplay')
-    elseif self.quit:isCliked(x,y) then
-    	serveur:send({type="input", pck={character=monde.moi.perso, key="return", state=true}})    
-        gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
-        gameStateManager:changeState('Gameplay')
-    end
-end
 
 function LevelFailed:keyPressed(akey, unicode)
 	if akey=="return" then
@@ -52,24 +49,26 @@ function LevelFailed:keyPressed(akey, unicode)
 end
 
 function LevelFailed:goGameplayOrder()
-    serveur:send({type="syncro", pck={character=monde.moi.perso, next="Gameplay", current="LevelFailed"}})    
-    gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
+    serveur:send({type="syncro", pck={perso=monde.moi.perso, next="Gameplay", current="LevelFailed"}})    
+    gameStateManager.state['Gameplay']:reset()
     gameStateManager:changeState('Gameplay')
 end
 
 function LevelFailed:backChoixNiveauOrder()
-    serveur:send({type="syncro", pck={character=monde.moi.perso, next="ChoixNiveau", current="LevelFailed"}})    
+    serveur:send({type="syncro", pck={perso=monde.moi.perso, next="ChoixNiveau", current="LevelFailed"}})    
     gameStateManager:changeState('ChoixNiveau')        
 end
 
 function LevelFailed:goGameplayApply()
-    gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
-    gameStateManager:changeState('Gameplay')
+	gameStateManager.state['Gameplay']:reset()
+	gameStateManager:changeState('Gameplay')
 end
 
 function LevelFailed:backChoixNiveauApply()
     gameStateManager:changeState('ChoixNiveau')        
 end
+
+
 function LevelFailed:keyReleased(key, unicode)
 end
 
@@ -86,6 +85,4 @@ function LevelFailed:draw()
 
 end
 
-function LevelFailed:onMessage(x, y, button)
-end
 

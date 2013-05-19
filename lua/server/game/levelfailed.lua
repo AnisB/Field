@@ -21,7 +21,6 @@ function LevelFailed:mouseReleased(x, y, button)
 end
 
 
-
 function LevelFailed:onMessage(msg,client)
 
     if msg.type=="syncro" then
@@ -31,8 +30,7 @@ function LevelFailed:onMessage(msg,client)
         end
 
         if msg.pck.next=="Gameplay" then
-            gameStateManager.state['Gameplay']:destroy()
-            gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
+        	gameStateManager.state['Gameplay']:reset()
             gameStateManager:changeState('Gameplay')
             for k,c in pairs(clients) do    
                 local packet={}
@@ -43,6 +41,7 @@ function LevelFailed:onMessage(msg,client)
                 end
             end
         elseif msg.pck.next=="ChoixNiveau" then
+        	print("Retour donc")
             for k,c in pairs(clients) do    
                 local packet={}
                 if c.perso==msg.pck.perso then
