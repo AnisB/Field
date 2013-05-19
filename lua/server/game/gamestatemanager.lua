@@ -19,9 +19,7 @@ require('game.gamestates.arcade')
 require('game.gamestates.histoirechoixperso')
 require('game.gamestates.histoire')
 
---require("game.levelchange")
---require()
-GameStateManager = {}
+GameStateManager= {}
 GameStateManager.__index = GameStateManager
 
 function GameStateManager.new()
