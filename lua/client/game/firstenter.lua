@@ -8,7 +8,7 @@ function FirstEnter:new()
     local self = {}
     setmetatable(self, FirstEnter)
     self.timer=1
-    self.img=love.graphics.newImage("img/title.png")
+    self.logo = BasicAnim.new("logolarge", true,0.15,4)
     self.trans=255
     self.up=true
     self.shouldPass=false
@@ -27,7 +27,7 @@ end
 function FirstEnter:keyPressed(key, unicode)
 	if key=="return" and self.shouldPass==false then
 		self.shouldPass=true
-		Sound.playSound("firstenter")
+		-- Sound.playSound("firstenter")
 	end
 	
 end
@@ -42,6 +42,8 @@ function FirstEnter:joystickReleased(joystick, button)
 end
 
 function FirstEnter:update(dt)
+
+	self.logo:update(dt)
 	if self.trans<=0 then 
 		self.up=false
 	end
@@ -72,7 +74,7 @@ function FirstEnter:draw()
 	love.graphics.setColor(255,150,150,self.trans*self.passTimer)
 	love.graphics.print("Press Return",500,500)
 	love.graphics.setColor(255,255,255,255*self.passTimer)
-	love.graphics.draw(self.img,300,100)
+	love.graphics.draw(self.logo:getSprite(),300,0,0,0.7,0.7)
 
 
 end

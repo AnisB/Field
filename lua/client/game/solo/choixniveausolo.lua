@@ -8,14 +8,14 @@ ChoixNiveauSolo.__index = ChoixNiveauSolo
 function ChoixNiveauSolo.new(player,continuous)
     local self = {}
     setmetatable(self, ChoixNiveauSolo)
-    self.back=love.graphics.newImage("backgrounds/choixniveau/back.png")
+    self.back=BackgroundNiveau.new()
     self.levellabel=love.graphics.newImage("backgrounds/choixniveau/level.png")
 
-    self.play= Button.new(550,640,200,50,ButtonType.Small,"backgrounds/choixniveau/play.png")
-    self.returnB= Button.newDec(1000,640,250,50,ButtonType.Large,"backgrounds/choixniveau/return.png",10,0)
+    self.play= Button.new(150,340,200,50,   "backgrounds/choixniveau/play.png")
+    self.returnB= Button.newDec(125,440,250,50, "backgrounds/choixniveau/return.png",10,0)
 
-    self.right= Button.new(1000,350,123,155,ButtonType.Arrow,"backgrounds/choixniveau/right.png")
-    self.left= Button.newDec(90,350,123,155,ButtonType.Arrow,"backgrounds/choixniveau/left.png",10,0)
+    self.right= Button.new(1100,300,123,155,"backgrounds/choixniveau/right.png")
+    self.left= Button.newDec(500,300,123,155,"backgrounds/choixniveau/left.png",10,0)
     
     self.num_level = 1
     self.availableMaps = self:listmaps()
@@ -31,6 +31,13 @@ function ChoixNiveauSolo.new(player,continuous)
 
     self.timerPrev=1
     self.fonduDone=true
+
+    self.selection = {
+        self.play,
+        self.returnB
+    }
+    self.selected = 1
+    self.play:setSelected(true)
     return self
 end
 
@@ -73,7 +80,11 @@ end
 function ChoixNiveauSolo:mouseReleased(x, y, button) end
 
 function ChoixNiveauSolo:keyPressed(key, unicode)
-	if key == "q" or key== "left" then
+	if key == "down" then
+		self:incrementSelection()
+	elseif key == "up" then
+		self:decrementSelection()
+	elseif key == "left" then
 		self.num_level = self.num_level - 1
 		if self.num_level < 1 then self.num_level = 1 end
 		if self.num_level > #self.availableMaps then self.num_level = #self.availableMaps end
@@ -83,7 +94,7 @@ function ChoixNiveauSolo:keyPressed(key, unicode)
 		end
 		self.fonduDone=false
 		self.timerPrev=0
-	elseif key == "d" or key== "right" then
+	elseif key== "right" then
 		self.num_level = self.num_level + 1
 		if self.num_level < 1 then self.num_level = 1 end
 		if self.num_level > #self.availableMaps then self.num_level = #self.availableMaps end
@@ -106,6 +117,27 @@ function ChoixNiveauSolo:keyReleased(key, unicode) end
 function ChoixNiveauSolo:joystickPressed(joystick, button)
 end
 
+
+
+function ChoixNiveauSolo:incrementSelection()
+	self.selection[self.selected]:setSelected(false)
+	if self.selected == #self.selection then
+		self.selected = 0
+	end
+	self.selected = self.selected + 1
+	self.selection[self.selected]:setSelected(true)
+end
+
+function ChoixNiveauSolo:decrementSelection()
+	self.selection[self.selected]:setSelected(false)
+		if self.selected == 1 then
+		self.selected = #self.selection + 1
+	end
+	self.selected = self.selected - 1
+	self.selection[self.selected]:setSelected(true)
+end
+
+
 function ChoixNiveauSolo:joystickReleased(joystick, button)
 end
 
@@ -124,18 +156,17 @@ function ChoixNiveauSolo:draw()
 	x, y = love.mouse.getPosition()
 
 	-- background :
-	love.graphics.draw(self.back, 0, 0)
+	self.back:draw(1)
 
-	love.graphics.draw(self.levellabel, 420, 200)
-
-	love.graphics.print(self.level, 620, 200)
-	self.right:draw(x,y,1)
-	self.left:draw(x,y,1)
-    self.play:draw(x,y,1)
-    self.returnB:draw(x,y,1)
+	love.graphics.draw(self.levellabel, 720, 200)
+	love.graphics.print(self.level, 920, 200)
+	self.right:draw(1)
+	self.left:draw(1)
+    self.play:draw(1)
+    self.returnB:draw(1)
 
 	love.graphics.setColor(255,255,255,255*self.timerPrev)
-	love.graphics.draw(self.prev[self.level], 400, 300,0,0.35,0.35)
+	love.graphics.draw(self.prev[self.level], 647, 260,0,0.35,0.35)
 
 
 

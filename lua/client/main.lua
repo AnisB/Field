@@ -13,9 +13,6 @@ require("game.musicmanager")
 cron = require("lubeboth.cron")
 table2 = require("lubeboth.table2")
 
-SourceDirectory="./"
-ImgDirectory="img/"
-FontDirectory="font/"
 gameStateManager = nil
 
 gamePaused = false
@@ -94,6 +91,7 @@ function love.mousereleased(x, y, button)
 end
 
 function love.keypressed(key, unicode)
+	print(key)
 	if key == "escape" then
 		love.event.push("quit")
 	end

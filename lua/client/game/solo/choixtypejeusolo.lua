@@ -6,12 +6,21 @@ ChoixTypeJeuSolo.__index = ChoixTypeJeuSolo
 function ChoixTypeJeuSolo.new()
     local self = {}
     setmetatable(self, ChoixTypeJeuSolo)
-    self.back=love.graphics.newImage("backgrounds/solo/back.png")
-    self.story=Button.new(150,325,200,50,ButtonType.Large,"backgrounds/solo/story.png")
-    self.arcade=Button.new(150,400,250,50,ButtonType.Large,"backgrounds/solo/arcade.png")
-    self.returnB=Button.newDec(50,625,250,50,ButtonType.Large,"backgrounds/solo/return.png",10,0)
+    self.commonBackground = CommonBackground.new()
+    self.story=Button.new(125,375,200,50, "backgrounds/solo/story.png")
+    self.arcade=Button.new(100,425,250,50, "backgrounds/solo/arcade.png")
+    self.returnB=Button.newDec(100,625,250,50, "backgrounds/solo/return.png",10,0)
     self.enteringDone=false
     self.timer=0
+
+    self.selection = {
+        self.story,
+        self.arcade,
+        self.returnB
+    }
+    self.selected = 1
+    self.story:setSelected(true)
+
     return self
 end
 
@@ -34,7 +43,57 @@ function ChoixTypeJeuSolo:mousePressed(x, y, button)
 end
 
 function ChoixTypeJeuSolo:mouseReleased(x, y, button) end
-function ChoixTypeJeuSolo:keyPressed(key, unicode) end
+function ChoixTypeJeuSolo:keyPressed(key, unicode) 
+if key == 'down' or key =='tab' then
+			self:incrementSelection()
+		elseif key =='up' then
+			self:decrementSelection()
+	
+		elseif key == "return" then
+
+			if self.story.selected then
+				gameStateManager.state['ChoixPersoSolo'] = ChoixPersoSolo.new(true)
+				gameStateManager:changeState('ChoixPersoSolo')
+				self.timer=0
+				self.enteringDone=false	
+			end
+
+
+			if self.arcade.selected then
+				gameStateManager.state['ChoixPersoSolo'] = ChoixPersoSolo.new(false)
+				gameStateManager:changeState('ChoixPersoSolo')
+				self.enteringDone=false		
+				self.timer=0
+			end
+
+
+			if self.returnB.selected then
+				gameStateManager:resetAndChangeState('Menu')
+				self.timer=0
+				self.enteringDone=false
+			end
+		end
+end
+
+function ChoixTypeJeuSolo:incrementSelection()
+	self.selection[self.selected]:setSelected(false)
+	if self.selected == #self.selection then
+		self.selected = 0
+	end
+	self.selected = self.selected + 1
+	self.selection[self.selected]:setSelected(true)
+end
+
+function ChoixTypeJeuSolo:decrementSelection()
+	self.selection[self.selected]:setSelected(false)
+		if self.selected == 1 then
+		self.selected = #self.selection + 1
+	end
+	self.selected = self.selected - 1
+	self.selection[self.selected]:setSelected(true)
+end
+
+
 function ChoixTypeJeuSolo:keyReleased(key, unicode) end
 
 function ChoixTypeJeuSolo:joystickPressed(joystick, button)
@@ -44,6 +103,7 @@ function ChoixTypeJeuSolo:joystickReleased(joystick, button)
 end
 
 function ChoixTypeJeuSolo:update(dt) 
+	self.commonBackground:update(dt)
 	if not self.enteringDone then
 		self.timer =self.timer +dt
 		if self.timer>=1 then
@@ -55,12 +115,11 @@ end
 
 
 function ChoixTypeJeuSolo:draw()
-	x, y = love.mouse.getPosition()
 
 	-- background :
-	love.graphics.draw(self.back, 0, 0)
+	self.commonBackground:draw(self.timer)
 
-	self.story:draw(x,y,self.timer)
-	self.arcade:draw(x,y,self.timer)
-	self.returnB:draw(x,y,self.timer)
+	self.story:draw(self.timer)
+	self.arcade:draw(self.timer)
+	self.returnB:draw(self.timer)
 end

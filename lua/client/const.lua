@@ -8,3 +8,6 @@ unitWorldSize=64
 ParalaxImg="img/paralax/"
 ButtonImg="img/button/"
 SoloMapDirectory="maps/"
+SourceDirectory="./"
+ImgDirectory="img/"
+FontDirectory="font/"

@@ -3,65 +3,47 @@ This file is part of the Field project]]
 
 
 require("game.ui.button")
+require("game.ui.commonbg")
+require("game.ui.autoloopingbackground")
+require("game.ui.confirmationpopup")
+require("game.basicanim")
+
 Menu = {}
 Menu.__index = Menu
-function Menu:new()
+function Menu.new()
     local self = {}
     setmetatable(self, Menu)
     self.err = false
-    self.isRed=0
     self.timer=0
     self.enteringDone=false
     self.shouldQuit=false
     self.filter=1
 
-    self.back=love.graphics.newImage("backgrounds/menu/back.png")
-    self.solo=Button.new(150,250,200,50,ButtonType.Small,"backgrounds/menu/solo.png")
-    self.coop=Button.new(150,325,200,50,ButtonType.Small,"backgrounds/menu/coop.png")
-    self.options=Button.new(150,400,250,50,ButtonType.Large,"backgrounds/menu/options.png")
-    self.credits=Button.new(150,475,250,50,ButtonType.Large,"backgrounds/menu/credits.png")
-    self.quit=Button.new(165,600,200,50,ButtonType.Small,"backgrounds/menu/quit.png")
+    self.commonBackground = CommonBackground.new()
+    self.solo=Button.new(155,300,200,50,"backgrounds/menu/solo.png")
+    self.coop=Button.new(155,355,200,50,"backgrounds/menu/coop.png")
+    self.options=Button.new(125,410,250,50,"backgrounds/menu/options.png")
+    self.credits=Button.new(125,465,250,50,"backgrounds/menu/credits.png")
+    self.quit=Button.new(175,600,200,50,"backgrounds/menu/quit.png")
+    self.confirmation = ConfirmationPopUp.new()
 
     self.font = love.graphics.newFont(FontDirectory .. "font.ttf", 25)
     love.graphics.setFont(self.font)
 
-
+    self.selection = {
+        self.solo,
+        self.coop,
+        self.options,
+        self.credits,
+        self.quit
+    }
+    self.selected = 1
+    self.solo:setSelected(true)
     return self
 end
 
 function Menu:mousePressed(x, y, button)
 	if not self.shouldQuit then
-		if self.solo:isCliked(x,y) then
-			self.timer=0
-			self.enteringDone=false
-			gameStateManager:changeState('ChoixTypeJeuSolo')
-		end
-
-
-		if self.coop:isCliked(x,y) then
-			self.timer=0
-			self.enteringDone=false			
-			gameStateManager:changeState('ConnectToServer')
-		end
-
-
-		if self.options:isCliked(x,y) then
-			self.timer=0
-			self.enteringDone=false			
-			gameStateManager:changeState('Options')
-		end
-
-		if self.credits:isCliked(x,y) then
-			self.timer=0
-			self.enteringDone=false			
-			gameStateManager:changeState('Credits')
-		end
-
-		if self.quit:isCliked(x,y) then
-			self.shouldQuit=true
-			self.filter=0.5
-		end
-	else
 		if x > 540 and x < 540+100 and y > 550 and y < 550+50 then
 			love.event.push("quit")
 	 	end
@@ -76,11 +58,59 @@ end
 function Menu:reset()
     self.font = love.graphics.newFont(FontDirectory .. "font.ttf", 25)
     love.graphics.setFont(self.font)
+    self.enteringDone=false
+    self.shouldQuit=false
+    self.filter=1
 end
+
+
 function Menu:mouseReleased(x, y, button) 
 end
 
 function Menu:keyPressed(key, unicode) 
+	if self.shouldQuit then
+		self.confirmation:keyPressed(key,unicode)
+	else
+		if key == 'down' or key =='tab' then
+			self:incrementSelection()
+		elseif key =='up' then
+			self:decrementSelection()
+	
+		elseif key == "return" then
+
+			if self.solo.selected then
+				self.timer=0
+				self.enteringDone=false
+				gameStateManager:changeState('ChoixTypeJeuSolo')
+			end
+
+
+			if self.coop.selected then
+				self.timer=0
+				self.enteringDone=false			
+				gameStateManager:changeState('ConnectToServer')
+			end
+
+
+			if self.options.selected then
+				self.timer=0
+				self.enteringDone=false			
+				gameStateManager:changeState('Options')
+			end
+
+			if self.credits.selected then
+				self.timer=0
+				self.enteringDone=false			
+				gameStateManager:changeState('Credits')
+			end
+
+			if self.quit.selected then
+				self.shouldQuit=true
+				self.filter=0.5
+				self.confirmation:setEnable(true)
+			end
+		end
+	end
 end
 
 function Menu:keyReleased(key, unicode) 
@@ -92,7 +122,26 @@ end
 function Menu:joystickReleased(joystick, button)
 end
 
+function Menu:incrementSelection()
+	self.selection[self.selected]:setSelected(false)
+	if self.selected == #self.selection then
+		self.selected = 0
+	end
+	self.selected = self.selected + 1
+	self.selection[self.selected]:setSelected(true)
+end
+
+function Menu:decrementSelection()
+	self.selection[self.selected]:setSelected(false)
+		if self.selected == 1 then
+		self.selected = #self.selection + 1
+	end
+	self.selected = self.selected - 1
+	self.selection[self.selected]:setSelected(true)
+end
+
 function Menu:update(dt) 
+	self.commonBackground:update(dt)
 	if not self.enteringDone then
 		self.timer =self.timer +dt
 		if self.timer>=1 then
@@ -104,49 +153,31 @@ end
 
 
 function Menu:draw()
-	love.graphics.setColor(255,255,255,255*self.timer*self.filter)
-	love.graphics.draw(self.back,0,0)
+
 	x, y = love.mouse.getPosition()
 
+	local color = 255*self.timer*self.filter
+	love.graphics.setColor(color,color,color,255)
 
 
 	-- rectangles :
 	 if not self.shouldQuit then
-	 	self.solo:draw(x,y,self.timer)
-	 	self.coop:draw(x,y,self.timer)
-	 	self.options:draw(x,y,self.timer)
-	 	self.credits:draw(x,y,self.timer)
-	 	self.quit:draw(x,y,self.timer)
+	 	self.commonBackground:draw(self.timer*self.filter)
+
+	 	self.solo:draw(self.timer)
+	 	self.coop:draw(self.timer)
+	 	self.options:draw(self.timer)
+	 	self.credits:draw(self.timer)
+	 	self.quit:draw(self.timer)
 	 else
-	 	self.solo:draw(0,0,self.filter)
-	 	self.coop:draw(0,0,self.filter)
-	 	self.options:draw(0,0,self.filter)
-	 	self.credits:draw(0,0,self.filter)
-	 	self.quit:draw(0,0,self.filter)
+	 	self.commonBackground:draw(self.timer*self.filter)
 
-
-	 	love.graphics.setColor(50, 50, 50, 120)
-	 	love.graphics.rectangle("fill", 400, 300, 500, 350)
-	 	love.graphics.setColor(255, 255, 255, 255)
-	 	love.graphics.print("Are you sure about",450,320)
-	 	love.graphics.print("quitting?",560,360)
-
-	 	if x > 540 and x < 540+100 and y > 550 and y < 550+50 then
-	 		love.graphics.setColor(150, 150, 150, 255)
-	 	else
-	 		love.graphics.setColor(50, 50, 50, 255)
-	 	end
-	 	love.graphics.rectangle("fill", 530, 550, 100, 50)
-	 	love.graphics.setColor(255, 100,100, 255)
-	 	love.graphics.print("Yes",550,555)
-	 	if x > 640 and x < 640+100 and y > 550 and y < 550+50 then
-	 		love.graphics.setColor(150, 150, 150, 255)
-	 	else
-	 		love.graphics.setColor(50, 50, 50, 255)
-	 	end
-	 	love.graphics.rectangle("fill", 660, 550, 100, 50)
-	 	love.graphics.setColor(255, 255, 255, 255)
-	 	love.graphics.print("No",675,555)
+	 	self.solo:draw(self.filter)
+	 	self.coop:draw(self.filter)
+	 	self.options:draw(self.filter)
+	 	self.credits:draw(self.filter)
+	 	self.quit:draw(self.filter)
+	 	self.confirmation:draw()
 
 	 end
 

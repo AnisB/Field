@@ -10,8 +10,8 @@ function LevelFailedSolo.new()
 	self.next=next
 	self.continuous=continuous
 	self.back=love.graphics.newImage("backgrounds/failed/back.png")
-	self.retry=Button.new(800,300,200,50,ButtonType.Large,"backgrounds/failed/retry.png")
-	self.quit=Button.new(800,400,200,50,ButtonType.Small,"backgrounds/failed/quit.png")
+	self.retry=Button.new(800,300,200,50, "backgrounds/failed/retry.png")
+	self.quit=Button.new(800,400,200,50,   "backgrounds/failed/quit.png")
 	return self
 end
 

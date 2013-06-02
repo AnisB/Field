@@ -41,6 +41,7 @@ end
 -- "high level" events :
 
 function onConnect(client)
+	print(client.id)
 	client:speak("bonjour bonjour !")
 	clients[client.id] = client -- ajout a la liste des clients
 	nb_clients = nb_clients + 1

@@ -9,27 +9,62 @@ function Options:new()
     setmetatable(self, Options)
     self.enteringDone = false
     self.timer=0
-    self.returnB=Button.new(1000,625,200,50,ButtonType.Large,"backgrounds/options/return.png")
-    self.audio=Button.newDec(100,200,200,50,ButtonType.Small,"backgrounds/options/audio.png",-10,-10)
-    self.video=Button.newDec(100,300,200,50,ButtonType.Small,"backgrounds/options/video.png",-10,-10)
-    self.gameplay=Button.newDec(100,400,200,50,ButtonType.VLarge,"backgrounds/options/gameplay.png",20,20)
-    self.back=love.graphics.newImage("backgrounds/options/back.png")
+    self.returnB=Button.new(1000,625,200,50,"backgrounds/options/return.png")
+    self.audio=Button.newDec(100,300,200,50,"backgrounds/options/audio.png",-10,-10)
+    self.video=Button.newDec(100,375,200,50,"backgrounds/options/video.png",-10,-10)
+    self.gameplay=Button.newDec(100,425,200,50 ,"backgrounds/options/gameplay.png",20,20)
+    self.commonBackground = CommonBackground.new()
+
+    self.selection = {
+        self.audio,
+        self.video,
+        self.gameplay,
+        self.returnB
+    }
+    self.selected = 1
+    self.audio:setSelected(true)
+
     return self
 end
 
 function Options:mousePressed(x, y, button)
-		if x > 1050 and x < 1050+200 and y > 650 and y < 650+50 then
-			gameStateManager:changeState("Menu")
-			self.enteringDone=false
-			self.timer=0
-		end
 end
 
 function Options:mouseReleased(x, y, button) 
 end
 
-function Options:keyPressed(key, unicode) 
+function Options:incrementSelection()
+	self.selection[self.selected]:setSelected(false)
+	if self.selected == #self.selection then
+		self.selected = 0
+	end
+	self.selected = self.selected + 1
+	self.selection[self.selected]:setSelected(true)
 end
+
+function Options:decrementSelection()
+	self.selection[self.selected]:setSelected(false)
+		if self.selected == 1 then
+		self.selected = #self.selection + 1
+	end
+	self.selected = self.selected - 1
+	self.selection[self.selected]:setSelected(true)
+end
+
+function Options:keyPressed(key, unicode) 
+	if key == 'down' or key =='tab' then
+			self:incrementSelection()
+		elseif key =='up' then
+			self:decrementSelection()
+	
+		elseif key == "return" then
+			self.timer=0
+			self.enteringDone=false			
+			gameStateManager:changeState('Menu')
+		end
+end
+
+
 
 function Options:keyReleased(key, unicode) 
 end
@@ -40,7 +75,8 @@ end
 function Options:joystickReleased(joystick, button)
 end
 
-function Options:update(dt) 
+function Options:update(dt)
+	self.commonBackground:update(dt) 
 	if not self.enteringDone then
 		self.timer =self.timer +dt
 		if self.timer>=1 then
@@ -53,13 +89,13 @@ end
 
 function Options:draw()
 	love.graphics.setColor(255,255,255,255*self.timer)
-	love.graphics.draw(self.back,0,0)
 	x, y = love.mouse.getPosition()
+	self.commonBackground:draw(self.timer) 
 
-	self.audio:draw(x,y,self.timer)
-	self.video:draw(x,y,self.timer)
-	self.gameplay:draw(x,y,self.timer)
-	self.returnB:draw(x,y,self.timer)
+	self.audio:draw(self.timer)
+	self.video:draw(self.timer)
+	self.gameplay:draw(self.timer)
+	self.returnB:draw(self.timer)
 
 
 
