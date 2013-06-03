@@ -13,7 +13,7 @@ function LevelEnding.new(next,continuous)
     self.next=next
     self.continuous=continuous
     self.back=love.graphics.newImage("backgrounds/ending/back.png")
-    self.continue=Button.newDec(300,300,300,50,ButtonType.VLarge,"backgrounds/ending/continue.png",30,5)
+    self.continue=Button.new(300,300,300,50,"backgrounds/ending/continue.png")
     self.returnB=Button.new(800,300,250,50, "backgrounds/ending/return.png")
     self.perso1 = AnimMM.new("metalman/alu")
     self.perso2 = AnimTM.new("themagnet")

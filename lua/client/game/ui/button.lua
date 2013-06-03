@@ -56,7 +56,7 @@ end
 
 function Button:basicDraw(filter)
 	love.graphics.setColor(255,255,255,255*filter)
-	love.graphics.draw(self.img, self.position.x+25+self.dec.x, self.position.y+20+self.dec.y)
+	love.graphics.draw(self.img, self.position.x+25, self.position.y+20)
 	love.graphics.setColor(255,255,255,255)
 end
 
@@ -65,7 +65,7 @@ end
 function Button:selectedDraw(filter)
 	love.graphics.setColor(255,255,255,255*filter)
 	love.graphics.draw(self.select, self.position.x-20, self.position.y+20)
-	love.graphics.draw(self.img, self.position.x+25+self.dec.x, self.position.y+20+self.dec.y)
+	love.graphics.draw(self.img, self.position.x+25, self.position.y+20)
 	love.graphics.setColor(255,255,255,255)
 end
 
@@ -74,7 +74,7 @@ end
 
 function Button:disabledDraw(filter)
 	love.graphics.setColor(100,100,100,255*filter)
-	love.graphics.draw(self.img, self.position.x+25+self.dec.x, self.position.y+20+self.dec.y)
+	love.graphics.draw(self.img, self.position.x+25, self.position.y+20)
 	love.graphics.setColor(255,255,255,255)
 end
 
@@ -82,7 +82,7 @@ end
 function Button:disabledSelectedDraw(filter)
 	love.graphics.setColor(100,100,100,255*filter)
 	love.graphics.draw(self.select, self.position.x-20, self.position.y+20)
-	love.graphics.draw(self.img, self.position.x+25+self.dec.x, self.position.y+20+self.dec.y)
+	love.graphics.draw(self.img, self.position.x+25, self.position.y+20)
 	love.graphics.setColor(255,255,255,255)
 end
 

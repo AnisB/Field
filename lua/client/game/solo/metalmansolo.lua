@@ -66,6 +66,7 @@ function MetalManSolo.new(camera,pos,powers)
 
 
 	self.tranfSound=Sound.getSound("tranf")
+	self.shake=Sound.getSound("shake")
 	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
 	self.powers = {}
 
@@ -256,7 +257,7 @@ end
 function MetalManSolo:collideWith( object, collision )
 
 	if self.alive then
-		if object.type=='GateInterruptor' or object.type=='Interruptor' or object.type=='TheMagnet' then
+		if object.type=='GateInterruptor' or object.type=='Interruptor' or object.type=='TheMagnet' or object.type=='LevelEnd' or object.type=='Acid' then
 			--Ghost dude
 		else
 			self.collisionCounter=self.collisionCounter+1
@@ -269,11 +270,15 @@ function MetalManSolo:collideWith( object, collision )
 				if kinEnergyX>10.9 or kinEnergyY>11 then
 					gameStateManager.state["GameplaySolo"]:shakeOnX(2,100,0.2)
 					gameStateManager.state["GameplaySolo"]:shakeOnY(2,100,0.2)
+					self.shake:stop()
+					self.shake:play()
 				end
 			end
 			if self.isStatic==true  then
 					gameStateManager.state["GameplaySolo"]:shakeOnX(5,100,0.2)
 					gameStateManager.state["GameplaySolo"]:shakeOnY(5,100,0.2)
+					self.shake:stop()
+					self.shake:play()
 			end
 
 			if(object:getPosition().y>self.position.y) then
