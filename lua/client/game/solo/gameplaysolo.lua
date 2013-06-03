@@ -23,12 +23,14 @@ require("game.shader.backlightshader")
 -- Inlcude Other
 require("game.simplebackground")
 require("game.ui.loadingscreen")
-require("game.ui.popup")
+require("game.ui.pausemenu")
 require("const")
 
 
 GameplaySolo = {}
 GameplaySolo.__index = GameplaySolo
+
+
 
 
 function GameplaySolo.new(mapFile,continuous,player)
@@ -105,7 +107,7 @@ function GameplaySolo.new(mapFile,continuous,player)
 
 
     -- Pause menu loading
-    self.pauseMenu=PopUp.new(200,100,900,550)
+    self.pauseMenu=PauseMenu.new(200,100,900,550)
 
 
 
@@ -275,7 +277,7 @@ end
                     end            
                 end
             else
-
+                self.pauseMenu:keyPressed(key, unicode)
             end
             -- Cheat Code
             if key=="c" then
@@ -284,7 +286,7 @@ end
 
 
             -- Pause
-            if key =="u" then
+            if key =="escape" then
                 self:setPaused( not self.gameIsPaused)
             end   
         end

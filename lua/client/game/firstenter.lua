@@ -8,7 +8,7 @@ function FirstEnter:new()
     local self = {}
     setmetatable(self, FirstEnter)
     self.timer=1
-    self.logo = BasicAnim.new("logolarge", true,0.15,4)
+    self.logo = BasicAnim.new("logo", true,0.15,8)
     self.trans=255
     self.up=true
     self.shouldPass=false
@@ -72,9 +72,9 @@ end
 
 function FirstEnter:draw()
 	love.graphics.setColor(255,150,150,self.trans*self.passTimer)
-	love.graphics.print("Press Return",500,500)
+	love.graphics.print("Press Start",500,500)
 	love.graphics.setColor(255,255,255,255*self.passTimer)
-	love.graphics.draw(self.logo:getSprite(),300,0,0,0.7,0.7)
+	love.graphics.draw(self.logo:getSprite(),400,100)
 
 
 end

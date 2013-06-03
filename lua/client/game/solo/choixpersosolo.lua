@@ -53,6 +53,8 @@ function ChoixPersoSolo:keyPressed(key, unicode)
 		self:forceReturn()
 	elseif key == 'up' then
 		self:forcePlay()
+	elseif key == "escape" then
+		gameStateManager:changeState('ChoixTypeJeuSolo')
 	end			
 
 	if key == "return" then

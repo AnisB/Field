@@ -105,8 +105,14 @@ function ChoixNiveauSolo:keyPressed(key, unicode)
 		self.fonduDone=false
 		self.timerPrev=0
 	elseif key == "return" then
-		gameStateManager.state['GameplaySolo']= GameplaySolo.new(self.level,self.continuous,self.player)
-		gameStateManager:changeState('GameplaySolo')
+		if self.play.selected then
+			gameStateManager.state['GameplaySolo']= GameplaySolo.new(self.level,self.continuous,self.player)
+			gameStateManager:changeState('GameplaySolo')
+		elseif self.returnB.selected then
+			gameStateManager:changeState('ChoixPersoSolo')
+		end
+	elseif key == "escape" then
+		gameStateManager:changeState('ChoixPersoSolo')
 	end
 
 
@@ -142,6 +148,7 @@ function ChoixNiveauSolo:joystickReleased(joystick, button)
 end
 
 function ChoixNiveauSolo:update(dt)
+	self.back:update(dt)
 	if not self.fonduDone then
 		self.timerPrev =self.timerPrev +dt
 		if self.timerPrev>=1 then

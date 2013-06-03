@@ -35,8 +35,6 @@ function ChoixNiveau:mousePressed(x, y, button)
 
 end
 
-
-
 function ChoixNiveau:incrementSelection()
 	self.selection[self.selected]:setSelected(false)
 	if self.selected == #self.selection then

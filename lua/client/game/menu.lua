@@ -43,16 +43,7 @@ function Menu.new()
 end
 
 function Menu:mousePressed(x, y, button)
-	if not self.shouldQuit then
-		if x > 540 and x < 540+100 and y > 550 and y < 550+50 then
-			love.event.push("quit")
-	 	end
 
-	 	if x > 640 and x < 640+100 and y > 550 and y < 550+50 then
-			self.shouldQuit=false
-			self.filter=1
-	 	end
-	end
 end
 
 function Menu:reset()
@@ -75,7 +66,10 @@ function Menu:keyPressed(key, unicode)
 			self:incrementSelection()
 		elseif key =='up' then
 			self:decrementSelection()
-	
+		elseif key == "escape" then
+				self.shouldQuit=true
+				self.filter=0.5
+				self.confirmation:setEnable(true)
 		elseif key == "return" then
 
 			if self.solo.selected then

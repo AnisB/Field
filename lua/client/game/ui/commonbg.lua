@@ -24,7 +24,7 @@ function CommonBackground.new(isSimplfied)
     	self.tm:syncronize(4)
         self.back1=AutoLoopingBackground.new("backgrounds/common/back1.png",300)
 	end
-    self.logo = BasicAnim.new("logosmall", true,0.2,4)
+    self.logo = BasicAnim.new("logo", true,0.2,8)
     return self
 end
 

@@ -51,13 +51,13 @@ function discoveryCallback(data, id)
 end
 
 function love.load()
+	love.graphics.setIcon( love.graphics.newImage("icons/256x256.png" ))
 	-- lube :
 	discoveryListener = lube.udpServer()
 	discoveryListener:listen(3411)
 	discoveryListener.callbacks.recv = discoveryCallback
 	-- /lube
 	monde = {}
-	love.graphics.setIcon( love.graphics.newImage(ImgDirectory.."icon.png" ))
 	gameStateManager = GameStateManager.new()
 	love.audio.setDistanceModel("exponent")
 	--love.audio.setOrientation(0,0,1, 0,1,0)
@@ -91,10 +91,6 @@ function love.mousereleased(x, y, button)
 end
 
 function love.keypressed(key, unicode)
-	print(key)
-	if key == "escape" then
-		love.event.push("quit")
-	end
 	gameStateManager:keyPressed(key, unicode)
 end
 

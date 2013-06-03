@@ -148,18 +148,18 @@ end
 function MetalMan:changeMass()
 	if self.alive then
 		if 	self.metalWeight==MetalMTypes.Alu then
-			-- if self.powers["Acier"] then
+			if self.powers["Acier"] then
 				self.anim = AnimMM.new('metalman/acier')
 				self:loadAnimation("standing",true)
 				self:loadAnimation("load1",true)
 				self.metalWeight=MetalMTypes.Acier
-			-- end
+			end
 		elseif 	self.metalWeight==MetalMTypes.Acier then
-			-- if self.powers["Alu"] then
+			if self.powers["Alu"] then
 				self.metalWeight=MetalMTypes.Alu
 				self.anim = AnimMM.new('metalman/alu')
 				self:loadAnimation("load2",true)
-			-- end
+			end
 		end
 		self.pc.body:setMass(self.metalWeight*unitWorldSize)
 	end
@@ -178,7 +178,7 @@ function MetalMan:switchType()
 if self.alive then
 
 	if self.metalType ==MetalTypes.Normal then
-		-- if self.powers["Static"] then
+		if self.powers["Static"] then
 			self.oldMetal = self.metalType
 			self.metalType=MetalTypes.Static
 			self.anim = AnimMM.new('metalman/static')
@@ -188,9 +188,9 @@ if self.alive then
 				self:loadAnimation("load2",true)
 			end
 			self.isStatic=true
-		-- end
+		end
 	elseif self.metalType ==MetalTypes.Static then
-		-- if self.powers["Acier"] or  self.powers["Alu"] then
+		if self.powers["Acier"] or  self.powers["Alu"] then
 			self.oldMetal = self.metalType
 			self.metalType=MetalTypes.Normal
 			self.isStatic=false
@@ -201,7 +201,7 @@ if self.alive then
 				self.anim = AnimMM.new('metalman/acier')
 				self:loadAnimation("load2",true)
 			end
-		-- end
+		end
 
 	end
 end

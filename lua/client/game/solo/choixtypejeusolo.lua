@@ -48,7 +48,8 @@ if key == 'down' or key =='tab' then
 			self:incrementSelection()
 		elseif key =='up' then
 			self:decrementSelection()
-	
+		elseif key == "escape" then
+			gameStateManager:changeState('Menu')
 		elseif key == "return" then
 
 			if self.story.selected then

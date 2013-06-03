@@ -61,7 +61,7 @@ function GameStateManager.new()
 
 	-- Jeu Solo
 	self.state['ChoixTypeJeuSolo'] = ChoixTypeJeuSolo.new()	
-	self.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new("metalman",false)
+	self.state['ChoixNiveauSolo'] = nil
 	self.state['ChoixPersoSolo'] = nil
 	self.state['GameplaySolo'] = nil
 	self.state['LevelEndingSolo'] = nil

@@ -437,19 +437,18 @@ end
 
 -- Return the character to screen
 function TheMagnet:secondSend(x,y)
-if self.goF then
-	return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x-unitWorldSize/2).."#"..math.floor( self.position.y+y-unitWorldSize/2).."#".."1".."#"..tostring(self.appliesField).."#"..self.fieldType)
-else
--- 	print("MDR")
-	return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x+unitWorldSize/2).."#"..math.floor( self.position.y+y-unitWorldSize/2).."#".."-1".."#"..tostring(self.appliesField).."#"..self.fieldType)
-end
+	if self.goF then
+		return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x-unitWorldSize/2).."#"..math.floor( self.position.y+y-unitWorldSize/2).."#".."1".."#"..tostring(self.appliesField).."#"..self.fieldType)
+	else
+		return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x+unitWorldSize/2).."#"..math.floor( self.position.y+y-unitWorldSize/2).."#".."-1".."#"..tostring(self.appliesField).."#"..self.fieldType)
+	end
 end
 
 -- Return the character to screen
 function TheMagnet:mainSend(x,y)
-if self.goF then
-	return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(windowW/2-unitWorldSize/2).."#"..math.floor( windowH/2-unitWorldSize/2).."#".."1".."#"..tostring(self.appliesField).."#"..self.fieldType)
-else
-	return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(windowW/2+unitWorldSize/2).."#"..math.floor( windowH/2-unitWorldSize/2).."#".."-1".."#"..tostring(self.appliesField).."#"..self.fieldType)
-end
+	if self.goF then
+		return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(windowW/2-unitWorldSize/2).."#"..math.floor( windowH/2-unitWorldSize/2).."#".."1".."#"..tostring(self.appliesField).."#"..self.fieldType)
+	else
+		return ("@themagnet".."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(windowW/2+unitWorldSize/2).."#"..math.floor( windowH/2-unitWorldSize/2).."#".."-1".."#"..tostring(self.appliesField).."#"..self.fieldType)
+	end
 end

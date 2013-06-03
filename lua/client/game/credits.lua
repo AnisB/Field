@@ -68,7 +68,7 @@ function Credits:draw()
 	love.graphics.printf("This game was created by an indie team. It's a network cooperative game based on an assymetric gameplay about electromagnetic forces.", 100, 75,1000)
 	love.graphics.printf("The team is composed of:\n Pierre Germain(Infography), Anthony Clerc(Sound Design), Julien Deville(Level Design), Anis Benyoub(Game Design, Gameplay and network Dev), Frédéric Matigot and Florent Weillaert(Network Dev).", 100, 425, 1100)
 	love.graphics.setColor(200,100,100,255*self.timer)
-	love.graphics.printf("Press return to exit", 0, 650, 1280, "center")
+	love.graphics.printf("Press start", 0, 650, 1280, "center")
 
 
 end
