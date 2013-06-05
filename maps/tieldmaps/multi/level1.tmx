@@ -95,7 +95,7 @@
  </objectgroup>
  <objectgroup color="#ffffff" name="movable" width="70" height="10"/>
  <objectgroup color="#ff6666" name="destroyable" width="70" height="10"/>
- <objectgroup color="#ff0000" name="metalman" width="70" height="10">
+ <objectgroup color="#800000" name="metalman" width="70" height="10">
   <object x="768" y="512" width="64" height="64">
    <properties>
     <property name="powers" value="Alu"/>
@@ -105,7 +105,7 @@
  <objectgroup color="#ff0000" name="themagnet" width="70" height="10">
   <object x="896" y="512" width="64" height="64">
    <properties>
-    <property name="powers" value="Repulsive#Attractive"/>
+    <property name="powers" value="None"/>
    </properties>
   </object>
  </objectgroup>

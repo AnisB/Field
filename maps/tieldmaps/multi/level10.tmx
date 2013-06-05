@@ -58,13 +58,13 @@
  <tileset firstgid="17" name="mur2" tilewidth="64" tileheight="64">
   <image source="data/mur2.png" width="64" height="64"/>
  </tileset>
-   <tileset firstgid="18" name="lamp1" tilewidth="64" tileheight="64">
+ <tileset firstgid="18" name="lamp1" tilewidth="64" tileheight="64">
   <image source="data/lamp1.png" width="64" height="64"/>
  </tileset>
-  <tileset firstgid="19" name="lamp2" tilewidth="64" tileheight="64">
+ <tileset firstgid="19" name="lamp2" tilewidth="64" tileheight="64">
   <image source="data/lamp2.png" width="64" height="64"/>
  </tileset>
-  <tileset firstgid="20" name="cable" tilewidth="64" tileheight="64">
+ <tileset firstgid="20" name="cable" tilewidth="64" tileheight="64">
   <image source="data/cable.png" width="64" height="64"/>
  </tileset>
  <layer name="front" width="60" height="21">
@@ -130,11 +130,19 @@
   <object x="1728" y="960" width="64" height="64"/>
   <object x="1920" y="640" width="64" height="64"/>
  </objectgroup>
- <objectgroup color="#ff0000" name="metalman" width="60" height="21">
-  <object x="384" y="1152" width="64" height="64"/>
+ <objectgroup color="#800000" name="metalman" width="60" height="21">
+  <object x="384" y="1152" width="64" height="64">
+   <properties>
+    <property name="powers" value="Alu#Acier"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ff0000" name="themagnet" width="60" height="21">
-  <object x="512" y="1152" width="64" height="64"/>
+  <object x="512" y="1152" width="64" height="64">
+   <properties>
+    <property name="powers" value="Repulsive#Attractive#RotativeL#RotativeR"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#800000" name="generator" width="60" height="21">
   <object type="Repulsive" x="896" y="576" width="64" height="64">
