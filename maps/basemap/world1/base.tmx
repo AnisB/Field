@@ -58,13 +58,50 @@
  <tileset firstgid="17" name="mur2" tilewidth="64" tileheight="64">
   <image source="data/mur2.png" width="64" height="64"/>
  </tileset>
-    <tileset firstgid="18" name="lamp1" tilewidth="64" tileheight="64">
+ <tileset firstgid="18" name="lamp1" tilewidth="64" tileheight="64">
   <image source="data/lamp1.png" width="64" height="64"/>
  </tileset>
-  <tileset firstgid="19" name="lamp2" tilewidth="64" tileheight="64">
+ <tileset firstgid="19" name="lamp2" tilewidth="64" tileheight="64">
   <image source="data/lamp2.png" width="64" height="64"/>
  </tileset>
-  <tileset firstgid="20" name="cable" tilewidth="64" tileheight="64">
+ <tileset firstgid="20" name="cable" tilewidth="64" tileheight="64">
   <image source="data/cable.png" width="64" height="64"/>
  </tileset>
+ <layer name="foreground" width="70" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRQC4QhGJqqRsOQJCBOP8Sq244AEEG4vyLTR26GC48WAGx7ifFv6SYO1gBIXdzkqh+MPt1MAAAUfcFBQ==
+  </data>
+ </layer>
+ <layer name="front" width="70" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOMAIxCxCzDlHMBvUDseqIBaSoHayAWD+Mhgtl6khVO1jBaLhgB6Phgh2Mhgt2QEq4EFv3clDfmXQH+MKFk0h16ICdTLcMJkBqemEaIZiNBHUAVZsCFw==
+  </data>
+ </layer>
+ <objectgroup color="#00ff00" name="wall" width="70" height="10">
+  <object x="3776" y="0" width="64" height="576"/>
+  <object x="640" y="0" width="64" height="576"/>
+ </objectgroup>
+ <objectgroup color="#0000ff" name="platform" width="70" height="10">
+  <object x="640" y="576" width="3200" height="64"/>
+  <object x="704" y="0" width="3072" height="64"/>
+ </objectgroup>
+ <objectgroup color="#ffffff" name="movable" width="70" height="10"/>
+ <objectgroup color="#ff6666" name="destroyable" width="70" height="10"/>
+ <objectgroup color="#800000" name="metalman" width="70" height="10"/>
+ <objectgroup color="#ff0000" name="themagnet" width="70" height="10"/>
+ <objectgroup color="#800000" name="generator" width="70" height="10"/>
+ <objectgroup color="#66ccff" name="switch" width="70" height="10"/>
+ <objectgroup color="#e6e6e6" name="metal" width="70" height="10"/>
+ <objectgroup color="#333333" name="gate" width="70" height="10"/>
+ <objectgroup color="#004080" name="acid" width="70" height="10"/>
+ <objectgroup color="#ffff00" name="arc" width="70" height="10"/>
+ <objectgroup color="#ffff00" name="levelend" width="70" height="10">
+  <object x="3584" y="448" width="192" height="128">
+   <properties>
+    <property name="next" value="levelX"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#800080" name="gateswitch" width="70" height="10"/>
+ <objectgroup name="lamps" width="70" height="10"/>
 </map>
