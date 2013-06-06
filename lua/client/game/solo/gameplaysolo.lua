@@ -166,7 +166,6 @@ end
     end  
 
     function GameplaySolo:reset()
-        self.shouldEnd=false
         world:setCallbacks(nil, function() collectgarbage() end)
         world:destroy()
         world=nil
@@ -193,6 +192,8 @@ end
             self.theMagnet = TheMagnetSolo.new(self.cameraTM,self.mapLoader.theMagnetPos)
             self.magnetmanager:addGenerator(self.theMagnet)
         end
+        self.gameIsPaused=false
+        
 
     end
 
@@ -200,10 +201,10 @@ end
         self.shouldEnd=true
     end    
 
-    function GameplaySolo:setPaused(state)
-        self.gameIsPaused=state
-        self.pauseMenu.isActive=state
-    end
+    -- function GameplaySolo:sendPause(state)
+    --     self.gameIsPaused=state
+    --     self.pauseMenu.isActive=state
+    -- end
 
 
     function GameplaySolo:mousePressed(x, y, button)
@@ -287,7 +288,7 @@ end
 
             -- Pause
             if key =="escape" then
-                self:setPaused( not self.gameIsPaused)
+                self.pauseMenu:sendPauseOrder()
             end   
         end
     end

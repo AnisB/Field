@@ -7,7 +7,7 @@ LoadingScreen = {}
 LoadingScreen.__index =  LoadingScreen
 
 
---LoadingScreen.spiral = BasicAnim.new("loading",true, 0.2,8)
+LoadingScreen.spiral = love.graphics.newImage("img/loading.png")
 
 
 function LoadingScreen.new(options)
@@ -16,6 +16,8 @@ function LoadingScreen.new(options)
     math.randomseed(os.time())
 
     self.screenWidth, self.screenHeight = love.graphics.getWidth(), love.graphics.getHeight()
+    self.timer = 1
+    self.gd = true
     return self
 end
 
@@ -23,13 +25,25 @@ end
 
 
 function LoadingScreen:update(dt)
-  --LoadingScreen.spiral:update(dt)
+  if self.gd then
+    self.timer = self.timer -dt
+    if self.timer <= 0 then
+      self.timer = 0
+      self.gd = false
+    end
+  else
+    self.timer = self.timer  +dt
+    if self.timer >= 1 then
+      self.timer = 1
+      self.gd = true
+    end
+  end
 end
 
 
 function LoadingScreen:draw()
-  love.graphics.setColor(255,255,255,255)
-  --love.graphics.draw(LoadingScreen.spiral:getSprite(), 0,0)
+  love.graphics.setColor(255,255,255,255*self.timer)
+  love.graphics.draw(LoadingScreen.spiral, 500,100)
 	self:drawLoadingBar()
 end
 
@@ -38,6 +52,7 @@ end
 
 
  function LoadingScreen:drawLoadingBar()
+  love.graphics.setColor(255,255,255,255)
   local separation = 30;
   local w = windowW - 2*separation
   local h = 50;
@@ -50,5 +65,8 @@ end
   if gameStateManager.loader.loadedCount > 0 then
     w = w * (gameStateManager.loader.loadedCount / gameStateManager.loader.resourceCount)
   end
+  love.graphics.setColor(255,100,100,255)
   love.graphics.rectangle("fill", x, y, w, h)
+  love.graphics.setColor(255,255,255,255)
+
 end

@@ -2,6 +2,7 @@
 This file is part of the Field project
 ]]
 
+require("game.ui.optionspausemenu")
 
 PauseMenu = {}
 PauseMenu.__index =  PauseMenu
@@ -14,19 +15,22 @@ function PauseMenu.new(x,y,w,l)
 
     self.resume=Button.new(500,225,200,50, "backgrounds/ingame/resume.png")
     self.restart=Button.new(500,300,250,50, "backgrounds/ingame/restart.png")
-    self.audio=Button.new(525,375,250,50, "backgrounds/ingame/audio.png")
+    self.options=Button.new(500,375,250,50, "backgrounds/ingame/options.png")
     self.quit=Button.new(550,450,250,50, "backgrounds/ingame/quit.png")
 
 
     self.selection = {
         self.resume,
         self.restart,
-        self.audio,
+        self.options,
         self.quit
     }
 
     self.selected = 1
     self.resume:setSelected(true)
+
+    self.optionsFlag = false
+    self.optionsMenu = OptionsPauseMenu.new(self)
 
     return self
 end
@@ -38,8 +42,10 @@ end
 function PauseMenu:update(dt)
 end
 
-function PauseMenu:keyPressed(key, unicode) 
-    if key == 'down' or key =='tab' then
+function PauseMenu:keyPressed(key, unicode)
+
+    if not self.optionsFlag then
+        if key == 'down' or key =='tab' then
             self:incrementSelection()
         elseif key =='up' then
             self:decrementSelection()
@@ -48,16 +54,19 @@ function PauseMenu:keyPressed(key, unicode)
 
             if self.resume.selected then
                 gameStateManager.state['GameplaySolo'].gameIsPaused=false
+                self.isActive=false
             end
 
 
             if self.restart.selected then
                 gameStateManager.state['GameplaySolo'].gameIsPaused=false
                 gameStateManager.state['GameplaySolo']:reset()
+                self.isActive=false
             end
 
 
-            if self.audio.selected then
+            if self.options.selected then
+                self.optionsFlag=true
             end
 
 
@@ -65,12 +74,31 @@ function PauseMenu:keyPressed(key, unicode)
                 gameStateManager.state['GameplaySolo'].gameIsPaused=false
                 gameStateManager.state['GameplaySolo']:destroy()
                 gameStateManager:changeState('ChoixNiveauSolo')
+                self.isActive=false
             end
 
         end
+    else
+        self.optionsMenu:keyPressed(key,unicode)
+    end
 end
 
 
+
+function PauseMenu:sendPauseOrder()
+   if self.isActive then
+    if not self.optionsFlag then
+        gameStateManager.state['GameplaySolo'].gameIsPaused=false    
+        self.isActive = false
+    else
+            self.optionsFlag = false
+
+    end
+   else
+    gameStateManager.state['GameplaySolo'].gameIsPaused=true    
+    self.isActive = true
+   end
+end
 
 function PauseMenu:incrementSelection()
     self.selection[self.selected]:setSelected(false)
@@ -92,10 +120,14 @@ end
 
 function PauseMenu:draw(x,y)
         if  self.isActive then
+            if self.optionsFlag then
+                self.optionsMenu:draw()
+                return
+            end
             love.graphics.draw(self.back,250,50)
             self.resume:draw(1)
             self.restart:draw(1)
-            self.audio:draw(1)
+            self.options:draw(1)
             self.quit:draw(1)
         end
 end

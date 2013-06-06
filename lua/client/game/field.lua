@@ -138,6 +138,12 @@ function Field:update(dt)
 end
 
 
+function Field:drawNoEffect(x,y)
+  love.graphics.setPixelEffect()
+  love.graphics.draw(self.back, x-unitWorldSize/4,y-unitWorldSize/4)
+  love.graphics.draw(self.mov, x-unitWorldSize/4,y-unitWorldSize/4)
+end
+
 function Field:draw(x,y)
   effect = love.graphics.getPixelEffect( )
   love.graphics.setPixelEffect()
