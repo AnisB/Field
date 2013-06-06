@@ -954,7 +954,7 @@
  <objectgroup color="#ffff00" name="levelend" width="60" height="21">
   <object x="3584" y="1088" width="192" height="128">
    <properties>
-    <property name="next" value="level6"/>
+    <property name="next" value="11"/>
    </properties>
   </object>
  </objectgroup>

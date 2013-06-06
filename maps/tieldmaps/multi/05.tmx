@@ -622,7 +622,7 @@
  <objectgroup color="#ffff00" name="levelend" width="60" height="20">
   <object x="3456" y="1024" width="320" height="192">
    <properties>
-    <property name="next" value="level6"/>
+    <property name="next" value="06"/>
    </properties>
   </object>
  </objectgroup>

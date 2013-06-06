@@ -396,7 +396,7 @@
  <objectgroup color="#ffff00" name="levelend" width="60" height="13">
   <object x="3456" y="576" width="320" height="192">
    <properties>
-    <property name="next" value="level10"/>
+    <property name="next" value="10"/>
    </properties>
   </object>
  </objectgroup>
