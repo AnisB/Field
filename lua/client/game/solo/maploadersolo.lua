@@ -28,7 +28,7 @@ function MapLoaderSolo.new(MapLoaderSoloFile,magnetManager)
     local self = {}
     setmetatable(self, MapLoaderSolo)
     print("maps/"..MapLoaderSoloFile.."\.fieldmap/map.lua")
-    self.map = require ("maps/"..MapLoaderSoloFile.."-fieldmap/map")
+    self.map = require (MapLoaderSoloFile.."-fieldmap/map")
     self.magnetManager=magnetManager
 
     -- Init

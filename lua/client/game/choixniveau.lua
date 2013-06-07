@@ -78,7 +78,7 @@ function ChoixNiveau:keyPressed(key, unicode)
 	if self.num_level > #monde.availableMaps then self.num_level = #monde.availableMaps end
 	self.level = monde.availableMaps[self.num_level]
 	if self.prev[self.level]==nil then
-			self.prev[self.level]=love.graphics.newImage("maps/"..self.level.."-fieldmap/prev.png")
+			self.prev[self.level]=love.graphics.newImage("maps/multi/"..self.level.."-fieldmap/prev.png")
 	end
 end
 
@@ -108,7 +108,7 @@ function ChoixNiveau:onMessage(msg)
     end 
 	if msg.type == "choixNiveau" then
 		monde.niveau = msg.level
-            gameStateManager.state['Gameplay']=Gameplay.new("maps/"..msg.pck.level,true)
+            gameStateManager.state['Gameplay']=Gameplay.new("maps/multi/"..msg.pck.level,true)
             gameStateManager:changeState('Gameplay')	
 	else
 		print("[ChoixNiveau] wrong type :", table2.tostring(msg))
@@ -127,14 +127,14 @@ function ChoixNiveau:synchroViewedLevelApply(level)
 	if self.num_level > #monde.availableMaps then self.num_level = #monde.availableMaps end
 	self.level = monde.availableMaps[self.num_level]
 	if self.prev[self.level]==nil then
-			self.prev[self.level]=love.graphics.newImage("maps/"..self.level.."-fieldmap/prev.png")
+			self.prev[self.level]=love.graphics.newImage("maps/multi/"..self.level.."-fieldmap/prev.png")
 	end
 	self.level = monde.availableMaps[level]
 end
 
 function ChoixNiveau:goGameplayOrder()
     serveur:send({type="syncro", pck={perso=monde.moi.perso, next="Gameplay", current="ChoixNiveau", level = self.level}})    
-    gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.level,true)
+    gameStateManager.state['Gameplay']=Gameplay.new("maps/multi/"..self.level,true)
     gameStateManager:changeState('Gameplay')
 end
 
@@ -144,7 +144,7 @@ function ChoixNiveau:backChoixPersoOrder()
 end
 
 function ChoixNiveau:goGameplayApply(level)
-    gameStateManager.state['Gameplay']=Gameplay.new("maps/"..level,true)
+    gameStateManager.state['Gameplay']=Gameplay.new("maps/multi/"..level,true)
     gameStateManager:changeState('Gameplay')
 end
 

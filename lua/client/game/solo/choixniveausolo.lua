@@ -9,6 +9,8 @@ function ChoixNiveauSolo.new(player,continuous)
     local self = {}
     setmetatable(self, ChoixNiveauSolo)
     self.back=BackgroundNiveau.new()
+    self.player = player
+
     self.levellabel=love.graphics.newImage("backgrounds/choixniveau/level.png")
 
     self.play= Button.new(150,340,200,50,   "backgrounds/choixniveau/play.png")
@@ -21,9 +23,8 @@ function ChoixNiveauSolo.new(player,continuous)
     self.availableMaps = self:listmaps()
     self.level = self.availableMaps[self.num_level]
     self.prev={}
-    self.prev[self.level]=love.graphics.newImage("maps/"..self.level.."-fieldmap/prev.png")
+    self.prev[self.level]=love.graphics.newImage("maps/solo/"..player.."/"..self.level.."-fieldmap/prev.png")
 
-    self.player = player
     self.continuous=continuous
 
     self.font = love.graphics.newFont(FontDirectory .. "font.ttf", 30)
@@ -42,7 +43,7 @@ function ChoixNiveauSolo.new(player,continuous)
 end
 
 function ChoixNiveauSolo:listmapslua()
-	local files = love.filesystem.enumerate(SoloMapDirectory)
+	local files = love.filesystem.enumerate("maps/solo/"..self.player.."/")
 	local m = {}
 	for k,v in pairs(files) do
 		if string.sub(v, -4) == ".lua" then
@@ -53,7 +54,7 @@ function ChoixNiveauSolo:listmapslua()
 end
 
 function ChoixNiveauSolo:listmaps()
-	local files = love.filesystem.enumerate(SoloMapDirectory)
+	local files = love.filesystem.enumerate("maps/solo/"..self.player.."/")
 	local m = {}
 	for k,v in pairs(files) do
 		if string.sub(v, -9) == "-fieldmap" then
@@ -90,7 +91,7 @@ function ChoixNiveauSolo:keyPressed(key, unicode)
 		if self.num_level > #self.availableMaps then self.num_level = #self.availableMaps end
 		self.level = self.availableMaps[self.num_level]
 		if self.prev[self.level]==nil then
-			self.prev[self.level]=love.graphics.newImage("maps/"..self.level.."-fieldmap/prev.png")
+			self.prev[self.level]=love.graphics.newImage("maps/solo/"..self.player.."/"..self.level.."-fieldmap/prev.png")
 		end
 		self.fonduDone=false
 		self.timerPrev=0
@@ -100,13 +101,13 @@ function ChoixNiveauSolo:keyPressed(key, unicode)
 		if self.num_level > #self.availableMaps then self.num_level = #self.availableMaps end
 		self.level = self.availableMaps[self.num_level]
 		if self.prev[self.level]==nil then
-			self.prev[self.level]=love.graphics.newImage("maps/"..self.level.."-fieldmap/prev.png")
+			self.prev[self.level]=love.graphics.newImage("maps/solo/"..self.player.."/"..self.level.."-fieldmap/prev.png")
 		end
 		self.fonduDone=false
 		self.timerPrev=0
 	elseif key == "return" then
 		if self.play.selected then
-			gameStateManager.state['GameplaySolo']= GameplaySolo.new(self.level,self.continuous,self.player)
+			gameStateManager.state['GameplaySolo']= GameplaySolo.new("maps/solo/"..self.player.."/"..self.level,self.continuous,self.player)
 			gameStateManager:changeState('GameplaySolo')
 		elseif self.returnB.selected then
 			gameStateManager:changeState('ChoixPersoSolo')

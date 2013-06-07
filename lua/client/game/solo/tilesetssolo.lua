@@ -20,13 +20,12 @@ function TilesetsSolo:getTiles(tiles,map)
 	for i,v in pairs(tiles) do
 		local tile ={}
 		tile.id = v.firstgid
-		-- tile.img = love.graphics.newImage("maps/"..map.."-fieldmap/"..v.image)
 		tile.quad= love.graphics.newQuad(0, 0, v.tilewidth, v.tileheight, v.tilewidth*2, v.tileheight)
 		tile.width=v.tilewidth
 		tile.height=v.tileheight
 
 		table.insert(self.tiles,tile)
-		gameStateManager.loader.newImage(self.tiles[tile.id] ,"img", "maps/"..map.."-fieldmap/"..v.image)
+		gameStateManager.loader.newImage(self.tiles[tile.id] ,"img", map.."-fieldmap/"..v.image)
 	end
 end
 
