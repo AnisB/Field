@@ -69,12 +69,12 @@
  </tileset>
  <layer name="foreground" width="70" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRQC4QhOJRgACCDKPhgg4EGcgPF3S9uPBgAMS6lRp+GErhAgKkhgXnwDhz2AIA/u8D0w==
+   eJxjYBgFo2AUjIJRQC4QhOJRgACCDKPhgg4EGcgPF3S9uPBgAMS6lRp+GErhAgL0CpdRgB0AADVSA/0=
   </data>
  </layer>
  <layer name="front" width="70" height="10">
   <data encoding="base64" compression="zlib">
-   eJztlUsOABAQQxG/+58YiZVYFPULL+mOmmlmQggMGaWjzKWyuQc2TE/Ui93Hz2WNH9sT3UdLfDNxei67+LnUOTEXWYh9Hq0BBd11P1jPaC6MbGbMi+u8V+uvNxfGzKKkeVGPqOV/Cz5LAhg=
+   eJxjYCAOMAIxCxCzDlHMBvUDtQE1zSTWLEYkTE97B8pMUsKFmnYP9nAhNj+yUdnuwR4uAwVGwwU7GIzhwshAWjlKqnpi3UAsIDavc1DoHkrDhdyw4UQzk9qAnUx92PxHbrhQI80SC0DphWmEYFj9RgwAAHV/AiU=
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="70" height="10">
@@ -84,6 +84,7 @@
   <object x="2432" y="448" width="64" height="128"/>
   <object x="1856" y="64" width="64" height="128"/>
   <object x="2496" y="64" width="64" height="128"/>
+  <object x="2624" y="64" width="64" height="192"/>
  </objectgroup>
  <objectgroup color="#0000ff" name="platform" width="70" height="10">
   <object x="640" y="576" width="3200" height="64"/>
@@ -105,28 +106,38 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#ff0000" name="themagnet" width="70" height="10"/>
  <objectgroup color="#800000" name="generator" width="70" height="10">
   <object type="Attractive" x="1920" y="128" width="64" height="64">
    <properties>
-    <property name="enabled" value="true"/>
     <property name="id" value="2"/>
    </properties>
   </object>
-  <object type="Attractive" x="2176" y="128" width="64" height="64">
+  <object type="Attractive" x="2240" y="128" width="64" height="64">
    <properties>
     <property name="enabled" value="true"/>
     <property name="id" value="2"/>
    </properties>
   </object>
-  <object type="Attractive" x="2432" y="128" width="64" height="64">
+  <object type="Attractive" x="2560" y="128" width="64" height="64">
    <properties>
     <property name="enabled" value="true"/>
     <property name="id" value="2"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#66ccff" name="switch" width="70" height="10"/>
+ <objectgroup color="#66ccff" name="switch" width="70" height="10">
+  <object x="1728" y="320" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+   </properties>
+  </object>
+  <object x="2560" y="192" width="64" height="64">
+   <properties>
+    <property name="enabled" value="true"/>
+    <property name="id" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#e6e6e6" name="metal" width="70" height="10"/>
  <objectgroup color="#333333" name="gate" width="70" height="10"/>
  <objectgroup color="#004080" name="acid" width="70" height="10">

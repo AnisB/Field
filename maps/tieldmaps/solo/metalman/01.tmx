@@ -69,12 +69,12 @@
  </tileset>
  <layer name="foreground" width="70" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRQC4QhOJRgACCDKPhgg4EGcgPF3S9uPBgAMS6lRp+GErhAgKkhgXnwDhz2AIA/u8D0w==
+   eJxjYBgFo2AUjIJRQC4QhOJRgACCDKPhgg4EGcgPF3S9uPBgAMS6lRp+GErhAgL0CpdRgB0AADVSA/0=
   </data>
  </layer>
  <layer name="front" width="70" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYCAOMAIxCxCzDlHMBvUDtQEtzKQ3GA0X7GA0XLCD0XDBDkbDBTsYjOHCiIaprZ5YNxALiK17OSh0D6XhQo2woUV6YSdTHzb/kRsu1EizxAJQemEaIZiNhHABAJNlAd0=
+   eJxjYCAOMAIxCxCzDlHMBvUDtQEtzKQ3GA0X7GA0XLCD0XDBDkbDBTsYjOHCiIaprZ5YNxALiK17OSh0D6XhQm7YcKKZSW3ATqY+bP4jN1yokWaJBaD0wjRCMBsJ4QIAqQ0B5g==
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="70" height="10">
@@ -102,7 +102,6 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#ff0000" name="themagnet" width="70" height="10"/>
  <objectgroup color="#800000" name="generator" width="70" height="10"/>
  <objectgroup color="#66ccff" name="switch" width="70" height="10"/>
  <objectgroup color="#e6e6e6" name="metal" width="70" height="10"/>
@@ -193,7 +192,7 @@
  <objectgroup color="#ffff00" name="levelend" width="70" height="10">
   <object x="3584" y="448" width="192" height="128">
    <properties>
-    <property name="next" value="levelX"/>
+    <property name="next" value="02"/>
    </properties>
   </object>
  </objectgroup>

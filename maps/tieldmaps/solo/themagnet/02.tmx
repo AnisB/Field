@@ -69,12 +69,12 @@
  </tileset>
  <layer name="foreground" width="70" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRQC4QhOJRgACCDKPhgg4EGcgPF3S9uPBgAMS6lRp+GErhAgKkhgXnwDhz2AIA/u8D0w==
+   eJxjYBgFo2AUjIJRQC4QhOJRgACCDKPhgg4EGcgPF3S9uPBgAMS6lRruHkrhAgL0CpdRgB0AAHkzA5c=
   </data>
  </layer>
  <layer name="front" width="70" height="10">
   <data encoding="base64" compression="zlib">
-   eJztlckOABAQQxHb/38xEidxKCrWJr2Z7WUmhMAko3W0OdQ2z8AWOyeaj1n3Ji6712TnRG/SEmuewGWFPpe6duQiC7Pfoz2gQu/cD/YzyoXBZsa+uM642ny9XBg7iyrti3rELX9bADU/Ahc=
+   eJxjYCAOMAIxCxCzDlHMBvUDtQG1zSTWPGraO5zCZbDbSW0zic2TbFS0cyiEy0CA0XDBDgZjuDCiYWqrJ9YNxAJi8zkHhe6hNFzIDRtONDOpDdjJ1IfNf+SGCzXSLLEAlF6YRggmpW4DAErnAiA=
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="70" height="10">
@@ -98,7 +98,6 @@
  </objectgroup>
  <objectgroup color="#ffffff" name="movable" width="70" height="10"/>
  <objectgroup color="#ff6666" name="destroyable" width="70" height="10"/>
- <objectgroup color="#800000" name="metalman" width="70" height="10"/>
  <objectgroup color="#ff0000" name="themagnet" width="70" height="10">
   <object x="768" y="512" width="64" height="64">
    <properties>
