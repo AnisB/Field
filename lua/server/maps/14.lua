@@ -15,7 +15,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "mur.png",
+      image = "data/mur.png",
       imagewidth = 64,
       imageheight = 64,
       transparentcolor = "#ffffff",
@@ -29,7 +29,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "sol.png",
+      image = "data/sol.png",
       imagewidth = 64,
       imageheight = 64,
       transparentcolor = "#ffffff",
@@ -43,7 +43,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "alone.png",
+      image = "data/alone.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -56,7 +56,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "left.png",
+      image = "data/left.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -69,7 +69,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "mid.png",
+      image = "data/mid.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -82,7 +82,189 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "right.png",
+      image = "data/right.png",
+      imagewidth = 64,
+      imageheight = 64,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "portebas",
+      firstgid = 7,
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      image = "data/portebas.png",
+      imagewidth = 64,
+      imageheight = 64,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "portehaut",
+      firstgid = 8,
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      image = "data/portehaut.png",
+      imagewidth = 64,
+      imageheight = 64,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "fin",
+      firstgid = 9,
+      tilewidth = 192,
+      tileheight = 128,
+      spacing = 0,
+      margin = 0,
+      image = "data/fin.png",
+      imagewidth = 192,
+      imageheight = 128,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "citerne",
+      firstgid = 10,
+      tilewidth = 418,
+      tileheight = 632,
+      spacing = 0,
+      margin = 0,
+      image = "data/citerne.png",
+      imagewidth = 418,
+      imageheight = 632,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "container1",
+      firstgid = 11,
+      tilewidth = 610,
+      tileheight = 276,
+      spacing = 0,
+      margin = 0,
+      image = "data/container1.png",
+      imagewidth = 610,
+      imageheight = 276,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "container2",
+      firstgid = 12,
+      tilewidth = 480,
+      tileheight = 330,
+      spacing = 0,
+      margin = 0,
+      image = "data/container2.png",
+      imagewidth = 480,
+      imageheight = 330,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "cable1",
+      firstgid = 13,
+      tilewidth = 77,
+      tileheight = 372,
+      spacing = 0,
+      margin = 0,
+      image = "data/cable1.png",
+      imagewidth = 77,
+      imageheight = 372,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "passerelle1",
+      firstgid = 14,
+      tilewidth = 198,
+      tileheight = 342,
+      spacing = 0,
+      margin = 0,
+      image = "data/passerelle1.png",
+      imagewidth = 198,
+      imageheight = 342,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "passerelle2",
+      firstgid = 15,
+      tilewidth = 122,
+      tileheight = 599,
+      spacing = 0,
+      margin = 0,
+      image = "data/passerelle2.png",
+      imagewidth = 122,
+      imageheight = 599,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "cable2",
+      firstgid = 16,
+      tilewidth = 46,
+      tileheight = 243,
+      spacing = 0,
+      margin = 0,
+      image = "data/cable2.png",
+      imagewidth = 46,
+      imageheight = 243,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "mur2",
+      firstgid = 17,
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      image = "data/mur2.png",
+      imagewidth = 64,
+      imageheight = 64,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "lamp1",
+      firstgid = 18,
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      image = "data/lamp1.png",
+      imagewidth = 64,
+      imageheight = 64,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "lamp2",
+      firstgid = 19,
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      image = "data/lamp2.png",
+      imagewidth = 64,
+      imageheight = 64,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "cable",
+      firstgid = 20,
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      image = "data/cable.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -92,7 +274,7 @@ return {
   layers = {
     {
       type = "tilelayer",
-      name = "Calque de Tile 1",
+      name = "front",
       x = 0,
       y = 0,
       width = 60,
@@ -325,12 +507,14 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 1920,
-          y = 256,
+          x = 128,
+          y = 512,
           width = 64,
           height = 64,
           visible = true,
-          properties = {}
+          properties = {
+            ["powers"] = "Alu#Acier#Static"
+          }
         }
       }
     },
@@ -345,12 +529,14 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 1600,
-          y = 256,
+          x = 256,
+          y = 512,
           width = 64,
           height = 64,
           visible = true,
-          properties = {}
+          properties = {
+            ["powers"] = "Repulsive#Attractive#RotativeL#RotativeR#Static"
+          }
         }
       }
     },
@@ -694,7 +880,7 @@ return {
           height = 192,
           visible = true,
           properties = {
-            ["next"] = "level13"
+            ["next"] = "13"
           }
         }
       }

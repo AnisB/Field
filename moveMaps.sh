@@ -49,6 +49,7 @@ originMulti="maps/tieldmaps/multi/"
 criteriaMulti="*.lua"
 destMulti="maps/exported/multi/"
 clientMulti="lua/client/maps/multi/"
+serverMulti="lua/server/maps/"
 
 for i in $( ls *$originMulti$criteriaMulti* ); 
 do
@@ -63,6 +64,7 @@ do
     filename=$(echo $i | sed -e "s%$destMulti%%")
     number=$(echo $filename | sed -e "s%.lua%%")
     cp $destMulti$filename "$clientMulti$number-fieldmap/map.lua"
+    cp $destMulti$filename "$serverMulti$filename"
 done
 
 echo "Multi Done"

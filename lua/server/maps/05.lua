@@ -230,12 +230,51 @@ return {
       imageheight = 64,
       properties = {},
       tiles = {}
+    },
+    {
+      name = "lamp1",
+      firstgid = 18,
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      image = "data/lamp1.png",
+      imagewidth = 64,
+      imageheight = 64,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "lamp2",
+      firstgid = 19,
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      image = "data/lamp2.png",
+      imagewidth = 64,
+      imageheight = 64,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "cable",
+      firstgid = 20,
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      image = "data/cable.png",
+      imagewidth = 64,
+      imageheight = 64,
+      properties = {},
+      tiles = {}
     }
   },
   layers = {
     {
       type = "tilelayer",
-      name = "Calque de Tile 1",
+      name = "front",
       x = 0,
       y = 0,
       width = 60,
@@ -603,7 +642,9 @@ return {
           width = 64,
           height = 64,
           visible = true,
-          properties = {}
+          properties = {
+            ["powers"] = "Alu"
+          }
         }
       }
     },
@@ -623,7 +664,9 @@ return {
           width = 64,
           height = 64,
           visible = true,
-          properties = {}
+          properties = {
+            ["powers"] = "Repulsive#Attractive"
+          }
         }
       }
     },
@@ -1915,7 +1958,7 @@ return {
           height = 192,
           visible = true,
           properties = {
-            ["next"] = "level6"
+            ["next"] = "06"
           }
         }
       }
