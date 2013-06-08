@@ -235,7 +235,7 @@ return {
   layers = {
     {
       type = "tilelayer",
-      name = "Calque de Tile 1",
+      name = "front",
       x = 0,
       y = 0,
       width = 200,
@@ -1323,7 +1323,7 @@ return {
           height = 192,
           visible = true,
           properties = {
-            ["next"] = "level1"
+            ["next"] = "01"
           }
         }
       }

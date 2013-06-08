@@ -503,7 +503,7 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["powers"] = "Alu#Acier#Static"
+            ["powers"] = "Alu"
           }
         }
       }
@@ -525,7 +525,7 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["powers"] = "Repulsive#Attractive"
+            ["powers"] = "None"
           }
         }
       }
@@ -804,7 +804,7 @@ return {
           height = 128,
           visible = true,
           properties = {
-            ["next"] = "level2"
+            ["next"] = "02"
           }
         }
       }
