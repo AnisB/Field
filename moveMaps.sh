@@ -23,10 +23,10 @@ done
 
 echo "Solo MetalMan Done"
 
-originMagnet="maps/tieldmaps/solo/metalman/"
+originMagnet="maps/tieldmaps/solo/themagnet/"
 criteriaMagnet="*.lua"
-destMagnet="maps/exported/solo/metalman/"
-clientMagnet="lua/client/maps/solo/metalman/"
+destMagnet="maps/exported/solo/themagnet/"
+clientMagnet="lua/client/maps/solo/themagnet/"
 
 for i in $( ls *$originMagnet$criteriaMagnet* ); 
 do
