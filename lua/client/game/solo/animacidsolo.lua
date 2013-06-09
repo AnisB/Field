@@ -2,41 +2,22 @@ AnimAcidSolo = {}
 AnimAcidSolo.__index = AnimAcidSolo
 
 
-
-
 AnimAcidSolo.ANIMS = {  -- set of animations available :
-	normal = {},
-	kill = {}
+	normal = {}
 }
-
 
 -- name
 AnimAcidSolo.ANIMS.normal.name = "normal"
-AnimAcidSolo.ANIMS.kill.name = "kill"
-
 
 -- delays
 AnimAcidSolo.ANIMS.normal.DELAY = 0.2
-AnimAcidSolo.ANIMS.kill.DELAY = 0.2
-
-
 
 -- number of sprites :
 AnimAcidSolo.ANIMS.normal.number = 3
-AnimAcidSolo.ANIMS.kill.number = 3
-
-
-
-
--- priority :
-AnimAcidSolo.ANIMS.normal.priority = 10
-AnimAcidSolo.ANIMS.kill.priority = 20
-
 
 
 -- automatic loopings or automatic switch :
 AnimAcidSolo.ANIMS.normal.loop = true
-AnimAcidSolo.ANIMS.kill.loop = true
 
 AnimAcidSolo.sprites={}
 
@@ -46,17 +27,14 @@ function AnimAcidSolo.new(folder)
 	local self = {}
 	setmetatable(self, AnimAcidSolo)
 	self.time = 0.0
-	-- self.sprites = {}
+
 	if AnimAcidSolo.sprites[folder]==nil then
 		AnimAcidSolo.sprites[folder]={}
 		for key,val in pairs(AnimAcidSolo.ANIMS) do
 			AnimAcidSolo.sprites[folder][key] = {}
 			for i=1, val.number do
 				local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
-			-- print("loading image =>", path)
-			--self.sprites[key][i] = 
 			    gameStateManager.loader.newImage(AnimAcidSolo.sprites[folder][key],i, path)
-			    -- AnimAcidSolo.sprites[folder][key][i] = love.graphics.newImage(path)
 			end
 		end
 	end

@@ -1,6 +1,7 @@
+--[[ 
+This file is part of the Field project]]
 
-
-
+-- Utile pour les anims
 require("game.field")
 
 Credits = {}
@@ -9,15 +10,21 @@ Credits.__index = Credits
 function Credits:new()
     local self = {}
     setmetatable(self, Credits)
+
+    -- Personnages qui bougent
     self.mm = AnimMM.new("metalman/acier")
     self.tm = AnimTM.new("themagnet")
     self.mm:load("running",true)
     self.tm:load("field",true)
+	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
+
+    -- Champ
     self.field= Field.new("Repulsive",{x=750,y=350})
+
+    -- Init attributs
     self.field.isActive=true
     self.timer=1
     self.down=true
-	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
 
     return self
 end
@@ -42,9 +49,12 @@ end
 
 
 function Credits:update(dt)
+	-- Maj du field et des persos
 	self.field:update(dt)
 	self.mm:update(dt)
 	self.tm:update(dt)
+
+	-- Clignotage du "Press Start"
 	if self.down then
 		self.timer= self.timer -dt 
 		if self.timer<=0 then
@@ -62,6 +72,7 @@ function Credits:update(dt)
 end
 
 function Credits:draw()
+	love.graphics.setColor(255,255,255,255)
 	self.field:draw(770, 375)
 	love.graphics.drawq(self.mm:getSprite(),self.diffuse, 450, 275,0,2,2)
 	love.graphics.drawq(self.tm:getSprite(),self.diffuse, 700, 275,0,2,2)

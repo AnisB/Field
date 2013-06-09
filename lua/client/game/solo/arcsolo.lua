@@ -8,7 +8,7 @@ ArcSolo.__index = ArcSolo
 TimerArcSolo =1
 
 ArcSoloType={DebutH='DebutH',MillieuH='MillieuH',FinH='FinH',DebutV='DebutV',MillieuV='MillieuV',FinV='FinV'}
-function ArcSolo.new(pos,w,h,typeArcSolo,netid)
+function ArcSolo.new(pos,w,h,typeArcSolo,id,enable)
 	local self = {}
 	setmetatable(self, ArcSolo)
 
@@ -26,11 +26,11 @@ function ArcSolo.new(pos,w,h,typeArcSolo,netid)
 	else
 		self.anim = AnimArcSolo.new('arc/arcside')
 	end
-	self:loadAnimation("on",true)
+	-- self:loadAnimation("on",true)
 	self.isTouched=false
 	self.timer=0
 	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
-
+	self.enable = enable
 	return self
 end
 
@@ -47,15 +47,25 @@ end
 function ArcSolo:preSolve(b,coll)
 end
 
+function ArcSolo:init()
+    if self.enabled then
+    	self.anim:load("on",true)
+    else
+    	self.anim:load("off",true)
+	end
+end
+
 
 
 function ArcSolo:collideWith( object, collision )
-	if object.type=='MetalManSolo' or object.type =='TheMagnetSolo' then
-		self.isTouched=true
-		object:die()
-		gameStateManager.state["GameplaySolo"]:slow(1)
-		-- gameStateManager.state["GameplaySolo"]:shakeOnX(4,500,0.4)
-		-- gameStateManager.state["GameplaySolo"]:shakeOnY(4,500,0.4)
+	if self.enabled then
+		if object.type=='MetalManSolo' or object.type =='TheMagnetSolo' then
+			self.isTouched=true
+			object:die()
+			gameStateManager.state["GameplaySolo"]:slow(1)
+		    -- gameStateManager.state["GameplaySolo"]:shakeOnX(4,500,0.4)
+		    -- gameStateManager.state["GameplaySolo"]:shakeOnY(4,500,0.4)
+		end
 	end
 end
 

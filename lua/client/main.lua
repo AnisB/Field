@@ -15,7 +15,8 @@ table2 = require("lubeboth.table2")
 
 gameStateManager = nil
 
-gamePaused = false
+-- Game paused quoi...@Florent si ça gere le focus tu l'apelle focus.
+gameFocus = false
 
 musicM = MusicManager.new()
 musicM:play()
@@ -35,7 +36,7 @@ function onMessage(msg)
 			gameStateManager.state['Gameplay']:handlePacket(msg.pk)
 		end
 	elseif msg.type == "listmaps" then
-		print("MAPS =", table2.tostring(msg))
+		-- print("MAPS =", table2.tostring(msg))
 		monde.availableMaps = msg.maps
 	else
 		gameStateManager:onMessage(msg)
@@ -99,7 +100,7 @@ function love.keyreleased(key, unicode)
 end
 
 function love.joystickpressed(joystick, button)
-	if not gamePaused then
+	if not gameFocus then
 		if button==10 then --start manette = touche return du clavier
 			love.event.push('keypressed', "return")
 		end
@@ -108,7 +109,7 @@ function love.joystickpressed(joystick, button)
 end
 
 function love.joystickreleased(joystick, button)
-	if not gamePaused then
+	if not gameFocus then
 		if button==10 then --start manette = touche return du clavier
 			love.event.push('keyreleased', "return")
 		end
@@ -117,20 +118,9 @@ function love.joystickreleased(joystick, button)
 end
 
 function love.draw()
--- love.graphics.setBackgroundColor( 0, 0, 0, 255 )
--- canvas:clear()
-gameStateManager:draw()
--- love.graphics.setCanvas()	
--- draw scaled canvas to screen
-love.graphics.setColor(255,255,255)
-
-
+	gameStateManager:draw()
 end
 
 function love.focus(b)
-    if not b then
-        gamePaused = true
-	else 
-		gamePaused = false
-	end
+	gameFocus = not b
 end

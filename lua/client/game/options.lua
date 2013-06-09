@@ -12,7 +12,7 @@ function Options:new()
     self.returnB=Button.new(1000,625,200,50,"backgrounds/options/return.png")
     self.audio=Button.newDec(100,300,200,50,"backgrounds/options/audio.png",-10,-10)
     self.video=Button.newDec(100,375,200,50,"backgrounds/options/video.png",-10,-10)
-    self.gameplay=Button.newDec(100,425,200,50 ,"backgrounds/options/gameplay.png",20,20)
+    self.gameplay=Button.newDec(125,450,200,50 ,"backgrounds/options/gameplay.png",20,20)
     self.commonBackground = CommonBackground.new()
 
     self.selection = {

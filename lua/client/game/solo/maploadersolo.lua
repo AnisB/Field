@@ -2,10 +2,13 @@
 This file is part of the Field project
 ]]
 
+-- Includes génériques
+require("const")
 
+
+-- Inlcudes relatifs aux objets
 require("game.solo.platformsolo")
 require("game.solo.camerasolo")
-require("const")
 require("game.solo.wallsolo")
 require("game.solo.destroyablesolo")
 require("game.solo.tilesetssolo")
@@ -18,6 +21,7 @@ require("game.solo.generatorsolo")
 require("game.solo.interruptorsolo")
 require("game.solo.metalsolo")
 require("game.solo.levelendsolo")
+require("game.solo.eventtimer")
 
 
 
@@ -45,6 +49,7 @@ function MapLoaderSolo.new(MapLoaderSoloFile,magnetManager)
     self.arcs={}
     self.levelends={}
     self.allowedPowers={}
+    self.timers={}
     -- Creation du Layer
     self.tilesets={}
 
@@ -105,6 +110,9 @@ function MapLoaderSolo.new(MapLoaderSoloFile,magnetManager)
                 -- Gestion de position
                 self.theMagnetPos={x=d.objects[1].x,y=d.objects[1].y}
                 self.theMagnetPowers=d.objects[1].properties["powers"]
+                elseif  d.name=="timer" then
+                -- Gestion des timers
+                self:createTimers(d) 
             end    
             
     end
@@ -193,6 +201,23 @@ function MapLoaderSolo:createMetals(map)
     end
 end
 
+
+function MapLoaderSolo:createTimers(map)
+    for i,j in pairs(map.objects) do
+        local m =EventTimer.new(
+            j.properties["id"],
+            j.properties["duration"],
+            j.properties["state"],
+            j.properties["loop"],
+            j.properties,
+            self,
+            self.magnetManager
+            )       
+        self.timers[j.properties["id"]] = m
+    end
+end
+
+
 function MapLoaderSolo:update(dt)
 
     for i,b in pairs(self.destroyables) do
@@ -241,6 +266,9 @@ function MapLoaderSolo:update(dt)
     for i,p in pairs(self.levelends) do
         p:update(dt)
     end
+    for i,p in pairs(self.timers) do
+        p:update(dt)
+    end
 end
 
 
@@ -286,12 +314,9 @@ function MapLoaderSolo:init()
         p:init()
     end
 
-    -- for i,p in pairs(self.arcs) do
-    --     p:init(dt)
-    -- end
-    -- for i,p in pairs(self.levelends) do
-    --     p:init(dt)
-    -- end
+    for i,p in pairs(self.arcs) do
+        p:init(dt)
+    end
 end
 
 function MapLoaderSolo:isSeen(pos1,pos2,w,h)
@@ -358,9 +383,6 @@ function MapLoaderSolo:draw(pos)
 
 end
 
-
-
-
 function MapLoaderSolo:firstPlanDraw(pos)
  
     for i,p in pairs(self.acids) do
@@ -414,6 +436,67 @@ function MapLoaderSolo:closeNG(id)
         end
     end
 end
+
+
+-- Actions sur les timers
+
+
+function MapLoaderSolo:enableT(id)
+    for i,p in pairs(self.timers) do
+        if(p.id==id) then
+            p.enabled = true
+        end
+    end
+end
+
+function MapLoaderSolo:disableT(id)
+    for i,p in pairs(self.timers) do
+        if(p.id==id) then
+            p.enabled = false
+        end
+    end
+end
+
+function MapLoaderSolo:switchT(id)
+    for i,p in pairs(self.timers) do
+        if(p.id==id) then
+            p.enabled = not p.enabled
+        end
+    end
+end
+
+
+-- Actions sur les arcs
+
+
+function MapLoaderSolo:enableA(id)
+    for i,p in pairs(self.arcs) do
+        if(p.id==id) then
+            p.enabled = true
+        end
+    end
+end
+
+function MapLoaderSolo:disableA(id)
+    for i,p in pairs(self.arcs) do
+        if(p.id==id) then
+            p.enabled = false
+        end
+    end
+end
+
+function MapLoaderSolo:switchA(id)
+    for i,p in pairs(self.arcs) do
+        if(p.id==id) then
+            p.enabled = not p.enabled
+        end
+    end
+end
+
+
+
+
+-- Interraction des joueurs
 
 function MapLoaderSolo:handleTry(tryer)
     for i,p in pairs(self.interruptors) do
