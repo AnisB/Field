@@ -158,7 +158,9 @@
   <object x="3584" y="1600" width="64" height="64"/>
   <object x="3584" y="2496" width="64" height="64"/>
  </objectgroup>
- <objectgroup color="#ffffff" name="movable" width="60" height="60"/>
+ <objectgroup color="#ffffff" name="movable" width="60" height="60">
+  <object x="1664" y="1664"/>
+ </objectgroup>
  <objectgroup color="#ff6666" name="destroyable" width="60" height="60"/>
  <objectgroup color="#ff0000" name="themagnet" width="60" height="60">
   <object x="768" y="3712" width="64" height="64">
