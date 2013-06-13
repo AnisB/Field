@@ -34,6 +34,7 @@ function MapLoader.new(MapLoaderFile,magnetManager)
     self.generators={}
     self.interruptors={}
     self.gateinterruptors={}
+    self.arcinterruptors={}
     self.gates={}
     self.metals={}
     self.acids={}
@@ -72,6 +73,9 @@ function MapLoader.new(MapLoaderFile,magnetManager)
                 elseif  d.name=="gateswitch" then
                 -- Gestion des interrutpeurs de porte
                 self:createGateInterruptors(d)
+                elseif  d.name=="arcswitch" then
+                -- Gestion des interrutpeurs de porte
+                self:createArcInterruptors(d)
 
                 elseif  d.name=="gate" then
                 -- Gestion des portes
@@ -150,6 +154,13 @@ function MapLoader:createGateInterruptors(map)
     end
 end
 
+function MapLoader:createArcInterruptors(map)
+    for i,j in pairs(map.objects) do
+        table.insert(self.arcinterruptors, ArcInterruptor.new({x=(j.x),y=(j.y)},true,j.properties["id"],self,j.properties["enabled"],i))
+    end
+end
+
+
 function MapLoader:createGates(map)
     for i,j in pairs(map.objects) do
         table.insert(self.gates, Gate.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["openid"],j.properties["closeid"],j.properties["prev"],j.properties["next"],j.properties["animid"],j.properties["enabled"],j.properties["type"],self,i));
@@ -216,6 +227,9 @@ function MapLoader:update(dt)
     for i,p in pairs(self.gateinterruptors) do
         p:update(dt)
     end    
+     for i,p in pairs(self.arcinterruptors) do
+        p:update(dt)
+    end       
 
     for i,p in pairs(self.gates) do
         p:update(dt)
@@ -287,6 +301,11 @@ function MapLoader:draw(pos)
     end
     
     for i,p in pairs(self.gateinterruptors) do
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end    
+    for i,p in pairs(self.arcinterruptors) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
           p:draw(pos.x-windowW/2,windowH/2-pos.y)
         end

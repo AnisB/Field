@@ -789,6 +789,32 @@ return {
     },
     {
       type = "objectgroup",
+      name = "timer",
+      visible = true,
+      opacity = 1,
+      properties = {},
+      objects = {
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 3584,
+          y = 448,
+          width = 192,
+          height = 128,
+          visible = true,
+          properties = {
+            ["id"] = "1",
+            ["duration"] = "1",
+            ["state"] = "on",
+            ["loop"] = "true",
+            ["Generators"] = "2@2#"
+         } 
+        }
+      }
+    },
+    {
+      type = "objectgroup",
       name = "gateswitch",
       visible = true,
       opacity = 1,

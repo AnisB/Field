@@ -24,7 +24,7 @@ function Interruptor.new(pos,type,generatorID,magnetManager,sprite,netid)
 	self.canBeEnableTM=0
 	self.magnetManager=magnetManager
 	self.generatorID= generatorID
-	self.anim = AnimInter.new('inter')
+	self.anim = AnimInter.new('switch/gene')
 	self:loadAnimation("off",true)
 	return self
 end

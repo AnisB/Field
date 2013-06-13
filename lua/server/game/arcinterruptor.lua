@@ -3,30 +3,29 @@
 This file is part of the Field project]]
 
 
-require("game.solo.animintersolo")
-GateInterruptorSolo = {}
-GateInterruptorSolo.__index = GateInterruptorSolo
+require("game.animinter")
+ArcInterruptor = {}
+ArcInterruptor.__index = ArcInterruptor
 
-GateInterruptorSoloTimer =0.5
-function GateInterruptorSolo.new(pos,type,gateOpenID,gateCloseID,mapLoader,enabled,netid)
+ArcInterruptorTimer =0.5
+function ArcInterruptor.new(pos,type,arcID,mapLoader,enabled,netid)
 	local self = {}
-	setmetatable(self, GateInterruptorSolo)
+	setmetatable(self, ArcInterruptor)
 
 	self.netid=netid
 	self.position={x=pos.x,y=pos.y}
 	local decalage={unitWorldSize/2,unitWorldSize/2}
 	self.pc = Physics.newInterruptor(self.position.x,self.position.y,unitWorldSize,unitWorldSize,type,decalage)
 	self.typeG=type
-	self.anim = AnimInterSolo.new('switch/gate')
+	self.anim = AnimInterSolo.new('switch/arc')
 	self.pc.fixture:setUserData(self)
-	self.type='GateInterruptorSolo'
+	self.type='ArcInterruptor'
 
 
 	self.canBeEnableTM=0
 	self.canBeEnableMM=0
 	self.mapLoader=mapLoader
-	self.gateOpenID= gateOpenID
-	self.gateCloseID= gateCloseID
+	self.arcID= arcID
 	self.w=unitWorldSize
 	self.h=unitWorldSize
 
@@ -35,7 +34,7 @@ function GateInterruptorSolo.new(pos,type,gateOpenID,gateCloseID,mapLoader,enabl
 
 	return self
 end
-function GateInterruptorSolo:init()
+function ArcInterruptor:init()
 	if enabled then
 		self.on=true
 		self:loadAnimation("on",true)
@@ -46,7 +45,7 @@ function GateInterruptorSolo:init()
 	end
 end
 
-function GateInterruptorSolo:isAppliable(pos)
+function ArcInterruptor:isAppliable(pos)
 	 local ax =pos.x-self.position.x
 	 local ay =pos.y-self.position.y
 	if math.abs(math.sqrt(ax*ax+ay*ay))<=self.fieldRadius then
@@ -58,22 +57,22 @@ end
 
 
 
-function GateInterruptorSolo:getPosition()
+function ArcInterruptor:getPosition()
 	return self.position
 end
-function GateInterruptorSolo:handleTry(tryer)
+function ArcInterruptor:handleTry(tryer)
 
 	if self.timer ==0 then
-		self.timer=GateInterruptorSoloTimer 
+		self.timer=ArcInterruptorTimer 
 		if tryer=='MetalMan' then
 			if self.canBeEnableMM>0 then
 				self.on= not self.on
 				if self.on then
-					self.mapLoader:openG(self.gateOpenID)
+					self.mapLoader:enableA(self.arcID)
 					self:loadAnimation("launching",true)
 
 				else
-					self.mapLoader:closeG(self.gateCloseID)
+					self.mapLoader:disableA(self.arcID)
 					self:loadAnimation("shutdown",true)
 
 
@@ -83,11 +82,11 @@ function GateInterruptorSolo:handleTry(tryer)
 			if self.canBeEnableTM>0 then
 				self.on= not self.on
 				if self.on then
-					self.mapLoader:openG(self.gateOpenID)
+					self.mapLoader:enableA(self.arcID)
 					self:loadAnimation("launching",true)
 
 				else
-					self.mapLoader:closeG(self.gateCloseID)
+					self.mapLoader:disableA(self.arcID)
 					self:loadAnimation("shutdown",true)
 				end
 			end
@@ -96,12 +95,12 @@ function GateInterruptorSolo:handleTry(tryer)
 end
 
 
-function GateInterruptorSolo:preSolve(b,coll)
+function ArcInterruptor:preSolve(b,coll)
 end
 
 
 
-function GateInterruptorSolo:collideWith( object, collision )
+function ArcInterruptor:collideWith( object, collision )
 	if object.type=='MetalManSolo' then
 		self.canBeEnableMM =self.canBeEnableMM+1
 	end
@@ -110,7 +109,7 @@ function GateInterruptorSolo:collideWith( object, collision )
 	end
 end
 
-function GateInterruptorSolo:unCollideWith( object, collision )
+function ArcInterruptor:unCollideWith( object, collision )
 	if object.type=='MetalManSolo' then
 		self.canBeEnableMM =self.canBeEnableMM-1
 	end
@@ -119,7 +118,7 @@ function GateInterruptorSolo:unCollideWith( object, collision )
 	end
 end
 
-function GateInterruptorSolo:addStatMetal(metal)
+function ArcInterruptor:addStatMetal(metal)
   for _, value in pairs(self.statMetals) do
     if value == metal then
       return 
@@ -130,16 +129,16 @@ function GateInterruptorSolo:addStatMetal(metal)
 end
 
 
-function GateInterruptorSolo:changeState( newState )
+function ArcInterruptor:changeState( newState )
 	self.on=newState
 end
 
 
-function GateInterruptorSolo:getPosition(  )
+function ArcInterruptor:getPosition(  )
 	return self.position
 end
 
-function GateInterruptorSolo:update(seconds)
+function ArcInterruptor:update(seconds)
 	if self.timer>0 then
 		self.timer=self.timer-seconds
 		if self.timer<=0 then
@@ -154,15 +153,15 @@ end
 
 
 
-function GateInterruptorSolo:loadAnimation(anim, force)
+function ArcInterruptor:loadAnimation(anim, force)
 		self.anim:load(anim, force)
 end
 
-function GateInterruptorSolo:draw(x,y)
+function ArcInterruptor:draw(x,y)
     	love.graphics.drawq(self.anim:getSprite(), self.quad,self.position.x-x, self.position.y+y)
 
 end
 
-function GateInterruptorSolo:send(x,y)
-    return ("@gateinterruptorSolo".."#"..self.netid.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
+function ArcInterruptor:send(x,y)
+    return ("@Arcinterruptor".."#"..self.netid.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
 end

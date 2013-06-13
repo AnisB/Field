@@ -17,7 +17,7 @@ function GateInterruptor.new(pos,type,gateOpenID,gateCloseID,mapLoader,enabled,n
 	local decalage={unitWorldSize/2,unitWorldSize/2}
 	self.pc = Physics.newInterruptor(self.position.x,self.position.y,unitWorldSize,unitWorldSize,type,decalage)
 	self.typeG=type
-	self.anim = AnimInter.new('inter')
+	self.anim = AnimInter.new('switch/gate')
 	self.pc.fixture:setUserData(self)
 	self.type='GateInterruptor'
 

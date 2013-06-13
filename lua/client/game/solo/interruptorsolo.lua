@@ -24,7 +24,7 @@ function InterruptorSolo.new(pos,type,generatorID,magnetManager,sprite,netid)
 	self.canBeEnableTM=0
 	self.magnetManager=magnetManager
 	self.generatorID= generatorID
-	self.anim = AnimInterSolo.new('inter')
+	self.anim = AnimInterSolo.new('switch/gene')
 	self.quad= love.graphics.newQuad(0, 0, unitWorldSize, unitWorldSize, unitWorldSize*2,unitWorldSize)
 
 	return self
