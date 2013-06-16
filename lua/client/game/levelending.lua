@@ -59,7 +59,7 @@ end
 
 function LevelEnding:goGameplayOrder()
     serveur:send({type="syncro", pck={perso=monde.moi.perso, next="Gameplay", current="LevelEnding"}})    
-    gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
+    gameStateManager.state['Gameplay']=Gameplay.new("maps/multi/"..self.next,true)
     gameStateManager:changeState('Gameplay')
 end
 
@@ -69,7 +69,7 @@ function LevelEnding:backChoixNiveauOrder()
 end
 
 function LevelEnding:goGameplayApply()
-    gameStateManager.state['Gameplay']=Gameplay.new("maps/"..self.next,true)
+    gameStateManager.state['Gameplay']=Gameplay.new("maps/multi/"..self.next,true)
     gameStateManager:changeState('Gameplay')
 end
 

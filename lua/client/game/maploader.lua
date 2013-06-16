@@ -33,6 +33,7 @@ function MapLoader.new(MapLoaderFile)
     self.generators={}
     self.interruptors={}
     self.gateinterruptors={}
+    self.arcinterruptors={}
     self.gates={}
     self.metals={}
     self.acids={}
@@ -146,7 +147,7 @@ end
 
 function MapLoader:handlePacket(maps)
 	for i,p in pairs(self.metals) do
-	p.drawed=false
+		p.drawed=false
 	end
 
 	for i,p in pairs(self.destroyables) do
@@ -178,17 +179,17 @@ function MapLoader:handlePacket(maps)
 	end 
 
 	if  maps.metal~=nil then
-	for v in string.gmatch(maps.metal, "[^@]+") do
-		t={}
-		for d in string.gmatch(v, "[^#]+") do
-			table.insert(t,d)
+		for v in string.gmatch(maps.metal, "[^@]+") do
+			t={}
+			for d in string.gmatch(v, "[^#]+") do
+				table.insert(t,d)
+			end
+			if self.metals[tonumber(t[2])]==nil then
+				self.metals[tonumber(t[2])]=Metal.new({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
+			else
+				self.metals[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[4],tonumber(t[5]))
+			end
 		end
-		if self.metals[tonumber(t[2])]==nil then
-			self.metals[tonumber(t[2])]=Metal.new({x=tonumber(t[6]),y=tonumber(t[7])},t[3],t[4],tonumber(t[5]))
-		else
-			self.metals[tonumber(t[2])]:syncronize({x=tonumber(t[6]),y=tonumber(t[7])},t[4],tonumber(t[5]))
-		end
-	end
 	end
 
 	if  maps.destroyable~=nil then
@@ -233,6 +234,19 @@ function MapLoader:handlePacket(maps)
 		end
 	end
 
+	if  maps.arcinterruptor~=nil then
+		for v in string.gmatch(maps.arcinterruptor, "[^@]+") do
+			t={}
+			for d in string.gmatch(v, "[^#]+") do
+				table.insert(t,d)
+			end
+			if self.arcinterruptors[tonumber(t[2])]==nil then
+				self.arcinterruptors[tonumber(t[2])]=ArcInterruptor.new({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
+			else
+				self.arceinterruptors[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
+			end            
+		end
+	end   
 
 	if  maps.gateinterruptor~=nil then
 		for v in string.gmatch(maps.gateinterruptor, "[^@]+") do

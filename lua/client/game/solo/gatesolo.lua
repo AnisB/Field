@@ -102,7 +102,6 @@ end
 	self.pc.fixture:setFilterData(1,1,0)
 	self.anim:load("closing",true)
 	self.sound.close:play()
-
 	end
 
 

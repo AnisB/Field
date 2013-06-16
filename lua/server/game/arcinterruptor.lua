@@ -151,7 +151,14 @@ function ArcInterruptor:update(seconds)
 	self.position.y=y
 end
 
-
+function ArcInterruptor:syncronizeState(newState)
+	self.on = newState
+	if newState then
+		self:loadAnimation("launching",true)
+	else
+		self:loadAnimation("shutdown",true)
+	end
+end
 
 function ArcInterruptor:loadAnimation(anim, force)
 		self.anim:load(anim, force)

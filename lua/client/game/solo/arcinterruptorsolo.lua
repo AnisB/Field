@@ -1,5 +1,3 @@
-	self.gateCloseID= gateCloseID
-
 --[[ 
 This file is part of the Field project]]
 
@@ -26,17 +24,23 @@ function ArcInterruptorSolo.new(pos,type,arcID,mapLoader,enabled,netid)
 	self.canBeEnableTM=0
 	self.canBeEnableMM=0
 	self.mapLoader=mapLoader
-	self.arcID= arcID
+	self.arcID= tonumber(arcID)
 	self.w=unitWorldSize
 	self.h=unitWorldSize
 
 	self.timer=0
+
+	if enabled =="true" then
+		self.enabled = true
+	else
+		self.enabled = false
+	end
 	self.quad= love.graphics.newQuad(0, 0, unitWorldSize, unitWorldSize, unitWorldSize*2,unitWorldSize)
 
 	return self
 end
 function ArcInterruptorSolo:init()
-	if enabled then
+	if self.enabled then
 		self.on=true
 		self:loadAnimation("on",true)
 	else
@@ -56,6 +60,14 @@ function ArcInterruptorSolo:isAppliable(pos)
 	end
 end
 
+function ArcInterruptorSolo:syncronizeState(newState)
+	self.on = newState
+	if newState then
+		self:loadAnimation("launching",true)
+	else
+		self:loadAnimation("shutdown",true)
+	end
+end
 
 
 function ArcInterruptorSolo:getPosition()

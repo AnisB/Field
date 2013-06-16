@@ -14,7 +14,7 @@ function GateInterruptor.new(pos,anim,id)
 	self.drawed=true
 	
 	self.type='GateInterruptor'
-	self.anim = AnimInter.new('inter')
+	self.anim = AnimInter.new('switch/gate')
 	self.anim:syncronize(anim,id)
 	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
 	return self

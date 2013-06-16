@@ -29,6 +29,16 @@ function Interruptor.new(pos,type,generatorID,magnetManager,sprite,netid)
 	return self
 end
 
+function Interruptor:syncronizeState(newState)
+	self.on = newState
+	if newState then
+		self:loadAnimation("launching",true)
+	else
+		self:loadAnimation("shutdown",true)
+	end
+end
+
+
 
 function Interruptor:isAppliable(pos)
 	local ax =pos.x-self.position.x

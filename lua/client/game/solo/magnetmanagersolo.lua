@@ -76,16 +76,32 @@ function MagnetManagerSolo:enableG(GID)
 	for i,v in pairs(self.passiveGenerators) do
 		if v.id == GID then
 			v:enableG()
+			done = true
 		end
 	end
+	if done then
+        for i,p in pairs(self.gateinterruptors) do
+            if(p.id==id) then
+                p:syncronizeState(false)
+            end
+        end
+    end
 end
 
 function MagnetManagerSolo:disableG(GID)
 	for i,v in pairs(self.activeGenerators) do
-		if v.id ==GID then
+		if v.generatorID ==GID then
 			v:disableG()
+			done = true
 		end
 	end
+	if done then
+        for i,p in pairs(self.gateinterruptors) do
+            if(p.generatorID==id) then
+                p:syncronizeState(false)
+            end
+        end
+    end
 end
 
 function MagnetManagerSolo:changeMetalType(metal,oldType,newType)

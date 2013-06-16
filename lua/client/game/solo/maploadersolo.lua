@@ -14,6 +14,7 @@ require("game.solo.destroyablesolo")
 require("game.solo.tilesetssolo")
 require("game.solo.movablesolo")
 require("game.solo.gateinterruptorsolo")
+require("game.solo.arcinterruptorsolo")
 require("game.solo.gatesolo")
 require("game.solo.acidsolo")
 require("game.solo.arcsolo")
@@ -43,6 +44,7 @@ function MapLoaderSolo.new(MapLoaderSoloFile,magnetManager)
     self.generators={}
     self.interruptors={}
     self.gateinterruptors={}
+    self.arcinterruptors={}
     self.gates={}
     self.metals={}
     self.acids={}
@@ -89,6 +91,10 @@ function MapLoaderSolo.new(MapLoaderSoloFile,magnetManager)
                 elseif  d.name=="gateswitch" then
                 -- Gestion des interrutpeurs de porte
                 self:createGateInterruptors(d)
+
+                elseif  d.name=="arcswitch" then
+                -- Gestion des interrutpeurs d'arc
+                self:createArcInterruptors(d)
 
                 elseif  d.name=="gate" then
                 -- Gestion des portes
@@ -158,13 +164,19 @@ end
 
 function MapLoaderSolo:createInterruptors(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.interruptors, InterruptorSolo.new({x=(j.x),y=(j.y)},true,j.properties["id"],self.magnetManager,j.properties["image"],i))
+        table.insert(self.interruptors, InterruptorSolo.new({x=(j.x),y=(j.y)},true,j.properties["id"],self.magnetManager,j.properties["timers"],i))
     end
 end
 
 function MapLoaderSolo:createGateInterruptors(map)
     for i,j in pairs(map.objects) do
         table.insert(self.gateinterruptors, GateInterruptorSolo.new({x=(j.x),y=(j.y)},true,j.properties["openid"],j.properties["closeid"],self,j.properties["enabled"],i))
+    end
+end
+
+function MapLoaderSolo:createArcInterruptors(map)
+    for i,j in pairs(map.objects) do
+        table.insert(self.arcinterruptors, ArcInterruptorSolo.new({x=(j.x),y=(j.y)},true,j.properties["id"],self,j.properties["enabled"],i))
     end
 end
 
@@ -176,7 +188,7 @@ end
 
 function MapLoaderSolo:createAcids(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.acids, AcidSolo.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["type"],i))
+        table.insert(self.acids, AcidSolo.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["type"],j.properties["id"],j.properties["enabled"],i))
     end
 end
 
@@ -188,7 +200,7 @@ end
 
 function MapLoaderSolo:createArcs(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.arcs, ArcSolo.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["type"],i))
+        table.insert(self.arcs, ArcSolo.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["type"],j.properties["id"],j.properties["enabled"],i))
     end
 end
 
@@ -248,9 +260,13 @@ function MapLoaderSolo:update(dt)
         p:update(dt)
     end
     
+    for i,p in pairs(self.arcinterruptors) do
+        p:update(dt)
+    end  
+
     for i,p in pairs(self.gateinterruptors) do
         p:update(dt)
-    end    
+    end        
 
     for i,p in pairs(self.gates) do
         p:update(dt)
@@ -306,6 +322,10 @@ function MapLoaderSolo:init()
         p:init()
     end    
 
+    for i,p in pairs(self.arcinterruptors) do
+        p:init()
+    end    
+
     for i,p in pairs(self.gates) do
         p:init()
     end
@@ -315,7 +335,7 @@ function MapLoaderSolo:init()
     end
 
     for i,p in pairs(self.arcs) do
-        p:init(dt)
+        p:init()
     end
 end
 
@@ -380,6 +400,11 @@ function MapLoaderSolo:draw(pos)
         end
     end    
 
+    for i,p in pairs(self.arcinterruptors) do
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+          p:draw(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end 
 
 end
 
@@ -409,6 +434,14 @@ function MapLoaderSolo:openG(id)
     for i,p in pairs(self.gates) do
         if(p.openID==id) then
             p:openG()
+            done = true
+        end
+    end
+    if done then
+        for i,p in pairs(self.gateinterruptors) do
+            if(p.gateOpenID==id) then
+                p:syncronizeState(true)
+            end
         end
     end
 end
@@ -417,6 +450,14 @@ function MapLoaderSolo:closeG(id)
     for i,p in pairs(self.gates) do
         if(p.closeID==id) then
             p:closeG()
+            done = true
+        end
+    end
+    if done then
+        for i,p in pairs(self.gateinterruptors) do
+            if(p.gateCloseID==id) then
+                p:syncronizeState(false)
+            end
         end
     end
 end
@@ -434,7 +475,7 @@ function MapLoaderSolo:closeNG(id)
         if(p.animid==id) then
             p:closeG()
         end
-    end
+    end    
 end
 
 
@@ -445,6 +486,7 @@ function MapLoaderSolo:enableT(id)
     for i,p in pairs(self.timers) do
         if(p.id==id) then
             p.enabled = true
+            done = true
         end
     end
 end
@@ -453,6 +495,7 @@ function MapLoaderSolo:disableT(id)
     for i,p in pairs(self.timers) do
         if(p.id==id) then
             p.enabled = false
+            done = true
         end
     end
 end
@@ -472,7 +515,15 @@ end
 function MapLoaderSolo:enableA(id)
     for i,p in pairs(self.arcs) do
         if(p.id==id) then
-            p.enabled = true
+            p:activateA()
+            done = true
+        end
+    end
+    if done then
+        for i,p in pairs(self.arcinterruptors) do
+            if(p.arcID==id) then
+                p:syncronizeState(true)
+            end
         end
     end
 end
@@ -480,7 +531,15 @@ end
 function MapLoaderSolo:disableA(id)
     for i,p in pairs(self.arcs) do
         if(p.id==id) then
-            p.enabled = false
+            p:disableA()
+            done = true
+        end
+    end
+    if done then
+        for i,p in pairs(self.arcinterruptors) do
+            if(p.arcID==id) then
+                p:syncronizeState(false)
+            end
         end
     end
 end
@@ -488,7 +547,21 @@ end
 function MapLoaderSolo:switchA(id)
     for i,p in pairs(self.arcs) do
         if(p.id==id) then
-            p.enabled = not p.enabled
+             if p.enabled then
+                p:disableA()
+                newState = false
+            else
+                p:activateA()
+                newState = true
+            end
+            done = true
+        end
+    end
+    if done then
+        for i,p in pairs(self.arcinterruptors) do
+            if(p.arcID==id) then
+                p:syncronizeState(newState)
+            end
         end
     end
 end
@@ -503,6 +576,9 @@ function MapLoaderSolo:handleTry(tryer)
         p:handleTry(tryer)
     end    
     for i,p in pairs(self.gateinterruptors) do
+        p:handleTry(tryer)
+    end  
+    for i,p in pairs(self.arcinterruptors) do
         p:handleTry(tryer)
     end    
 end

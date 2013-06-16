@@ -53,6 +53,14 @@ function GateInterruptor:isAppliable(pos)
 	end
 end
 
+function GateInterruptor:syncronizeState(newState)
+	self.on = newState
+	if newState then
+		self:loadAnimation("launching",true)
+	else
+		self:loadAnimation("shutdown",true)
+	end
+end
 
 
 function GateInterruptor:getPosition()

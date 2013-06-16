@@ -2,38 +2,24 @@ AnimAcid = {}
 AnimAcid.__index = AnimAcid
 
 AnimAcid.ANIMS = {  -- set of animations available :
-	normal = {},
-	kill = {}
+	normal = {}
 }
 
 
 -- name
 AnimAcid.ANIMS.normal.name = "normal"
-AnimAcid.ANIMS.kill.name = "kill"
-
 
 -- delays
 AnimAcid.ANIMS.normal.DELAY = 0.2
-AnimAcid.ANIMS.kill.DELAY = 0.2
-
-
 
 -- number of sprites :
 AnimAcid.ANIMS.normal.number = 3
-AnimAcid.ANIMS.kill.number = 3
-
-
-
 
 -- priority :
 AnimAcid.ANIMS.normal.priority = 10
-AnimAcid.ANIMS.kill.priority = 20
-
-
 
 -- automatic loopings or automatic switch :
 AnimAcid.ANIMS.normal.loop = true
-AnimAcid.ANIMS.kill.loop = true
 
 
 

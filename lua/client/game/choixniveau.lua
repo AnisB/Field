@@ -118,9 +118,10 @@ end
 
 
 function ChoixNiveau:synchroViewedLevel()
-    serveur:send({type="syncroLevel", pck={perso=monde.moi.perso, current="ChoixNiveau", level=self.num_level}})    
+	if self.num_level > 0 and self.num_level<= #self.level then
+		serveur:send({type="syncroLevel", pck={perso=monde.moi.perso, current="ChoixNiveau", level=self.num_level}})    
+	end
 end
-
 function ChoixNiveau:synchroViewedLevelApply(level)
 	self.num_level = level
 	if self.num_level < 1 then self.num_level = 1 end

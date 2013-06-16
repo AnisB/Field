@@ -46,6 +46,17 @@ function GateInterruptorSolo:init()
 	end
 end
 
+
+function GateInterruptorSolo:syncronizeState(newState)
+	self.on = newState
+	if newState then
+		self:loadAnimation("launching",true)
+	else
+		self:loadAnimation("shutdown",true)
+	end
+end
+
+
 function GateInterruptorSolo:isAppliable(pos)
 	 local ax =pos.x-self.position.x
 	 local ay =pos.y-self.position.y

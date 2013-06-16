@@ -7,7 +7,7 @@ InterruptorSolo = {}
 InterruptorSolo.__index = InterruptorSolo
 
 
-function InterruptorSolo.new(pos,type,generatorID,magnetManager,sprite,netid)
+function InterruptorSolo.new(pos,type,generatorID,magnetManager,sprite,netid,timers)
 	local self = {}
 	setmetatable(self, InterruptorSolo)
 	self.netid=netid
@@ -26,10 +26,31 @@ function InterruptorSolo.new(pos,type,generatorID,magnetManager,sprite,netid)
 	self.generatorID= generatorID
 	self.anim = AnimInterSolo.new('switch/gene')
 	self.quad= love.graphics.newQuad(0, 0, unitWorldSize, unitWorldSize, unitWorldSize*2,unitWorldSize)
-
+	
+	self.timers = {}
+	self:parseTimers(timers)
 	return self
 end
 
+function InterruptorSolo:getArgs(string)
+	local ret ={}
+	for i in string.gmatch(string, "([^@]+)") do
+		table.insert(ret, i)
+	end
+	return ret
+end
+
+function InterruptorSolo:parseTimers(parTimer)
+	if parTimer ~= nil then
+		print("Il y a des timers dans cet interrupteur")
+		for k in string.gmatch(parTimer, "([^#]+)") do
+			local timer = self:getArgs(k)
+			assert(#timer == 2)
+			table.insert(self.timers,timer)
+			-- print(timer[1],timer[2])
+		end
+	end
+end
 function InterruptorSolo:init()
 	self:loadAnimation("off",true)
 end
@@ -40,6 +61,14 @@ function InterruptorSolo:isAppliable(pos)
 		return true
 	else
 		return false
+	end
+end
+function InterruptorSolo:syncronizeState(newState)
+	self.on = newState
+	if newState then
+		self:loadAnimation("launching",true)
+	else
+		self:loadAnimation("shutdown",true)
 	end
 end
 

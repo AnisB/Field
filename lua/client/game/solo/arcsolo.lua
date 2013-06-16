@@ -12,7 +12,7 @@ function ArcSolo.new(pos,w,h,typeArcSolo,id,enable)
 	local self = {}
 	setmetatable(self, ArcSolo)
 
-	self.netid=netid
+	self.id=tonumber(id)
 	self.position={x=pos.x,y=pos.y}
 	self.w=w
 	self.h=h
@@ -30,7 +30,12 @@ function ArcSolo.new(pos,w,h,typeArcSolo,id,enable)
 	self.isTouched=false
 	self.timer=0
 	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
-	self.enable = enable
+	if enable == "true" then
+		self.enabled = true
+	else
+		self.enabled = false
+	end
+
 	return self
 end
 
@@ -72,7 +77,15 @@ end
 function ArcSolo:unCollideWith( object, collision )
 
 end
+function ArcSolo:activateA( )
+	self.enabled = true
+	self.anim:load("on",true)
+	end
 
+function ArcSolo:disableA( )
+	self.enabled = false
+	self.anim:load("off",true)
+	end
 function ArcSolo:update(seconds)
 	if self.isTouched then
 		self.timer=self.timer+seconds
@@ -99,4 +112,8 @@ function ArcSolo:draw(x,y)
 	elseif (  self.arcSoloType==ArcSoloType.FinH) then
 		love.graphics.drawq(self.anim:getSprite(), self.diffuse,self.position.x-x+unitWorldSize , self.position.y+y,0,-1,1)
 	end
+end
+
+function ArcSolo:send(x,y)
+		return ("@arc".."#"..self.netid.."#"..self.arcType.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor(self.position.y+y))
 end

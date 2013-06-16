@@ -2,19 +2,22 @@
 This file is part of the Field project
 ]]
 
+-- Includes génériques
+require("const")
 
 require("game.platform")
 require("game.camera")
-require("const")
 require("game.wall")
 require("game.destroyable")
 require("game.tilesets")
 require("game.movable")
 require("game.gateinterruptor")
+require("game.arcinterruptor")
 require("game.gate")
 require("game.acid")
 require("game.arc")
 require("game.levelend")
+require("game.eventtimer")
 
 
 MapLoader = {}
@@ -41,6 +44,8 @@ function MapLoader.new(MapLoaderFile,magnetManager)
     self.arcs={}
     self.levelends={}
     self.allowedPowers={}
+    self.timers={}
+
 
 
     for i,d in pairs(self.map.layers) do
@@ -194,6 +199,22 @@ function MapLoader:createMetals(map)
     end
 end
 
+
+function MapLoader:createTimers(map)
+    for i,j in pairs(map.objects) do
+        local m =EventTimer.new(
+            j.properties["id"],
+            j.properties["duration"],
+            j.properties["state"],
+            j.properties["loop"],
+            j.properties,
+            self,
+            self.magnetManager
+            )       
+        self.timers[j.properties["id"]] = m
+    end
+end
+
 function MapLoader:update(dt)
 
     for i,b in pairs(self.destroyables) do
@@ -245,6 +266,10 @@ function MapLoader:update(dt)
     for i,p in pairs(self.levelends) do
         p:update(dt)
     end
+
+    for i,p in pairs(self.timers) do
+        p:update(dt)
+    end
 end
 
 function MapLoader:isSeen(pos1,pos2,w,h)
@@ -256,7 +281,6 @@ function MapLoader:isSeen(pos1,pos2,w,h)
 end
 
 function MapLoader:draw(pos)
-    -- self.tilesets:draw({x=pos.x-windowW/2,y=windowH/2-pos.y})
 
     for i,p in pairs(self.metals) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
@@ -310,8 +334,6 @@ function MapLoader:draw(pos)
           p:draw(pos.x-windowW/2,windowH/2-pos.y)
         end
     end    
-
-
 end
 
 function MapLoader:toSend(pos)
@@ -367,6 +389,14 @@ function MapLoader:toSend(pos)
     end
 	maptable.gateinterruptor=gateinterruptors    
 
+    local arcinterruptors=""
+    for i,p in pairs(self.arcinterruptors) do
+        if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
+            arcinterruptors=arcinterruptors..p:send(pos.x-windowW/2,windowH/2-pos.y)
+        end
+    end
+    maptable.arcinterruptor=arcinterruptors  
+
 	local gates=""
     for i,p in pairs(self.gates) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
@@ -415,11 +445,18 @@ function MapLoader:firstPlanDraw(pos)
         end
     end
 end
-
 function MapLoader:openG(id)
     for i,p in pairs(self.gates) do
         if(p.openID==id) then
             p:openG()
+            done = true
+        end
+    end
+    if done then
+        for i,p in pairs(self.gateinterruptors) do
+            if(p.gateOpenID==id) then
+                p:syncronizeState(true)
+            end
         end
     end
 end
@@ -428,6 +465,14 @@ function MapLoader:closeG(id)
     for i,p in pairs(self.gates) do
         if(p.closeID==id) then
             p:closeG()
+            done = true
+        end
+    end
+    if done then
+        for i,p in pairs(self.gateinterruptors) do
+            if(p.gateCloseID==id) then
+                p:syncronizeState(false)
+            end
         end
     end
 end
@@ -445,14 +490,110 @@ function MapLoader:closeNG(id)
         if(p.animid==id) then
             p:closeG()
         end
+    end    
+end
+
+
+-- Actions sur les timers
+
+
+function MapLoader:enableT(id)
+    for i,p in pairs(self.timers) do
+        if(p.id==id) then
+            p.enabled = true
+            done = true
+        end
     end
 end
+
+function MapLoader:disableT(id)
+    for i,p in pairs(self.timers) do
+        if(p.id==id) then
+            p.enabled = false
+            done = true
+        end
+    end
+end
+
+function MapLoader:switchT(id)
+    for i,p in pairs(self.timers) do
+        if(p.id==id) then
+            p.enabled = not p.enabled
+        end
+    end
+end
+
+
+-- Actions sur les arcs
+
+
+function MapLoader:enableA(id)
+    for i,p in pairs(self.arcs) do
+        if(p.id==id) then
+            p:activateA()
+            done = true
+        end
+    end
+    if done then
+        for i,p in pairs(self.arcinterruptors) do
+            if(p.arcID==id) then
+                p:syncronizeState(true)
+            end
+        end
+    end
+end
+
+function MapLoader:disableA(id)
+    for i,p in pairs(self.arcs) do
+        if(p.id==id) then
+            p:disableA()
+            done = true
+        end
+    end
+    if done then
+        for i,p in pairs(self.arcinterruptors) do
+            if(p.arcID==id) then
+                p:syncronizeState(false)
+            end
+        end
+    end
+end
+
+function MapLoader:switchA(id)
+    for i,p in pairs(self.arcs) do
+        if(p.id==id) then
+             if p.enabled then
+                p:disableA()
+                newState = false
+            else
+                p:activateA()
+                newState = true
+            end
+            done = true
+        end
+    end
+    if done then
+        for i,p in pairs(self.arcinterruptors) do
+            if(p.arcID==id) then
+                p:syncronizeState(newState)
+            end
+        end
+    end
+end
+
+
+
+
+-- Interraction des joueurs
 
 function MapLoader:handleTry(tryer)
     for i,p in pairs(self.interruptors) do
         p:handleTry(tryer)
     end    
     for i,p in pairs(self.gateinterruptors) do
+        p:handleTry(tryer)
+    end  
+    for i,p in pairs(self.arcinterruptors) do
         p:handleTry(tryer)
     end    
 end

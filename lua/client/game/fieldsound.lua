@@ -24,7 +24,7 @@ function FieldSound.new(soundName)
 	end
 	local path = FieldSound.SOUND_ROOT..name..'.ogg'
 	local pathLoop = FieldSound.SOUND_ROOT..name..FieldSound.SOUND_LOOP..'.ogg'
-	self.src = love.audio.newSource(path, "static")
+	self.src = love.audio.newSource(path)
 	self.srcLoop = love.audio.newSource(pathLoop, "static")
 	self.src:setDistance(200,1000)
 	self.srcLoop:setDistance(200,1000)

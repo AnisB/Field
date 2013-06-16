@@ -3,17 +3,17 @@
 require("game.animinter")
 
 
-Interruptor = {}
-Interruptor.__index = Interruptor
+ArcInterruptor = {}
+ArcInterruptor.__index = ArcInterruptor
 
 
-function Interruptor.new(pos,anim,id, timers)
+function ArcInterruptor.new(pos,anim,id)
 	local self = {}
-	setmetatable(self, Interruptor)
+	setmetatable(self, ArcInterruptor)
 	self.position={x=pos.x,y=pos.y}
 	self.drawed=true	
-	self.type='Interruptor'
-	self.anim = AnimInter.new('switch/gene')
+	self.type='ArcInterruptor'
+	self.anim = AnimInter.new('switch/arc')
 	self.anim:syncronize(anim,id)
 	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
 
@@ -21,11 +21,11 @@ function Interruptor.new(pos,anim,id, timers)
 end
 
 
-function Interruptor:getPosition()
+function ArcInterruptor:getPosition()
 	return self.position
 end
 
-function Interruptor:syncronize(pos,anim,id)
+function ArcInterruptor:syncronize(pos,anim,id)
 	if (self.anim.currentAnim.name~=anim) then
 		self.anim:syncronize(anim,id)   
 	end
@@ -34,15 +34,15 @@ function Interruptor:syncronize(pos,anim,id)
 	self.drawed=true
 end
 
-function Interruptor:loadAnimation(anim, force)
+function ArcInterruptor:loadAnimation(anim, force)
 		self.anim:load(anim, force)
 end
 
-function Interruptor:update(seconds)
+function ArcInterruptor:update(seconds)
 	self.anim:update(seconds)
 
 end
 
-function Interruptor:draw()
+function ArcInterruptor:draw()
     	love.graphics.drawq(self.anim:getSprite(), self.diffuse,self.position.x, self.position.y)
 end
