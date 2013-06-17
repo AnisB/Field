@@ -80,7 +80,7 @@ function MagnetManagerSolo:enableG(GID)
 		end
 	end
 	if done then
-        for i,p in pairs(self.gateinterruptors) do
+        for i,p in pairs(gameStateManager.state["GameplaySolo"].mapLoader.gateinterruptors) do
             if(p.id==id) then
                 p:syncronizeState(false)
             end
@@ -90,13 +90,13 @@ end
 
 function MagnetManagerSolo:disableG(GID)
 	for i,v in pairs(self.activeGenerators) do
-		if v.generatorID ==GID then
+		if v.id ==GID then
 			v:disableG()
 			done = true
 		end
 	end
 	if done then
-        for i,p in pairs(self.gateinterruptors) do
+        for i,p in pairs(gameStateManager.state["GameplaySolo"].mapLoader.gateinterruptors) do
             if(p.generatorID==id) then
                 p:syncronizeState(false)
             end
