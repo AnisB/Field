@@ -94,7 +94,7 @@
  <objectgroup color="#800000" name="metalman" width="60" height="7">
   <object x="768" y="320" width="64" height="64">
    <properties>
-    <property name="powers" value="Alu"/>
+    <property name="powers" value="Alu#Acier"/>
    </properties>
   </object>
  </objectgroup>
