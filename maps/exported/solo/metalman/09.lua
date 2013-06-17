@@ -653,7 +653,7 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "0"
+            ["id"] = "1"
           }
         },
         {
@@ -844,7 +844,7 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "0"
+            ["id"] = "1"
           }
         },
         {
