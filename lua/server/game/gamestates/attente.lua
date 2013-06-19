@@ -8,6 +8,10 @@ function Attente:init()
 	self.discoveryInterval = 0.2
 end
 
+function Attente:reset()
+
+end
+
 function Attente:update(dt)
 	-- print("Weeee !", dt)
 	self.discoveryLast = self.discoveryLast + dt

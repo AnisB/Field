@@ -6,6 +6,8 @@
     require("const")
     DestroyableSolo = {}
     DestroyableSolo.__index =  DestroyableSolo
+
+    Destroyable.sounds = {}
     
     function DestroyableSolo.new(position,type,sprite,w,h,netid)
         local self = {}

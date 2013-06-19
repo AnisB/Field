@@ -93,15 +93,7 @@ function EventTimer:getArgs(string)
 end
 
 function EventTimer:parseParams(Actions)
-	if Actions["Timers"] ~= nil then
-		print("Il y a des timers dans ce timer")
-		for k in string.gmatch(Actions["Timers"], "([^#]+)") do
-			local timer = self:getArgs(k)
-			assert(#timer == 2)
-			table.insert(self.timers,timer)
-			-- print(timer[1],timer[2])
-		end
-	end
+
 
 	if Actions["Generators"] ~= nil then
 		print("Il y a des generateurs dans ce timer")

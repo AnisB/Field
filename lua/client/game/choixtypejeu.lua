@@ -51,20 +51,48 @@ function ChoixTypeJeu:keyPressed(key, unicode)
 		elseif key == "return" then
 
 			if self.story.selected then
-				-- serveur:send({type="choixTypeJeu", typeJeu="story"})
+				self:GoPersoOrder("histoire")
 			end
 
 
 			if self.arcade.selected then
-				serveur:send({type="choixTypeJeu", typeJeu="arcade"})
+				self:GoPersoOrder("arcade")
 			end
 
 
 			if self.returnB.selected then
+				self:DisconnectOrder()
 				-- Disconnection to put here
 			end
 		end
 end
+
+
+
+function ChoixTypeJeu:GoPersoOrder(type)
+    monde.typeJeu = type
+    print( "SET TO", monde.typeJeu  )
+    serveur:send({type="syncro", sender = monde.cookie, pck={next="ChoixPerso", current="ChoixTypeJeu", typeJeu = type}})    
+    gameStateManager:changeState('ChoixPerso')
+end
+
+function ChoixTypeJeu:DisconnectOrder()
+    serveur:send({type="syncro", sender = monde.cookie, pck={next="ConnectToServer", current="ChoixTypeJeu"}})    
+    gameStateManager:resetAndChangeState('ConnectToServer')        
+end
+
+function ChoixTypeJeu:GoPersoApply(type)
+	print("APPLY RECU", type)
+    monde.typeJeu = type
+    gameStateManager:changeState('ChoixPerso')
+end
+
+function ChoixTypeJeu:DisconnectApply()
+    gameStateManager:resetAndChangeState('ConnectToServer')
+end
+
+
+
 function ChoixTypeJeu:keyReleased(key, unicode) end
 
 function ChoixTypeJeu:joystickPressed(joystick, button)
@@ -78,18 +106,18 @@ function ChoixTypeJeu:update(dt)
 end
 
 function ChoixTypeJeu:onMessage(msg)
-	if msg.type == "choixTypeJeuFini" then
-		monde.typeJeu = msg.typeJeu
-		if monde.typeJeu == 'arcade' then
-			if msg.persos == nil then
-				gameStateManager:changeState('ChoixPerso')
-			else
-				return -- on verra ?
-			end
-		end
-	else
-		print("[ChoixTypeJeu] wrong type :", table2.tostring(msg))
-	end
+
+	if msg.type=="syncro" and msg.pck.next=="ConnectToServer"then
+        self:DisconnectApply()   
+    elseif msg.type=="syncro" and msg.pck.next=="ChoixPerso" then
+        self:GoPersoApply(msg.pck.typeJeu)   
+    elseif msg.type=="reset" then
+        -- We got a problem
+        --gameStateManager:forceDisconnect()
+    else
+    	assert(false)
+        -- Ce message n'est pas censé atterir ici
+    end 
 end
 
 function ChoixTypeJeu:draw()

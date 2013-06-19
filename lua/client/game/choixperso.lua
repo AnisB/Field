@@ -126,9 +126,15 @@ function ChoixPerso:onMessage(msg)
 			monde.lui.cookie = msg.player
 			monde[msg.perso] = monde.lui
 		end
-		elseif msg.type == "choixPersoFini" then
+	elseif msg.type == "choixPersoFini" then
+		print(monde.typeJeu)
 		if monde.typeJeu == "arcade" then
 			gameStateManager:changeState('ChoixNiveau')
+		elseif monde.typeJeu == "histoire" then
+			print("ON EST DANS HISTOIRE")
+			gameStateManager:changeState('ChoixNiveau')
+		else
+			assert(false)
 		end
 	elseif msg.type == "err" then
 		self.err.enabled = true

@@ -8,6 +8,8 @@ function ArcadeChoixPerso:draw() end
 function ArcadeChoixPerso:keyReleased(key, unicode) end
 
 function ArcadeChoixPerso:onMessage(msg, client)
+
+	print "ici"
 	if msg.type == "choixPerso" then
 		if not msg.confirm then
 			client.perso = msg.perso or debug_warn("[ArcadeChoixPerso] missing perso")
@@ -23,6 +25,7 @@ function ArcadeChoixPerso:onMessage(msg, client)
 				monde[monde.player1.perso] = monde.player1
 				monde[monde.player2.perso] = monde.player2
 				gameStateManager:changeState("arcadeChoixNiveau")
+				print("Perso j'suis passé au choix des niveaux")
 				-- TODO : envoyer la liste des niveau possibles ?
 			else
 				client:send({type= "err", content="Erreur dans le choix des personnages", msg="choix des personnages pas fini"})

@@ -48,6 +48,12 @@ function ConnectToServer:mousePressed(x, y, button)
 
 end
 
+
+function ConnectToServer:reset()
+	self.waiting = false
+	self.discovered = false
+end
+
 function ConnectToServer:mouseReleased(x, y, button)
 end
 
