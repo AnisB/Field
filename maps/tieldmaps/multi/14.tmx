@@ -74,31 +74,27 @@
  </layer>
  <layer name="front" width="65" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYCAOMAIxCxCzDkNMLGAkQe1wBdQIA0Yy8GAClLqHHP2MaPRAA0rcQW6cDqcwoET/YPE/CFDih8HkD2yA2PqOY6AcSAPASaY+dhLV07qMp6Z5oHTANMIxAP5pAgA=
+   eJxjYCAOMAIxCxCzDkNMLGAkQS019A2UubSwczQMyM8/bHjMYKPAPZSAgbATHxgNg6EVBswkqseVd9jQ1JFqLjl2omMOKto50ICTTH3sVHXF4AKgdMA0wjEAp3ICdg==
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="65" height="10">
   <object x="640" y="0" width="64" height="576"/>
   <object x="4096" y="0" width="64" height="576"/>
-  <object x="2496" y="128" width="64" height="192"/>
-  <object x="1664" y="192" width="64" height="192"/>
-  <object x="2624" y="192" width="64" height="128"/>
+  <object x="2944" y="256" width="64" height="128"/>
+  <object x="1536" y="64" width="64" height="128"/>
+  <object x="2944" y="64" width="64" height="128"/>
  </objectgroup>
  <objectgroup color="#0000ff" name="platform" width="65" height="10">
   <object x="640" y="576" width="3520" height="64"/>
   <object x="704" y="0" width="3392" height="64"/>
-  <object x="2944" y="512" width="64" height="64"/>
-  <object x="1728" y="128" width="768" height="64"/>
-  <object x="1408" y="512" width="320" height="64"/>
-  <object x="2560" y="320" width="64" height="64"/>
-  <object x="1536" y="384" width="128" height="64"/>
-  <object x="1600" y="256" width="64" height="64"/>
-  <object x="2112" y="512" width="832" height="64"/>
+  <object x="1536" y="192" width="960" height="64"/>
+  <object x="2304" y="384" width="448" height="64"/>
+  <object x="1536" y="384" width="64" height="64"/>
+  <object x="2944" y="384" width="64" height="64"/>
+  <object x="2624" y="192" width="384" height="64"/>
  </objectgroup>
  <objectgroup color="#ffffff" name="movable" width="65" height="10"/>
- <objectgroup color="#ff6666" name="destroyable" width="65" height="10">
-  <object x="2368" y="64" width="64" height="64"/>
- </objectgroup>
+ <objectgroup color="#ff6666" name="destroyable" width="65" height="10"/>
  <objectgroup color="#800000" name="metalman" width="65" height="10">
   <object x="768" y="512" width="64" height="64">
    <properties>
@@ -117,137 +113,239 @@
  <objectgroup color="#66ccff" name="switch" width="65" height="10"/>
  <objectgroup color="#e6e6e6" name="metal" width="65" height="10"/>
  <objectgroup color="#333333" name="gate" width="65" height="10">
-  <object x="1728" y="320" width="832" height="64">
+  <object x="2944" y="512" width="64" height="64">
    <properties>
-    <property name="id" value="1"/>
+    <property name="animid" value="12"/>
+    <property name="openid" value="2"/>
+    <property name="prev" value="11"/>
+    <property name="type" value="FinVH"/>
    </properties>
   </object>
-  <object x="1664" y="64" width="64" height="128">
+  <object x="2944" y="448" width="64" height="64">
    <properties>
-    <property name="id" value="2"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup color="#004080" name="acid" width="65" height="10">
-  <object x="1856" y="512" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="1984" y="512" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="2048" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="2240" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="2176" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="2112" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="1728" y="512" width="64" height="64">
-   <properties>
-    <property name="type" value="hg"/>
-   </properties>
-  </object>
-  <object x="1792" y="512" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="2816" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hd"/>
-   </properties>
-  </object>
-  <object x="1920" y="512" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="2048" y="512" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="2688" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="2624" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="2304" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="2752" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="2368" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="2496" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="2560" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="2432" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
+    <property name="animid" value="11"/>
+    <property name="closeid" value="2"/>
+    <property name="next" value="12"/>
+    <property name="type" value="DebutVH"/>
    </properties>
   </object>
  </objectgroup>
+ <objectgroup color="#004080" name="acid" width="65" height="10"/>
  <objectgroup color="#ffff00" name="arc" width="65" height="10">
-  <object x="3200" y="320" width="64" height="64">
+  <object x="1728" y="512" width="64" height="64">
    <properties>
     <property name="id" value="1"/>
     <property name="type" value="FinV"/>
    </properties>
   </object>
-  <object x="3200" y="128" width="64" height="64">
+  <object x="1728" y="256" width="64" height="64">
    <properties>
     <property name="id" value="1"/>
     <property name="type" value="DebutV"/>
    </properties>
   </object>
-  <object x="3200" y="256" width="64" height="64">
+  <object x="1728" y="448" width="64" height="64">
    <properties>
     <property name="id" value="1"/>
     <property name="type" value="MillieuV"/>
    </properties>
   </object>
-  <object x="3200" y="192" width="64" height="64">
+  <object x="1728" y="384" width="64" height="64">
    <properties>
     <property name="id" value="1"/>
     <property name="type" value="MillieuV"/>
+   </properties>
+  </object>
+  <object x="1728" y="320" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="type" value="MillieuV"/>
+   </properties>
+  </object>
+  <object x="2240" y="512" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="type" value="FinV"/>
+   </properties>
+  </object>
+  <object x="2240" y="320" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="type" value="MillieuV"/>
+   </properties>
+  </object>
+  <object x="2240" y="256" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="type" value="DebutV"/>
+   </properties>
+  </object>
+  <object x="2240" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="type" value="MillieuV"/>
+   </properties>
+  </object>
+  <object x="2240" y="448" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="type" value="MillieuV"/>
+   </properties>
+  </object>
+  <object x="2752" y="512" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="type" value="FinV"/>
+   </properties>
+  </object>
+  <object x="2752" y="320" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="type" value="MillieuV"/>
+   </properties>
+  </object>
+  <object x="2752" y="256" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="type" value="DebutV"/>
+   </properties>
+  </object>
+  <object x="2752" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="type" value="MillieuV"/>
+   </properties>
+  </object>
+  <object x="2752" y="448" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="type" value="MillieuV"/>
+   </properties>
+  </object>
+  <object x="1600" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="DebutH"/>
+   </properties>
+  </object>
+  <object x="1664" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="1728" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="1792" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="1856" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="1984" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="1920" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="2112" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="2048" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="2240" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="2176" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="2368" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="2304" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="2496" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="2432" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="2624" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="2560" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="2752" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="2688" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="2880" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="2816" y="384" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuH"/>
    </properties>
   </object>
  </objectgroup>
@@ -259,27 +357,12 @@
   </object>
  </objectgroup>
  <objectgroup color="#800080" name="gateswitch" width="65" height="10">
-  <object x="2368" y="192" width="64" height="64">
+  <object x="1600" y="128" width="64" height="64">
    <properties>
-    <property name="id" value="2"/>
-   </properties>
-  </object>
-  <object x="1600" y="320" width="64" height="64">
-   <properties>
-    <property name="id" value="1"/>
-   </properties>
-  </object>
-  <object x="2432" y="256" width="64" height="64">
-   <properties>
-    <property name="id" value="1"/>
+    <property name="closeid" value="2"/>
+    <property name="openid" value="2"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="arcswitch" width="65" height="10">
-  <object x="3136" y="64" width="64" height="64">
-   <properties>
-    <property name="id" value="1"/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup name="arcswitch" width="65" height="10"/>
 </map>
