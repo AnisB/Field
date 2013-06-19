@@ -74,7 +74,7 @@
  </layer>
  <layer name="front" width="80" height="50">
   <data encoding="base64" compression="zlib">
-   eJztW8tuAyEMTLtt2v7/D7eHIiG0wBjb2CYeiQtZBpgYD87j8UjswJuj9vHXPg3b838dVP08IOo6oq5bC6kfD6kfDxL6SfsCynvnH89mbZIe03L39Bihp99J6O1HYu+pH/YshTv143Gnfjxuqqcgz0jWH3Xen40Z1RS79dPErphv32/uOryc1dSPh5P0O/H8ljxZ505N/XbVHHf+Ue/xal5rfQGpWUb7RPpG4PBKxow2l7V+6NhVaHJdVV8d46kfzmUdf9HO7wXwe9SP4yOjWqJXc0h7hbV+u4Gsoc5/Enyz573kRMn5TtbvZ2HMaL7I59dD/PX62ry5W79ZrUGdH+WccUh6bYT4Q7wY1dH6/Ejfu0Z8FN1QHdvXel4bQb/CR733Ife/3j0w73883OU/ylikT4ID6bPQkzOnN/0s4NE/qHcaS0TSj+udq/5B+b4S/UyB4tMjRDqrHHiIv1V4OeerdcqMd7UP5UfuwdqIGH/UWkITHvIf1x8k6o9Vf+HUKSOc6BU9WOa/E5H6rWN3/jsN2vrtbAW7/7+l9fv7V0bqx0PRAz0L3wZr9AxqPH2prCIu6vh7z0ZuxVN+Ab11Bvg=
+   eJztW9luAyEMTLtt2v7/D7cPRUJogTE+sIlH4mWzDN6J8eAcj0fCAm+Oxsff+Nw4nv9xUPXzgKhxRI1bC6kfD6kfDxL6SfsCynvnH88mNkmPabl7eozQ0+8k9J5H4tlTP+xeCnfqx+NO/XjcVE9B7pHsP+q6P5sz6ims9dOEVc637zc3Di97NfXj4ST9Tty/pU7WtVNTP6ue484/6me8mtdaX0B6ltFzItdG4PBK5ow212790Lmr0OS6qmt1jqd+ONfu/Iu2fy+A30q/1hNmc1d9ZNRL9HoOaa/YrZ81kBjq+ifBN7vfS02UXO9k/X4W5ozW87Z/NdfnghJXWzet9Zv1GtT1Uc4Zh6TXRsg/xItRHXfvH+lz14iPohuqY/taz2sj6Ff4qOc+5PzXOwdGOP9JraWBu/pHmYtck+BAz9nW4KzpTb8d8Ogf1DPNTkTSj+udq/5B+b4S/UyB4tMjRNqrHHjIv1V42eerfcqMd/Uayo+cg7URMf+ovYQmPNQ/rj9I9B+r/sLpU0Y40St62Fn/TkTqtw7r+ncatPWzHAXW/9/S+v39KyP146Hoge6F7w0xegY1n75UooiLOv/ec5BH8ZRfBCwG+g==
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="80" height="50">
@@ -107,6 +107,7 @@
   <object x="4352" y="2048" width="64" height="448"/>
   <object x="1280" y="1920" width="64" height="576"/>
   <object x="960" y="1920" width="64" height="896"/>
+  <object x="1216" y="1344" width="64" height="128"/>
  </objectgroup>
  <objectgroup color="#0000ff" name="platform" width="80" height="50">
   <object x="640" y="3136" width="4480" height="64"/>
@@ -499,6 +500,18 @@
    </properties>
   </object>
   <object x="3776" y="1344" width="64" height="64">
+   <properties>
+    <property name="magnet" value="static"/>
+    <property name="physic" value="static"/>
+   </properties>
+  </object>
+  <object x="1216" y="1472" width="64" height="64">
+   <properties>
+    <property name="magnet" value="static"/>
+    <property name="physic" value="static"/>
+   </properties>
+  </object>
+  <object x="1216" y="1280" width="64" height="64">
    <properties>
     <property name="magnet" value="static"/>
     <property name="physic" value="static"/>

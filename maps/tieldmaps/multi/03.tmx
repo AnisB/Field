@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="60" height="10" tilewidth="64" tileheight="64">
+<map version="1.0" orientation="orthogonal" width="65" height="10" tilewidth="64" tileheight="64">
  <tileset firstgid="1" name="mur" tilewidth="64" tileheight="64">
   <image source="data/mur.png" trans="ffffff" width="64" height="64"/>
  </tileset>
@@ -67,51 +67,56 @@
  <tileset firstgid="20" name="cable" tilewidth="64" tileheight="64">
   <image source="data/cable.png" width="64" height="64"/>
  </tileset>
- <layer name="front" width="60" height="10">
+ <layer name="foreground" width="65" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYAFi1mGO2YCYEYrxAS4C8kMJEOPf4QRo6V9y8wgbjdwDAtTyL8hvtHIncrhRasdoeh5YMxnRMLUByEwOKptHTf9Sw8+caOazU8FMmFm08C814xlkFqg8YBohGFTeAQDVIwJU
+   eJxjYBgFo2AUjIKRDQSheKQCQYaRHQaCDJhhgC6GCw81QIq/hmMYEOunoeYvWgIA4V0DUw==
   </data>
  </layer>
- <objectgroup color="#00ff00" name="wall" width="60" height="10">
-  <object x="0" y="0" width="64" height="576"/>
-  <object x="3776" y="0" width="64" height="576"/>
-  <object x="2240" y="448" width="64" height="128"/>
-  <object x="1344" y="448" width="64" height="128"/>
+ <layer name="front" width="65" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOMAIxCxCzDkNMLGAkIM9FgllDFRAKg5EAaBUG5OYvNhq5Bx+gRhiA/EsrtyOHJa3sGM0L1A8DRgrMZETDlAJi8yMHFeyCAUrdjx4GpJrDSaa97GTqQwfUiENsYUBJegClA6YRjgFvpgJt
+  </data>
+ </layer>
+ <objectgroup color="#00ff00" name="wall" width="65" height="10">
+  <object x="640" y="0" width="64" height="576"/>
+  <object x="2880" y="448" width="64" height="128"/>
+  <object x="1984" y="448" width="64" height="128"/>
+  <object x="4096" y="64" width="64" height="576"/>
  </objectgroup>
- <objectgroup color="#0000ff" name="platform" width="60" height="10">
-  <object x="0" y="576" width="3840" height="64"/>
-  <object x="64" y="0" width="3712" height="64"/>
-  <object x="2240" y="384" width="256" height="64"/>
-  <object x="2496" y="448" width="64" height="64"/>
-  <object x="2560" y="512" width="64" height="64"/>
-  <object x="1280" y="384" width="128" height="64"/>
-  <object x="1216" y="448" width="64" height="64"/>
-  <object x="1152" y="512" width="64" height="64"/>
-  <object x="1408" y="192" width="960" height="64"/>
-  <object x="1088" y="256" width="128" height="64"/>
-  <object x="2560" y="256" width="256" height="64"/>
+ <objectgroup color="#0000ff" name="platform" width="65" height="10">
+  <object x="640" y="576" width="3840" height="64"/>
+  <object x="704" y="0" width="3712" height="64"/>
+  <object x="2880" y="384" width="256" height="64"/>
+  <object x="3136" y="448" width="64" height="64"/>
+  <object x="3200" y="512" width="64" height="64"/>
+  <object x="1920" y="384" width="128" height="64"/>
+  <object x="1856" y="448" width="64" height="64"/>
+  <object x="1792" y="512" width="64" height="64"/>
+  <object x="2048" y="192" width="960" height="64"/>
+  <object x="1728" y="256" width="128" height="64"/>
+  <object x="3200" y="256" width="256" height="64"/>
  </objectgroup>
- <objectgroup color="#ffffff" name="movable" width="60" height="10"/>
- <objectgroup color="#ff6666" name="destroyable" width="60" height="10"/>
- <objectgroup color="#800000" name="metalman" width="60" height="10">
-  <object x="128" y="512" width="64" height="64">
+ <objectgroup color="#ffffff" name="movable" width="65" height="10"/>
+ <objectgroup color="#ff6666" name="destroyable" width="65" height="10"/>
+ <objectgroup color="#800000" name="metalman" width="65" height="10">
+  <object x="768" y="512" width="64" height="64">
    <properties>
     <property name="powers" value="Alu"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#ff0000" name="themagnet" width="60" height="10">
-  <object x="256" y="512" width="64" height="64">
+ <objectgroup color="#ff0000" name="themagnet" width="65" height="10">
+  <object x="896" y="512" width="64" height="64">
    <properties>
     <property name="powers" value="Attractive"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#800000" name="generator" width="60" height="10"/>
- <objectgroup color="#66ccff" name="switch" width="60" height="10"/>
- <objectgroup color="#e6e6e6" name="metal" width="60" height="10"/>
- <objectgroup color="#333333" name="gate" width="60" height="10">
-  <object x="2304" y="64" width="64" height="64">
+ <objectgroup color="#800000" name="generator" width="65" height="10"/>
+ <objectgroup color="#66ccff" name="switch" width="65" height="10"/>
+ <objectgroup color="#e6e6e6" name="metal" width="65" height="10"/>
+ <objectgroup color="#333333" name="gate" width="65" height="10">
+  <object x="2944" y="64" width="64" height="64">
    <properties>
     <property name="animid" value="1"/>
     <property name="closeid" value="1"/>
@@ -119,7 +124,7 @@
     <property name="type" value="DebutVH"/>
    </properties>
   </object>
-  <object x="2304" y="128" width="64" height="64">
+  <object x="2944" y="128" width="64" height="64">
    <properties>
     <property name="animid" value="2"/>
     <property name="openid" value="1"/>
@@ -128,108 +133,48 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#004080" name="acid" width="60" height="10">
-  <object x="1792" y="448" width="64" height="64">
+ <objectgroup color="#004080" name="acid" width="65" height="10">
+  <object x="2432" y="448" width="64" height="64">
    <properties>
     <property name="type" value="hm"/>
    </properties>
   </object>
-  <object x="1664" y="448" width="64" height="64">
+  <object x="2304" y="448" width="64" height="64">
    <properties>
     <property name="type" value="hm"/>
    </properties>
   </object>
-  <object x="1728" y="512" width="64" height="64">
+  <object x="2368" y="512" width="64" height="64">
    <properties>
     <property name="type" value="bm"/>
    </properties>
   </object>
-  <object x="1536" y="512" width="64" height="64">
-   <properties>
-    <property name="type" value="bm"/>
-   </properties>
-  </object>
-  <object x="1536" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="1856" y="512" width="64" height="64">
-   <properties>
-    <property name="type" value="bm"/>
-   </properties>
-  </object>
-  <object x="1472" y="512" width="64" height="64">
-   <properties>
-    <property name="type" value="bm"/>
-   </properties>
-  </object>
-  <object x="1600" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="1664" y="512" width="64" height="64">
-   <properties>
-    <property name="type" value="bm"/>
-   </properties>
-  </object>
-  <object x="1472" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="1408" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hg"/>
-   </properties>
-  </object>
-  <object x="1792" y="512" width="64" height="64">
-   <properties>
-    <property name="type" value="bm"/>
-   </properties>
-  </object>
-  <object x="1920" y="512" width="64" height="64">
-   <properties>
-    <property name="type" value="bm"/>
-   </properties>
-  </object>
-  <object x="1600" y="512" width="64" height="64">
+  <object x="2176" y="512" width="64" height="64">
    <properties>
     <property name="type" value="bm"/>
    </properties>
   </object>
   <object x="2176" y="448" width="64" height="64">
    <properties>
-    <property name="type" value="hd"/>
-   </properties>
-  </object>
-  <object x="2176" y="512" width="64" height="64">
-   <properties>
-    <property name="type" value="bd"/>
-   </properties>
-  </object>
-  <object x="1408" y="512" width="64" height="64">
-   <properties>
-    <property name="type" value="bg"/>
-   </properties>
-  </object>
-  <object x="1920" y="448" width="64" height="64">
-   <properties>
     <property name="type" value="hm"/>
    </properties>
   </object>
-  <object x="1856" y="448" width="64" height="64">
+  <object x="2496" y="512" width="64" height="64">
    <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
-  <object x="1728" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
+    <property name="type" value="bm"/>
    </properties>
   </object>
   <object x="2112" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="bm"/>
+   </properties>
+  </object>
+  <object x="2240" y="448" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="2304" y="512" width="64" height="64">
    <properties>
     <property name="type" value="bm"/>
    </properties>
@@ -239,37 +184,97 @@
     <property name="type" value="hm"/>
    </properties>
   </object>
-  <object x="1984" y="512" width="64" height="64">
+  <object x="2048" y="448" width="64" height="64">
+   <properties>
+    <property name="type" value="hg"/>
+   </properties>
+  </object>
+  <object x="2432" y="512" width="64" height="64">
    <properties>
     <property name="type" value="bm"/>
+   </properties>
+  </object>
+  <object x="2560" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="bm"/>
+   </properties>
+  </object>
+  <object x="2240" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="bm"/>
+   </properties>
+  </object>
+  <object x="2816" y="448" width="64" height="64">
+   <properties>
+    <property name="type" value="hd"/>
+   </properties>
+  </object>
+  <object x="2816" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="bd"/>
    </properties>
   </object>
   <object x="2048" y="512" width="64" height="64">
    <properties>
-    <property name="type" value="bm"/>
+    <property name="type" value="bg"/>
    </properties>
   </object>
-  <object x="2048" y="448" width="64" height="64">
+  <object x="2560" y="448" width="64" height="64">
    <properties>
     <property name="type" value="hm"/>
    </properties>
   </object>
-  <object x="1984" y="448" width="64" height="64">
+  <object x="2496" y="448" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="2368" y="448" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="2752" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="bm"/>
+   </properties>
+  </object>
+  <object x="2752" y="448" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="2624" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="bm"/>
+   </properties>
+  </object>
+  <object x="2688" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="bm"/>
+   </properties>
+  </object>
+  <object x="2688" y="448" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
+  <object x="2624" y="448" width="64" height="64">
    <properties>
     <property name="type" value="hm"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#ffff00" name="arc" width="60" height="10"/>
- <objectgroup color="#ffff00" name="levelend" width="60" height="10">
-  <object x="3456" y="384" width="320" height="192">
+ <objectgroup color="#ffff00" name="arc" width="65" height="10"/>
+ <objectgroup color="#ffff00" name="levelend" width="65" height="10">
+  <object x="3904" y="448" width="192" height="128">
    <properties>
     <property name="next" value="04"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#800080" name="gateswitch" width="60" height="10">
-  <object x="2752" y="192" width="64" height="64">
+ <objectgroup color="#800080" name="gateswitch" width="65" height="10">
+  <object x="3392" y="192" width="64" height="64">
    <properties>
     <property name="closeid" value="1"/>
     <property name="openid" value="1"/>
