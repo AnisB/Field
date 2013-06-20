@@ -329,6 +329,8 @@ function MapLoader:draw(pos)
           p:draw(pos.x-windowW/2,windowH/2-pos.y)
         end
     end    
+
+
     for i,p in pairs(self.arcinterruptors) do
         if(self:isSeen(pos,p:getPosition(),p.w,p.h)) then
           p:draw(pos.x-windowW/2,windowH/2-pos.y)

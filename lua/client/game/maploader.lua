@@ -137,6 +137,12 @@ function MapLoader:draw(pos)
 		end
 	end    
 	
+	for i,p in pairs(self.arcinterruptors) do
+		if p.drawed==true then
+			p:draw()
+		end
+	end  
+
     for i,p in pairs(self.gates) do
     if p.drawed==true then
 			p:draw()
