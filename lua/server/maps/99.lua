@@ -492,7 +492,7 @@ return {
           visible = true,
           properties = {
             ["enabled"] = "true",
-            ["id"] = "1",
+            ["id"] = "2",
             ["type"] = "FinV"
           }
         }
