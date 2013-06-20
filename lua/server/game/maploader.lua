@@ -186,7 +186,7 @@ end
 
 function MapLoader:createArcs(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.arcs, Arc.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["type"],j.properties["enabled"],i))
+        table.insert(self.arcs, Arc.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["type"],j.properties["id"],j.properties["enabled"],i))
     end
 end
 
