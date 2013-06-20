@@ -74,7 +74,7 @@
  </layer>
  <layer name="front" width="80" height="50">
   <data encoding="base64" compression="zlib">
-   eJztW9luAyEMTLtt2v7/D7cPRUJogTE+sIlH4mWzDN6J8eAcj0fCAm+Oxsff+Nw4nv9xUPXzgKhxRI1bC6kfD6kfDxL6SfsCynvnH88mNkmPabl7eozQ0+8k9J5H4tlTP+xeCnfqx+NO/XjcVE9B7pHsP+q6P5sz6ims9dOEVc637zc3Di97NfXj4ST9Tty/pU7WtVNTP6ue484/6me8mtdaX0B6ltFzItdG4PBK5ow212790Lmr0OS6qmt1jqd+ONfu/Iu2fy+A30q/1hNmc1d9ZNRL9HoOaa/YrZ81kBjq+ifBN7vfS02UXO9k/X4W5ozW87Z/NdfnghJXWzet9Zv1GtT1Uc4Zh6TXRsg/xItRHXfvH+lz14iPohuqY/taz2sj6Ff4qOc+5PzXOwdGOP9JraWBu/pHmYtck+BAz9nW4KzpTb8d8Ogf1DPNTkTSj+udq/5B+b4S/UyB4tMjRNqrHHjIv1V42eerfcqMd/Uayo+cg7URMf+ovYQmPNQ/rj9I9B+r/sLpU0Y40St62Fn/TkTqtw7r+ncatPWzHAXW/9/S+v39KyP146Hoge6F7w0xegY1n75UooiLOv/ec5BH8ZRfBCwG+g==
+   eJztW9luAyEMTLtt2v7/D7cPRUJWgDG+gPVIvGyWwTsxHpzj8Uh44G2h8fE3PgPH8z8Orn4rYNc4do3bCqmfDKmfDBr6afsCyvvKP54kNk2PodwtPXpo6XcSWs+j8eypH3Yvhzv1k3GnfjJurqcg92j2H3XdH83p9RTe+lnCK+fp+y2NY5W9mvrJcJJ+J+7fUifr2mmpn1fP8co/6me8yGvUF5CepfecyLUeJLyaOWPNFa0fOncWllxXda3O8dQP54rOv9327wXwe+lHPWE0d9ZHer1Eq+fQ9opo/byBxFDXPw2+0f2r1ETN9U7W72diTm+91fav5fpScOKiddNbv1GvwV0f5RxxaHrtDvmHeDGqY/T+0T539fg4uqE60tdaXruDfoWPe+5Dzn+tc+AO5z+ttbhxoPNo/ZOsGamfRE+Jfppr3jH/rK9Zrq+l4R30k3rnrH9wvq9EP1Pg+HQPEXs1Aivk3yw097kkhtk+ZcQ7ew3lR87B1tgx/7i9hCVWqH9Sf5j1D43fw0j6lB5O9IoWIuvfiUj95uFd/06DtX6eo8D7/1tWv7+/M1I/GYoe6F74DohxZXDz6cskin1R5997DvYonvILXewG/g==
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="80" height="50">
@@ -679,18 +679,21 @@
  <objectgroup color="#ffff00" name="arc" width="80" height="50">
   <object x="1728" y="1344" width="64" height="64">
    <properties>
+    <property name="enabled" value="true"/>
     <property name="id" value="4"/>
     <property name="type" value="MillieuH"/>
    </properties>
   </object>
   <object x="1856" y="1344" width="64" height="64">
    <properties>
+    <property name="enabled" value="true"/>
     <property name="id" value="4"/>
     <property name="type" value="FinH"/>
    </properties>
   </object>
   <object x="1664" y="1344" width="64" height="64">
    <properties>
+    <property name="enabled" value="true"/>
     <property name="id" value="4"/>
     <property name="type" value="DebutH"/>
    </properties>
@@ -781,6 +784,7 @@
   </object>
   <object x="1792" y="1344" width="64" height="64">
    <properties>
+    <property name="enabled" value="true"/>
     <property name="id" value="4"/>
     <property name="type" value="MillieuH"/>
    </properties>
@@ -877,6 +881,7 @@
   </object>
   <object x="2944" y="960" width="64" height="64">
    <properties>
+    <property name="enabled" value="true"/>
     <property name="id" value="4"/>
    </properties>
   </object>
