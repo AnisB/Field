@@ -531,8 +531,10 @@ end
 
 function MapLoader:enableA(id)
     for i,p in pairs(self.arcs) do
+        print("ID interr",p.id, id)
         if(p.id==id) then
             p:activateA()
+            print("ARC trouvé allumage")
             done = true
         end
     end
@@ -547,8 +549,11 @@ end
 
 function MapLoader:disableA(id)
     for i,p in pairs(self.arcs) do
+        print("ID interr",p.id)
+
         if(p.id==id) then
             p:disableA()
+            print("ARC trouvé eteinte")
             done = true
         end
     end

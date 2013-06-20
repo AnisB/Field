@@ -33,8 +33,10 @@ function Arc.new(pos,w,h,typeArc,id,enable, netid)
 	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
 	if enable == "true" then
 		self.enabled = true
+		self.anim:load("on")
 	else
 		self.enabled = false
+		self.anim:load("off")
 	end
 
 	return self

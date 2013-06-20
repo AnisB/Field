@@ -24,17 +24,19 @@ function ArcInterruptor.new(pos,type,arcID,mapLoader,enabled,netid)
 	self.canBeEnableTM=0
 	self.canBeEnableMM=0
 	self.mapLoader=mapLoader
-	self.arcID= arcID
+	self.arcID= tonumber(arcID)
 	self.w=unitWorldSize
 	self.h=unitWorldSize
 
 	self.timer=0
 	self.quad= love.graphics.newQuad(0, 0, unitWorldSize, unitWorldSize, unitWorldSize*2,unitWorldSize)
 
+	self.enabled = enabled
+
 	return self
 end
 function ArcInterruptor:init()
-	if enabled then
+	if self.enabled then
 		self.on=true
 		self:loadAnimation("on",true)
 	else
@@ -61,16 +63,19 @@ function ArcInterruptor:getPosition()
 end
 function ArcInterruptor:handleTry(tryer)
 
+	print("Tryer", tryer)
 	if self.timer ==0 then
 		self.timer=ArcInterruptorTimer 
 		if tryer=='MetalMan' then
 			if self.canBeEnableMM>0 then
 				self.on= not self.on
 				if self.on then
+					print("activation de ", self.arcID)
 					self.mapLoader:enableA(self.arcID)
 					self:loadAnimation("launching",true)
 
 				else
+					print("activation de ", self.arcID)
 					self.mapLoader:disableA(self.arcID)
 					self:loadAnimation("shutdown",true)
 
@@ -82,9 +87,11 @@ function ArcInterruptor:handleTry(tryer)
 				self.on= not self.on
 				if self.on then
 					self.mapLoader:enableA(self.arcID)
+					print("activation de ", self.arcID)
 					self:loadAnimation("launching",true)
 
 				else
+					print("activation de ", self.arcID)
 					self.mapLoader:disableA(self.arcID)
 					self:loadAnimation("shutdown",true)
 				end
@@ -100,19 +107,19 @@ end
 
 
 function ArcInterruptor:collideWith( object, collision )
-	if object.type=='MetalManSolo' then
+	if object.type=='MetalMan' then
 		self.canBeEnableMM =self.canBeEnableMM+1
 	end
-	if object.type =='TheMagnetSolo' then
+	if object.type =='TheMagnet' then
 		self.canBeEnableTM =self.canBeEnableTM+1
 	end
 end
 
 function ArcInterruptor:unCollideWith( object, collision )
-	if object.type=='MetalManSolo' then
+	if object.type=='MetalMan' then
 		self.canBeEnableMM =self.canBeEnableMM-1
 	end
-	if object.type =='TheMagnetSolo' then
+	if object.type =='TheMagnet' then
 		self.canBeEnableTM =self.canBeEnableTM-1
 	end
 end

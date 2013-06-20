@@ -83,6 +83,10 @@ function MapLoader:update(dt)
 		p:update(dt)
 	end    
 
+	for i,p in pairs(self.arcinterruptors) do
+		p:update(dt)
+	end    
+
 	for i,p in pairs(self.gates) do
 		p:update(dt)
 	end

@@ -69,7 +69,7 @@ end
 -- PUBLIC : change animation (you can force it)
 function AnimArc:load(anim, force)
 	local newAnim = AnimArc.ANIMS[anim]
-	if force or newAnimArc.priority > self.currentAnim.priority then
+	if force or newAnim.priority > self.currentAnim.priority then
 		self.currentAnim = newAnim
 		self.currentPos = 1
 		-- begin of an animation
