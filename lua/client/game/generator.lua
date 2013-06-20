@@ -86,9 +86,9 @@ end
 
 function Generator:draw(x,y)
 	if self.typeField =="Attractive" then
-		self.field:draw(self.position.x+unitWorldSize/2,self.position.y+unitWorldSize/2)
+		self.field:draw(self.position.x+unitWorldSize/2,self.position.y+unitWorldSize)
 	else
-		self.field:draw(self.position.x+unitWorldSize/2,self.position.y+unitWorldSize/2)
+		self.field:draw(self.position.x+unitWorldSize/2,self.position.y+unitWorldSize)
 	end
-	love.graphics.drawq(self.anim:getSprite(), self.diffuse,self.position.x-unitWorldSize/2, self.position.y-unitWorldSize/2)
+	love.graphics.drawq(self.anim:getSprite(), self.diffuse,self.position.x, self.position.y)
 end
