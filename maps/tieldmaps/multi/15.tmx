@@ -74,7 +74,7 @@
  </layer>
  <layer name="front" width="80" height="50">
   <data encoding="base64" compression="zlib">
-   eJztW9luAyEMTLtt2v7/D7cPRUJWgDG+gPVIvGyWwTsxHpzj8Uh44G2h8fE3PgPH8z8Orn4rYNc4do3bCqmfDKmfDBr6afsCyvvKP54kNk2PodwtPXpo6XcSWs+j8eypH3Yvhzv1k3GnfjJurqcg92j2H3XdH83p9RTe+lnCK+fp+y2NY5W9mvrJcJJ+J+7fUifr2mmpn1fP8co/6me8yGvUF5CepfecyLUeJLyaOWPNFa0fOncWllxXda3O8dQP54rOv9327wXwe+lHPWE0d9ZHer1Eq+fQ9opo/byBxFDXPw2+0f2r1ETN9U7W72diTm+91fav5fpScOKiddNbv1GvwV0f5RxxaHrtDvmHeDGqY/T+0T539fg4uqE60tdaXruDfoWPe+5Dzn+tc+AO5z+ttbhxoPNo/ZOsGamfRE+Jfppr3jH/rK9Zrq+l4R30k3rnrH9wvq9EP1Pg+HQPEXs1Aivk3yw097kkhtk+ZcQ7ew3lR87B1tgx/7i9hCVWqH9Sf5j1D43fw0j6lB5O9IoWIuvfiUj95uFd/06DtX6eo8D7/1tWv7+/M1I/GYoe6F74DohxZXDz6cskin1R5997DvYonvILXewG/g==
+   eJztW9luAyEMTLtt2vz/D6cPRUIoGN82xCPxslkG78R4cI7breCBj0Tj6298B477fxxU/TJg1zh2jdsKpZ8MpZ8MGvpp+wKW95V/3IfYND1m5J7pAWGm30mYPY/Gs5d+uHsp3KWfjLv0k3FTPQVzj2b/0df91Ryop/DWzxJeOT++39I4suzV0k+Gk/Q7cf+2OtnXTkv9vHqOV/7RP+M1vDb6AqZngZ4Tcw2ChFczZ6y5ovXDzuXCkuvqrvU5XvrhuaLzb7f9eyH4vfQbPWE1l+sjUC8x6zm0vSJaP29gYujrnwbf6v4sNVFzvZP1ezDmQOtl27+W60tBiWusm976rXoN6vpYzhWHptfukH8YL8bqGL1/tM9dEB9FN6yO42szr91Bv8ZHPfdhzn+zc2C28x/lrKedu9x5Y/2TrBlZ/yR6SvTTXDPaP7jQ1C+6/lHPNBp4B/2k3sn1D8r3ldjPFCg+DSFir0YgQ/5xobnPJTFw+5QVL/calh9zDrbGjvlH7SUskaH+Sf2B6x8av4eR9CkQTvSKGSLr34ko/fjwrn+nwVo/z9Hg/f8tq9/fvzNKPxmaHti98BsQY2ZQ8+nHJIp90effZw3yaJ7yBHa0Bv8=
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="80" height="50">
@@ -164,6 +164,7 @@
   <object x="1664" y="2112" width="64" height="64"/>
   <object x="4352" y="960" width="192" height="64"/>
   <object x="4480" y="1152" width="192" height="64"/>
+  <object x="896" y="1920" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#ffffff" name="movable" width="80" height="50"/>
  <objectgroup color="#ff6666" name="destroyable" width="80" height="50"/>
