@@ -1,4 +1,3 @@
-
 --[[ 
 This file is part of the Field project]]
 
@@ -17,7 +16,7 @@ function ArcInterruptor.new(pos,type,arcID,mapLoader,enabled,netid)
 	local decalage={unitWorldSize/2,unitWorldSize/2}
 	self.pc = Physics.newInterruptor(self.position.x,self.position.y,unitWorldSize,unitWorldSize,type,decalage)
 	self.typeG=type
-	self.anim = AnimInterSolo.new('switch/arc')
+	self.anim = AnimInter.new('switch/arc')
 	self.pc.fixture:setUserData(self)
 	self.type='ArcInterruptor'
 
