@@ -74,7 +74,7 @@
  </layer>
  <layer name="front" width="80" height="50">
   <data encoding="base64" compression="zlib">
-   eJztW9luAyEMTLtt2vz/D6cPRUIoGN82xCPxslkG78R4cI7breCBj0Tj6298B477fxxU/TJg1zh2jdsKpZ8MpZ8MGvpp+wKW95V/3IfYND1m5J7pAWGm30mYPY/Gs5d+uHsp3KWfjLv0k3FTPQVzj2b/0df91Ryop/DWzxJeOT++39I4suzV0k+Gk/Q7cf+2OtnXTkv9vHqOV/7RP+M1vDb6AqZngZ4Tcw2ChFczZ6y5ovXDzuXCkuvqrvU5XvrhuaLzb7f9eyH4vfQbPWE1l+sjUC8x6zm0vSJaP29gYujrnwbf6v4sNVFzvZP1ezDmQOtl27+W60tBiWusm976rXoN6vpYzhWHptfukH8YL8bqGL1/tM9dEB9FN6yO42szr91Bv8ZHPfdhzn+zc2C28x/lrKedu9x5Y/2TrBlZ/yR6SvTTXDPaP7jQ1C+6/lHPNBp4B/2k3sn1D8r3ldjPFCg+DSFir0YgQ/5xobnPJTFw+5QVL/calh9zDrbGjvlH7SUskaH+Sf2B6x8av4eR9CkQTvSKGSLr34ko/fjwrn+nwVo/z9Hg/f8tq9/fvzNKPxmaHti98BsQY2ZQ8+nHJIp90effZw3yaJ7yBHa0Bv8=
+   eJztW+1uwyAM7Jau297/hbtJi4RogPO3YZzEH9LY5op9Jk1vtw0PvCUa95/xETgef3FQucuATHGgsWz+XkHlJFPcGbDzVwaN/NXWBdTulX48qtg0Naa23eOkhRZ/K6G1Hunae/tvJVD508jflWDFX8/GSsiQvxr6oHX+KOv+6J7emcIzf633pNeer7/vq+u7f8b8WOVvBDLxt/P3FWedLGunpf56nTmu9KNc41Fdq3UBObP01onMtSDdf5p7xtoWtc9A/Uh4mYW/o5gr93h0/zwLf9K5np9V8/cA7HvlL5Vnro70zhKtM4e2Vljkr7ROWgKJoax/GvbKz2rnqjen2nFF988c/r4Z9/T8Zctf6ZwlKHHVddNbf0dnDa7/kc2RDYnWtmJCfUfsP0SL0XVkzF8uRr4pvKE81tdaWmtRf6hcc2xSOEKeP9d9YGT/16pfEVrBtXVV/yQ+I/VXwqeEP02flvor8YXEonXfTPqrxeGM/HHsSrSTqx+U3yvRZwoUnW4hSisikDF/UVj0SZwY0HOKl/6i9pE+2Bqe/bMWf6N66AlK/bPKX6k+cPVD430YyjnFIn9XAPc5TQuU/bciPPN3NWjUv/PzyNxqsO6fPccJ7/9vSd+/j+7JMkIjf/8zTj7QXPgKiDEzqPvv0yqQSVH28u97sMavrjwBFSwHPw==
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="80" height="50">
