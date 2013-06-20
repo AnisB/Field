@@ -7,18 +7,6 @@ function ArcadeChoixNiveau:update(dt) end
 function ArcadeChoixNiveau:draw() end
 
 function ArcadeChoixNiveau:onMessage(msg, client)
-	-- if msg.type == "choixNiveau" then
-	-- 	monde.level = msg.level
-	-- 	for k,c in pairs(clients) do
-	-- 		c:send({type= "choixNiveau", level= msg.level})
-	-- 	end
-	-- 	if gameStateManager.state['Gameplay']~=nil then
-	-- 		gameStateManager.state['Gameplay']:destroy()
-	-- 	end
-	-- 	gameStateManager.state['Gameplay']=Gameplay.new("maps/"..msg.level,true)
-	-- 	gameStateManager:changeState("Gameplay")
-	-- end
-
 	if msg.type=="syncro" then
 
         if msg.pck.current~="ChoixNiveau" then
@@ -63,7 +51,6 @@ function ArcadeChoixNiveau:onMessage(msg, client)
         	if c.perso==msg.pck.perso then
                 -- Nothgin to do, the peer is already sycronised with himself
             else
-            	print("Envoi"..c.perso)
             	c:send({type= "syncroLevel", pck={current="ChoixNiveau", level = msg.pck.level}})
             end
         end

@@ -8,8 +8,7 @@ function ChoixTypeJeu:draw() end
 function ChoixTypeJeu:keyReleased(key, unicode) end
 
 function ChoixTypeJeu:onMessage(msg, client)
-
-print("recu un truc")
+	
 	if msg.type=="syncro" then
 
         if msg.pck.current~="ChoixTypeJeu" then

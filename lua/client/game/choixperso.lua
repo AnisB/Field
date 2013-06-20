@@ -41,21 +41,7 @@ function ChoixPerso:new()
 end
 
 function ChoixPerso:mousePressed(x, y, button)
-	if self.metalman:isCliked(x,y) then
-		serveur:send({type="choixPerso", confirm=false, perso="metalman"})
-		self.isRed=1
-		self.metalman:setSelected(true)
-		self.themagnet:setSelected(false)
-		self.play:setEnable(true)
-	elseif self.themagnet:isCliked(x,y) then
-		serveur:send({type="choixPerso", confirm=false, perso="themagnet"})
-		self.isRed=2
-		self.themagnet:setSelected(true)
-		self.metalman:setSelected(false)
-		self.play:setEnable(true)
-	elseif self.play:isCliked(x,y) then
-		serveur:send({type="choixPerso", confirm=true})
-	end
+
 end
 
 function ChoixPerso:mouseReleased(x, y, button) 

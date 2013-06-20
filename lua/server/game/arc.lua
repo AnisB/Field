@@ -8,11 +8,12 @@ Arc.__index = Arc
 TimerArc =1
 
 ArcType={DebutH='DebutH',MillieuH='MillieuH',FinH='FinH',DebutV='DebutV',MillieuV='MillieuV',FinV='FinV'}
-function Arc.new(pos,w,h,typeArc,id,enable)
+function Arc.new(pos,w,h,typeArc,id,enable, netid)
 	local self = {}
 	setmetatable(self, Arc)
 
 	self.id=tonumber(id)
+	self.netid = netid
 	self.position={x=pos.x,y=pos.y}
 	self.w=w
 	self.h=h

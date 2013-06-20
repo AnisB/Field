@@ -11,6 +11,7 @@ require("game.destroyable")
 require("game.tilesets")
 require("game.movable")
 require("game.gateinterruptor")
+require("game.arcinterruptor")
 require("game.interruptor")
 require("game.gate")
 require("game.acid")
@@ -243,7 +244,7 @@ function MapLoader:handlePacket(maps)
 			if self.arcinterruptors[tonumber(t[2])]==nil then
 				self.arcinterruptors[tonumber(t[2])]=ArcInterruptor.new({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
 			else
-				self.arceinterruptors[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
+				self.arcinterruptors[tonumber(t[2])]:syncronize({x=tonumber(t[5]),y=tonumber(t[6])},t[3],tonumber(t[4]))
 			end            
 		end
 	end   
