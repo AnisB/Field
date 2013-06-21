@@ -66,16 +66,7 @@ end
 
 
 function ChoixNiveauSolo:mousePressed(x, y, button)
-	if self.left:isCliked(x,y) then
-		self:keyPressed("q")
-	elseif self.right:isCliked(x,y) then
-		self:keyPressed("d")
-	elseif self.play:isCliked(x,y) then
-		gameStateManager.state['GameplaySolo']= GameplaySolo.new(self.level,self.continuous,self.player)
-		gameStateManager:changeState('GameplaySolo')
-	elseif self.returnB:isCliked(x,y) then
-		gameStateManager:changeState("ChoixPersoSolo")
-	end
+
 end
 
 function ChoixNiveauSolo:mouseReleased(x, y, button) end

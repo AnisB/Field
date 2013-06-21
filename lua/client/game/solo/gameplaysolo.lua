@@ -193,7 +193,7 @@ end
             self.magnetmanager:addGenerator(self.theMagnet)
         end
         self.gameIsPaused=false
-        
+        self.shouldEnd=false 
 
     end
 

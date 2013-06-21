@@ -72,8 +72,16 @@ function ConnectToServer:keyPressed(key, unicode)
 			end
 		elseif key =="tab" or key =="down" then
 			self:incrementSelection()	
-	    elseif key =="up" then
+	    elseif key =="up" or key =="left" then
 	    	self:decrementSelection()
+	    elseif key == "right" then
+	    	if self.play.selected or self.returnB.selected then
+	    		self:incrementSelection()	
+	    	else
+	    		self.selection[self.selected].selected = false
+	    			self.selected = 3
+	    			self.play.selected = true
+	    	end
 	    else
 	    	if self.selection[self.selected].className == "TextField" then
 	    		self.selection[self.selected]:keyPressed(key,unicode)
