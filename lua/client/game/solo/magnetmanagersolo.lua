@@ -37,7 +37,7 @@ function MagnetManagerSolo:update(dt)
 	end
 
 
-	for i,g in ipairs(self.activeGenerators) do
+	    for i,g in ipairs(self.activeGenerators) do
 			for i,m in ipairs(self.normalMetals) do
 				if g:isAppliable(m:getPosition())  then
 					if g.fieldType==FieldTypes.Static then
@@ -103,6 +103,30 @@ function MagnetManagerSolo:disableG(GID)
         end
     end
 end
+
+function MagnetManagerSolo:switchG(GID)
+	for i,v in pairs(self.passiveGenerators) do
+        if(v.id==GID) then
+             if v.appliesField then
+                p:disableG()
+                newState = false
+            else
+                p:enableG()
+                newState = true
+            end
+            done = true
+        end
+    end
+	if done then
+        for i,p in pairs(gameStateManager.state["GameplaySolo"].mapLoader.gateinterruptors) do
+            if(p.id==id) then
+                p:syncronizeState(false)
+            end
+        end
+    end
+
+end
+
 
 function MagnetManagerSolo:changeMetalType(metal,oldType,newType)
 	if oldType==MetalTypes.Normal then

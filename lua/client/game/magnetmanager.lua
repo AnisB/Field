@@ -100,18 +100,18 @@ function MagnetManager:switchG(GID)
 		end
 	end
 end
-function MagnetManager:switchG(GID)
-	for i,v in pairs(self.activeGenerators) do
-		if v.id == GID then
-			v:disableG()
-		end
-	end
-		for i,v in pairs(self.passiveGenerators) do
-		if v.id == GID then
-			v:enableG()
-		end
-	end
-end
+-- function MagnetManager:switchG(GID)
+-- 	for i,v in pairs(self.activeGenerators) do
+-- 		if v.id == GID then
+-- 			v:disableG()
+-- 		end
+-- 	end
+-- 		for i,v in pairs(self.passiveGenerators) do
+-- 		if v.id == GID then
+-- 			v:enableG()
+-- 		end
+-- 	end
+-- end
 
 function MagnetManager:changeMetalType(metal,oldType,newType)
 	if oldType==MetalTypes.Normal then

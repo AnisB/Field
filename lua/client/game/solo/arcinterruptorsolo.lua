@@ -61,11 +61,13 @@ function ArcInterruptorSolo:isAppliable(pos)
 end
 
 function ArcInterruptorSolo:syncronizeState(newState)
-	self.on = newState
-	if newState then
-		self:loadAnimation("launching",true)
-	else
-		self:loadAnimation("shutdown",true)
+	if (self.on ~= newState) then
+		self.on = newState
+		if newState then
+			self:loadAnimation("launching",true)
+		else
+			self:loadAnimation("shutdown",true)
+		end
 	end
 end
 

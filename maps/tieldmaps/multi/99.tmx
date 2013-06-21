@@ -87,7 +87,19 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#800000" name="generator" width="200" height="20"/>
+ <objectgroup color="#800000" name="generator" width="200" height="20">
+  <object type="Repulsive" x="768" y="832" width="64" height="64">
+   <properties>
+    <property name="1" value=""/>
+   </properties>
+  </object>
+  <object type="Attractive" x="896" y="768" width="64" height="64">
+   <properties>
+    <property name="enabled" value="2"/>
+    <property name="id" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#66ccff" name="switch" width="200" height="20"/>
  <objectgroup color="#e6e6e6" name="metal" width="200" height="20"/>
  <objectgroup color="#333333" name="gate" width="200" height="20"/>
@@ -100,10 +112,10 @@
     <property name="type" value="DebutV"/>
    </properties>
   </object>
-  <object x="1216" y="1024" width="64" height="64">
+  <object x="1024" y="1088" width="64" height="64">
    <properties>
     <property name="enabled" value="true"/>
-    <property name="id" value="2"/>
+    <property name="id" value="1"/>
     <property name="type" value="MillieuV"/>
    </properties>
   </object>
@@ -114,11 +126,32 @@
     <property name="type" value="MillieuV"/>
    </properties>
   </object>
+  <object x="1024" y="1152" width="64" height="64">
+   <properties>
+    <property name="enabled" value="true"/>
+    <property name="id" value="1"/>
+    <property name="type" value="FinV"/>
+   </properties>
+  </object>
+  <object x="1024" y="1024" width="64" height="64">
+   <properties>
+    <property name="enabled" value="true"/>
+    <property name="id" value="1"/>
+    <property name="type" value="DebutV"/>
+   </properties>
+  </object>
   <object x="1216" y="1152" width="64" height="64">
    <properties>
     <property name="enabled" value="true"/>
     <property name="id" value="2"/>
     <property name="type" value="FinV"/>
+   </properties>
+  </object>
+  <object x="1216" y="1024" width="64" height="64">
+   <properties>
+    <property name="enabled" value="true"/>
+    <property name="id" value="2"/>
+    <property name="type" value="MillieuV"/>
    </properties>
   </object>
  </objectgroup>
@@ -135,6 +168,25 @@
    <properties>
     <property name="enabled" value="true"/>
     <property name="id" value="2"/>
+   </properties>
+  </object>
+  <object x="768" y="1152" width="64" height="64">
+   <properties>
+    <property name="enabled" value="true"/>
+    <property name="id" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="timer" width="200" height="20">
+  <object x="576" y="832" width="64" height="64">
+   <properties>
+    <property name="Arcs" value="1@2#2@0#"/>
+    <property name="Gates" value="1@2#"/>
+    <property name="Generators" value="1@2#"/>
+    <property name="duration" value="2"/>
+    <property name="id" value="1"/>
+    <property name="loop" value="true"/>
+    <property name="state" value="true"/>
    </properties>
   </object>
  </objectgroup>

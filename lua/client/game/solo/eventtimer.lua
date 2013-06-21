@@ -46,12 +46,15 @@ function EventTimer:executeActions()
 	-- end
 	
 	for i,k in pairs(self.generators) do
+		print ("Action sur generateur", k[1], k[2])
 		if k[2] == EventTimer.Actions.Shutdown then
 			self.magnetManager:disableG(k[1])
 		elseif k[2] == EventTimer.Actions.Start then
 			self.magnetManager:enableG(k[1])
-		elseif k [2] == EventTimer.Actions.Switch then
+		elseif k[2] == EventTimer.Actions.Switch then
 			self.magnetManager:switchG(k[1])
+			print("Switch de ", k[1])
+
 		end
 	end
 
@@ -61,15 +64,17 @@ function EventTimer:executeActions()
 		elseif k[2] == EventTimer.Actions.Start then
 			self.mapLoader:openG(k[1])
 		elseif k [2] == EventTimer.Actions.Switch then
-			self.mapLoader:switchG(k[1])
+			--self.mapLoader:switchG(k[1])
 		end
 	end
 
-	-- Pas encore implémenté
 	for i,k in pairs(self.arcs) do
 		if k[2] == EventTimer.Actions.Shutdown then
+			self.mapLoader:disableA(k[1])
 		elseif k[2] == EventTimer.Actions.Start then
-		elseif k [2] == EventTimer.Actions.Switch then
+			self.mapLoader:enable1(k[1])
+		elseif k[2] == EventTimer.Actions.Switch then
+			self.mapLoader:switchA(k[1])
 		end
 	end
 
@@ -87,7 +92,7 @@ end
 function EventTimer:getArgs(string)
 	local ret ={}
 	for i in string.gmatch(string, "([^@]+)") do
-		table.insert(ret, i)
+		table.insert(ret, tonumber(i))
 	end
 	return ret
 end
@@ -101,7 +106,6 @@ function EventTimer:parseParams(Actions)
 			local generator = self:getArgs(k)
 			assert(#generator == 2)
 			table.insert(self.generators,generator)
-			-- print(generator[1],generator[2])
 		end
 	end
 
@@ -111,7 +115,6 @@ function EventTimer:parseParams(Actions)
 			local arc = self:getArgs(k)
 			assert(#arc == 2)
 			table.insert(self.arcs,arc)
-			-- print(arc[1],arc[2])
 		end
 	end
 
@@ -131,6 +134,7 @@ function EventTimer:update(dt)
 	if self.enabled then
 		self.timer = self.timer+dt
 		if  self.timer >= self.duration then
+			print("BOUM")
 			self:executeActions()
 			if self.loop then
 				self.timer =0
