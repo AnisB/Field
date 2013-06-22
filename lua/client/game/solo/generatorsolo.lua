@@ -12,9 +12,9 @@ GeneratorSolo.__index = GeneratorSolo
 function GeneratorSolo.new(pos,type,typeField,ID,netid)
 	local self = {}
 	setmetatable(self, GeneratorSolo)
-	print(pos)
 	self.netid=netid
-	self.id=ID
+	self.id=tonumber(ID)
+	print(self.id)
 	self.position={x=pos.x,y=pos.y}
 	self.pc = Physics.newSphere(self.position.x+unitWorldSize/2,self.position.y+unitWorldSize/2,unitWorldSize/2,type)
 	self.typeG=type

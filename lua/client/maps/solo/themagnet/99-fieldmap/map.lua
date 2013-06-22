@@ -406,7 +406,7 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["1"] = ""
+            ["id"] = "2"
           }
         },
         {
@@ -431,7 +431,34 @@ return {
       visible = true,
       opacity = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 640,
+          y = 1152,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "1"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 448,
+          y = 1152,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "2"
+          }
+        }
+      }
     },
     {
       type = "objectgroup",

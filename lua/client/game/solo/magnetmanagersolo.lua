@@ -74,14 +74,16 @@ end
 
 function MagnetManagerSolo:enableG(GID)
 	for i,v in pairs(self.passiveGenerators) do
+		print ("Recherche de ", GID,v.id)
 		if v.id == GID then
+
 			v:enableG()
 			done = true
 		end
 	end
 	if done then
         for i,p in pairs(gameStateManager.state["GameplaySolo"].mapLoader.gateinterruptors) do
-            if(p.id==id) then
+            if(p.generatorID==id) then
                 p:syncronizeState(false)
             end
         end
@@ -90,7 +92,8 @@ end
 
 function MagnetManagerSolo:disableG(GID)
 	for i,v in pairs(self.activeGenerators) do
-		if v.id ==GID then
+		print ("Recherche de ", GID,v.id)
+		if v.id == GID then
 			v:disableG()
 			done = true
 		end
@@ -104,28 +107,7 @@ function MagnetManagerSolo:disableG(GID)
     end
 end
 
-function MagnetManagerSolo:switchG(GID)
-	for i,v in pairs(self.passiveGenerators) do
-        if(v.id==GID) then
-             if v.appliesField then
-                p:disableG()
-                newState = false
-            else
-                p:enableG()
-                newState = true
-            end
-            done = true
-        end
-    end
-	if done then
-        for i,p in pairs(gameStateManager.state["GameplaySolo"].mapLoader.gateinterruptors) do
-            if(p.id==id) then
-                p:syncronizeState(false)
-            end
-        end
-    end
 
-end
 
 
 function MagnetManagerSolo:changeMetalType(metal,oldType,newType)

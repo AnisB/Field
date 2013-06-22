@@ -430,6 +430,68 @@ function MapLoaderSolo:firstPlanDraw(pos)
     end
 end
 
+-- Actions sur les generateurs
+
+
+function MapLoaderSolo:enableGene(id)
+    for i,p in pairs(self.generators) do
+        if(p.id==id) then
+            p:enableG()
+            done = true
+        end
+    end
+    if done then
+        for i,p in pairs(self.interruptors) do
+            if(p.generatorID==id) then
+                p:syncronizeState(true)
+            end
+        end
+    end
+end
+
+function MapLoaderSolo:disableGene(id)
+    for i,p in pairs(self.generators) do
+        if(p.id==id) then
+            p:disableG()
+            done = true
+        end
+    end
+    if done then
+        for i,p in pairs(self.interruptors) do
+            if(p.generatorID==id) then
+                p:syncronizeState(false)
+            end
+        end
+    end
+end
+
+function MapLoaderSolo:switchGene(id)
+    for i,p in pairs(self.generators) do
+        print("Recherche", id)
+        if(p.id==id) then
+            print("FOUND")
+             if p.appliesField then
+                p:disableG()
+                newState = false
+            else
+                p:enableG()
+                newState = true
+            end
+            done = true
+        end
+    end
+    if done then
+        for i,p in pairs(self.interruptors) do
+            if(p.generatorID==id) then
+                p:syncronizeState(newState)
+            end
+        end
+    end
+end
+
+
+
+-- Action sur les portes
 function MapLoaderSolo:openG(id)
     for i,p in pairs(self.gates) do
         if(p.openID==id) then

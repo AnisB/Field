@@ -90,7 +90,7 @@
  <objectgroup color="#800000" name="generator" width="200" height="20">
   <object type="Repulsive" x="768" y="832" width="64" height="64">
    <properties>
-    <property name="1" value=""/>
+    <property name="id" value="2"/>
    </properties>
   </object>
   <object type="Attractive" x="896" y="768" width="64" height="64">
@@ -100,7 +100,18 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#66ccff" name="switch" width="200" height="20"/>
+ <objectgroup color="#66ccff" name="switch" width="200" height="20">
+  <object x="640" y="1152" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+   </properties>
+  </object>
+  <object x="448" y="1152" width="64" height="64">
+   <properties>
+    <property name="id" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#e6e6e6" name="metal" width="200" height="20"/>
  <objectgroup color="#333333" name="gate" width="200" height="20"/>
  <objectgroup color="#004080" name="acid" width="200" height="20"/>
