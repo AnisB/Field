@@ -22,8 +22,8 @@ function GateSolo.new(pos,w,h,openID,closeID,prev,next,animid,enabled,type,mapLo
 
 	self.animid=animid
 	self.netid=netid
-	self.openID=openID
-	self.closeID=closeID
+	self.openID=tonumber(openID)
+	self.closeID=tonumber(closeID)
 	self.prev=prev
 	self.next=next
 	self.mapLoader=mapLoader
@@ -52,7 +52,11 @@ function GateSolo.new(pos,w,h,openID,closeID,prev,next,animid,enabled,type,mapLo
 	self.sound={open=Sound.getSound("open"),close=Sound.getSound("close")}
 
 	self.quad= love.graphics.newQuad(0, 0, unitWorldSize, unitWorldSize, unitWorldSize*2,unitWorldSize)
-	self.enabled=enabled
+	if enabled == "true" then
+		self.open = true
+	else
+		self.open = false
+	end
 	return self
 end
 
@@ -71,7 +75,7 @@ end
 	end
 	
 	function GateSolo:init()
-    if self.enabled then
+    if self.open then
         self.pc.fixture:setFilterData(1,1,-1)    	
     	self.anim:load("open",true)
     else

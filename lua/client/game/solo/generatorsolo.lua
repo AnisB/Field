@@ -21,14 +21,14 @@ function GeneratorSolo.new(pos,type,typeField,ID,netid)
 	self.pc.fixture:setUserData(self)
 	self.type='GeneratorSolo'
 
-	if typeField=="Repulsive" then
-		self.typeField=FieldTypes.Repulsive
-	elseif typeField=="Attractive" then
+	if typeField == "Repulsive" then
+		self.typeField = FieldTypes.Repulsive
+	elseif typeField == "Attractive" then
 		self.typeField=FieldTypes.Attractive
-	elseif typeField=="RotativeR" then
+	elseif typeField == "RotativeR" then
 		self.typeField=FieldTypes.RotativeR
-	elseif typeField=="RotativeL" then
-		self.typeField=FieldTypes.RotativeL
+	elseif typeField == "RotativeL" then
+		self.typeField = FieldTypes.RotativeL
 	end
 
 	self.appliesField=false

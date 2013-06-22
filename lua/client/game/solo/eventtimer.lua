@@ -13,12 +13,20 @@ function EventTimer.new(id, duration,  enabled, loop, actions, mapLoader, magnet
     setmetatable(self, EventTimer)
 
     -- Init self attributes
-    self.enabled=enabled
+    if enabled == "true" then
+    	self.enabled = true
+    else
+    	self.enabled = false
+    end
     self.id=id
-    self.duration = 1
+    self.duration = tonumber(duration)
     self.type="EventTimer"
     self.timer = 0
-    self.loop = true
+    if loop == "true" then
+    	self.loop = true
+    else
+    	self.lopp = false
+    end
 
     -- Init possible actions
     self.generators={}
@@ -62,7 +70,7 @@ function EventTimer:executeActions()
 		elseif k[2] == EventTimer.Actions.Start then
 			self.mapLoader:openG(k[1])
 		elseif k [2] == EventTimer.Actions.Switch then
-			--self.mapLoader:switchG(k[1])
+			self.mapLoader:switchG(k[1])
 		end
 	end
 
@@ -125,6 +133,19 @@ function EventTimer:parseParams(Actions)
 			-- print(gate[1],gate[2])
 		end
 	end
+
+
+	if Actions["Timers"] ~= nil then
+		print("Il y a des timers dans ce timer")
+		for k in string.gmatch(Actions["Timers"], "([^#]+)") do
+			local timer = self:getArgs(k)
+			assert(#timer == 2)
+			table.insert(self.timer,timer)
+			-- print(gate[1],gate[2])
+		end
+	end
+
+
 end
 
 

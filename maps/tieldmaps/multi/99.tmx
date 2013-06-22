@@ -113,7 +113,17 @@
   </object>
  </objectgroup>
  <objectgroup color="#e6e6e6" name="metal" width="200" height="20"/>
- <objectgroup color="#333333" name="gate" width="200" height="20"/>
+ <objectgroup color="#333333" name="gate" width="200" height="20">
+  <object x="256" y="1152" width="64" height="64">
+   <properties>
+    <property name="animid" value="1"/>
+    <property name="closeid" value="1"/>
+    <property name="enabled" value="true"/>
+    <property name="openid" value="1"/>
+    <property name="type" value="VAloneH"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#004080" name="acid" width="200" height="20"/>
  <objectgroup color="#ffff00" name="arc" width="200" height="20">
   <object x="1216" y="960" width="64" height="64">
@@ -173,7 +183,14 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#800080" name="gateswitch" width="200" height="20"/>
+ <objectgroup color="#800080" name="gateswitch" width="200" height="20">
+  <object x="128" y="1152" width="64" height="64">
+   <properties>
+    <property name="closeid" value="1"/>
+    <property name="openid" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="arcswitch" width="200" height="20">
   <object x="896" y="1152" width="64" height="64">
    <properties>

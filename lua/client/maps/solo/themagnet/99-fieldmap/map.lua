@@ -474,7 +474,25 @@ return {
       visible = true,
       opacity = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 256,
+          y = 1152,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "1",
+            ["closeid"] = "1",
+            ["enabled"] = "true",
+            ["openid"] = "1",
+            ["type"] = "VAloneH"
+          }
+        }
+      }
     },
     {
       type = "objectgroup",
@@ -626,7 +644,22 @@ return {
       visible = true,
       opacity = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 128,
+          y = 1152,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["closeid"] = "1",
+            ["openid"] = "1"
+          }
+        }
+      }
     },
     {
       type = "objectgroup",

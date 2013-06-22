@@ -25,8 +25,8 @@ function GateInterruptorSolo.new(pos,type,gateOpenID,gateCloseID,mapLoader,enabl
 	self.canBeEnableTM=0
 	self.canBeEnableMM=0
 	self.mapLoader=mapLoader
-	self.gateOpenID= gateOpenID
-	self.gateCloseID= gateCloseID
+	self.gateOpenID= tonumber(gateOpenID)
+	self.gateCloseID= tonumber(gateCloseID)
 	self.w=unitWorldSize
 	self.h=unitWorldSize
 

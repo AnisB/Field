@@ -467,9 +467,7 @@ end
 
 function MapLoaderSolo:switchGene(id)
     for i,p in pairs(self.generators) do
-        print("Recherche", id)
         if(p.id==id) then
-            print("FOUND")
              if p.appliesField then
                 p:disableG()
                 newState = false
@@ -519,6 +517,32 @@ function MapLoaderSolo:closeG(id)
         for i,p in pairs(self.gateinterruptors) do
             if(p.gateCloseID==id) then
                 p:syncronizeState(false)
+            end
+        end
+    end
+end
+
+
+function MapLoaderSolo:switchG(id)
+    print ("looking for", id)
+    for i,p in pairs(self.gates) do
+        print (p.openID, p.closeID)
+        if(p.closeID==id and p.open == true) then
+            p:closeG()
+            print ("LALAL", id)
+            done = true
+            state = false
+        elseif(p.openID==id and p.open == false) then
+            p:openG()
+            print ("BABAB", id)
+            done = true
+            state = true
+        end
+    end
+    if done then
+        for i,p in pairs(self.gateinterruptors) do
+            if(p.gateCloseID==id) then
+                p:syncronizeState(state)
             end
         end
     end
