@@ -18,7 +18,7 @@ function EventTimer.new(id, duration,  enabled, loop, actions, mapLoader, magnet
     else
     	self.enabled = false
     end
-    self.id=id
+    self.id=tonumber(id)
     self.duration = tonumber(duration)
     self.type="EventTimer"
     self.timer = 0
