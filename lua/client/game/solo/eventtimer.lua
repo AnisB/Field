@@ -154,11 +154,10 @@ function EventTimer:update(dt)
 		self.timer = self.timer+dt
 		if  self.timer >= self.duration then
 			self:executeActions()
-			if self.loop then
-				self.timer =0
-			else
+			if not self.loop then
 				self.enabled = false
 			end
+				self.timer = 0 
 		end
 	end
 end

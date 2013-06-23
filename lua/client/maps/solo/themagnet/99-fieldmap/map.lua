@@ -422,6 +422,19 @@ return {
             ["enabled"] = "2",
             ["id"] = "1"
           }
+        },
+        {
+          name = "",
+          type = "Attractive",
+          shape = "rectangle",
+          x = 2176,
+          y = 960,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "6"
+          }
         }
       }
     },
@@ -456,6 +469,20 @@ return {
           visible = true,
           properties = {
             ["id"] = "2"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1856,
+          y = 1152,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "5",
+            ["timers"] = "2@1@1#3@1@0#"
           }
         }
       }
@@ -722,6 +749,46 @@ return {
             ["id"] = "1",
             ["loop"] = "true",
             ["state"] = "true"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1920,
+          y = 960,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["Arcs"] = "",
+            ["Gates"] = "",
+            ["Generators"] = "6@1#",
+            ["Timers"] = "",
+            ["duration"] = "1",
+            ["id"] = "2",
+            ["loop"] = "false",
+            ["state"] = "false"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1920,
+          y = 1024,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["Arcs"] = "",
+            ["Gates"] = "",
+            ["Generators"] = "6@0#",
+            ["Timers"] = "",
+            ["duration"] = "1",
+            ["id"] = "3",
+            ["loop"] = "false",
+            ["state"] = "false"
           }
         }
       }

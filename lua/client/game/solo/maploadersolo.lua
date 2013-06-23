@@ -164,19 +164,19 @@ end
 
 function MapLoaderSolo:createInterruptors(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.interruptors, InterruptorSolo.new({x=(j.x),y=(j.y)},true,j.properties["id"],self.magnetManager,j.properties["timers"],i))
+        table.insert(self.interruptors, InterruptorSolo.new({x=(j.x),y=(j.y)},true,j.properties["id"],self.magnetManager,self,j.properties["enabled"],j.properties["timers"],i))
     end
 end
 
 function MapLoaderSolo:createGateInterruptors(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.gateinterruptors, GateInterruptorSolo.new({x=(j.x),y=(j.y)},true,j.properties["openid"],j.properties["closeid"],self,j.properties["enabled"],i))
+        table.insert(self.gateinterruptors, GateInterruptorSolo.new({x=(j.x),y=(j.y)},true,j.properties["openid"],j.properties["closeid"],self,j.properties["enabled"],j.properties["timers"],i))
     end
 end
 
 function MapLoaderSolo:createArcInterruptors(map)
     for i,j in pairs(map.objects) do
-        table.insert(self.arcinterruptors, ArcInterruptorSolo.new({x=(j.x),y=(j.y)},true,j.properties["id"],self,j.properties["enabled"],i))
+        table.insert(self.arcinterruptors, ArcInterruptorSolo.new({x=(j.x),y=(j.y)},true,j.properties["id"],self,j.properties["enabled"],j.properties["timers"],i))
     end
 end
 
@@ -529,12 +529,10 @@ function MapLoaderSolo:switchG(id)
         print (p.openID, p.closeID)
         if(p.closeID==id and p.open == true) then
             p:closeG()
-            print ("LALAL", id)
             done = true
             state = false
         elseif(p.openID==id and p.open == false) then
             p:openG()
-            print ("BABAB", id)
             done = true
             state = true
         end

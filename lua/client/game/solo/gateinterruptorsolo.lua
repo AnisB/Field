@@ -7,8 +7,15 @@ require("game.solo.animintersolo")
 GateInterruptorSolo = {}
 GateInterruptorSolo.__index = GateInterruptorSolo
 
-GateInterruptorSoloTimer =0.5
-function GateInterruptorSolo.new(pos,type,gateOpenID,gateCloseID,mapLoader,enabled,netid)
+
+
+GateInterruptorSolo.TimeEvent = {Launching = 1, Shutdown = 0}
+GateInterruptorSolo.ActionType = {Shutdown = 0, Start = 1, Switch =2}
+
+
+
+GateInterruptorSolo.Timer =0.5
+function GateInterruptorSolo.new(pos,type,gateOpenID,gateCloseID,mapLoader,enabled,timers,netid)
 	local self = {}
 	setmetatable(self, GateInterruptorSolo)
 
@@ -33,8 +40,50 @@ function GateInterruptorSolo.new(pos,type,gateOpenID,gateCloseID,mapLoader,enabl
 	self.timer=0
 	self.quad= love.graphics.newQuad(0, 0, unitWorldSize, unitWorldSize, unitWorldSize*2,unitWorldSize)
 
+	self.timers = {}
+	self:parseTimers(timers)
+
 	return self
 end
+
+
+function GateInterruptorSolo:getArgs(string)
+	local ret ={}
+	for i in string.gmatch(string, "([^@]+)") do
+		table.insert(ret, tonumber(i))
+	end
+	return ret
+end
+
+function GateInterruptorSolo:executeActions(actionType)
+	-- print("EXECUTION DES ACTIONS")
+	for i,v in pairs(self.timers) do
+		-- print("TIMER",v[1],v[2],v[3])
+		if v[3] == actionType then
+			if v[2] == EventTimer.Actions.Shutdown then
+				self.mapLoader:disableT(v[1])
+			elseif v[2] == EventTimer.Actions.Start then
+				self.mapLoader:enableT(v[1])
+			elseif v[2] == EventTimer.Actions.Switch then
+				self.mapLoader:switchT(v[1])
+			end
+		end
+	end
+end
+
+
+function GateInterruptorSolo:parseTimers(parTimer)
+	if parTimer ~= nil then
+		print("Il y a des timers")
+		for k in string.gmatch(parTimer, "([^#]+)") do
+			local timer = self:getArgs(k)
+			assert(#timer == 3)
+			table.insert(self.timers,timer)
+			print(timer[1],timer[2],timer[3])
+		end
+	end
+end
+
 function GateInterruptorSolo:init()
 	if enabled then
 		self.on=true
@@ -75,19 +124,18 @@ end
 function GateInterruptorSolo:handleTry(tryer)
 
 	if self.timer ==0 then
-		self.timer=GateInterruptorSoloTimer 
+		self.timer=GateInterruptorSolo.Timer 
 		if tryer=='MetalMan' then
 			if self.canBeEnableMM>0 then
 				self.on= not self.on
 				if self.on then
 					self.mapLoader:openG(self.gateOpenID)
 					self:loadAnimation("launching",true)
-
+					self:executeActions(Interruptor.TimeEvent.Launching)
 				else
 					self.mapLoader:closeG(self.gateCloseID)
 					self:loadAnimation("shutdown",true)
-
-
+					self:executeActions(Interruptor.TimeEvent.Shutdown)
 				end
 			end
 		elseif tryer=='TheMagnet' then
@@ -96,10 +144,11 @@ function GateInterruptorSolo:handleTry(tryer)
 				if self.on then
 					self.mapLoader:openG(self.gateOpenID)
 					self:loadAnimation("launching",true)
-
+					self:executeActions(Interruptor.TimeEvent.Launching)
 				else
 					self.mapLoader:closeG(self.gateCloseID)
 					self:loadAnimation("shutdown",true)
+					self:executeActions(Interruptor.TimeEvent.Shutdown)
 				end
 			end
 		end
@@ -108,6 +157,7 @@ end
 
 
 function GateInterruptorSolo:preSolve(b,coll)
+
 end
 
 

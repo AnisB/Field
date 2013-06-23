@@ -6,10 +6,13 @@ require("game.solo.animintersolo")
 InterruptorSolo = {}
 InterruptorSolo.__index = InterruptorSolo
 
+Interruptor.TimeEvent = {Launching = 1, Shutdown = 0}
+Interruptor.ActionType = {Shutdown = 0, Start = 1, Switch =2}
 
-function InterruptorSolo.new(pos,type,generatorID,magnetManager,sprite,netid,timers)
+function InterruptorSolo.new(pos,type,generatorID,magnetManager,mapLoader,enabled,timers,netid)
 	local self = {}
 	setmetatable(self, InterruptorSolo)
+	self.mapLoader = mapLoader
 	self.netid=netid
 	self.position={x=pos.x,y=pos.y}
 	local decalage={unitWorldSize/2,unitWorldSize/2}
@@ -19,7 +22,11 @@ function InterruptorSolo.new(pos,type,generatorID,magnetManager,sprite,netid,tim
 	self.h=unitWorldSize
 	self.pc.fixture:setUserData(self)
 	self.type='InterruptorSolo'
-	self.on= false
+	if enabled == "true" then
+		self.on= true
+	else
+		self.on = false
+	end
 	self.canBeEnableMM=0
 	self.canBeEnableTM=0
 	self.magnetManager=magnetManager
@@ -35,19 +42,36 @@ end
 function InterruptorSolo:getArgs(string)
 	local ret ={}
 	for i in string.gmatch(string, "([^@]+)") do
-		table.insert(ret, i)
+		table.insert(ret, tonumber(i))
 	end
 	return ret
 end
 
+function InterruptorSolo:executeActions(actionType)
+	print("EXECUTION DES ACTIONS")
+	for i,v in pairs(self.timers) do
+		print("TIMER",v[1],v[2],v[3])
+		if v[3] == actionType then
+			if v[2] == EventTimer.Actions.Shutdown then
+				self.mapLoader:disableT(v[1])
+			elseif v[2] == EventTimer.Actions.Start then
+				self.mapLoader:enableT(v[1])
+			elseif v[2] == EventTimer.Actions.Switch then
+				self.mapLoader:switchT(v[1])
+			end
+		end
+	end
+end
+
+
 function InterruptorSolo:parseTimers(parTimer)
 	if parTimer ~= nil then
-		print("Il y a des timers dans cet interrupteur")
+		print("Il y a des timers")
 		for k in string.gmatch(parTimer, "([^#]+)") do
 			local timer = self:getArgs(k)
-			assert(#timer == 2)
+			assert(#timer == 3)
 			table.insert(self.timers,timer)
-			-- print(timer[1],timer[2])
+			print(timer[1],timer[2],timer[3])
 		end
 	end
 end
@@ -64,11 +88,13 @@ function InterruptorSolo:isAppliable(pos)
 	end
 end
 function InterruptorSolo:syncronizeState(newState)
-	self.on = newState
-	if newState then
-		self:loadAnimation("launching",true)
-	else
-		self:loadAnimation("shutdown",true)
+	if (self.on ~= newState) then
+		self.on = newState
+		if newState then
+			self:loadAnimation("launching",true)
+		else
+			self:loadAnimation("shutdown",true)
+		end
 	end
 end
 
@@ -86,12 +112,12 @@ function InterruptorSolo:handleTry(tryer)
 			if self.on then
 				self.magnetManager:enableG(self.generatorID)
 				self:loadAnimation("launching",true)
+				self:executeActions(Interruptor.TimeEvent.Launching)
 
 			else
 				self.magnetManager:disableG(self.generatorID)
 				self:loadAnimation("shutdown",true)
-
-
+				self:executeActions(Interruptor.TimeEvent.Shutdown)
 			end
 		end
 	elseif tryer=='TheMagnet' then
@@ -100,10 +126,11 @@ function InterruptorSolo:handleTry(tryer)
 			if self.on then
 				self.magnetManager:enableG(self.generatorID)
 				self:loadAnimation("launching",true)
-
+				self:executeActions(Interruptor.TimeEvent.Launching)
 			else
 				self.magnetManager:disableG(self.generatorID)
 				self:loadAnimation("shutdown",true)
+				self:executeActions(Interruptor.TimeEvent.Shutdown)
 			end
 		end
 	end
@@ -160,7 +187,7 @@ end
 
 function InterruptorSolo:update(seconds)
 	self.anim:update(seconds)
-	x,y =self.pc.body:getPosition()
+	x,y = self.pc.body:getPosition()
 	self.position.x=x
 	self.position.y=y
 end

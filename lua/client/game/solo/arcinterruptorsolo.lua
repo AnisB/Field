@@ -7,7 +7,13 @@ ArcInterruptorSolo = {}
 ArcInterruptorSolo.__index = ArcInterruptorSolo
 
 ArcInterruptorSoloTimer =0.5
-function ArcInterruptorSolo.new(pos,type,arcID,mapLoader,enabled,netid)
+
+
+ArcInterruptorSolo.TimeEvent = {Launching = 1, Shutdown = 0}
+ArcInterruptorSolo.ActionType = {Shutdown = 0, Start = 1, Switch =2}
+
+
+function ArcInterruptorSolo.new(pos,type,arcID,mapLoader,enabled,timers,netid)
 	local self = {}
 	setmetatable(self, ArcInterruptorSolo)
 
@@ -37,8 +43,52 @@ function ArcInterruptorSolo.new(pos,type,arcID,mapLoader,enabled,netid)
 	end
 	self.quad= love.graphics.newQuad(0, 0, unitWorldSize, unitWorldSize, unitWorldSize*2,unitWorldSize)
 
+	self.timers = {}
+	self:parseTimers(timers)
+
 	return self
 end
+
+
+function ArcInterruptorSolo:getArgs(string)
+	local ret ={}
+	for i in string.gmatch(string, "([^@]+)") do
+		table.insert(ret, tonumber(i))
+	end
+	return ret
+end
+
+function ArcInterruptorSolo:executeActions(actionType)
+	-- print("EXECUTION DES ACTIONS")
+	for i,v in pairs(self.timers) do
+		-- print("TIMER",v[1],v[2],v[3])
+		if v[3] == actionType then
+			if v[2] == EventTimer.Actions.Shutdown then
+				self.mapLoader:disableT(v[1])
+			elseif v[2] == EventTimer.Actions.Start then
+				self.mapLoader:enableT(v[1])
+			elseif v[2] == EventTimer.Actions.Switch then
+				self.mapLoader:switchT(v[1])
+			end
+		end
+	end
+end
+
+
+function ArcInterruptorSolo:parseTimers(parTimer)
+	if parTimer ~= nil then
+		print("Il y a des timers")
+		for k in string.gmatch(parTimer, "([^#]+)") do
+			local timer = self:getArgs(k)
+			assert(#timer == 3)
+			table.insert(self.timers,timer)
+			print(timer[1],timer[2],timer[3])
+		end
+	end
+end
+
+
+
 function ArcInterruptorSolo:init()
 	if self.enabled then
 		self.on=true
@@ -76,7 +126,6 @@ function ArcInterruptorSolo:getPosition()
 	return self.position
 end
 function ArcInterruptorSolo:handleTry(tryer)
-
 	if self.timer ==0 then
 		self.timer=ArcInterruptorSoloTimer 
 		if tryer=='MetalMan' then
@@ -85,12 +134,12 @@ function ArcInterruptorSolo:handleTry(tryer)
 				if self.on then
 					self.mapLoader:enableA(self.arcID)
 					self:loadAnimation("launching",true)
+					self:executeActions(Interruptor.TimeEvent.Launching)
 
 				else
 					self.mapLoader:disableA(self.arcID)
 					self:loadAnimation("shutdown",true)
-
-
+					self:executeActions(Interruptor.TimeEvent.Shutdown)
 				end
 			end
 		elseif tryer=='TheMagnet' then
@@ -99,10 +148,11 @@ function ArcInterruptorSolo:handleTry(tryer)
 				if self.on then
 					self.mapLoader:enableA(self.arcID)
 					self:loadAnimation("launching",true)
-
+					self:executeActions(Interruptor.TimeEvent.Launching)
 				else
 					self.mapLoader:disableA(self.arcID)
 					self:loadAnimation("shutdown",true)
+					self:executeActions(Interruptor.TimeEvent.Shutdown)
 				end
 			end
 		end
