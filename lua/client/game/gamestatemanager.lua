@@ -7,6 +7,9 @@ require("game.storyline")
 require("game.graphicchecks")
 require("game.firstenter")
 
+require("game.cinematic.cinematic")
+
+
 require("game.connecttoserver")
 require("game.choixtypejeu")
 require("game.choixperso")
@@ -56,6 +59,8 @@ function GameStateManager.new()
 	self.state['WaitingForDistant'] = WaitingForDistant.new()
 	self.state['LevelBegin'] = LevelBegin.new()
 	self.state['Gameplay'] = nil
+
+	self.state['Cinematic'] = Cinematic.new("exemple")
 
 
 

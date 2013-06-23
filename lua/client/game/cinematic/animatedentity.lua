@@ -6,7 +6,7 @@ This file is part of the Field project
 AnimatedEntity = {}
 AnimatedEntity.__index =  AnimatedEntity
 
-function AnimatedEntity:new(id, position, isVisible, sprite, delay, loop, nbFrames, velocity)
+function AnimatedEntity.new(id, position, isVisible, sprite, delay, loop, nbFrames, velocity, normalMapped)
     local self = {}
     setmetatable(self, AnimatedEntity)
 
@@ -18,7 +18,14 @@ function AnimatedEntity:new(id, position, isVisible, sprite, delay, loop, nbFram
     else
     	self.velocity = {x = 0, y = 0}
     end
+    print("NBFRAMES", nbFrames)
+    print("LOOP", loop)
     self.animation = BasicAnim.new(sprite, loop, delay, nbFrames)
+    self.normalMapped= normalMapped
+
+    if self.normalMapped then
+        self.quad = love.graphics.newQuad(0, 0, self.animation:getSprite():getWidth( )/2, self.animation:getSprite():getHeight( ), self.animation:getSprite():getWidth( ), self.animation:getSprite():getHeight( ))
+    end
     return self
 end
 
@@ -29,26 +36,34 @@ function AnimatedEntity:update(dt)
 end
 
 
-function AnimatedEntity:setPosition(x,y)
-	self.position.x = x
-	self.position.y = y
+function AnimatedEntity:setPosition(pos)
+	self.position.x = pos.x
+	self.position.y = pos.y
 end
 
-function AnimatedEntity:setVelocity(x,y)
-	self.velocity.x = x
-	self.velocity.y = y
+function AnimatedEntity:setVelocity(vel)
+	self.velocity.x = vel.x
+	self.velocity.y = vel.y
 end
 
 function AnimatedEntity:setVisibility(val)
 	self.visible = val
 end
 
-function AnimatedEntity:changeAnim(sprite, loop, delay, nbFrames)
-    self.animation = BasicAnim.new(sprite, loop, delay, nbFrames)
+function AnimatedEntity:setAnimation(animInfo)
+    self.animation = BasicAnim.new(animInfo.sprite, animInfo.loop, animInfo.delay, animInfo.nbFrames)
+
+    if self.normalMapped then
+        self.quad = love.graphics.newQuad(0, 0, self.animation:getSprite():getWidth( )/2, self.animation:getSprite():getHeight( ), self.animation:getSprite():getWidth( ), self.animation:getSprite():getHeight( ))
+    end
 end
 
 function AnimatedEntity:draw()
 	if self.visible then
-		love.graphics.draw(self.animation, self.position.x, self.position.y)
+        if self.normalMapped then
+          love.graphics.drawq(self.animation:getSprite(), self.quad , self.position.x, self.position.y)
+        else
+          love.graphics.draw(self.animation:getSprite(), self.position.x, self.position.y)
+      end
 	end
 end

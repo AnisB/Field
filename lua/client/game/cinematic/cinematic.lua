@@ -1,22 +1,12 @@
 --[[ 
 This file is part of the Field project]]
 
--- Includes Persos
-require("game.solo.themagnetsolo")
-require("game.solo.metalmansolo")
-
--- Include Camera
-require("game.solo.camerasolo")
-
--- Include physics
-require("game.solo.magnetmanagersolo")
-
--- Inlclude objet managing
-require("game.solo.maploadersolo")
 require("game.sound")
 
 -- Include Shaders
 require("game.shader.bloomshadereffect")
+
+require("game.cinematic.scenarioloader")
 require("game.shader.lightshader")
 require("game.shader.backlightshader")
 
@@ -27,77 +17,89 @@ require("game.ui.pausemenu")
 require("const")
 
 
-CinematicSolo = {}
-CinematicSolo.__index = CinematicSolo
+Cinematic = {}
+Cinematic.__index = Cinematic
 
 
 
 
-function CinematicSolo.new(scenario)
+function Cinematic.new(scenario)
     local self = {}
-    setmetatable(self, CinematicSolo)
+    setmetatable(self, Cinematic)
 
     --Map loading
-    self.mapFile=mapFile
+    self.scenarioLoaded = ScenarioLoader.new(scenario)
+    self.camera = CameraSolo.new(0,0)
 
-    self.scenarioLoader = ScenarioLoader.new(mapFile)
-
-    self.camera =CameraSolo.new(0,0)
+    self.duration = self.scenarioLoaded.Duration
     
     self.cinematicFinished=false
+
+    self.time = 0
+
+    self.actions = self.scenarioLoaded.actions
 
     return self
 end
 
 
 -- Initialisation de début d'anim
-    function CinematicSolo:init()
+    function Cinematic:init()
 
     end
 
     
-    function CinematicSolo:finish()
+    function Cinematic:finish()
         self.cinematicFinished=true
     end
 
 
-    function CinematicSolo:destroy()
+    function Cinematic:destroy()
     end  
 
-    function CinematicSolo:reset()
+    function Cinematic:reset()
      
     end
 
 
-    function CinematicSolo:mousePressed(x, y, button)
+    function Cinematic:mousePressed(x, y, button)
     end
     
-    function CinematicSolo:mouseReleased(x, y, button)
-    end
-    
-
-    function CinematicSolo:keyPressed(key, unicode)
-    end
-
-
-    function CinematicSolo:keyReleased(key, unicode)
-
-    end
-
-    
-    function CinematicSolo:update(dt)
-        self.scenarioLoader:update(dt)
-    end
-    
-    function CinematicSolo:draw()
-       
+    function Cinematic:mouseReleased(x, y, button)
     end
     
 
-function CinematicSolo:shakeOnX(dx,speed,duration)
+    function Cinematic:keyPressed(key, unicode)
+    end
+
+
+    function Cinematic:keyReleased(key, unicode)
+
+    end
+
+    
+    function Cinematic:update(dt)
+        self.time = self.time + dt
+        self.scenarioLoaded:update(dt)
+        for i,p in pairs(self.actions) do
+            if p:shouldBeDone(self.time) then
+                p:execute()
+                table.remove(self.actions, i)
+            else
+                return
+            end
+        end
+    end
+    
+    function Cinematic:draw()
+        self.scenarioLoaded:draw()
+    end
+    
+
+function Cinematic:shakeOnX(dx,speed,duration)
         self.camera:shakeOnX(dx,speed,duration)
 end
 
-function CinematicSolo:shakeOnY(dy,speed,duration)
+function Cinematic:shakeOnY(dy,speed,duration)
     self.camera:shakeOnY(dy,speed,duration)
 end
