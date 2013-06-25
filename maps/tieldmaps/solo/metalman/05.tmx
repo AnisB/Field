@@ -524,7 +524,7 @@
  <objectgroup color="#ffff00" name="levelend" width="60" height="15">
   <object x="3584" y="768" width="192" height="128">
    <properties>
-    <property name="next" value="levelX"/>
+    <property name="next" value="06"/>
    </properties>
   </object>
  </objectgroup>

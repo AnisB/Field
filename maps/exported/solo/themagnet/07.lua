@@ -1732,7 +1732,7 @@ return {
           height = 128,
           visible = true,
           properties = {
-            ["next"] = "levelX"
+            ["next"] = "08"
           }
         }
       }

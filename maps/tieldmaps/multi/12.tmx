@@ -74,7 +74,7 @@
  </layer>
  <layer name="front" width="65" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYCAOMAIxCxCzDkNMLGAkQS019BFrDrXMp8QNtNJHrDmDPQwYkfQxUoDx2T/Yw4ASfej6h2IYEHI7reylJaA0HVDbLwMRNhxk6KFWeUCorCAVcJKpj51MfUMBgNo9TCMcAwDddQHs
+   eJxjYCAOMAIxCxCzDjPMRqT/YWFADiBXH7HmUGo+KfpHw4A8uxiR9DFSgPHZP9jDgBJ96PqHYhgQcjut7KWl+ZSmA2r7hdblDDbAQab51CgPCJUVpAJONDcSC9jJtG+wA1i7h2kEY1AbCQALbAH5
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="65" height="10">
