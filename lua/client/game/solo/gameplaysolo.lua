@@ -57,11 +57,15 @@ function GameplaySolo.new(mapFile,continuous,player)
 
     -- Paralax Loading
     self.mapy= self.mapLoader.map.height*self.mapLoader.map.tileheight
+
+    self.paralax = true
     self.background1=Background.new(ParalaxImg.."1.png",1,self.mapy)
     self.background2=Background.new(ParalaxImg.."2.png",0.75,self.mapy)
     self.background3=Background.new(ParalaxImg.."3.png",0.5,self.mapy)
     self.background4=Background.new(ParalaxImg.."4.png",0.25,self.mapy)
     self.background5=SimpleBackground.new(ParalaxImg.."5.png",0.0,self.mapy)
+
+    self.background=Background.new(ParalaxImg.."/noparalax/1.png",1,self.mapy)
 
 
     -- Player loading
@@ -383,16 +387,24 @@ end
 
             self.metalMan:preDraw()
 
-            self.background5:draw(self.cameraMM:getPos()) 
+            if self.paralax then
+                self.background5:draw(self.cameraMM:getPos()) 
+            else
+            end
+
             self.metalMan:postDraw()
 
             self.bloom:predraw()
             self.lightback:predraw()
 
-            self.background4:draw(self.cameraMM:getPos())
-            self.background3:draw(self.cameraMM:getPos())
-            self.background2:draw(self.cameraMM:getPos())
-            self.background1:draw(self.cameraMM:getPos())
+            if self.paralax then
+                self.background4:draw(self.cameraMM:getPos())
+                self.background3:draw(self.cameraMM:getPos())
+                self.background2:draw(self.cameraMM:getPos())
+                self.background1:draw(self.cameraMM:getPos())
+            else
+                self.background:draw(self.cameraMM:getPos())
+            end
             self.lightback:postdraw()
             
             self.light:predraw()
@@ -407,15 +419,23 @@ end
     
         elseif self.player=="themagnet" then
 
-            self.background5:draw(self.cameraTM:getPos()) 
-            self.background4:draw(self.cameraTM:getPos())
+            if self.paralax then
+                self.background5:draw(self.cameraTM:getPos()) 
+                self.background4:draw(self.cameraTM:getPos())
+            else
+            end
             self.bloom:predraw()
 
             self.lightback:predraw()
 
-            self.background3:draw(self.cameraTM:getPos())
-            self.background2:draw(self.cameraTM:getPos())
-            self.background1:draw(self.cameraTM:getPos())
+            if self.paralax then
+                self.background4:draw(self.cameraTM:getPos())
+                self.background3:draw(self.cameraTM:getPos())
+                self.background2:draw(self.cameraTM:getPos())
+                self.background1:draw(self.cameraTM:getPos())
+            else
+                self.background:draw(self.cameraTM:getPos())
+            end
 
             self.mapLoader:draw(self.cameraTM:getPos())
             self.lightback:postdraw()

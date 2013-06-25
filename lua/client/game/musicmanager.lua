@@ -4,7 +4,7 @@ MusicManager.__index = MusicManager
 MusicManager.SOUND_ROOT = "sound/"
 MusicManager.SOUND_LOOP = ""--"loop"
 
-MUSIC_VOL = 0
+MUSIC_VOL = 0.5
 
 
 function MusicManager.new()
@@ -50,6 +50,14 @@ function MusicManager:play()
 	self.srcIntro:setLooping(false)
 end
 
+
+function MusicManager:setVolume(newVolumeVal)
+	self.srcIntro:setVolume(newVolumeVal)
+	self.srcMainLoop:setVolume(newVolumeVal)
+	for i,v in pairs(self.secondaryLoop) do
+		v:setVolume(newVolumeVal)
+	end
+end
 
 function MusicManager:reset()
 -- TODO

@@ -257,7 +257,7 @@ end
 function MetalManSolo:collideWith( object, collision )
 
 	if self.alive then
-		if object.type=='GateInterruptor' or object.type=='Interruptor' or object.type=='TheMagnet' or object.type=='LevelEnd' or object.type=='Acid' then
+		if object.type=='GateInterruptorSolo' or object.type=='InterruptorSolo' or object.type=='ArcInterruptorSolo' or object.type=='ArcSolo' or object.type=='TheMagnet' or object.type=='LevelEnd' or object.type=='Acid' then
 			--Ghost dude
 		else
 			self.collisionCounter=self.collisionCounter+1

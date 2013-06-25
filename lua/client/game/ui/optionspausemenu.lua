@@ -4,6 +4,8 @@ This file is part of the Field project
 
 
 require("game.ui.scroller")
+require("game.ui.checkbox")
+
 OptionsPauseMenu = {}
 OptionsPauseMenu.__index =  OptionsPauseMenu
 
@@ -13,14 +15,14 @@ function OptionsPauseMenu.new( father )
 
     self.back = love.graphics.newImage("img/pause.png")
 
-    self.musicVolume=Scroller.new(300,225,"backgrounds/ingame/volume.png", 0,20)
-    -- self.paralax=CheckBox.new(500,300,250,50, true,"backgrounds/ingame/return.png")
+    self.musicVolume=Scroller.new(310,225,"backgrounds/ingame/volume.png", MUSIC_VOL,20)
+    self.paralax=CheckBox.new(340,300,"backgrounds/ingame/paralax.png",true,125)
     self.returnB=Button.new(500,450,250,50, "backgrounds/ingame/return.png")
 
 
     self.selection = {
         self.musicVolume,
-        -- self.paralax,
+        self.paralax,
         self.returnB
     }
 
@@ -49,16 +51,19 @@ function OptionsPauseMenu:keyPressed(key, unicode)
         elseif key == "right" and self.musicVolume.selected then
             if (self.musicVolume.scrollPosition <0.9) then
                 self.musicVolume.scrollPosition = self.musicVolume.scrollPosition +0.1  
+                musicM:setVolume(self.musicVolume.scrollPosition)
             end
         elseif key == "left" and self.musicVolume.selected then
             if (self.musicVolume.scrollPosition >= 0.1)then
                 self.musicVolume.scrollPosition = self.musicVolume.scrollPosition -0.1  
+                musicM:setVolume(self.musicVolume.scrollPosition)
             end
         elseif key == "return" then
 
-            -- if self.paralax.selected then
-
-            -- end
+            if self.paralax.selected then
+                self.paralax.state = not self.paralax.state
+                gameStateManager.state['GameplaySolo'].paralax = self.paralax.state
+            end
 
             if self.returnB.selected then
                 self.father.optionsFlag = false
@@ -90,6 +95,6 @@ end
 function OptionsPauseMenu:draw()
     love.graphics.draw(self.back,250,50)
     self.musicVolume:draw(1)
-    -- self.paralax:draw(1)
+    self.paralax:draw(1)
     self.returnB:draw(1)
 end
