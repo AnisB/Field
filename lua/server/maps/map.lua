@@ -435,6 +435,19 @@ return {
           properties = {
             ["id"] = "6"
           }
+        },
+        {
+          name = "",
+          type = "RotativeL",
+          shape = "rectangle",
+          x = 2368,
+          y = 896,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "9"
+          }
         }
       }
     },
@@ -789,6 +802,46 @@ return {
             ["id"] = "3",
             ["loop"] = "false",
             ["state"] = "false"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2304,
+          y = 960,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["Arcs"] = "",
+            ["Gates"] = "",
+            ["Generators"] = "9@1#",
+            ["Timers"] = "",
+            ["duration"] = "1",
+            ["id"] = "9",
+            ["loop"] = "false",
+            ["state"] = "false"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2304,
+          y = 1024,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["Arcs"] = "",
+            ["Gates"] = "",
+            ["Generators"] = "",
+            ["Timers"] = "9@1#",
+            ["duration"] = "3",
+            ["id"] = "10",
+            ["loop"] = "true",
+            ["state"] = "true"
           }
         }
       }
