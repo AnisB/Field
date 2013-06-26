@@ -37,6 +37,12 @@ function GateInterruptorSolo.new(pos,type,gateOpenID,gateCloseID,mapLoader,enabl
 	self.w=unitWorldSize
 	self.h=unitWorldSize
 
+	if enabled =="true" then
+		self.enabled = true
+	else
+		self.enabled = false
+	end
+	
 	self.timer=0
 	self.quad= love.graphics.newQuad(0, 0, unitWorldSize, unitWorldSize, unitWorldSize*2,unitWorldSize)
 
@@ -85,7 +91,7 @@ function GateInterruptorSolo:parseTimers(parTimer)
 end
 
 function GateInterruptorSolo:init()
-	if enabled then
+	if self.enabled then
 		self.on=true
 		self:loadAnimation("on",true)
 	else

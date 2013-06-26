@@ -78,7 +78,7 @@ function EventTimer:executeActions()
 		if k[2] == EventTimer.Actions.Shutdown then
 			self.mapLoader:disableA(k[1])
 		elseif k[2] == EventTimer.Actions.Start then
-			self.mapLoader:enable1(k[1])
+			self.mapLoader:enableA(k[1])
 		elseif k[2] == EventTimer.Actions.Switch then
 			self.mapLoader:switchA(k[1])
 		end
