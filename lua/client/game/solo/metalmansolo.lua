@@ -92,8 +92,12 @@ function MetalManSolo:die(type)
 	if self.alive then
 		self.alive=false
 		if(type=="acid") then
+			gameStateManager.state["GameplaySolo"]:dieEffect(Effects.Green)
+			gameStateManager.state["GameplaySolo"]:slow()
 		else
+			gameStateManager.state["GameplaySolo"]:dieEffect(Effects.White)
 			self:loadAnimation("mortelec",true)
+			gameStateManager.state["GameplaySolo"]:slow()
 			Sound.playSound("electroc")
 		end
 	end

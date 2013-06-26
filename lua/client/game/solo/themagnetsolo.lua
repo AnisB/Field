@@ -87,12 +87,16 @@ end
 		if self.alive then
 			self:disableField()
 			self:disableStaticField()
-			if(type=="acid") then
-			else
-				self:loadAnimation("mortelec",true)	
-			end
 			self.alive=false
-			
+			if(type=="acid") then
+				gameStateManager.state["GameplaySolo"]:dieEffect(Effects.Green)
+				gameStateManager.state["GameplaySolo"]:slow()
+			else
+				gameStateManager.state["GameplaySolo"]:dieEffect(Effects.White)
+				self:loadAnimation("mortelec",true)
+				gameStateManager.state["GameplaySolo"]:slow()
+				Sound.playSound("electroc")
+			end
 		end
 	end
 

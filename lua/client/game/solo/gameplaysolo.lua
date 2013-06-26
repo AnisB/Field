@@ -30,7 +30,7 @@ require("const")
 GameplaySolo = {}
 GameplaySolo.__index = GameplaySolo
 
-
+Effects = {White = 1 , Green = 2}
 
 
 function GameplaySolo.new(mapFile,continuous,player)
@@ -155,10 +155,12 @@ end
 
     function GameplaySolo:slow()
         self.isSlowing=true
-        self.slowTimer=0
+        self.slowTimer=0.2
     end
 
-
+    function GameplaySolo:dieEffect(effect)
+        self.effect = effect
+    end
 
     function GameplaySolo:destroy()
         self.shouldEnd=false
@@ -382,7 +384,14 @@ end
             self.loadingScreen:draw()
         else
 
-
+            if self.isSlowing then
+                if self.effect == Effects.White then
+                    love.graphics.setColor(255,255,255,255*(1-self.slowTimer))
+                else
+                    love.graphics.setColor(0,100,0,255*(1-self.slowTimer))
+                end
+                love.graphics.rectangle("fill", 0,0, windowW, windowH)
+            end
         if self.player=="metalman" then
 
             self.metalMan:preDraw()
@@ -416,8 +425,24 @@ end
 
             self.light:postdraw()
             self.bloom:postdraw() 
-    
+            if self.isSlowing then
+                if self.effect == Effects.White then
+                    love.graphics.setColor(255,255,255,255*(1-self.slowTimer))
+                else
+                    love.graphics.setColor(0,100,0,255*(1-self.slowTimer))
+                end
+                love.graphics.rectangle("fill", 0,0, windowW, windowH)
+            end
         elseif self.player=="themagnet" then
+
+            if self.isSlowing then
+                if self.effect == Effects.White then
+                    love.graphics.setColor(255,255,255,255*(1-self.slowTimer))
+                else
+                    love.graphics.setColor(0,100,0,255*(1-self.slowTimer))
+                end
+                love.graphics.rectangle("fill", 0,0, windowW, windowH)
+            end
 
             if self.paralax then
                 self.background5:draw(self.cameraTM:getPos()) 
@@ -427,7 +452,6 @@ end
             self.bloom:predraw()
 
             self.lightback:predraw()
-
             if self.paralax then
                 self.background4:draw(self.cameraTM:getPos())
                 self.background3:draw(self.cameraTM:getPos())
@@ -446,6 +470,14 @@ end
             self.mapLoader:firstPlanDraw(self.cameraTM:getPos())
             self.light:postdraw()
             self.bloom:postdraw() 
+            if self.isSlowing then
+                if self.effect == Effects.White then
+                    love.graphics.setColor(255,255,255,255*(1-self.slowTimer))
+                else
+                    love.graphics.setColor(0,100,0,255*(1-self.slowTimer))
+                end
+                love.graphics.rectangle("fill", 0,0, windowW, windowH)
+            end
         end
     end
 
