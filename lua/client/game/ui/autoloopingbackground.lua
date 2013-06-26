@@ -6,13 +6,18 @@
 AutoLoopingBackground = {}
 AutoLoopingBackground.__index =  AutoLoopingBackground
 
-function AutoLoopingBackground.new(path,speed)
+function AutoLoopingBackground.new(path,speed, decy)
     local self = {}
     setmetatable(self, AutoLoopingBackground)
 
 	self.img=love.graphics.newImage(path)
     self.scrolling=0
     self.speed =speed
+    if decy then
+        self.decy = decy
+    else
+        self.decy = 0
+    end
     return self
 end
 
@@ -25,6 +30,6 @@ end
 
 
 function AutoLoopingBackground:draw()
-		love.graphics.draw(self.img,-(self.scrolling)%1280-1280, 0)
-		love.graphics.draw(self.img, -(self.scrolling)%1280, 0)
+		love.graphics.draw(self.img,-(self.scrolling)%1280-1280, 0+ self.decy)
+		love.graphics.draw(self.img, -(self.scrolling)%1280, 0 + self.decy)
 end

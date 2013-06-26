@@ -104,6 +104,11 @@
     <property name="id" value="6"/>
    </properties>
   </object>
+  <object type="RotativeL" x="2368" y="896" width="64" height="64">
+   <properties>
+    <property name="id" value="9"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#66ccff" name="switch" width="200" height="20">
   <object x="640" y="1152" width="64" height="64">
@@ -250,6 +255,30 @@
     <property name="id" value="3"/>
     <property name="loop" value="false"/>
     <property name="state" value="false"/>
+   </properties>
+  </object>
+  <object x="2304" y="960" width="64" height="64">
+   <properties>
+    <property name="Arcs" value=""/>
+    <property name="Gates" value=""/>
+    <property name="Generators" value="9@1#"/>
+    <property name="Timers" value=""/>
+    <property name="duration" value="1"/>
+    <property name="id" value="9"/>
+    <property name="loop" value="false"/>
+    <property name="state" value="false"/>
+   </properties>
+  </object>
+  <object x="2304" y="1024" width="64" height="64">
+   <properties>
+    <property name="Arcs" value=""/>
+    <property name="Gates" value=""/>
+    <property name="Generators" value=""/>
+    <property name="Timers" value="9@1#"/>
+    <property name="duration" value="3"/>
+    <property name="id" value="10"/>
+    <property name="loop" value="true"/>
+    <property name="state" value="true"/>
    </properties>
   </object>
  </objectgroup>

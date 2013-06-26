@@ -88,7 +88,7 @@ function EventTimer:executeActions()
 		if k[2] == EventTimer.Actions.Shutdown then
 			self.mapLoader:disableT(k[1])
 		elseif k[2] == EventTimer.Actions.Start then
-			self.mapLoader:ensableT(k[1])
+			self.mapLoader:enableT(k[1])
 		elseif k [2] == EventTimer.Actions.Switch then
 			self.mapLoader:switchT(k[1])
 		end
@@ -140,7 +140,7 @@ function EventTimer:parseParams(Actions)
 		for k in string.gmatch(Actions["Timers"], "([^#]+)") do
 			local timer = self:getArgs(k)
 			assert(#timer == 2)
-			table.insert(self.timer,timer)
+			table.insert(self.timers,timer)
 			-- print(gate[1],gate[2])
 		end
 	end

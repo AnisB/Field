@@ -14,15 +14,14 @@ function CommonBackground.new(isSimplfied)
     setmetatable(self, CommonBackground)
 
     self.back2=love.graphics.newImage("backgrounds/common/back2.png")
-    self.back1=AutoLoopingBackground.new("backgrounds/common/back1.png",300)
+    self.back1=AutoLoopingBackground.new("backgrounds/common/back1.png",300,300)
+    self.back0=AutoLoopingBackground.new("backgrounds/common/back0.png",300)
     self.isSimplfied = isSimplfied
     if self.isSimplfied == true then
-        self.back1=SimpleBackground.new("backgrounds/common/back1.png",300)
     else
     	self.mm = BasicAnim.new("runningmm", true,0.075,9)
     	self.tm = BasicAnim.new("runningtm", true,0.075,9)
     	self.tm:syncronize(4)
-        self.back1=AutoLoopingBackground.new("backgrounds/common/back1.png",300)
 	end
     self.logo = BasicAnim.new("logo", true,0.2,8)
     return self
@@ -36,14 +35,16 @@ function CommonBackground:update(dt)
 	end
 
 	self.logo:update(dt)
-	self.back1:update(dt)
+    self.back1:update(dt)
+	self.back0:update(dt)
 end
 
 
 function CommonBackground:draw(filter)
 	local color = 255*filter
 	love.graphics.setColor(color,color,color,255)
-	self.back1:draw()
+	self.back0:draw()
+    self.back1:draw()
 	love.graphics.draw(self.back2,0,0)
 	if self.isSimplfied == true then
     else
