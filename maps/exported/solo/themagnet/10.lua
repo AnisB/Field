@@ -2274,7 +2274,7 @@ return {
           properties = {
             ["animid"] = "203",
             ["closeid"] = "2",
-            ["next"] = "203",
+            ["next"] = "204",
             ["type"] = "DebutVH"
           }
         },
@@ -2615,7 +2615,7 @@ return {
           height = 128,
           visible = true,
           properties = {
-            ["next"] = "levelX"
+            ["next"] = "boss"
           }
         }
       }

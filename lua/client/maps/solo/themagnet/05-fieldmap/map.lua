@@ -1291,7 +1291,19 @@ return {
       visible = true,
       opacity = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1664,
+          y = 1664,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        }
+      }
     },
     {
       type = "objectgroup",
@@ -3283,7 +3295,7 @@ return {
           height = 128,
           visible = true,
           properties = {
-            ["next"] = "levelX"
+            ["next"] = "06"
           }
         }
       }

@@ -657,7 +657,7 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["powers"] = "Alu"
+            ["powers"] = "Alu#Acier"
           }
         }
       }
@@ -1658,7 +1658,7 @@ return {
           height = 128,
           visible = true,
           properties = {
-            ["next"] = "levelX"
+            ["next"] = "08"
           }
         }
       }

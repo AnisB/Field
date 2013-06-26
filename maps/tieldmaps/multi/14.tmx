@@ -74,7 +74,7 @@
  </layer>
  <layer name="front" width="65" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYCAOMAIxCxCzDkNMLGAkQS019A2UubSwczQMyM8/bHjMYKPAPZSAgbATHxgNg6EVBswkqseVd9jQ1JFqLjl2omMOKto50ICTTH3sVHXF4AKgdMA0wjEAp3ICdg==
+   eJxjYCAOMAIxCxCzDjPMRqT/YWFADiBXH73MJcWc0TAg305y8w8bHjPYKHAPOqBHGNAKjIbB0AoDZhLV48o76OU3qebiAqTUdxxUsnMwAE4kNilxy05thwwSAEsHTCMYg/IYANVaAoM=
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="65" height="10">
@@ -352,7 +352,7 @@
  <objectgroup color="#ffff00" name="levelend" width="65" height="10">
   <object x="3904" y="448" width="192" height="128">
    <properties>
-    <property name="next" value="13"/>
+    <property name="next" value="15"/>
    </properties>
   </object>
  </objectgroup>
