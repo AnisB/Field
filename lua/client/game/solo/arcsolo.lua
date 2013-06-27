@@ -67,8 +67,8 @@ function ArcSolo:collideWith( object, collision )
 		if object.type=='MetalManSolo' or object.type =='TheMagnetSolo' then
 			self.isTouched=true
 			object:die()
-		    -- gameStateManager.state["GameplaySolo"]:shakeOnX(4,500,0.4)
-		    -- gameStateManager.state["GameplaySolo"]:shakeOnY(4,500,0.4)
+		    gameStateManager.state["GameplaySolo"]:shakeOnX(4,500,0.4)
+		    gameStateManager.state["GameplaySolo"]:shakeOnY(4,500,0.4)
 		end
 	end
 end

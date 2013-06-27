@@ -68,6 +68,10 @@ function GameplaySolo.new(mapFile,continuous,player)
     self.background=Background.new(ParalaxImg.."/noparalax/1.png",1,self.mapy)
 
 
+    self. filterAcid = love.graphics.newImage("img/death/acid.png")
+    self. filterArc = love.graphics.newImage("img/death/arc.png")
+
+
     -- Player loading
     self.player= player
     if self.player=="metalman" then
@@ -428,10 +432,11 @@ end
             if self.isSlowing then
                 if self.effect == Effects.White then
                     love.graphics.setColor(255,255,255,255*(1-self.slowTimer))
+                    love.graphics.draw(self.filterArc,0,0,0, 2,2)
                 else
-                    love.graphics.setColor(0,100,0,255*(1-self.slowTimer))
+                    love.graphics.setColor(255,255,255,255*(1-self.slowTimer))
+                    love.graphics.draw(self.filterAcid,0,0,0, 2,2)
                 end
-                love.graphics.rectangle("fill", 0,0, windowW, windowH)
             end
         elseif self.player=="themagnet" then
 
