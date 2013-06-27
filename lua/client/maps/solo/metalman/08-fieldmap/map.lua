@@ -378,42 +378,9 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 1088,
-          y = 320,
-          width = 896,
-          height = 64,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 3072,
-          y = 320,
-          width = 128,
-          height = 64,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
           x = 896,
           y = 320,
-          width = 128,
-          height = 64,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 2048,
-          y = 320,
-          width = 960,
+          width = 2304,
           height = 64,
           visible = true,
           properties = {}
@@ -787,7 +754,9 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "1"
+            ["enabled"] = "true",
+            ["id"] = "1",
+            ["timers"] = "1@1@0#"
           }
         },
         {
@@ -800,7 +769,9 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "2"
+            ["enabled"] = "true",
+            ["id"] = "2",
+            ["timers"] = "2@1@0#"
           }
         },
         {
@@ -824,7 +795,9 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "2"
+            ["enabled"] = "true",
+            ["id"] = "2",
+            ["timers"] = "2@1@0#"
           }
         },
         {
@@ -837,7 +810,75 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "3"
+            ["enabled"] = "true",
+            ["id"] = "3",
+            ["timers"] = "3@1@0#"
+          }
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      name = "timer",
+      visible = true,
+      opacity = 1,
+      properties = {},
+      objects = {
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 896,
+          y = 128,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["Arcs"] = "1@1#",
+            ["Gates"] = "",
+            ["Generators"] = "",
+            ["duration"] = "2",
+            ["id"] = "1",
+            ["loop"] = "false",
+            ["state"] = "false"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1856,
+          y = 128,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["Arcs"] = "2@1#",
+            ["Gates"] = "",
+            ["Generators"] = "",
+            ["duration"] = "2.5",
+            ["id"] = "2",
+            ["loop"] = "false",
+            ["state"] = "false"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1152,
+          y = 128,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["Arcs"] = "3@1#",
+            ["Gates"] = "",
+            ["Generators"] = "",
+            ["duration"] = "3.5",
+            ["id"] = "3",
+            ["loop"] = "false",
+            ["state"] = "false"
           }
         }
       }

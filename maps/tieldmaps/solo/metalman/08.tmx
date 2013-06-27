@@ -84,10 +84,7 @@
  <objectgroup color="#0000ff" name="platform" width="60" height="7">
   <object x="640" y="384" width="3200" height="64"/>
   <object x="704" y="0" width="3072" height="64"/>
-  <object x="1088" y="320" width="896" height="64"/>
-  <object x="3072" y="320" width="128" height="64"/>
-  <object x="896" y="320" width="128" height="64"/>
-  <object x="2048" y="320" width="960" height="64"/>
+  <object x="896" y="320" width="2304" height="64"/>
  </objectgroup>
  <objectgroup color="#ffffff" name="movable" width="60" height="7"/>
  <objectgroup color="#ff6666" name="destroyable" width="60" height="7"/>
@@ -222,23 +219,66 @@
  <objectgroup color="#ffcc66" name="arcswitch" width="60" height="7">
   <object x="896" y="256" width="64" height="64">
    <properties>
+    <property name="enabled" value="true"/>
     <property name="id" value="1"/>
+    <property name="timers" value="1@1@0#"/>
    </properties>
   </object>
   <object x="1856" y="256" width="64" height="64">
    <properties>
+    <property name="enabled" value="true"/>
     <property name="id" value="2"/>
+    <property name="timers" value="2@1@0#"/>
    </properties>
   </object>
   <object x="896" y="384" width="448"/>
   <object x="2880" y="256" width="64" height="64">
    <properties>
+    <property name="enabled" value="true"/>
     <property name="id" value="2"/>
+    <property name="timers" value="2@1@0#"/>
    </properties>
   </object>
   <object x="1152" y="256" width="64" height="64">
    <properties>
+    <property name="enabled" value="true"/>
     <property name="id" value="3"/>
+    <property name="timers" value="3@1@0#"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="timer" width="60" height="7">
+  <object x="896" y="128" width="64" height="64">
+   <properties>
+    <property name="Arcs" value="1@1#"/>
+    <property name="Gates" value=""/>
+    <property name="Generators" value=""/>
+    <property name="duration" value="2"/>
+    <property name="id" value="1"/>
+    <property name="loop" value="false"/>
+    <property name="state" value="false"/>
+   </properties>
+  </object>
+  <object x="1856" y="128" width="64" height="64">
+   <properties>
+    <property name="Arcs" value="2@1#"/>
+    <property name="Gates" value=""/>
+    <property name="Generators" value=""/>
+    <property name="duration" value="2.5"/>
+    <property name="id" value="2"/>
+    <property name="loop" value="false"/>
+    <property name="state" value="false"/>
+   </properties>
+  </object>
+  <object x="1152" y="128" width="64" height="64">
+   <properties>
+    <property name="Arcs" value="3@1#"/>
+    <property name="Gates" value=""/>
+    <property name="Generators" value=""/>
+    <property name="duration" value="3.5"/>
+    <property name="id" value="3"/>
+    <property name="loop" value="false"/>
+    <property name="state" value="false"/>
    </properties>
   </object>
  </objectgroup>

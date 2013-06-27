@@ -745,20 +745,8 @@ return {
           height = 64,
           visible = true,
           properties = {
-            ["id"] = "1"
-          }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 2112,
-          y = 320,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {
-            ["id"] = "2"
+            ["id"] = "1",
+            ["timers"] = "2@1@1#3@1@1#"
           }
         }
       }
@@ -813,21 +801,6 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 3072,
-          y = 320,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {
-            ["enabled"] = "true",
-            ["id"] = "3",
-            ["type"] = "MillieuV"
-          }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
           x = 1088,
           y = 320,
           width = 64,
@@ -852,36 +825,6 @@ return {
             ["enabled"] = "true",
             ["id"] = "2",
             ["type"] = "MillieuV"
-          }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 3072,
-          y = 128,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {
-            ["enabled"] = "true",
-            ["id"] = "3",
-            ["type"] = "DebutV"
-          }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 3072,
-          y = 384,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {
-            ["enabled"] = "true",
-            ["id"] = "3",
-            ["type"] = "FinV"
           }
         },
         {
@@ -918,21 +861,6 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 3072,
-          y = 192,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {
-            ["enabled"] = "true",
-            ["id"] = "3",
-            ["type"] = "MillieuV"
-          }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
           x = 1088,
           y = 192,
           width = 64,
@@ -956,21 +884,6 @@ return {
           properties = {
             ["enabled"] = "true",
             ["id"] = "2",
-            ["type"] = "MillieuV"
-          }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 3072,
-          y = 256,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {
-            ["enabled"] = "true",
-            ["id"] = "3",
             ["type"] = "MillieuV"
           }
         },
@@ -1423,6 +1336,81 @@ return {
             ["id"] = "4",
             ["type"] = "MillieuH"
           }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 3072,
+          y = 192,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["enabled"] = "true",
+            ["id"] = "1",
+            ["type"] = "MillieuV"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 3072,
+          y = 384,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["enabled"] = "true",
+            ["id"] = "1",
+            ["type"] = "FinV"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 3072,
+          y = 128,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["enabled"] = "true",
+            ["id"] = "1",
+            ["type"] = "DebutV"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 3072,
+          y = 256,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["enabled"] = "true",
+            ["id"] = "1",
+            ["type"] = "MillieuV"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 3072,
+          y = 320,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["enabled"] = "true",
+            ["id"] = "1",
+            ["type"] = "MillieuV"
+          }
         }
       }
     },
@@ -1482,21 +1470,8 @@ return {
           visible = true,
           properties = {
             ["enabled"] = "true",
-            ["id"] = "1"
-          }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 1920,
-          y = 256,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {
-            ["enabled"] = "true",
-            ["id"] = "2"
+            ["id"] = "1",
+            ["timers"] = "1@1@0#"
           }
         },
         {
@@ -1510,21 +1485,74 @@ return {
           visible = true,
           properties = {
             ["enabled"] = "true",
-            ["id"] = "3"
+            ["id"] = "1",
+            ["timers"] = "1@1@0#"
+          }
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      name = "timer",
+      visible = true,
+      opacity = 1,
+      properties = {},
+      objects = {
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 960,
+          y = 192,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["Arcs"] = "1@1#",
+            ["Gates"] = "",
+            ["Generators"] = "",
+            ["duration"] = "4",
+            ["id"] = "1",
+            ["loop"] = "false",
+            ["state"] = "false"
           }
         },
         {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 2304,
+          x = 1856,
+          y = 256,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["Arcs"] = "3@1#",
+            ["Gates"] = "",
+            ["Generators"] = "2@1#1@0#",
+            ["duration"] = "2",
+            ["id"] = "2",
+            ["loop"] = "false",
+            ["state"] = "false"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1856,
           y = 320,
           width = 64,
           height = 64,
           visible = true,
           properties = {
-            ["enabled"] = "true",
-            ["id"] = "3"
+            ["Arcs"] = "2@0#3@0#",
+            ["Gates"] = "",
+            ["Generators"] = "",
+            ["duration"] = "0",
+            ["id"] = "3",
+            ["loop"] = "false",
+            ["state"] = "false"
           }
         }
       }
