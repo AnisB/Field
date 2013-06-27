@@ -387,7 +387,6 @@ end
         if  self.loading then
             self.loadingScreen:draw()
         else
-
             if self.isSlowing then
                 if self.effect == Effects.White then
                     love.graphics.setColor(255,255,255,255*(1-self.slowTimer))
@@ -478,10 +477,11 @@ end
             if self.isSlowing then
                 if self.effect == Effects.White then
                     love.graphics.setColor(255,255,255,255*(1-self.slowTimer))
+                    love.graphics.draw(self.filterArc,0,0,0, 2,2)
                 else
-                    love.graphics.setColor(0,100,0,255*(1-self.slowTimer))
+                    love.graphics.setColor(255,255,255,255*(1-self.slowTimer))
+                    love.graphics.draw(self.filterAcid,0,0,0, 2,2)
                 end
-                love.graphics.rectangle("fill", 0,0, windowW, windowH)
             end
         end
     end
