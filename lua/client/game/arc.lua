@@ -6,6 +6,7 @@ Arc = {}
 Arc.__index = Arc
 
 TimerArc =1
+World = "world1"
 
 ArcType={DebutH='DebutH',MillieuH='MillieuH',FinH='FinH',DebutV='DebutV',MillieuV='MillieuV',FinV='FinV'}
 function Arc.new(pos,typeArc,anim,id)
@@ -15,9 +16,9 @@ function Arc.new(pos,typeArc,anim,id)
 	self.type='Arc'
 	self.arcType=typeArc
 	if( self.arcType==ArcType.MillieuV or self.arcType==ArcType.MillieuH ) then
-		self.anim = AnimArc.new('arc/arcmid')
+		self.anim = AnimArc.new('arc/'..World..'/arcmid')
 	else
-		self.anim = AnimArc.new('arc/arcside')
+		self.anim = AnimArc.new('arc/'..World..'/arcside')
 	end
 	self.anim:syncronize(anim,id)
 	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)

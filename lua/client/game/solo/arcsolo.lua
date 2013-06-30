@@ -5,6 +5,7 @@ require("game.solo.animarcsolo")
 ArcSolo = {}
 ArcSolo.__index = ArcSolo
 
+World = "world1"
 TimerArcSolo =1
 
 ArcSoloType={DebutH='DebutH',MillieuH='MillieuH',FinH='FinH',DebutV='DebutV',MillieuV='MillieuV',FinV='FinV'}
@@ -22,9 +23,9 @@ function ArcSolo.new(pos,w,h,typeArcSolo,id,enable)
 	self.type='ArcSolo'
 	self.arcSoloType=typeArcSolo
 	if( self.arcSoloType==ArcSoloType.MillieuV or self.arcSoloType==ArcSoloType.MillieuH ) then
-		self.anim = AnimArcSolo.new('arc/arcmid')
+		self.anim = AnimArcSolo.new('arc/'..World..'/arcmid')
 	else
-		self.anim = AnimArcSolo.new('arc/arcside')
+		self.anim = AnimArcSolo.new('arc/'..World..'/arcside')
 	end
 	-- self:loadAnimation("on",true)
 	self.isTouched=false
