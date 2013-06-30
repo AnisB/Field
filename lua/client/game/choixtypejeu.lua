@@ -109,6 +109,7 @@ end
 
 function ChoixTypeJeu:DisconnectApply()
     gameStateManager:resetAndChangeState('ConnectToServer')
+    serveur:disconnect() 
 end
 
 
@@ -120,7 +121,7 @@ end
 function ChoixTypeJeu:onMessage(msg)
 
 	if msg.type=="syncro" and msg.pck.next=="ConnectToServer"then
-        self:DisconnectApply()   
+        self:DisconnectApply()  
     elseif msg.type=="syncro" and msg.pck.next=="ChoixPerso" then
         self:GoPersoApply(msg.pck.typeJeu)   
     elseif msg.type=="reset" then

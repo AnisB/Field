@@ -47,9 +47,9 @@ function ChoixTypeJeu:onMessage(msg, client)
                 else
                     c:send({type= "syncro", pck={next="ConnectToServer"}})
                 end
+                gameStateManager:changeState("attente")
+
             end
-            -- On kick les deux joueurs et on reset
-            assert(false)
         end
     else
     	print(msg.type)

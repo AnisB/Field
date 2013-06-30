@@ -192,8 +192,7 @@ function ConnectToServer:onMessage(msg)
 		self:error("Already used pseudo")
 		self.waiting = false
 		serveur:disconnect()
-	end
-	if msg.type == "attenteFinie" then
+	elseif msg.type == "attenteFinie" then
 		gameStateManager:changeState('ChoixTypeJeu') -- WaitingForDistant
 	elseif msg.type == "discovery" then
 		if self.discovered == true then
