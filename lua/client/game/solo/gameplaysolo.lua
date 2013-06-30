@@ -24,6 +24,11 @@ require("game.shader.backlightshader")
 require("game.simplebackground")
 require("game.ui.loadingscreen")
 require("game.ui.pausemenu")
+
+
+require("game.soloinputmanager")
+
+
 require("const")
 
 
@@ -70,6 +75,8 @@ function GameplaySolo.new(mapFile,continuous,player)
 
     self. filterAcid = love.graphics.newImage("img/death/acid.png")
     self. filterArc = love.graphics.newImage("img/death/arc.png")
+
+    self.inputManager = SoloInputManager.new(player,self)
 
 
     -- Player loading
@@ -223,16 +230,28 @@ end
     function GameplaySolo:mouseReleased(x, y, button)
     end
     
-
     function GameplaySolo:keyPressed(key, unicode)
-        if not self.loading then
+        self.inputManager:keyPressed(key,unicode)
+    end
 
+    function GameplaySolo:joystickPressed(key, unicode)
+        self.inputManager:joystickPressed(key,unicode)
+    end
+
+
+    function GameplaySolo:joystickReleased(key, unicode)
+        self.inputManager:joystickReleased(key,unicode)
+    end
+
+    function GameplaySolo:sendPressedKey(key, unicode)
+        if not self.loading then
+            print("RECU"..key)
 
             if not self.gameIsPaused then
 
                 -- Inputs for players
                 if self.player=="metalman" then
-                    if key=="z" then
+                    if key=="up" then
                         self.metalMan:jump()     
                     end
                     if key =="e" then
@@ -243,11 +262,11 @@ end
                             self.metalMan:changeMass()
                         end
                     end
-                    if key =="d" then
+                    if key =="right" then
                         self.metalMan:startMove()
                     end
 
-                    if key =="q" then
+                    if key =="left" then
                         self.metalMan:startMove()
                     end  
 
@@ -298,23 +317,27 @@ end
 
             -- Pause
             if key =="escape" then
+                print("LA")
                 self.pauseMenu:sendPauseOrder()
             end   
         end
     end
 
-
     function GameplaySolo:keyReleased(key, unicode)
+        self.inputManager:keyReleased(key,unicode)
+    end
+
+    function GameplaySolo:sendReleasedKey(key)
         if not self.loading then
 
-        if not self.gameIsPaused then
-            if self.player=="metalman" then
-                if key =="d" then
-                    self.metalMan:stopMove()
-                end
-                if key =="q" then
-                    self.metalMan:stopMove()
-                end
+            if not self.gameIsPaused then
+                if self.player=="metalman" then
+                    if key =="right" then
+                        self.metalMan:stopMove()
+                    end
+                    if key =="" then
+                        self.metalMan:stopMove()
+                    end
 
                 elseif self.player=="themagnet" then
                     if key =="i" then
@@ -335,10 +358,12 @@ end
                 end
             end
         end
-        end
+    end
     
     
     function GameplaySolo:update(dttheo)
+
+        self.inputManager:update()
         if  self.loading then
             gameStateManager.loader.update(dttheo)
             self.loadingScreen:update(dttheo)

@@ -7,6 +7,8 @@ Options.__index = Options
 function Options:new()
     local self = {}
     setmetatable(self, Options)
+
+    self.inputManager = MenuInputManager.new(self)
     self.enteringDone = false
     self.timer=0
     self.returnB=Button.new(1000,625,200,50,"backgrounds/options/return.png")
@@ -51,7 +53,24 @@ function Options:decrementSelection()
 	self.selection[self.selected]:setSelected(true)
 end
 
-function Options:keyPressed(key, unicode) 
+function Options:keyPressed(key, unicode)
+    self.inputManager:keyPressed(key,unicode)
+end
+function Options:keyReleased(key, unicode)
+    self.inputManager:keyReleased(key,unicode)
+end
+
+function Options:joystickPressed(key, unicode)
+    self.inputManager:joystickPressed(key,unicode)
+end
+
+
+function Options:joystickReleased(key, unicode)
+    self.inputManager:joystickReleased(key,unicode)
+end
+
+
+function Options:sendPressedKey(key, unicode) 
 	if key == 'down' or key =='tab' then
 			self:incrementSelection()
 		elseif key =='up' then
@@ -66,16 +85,8 @@ end
 
 
 
-function Options:keyReleased(key, unicode) 
-end
-
-function Options:joystickPressed(joystick, button)
-end
-
-function Options:joystickReleased(joystick, button)
-end
-
 function Options:update(dt)
+	self.inputManager:update()
 	self.commonBackground:update(dt) 
 	if not self.enteringDone then
 		self.timer =self.timer +dt

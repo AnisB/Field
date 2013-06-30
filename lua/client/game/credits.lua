@@ -18,6 +18,8 @@ function Credits:new()
     self.tm:load("field",true)
 	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
 
+	self.inputManager = MenuInputManager.new(self)
+
     -- Champ
     self.field= Field.new("Repulsive",{x=750,y=350})
 
@@ -38,6 +40,24 @@ function Credits:mouseReleased(x, y, button)
 end
 
 function Credits:keyPressed(key, unicode)
+    self.inputManager:keyPressed(key,unicode)
+end
+
+function Credits:keyReleased(key, unicode)
+    self.inputManager:keyReleased(key,unicode)
+end
+
+function Credits:joystickPressed(key, unicode)
+    self.inputManager:joystickPressed(key,unicode)
+end
+
+
+function Credits:joystickReleased(key, unicode)
+    self.inputManager:joystickReleased(key,unicode)
+end
+
+
+function Credits:sendPressedKey(key, unicode) 
 	if key == "return" then
 		gameStateManager:changeState('Menu')
 	end
@@ -50,6 +70,7 @@ end
 
 function Credits:update(dt)
 	-- Maj du field et des persos
+	self.inputManager:update()
 	self.field:update(dt)
 	self.mm:update(dt)
 	self.tm:update(dt)

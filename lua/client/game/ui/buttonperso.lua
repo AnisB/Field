@@ -19,6 +19,7 @@ function ButtonPerso.new(x,y,img)
     self.selected=false
     self.enabled=true
     self.focused=false
+    self.focusedsecond=false
     self.select = ButtonPerso.HighLight
     return self
 end
@@ -44,13 +45,17 @@ end
 function ButtonPerso:setFocused(val)
 	self.focused=val
 end
-
+function ButtonPerso:setFocusedSecond(val)
+	self.focusedsecond=val
+end
 
 function ButtonPerso:basicDraw(filter)
-	if(not self.focused) then
-		love.graphics.setColor(255,255,255,255*filter)
-	else
+	if(self.focused) then
 		love.graphics.setColor(255,100,100,255*filter)
+	elseif self.focusedsecond then
+		love.graphics.setColor(100,100,255,255*filter)
+	else
+		love.graphics.setColor(255,255,255,255*filter)
 	end
 	love.graphics.draw(self.img, self.position.x+25+self.dec.x, self.position.y+20+self.dec.y)
 	love.graphics.setColor(255,255,255,255)
@@ -61,10 +66,12 @@ end
 function ButtonPerso:selectedDraw(filter)
 	love.graphics.setColor(255,255,255,255)
 	love.graphics.draw(self.select, self.position.x+160, self.position.y+280)
-	if(not self.focused) then
-		love.graphics.setColor(255,255,255,255*filter)
-	else
+	if(self.focused) then
 		love.graphics.setColor(255,100,100,255*filter)
+	elseif self.focusedsecond then
+		love.graphics.setColor(100,100,255,255*filter)
+	else
+		love.graphics.setColor(255,255,255,255*filter)
 	end
 	love.graphics.draw(self.img, self.position.x+25+self.dec.x, self.position.y+20+self.dec.y)
 	love.graphics.setColor(255,255,255,255)

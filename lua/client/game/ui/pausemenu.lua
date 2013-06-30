@@ -50,7 +50,7 @@ function PauseMenu:keyPressed(key, unicode)
         elseif key =='up' then
             self:decrementSelection()
     
-        elseif key == "return" then
+        elseif key == "return"then
 
             if self.resume.selected then
                 gameStateManager.state['GameplaySolo'].gameIsPaused=false

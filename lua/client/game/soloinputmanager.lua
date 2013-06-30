@@ -2,105 +2,111 @@
 This file is part of the Field project]]
 
 --les touches telles qu'elles doivent être envoyées au serveur
--- MetalManKEYS={up="z",down="s",left="q",right="d",changeweight="b",changestatic="n", interact="e"}
--- TheMagnetKEYS={up="up",down="down",left="left",right="right",repulsive="p",attractive="o",rotativel="k",rotativer="l",static="i", interact="e"}
+-- MetalManKEYSSolo={up="z",down="s",left="q",right="d",changeweight="b",changestatic="n", interact="e"}
+-- TheMagnetKEYSSolo={up="up",down="down",left="left",right="right",repulsive="p",attractive="o",rotativel="k",rotativer="l",static="i", interact="e"}
 
-MetalManKEYS={hands="e", up="z",down="s",left="q",right="d",changeweight="b",changestatic="n"}
-TheMagnetKEYS={hands="f", up="up",down="down",left="left",right="right",repulsive="p",attractive="o",rotativel="k",rotativer="l",static="i"}
+MetalManKEYSSolo={hands="e", jump="up",up="up",down="down",left="left",right="right",changeweight="b",changestatic="n", pause ="escape", start ="return"}
+TheMagnetKEYSSolo={hands="f", jump="up",up="up",down="down",left="left",right="right",repulsive="p",attractive="o",rotativel="k",rotativer="l",static="i", pause ="escape", start ="return" }
 
 
-InputManager = {}
-InputManager.__index = InputManager
-function InputManager.new()
+SoloInputManager = {}
+SoloInputManager.__index = SoloInputManager
+function SoloInputManager.new(perso, callBackState)
   local self = {}
-  setmetatable(self, InputManager)
-  self.keys=require("other.simplekeys")
+  setmetatable(self, SoloInputManager)
+  self.keys=require("other.keys")
   self.joystickKeyPressed = {"released", "released", "released", "released"}
   self.joystickHat = {"up", "down", "left", "right"}
+  self.perso = perso
+  self.callBackState = callBackState
+  self.listKeys = {}
   return self
 end
 
-function InputManager:keyPressed(akey, unicode)
-  if(monde.moi.perso=="metalman") then 
+function SoloInputManager:keyPressed(akey, unicode)
+  if(self.perso=="metalman") then 
     for i,v in pairs(self.keys.MetalManKEYS) do
       if(v==akey) then
-        serveur:send({type="input", pck={character="metalman", key=MetalManKEYS[i], state=true}})
+      	self.listKeys[akey] = true
+        self.callBackState:sendPressedKey(MetalManKEYSSolo[i])
       end
     end
     return
-    elseif (monde.moi.perso=="themagnet")then
+    elseif (self.perso=="themagnet")then
       for i,v in pairs(self.keys.TheMagnetKEYS) do
         if(v==akey) then
-          serveur:send({type="input", pck={character="themagnet", key=TheMagnetKEYS[i], state=true}})
+        	self.listKeys[akey] = true
+        	self.callBackState:sendPressedKey(TheMagnetKEYSSolo[i])
         end
       end
     end
   end
 
-  function InputManager:keyReleased(akey, unicode)
-  print("J'ai un input à handler"..akey)
-  if(monde.moi.perso=="metalman") then 
-    print("C'est un metalman, recherche de la clé")
-
+  function SoloInputManager:keyReleased(akey, unicode)
+  if(self.perso=="metalman") then 
     for i,v in pairs(self.keys.MetalManKEYS) do
       if(v==akey) then
-        print("Trouvée"..i.."#"..v.."Envoyé"..MetalManKEYS[i])
-        serveur:send({type="input", pck={character="metalman", key=MetalManKEYS[i], state=false}})
+        	self.listKeys[akey] = nil
+        self.callBackState:sendReleasedKey(MetalManKEYSSolo[i])
       end
     end
-    print("Pas trouvée"..akey)
     return
-    elseif (monde.moi.perso=="themagnet")then
+    elseif (self.perso=="themagnet")then
       for i,v in pairs(self.keys.TheMagnetKEYS) do
         if(v==akey) then
-          serveur:send({type="input", pck={character="themagnet", key=TheMagnetKEYS[i], state=false}})
+        	self.listKeys[akey] = nil
+        	self.callBackState:sendReleasedKey(TheMagnetKEYSSolo[i])
         end
       end
     end
   end
   
-function InputManager:joystickPressed(joystick, button)
+function SoloInputManager:joystickPressed(joystick, button)
 	if not gamePaused then
-		if(monde.moi.perso=="metalman") then 
+		if(self.perso=="metalman") then 
 		for i,v in pairs(self.keys.MetalManJoystickKEYS) do
 		  if(v==button) then
-			serveur:send({type="input", pck={character="metalman", key=MetalManKEYS[i], state=true}})
+		  	self.listKeys[button] = true
+		  	print(i)
+			self.callBackState:sendPressedKey(MetalManKEYSSolo[i])
 		  end
 		end
 		return
-		elseif (monde.moi.perso=="themagnet")then
+		elseif (self.perso=="themagnet")then
 		  for i,v in pairs(self.keys.TheMagnetJoystickKEYS) do
 			if(v==button) then
-			  serveur:send({type="input", pck={character="themagnet", key=TheMagnetKEYS[i], state=true}})
+				self.listKeys[button] = true
+				print("BLAH"..i)
+				print("BLOH"..TheMagnetKEYSSolo[i])
+				self.callBackState:sendPressedKey(TheMagnetKEYSSolo[i])
 			end
 		  end
 		end
 	end
 end
 
-function InputManager:joystickReleased(joystick, button)
+function SoloInputManager:joystickReleased(joystick, button)
 	if not gamePaused then
-		if(monde.moi.perso=="metalman") then 
-		print("C'est un metalman, recherche de la clé")
-
+		if(self.perso=="metalman") then 
 		for i,v in pairs(self.keys.MetalManJoystickKEYS) do
 		  if(v==button) then
-			print("Trouvée"..i.."#"..v.."Envoyé"..MetalManKEYS[i])
-			serveur:send({type="input", pck={character="metalman", key=MetalManKEYS[i], state=false}})
+		  	self.listKeys[button] = nil
+		  	self.callBackState:sendReleasedKey(MetalManKEYSSolo[i])
 		  end
 		end
 		return
-		elseif (monde.moi.perso=="themagnet")then
+		elseif (self.perso=="themagnet")then
 		  for i,v in pairs(self.keys.TheMagnetJoystickKEYS) do
 			if(v==button) then
-			  serveur:send({type="input", pck={character="themagnet", key=TheMagnetKEYS[i], state=false}})
+				self.listKeys[button] = nil
+				self.callBackState:sendReleasedKey(TheMagnetKEYSSolo[i])
 			end
 		  end
 		end
 	end
 end
 
-function InputManager:update()
+function SoloInputManager:update()
 	direction = love.joystick.getHat(1, 1)
 	
 	local newJoystickKeyPressed = {"released", "released", "released", "released"}
@@ -141,7 +147,7 @@ function InputManager:update()
 end
 
 
-function InputManager:isKeyDown(key)
+function SoloInputManager:isKeyDown(key)
 	local ok=false
 	if self.listKeys[key]~=nil then
 		ok=true

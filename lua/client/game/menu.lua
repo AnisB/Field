@@ -8,6 +8,9 @@ require("game.ui.autoloopingbackground")
 require("game.ui.confirmationpopup")
 require("game.basicanim")
 
+require("game.menuinputmanager")
+
+
 Menu = {}
 Menu.__index = Menu
 function Menu.new()
@@ -27,6 +30,7 @@ function Menu.new()
     self.quit=Button.new(175,600,200,50,"backgrounds/menu/quit.png")
     self.confirmation = ConfirmationPopUp.new()
 
+    self.inputManager = MenuInputManager.new(self) 
     self.font = love.graphics.newFont(FontDirectory .. "font.ttf", 25)
     love.graphics.setFont(self.font)
 
@@ -54,11 +58,24 @@ function Menu:reset()
     self.filter=1
 end
 
-
-function Menu:mouseReleased(x, y, button) 
+function Menu:keyPressed(key, unicode)
+    self.inputManager:keyPressed(key,unicode)
+end
+function Menu:keyReleased(key, unicode)
+    self.inputManager:keyReleased(key,unicode)
 end
 
-function Menu:keyPressed(key, unicode) 
+function Menu:joystickPressed(key, unicode)
+    self.inputManager:joystickPressed(key,unicode)
+end
+
+
+function Menu:joystickReleased(key, unicode)
+    self.inputManager:joystickReleased(key,unicode)
+end
+
+
+function Menu:sendPressedKey(key, unicode) 
 	if self.shouldQuit then
 		self.confirmation:keyPressed(key,unicode)
 	else
@@ -107,14 +124,13 @@ function Menu:keyPressed(key, unicode)
 	end
 end
 
-function Menu:keyReleased(key, unicode) 
+function Menu:sendReleasedKey(key, unicode) 
 end
 
-function Menu:joystickPressed(joystick, button)
+function Menu:mouseReleased(x, y, button) 
 end
 
-function Menu:joystickReleased(joystick, button)
-end
+
 
 function Menu:incrementSelection()
 	self.selection[self.selected]:setSelected(false)
@@ -135,6 +151,7 @@ function Menu:decrementSelection()
 end
 
 function Menu:update(dt) 
+	self.inputManager:update()
 	self.commonBackground:update(dt)
 	if not self.enteringDone then
 		self.timer =self.timer +dt

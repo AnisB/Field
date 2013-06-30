@@ -6,6 +6,8 @@ ChoixNiveau.__index = ChoixNiveau
 function ChoixNiveau:new()
     local self = {}
     setmetatable(self, ChoixNiveau)
+
+    self.inputManager = MenuInputManager.new(self)
     self.back=BackgroundNiveau.new()
     self.levellabel=love.graphics.newImage("backgrounds/choixniveau/level.png")
 
@@ -57,14 +59,31 @@ end
 function ChoixNiveau:mouseReleased(x, y, button) end
 
 function ChoixNiveau:keyPressed(key, unicode)
+    self.inputManager:keyPressed(key,unicode)
+end
+function ChoixNiveau:keyReleased(key, unicode)
+    self.inputManager:keyReleased(key,unicode)
+end
+
+function ChoixNiveau:joystickPressed(key, unicode)
+    self.inputManager:joystickPressed(key,unicode)
+end
+
+
+function ChoixNiveau:joystickReleased(key, unicode)
+    self.inputManager:joystickReleased(key,unicode)
+end
+
+
+function ChoixNiveau:sendPressedKey(key, unicode)
 	if key == "down" then
 		self:incrementSelection()
 	elseif key == "up" then
 		self:decrementSelection()
-	elseif key == "q" or key =="left" then
+	elseif key =="left" then
 		self.num_level = self.num_level - 1
 		self:synchroViewedLevel()
-	elseif key == "d"  or key == "right" then
+	elseif key == "right" then
 		self.num_level = self.num_level + 1
 		self:synchroViewedLevel()
 	elseif key == "return" then
@@ -82,34 +101,21 @@ function ChoixNiveau:keyPressed(key, unicode)
 	end
 end
 
-function ChoixNiveau:keyReleased(key, unicode) end
-
-function ChoixNiveau:joystickPressed(joystick, button)
+function ChoixNiveau:update(dt) 
+	self.inputManager:update()
 end
-
-function ChoixNiveau:joystickReleased(joystick, button)
-end
-
-function ChoixNiveau:update(dt) end
 
 function ChoixNiveau:onMessage(msg)
 
 	if msg.type=="syncro" and msg.pck.next=="Gameplay"then
         self:goGameplayApply(msg.pck.level)     
     elseif msg.type=="syncro" and msg.pck.next=="ChoixNiveau" then
-        self:backChoixNiveauApply()   
+        self:backChoixPersoApply()   
     elseif msg.type=="reset" then
         -- We got a problem
         --gameStateManager:forceDisconnect()
     elseif msg.type == "syncroLevel" then
-    	self:synchroViewedLevelApply(msg.pck.level)
-    else
-        -- Ce message n'est pas censé atterir ici
-    end 
-	if msg.type == "choixNiveau" then
-		monde.niveau = msg.level
-            gameStateManager.state['Gameplay']=Gameplay.new("maps/multi/"..msg.pck.level,true)
-            gameStateManager:changeState('Gameplay')	
+    	self:synchroViewedLevelApply(msg.pck.level)	
 	else
 		print("[ChoixNiveau] wrong type :", table2.tostring(msg))
 	end
@@ -118,11 +124,14 @@ end
 
 
 function ChoixNiveau:synchroViewedLevel()
-	if self.num_level > 0 and self.num_level<= #self.level then
+	print("Syncro level order", self.num_level,#monde.availableMaps)
+	if self.num_level > 0 and self.num_level<= #monde.availableMaps then
+		print("Envoi Ordre")
 		serveur:send({type="syncroLevel", pck={perso=monde.moi.perso, current="ChoixNiveau", level=self.num_level}})    
 	end
 end
 function ChoixNiveau:synchroViewedLevelApply(level)
+	print("Syncro level apply")
 	self.num_level = level
 	if self.num_level < 1 then self.num_level = 1 end
 	if self.num_level > #monde.availableMaps then self.num_level = #monde.availableMaps end
@@ -130,7 +139,7 @@ function ChoixNiveau:synchroViewedLevelApply(level)
 	if self.prev[self.level]==nil then
 			self.prev[self.level]=love.graphics.newImage("maps/multi/"..self.level.."-fieldmap/prev.png")
 	end
-	self.level = monde.availableMaps[level]
+
 end
 
 function ChoixNiveau:goGameplayOrder()
@@ -149,7 +158,7 @@ function ChoixNiveau:goGameplayApply(level)
     gameStateManager:changeState('Gameplay')
 end
 
-function ChoixNiveau:backChoixPersoapply()
+function ChoixNiveau:backChoixPersoApply()
     gameStateManager:changeState('ChoixPerso')        
 end
 

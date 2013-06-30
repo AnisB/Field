@@ -37,11 +37,24 @@ end
 
     end
     
+function Attente:availablePseudo(pseudo)
+	for k,c in pairs(clients) do
+		if c.pseudo ==pseudo then
+			return false
+		end
+	end
+	return true
+end
 function Attente:draw() end
 
 function Attente:onMessage(msg, client)
 	print "bing"
 	if msg.type == "login" then
+
+		if not self:availablePseudo(msg.pseudo) then
+			client:send({type= "PseudoError"})
+			return
+		end
 		client.pseudo = msg.pseudo or debug_warn("[login] missing pseudo")
 		client.cookie = msg.cookie or debug_warn("[login] missing cookie")
 		if nb_clients == 2 then

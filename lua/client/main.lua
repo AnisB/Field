@@ -16,7 +16,7 @@ table2 = require("lubeboth.table2")
 gameStateManager = nil
 
 -- Game paused quoi...@Florent si ça gere le focus tu l'apelle focus.
-gameFocus = false
+gameFocus = true
 
 musicM = MusicManager.new()
 musicM:play()
@@ -100,19 +100,14 @@ function love.keyreleased(key, unicode)
 end
 
 function love.joystickpressed(joystick, button)
-	if not gameFocus then
-		if button==10 then --start manette = touche return du clavier
-			love.event.push('keypressed', "return")
-		end
+	if gameFocus then
+
 		gameStateManager:joystickPressed(joystick, button)
 	end
 end
 
 function love.joystickreleased(joystick, button)
-	if not gameFocus then
-		if button==10 then --start manette = touche return du clavier
-			love.event.push('keyreleased', "return")
-		end
+	if gameFocus then
 		gameStateManager:joystickReleased(joystick, button)
 	end
 end
@@ -122,5 +117,5 @@ function love.draw()
 end
 
 function love.focus(b)
-	gameFocus = not b
+	gameFocus = b
 end

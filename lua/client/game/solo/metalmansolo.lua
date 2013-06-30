@@ -384,8 +384,7 @@ function MetalManSolo:update(seconds)
 			self:loadAnimation("running",true)	
 		end
 		if not self.isStatic  then
-			-- if gameStateManager.state['GameplaySolo'].inputManager:isKeyDown("d") then
-			if love.keyboard.isDown("d") then
+			if gameStateManager.state['GameplaySolo'].inputManager:isKeyDown("right") then
 				if self.metalWeight==MetalMTypes.Alu then
 					self.pc.body:applyForce(MetalManMovingForce.Alu, 0)
 				else
@@ -393,8 +392,7 @@ function MetalManSolo:update(seconds)
 				end
 				self.goF=true
 
-			-- elseif gameStateManager.state['GameplaySolo'].inputManager:isKeyDown("q") then 
-			elseif love.keyboard.isDown("q") then 
+			elseif gameStateManager.state['GameplaySolo'].inputManager:isKeyDown("left") then 
 				if self.metalWeight==MetalMTypes.Alu then
 					self.pc.body:applyForce(-MetalManMovingForce.Alu, 0)
 				else

@@ -48,4 +48,8 @@ function Client:send(aTable)
 	self.conn:send(str, self.id)
 end
 
+function Client:disconnect()
+	self.conn:disconnect()
+end
+
 Client = common.class("Client", Client)

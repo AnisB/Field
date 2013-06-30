@@ -7,6 +7,7 @@ function ArcadeChoixNiveau:update(dt) end
 function ArcadeChoixNiveau:draw() end
 
 function ArcadeChoixNiveau:onMessage(msg, client)
+
 	if msg.type=="syncro" then
 
         if msg.pck.current~="ChoixNiveau" then
@@ -26,7 +27,7 @@ function ArcadeChoixNiveau:onMessage(msg, client)
                 if c.perso==msg.pck.perso then
                     -- Nothgin to do, the peer is already sycronised with himself
                 else
-                	c:send({type= "choixNiveau", pck={next="Gameplay",level= msg.pck.level}})
+                	c:send({type= "syncro", pck={next="Gameplay",level= msg.pck.level}})
                 end
             end
         elseif msg.pck.next=="ChoixPerso" then
@@ -38,9 +39,10 @@ function ArcadeChoixNiveau:onMessage(msg, client)
                     c:send({type= "syncro", pck={next="ChoixNiveau"}})
                 end
             end
-            gameStateManager:changeState('arcadeChoixpPerso')  
+            gameStateManager:changeState('arcadeChoixPerso')  
         end
     elseif msg.type == "syncroLevel" then
+        print("recu syncro niveau")
     	if msg.pck.current~="ChoixNiveau" then
             -- Soucis de syncro des etats, on kick les 2 joueurs et on reset le serveur
             return
@@ -56,28 +58,6 @@ function ArcadeChoixNiveau:onMessage(msg, client)
         end
     end
 
-
-	-- if msg.type == "choixNiveau" then
-	-- 	if not msg.confirm then
-	-- 		-- TODO : checker que le niveau existe bien, toussa
-	-- 		monde.niveau = msg.niveau or debug_warn("[ArcadeChoixNiveau] missing niveau")
-	-- 		for k,c in pairs(clients) do
-	-- 			c:send({type= "choixNiveau", niveau= msg.niveau})
-	-- 		end
-	-- 	else
-	-- 		if monde.niveau then
-	-- 			for k,c in pairs(clients) do
-	-- 				c:send({type= "choixNiveauFini"})
-	-- 			end
-	-- 			gameStateManager:changeState("arcade")
-	-- 			-- TODO : envoyer le niveau ici ?
-	-- 		else
-	-- 			client:send({type= "err", msg="choix du niveau pas fini"})
-	-- 		end
-	-- 	end
-	-- else
-	-- 	debug_warn("[ArcadeChoixNiveau] wrong type")
-	-- end
 end
 
 ArcadeChoixNiveau = common.class("ArcadeChoixNiveau", ArcadeChoixNiveau)

@@ -6,6 +6,8 @@ ChoixTypeJeu.__index = ChoixTypeJeu
 function ChoixTypeJeu:new()
     local self = {}
     setmetatable(self, ChoixTypeJeu)
+
+    self.inputManager = MenuInputManager.new(self)
     self.commonBackground = CommonBackground.new()    
     self.story=Button.new(150,325,200,50, "backgrounds/solo/story.png")
     self.arcade=Button.new(150,400,250,50, "backgrounds/solo/arcade.png")
@@ -42,7 +44,25 @@ function ChoixTypeJeu:decrementSelection()
 end
 
 function ChoixTypeJeu:mouseReleased(x, y, button) end
-function ChoixTypeJeu:keyPressed(key, unicode) 
+
+function ChoixTypeJeu:keyPressed(key, unicode)
+    self.inputManager:keyPressed(key,unicode,true)
+end
+function ChoixTypeJeu:keyReleased(key, unicode)
+    self.inputManager:keyReleased(key,unicode)
+end
+
+function ChoixTypeJeu:joystickPressed(key, unicode)
+    self.inputManager:joystickPressed(key,unicode)
+end
+
+
+function ChoixTypeJeu:joystickReleased(key, unicode)
+    self.inputManager:joystickReleased(key,unicode)
+end
+
+
+function ChoixTypeJeu:sendPressedKey(key, unicode)
 	if key == 'down' or key =='tab' then
 			self:incrementSelection()
 		elseif key =='up' then
@@ -92,16 +112,8 @@ function ChoixTypeJeu:DisconnectApply()
 end
 
 
-
-function ChoixTypeJeu:keyReleased(key, unicode) end
-
-function ChoixTypeJeu:joystickPressed(joystick, button)
-end
-
-function ChoixTypeJeu:joystickReleased(joystick, button)
-end
-
 function ChoixTypeJeu:update(dt) 
+	self.inputManager:update()
 	self.commonBackground:update(dt)
 end
 

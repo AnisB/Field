@@ -58,7 +58,7 @@ function OptionsPauseMenu:keyPressed(key, unicode)
                 self.musicVolume.scrollPosition = self.musicVolume.scrollPosition -0.1  
                 musicM:setVolume(self.musicVolume.scrollPosition)
             end
-        elseif key == "return" then
+        elseif key == "return" or key == 3 then
 
             if self.paralax.selected then
                 self.paralax.state = not self.paralax.state

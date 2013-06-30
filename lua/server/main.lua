@@ -60,6 +60,7 @@ function onDisconnect(client)
 	client:speak("bye bye !")
 	clients[client.id] = nil -- destroy
 	nb_clients = nb_clients - 1
+	print("Un mec s'est barré")
 end
 -- /lube
 
@@ -140,7 +141,7 @@ function love.draw()
 		if ip_externe ~= nil then
 			love.graphics.print(ip_externe, 100, 120)
 		else
-			love.graphics.print("?", 40, 120)
+			love.graphics.print("OFFLINE", 40, 120)
 		end
 	end
 end

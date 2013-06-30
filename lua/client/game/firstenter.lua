@@ -13,6 +13,8 @@ function FirstEnter:new()
     self.up=true
     self.shouldPass=false
     self.passTimer=1
+
+    self.inputManager = MenuInputManager.new(self)
     return self
 end
 
@@ -25,6 +27,23 @@ end
 
 
 function FirstEnter:keyPressed(key, unicode)
+    self.inputManager:keyPressed(key,unicode)
+end
+function FirstEnter:keyReleased(key, unicode)
+    self.inputManager:keyReleased(key,unicode)
+end
+
+function FirstEnter:joystickPressed(key, unicode)
+    self.inputManager:joystickPressed(key,unicode)
+end
+
+
+function FirstEnter:joystickReleased(key, unicode)
+    self.inputManager:joystickReleased(key,unicode)
+end
+
+
+function FirstEnter:sendPressedKey(key, unicode) 
 	if key=="return" and self.shouldPass==false then
 		self.shouldPass=true
 		-- Sound.playSound("firstenter")
@@ -32,17 +51,8 @@ function FirstEnter:keyPressed(key, unicode)
 	
 end
 
-function FirstEnter:keyReleased(key, unicode)
-end
-
-function FirstEnter:joystickPressed(joystick, button)
-end
-
-function FirstEnter:joystickReleased(joystick, button)
-end
-
 function FirstEnter:update(dt)
-
+	self.inputManager:update()
 	self.logo:update(dt)
 	if self.trans<=0 then 
 		self.up=false

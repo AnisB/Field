@@ -10,11 +10,22 @@ LevelEnding.__index = LevelEnding
 function LevelEnding.new(next,continuous)
     local self = {}
     setmetatable(self, LevelEnding)
+
+    self.inputManager = MenuInputManager.new(self)
     self.next=next
     self.continuous=continuous
     self.back=love.graphics.newImage("backgrounds/ending/back.png")
     self.continue=Button.new(300,300,300,50,"backgrounds/ending/continue.png")
     self.returnB=Button.new(800,300,250,50, "backgrounds/ending/return.png")
+
+
+    self.selection = {
+        self.continue,
+        self.returnB
+    }
+    self.selected = 1
+    self.continue:setSelected(true)
+
     self.perso1 = AnimMM.new("metalman/alu")
     self.perso2 = AnimTM.new("themagnet")
     self.perso1:load("running",true)
@@ -22,16 +33,34 @@ function LevelEnding.new(next,continuous)
     self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
     self.pos1=-50
     self.pos2=-100
+
+
+
+
     return self
 end
 
 
-function LevelEnding:mousePressed(x, y, button)
-    if self.continue:isCliked(x,y) then
-        self:goGameplayOrder()       
-    elseif self.returnB:isCliked(x,y) then
-        self:backChoixNiveauOrder()        
+function LevelEnding:incrementSelection()
+    self.selection[self.selected]:setSelected(false)
+    if self.selected == #self.selection then
+        self.selected = 0
     end
+    self.selected = self.selected + 1
+    self.selection[self.selected]:setSelected(true)
+end
+
+function LevelEnding:decrementSelection()
+    self.selection[self.selected]:setSelected(false)
+        if self.selected == 1 then
+        self.selected = #self.selection + 1
+    end
+    self.selected = self.selected - 1
+    self.selection[self.selected]:setSelected(true)
+end
+
+
+function LevelEnding:mousePressed(x, y, button)
 end
 
 function LevelEnding:onMessage(msg)
@@ -51,10 +80,40 @@ function LevelEnding:mouseReleased(x, y, button)
 end
 
 
-function LevelEnding:keyPressed(akey, unicode)
-	if akey=="return" then
-        self:goGameplayOrder()       
-    end		
+function LevelEnding:keyPressed(key, unicode)
+    self.inputManager:keyPressed(key,unicode)
+end
+function LevelEnding:keyReleased(key, unicode)
+    self.inputManager:keyReleased(key,unicode)
+end
+
+function LevelEnding:joystickPressed(key, unicode)
+    self.inputManager:joystickPressed(key,unicode)
+end
+
+
+function LevelEnding:joystickReleased(key, unicode)
+    self.inputManager:joystickReleased(key,unicode)
+end
+
+
+function LevelEnding:sendPressedKey(key, unicode) 
+    if key == "right" then
+        self:incrementSelection()
+    elseif key == "left" then
+        self:decrementSelection()
+    elseif key=="return" then
+
+        if self.continue.selected then
+            if self.continuous then
+                self:goGameplayOrder()      
+            else
+                self:backChoixNiveauOrder()
+            end 
+        elseif self.returnB.selected then
+                self:backChoixNiveauOrder()
+        end
+    end
 end
 
 function LevelEnding:goGameplayOrder()
@@ -77,16 +136,9 @@ function LevelEnding:backChoixNiveauApply()
     gameStateManager:changeState('ChoixNiveau')        
 end
 
-function LevelEnding:keyReleased(key, unicode)
-end
-
-function LevelEnding:joystickPressed(joystick, button)
-end
-
-function LevelEnding:joystickReleased(joystick, button)
-end
 
 function LevelEnding:update(dt)
+    self.inputManager:update()
     self.perso1:update(dt)
     self.perso2:update(dt)
     if(self.pos1<windowW+200) then
@@ -105,8 +157,8 @@ function LevelEnding:draw()
     love.graphics.draw(self.back, 0, 0)
 
 
-    self.continue:draw(x,y,1)
-    self.returnB:draw(x,y,1)
+    self.continue:draw(1)
+    self.returnB:draw(1)
     love.graphics.drawq(self.perso1:getSprite(), self.diffuse, self.pos1,530 )
     love.graphics.drawq(self.perso2:getSprite(), self.diffuse, self.pos2,530 )
 

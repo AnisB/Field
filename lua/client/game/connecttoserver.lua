@@ -9,6 +9,7 @@ require("game.ui.textfield")
 function ConnectToServer:new()
     local self = {}
     setmetatable(self, ConnectToServer)
+    self.inputManager = MenuInputManager.new(self)
 
     self.font = love.graphics.newFont(FontDirectory .. "font.ttf", 25)
     love.graphics.setFont(self.font)
@@ -41,6 +42,10 @@ function ConnectToServer:new()
     self.selected = 1
     self.ipaddrfield:setSelected(true)
 
+    self.err = false
+    self.errcontent =""
+    self.errcoolDown = 0
+
     return self
 end
 
@@ -48,6 +53,11 @@ function ConnectToServer:mousePressed(x, y, button)
 
 end
 
+function ConnectToServer:error(msg)
+    self.err = true
+    self.errcontent =msg
+    self.errcoolDown = 1
+end
 
 function ConnectToServer:reset()
 	self.waiting = false
@@ -58,11 +68,37 @@ function ConnectToServer:mouseReleased(x, y, button)
 end
 
 
+function ConnectToServer:mousePressed(x, y, button)
+end
+
+function ConnectToServer:mouseReleased(x, y, button)
+end
+
+
 function ConnectToServer:keyPressed(key, unicode)
+    self.inputManager:keyPressed(key,unicode,true)
+end
+function ConnectToServer:keyReleased(key, unicode)
+    self.inputManager:keyReleased(key,unicode)
+end
+
+function ConnectToServer:joystickPressed(key, unicode)
+    self.inputManager:joystickPressed(key,unicode)
+end
+
+
+function ConnectToServer:joystickReleased(key, unicode)
+    self.inputManager:joystickReleased(key,unicode)
+end
+
+
+function ConnectToServer:sendPressedKey(key, unicode) 
 	if self.waiting==false then
 		if key == "return" then
 			if self.play.selected then
-				if self.waiting==false then
+				if self.pseudofield.text == "" then
+					self:error("Empty pseudo")
+				elseif self.waiting==false then
 					self.waiting = true
 					self:connect()
 				end
@@ -90,18 +126,21 @@ function ConnectToServer:keyPressed(key, unicode)
 	end
 end
 
-function ConnectToServer:keyReleased(key, unicode) end
-
-function ConnectToServer:joystickPressed(joystick, button)
-end
-
-function ConnectToServer:joystickReleased(joystick, button)
-end
 
 function ConnectToServer:update(dt)
+	self.inputManager:update()
 	self.commonBackground:update(dt)
 	discoveryListener:update(dt)
 	self.timer = self.timer + dt
+
+	if self.err then
+		self.errcoolDown  = self.errcoolDown - dt
+		if self.errcoolDown <=0 then
+			self.err = false
+			self.errcoolDown = 0
+		end
+	end
+
 end
 
 
@@ -139,11 +178,21 @@ function ConnectToServer:connect()
 		print("CONNECTED !!")
 		monde.cookie = self.pseudofield.text
 		serveur:send({type= "login", pseudo=self.pseudofield.text, cookie=self.pseudofield.text})
+	else
+		-- Erreur de connexion à afficher
+		self:error("Cannot reach server")
+		self.waiting = false
 	end
 	-- /lube
 end
 
 function ConnectToServer:onMessage(msg)
+
+	if msg.type =="PseudoError" then
+		self:error("Already used pseudo")
+		self.waiting = false
+		serveur:disconnect()
+	end
 	if msg.type == "attenteFinie" then
 		gameStateManager:changeState('ChoixTypeJeu') -- WaitingForDistant
 	elseif msg.type == "discovery" then
@@ -183,6 +232,10 @@ function ConnectToServer:draw()
 		love.graphics.setColor(255, 255, 255, 255)
 	end
 
+	if self.err then
+		love.graphics.print(self.errcontent, 500, 600)
+		love.graphics.setColor(255, 255, 255, 255)
+	end
 	self.play:draw(1)
 	self.returnB:draw(1)
 

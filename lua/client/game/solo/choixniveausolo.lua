@@ -30,6 +30,7 @@ function ChoixNiveauSolo.new(player,continuous)
     self.font = love.graphics.newFont(FontDirectory .. "font.ttf", 30)
     love.graphics.setFont(self.font)
 
+    self.inputManager = MenuInputManager.new(self)
     self.timerPrev=1
     self.fonduDone=true
 
@@ -72,6 +73,23 @@ end
 function ChoixNiveauSolo:mouseReleased(x, y, button) end
 
 function ChoixNiveauSolo:keyPressed(key, unicode)
+    self.inputManager:keyPressed(key,unicode)
+end
+function ChoixNiveauSolo:keyReleased(key, unicode)
+    self.inputManager:keyReleased(key,unicode)
+end
+
+function ChoixNiveauSolo:joystickPressed(key, unicode)
+    self.inputManager:joystickPressed(key,unicode)
+end
+
+
+function ChoixNiveauSolo:joystickReleased(key, unicode)
+    self.inputManager:joystickReleased(key,unicode)
+end
+
+
+function ChoixNiveauSolo:sendPressedKey(key, unicode) 
 	if key == "down" then
 		self:incrementSelection()
 	elseif key == "up" then
@@ -110,12 +128,6 @@ function ChoixNiveauSolo:keyPressed(key, unicode)
 
 end
 
-function ChoixNiveauSolo:keyReleased(key, unicode) end
-
-function ChoixNiveauSolo:joystickPressed(joystick, button)
-end
-
-
 
 function ChoixNiveauSolo:incrementSelection()
 	self.selection[self.selected]:setSelected(false)
@@ -136,11 +148,9 @@ function ChoixNiveauSolo:decrementSelection()
 end
 
 
-function ChoixNiveauSolo:joystickReleased(joystick, button)
-end
-
 function ChoixNiveauSolo:update(dt)
 	self.back:update(dt)
+	self.inputManager:update()
 	if not self.fonduDone then
 		self.timerPrev =self.timerPrev +dt
 		if self.timerPrev>=1 then

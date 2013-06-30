@@ -8,6 +8,8 @@ ChoixPersoSolo.__index = ChoixPersoSolo
 function ChoixPersoSolo.new(continuous)
     local self = {}
     setmetatable(self, ChoixPersoSolo)
+
+    self.inputManager = MenuInputManager.new(self)
     self.mm = BasicAnim.new("standingmm",true,0.2,6)
     self.tm = BasicAnim.new("standingtm",true,0.2,6)
 
@@ -44,7 +46,26 @@ end
 
 function ChoixPersoSolo:mouseReleased(x, y, button) 
 end
+
+
 function ChoixPersoSolo:keyPressed(key, unicode)
+    self.inputManager:keyPressed(key,unicode)
+end
+function ChoixPersoSolo:keyReleased(key, unicode)
+    self.inputManager:keyReleased(key,unicode)
+end
+
+function ChoixPersoSolo:joystickPressed(key, unicode)
+    self.inputManager:joystickPressed(key,unicode)
+end
+
+
+function ChoixPersoSolo:joystickReleased(key, unicode)
+    self.inputManager:joystickReleased(key,unicode)
+end
+
+
+function ChoixPersoSolo:sendPressedKey(key, unicode) 
 	if key == 'right' or key =='tab' then
 		self:incrementSelection()
 	elseif key =='left' then
@@ -86,16 +107,10 @@ function ChoixPersoSolo:keyPressed(key, unicode)
 		end
 	end
 end
-function ChoixPersoSolo:keyReleased(key, unicode)
-end
-
-function ChoixPersoSolo:joystickPressed(joystick, button)
-end
-
-function ChoixPersoSolo:joystickReleased(joystick, button)
-end
 
 function ChoixPersoSolo:update(dt)
+
+	self.inputManager:update()
 	self.background:update(dt) 
 	self.tm:update(dt)
 	self.mm:update(dt)

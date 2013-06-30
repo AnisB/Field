@@ -7,6 +7,8 @@ LevelFailed.__index = LevelFailed
 function LevelFailed.new()
 	local self = {}
 	setmetatable(self, LevelFailed)
+
+    self.inputManager = MenuInputManager.new(self)
   self.back=love.graphics.newImage("backgrounds/failed/back.png")
   
 
@@ -52,25 +54,34 @@ end
 function LevelFailed:mouseReleased(x, y, button)
 end
 
+function LevelFailed:keyPressed(key, unicode)
+    self.inputManager:keyPressed(key,unicode)
+end
+function LevelFailed:keyReleased(key, unicode)
+    self.inputManager:keyReleased(key,unicode)
+end
 
-function LevelFailed:keyPressed(akey, unicode)
- if key == "left" then
+function LevelFailed:joystickPressed(key, unicode)
+    self.inputManager:joystickPressed(key,unicode)
+end
+
+
+function LevelFailed:joystickReleased(key, unicode)
+    self.inputManager:joystickReleased(key,unicode)
+end
+
+
+function LevelFailed:sendPressedKey(key, unicode) 
+ if key == "down" then
         self:incrementSelection()
-    elseif key == "right" then
+    elseif key == "up" then
         self:decrementSelection()
   elseif key=="return" then
 
-        if self.continue.selected then
-            if self.continuous then
-                local player=gameStateManager.state['GameplaySolo'].player
-                gameStateManager.state['GameplaySolo']:destroy()
-                gameStateManager.state['GameplaySolo']=GameplaySolo.new(self.next,true,player)
-                gameStateManager:changeState('GameplaySolo')        
-            else
-                gameStateManager:changeState('ChoixNiveauSolo')
-            end 
-        elseif self.returnB.selected then
-            gameStateManager:changeState('ChoixNiveauSolo')
+    if self.retry.selected then
+            self:goGameplayOrder()
+        elseif self.quit.selected then
+            self:backChoixNiveauOrder()
         end
     end
 
@@ -97,11 +108,8 @@ function LevelFailed:backChoixNiveauApply()
 end
 
 
-function LevelFailed:keyReleased(key, unicode)
-end
-
-
 function LevelFailed:update(dt)
+    self.inputManager:update()
 	
 end
 function LevelFailed:incrementSelection()

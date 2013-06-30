@@ -13,6 +13,8 @@ function ChoixTypeJeuSolo.new()
     self.enteringDone=false
     self.timer=0
 
+    self.inputManager =  MenuInputManager.new(self)
+
     self.selection = {
         self.story,
         self.arcade,
@@ -42,8 +44,28 @@ function ChoixTypeJeuSolo:mousePressed(x, y, button)
 	end
 end
 
-function ChoixTypeJeuSolo:mouseReleased(x, y, button) end
-function ChoixTypeJeuSolo:keyPressed(key, unicode) 
+function ChoixTypeJeuSolo:mouseReleased(x, y, button) 
+end
+
+
+function ChoixTypeJeuSolo:keyPressed(key, unicode)
+    self.inputManager:keyPressed(key,unicode)
+end
+function ChoixTypeJeuSolo:keyReleased(key, unicode)
+    self.inputManager:keyReleased(key,unicode)
+end
+
+function ChoixTypeJeuSolo:joystickPressed(key, unicode)
+    self.inputManager:joystickPressed(key,unicode)
+end
+
+
+function ChoixTypeJeuSolo:joystickReleased(key, unicode)
+    self.inputManager:joystickReleased(key,unicode)
+end
+
+
+function ChoixTypeJeuSolo:sendPressedKey(key, unicode) 
 if key == 'down' or key =='tab' then
 			self:incrementSelection()
 		elseif key =='up' then
@@ -94,16 +116,8 @@ function ChoixTypeJeuSolo:decrementSelection()
 	self.selection[self.selected]:setSelected(true)
 end
 
-
-function ChoixTypeJeuSolo:keyReleased(key, unicode) end
-
-function ChoixTypeJeuSolo:joystickPressed(joystick, button)
-end
-
-function ChoixTypeJeuSolo:joystickReleased(joystick, button)
-end
-
 function ChoixTypeJeuSolo:update(dt) 
+	self.inputManager:update()
 	self.commonBackground:update(dt)
 	if not self.enteringDone then
 		self.timer =self.timer +dt

@@ -11,6 +11,8 @@ speedPerso=300
 function LevelEndingSolo.new(next,continuous,perso)
     local self = {}
     setmetatable(self, LevelEndingSolo)
+
+    self.inputManager = MenuInputManager.new(self)
     self.next=next
     self.continuous=continuous
     self.back=love.graphics.newImage("backgrounds/ending/back.png")
@@ -40,16 +42,6 @@ end
 
 
 function LevelEndingSolo:mousePressed(x, y, button)
-    if self.continue:isCliked(x,y) then
-        if self.continuous then
-            local player=gameStateManager.state['GameplaySolo'].player
-            gameStateManager.state['GameplaySolo']:destroy()
-            gameStateManager.state['GameplaySolo']=GameplaySolo.new(self.next,true,player)
-            gameStateManager:changeState('GameplaySolo')        
-        else
-            gameStateManager:changeState('ChoixNiveauSolo')
-        end     
-    end
 end
 
 function LevelEndingSolo:mouseReleased(x, y, button)
@@ -57,6 +49,23 @@ end
 
 
 function LevelEndingSolo:keyPressed(key, unicode)
+    self.inputManager:keyPressed(key,unicode)
+end
+function LevelEndingSolo:keyReleased(key, unicode)
+    self.inputManager:keyReleased(key,unicode)
+end
+
+function LevelEndingSolo:joystickPressed(key, unicode)
+    self.inputManager:joystickPressed(key,unicode)
+end
+
+
+function LevelEndingSolo:joystickReleased(key, unicode)
+    self.inputManager:joystickReleased(key,unicode)
+end
+
+
+function LevelEndingSolo:sendPressedKey(key, unicode) 
 
     if key == "left" then
         self:incrementSelection()
@@ -68,7 +77,7 @@ function LevelEndingSolo:keyPressed(key, unicode)
             if self.continuous then
                 local player=gameStateManager.state['GameplaySolo'].player
                 gameStateManager.state['GameplaySolo']:destroy()
-                gameStateManager.state['GameplaySolo']=GameplaySolo.new(self.next,true,player)
+                gameStateManager.state['GameplaySolo']=GameplaySolo.new("maps/solo/"..player.."/"..self.next,true,player)
                 gameStateManager:changeState('GameplaySolo')        
             else
                 gameStateManager:changeState('ChoixNiveauSolo')
@@ -79,11 +88,6 @@ function LevelEndingSolo:keyPressed(key, unicode)
     end
 
 end
-
-function LevelEndingSolo:keyReleased(key, unicode)
-end
-
-
 
 
 
@@ -108,6 +112,7 @@ end
 
 
 function LevelEndingSolo:update(dt)
+    self.inputManager:update()
 	self.perso:update(dt)
     if(self.pos<windowW+200) then
         self.pos=self.pos+dt*speedPerso

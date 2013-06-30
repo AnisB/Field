@@ -446,12 +446,10 @@ function TheMagnetSolo:update(seconds)
 	self.position.x=x
 	self.position.y=y
 	if self.alive then
-    -- if inputManager:isKeyDown("right") then --press the right arrow key to push the ball to the right
-  if love.keyboard.isDown("right") then --press the left arrow key to push the ball to the right
+    if gameStateManager.state['GameplaySolo'].inputManager:isKeyDown("right") then --press the right arrow key to push the ball to the right
   	self.goF=true
   	self.pc.body:applyForce(TheMagnetConst.MovingForce, 0)
-  -- elseif inputManager:isKeyDown("left") then --press the left arrow key to push the ball to the left
-  elseif love.keyboard.isDown("left") then --press the left arrow key to push the ball to the left
+  elseif gameStateManager.state['GameplaySolo'].inputManager:isKeyDown("left") then --press the left arrow key to push the ball to the left
   	self.pc.body:applyForce(-TheMagnetConst.MovingForce,0)
   	self.goF=false
   end

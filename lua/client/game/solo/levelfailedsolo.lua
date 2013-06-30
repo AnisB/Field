@@ -8,8 +8,8 @@ function LevelFailedSolo.new()
 	local self = {}
 	setmetatable(self, LevelFailedSolo)
 
-
-  self.back=love.graphics.newImage("backgrounds/failed/back.png")
+    self.inputManager = MenuInputManager.new(self)
+    self.back=love.graphics.newImage("backgrounds/failed/back.png")
 	self.retry=Button.new(800,300,200,50, "backgrounds/failed/retry.png")
 	self.quit=Button.new(800,400,200,50,   "backgrounds/failed/quit.png")
 
@@ -37,6 +37,23 @@ end
 
 
 function LevelFailedSolo:keyPressed(key, unicode)
+    self.inputManager:keyPressed(key,unicode)
+end
+function LevelFailedSolo:keyReleased(key, unicode)
+    self.inputManager:keyReleased(key,unicode)
+end
+
+function LevelFailedSolo:joystickPressed(key, unicode)
+    self.inputManager:joystickPressed(key,unicode)
+end
+
+
+function LevelFailedSolo:joystickReleased(key, unicode)
+    self.inputManager:joystickReleased(key,unicode)
+end
+
+
+function LevelFailedSolo:sendPressedKey(key, unicode) 
 
 	 if key == "down" then
         self:incrementSelection()
@@ -58,8 +75,7 @@ function LevelFailedSolo:keyPressed(key, unicode)
          
 end
 
-function LevelFailedSolo:keyReleased(key, unicode)
-end
+
 
 function LevelFailedSolo:incrementSelection()
     self.selection[self.selected]:setSelected(false)
@@ -82,6 +98,7 @@ end
 
 
 function LevelFailedSolo:update(dt)
+    self.inputManager:update()
 end
 
 function LevelFailedSolo:draw()

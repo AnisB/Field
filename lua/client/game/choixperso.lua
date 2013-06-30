@@ -6,6 +6,8 @@ ChoixPerso.__index = ChoixPerso
 function ChoixPerso:new()
     local self = {}
     setmetatable(self, ChoixPerso)
+
+    self.inputManager = MenuInputManager.new(self)
     self.err = {}
 
     self.mm = BasicAnim.new("standingmm",true,0.2,6)
@@ -22,6 +24,7 @@ function ChoixPerso:new()
     self.continuous=continuous
 
     self.selectedPerso=-1
+    self.selectedPersoDistant=-1
 
     self.enteringDone=false
     self.timer=0
@@ -40,14 +43,46 @@ function ChoixPerso:new()
     return self
 end
 
+function ChoixPerso:reset()
+    self.selectedPerso=-1
+    self.selectedPersoDistant=-1
+    self.enteringDone=false
+    self.timer=0
+    self.selection[self.selected].selected = false
+    self.selected = 2
+    self.selection[self.selected].selected = true
+    self.play:setEnable(false)
+    self.themagnet:setFocusedSecond(false)
+    self.metalman:setFocusedSecond(false)
+    self.themagnet:setFocused(false)
+    self.metalman:setFocused(false)
+
+end
+
 function ChoixPerso:mousePressed(x, y, button)
 
 end
 
 function ChoixPerso:mouseReleased(x, y, button) 
 end
-
 function ChoixPerso:keyPressed(key, unicode)
+    self.inputManager:keyPressed(key,unicode,true)
+end
+function ChoixPerso:keyReleased(key, unicode)
+    self.inputManager:keyReleased(key,unicode)
+end
+
+function ChoixPerso:joystickPressed(key, unicode)
+    self.inputManager:joystickPressed(key,unicode)
+end
+
+
+function ChoixPerso:joystickReleased(key, unicode)
+    self.inputManager:joystickReleased(key,unicode)
+end
+
+
+function ChoixPerso:sendPressedKey(key, unicode)
 	if key == 'right' or key =='tab' then
 		self:incrementSelection()
 	elseif key =='left' then
@@ -60,37 +95,65 @@ function ChoixPerso:keyPressed(key, unicode)
 
 	if key == "return" then
 		if self.metalman.selected then
-			serveur:send({type="choixPerso", confirm=false, perso="metalman"})
-			self.selectedPerso=1
-			self.metalman:setFocused(true)
-			self.themagnet:setFocused(false)
-			self.play:setEnable(true)
-			self:forcePlay()
+			self:selectPersoOrder("metalman")
 	    elseif self.themagnet.selected  then
-	    	self.selectedPerso=2
-	    	self.themagnet:setFocused(true)
-	    	self.metalman:setFocused(false)
-	    	self.play:setEnable(true)
-			self:forcePlay()
-			serveur:send({type="choixPerso", confirm=false, perso="themagnet"})
+	    	self:selectPersoOrder("themagnet")
 	    elseif self.play.selected  then
-	    	serveur:send({type="choixPerso", confirm=true})
-			self.enteringDone=false
-		end
-	elseif self.returnB.selected  then
-	
+	    	self:playOrder()
+    	elseif self.returnB.selected  then
+    		self:backChoixTypeJeu()
+    	end
 	end
-	-- end
-end
-function ChoixPerso:keyReleased(key, unicode) end
-
-function ChoixPerso:joystickPressed(joystick, button)
 end
 
-function ChoixPerso:joystickReleased(joystick, button)
+function ChoixPerso:selectPersoOrder(perso)
+	serveur:send({type="syncroChoix", pck ={confirm=false, current = "ChoixPerso", perso=perso}})
 end
+function ChoixPerso:selectHisPerso(perso)
+	if perso =="metalman" then
+		self.selectedPersoDistant=2
+		self.themagnet:setFocusedSecond(false)
+		self.metalman:setFocusedSecond(true)
+    elseif perso =="themagnet" then
+    	self.selectedPersoDistant=1
+		self.themagnet:setFocusedSecond(true)
+		self.metalman:setFocusedSecond(false)
+    end
+end 
+
+function ChoixPerso:selectMyPerso(perso)
+	if perso =="metalman" then
+    	self.selectedPerso=2
+		self.metalman:setFocused(true)
+		self.themagnet:setFocused(false)
+    elseif perso =="themagnet" then
+    	self.selectedPerso=1
+		self.themagnet:setFocused(true)
+		self.metalman:setFocused(false)
+    end
+
+end 
+
+
+function ChoixPerso:testPlay()
+	if self.selectedPersoDistant>=1 and self.selectedPerso>=1 then
+		self.play:setEnable(true)
+		self:forcePlay()
+	end
+end 
+
+function ChoixPerso:playOrder()
+	serveur:send({type="syncro", pck ={next="ChoixNiveau", current ="ChoixPerso"}})
+	self.enteringDone=false
+end 
+
+function ChoixPerso:backChoixTypeJeu()
+	print("GOING BACK CLIENT SOURCE")
+	serveur:send({type="syncro", pck={next="ChoixTypeJeu", current="ChoixPerso"}})
+end 
 
 function ChoixPerso:update(dt) 
+	self.inputManager:update()
 		if not self.enteringDone then
 		self.timer =self.timer +dt
 		if self.timer>=1 then
@@ -101,33 +164,52 @@ function ChoixPerso:update(dt)
 end
 
 function ChoixPerso:onMessage(msg)
-	if msg.type == "choixPerso" then
-		if msg.player == monde.cookie then
-			monde.moi = {}
-			monde.moi.perso = msg.perso
-			monde[msg.perso] = monde.moi
+	if msg.type == "syncroChoix" then
+		if msg.pck.player == monde.cookie then
+			self:setMySelection(msg.pck)
 		else
-			monde.lui = {}
-			monde.lui.perso = msg.perso
-			monde.lui.cookie = msg.player
-			monde[msg.perso] = monde.lui
+			self:setHisSelection(msg.pck)
 		end
-	elseif msg.type == "choixPersoFini" then
-		print(monde.typeJeu)
-		if monde.typeJeu == "arcade" then
-			gameStateManager:changeState('ChoixNiveau')
-		elseif monde.typeJeu == "histoire" then
-			print("ON EST DANS HISTOIRE")
-			gameStateManager:changeState('ChoixNiveau')
-		else
-			assert(false)
-		end
-	elseif msg.type == "err" then
+		self:testPlay()
+
+	elseif msg.type == "syncro" then
+		if msg.pck.next =="ChoixNiveau" then
+			if monde.typeJeu == "arcade" then
+				gameStateManager:changeState('ChoixNiveau')
+				self.enteringDone=false
+			elseif monde.typeJeu == "histoire" then
+				gameStateManager:changeState('ChoixNiveau')
+				self.enteringDone=false
+			else
+				assert(false)
+			end
+		elseif msg.pck.next == "ChoixTypeJeu" then
+	print("GOING BACK CLIENT APPLY")
+
+			self:reset()
+			gameStateManager:changeState('ChoixTypeJeu')
+		end				
+	elseif msg.type == "error" then
 		self.err.enabled = true
-		self.err.content=msg.content
+		self.err.content=msg.pck.content
 	else
 		print("[ChoixPerso] wrong type :", table2.tostring(msg))
 	end
+end
+
+function ChoixPerso:setMySelection(pck)
+	monde.moi = {}
+	monde.moi.perso = pck.perso
+	monde[pck.perso] = monde.moi
+	self:selectMyPerso(pck.perso)
+end
+
+function ChoixPerso:setHisSelection(pck)
+	monde.lui = {}
+	monde.lui.perso = pck.perso
+	monde.lui.cookie = pck.player
+	monde[pck.perso] = monde.lui
+	self:selectHisPerso(pck.perso)
 end
 
 

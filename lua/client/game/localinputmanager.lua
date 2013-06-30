@@ -9,98 +9,97 @@ MetalManKEYS={hands="e", up="z",down="s",left="q",right="d",changeweight="b",cha
 TheMagnetKEYS={hands="f", up="up",down="down",left="left",right="right",repulsive="p",attractive="o",rotativel="k",rotativer="l",static="i"}
 
 
-InputManagerSolo = {}
-InputManagerSolo.__index = InputManagerSolo
-function InputManagerSolo.new()
+SoloInputManager = {}
+SoloInputManager.__index = SoloInputManager
+function SoloInputManager.new(perso, gameplaySolo)
   local self = {}
-  setmetatable(self, InputManagerSolo)
+  setmetatable(self, SoloInputManager)
   self.keys=require("other.keys")
   self.joystickKeyPressed = {"released", "released", "released", "released"}
   self.joystickHat = {"up", "down", "left", "right"}
+  self.perso = perso
+  self.gameplaySolo = gameplaySolo
   return self
 end
 
-function InputManagerSolo:keyPressed(akey, unicode)
-  if(monde.moi.perso=="metalman") then 
+function SoloInputManager:keyPressed(akey, unicode)
+  if(self.perso=="metalman") then 
     for i,v in pairs(self.keys.MetalManKEYS) do
       if(v==akey) then
-        -- gameStateManager.state['GamePlay']:Input(akey)
+        self.gameplaySolo:sendKey(MetalManKEYS[i])
       end
     end
     return
-    elseif (monde.moi.perso=="themagnet")then
+    elseif (self.perso=="themagnet")then
       for i,v in pairs(self.keys.TheMagnetKEYS) do
         if(v==akey) then
-          serveur:send({type="input", pck={character="themagnet", key=TheMagnetKEYS[i], state=true}})
+        	self.gameplaySolo:sendPressedKey(TheMagnetKEYS[i])
         end
       end
     end
   end
 
-  function InputManagerSolo:keyReleased(akey, unicode)
+  function SoloInputManager:keyReleased(akey, unicode)
   print("J'ai un input à handler"..akey)
-  if(monde.moi.perso=="metalman") then 
+  if(self.perso=="metalman") then 
     print("C'est un metalman, recherche de la clé")
 
     for i,v in pairs(self.keys.MetalManKEYS) do
       if(v==akey) then
-        print("Trouvée"..i.."#"..v.."Envoyé"..MetalManKEYS[i])
-        serveur:send({type="input", pck={character="metalman", key=MetalManKEYS[i], state=false}})
+        self.gameplaySolo:sendReleasedKey(MetalManKEYS[i])
       end
     end
-    print("Pas trouvée"..akey)
     return
-    elseif (monde.moi.perso=="themagnet")then
+    elseif (self.perso=="themagnet")then
       for i,v in pairs(self.keys.TheMagnetKEYS) do
         if(v==akey) then
-          serveur:send({type="input", pck={character="themagnet", key=TheMagnetKEYS[i], state=false}})
+          self.gameplaySolo:sendReleasedKey(TheMagnetKEYS[i])
         end
       end
     end
   end
   
-function InputManagerSolo:joystickPressed(joystick, button)
+function SoloInputManager:joystickPressed(joystick, button)
 	if not gamePaused then
-		if(monde.moi.perso=="metalman") then 
+		if(self.perso=="metalman") then 
 		for i,v in pairs(self.keys.MetalManJoystickKEYS) do
 		  if(v==button) then
-			serveur:send({type="input", pck={character="metalman", key=MetalManKEYS[i], state=true}})
+			self.gameplaySolo:sendKey(MetalManKEYS[i])
 		  end
 		end
 		return
-		elseif (monde.moi.perso=="themagnet")then
+		elseif (self.perso=="themagnet")then
 		  for i,v in pairs(self.keys.TheMagnetJoystickKEYS) do
 			if(v==button) then
-			  serveur:send({type="input", pck={character="themagnet", key=TheMagnetKEYS[i], state=true}})
+			  self.gameplaySolo:sendPressedKey(TheMagnetKEYS[i])
 			end
 		  end
 		end
 	end
 end
 
-function InputManagerSolo:joystickReleased(joystick, button)
+function SoloInputManager:joystickReleased(joystick, button)
 	if not gamePaused then
-		if(monde.moi.perso=="metalman") then 
+		if(self.perso=="metalman") then 
 		print("C'est un metalman, recherche de la clé")
 
 		for i,v in pairs(self.keys.MetalManJoystickKEYS) do
 		  if(v==button) then
-			print("Trouvée"..i.."#"..v.."Envoyé"..MetalManKEYS[i])
-			serveur:send({type="input", pck={character="metalman", key=MetalManKEYS[i], state=false}})
+		  	self.gameplaySolo:sendReleasedKey(MetalManKEYS[i])
 		  end
 		end
 		return
-		elseif (monde.moi.perso=="themagnet")then
+		elseif (self.perso=="themagnet")then
 		  for i,v in pairs(self.keys.TheMagnetJoystickKEYS) do
 			if(v==button) then
-			  serveur:send({type="input", pck={character="themagnet", key=TheMagnetKEYS[i], state=false}})
+			  self.gameplaySolo:sendReleasedKey(TheMagnetKEYS[i])
 			end
 		  end
 		end
 	end
 end
 
-function InputManagerSolo:update()
+function SoloInputManager:update()
 	direction = love.joystick.getHat(1, 1)
 	
 	local newJoystickKeyPressed = {"released", "released", "released", "released"}
@@ -139,7 +138,7 @@ function InputManagerSolo:update()
 end
 
 
-function InputManagerSolo:isKeyDown(key)
+function SoloInputManager:isKeyDown(key)
 	local ok=false
 	if self.listKeys[key]~=nil then
 		ok=true
