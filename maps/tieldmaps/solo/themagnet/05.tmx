@@ -1134,7 +1134,7 @@
   </object>
  </objectgroup>
  <objectgroup color="#800080" name="gateswitch" width="60" height="60">
-  <object x="2432" y="128" width="64" height="64">
+  <object x="2304" y="128" width="64" height="64">
    <properties>
     <property name="closeid" value="11"/>
     <property name="openid" value="11"/>
@@ -1159,21 +1159,21 @@
     <property name="openid" value="1"/>
    </properties>
   </object>
-  <object x="2368" y="128" width="64" height="64">
+  <object x="2304" y="128" width="64" height="64">
    <properties>
     <property name="closeid" value="12"/>
     <property name="enabled" value="true"/>
     <property name="openid" value="12"/>
    </properties>
   </object>
-  <object x="3584" y="128" width="64" height="64">
+  <object x="3712" y="128" width="64" height="64">
    <properties>
     <property name="closeid" value="14"/>
     <property name="enabled" value="true"/>
     <property name="openid" value="14"/>
    </properties>
   </object>
-  <object x="3648" y="128" width="64" height="64">
+  <object x="3712" y="128" width="64" height="64">
    <properties>
     <property name="closeid" value="16"/>
     <property name="openid" value="16"/>
@@ -1191,7 +1191,7 @@
     <property name="openid" value="18"/>
    </properties>
   </object>
-  <object x="2368" y="1472" width="64" height="64">
+  <object x="2304" y="1472" width="64" height="64">
    <properties>
     <property name="closeid" value="15"/>
     <property name="enabled" value="true"/>
@@ -1217,21 +1217,21 @@
     <property name="openid" value="13"/>
    </properties>
   </object>
-  <object x="2368" y="2368" width="64" height="64">
+  <object x="2304" y="2368" width="64" height="64">
    <properties>
     <property name="closeid" value="15"/>
     <property name="enabled" value="true"/>
     <property name="openid" value="15"/>
    </properties>
   </object>
-  <object x="2432" y="2368" width="64" height="64">
+  <object x="2304" y="2368" width="64" height="64">
    <properties>
     <property name="closeid" value="19"/>
     <property name="enabled" value="true"/>
     <property name="openid" value="19"/>
    </properties>
   </object>
-  <object x="3648" y="2368" width="64" height="64">
+  <object x="3712" y="2368" width="64" height="64">
    <properties>
     <property name="closeid" value="13"/>
     <property name="openid" value="13"/>
