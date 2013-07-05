@@ -41,6 +41,9 @@
  </tileset>
  <tileset firstgid="13" name="cable1" tilewidth="77" tileheight="372">
   <tileoffset x="0" y="372"/>
+  <properties>
+   <property name="anim" value="true"/>
+  </properties>
   <image source="data/cable1.png" width="77" height="372"/>
  </tileset>
  <tileset firstgid="14" name="passerelle1" tilewidth="198" tileheight="342">
@@ -49,17 +52,23 @@
  </tileset>
  <tileset firstgid="15" name="passerelle2" tilewidth="122" tileheight="599">
   <tileoffset x="0" y="599"/>
+  <properties>
+   <property name="anim" value="true"/>
+  </properties>
   <image source="data/passerelle2.png" width="122" height="599"/>
  </tileset>
  <tileset firstgid="16" name="cable2" tilewidth="46" tileheight="243">
   <tileoffset x="0" y="243"/>
+  <properties>
+   <property name="anim" value="true"/>
+  </properties>
   <image source="data/cable2.png" width="46" height="243"/>
  </tileset>
  <tileset firstgid="17" name="mur2" tilewidth="64" tileheight="64">
   <image source="data/mur2.png" width="64" height="64"/>
  </tileset>
  <tileset firstgid="18" name="lamp1" tilewidth="64" tileheight="64">
-  <image source="data/lamp1.png" width="64" height="64"/>
+  <image source="data/lamp1.png" width="67" height="64"/>
  </tileset>
  <tileset firstgid="19" name="lamp2" tilewidth="64" tileheight="64">
   <image source="data/lamp2.png" width="64" height="64"/>
