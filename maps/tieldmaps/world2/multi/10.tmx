@@ -27,54 +27,26 @@
  <tileset firstgid="9" name="fin" tilewidth="192" tileheight="128">
   <image source="data/fin.png" width="192" height="128"/>
  </tileset>
- <tileset firstgid="10" name="citerne" tilewidth="418" tileheight="632">
-  <tileoffset x="0" y="632"/>
-  <image source="data/citerne.png" width="418" height="632"/>
- </tileset>
- <tileset firstgid="11" name="container1" tilewidth="610" tileheight="276">
-  <tileoffset x="0" y="195"/>
-  <image source="data/container1.png" width="610" height="276"/>
- </tileset>
- <tileset firstgid="12" name="container2" tilewidth="480" tileheight="330">
-  <tileoffset x="0" y="280"/>
-  <image source="data/container2.png" width="480" height="330"/>
- </tileset>
- <tileset firstgid="13" name="cable1" tilewidth="77" tileheight="372">
-  <tileoffset x="0" y="372"/>
-  <image source="data/cable1.png" width="77" height="372"/>
- </tileset>
- <tileset firstgid="14" name="passerelle1" tilewidth="198" tileheight="342">
-  <tileoffset x="0" y="342"/>
-  <image source="data/passerelle1.png" width="198" height="342"/>
- </tileset>
- <tileset firstgid="15" name="passerelle2" tilewidth="122" tileheight="599">
-  <tileoffset x="0" y="599"/>
-  <image source="data/passerelle2.png" width="122" height="599"/>
- </tileset>
- <tileset firstgid="16" name="cable2" tilewidth="46" tileheight="243">
-  <tileoffset x="0" y="243"/>
-  <image source="data/cable2.png" width="46" height="243"/>
- </tileset>
- <tileset firstgid="17" name="mur2" tilewidth="64" tileheight="64">
+ <tileset firstgid="10" name="mur2" tilewidth="64" tileheight="64">
   <image source="data/mur2.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="18" name="lamp1" tilewidth="64" tileheight="64">
-  <image source="data/lamp1.png" width="64" height="64"/>
+ <tileset firstgid="11" name="lamp1" tilewidth="64" tileheight="64">
+  <image source="data/lamp1.png" width="67" height="64"/>
  </tileset>
- <tileset firstgid="19" name="lamp2" tilewidth="64" tileheight="64">
-  <image source="data/lamp2.png" width="64" height="64"/>
+ <tileset firstgid="12" name="lamp2" tilewidth="64" tileheight="64">
+  <image source="data/lamp2.png" width="128" height="64"/>
  </tileset>
- <tileset firstgid="20" name="cable" tilewidth="64" tileheight="64">
+ <tileset firstgid="14" name="cable" tilewidth="64" tileheight="64">
   <image source="data/cable.png" width="64" height="64"/>
  </tileset>
  <layer name="foreground" width="65" height="21">
   <data encoding="base64" compression="zlib">
-   eJzt0sEJACAMA0BXcP9l/RZBqN/0DjpAkq4FAAAAb7t5aWquiR2k5upK3vY28b+rbv7kDvh3AFg5A1M=
+   eJzt0jEKACAMA0Bn//9g1yIIdU3voA9I0rUAAADgbTcvTc01sYPUXF3J294m/nfVzZ/cAf8OD4MB9Q==
   </data>
  </layer>
  <layer name="front" width="65" height="21">
   <data encoding="base64" compression="zlib">
-   eJztV+0KgDAI3KLP93/h6ocEEXTedLPYwVE/nLqbM0sJQz44BSeT4wzuXzSIDiZHzZquQdeA9V8bXYMYGljrpPXXWoPsRA1aauB1T6JrMCb9jCF+NOevqZHWd8EaTP/5mwYSE+lDT++aGB62tZFvT2attS2L0hisBtLb3rgW5ofmUxuamItbFhdaaXDWwQCwdH5B8ynxG6kfsHux6AeIj42Midp61olHbOZsvWZ9C3j/k6Dfj6/xnPV3UHYDHg==
+   eJztzjERADAIBDA2Wv+GK4LePUOiIFUAAAAwd9KBBTodgM9uOgBLPZKAABk=
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="65" height="21">
