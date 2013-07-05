@@ -3,19 +3,20 @@
 
 worlds="maps/tieldmaps"
 
-for i in $( ls *$worlds* ); 
+for j in $( ls *$worlds* ); 
 do
-    world=$i
+    world="$worlds/$j"
+
 
     originMetal="solo/metalman/"
     criteriaMetal="*.lua"
     destMetal="maps/exported/solo/metalman/"
     clientMetal="lua/client/maps/solo/metalman/"
 
-    for i in $( ls *$world$originMetal$criteriaMetal* ); 
+    for i in $( ls *$world/$originMetal$criteriaMetal* ); 
     do
         src=$i
-        filename=$(echo $i | sed -e "s%$world$originMetal%%")
+        filename=$(echo $i | sed -e "s%$world/$originMetal%%")
         mv $src $destMetal$filename
     done
 
@@ -34,10 +35,10 @@ do
     destMagnet="maps/exported/solo/themagnet/"
     clientMagnet="lua/client/maps/solo/themagnet/"
 
-    for i in $( ls *$world$originMagnet$criteriaMagnet* ); 
+    for i in $( ls *$world/$originMagnet$criteriaMagnet* ); 
     do
         src=$i
-        filename=$(echo $i | sed -e "s%$world$originMagnet%%")
+        filename=$(echo $i | sed -e "s%$world/$originMagnet%%")
         mv $src $destMagnet$filename
     done
 
@@ -57,10 +58,10 @@ do
     clientMulti="lua/client/maps/multi/"
     serverMulti="lua/server/maps/"
 
-    for i in $( ls *$world$originMulti$criteriaMulti* ); 
+    for i in $( ls *$world/$originMulti$criteriaMulti* ); 
     do
         src=$i
-        filename=$(echo $i | sed -e "s%$world$originMulti%%")
+        filename=$(echo $i | sed -e "s%$world/$originMulti%%")
         mv $src $destMulti$filename
     done
 

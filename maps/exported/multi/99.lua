@@ -176,7 +176,9 @@ return {
       image = "data/cable1.png",
       imagewidth = 77,
       imageheight = 372,
-      properties = {},
+      properties = {
+        ["anim"] = "true"
+      },
       tiles = {}
     },
     {
@@ -202,7 +204,9 @@ return {
       image = "data/passerelle2.png",
       imagewidth = 122,
       imageheight = 599,
-      properties = {},
+      properties = {
+        ["anim"] = "true"
+      },
       tiles = {}
     },
     {
@@ -215,7 +219,9 @@ return {
       image = "data/cable2.png",
       imagewidth = 46,
       imageheight = 243,
-      properties = {},
+      properties = {
+        ["anim"] = "true"
+      },
       tiles = {}
     },
     {
@@ -395,7 +401,61 @@ return {
       visible = true,
       opacity = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          name = "",
+          type = "Repulsive",
+          shape = "rectangle",
+          x = 768,
+          y = 832,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "2"
+          }
+        },
+        {
+          name = "",
+          type = "Attractive",
+          shape = "rectangle",
+          x = 896,
+          y = 768,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["enabled"] = "2",
+            ["id"] = "1"
+          }
+        },
+        {
+          name = "",
+          type = "Attractive",
+          shape = "rectangle",
+          x = 2176,
+          y = 960,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "6"
+          }
+        },
+        {
+          name = "",
+          type = "RotativeL",
+          shape = "rectangle",
+          x = 2368,
+          y = 896,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "9"
+          }
+        }
+      }
     },
     {
       type = "objectgroup",
@@ -403,7 +463,48 @@ return {
       visible = true,
       opacity = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 640,
+          y = 1152,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "1"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 448,
+          y = 1152,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "2"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1856,
+          y = 1152,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["id"] = "5",
+            ["timers"] = "2@1@1#3@1@0#"
+          }
+        }
+      }
     },
     {
       type = "objectgroup",
@@ -419,7 +520,25 @@ return {
       visible = true,
       opacity = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 256,
+          y = 1152,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "1",
+            ["closeid"] = "1",
+            ["enabled"] = "true",
+            ["openid"] = "1",
+            ["type"] = "VAloneH"
+          }
+        }
+      }
     },
     {
       type = "objectgroup",
@@ -455,14 +574,14 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 1216,
-          y = 1024,
+          x = 1024,
+          y = 1088,
           width = 64,
           height = 64,
           visible = true,
           properties = {
             ["enabled"] = "true",
-            ["id"] = "2",
+            ["id"] = "1",
             ["type"] = "MillieuV"
           }
         },
@@ -485,6 +604,36 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
+          x = 1024,
+          y = 1152,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["enabled"] = "true",
+            ["id"] = "1",
+            ["type"] = "FinV"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1024,
+          y = 1024,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["enabled"] = "true",
+            ["id"] = "1",
+            ["type"] = "DebutV"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
           x = 1216,
           y = 1152,
           width = 64,
@@ -494,6 +643,21 @@ return {
             ["enabled"] = "true",
             ["id"] = "2",
             ["type"] = "FinV"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1216,
+          y = 1024,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["enabled"] = "true",
+            ["id"] = "2",
+            ["type"] = "MillieuV"
           }
         }
       }
@@ -526,7 +690,22 @@ return {
       visible = true,
       opacity = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 128,
+          y = 1152,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["closeid"] = "1",
+            ["openid"] = "1"
+          }
+        }
+      }
     },
     {
       type = "objectgroup",
@@ -547,6 +726,128 @@ return {
           properties = {
             ["enabled"] = "true",
             ["id"] = "2"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 768,
+          y = 1152,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["enabled"] = "true",
+            ["id"] = "1"
+          }
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      name = "timer",
+      visible = true,
+      opacity = 1,
+      properties = {},
+      objects = {
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 576,
+          y = 832,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["Arcs"] = "1@2#2@0#",
+            ["Gates"] = "1@2#",
+            ["Generators"] = "1@2#",
+            ["duration"] = "2",
+            ["id"] = "1",
+            ["loop"] = "true",
+            ["state"] = "true"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1920,
+          y = 960,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["Arcs"] = "",
+            ["Gates"] = "",
+            ["Generators"] = "6@1#",
+            ["Timers"] = "",
+            ["duration"] = "1",
+            ["id"] = "2",
+            ["loop"] = "false",
+            ["state"] = "false"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1920,
+          y = 1024,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["Arcs"] = "",
+            ["Gates"] = "",
+            ["Generators"] = "6@0#",
+            ["Timers"] = "",
+            ["duration"] = "1",
+            ["id"] = "3",
+            ["loop"] = "false",
+            ["state"] = "false"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2304,
+          y = 960,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["Arcs"] = "",
+            ["Gates"] = "",
+            ["Generators"] = "9@1#",
+            ["Timers"] = "",
+            ["duration"] = "1",
+            ["id"] = "9",
+            ["loop"] = "false",
+            ["state"] = "false"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2304,
+          y = 1024,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["Arcs"] = "",
+            ["Gates"] = "",
+            ["Generators"] = "",
+            ["Timers"] = "9@1#",
+            ["duration"] = "3",
+            ["id"] = "10",
+            ["loop"] = "true",
+            ["state"] = "true"
           }
         }
       }

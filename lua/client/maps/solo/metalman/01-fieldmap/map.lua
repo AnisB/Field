@@ -176,7 +176,9 @@ return {
       image = "data/cable1.png",
       imagewidth = 77,
       imageheight = 372,
-      properties = {},
+      properties = {
+        ["anim"] = "true"
+      },
       tiles = {}
     },
     {
@@ -202,7 +204,9 @@ return {
       image = "data/passerelle2.png",
       imagewidth = 122,
       imageheight = 599,
-      properties = {},
+      properties = {
+        ["anim"] = "true"
+      },
       tiles = {}
     },
     {
@@ -215,7 +219,9 @@ return {
       image = "data/cable2.png",
       imagewidth = 46,
       imageheight = 243,
-      properties = {},
+      properties = {
+        ["anim"] = "true"
+      },
       tiles = {}
     },
     {
@@ -239,7 +245,7 @@ return {
       spacing = 0,
       margin = 0,
       image = "data/lamp1.png",
-      imagewidth = 64,
+      imagewidth = 67,
       imageheight = 64,
       properties = {},
       tiles = {}
