@@ -141,7 +141,7 @@ end
 
 -- PRIVATE
 function AnimGene:updateImg()
-	self.currentImg = AnimGene[self.folder][self.currentAnim.name][self.currentPos]
+	self.currentImg = AnimGene.sprites[self.folder][self.currentAnim.name][self.currentPos]
 end
 
 -- NETWORK
