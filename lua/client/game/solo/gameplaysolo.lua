@@ -54,7 +54,7 @@ function GameplaySolo.new(mapFile,continuous,player)
     -- Magnetics
     self.magnetmanager = MagnetManagerSolo.new()    
 
-
+    self.world = require(mapFile.."\-fieldmap/info").world
     --Map loading
     self.mapFile=mapFile
     self.mapLoader = MapLoaderSolo.new(mapFile,self.magnetmanager)
@@ -64,17 +64,17 @@ function GameplaySolo.new(mapFile,continuous,player)
     self.mapy= self.mapLoader.map.height*self.mapLoader.map.tileheight
 
     self.paralax = true
-    self.background1=Background.new(ParalaxImg.."1.png",1,self.mapy)
-    self.background2=Background.new(ParalaxImg.."2.png",0.75,self.mapy)
-    self.background3=Background.new(ParalaxImg.."3.png",0.5,self.mapy)
-    self.background4=Background.new(ParalaxImg.."4.png",0.25,self.mapy)
-    self.background5=SimpleBackground.new(ParalaxImg.."5.png",0.0,self.mapy)
+    self.background1=Background.new(ParalaxImg..self.world.."/1.png",1,self.mapy)
+    self.background2=Background.new(ParalaxImg..self.world.."/2.png",0.75,self.mapy)
+    self.background3=Background.new(ParalaxImg..self.world.."/3.png",0.5,self.mapy)
+    self.background4=Background.new(ParalaxImg..self.world.."/4.png",0.25,self.mapy)
+    self.background5=SimpleBackground.new(ParalaxImg..self.world.."/5.png",0.0,self.mapy)
 
-    self.background=Background.new(ParalaxImg.."/noparalax/1.png",1,self.mapy)
+    self.background=Background.new(ParalaxImg..self.world.."/noparalax/1.png",1,self.mapy)
 
 
-    self. filterAcid = love.graphics.newImage("img/death/acid.png")
-    self. filterArc = love.graphics.newImage("img/death/arc.png")
+    self. filterAcid = love.graphics.newImage("img/death/"..self.world.."/acid.png")
+    self. filterArc = love.graphics.newImage("img/death/"..self.world.."/arc.png")
 
     self.inputManager = SoloInputManager.new(player,self)
 
@@ -335,7 +335,7 @@ end
                     if key =="right" then
                         self.metalMan:stopMove()
                     end
-                    if key =="" then
+                    if key =="left" then
                         self.metalMan:stopMove()
                     end
 

@@ -380,7 +380,6 @@ function MetalManSolo:update(seconds)
 
 	if self.alive then
 		if self.animCounter >=1 and self.anim.currentAnim.name=="standing" then
-			print "lol"
 			self:loadAnimation("running",true)	
 		end
 		if not self.isStatic  then

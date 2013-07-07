@@ -60,7 +60,7 @@ function GameStateManager.new()
 	self.state['LevelBegin'] = LevelBegin.new()
 	self.state['Gameplay'] = nil
 
-	self.state['Cinematic'] = Cinematic.new("exemple")
+	-- self.state['Cinematic'] = Cinematic.new("exemple")
 
 
 

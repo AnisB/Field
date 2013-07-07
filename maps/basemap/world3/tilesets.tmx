@@ -1,0 +1,106 @@
+ <tileset firstgid="1" name="mur" tilewidth="64" tileheight="64">
+  <image source="data/mur.png" trans="ffffff" width="64" height="64"/>
+ </tileset>
+
+ <tileset firstgid="2" name="sol" tilewidth="64" tileheight="64">
+  <image source="data/sol.png" trans="ffffff" width="64" height="64"/>
+ </tileset>
+
+ <tileset firstgid="3" name="alone" tilewidth="64" tileheight="64">
+  <image source="data/alone.png" width="64" height="64"/>
+ </tileset>
+ 
+ <tileset firstgid="4" name="left" tilewidth="64" tileheight="64">
+  <image source="data/left.png" width="64" height="64"/>
+ </tileset>
+ 
+ <tileset firstgid="5" name="mid" tilewidth="64" tileheight="64">
+  <image source="data/mid.png" width="64" height="64"/>
+ </tileset>
+ 
+ <tileset firstgid="6" name="right" tilewidth="64" tileheight="64">
+  <image source="data/right.png" width="64" height="64"/>
+ </tileset>
+ 
+ <tileset firstgid="7" name="portebas" tilewidth="64" tileheight="64">
+  <image source="data/portebas.png" width="64" height="64"/>
+ </tileset>
+ 
+ <tileset firstgid="8" name="portehaut" tilewidth="64" tileheight="64">
+  <image source="data/portehaut.png" width="64" height="64"/>
+ </tileset>
+ 
+ <tileset firstgid="9" name="fin" tilewidth="192" tileheight="128">
+  <image source="data/fin.png" width="192" height="128"/>
+ </tileset>
+ 
+ <tileset firstgid="10" name="cube1" tilewidth="250" tileheight="250">
+  <tileoffset x="0" y="632"/>
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="8"/>
+  </properties>
+  <image source="data/cube1.png" width="250" height="250"/>
+ </tileset>
+
+  <tileset firstgid="11" name="plateforme1" tilewidth="190" tileheight="58">
+  <tileoffset x="0" y="632"/>
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="8"/>
+  </properties>
+  <image source="data/plateforme1.png" width="190" height="58"/>
+ </tileset>
+ 
+  <tileset firstgid="12" name="plateforme2" tilewidth="294" tileheight="66">
+  <tileoffset x="0" y="632"/>
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="8"/>
+  </properties>
+  <image source="data/plateforme2.png" width="294" height="66"/>
+ </tileset>
+
+<tileset firstgid="13" name="rectangle" tilewidth="355" tileheight="443">
+  <tileoffset x="0" y="632"/>
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="8"/>
+  </properties>
+  <image source="data/plateforme2.png" width="355" height="442"/>
+ </tileset>
+
+<tileset firstgid="14" name="rocher1" tilewidth="272" tileheight="445">
+  <tileoffset x="0" y="632"/>
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="8"/>
+  </properties>
+  <image source="data/rocher1.png" width="272" height="445"/>
+ </tileset>
+
+  <tileset firstgid="15" name="cable" tilewidth="64" tileheight="64">
+  <image source="data/cable.png" width="64" height="64"/>
+ </tileset>
+
+ <tileset firstgid="16" name="mur2" tilewidth="64" tileheight="64">
+  <image source="data/mur2.png" width="64" height="64"/>
+ </tileset>
+ 
+ <tileset firstgid="17" name="lampe1" tilewidth="64" tileheight="64">
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="4"/>
+  </properties>
+  <image source="data/lampe1.png" width="64" height="64"/>
+ </tileset>
+ 
+ <tileset firstgid="18" name="lampe2" tilewidth="64" tileheight="64">
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="4"/>
+  </properties>
+  <image source="data/lampe2.png" width="64" height="64"/>
+ </tileset>
+
+

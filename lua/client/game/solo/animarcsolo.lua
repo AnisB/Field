@@ -20,7 +20,7 @@ AnimArcSolo.ANIMS.on.DELAY = 0.075
 
 -- number of sprites :
 AnimArcSolo.ANIMS.off.number = 1
-AnimArcSolo.ANIMS.on.number = 3
+AnimArcSolo.ANIMS.on.number = 4
 
 
 

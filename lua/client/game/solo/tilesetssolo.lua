@@ -24,22 +24,42 @@ function TilesetsSolo:getTiles(tiles,map)
 		tile.width=v.tilewidth
 		tile.height=v.tileheight
 
-		table.insert(self.tiles,tile)
-		gameStateManager.loader.newImage(self.tiles[tile.id] ,"img", map.."-fieldmap/"..v.image)
+		if v.properties["anim"] == "true" then
+			tile.anim = true
+			table.insert(self.tiles,tile)
+			local k = string.sub(v.image, 0,-5)
+			tile.img = BasicAnim.newExternal(map.."-fieldmap/"..k,true,0.3,tonumber(v.properties["frames"]))
+
+		else
+			tile.anim = false
+			table.insert(self.tiles,tile)
+			gameStateManager.loader.newImage(self.tiles[tile.id] ,"img", map.."-fieldmap/"..v.image)
+		end
+
 	end
 end
 
 
 function TilesetsSolo:update(dt)
+	for i,v in pairs(self.tiles) do
+		if v.anim then
+			print(v.id)
+			v.img:update(dt)
+		end
+	end
 end
-
 
 function TilesetsSolo:draw(pos)
 	for i=0,self.layer.height-1,1 do
 		for j=1,self.layer.width,1 do
 			if self.layer.data[i*self.layer.width+j]>0 then
 				tmp=self.tiles[self.layer.data[i*self.layer.width+j]]
-				love.graphics.drawq(tmp.img,tmp.quad, (j-1)*64-pos.x, (i)*64+pos.y)
+				if tmp.anim then
+					love.graphics.drawq(tmp.img:getSprite(),tmp.quad, (j-1)*64-pos.x, (i)*64+pos.y)
+
+				else
+					love.graphics.drawq(tmp.img,tmp.quad, (j-1)*64-pos.x, (i)*64+pos.y)
+				end
 			end
 		end
 	end

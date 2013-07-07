@@ -26,6 +26,30 @@ function BasicAnim.new(folder,looping,delay,number)
 	return self
 end
 
+-- PUBLIC : constructor
+function BasicAnim.newExternal(folder,looping,delay,number)
+	local self = {}
+	setmetatable(self, BasicAnim)
+	self.time = 0.0
+	self.delay= delay
+	self.loop = looping
+	self.number = number
+
+	if BasicAnim.sprites[folder]==nil then
+		BasicAnim.sprites[folder]={}
+		for i=1, self.number do
+			local path = folder..'/'..i..'.png'
+		    BasicAnim.sprites[folder][i] = love.graphics.newImage(path)
+
+		end
+	end
+	self.folder=folder
+	self.currentPos = 1
+	self:updateImg()
+	return self
+end
+
+
 function BasicAnim.newL(folder,looping,delay,number)
 	local self = {}
 	setmetatable(self, BasicAnim)

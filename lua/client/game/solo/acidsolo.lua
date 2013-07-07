@@ -10,8 +10,7 @@ AcidSolo.Types ={hg='hg',hm='hm',hd='hd',mg='mg',mm='mm',md='md',bg='bg',bm='bm'
 
 TimerAcidSolo =1
 
-
-function AcidSolo.new(pos,w,h,type,netid)
+function AcidSolo.new(pos,w,h,type,mapInfo, netid)
 	local self = {}
 	setmetatable(self, AcidSolo)
 
@@ -19,7 +18,7 @@ function AcidSolo.new(pos,w,h,type,netid)
 	self.position={x=pos.x,y=pos.y}
 	if type==AcidSolo.Types.hg  or type==AcidSolo.Types.hm or type==AcidSolo.Types.hd then
 		self.dec=20
-		self.splash=AnimSplashSolo.new('splash')
+		self.splash=AnimSplashSolo.new('splash/'..mapInfo.world)
 	else
 		self.dec=0
 	end
@@ -30,7 +29,7 @@ function AcidSolo.new(pos,w,h,type,netid)
 	self.pc.fixture:setUserData(self)
 	self.type='AcidSolo'
 	self.acidSoloType=type
-	self.anim = AnimAcidSolo.new('acid/'..type)
+	self.anim = AnimAcidSolo.new('acid/'..mapInfo.world.."/"..type)
 	self.isTouched=false
 	self.timer=0
 	self.splashpos={x=0,y=0}	

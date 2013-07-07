@@ -14,6 +14,7 @@ require("game.shader.bloomshadereffect")
 require("game.shader.lightshader")
 require("game.shader.backlightshader")
 
+World="world1"
 
 Gameplay = {}
 Gameplay.__index = Gameplay
@@ -22,9 +23,6 @@ function Gameplay.new(mapFile)
     local self = {}
     setmetatable(self, Gameplay)
     --Map
-    if mapFile == nil then
-        mapFile = "maps.field2"
-    end
     self.mapFile=mapFile
     self.mapLoader = MapLoader.new(mapFile)
     
@@ -34,11 +32,11 @@ function Gameplay.new(mapFile)
 	self.keyPacket={}
 	self.mapx=self.mapLoader.map.width*self.mapLoader.map.tilewidth
 	self.mapy= self.mapLoader.map.height*self.mapLoader.map.tileheight
-	self.background1=Background.new(ParalaxImg.."1.png",1,self.mapy)
-	self.background2=Background.new(ParalaxImg.."2.png",0.75,self.mapy)
-	self.background3=Background.new(ParalaxImg.."3.png",0.5,self.mapy)
-	self.background4=Background.new(ParalaxImg.."4.png",0.0,self.mapy)
-	self.background5=SimpleBackground.new(ParalaxImg.."5.png",0.0,self.mapy)
+	self.background1=Background.new(ParalaxImg..World.."/1.png",1,self.mapy)
+	self.background2=Background.new(ParalaxImg..World.."/2.png",0.75,self.mapy)
+	self.background3=Background.new(ParalaxImg..World.."/3.png",0.5,self.mapy)
+	self.background4=Background.new(ParalaxImg..World.."/4.png",0.0,self.mapy)
+	self.background5=SimpleBackground.new(ParalaxImg..World.."/5.png",0.0,self.mapy)
 
     self.camera=Camera.new(-1000,-1000)
     self.inputManager = InputManager.new()

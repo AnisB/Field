@@ -32,8 +32,10 @@ MapLoaderSolo.__index =  MapLoaderSolo
 function MapLoaderSolo.new(MapLoaderSoloFile,magnetManager)
     local self = {}
     setmetatable(self, MapLoaderSolo)
-    print("maps/"..MapLoaderSoloFile.."\.fieldmap/map.lua")
     self.map = require (MapLoaderSoloFile.."-fieldmap/map")
+
+    self.mapInfos = require (MapLoaderSoloFile.."-fieldmap/info")
+
     self.magnetManager=magnetManager
 
     -- Init
@@ -101,10 +103,10 @@ function MapLoaderSolo.new(MapLoaderSoloFile,magnetManager)
                 self:createGates(d) 
                 elseif  d.name=="acid" then
                 -- Gestion des acides
-                self:createAcids(d)   
+                self:createAcids(d, self.mapInfos)   
                 elseif  d.name=="arc" then
                 -- Gestion des arcs
-                self:createArcs(d)
+                self:createArcs(d, self.mapInfos)
                 elseif  d.name=="levelend" then
                 -- Gestion des fin de niveau
                 self:createLevelEnds(d)   
@@ -186,9 +188,9 @@ function MapLoaderSolo:createGates(map)
     end
 end
 
-function MapLoaderSolo:createAcids(map)
+function MapLoaderSolo:createAcids(map, mapInfo)
     for i,j in pairs(map.objects) do
-        table.insert(self.acids, AcidSolo.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["type"],j.properties["id"],j.properties["enabled"],i))
+        table.insert(self.acids, AcidSolo.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["type"],mapInfo,i))
     end
 end
 
@@ -198,9 +200,9 @@ function MapLoaderSolo:createLevelEnds(map)
     end
 end
 
-function MapLoaderSolo:createArcs(map)
+function MapLoaderSolo:createArcs(map, mapInfo)
     for i,j in pairs(map.objects) do
-        table.insert(self.arcs, ArcSolo.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["type"],j.properties["id"],j.properties["enabled"],i))
+        table.insert(self.arcs, ArcSolo.new({x=(j.x),y=(j.y)},j.width,j.height,j.properties["type"],j.properties["id"],j.properties["enabled"], mapInfo, i))
     end
 end
 
@@ -232,6 +234,10 @@ end
 
 function MapLoaderSolo:update(dt)
 
+    for i,b in pairs(self.tilesets) do
+          b:update(dt)
+    end
+    
     for i,b in pairs(self.destroyables) do
           b:update(dt)
     end

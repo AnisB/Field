@@ -6,6 +6,7 @@ Acid = {}
 Acid.__index = Acid
 Acid.Types ={hg='hg',hm='hm',hd='hd',mg='mg',mm='mm',md='md',bg='bg',bm='bm',bd='bd'}
 
+AcidWorld ="world1/"
 function Acid.new(pos,type,anim,id)
 	local self = {}
 	setmetatable(self, Acid)
@@ -13,13 +14,13 @@ function Acid.new(pos,type,anim,id)
 
 	if type==Acid.Types.hg  or type==Acid.Types.hm or type==Acid.Types.hd then
 		self.dec=20
-		self.splash=AnimSplash.new('splash')		
+		self.splash=AnimSplash.new('splash/'..AcidWorld)		
 	else
 		self.dec=0
 	end
 	self.type='Acid'
 	self.acidType=type
-	self.anim = AnimAcid.new('acid/'..type)
+	self.anim = AnimAcid.new('acid/'..AcidWorld..type)
 	self.anim:syncronize(anim,id)
 	self.splashpos={x=0,y=0}
 	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)

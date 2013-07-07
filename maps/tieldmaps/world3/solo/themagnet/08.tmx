@@ -27,45 +27,65 @@
  <tileset firstgid="9" name="fin" tilewidth="192" tileheight="128">
   <image source="data/fin.png" width="192" height="128"/>
  </tileset>
- <tileset firstgid="10" name="citerne" tilewidth="418" tileheight="632">
+ <tileset firstgid="10" name="cube1" tilewidth="250" tileheight="250">
   <tileoffset x="0" y="632"/>
-  <image source="data/citerne.png" width="418" height="632"/>
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="8"/>
+  </properties>
+  <image source="data/cube1.png" width="250" height="250"/>
  </tileset>
- <tileset firstgid="11" name="container1" tilewidth="610" tileheight="276">
-  <tileoffset x="0" y="195"/>
-  <image source="data/container1.png" width="610" height="276"/>
+ <tileset firstgid="11" name="plateforme1" tilewidth="190" tileheight="58">
+  <tileoffset x="0" y="58"/>
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="8"/>
+  </properties>
+  <image source="data/plateforme1.png" width="190" height="58"/>
  </tileset>
- <tileset firstgid="12" name="container2" tilewidth="480" tileheight="330">
-  <tileoffset x="0" y="280"/>
-  <image source="data/container2.png" width="480" height="330"/>
+ <tileset firstgid="12" name="plateforme2" tilewidth="294" tileheight="66">
+  <tileoffset x="0" y="66"/>
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="8"/>
+  </properties>
+  <image source="data/plateforme2.png" width="294" height="66"/>
  </tileset>
- <tileset firstgid="13" name="cable1" tilewidth="77" tileheight="372">
-  <tileoffset x="0" y="372"/>
-  <image source="data/cable1.png" width="77" height="372"/>
+ <tileset firstgid="13" name="rectangle" tilewidth="355" tileheight="442">
+  <tileoffset x="0" y="442"/>
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="8"/>
+  </properties>
+  <image source="data/rectangle.png" width="355" height="442"/>
  </tileset>
- <tileset firstgid="14" name="passerelle1" tilewidth="198" tileheight="342">
-  <tileoffset x="0" y="342"/>
-  <image source="data/passerelle1.png" width="198" height="342"/>
+ <tileset firstgid="14" name="rocher1" tilewidth="272" tileheight="445">
+  <tileoffset x="0" y="632"/>
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="8"/>
+  </properties>
+  <image source="data/rocher1.png" width="272" height="445"/>
  </tileset>
- <tileset firstgid="15" name="passerelle2" tilewidth="122" tileheight="599">
-  <tileoffset x="0" y="599"/>
-  <image source="data/passerelle2.png" width="122" height="599"/>
+ <tileset firstgid="15" name="cable" tilewidth="64" tileheight="64">
+  <image source="data/cable.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="16" name="cable2" tilewidth="46" tileheight="243">
-  <tileoffset x="0" y="243"/>
-  <image source="data/cable2.png" width="46" height="243"/>
- </tileset>
- <tileset firstgid="17" name="mur2" tilewidth="64" tileheight="64">
+ <tileset firstgid="16" name="mur2" tilewidth="64" tileheight="64">
   <image source="data/mur2.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="18" name="lamp1" tilewidth="64" tileheight="64">
-  <image source="data/lamp1.png" width="64" height="64"/>
+ <tileset firstgid="17" name="lampe1" tilewidth="64" tileheight="64">
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="4"/>
+  </properties>
+  <image source="data/lampe1.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="19" name="lamp2" tilewidth="64" tileheight="64">
-  <image source="data/lamp2.png" width="64" height="64"/>
- </tileset>
- <tileset firstgid="20" name="cable" tilewidth="64" tileheight="64">
-  <image source="data/cable.png" width="64" height="64"/>
+ <tileset firstgid="18" name="lampe2" tilewidth="64" tileheight="64">
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="4"/>
+  </properties>
+  <image source="data/lampe2.png" width="64" height="64"/>
  </tileset>
  <layer name="foreground" width="60" height="20">
   <data encoding="base64" compression="zlib">
