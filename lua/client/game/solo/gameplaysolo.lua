@@ -150,7 +150,6 @@ end
     function GameplaySolo:init()
         -- Principalement les anims
         -- Init mapLoader
-        print("init called")
         self.mapLoader:init()
 
         -- Init character
@@ -242,8 +241,6 @@ end
 
     function GameplaySolo:sendPressedKey(key, unicode)
         if not self.loading then
-            print("RECU"..key)
-
             if not self.gameIsPaused then
 
                 -- Inputs for players
@@ -314,7 +311,6 @@ end
 
             -- Pause
             if key =="escape" then
-                print("LA")
                 self.pauseMenu:sendPauseOrder()
             end   
         end
@@ -376,14 +372,14 @@ end
         dt=dttheo*self.slowTimer
         if  not self.gameIsPaused then
             if(self.levelFinished) then
-			   -- inputManager:clearInputs()
+			   self.inputManager:clearInputs()
                gameStateManager.state['LevelEndingSolo']=LevelEndingSolo.new(self.mapLoader.levelends[1].next,self.continuous)
                gameStateManager:changeState('LevelEndingSolo')
                return
            end
 
             if(self.shouldEnd) then
-                -- inputManager:clearInputs()
+                self.inputManager:clearInputs()
                 gameStateManager.state['LevelFailedSolo']=LevelFailedSolo.new()
                 gameStateManager:changeState('LevelFailedSolo')
                 return        

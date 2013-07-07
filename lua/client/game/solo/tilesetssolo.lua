@@ -64,7 +64,6 @@ function TilesetsSolo:update(dt)
 end
 
 function TilesetsSolo:draw(pos)
-	print("Merde")
 	for i=0,self.layer.height-1,1 do
 		for j=1,self.layer.width,1 do
 			if self.layer.data[i*self.layer.width+j]>0 then
@@ -73,8 +72,6 @@ function TilesetsSolo:draw(pos)
 					love.graphics.drawq(tmp.img:getSprite(),tmp.quad, (j-1)*64-pos.x, (i)*64+pos.y)
 
 				else
-					print(tmp.img)
-					print(tmp.quad)
 					love.graphics.drawq(tmp.img,tmp.quad, (j-1)*64-pos.x, (i)*64+pos.y)
 				end
 			end
