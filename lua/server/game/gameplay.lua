@@ -89,15 +89,13 @@ function Gameplay.new(mapFile,continuous)
 
         
         --Characters
-        self.metalMan = MetalMan.new(self.cameraMM,self.mapLoader.metalManPos)
-        self.theMagnet = TheMagnet.new(self.cameraTM,self.mapLoader.theMagnetPos)
+        self.metalMan = MetalMan.new(self.cameraMM,self.mapLoader.metalManPos, self.mapLoader.metalManPowers)
+        self.theMagnet = TheMagnet.new(self.cameraTM,self.mapLoader.theMagnetPos, self.mapLoader.theMagnetPowers)
         self.magnetmanager:addGenerator(self.theMagnet)
         self.magnetmanager:addMetal(self.metalMan)
 
         -- Temp var
         self.drawWho=1
-        print(world:getGravity())
-
     end
 
     function Gameplay:failed()
@@ -157,6 +155,7 @@ function Gameplay.new(mapFile,continuous)
         end
 
         if not self.metalMan.isStatic then
+            print("Server recieved changemass")
             if key =="b" then
                 self.metalMan:changeMass()
             end

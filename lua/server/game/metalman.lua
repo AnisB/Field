@@ -147,15 +147,22 @@ end
 
 function MetalMan:changeMass()
 	if self.alive then
+		print("BING")
 		if 	self.metalWeight==MetalMTypes.Alu then
+				print("BONG")
+
 			if self.powers["Acier"] then
+				print("zdzdz")
+
 				self.anim = AnimMM.new('metalman/acier')
 				self:loadAnimation("standing",true)
 				self:loadAnimation("load1",true)
 				self.metalWeight=MetalMTypes.Acier
 			end
 		elseif 	self.metalWeight==MetalMTypes.Acier then
+			print("BANG")
 			if self.powers["Alu"] then
+				print("JZBNDZ")
 				self.metalWeight=MetalMTypes.Alu
 				self.anim = AnimMM.new('metalman/alu')
 				self:loadAnimation("load2",true)

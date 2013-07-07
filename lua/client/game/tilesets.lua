@@ -6,6 +6,8 @@ This file is part of the Field project
 Tilesets = {}
 Tilesets.__index =  Tilesets
 
+Tilesets.sprites={}
+
 function Tilesets.new(tile,layer,map)
     local self = {}
     setmetatable(self, Tilesets)
@@ -20,7 +22,10 @@ function Tilesets:getTiles(tiles)
 	for i,v in pairs(tiles) do
 		local tile ={}
 		tile.id = v.firstgid
-		tile.img = love.graphics.newImage(self.map.."-fieldmap/"..v.image)
+		if Tilesets.sprites [self.map.."-fieldmap/"..v.image] == nil then
+			Tilesets.sprites [self.map.."-fieldmap/"..v.image] = love.graphics.newImage(self.map.."-fieldmap/"..v.image)
+		end
+		tile.img = Tilesets.sprites [self.map.."-fieldmap/"..v.image]
 		tile.quad= love.graphics.newQuad(0, 0, v.tilewidth, v.tileheight, v.tilewidth*2, v.tileheight)
 		tile.width=v.tilewidth
 		tile.height=v.tileheight

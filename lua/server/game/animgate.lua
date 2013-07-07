@@ -55,14 +55,14 @@ function AnimGate.new(folder)
 	setmetatable(self, AnimGate)
 	self.time = 0.0
 	self.sprites = {}
-	for key,val in pairs(AnimGate.ANIMS) do
-		self.sprites[key] = {}
-		for i=1, val.number do
-			local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
-			-- print("loading image =>", path)
-			self.sprites[key][i] = love.graphics.newImage(path)
-		end
-	end
+	-- for key,val in pairs(AnimGate.ANIMS) do
+	-- 	self.sprites[key] = {}
+	-- 	for i=1, val.number do
+	-- 		local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
+	-- 		-- print("loading image =>", path)
+	-- 		-- self.sprites[key][i] = love.graphics.newImage(path)
+	-- 	end
+	-- end
 	self.currentAnim = AnimGate.ANIMS.close
 	self.currentPos = 1
 	-- begin of an animation

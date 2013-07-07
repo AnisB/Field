@@ -63,6 +63,7 @@ function PauseMenu:keyPressed(key, unicode)
             local continuous =gameStateManager.state['GameplaySolo'].continuous
             local player =gameStateManager.state['GameplaySolo'].player
             gameStateManager.state['GameplaySolo']:destroy()
+            gameStateManager:resetLoader()
             gameStateManager.state['GameplaySolo'] = GameplaySolo.new(mapFile,continuous,player)
             gameStateManager:changeState('GameplaySolo')    
             end

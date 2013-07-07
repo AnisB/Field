@@ -6,6 +6,9 @@ This file is part of the Field project
 TilesetsSolo = {}
 TilesetsSolo.__index =  TilesetsSolo
 
+TilesetsSolo.sprites = { }
+
+
 function TilesetsSolo.new(tile,layer,map)
     local self = {}
     setmetatable(self, TilesetsSolo)
@@ -32,24 +35,36 @@ function TilesetsSolo:getTiles(tiles,map)
 
 		else
 			tile.anim = false
+			if (TilesetsSolo.sprites[map.."-fieldmap/"..v.image] ==nil) then
+				gameStateManager.loader.newImage(TilesetsSolo.sprites ,map.."-fieldmap/"..v.image, map.."-fieldmap/"..v.image)
+			else
+			end
+			tile.img = map.."-fieldmap/"..v.image
 			table.insert(self.tiles,tile)
-			gameStateManager.loader.newImage(self.tiles[tile.id] ,"img", map.."-fieldmap/"..v.image)
 		end
 
 	end
 end
 
+function TilesetsSolo:init()
+	for i,v in pairs(self.tiles) do
+		if not v.anim then
+			print(v.img)
+			v.img = TilesetsSolo.sprites[v.img]
+		end
+	end
+end
 
 function TilesetsSolo:update(dt)
 	for i,v in pairs(self.tiles) do
 		if v.anim then
-			print(v.id)
 			v.img:update(dt)
 		end
 	end
 end
 
 function TilesetsSolo:draw(pos)
+	print("Merde")
 	for i=0,self.layer.height-1,1 do
 		for j=1,self.layer.width,1 do
 			if self.layer.data[i*self.layer.width+j]>0 then
@@ -58,6 +73,8 @@ function TilesetsSolo:draw(pos)
 					love.graphics.drawq(tmp.img:getSprite(),tmp.quad, (j-1)*64-pos.x, (i)*64+pos.y)
 
 				else
+					print(tmp.img)
+					print(tmp.quad)
 					love.graphics.drawq(tmp.img,tmp.quad, (j-1)*64-pos.x, (i)*64+pos.y)
 				end
 			end

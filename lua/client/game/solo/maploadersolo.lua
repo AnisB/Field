@@ -296,6 +296,10 @@ end
 
 function MapLoaderSolo:init()
 
+    for i,b in pairs(self.tilesets) do
+          b:init()
+    end
+
     for i,b in pairs(self.destroyables) do
           b:init()
     end

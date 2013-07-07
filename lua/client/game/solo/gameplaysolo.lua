@@ -45,7 +45,6 @@ function GameplaySolo.new(mapFile,continuous,player)
     -- Vars
     self.continuous=continuous
 
-
     -- Physics
     love.physics.setMeter( unitWorldSize) --the height of a meter our worlds will be 64px
     world = love.physics.newWorld( 0, 18*unitWorldSize, false )
@@ -132,13 +131,16 @@ function GameplaySolo.new(mapFile,continuous,player)
     -- Starting the multithreading loading
     local returnF = GameplaySolo.loadFinished
     self.loading=gameStateManager.loader.start(returnF, print)
-
+    if not self.loading then
+        self.loading = true
+        self:init()
+    end
     return self
 end
 
 
     -- Fonction qui init l'état gameplay solo quand l'état est fini
-    function GameplaySolo:loadFinished()
+    function GameplaySolo.loadFinished()
         local gp = gameStateManager.state["GameplaySolo"]
         gp:init()
     end
@@ -148,6 +150,7 @@ end
     function GameplaySolo:init()
         -- Principalement les anims
         -- Init mapLoader
+        print("init called")
         self.mapLoader:init()
 
         -- Init character
@@ -217,12 +220,6 @@ end
     function GameplaySolo:failed()
         self.shouldEnd=true
     end    
-
-    -- function GameplaySolo:sendPause(state)
-    --     self.gameIsPaused=state
-    --     self.pauseMenu.isActive=state
-    -- end
-
 
     function GameplaySolo:mousePressed(x, y, button)
     end
