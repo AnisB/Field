@@ -82,7 +82,7 @@
  </layer>
  <layer name="front" width="60" height="60">
   <data encoding="base64" compression="zlib">
-   eJztWosOwiAMnE6n/v8PuyUSkbBxpbC22EtIXHa0O3mUWzZNGC5ru63tbrQtHw0oKNy0H9qXmqMn3/X+zu/loN9RnhAjzLf4uuaZSvFR5Lil/vP01TtX5pDi1+htkSO+l97PXZdicJ4F1ctdv3N0b2+eIBwrejds67C0pkscS3pbwPXSuD32K2TeUhFiah5fpH4hiONo1tsDlvQicUavv+n811J/OTkCcvtYyh+9/mo9P7tePIcUX1qvJX/EybHB/VEdx5LeFnC9NG4PvSP4o5oc7o/4sKTX/ZFef9Sr/mr1R5wcUnzp8T2b73rl92et/qjX/kzlWNqv3B/R4XppXPdHeU7N+Fr2R5wcLaF5fGvijF5/3R+NXX+1np85OUp89BtW7fVImi+tF/FHnPgIV9P+zInP5ab9ztqfOfH3uMg3wNwcGvjS67cFNOqlfO9NhUa9PaFNb+842s5Xe0C8AAKq3nRtnTm+Ld57UM6fT2YuKbyi35T//dH6QQQQxvf6J21bD28MMAUb
+   eJztWgEOwiAMnE6n/v/DjsRFJNu4UkoL9hISzY6Ws9BSs2nCcFnHbR13wlg+85C5C9FHKR8FhZvOQ+dSfUjyXe/vflpO5p35iecj9nJrytlHcaT3DPP01TsX+tDil+it4SN+lj7f+56zwVkLqpd7fufo2dE+QTi96A0I5zB3pnOcnvTWgOulcSXyFbJvqdhsWo4vUr8QxHYs65VAT3oRO6PX33T/W6m/HB8b9vJYyh+9/lq9P7te3IcWX1tvT/0Rx0eA90dlnJ701oDrpXEl9I7QH5X48P6Ij570en9ktz+Sqr9W+yOODy2+dnxb812vfn622h9J5Wcqp6d85f0RHa6XxvX+aJ9TEt+e+yOOj5qwHN8SO6PXX++Pxq6/Vu/PHB85fsv3RT2++5xW/RHHPsK1lJ859rncdF6r/Myxf8Slvl8rna+k+NrntwYs6qW8702FRb2SsKZX2o61+9URkF4AAVVverZaxrfG/x7o/TP4eTJ9aeEVfab87o/aC1HAFt/rn4ywT9+ZhQUE
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="60" height="60">
@@ -106,17 +106,17 @@
   <object x="2048" y="192" width="192" height="64"/>
   <object x="960" y="192" width="256" height="64"/>
   <object x="1472" y="256" width="64" height="64"/>
-  <object x="2240" y="1536" width="192" height="64"/>
+  <object x="2304" y="1536" width="128" height="64"/>
   <object x="2304" y="192" width="192" height="64"/>
   <object x="1664" y="256" width="64" height="64"/>
   <object x="3072" y="2880" width="704" height="64"/>
   <object x="3584" y="192" width="192" height="64"/>
-  <object x="3648" y="1536" width="192" height="64"/>
-  <object x="3648" y="2432" width="192" height="64"/>
-  <object x="2240" y="2432" width="192" height="64"/>
+  <object x="3648" y="1536" width="128" height="64"/>
+  <object x="3648" y="2432" width="128" height="64"/>
+  <object x="2304" y="2432" width="128" height="64"/>
   <object x="2624" y="384" width="256" height="64"/>
   <object x="2304" y="3328" width="192" height="64"/>
-  <object x="2240" y="640" width="192" height="64"/>
+  <object x="2304" y="640" width="128" height="64"/>
   <object x="3648" y="640" width="128" height="64"/>
   <object x="2688" y="320" width="128" height="64"/>
   <object x="2688" y="448" width="128" height="64"/>
@@ -166,9 +166,7 @@
   <object x="3584" y="1600" width="64" height="64"/>
   <object x="3584" y="2496" width="64" height="64"/>
  </objectgroup>
- <objectgroup color="#ffffff" name="movable" width="60" height="60">
-  <object x="1664" y="1664"/>
- </objectgroup>
+ <objectgroup color="#ffffff" name="movable" width="60" height="60"/>
  <objectgroup color="#ff6666" name="destroyable" width="60" height="60"/>
  <objectgroup color="#ff0000" name="themagnet" width="60" height="60">
   <object x="768" y="3712" width="64" height="64">
@@ -487,7 +485,7 @@
   <object x="3008" y="2240" width="64" height="64">
    <properties>
     <property name="animid" value="131"/>
-    <property name="next" value="312"/>
+    <property name="next" value="132"/>
     <property name="prev" value="130"/>
     <property name="type" value="MillieuVH"/>
    </properties>
@@ -1204,12 +1202,6 @@
     <property name="closeid" value="15"/>
     <property name="enabled" value="true"/>
     <property name="openid" value="15"/>
-   </properties>
-  </object>
-  <object x="3712" y="1472" width="64" height="64">
-   <properties>
-    <property name="closeid" value="11"/>
-    <property name="openid" value="11"/>
    </properties>
   </object>
   <object x="3712" y="2368" width="64" height="64">

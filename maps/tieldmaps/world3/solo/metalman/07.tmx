@@ -89,12 +89,12 @@
  </tileset>
  <layer name="foreground" width="70" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMAqGHmAeaAfQGbASwBwD5zSKACeNzWensfmjYGgAANQwAEQ=
+   eJxjYBgFo2AUjIJRMAqoCwSgmJaAmcbmUxsIMJAfLgJEYA7qOJOuAN0PlOrHhtmp4lL6AXrknZEIADnDAeM=
   </data>
  </layer>
  <layer name="front" width="70" height="10">
   <data encoding="base64" compression="zlib">
-   eJzllYEKgCAMRGcuq///4QwSRFxzuVnUgwORteFxJkAbLgqj5g6hQo+7CucZtLHoOXr+U744YyXyzAXlM0jhenqD2ZQvFOUdLT2z9MVfVun7ksPN5r7/Ul4kpLyknIzyBUF2n63wxLqk15eWt3MV9nwLW7a2yMtS2avNaX23RtX01B95mX4gyT9gB25GAkE=
+   eJzllY0KgCAMhDVL6/1fuAYNRDZ/Nw364EBk7eC4ypg67Kv90TFZXsAbd0iDuaxCwntVLlZZCPamtQMrcnEK3lwuHPF7RmWmlQvgslPyuYzsnpkLh1ZfWuehM555XiuX2JOi1CUpHHNOGc2l9P+DLM7GnV/his4afQnEHeVT490z0+s1Mg992X6g3Dcg5QYALgI1
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="70" height="10">
@@ -104,6 +104,7 @@
   <object x="2688" y="64" width="64" height="192"/>
   <object x="2496" y="192" width="64" height="192"/>
   <object x="3520" y="256" width="64" height="192"/>
+  <object x="704" y="64" width="64" height="192"/>
  </objectgroup>
  <objectgroup color="#0000ff" name="platform" width="70" height="10">
   <object x="640" y="576" width="3200" height="64"/>
@@ -289,7 +290,7 @@
     <property name="type" value="FinV"/>
    </properties>
   </object>
-  <object x="704" y="64" width="64" height="64">
+  <object x="704" y="256" width="64" height="64">
    <properties>
     <property name="enabled" value="true"/>
     <property name="id" value="2"/>
@@ -301,27 +302,6 @@
     <property name="enabled" value="true"/>
     <property name="id" value="2"/>
     <property name="type" value="FinV"/>
-   </properties>
-  </object>
-  <object x="704" y="256" width="64" height="64">
-   <properties>
-    <property name="enabled" value="true"/>
-    <property name="id" value="2"/>
-    <property name="type" value="MillieuV"/>
-   </properties>
-  </object>
-  <object x="704" y="128" width="64" height="64">
-   <properties>
-    <property name="enabled" value="true"/>
-    <property name="id" value="2"/>
-    <property name="type" value="MillieuV"/>
-   </properties>
-  </object>
-  <object x="704" y="192" width="64" height="64">
-   <properties>
-    <property name="enabled" value="true"/>
-    <property name="id" value="2"/>
-    <property name="type" value="MillieuV"/>
    </properties>
   </object>
   <object x="1728" y="512" width="64" height="64">
@@ -450,13 +430,6 @@
     <property name="type" value="MillieuH"/>
    </properties>
   </object>
-  <object x="2624" y="512" width="64" height="64">
-   <properties>
-    <property name="enabled" value="true"/>
-    <property name="id" value="2"/>
-    <property name="type" value="MillieuH"/>
-   </properties>
-  </object>
   <object x="2624" y="256" width="64" height="64">
    <properties>
     <property name="enabled" value="true"/>
@@ -483,20 +456,6 @@
     <property name="enabled" value="true"/>
     <property name="id" value="2"/>
     <property name="type" value="FinH"/>
-   </properties>
-  </object>
-  <object x="2688" y="512" width="64" height="64">
-   <properties>
-    <property name="enabled" value="true"/>
-    <property name="id" value="2"/>
-    <property name="type" value="MillieuH"/>
-   </properties>
-  </object>
-  <object x="2752" y="512" width="64" height="64">
-   <properties>
-    <property name="enabled" value="true"/>
-    <property name="id" value="2"/>
-    <property name="type" value="MillieuH"/>
    </properties>
   </object>
   <object x="2816" y="512" width="64" height="64">
@@ -576,6 +535,20 @@
     <property name="type" value="MillieuH"/>
    </properties>
   </object>
+  <object x="2624" y="512" width="64" height="64">
+   <properties>
+    <property name="enabled" value="true"/>
+    <property name="id" value="2"/>
+    <property name="type" value="FinH"/>
+   </properties>
+  </object>
+  <object x="2752" y="512" width="64" height="64">
+   <properties>
+    <property name="enabled" value="true"/>
+    <property name="id" value="2"/>
+    <property name="type" value="DebutH"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ffff00" name="levelend" width="70" height="10">
   <object x="3584" y="448" width="192" height="128">
@@ -589,6 +562,7 @@
  <objectgroup color="#ffcc66" name="arcswitch" width="60" height="10">
   <object x="2624" y="64" width="64" height="64">
    <properties>
+    <property name="enabled" value="true"/>
     <property name="id" value="1"/>
    </properties>
   </object>

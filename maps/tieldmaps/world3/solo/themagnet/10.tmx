@@ -87,14 +87,24 @@
   </properties>
   <image source="data/lampe2.png" width="64" height="64"/>
  </tileset>
+ <tileset firstgid="19" name="lampe1" tilewidth="64" tileheight="64">
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="4"/>
+  </properties>
+  <image source="../metalman/data/lampe1.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="20" name="alone" tilewidth="64" tileheight="64">
+  <image source="../metalman/data/alone.png" width="64" height="64"/>
+ </tileset>
  <layer name="foreground" width="80" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt11EOwiAQRdFuodH9r9Vf21SEYeANwz0JPyaN9Iqd9DiA9bxFn0XfS62X6LPoewGwp8zzY4bM8wMAWqneDaLPilqqdwNmBYBV7DYXvDEXAACjnF8Lbc6HhbKnZr8Wrmrb0PDK2oOOPve/e0O0a5kTpfmx41zxaFfql7WhV7eaftkaerer6Zel44x7yNLqznJeRq3VWP9vNOx7Xu3esPd5v3PDWXuzdojaT32erOc9AnWn3ueFkrqRRz9VQ3Wff40se5xF8bt5f6fq7KnP3KxzPYL6viI0tFyvvpdIHVuvU+8/woKfDwarN7E=
+   eJzt1UEOwiAQRmGOYKL3P6sLF0ZTKTPO8A/0fQkb09byRGgNwNXc+QxAkof6BTBdpb2dswIA1lbpDOCsAIC1cVYAAKJwVuS6HQz09XrRsm+0DQ0/eXvQMWb+V28Iu6Oz1Tp+PWd3Ee16/XZtGNVtpN9uDTO6jT53dTPmsEurb5b/W/ZYjXW/ouGbZ7+n4cvZvl9hVDXr3bwdqvZTryfveq9A3enf/UJJ3Siin6qhus9ZozZwjaqj4neL/k7V2lOvuVnrOoN6XhUaeu5Xz6VSR+t96vevMBDnCd3nMiw=
   </data>
  </layer>
  <layer name="front" width="80" height="50">
   <data encoding="base64" compression="zlib">
-   eJztmmGPwjAIhtXtdvr//7BeoknTtB3wQqEnT9IPRzZgSHk7z8slmcE10Npf68dxHe88uPWLwKp5rJq3FVk/jKwfhkb9tHWB6ncrrp2hJQexHiN69ZtNlJi5f7GYWT8sZu5fLGZE/Zj5/nF0fFG1wqr/ouxzKVbP+R9rRSXrh5H7l473/uXqDOUaDf2odWFv2NDnHIHWzxvt/L+xflvD1rpOajuLPyuWBdl/GHUOW8PWuo5j48Qf2TS1gqsfpSbsHbvkmSi2Ed79j4LMv54/bnypTSM+inf+3vH/eAju6cWLPP8s4qNwPtd6bq5eP4omUXzU8693ndSm5be2S+NzNJniS5IDei/Xh8bnh5xtRj5LevOPcm/PpuGj1XvccyJy/kP/Bxlh/6KxJFBiSM5/HJ0eoT3/tJHEyP6Txxj1leZ7CtcHdf5po1k/qW0EGuva+NtCP3rfH0g1xXr+SfttRk9K8O4/xF8EvOcf4i8C3v2HnOkjEO38h2rFmX6UGkB9N6m/Uynv8/79S1Q4ua4w/2ajPauzfjRmzz9PRvlErZ+1VrSW9u/vz95ZrH5//81k/TA+9aD2/90hx8hw++nXJIt1Kfvvlou9PpryBFWcBuE=
+   eJztWttSxCAM7dq16v//sD7YGYYlIfekW84MD0ZI0mPCAcZtW4jAo9B4/o3PxHH858HlrgIq5UHNZfH3Ci4nlfKugNW/Olj0r7UuUP3uzVxvLYG0wqJ/M2qhSszVv7qYS391MVf/6mJa9O+V7x/HwBemFVRORsD4o9iuBA/+OH7fEZ79ewes/qUju3+5OkOZo9WPkS7sBt9Ehbb+KtSkdf6R/VuFv31gG82j2iL7Nxse9ceJ/W78Wex/Xv1rqRVc/TiaOM9Ndq/gfCcVmfVvAc3+B/njxLbmJYM/qQ3yl3l+lvD3I1gDxYvc/7h+pTZPcP6u0jcZzGcF/cc0ieKj3/+geVSbp/5KcoJ8UQbFlyQHbG3V/tWcbTCfLaD9j7IWsmHrpbxga6WjP/+N3pKxcyEnf8wWpb8RWkGJITn/YTrt1b+U/c8akhjR+hcRSwpuDKyuqHUa0b/cOpcio/4i9fcx+NlKP2bvBxpN4dxTIMw0VOI7oiYlyNZfKirzZ73/YT6kqMyf1Ib5tPZ7Ff4szn9c/iy1YqYfrQZA2tLfT/o3lf53ku+cIetcZwVOrpbv1OfcO/FHWZutv9GQ5hp9/80Elo9H/XHWZ2nFaFj///3szgJpirZ/7wyL/r0zTj6o9f+dkGNlcOvvyyuRi6I9y3+swR6npvwCMX0G+g==
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="80" height="50">
@@ -122,8 +132,6 @@
   <object x="4032" y="1728" width="64" height="448"/>
   <object x="4352" y="1856" width="64" height="640"/>
   <object x="1600" y="1600" width="64" height="576"/>
-  <object x="4608" y="2756" width="64" height="64"/>
-  <object x="3968" y="2116" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#0000ff" name="platform" width="80" height="50">
   <object x="640" y="3136" width="4480" height="64"/>
@@ -794,6 +802,11 @@
   <object x="4096" y="832" width="64" height="64"/>
   <object x="1856" y="832" width="64" height="64"/>
   <object x="1536" y="832" width="64" height="64"/>
+  <object x="3136" y="1472" width="64" height="64"/>
+  <object x="2176" y="1472" width="64" height="64"/>
+  <object x="2496" y="1472" width="64" height="64"/>
+  <object x="3456" y="1472" width="64" height="64"/>
+  <object x="2816" y="1472" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="arcswitch" width="80" height="50">
   <object x="3072" y="2112" width="64" height="64">
@@ -802,7 +815,7 @@
     <property name="id" value="1"/>
    </properties>
   </object>
-  <object x="3904" y="2752" width="64" height="64">
+  <object x="3840" y="2752" width="64" height="64">
    <properties>
     <property name="id" value="3"/>
    </properties>

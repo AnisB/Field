@@ -15,7 +15,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/mur.png",
+      image = "../../../world2/solo/metalman/data/mur.png",
       imagewidth = 64,
       imageheight = 64,
       transparentcolor = "#ffffff",
@@ -29,7 +29,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/sol.png",
+      image = "../../../world2/solo/metalman/data/sol.png",
       imagewidth = 64,
       imageheight = 64,
       transparentcolor = "#ffffff",
@@ -43,7 +43,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/alone.png",
+      image = "../../../world2/solo/metalman/data/alone.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -56,7 +56,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/left.png",
+      image = "../../../world2/solo/metalman/data/left.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -69,7 +69,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/mid.png",
+      image = "../../../world2/solo/metalman/data/mid.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -82,7 +82,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/right.png",
+      image = "../../../world2/solo/metalman/data/right.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -95,7 +95,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/portebas.png",
+      image = "../../../world2/solo/metalman/data/portebas.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -108,7 +108,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/portehaut.png",
+      image = "../../../world2/solo/metalman/data/portehaut.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -121,153 +121,129 @@ return {
       tileheight = 128,
       spacing = 0,
       margin = 0,
-      image = "data/fin.png",
+      image = "../../../world2/solo/metalman/data/fin.png",
       imagewidth = 192,
       imageheight = 128,
       properties = {},
       tiles = {}
     },
     {
-      name = "citerne",
+      name = "cube1",
       firstgid = 10,
-      tilewidth = 418,
-      tileheight = 632,
+      tilewidth = 327,
+      tileheight = 327,
       spacing = 0,
       margin = 0,
-      image = "data/citerne.png",
-      imagewidth = 418,
-      imageheight = 632,
-      properties = {},
+      image = "../../../world2/solo/metalman/data/cube1.png",
+      imagewidth = 327,
+      imageheight = 327,
+      properties = {
+        ["anim"] = "true",
+        ["frames"] = "8"
+      },
       tiles = {}
     },
     {
-      name = "container1",
+      name = "cube2",
       firstgid = 11,
-      tilewidth = 610,
-      tileheight = 276,
+      tilewidth = 691,
+      tileheight = 291,
       spacing = 0,
       margin = 0,
-      image = "data/container1.png",
-      imagewidth = 610,
-      imageheight = 276,
-      properties = {},
+      image = "../../../world2/solo/metalman/data/cube2.png",
+      imagewidth = 691,
+      imageheight = 291,
+      properties = {
+        ["anim"] = "true",
+        ["frames"] = "8"
+      },
       tiles = {}
     },
     {
-      name = "container2",
+      name = "cube3",
       firstgid = 12,
-      tilewidth = 480,
-      tileheight = 330,
+      tilewidth = 452,
+      tileheight = 159,
       spacing = 0,
       margin = 0,
-      image = "data/container2.png",
-      imagewidth = 480,
-      imageheight = 330,
-      properties = {},
+      image = "../../../world2/solo/metalman/data/cube3.png",
+      imagewidth = 452,
+      imageheight = 159,
+      properties = {
+        ["anim"] = "true",
+        ["frames"] = "8"
+      },
       tiles = {}
     },
     {
-      name = "cable1",
+      name = "barre",
       firstgid = 13,
-      tilewidth = 77,
-      tileheight = 372,
+      tilewidth = 126,
+      tileheight = 521,
       spacing = 0,
       margin = 0,
-      image = "data/cable1.png",
-      imagewidth = 77,
-      imageheight = 372,
-      properties = {},
-      tiles = {}
-    },
-    {
-      name = "passerelle1",
-      firstgid = 14,
-      tilewidth = 198,
-      tileheight = 342,
-      spacing = 0,
-      margin = 0,
-      image = "data/passerelle1.png",
-      imagewidth = 198,
-      imageheight = 342,
-      properties = {},
-      tiles = {}
-    },
-    {
-      name = "passerelle2",
-      firstgid = 15,
-      tilewidth = 122,
-      tileheight = 599,
-      spacing = 0,
-      margin = 0,
-      image = "data/passerelle2.png",
-      imagewidth = 122,
-      imageheight = 599,
-      properties = {},
-      tiles = {}
-    },
-    {
-      name = "cable2",
-      firstgid = 16,
-      tilewidth = 46,
-      tileheight = 243,
-      spacing = 0,
-      margin = 0,
-      image = "data/cable2.png",
-      imagewidth = 46,
-      imageheight = 243,
-      properties = {},
-      tiles = {}
-    },
-    {
-      name = "mur2",
-      firstgid = 17,
-      tilewidth = 64,
-      tileheight = 64,
-      spacing = 0,
-      margin = 0,
-      image = "data/mur2.png",
-      imagewidth = 64,
-      imageheight = 64,
-      properties = {},
-      tiles = {}
-    },
-    {
-      name = "lamp1",
-      firstgid = 18,
-      tilewidth = 64,
-      tileheight = 64,
-      spacing = 0,
-      margin = 0,
-      image = "data/lamp1.png",
-      imagewidth = 64,
-      imageheight = 64,
-      properties = {},
-      tiles = {}
-    },
-    {
-      name = "lamp2",
-      firstgid = 19,
-      tilewidth = 64,
-      tileheight = 64,
-      spacing = 0,
-      margin = 0,
-      image = "data/lamp2.png",
-      imagewidth = 64,
-      imageheight = 64,
+      image = "../../../world2/solo/metalman/data/barre.png",
+      imagewidth = 126,
+      imageheight = 521,
       properties = {},
       tiles = {}
     },
     {
       name = "cable",
-      firstgid = 20,
+      firstgid = 14,
       tilewidth = 64,
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/cable.png",
+      image = "../../../world2/solo/metalman/data/cable.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
+      tiles = {}
+    },
+    {
+      name = "mur2",
+      firstgid = 15,
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      image = "../../../world2/solo/metalman/data/mur2.png",
+      imagewidth = 64,
+      imageheight = 64,
+      properties = {},
+      tiles = {}
+    },
+    {
+      name = "lampe1",
+      firstgid = 16,
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      image = "../../../world2/solo/metalman/data/lampe1.png",
+      imagewidth = 64,
+      imageheight = 64,
+      properties = {
+        ["anim"] = "true",
+        ["frames"] = "4"
+      },
+      tiles = {}
+    },
+    {
+      name = "lampe2",
+      firstgid = 17,
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      image = "../../../world2/solo/metalman/data/lampe2.png",
+      imagewidth = 64,
+      imageheight = 64,
+      properties = {
+        ["anim"] = "true",
+        ["frames"] = "4"
+      },
       tiles = {}
     }
   },
@@ -288,11 +264,11 @@ return {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 17, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 17, 17, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
       }
     },
@@ -308,14 +284,14 @@ return {
       properties = {},
       encoding = "lua",
       data = {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 5, 6, 1, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 1, 4, 5, 5, 5, 5, 6, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 5, 5, 6, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        4, 5, 5, 5, 5, 5, 5, 5, 5, 6, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
       }
@@ -1001,23 +977,6 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 2560,
-          y = 384,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {
-            ["animid"] = "18",
-            ["enabled"] = "true",
-            ["next"] = "17",
-            ["prev"] = "19",
-            ["type"] = "MillieuHD"
-          }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
           x = 2240,
           y = 384,
           width = 64,
@@ -1157,6 +1116,23 @@ return {
             ["next"] = "214",
             ["prev"] = "212",
             ["type"] = "MillieuVH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2560,
+          y = 384,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "18",
+            ["enabled"] = "true",
+            ["next"] = "17",
+            ["prev"] = "19",
+            ["type"] = "MillieuHD"
           }
         }
       }
@@ -1432,32 +1408,6 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 2560,
-          y = 512,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {
-            ["type"] = "bm"
-          }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 2560,
-          y = 448,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {
-            ["type"] = "hm"
-          }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
           x = 1792,
           y = 512,
           width = 64,
@@ -1557,6 +1507,32 @@ return {
           properties = {
             ["type"] = "hm"
           }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2560,
+          y = 512,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["type"] = "bm"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2560,
+          y = 448,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["type"] = "hm"
+          }
         }
       }
     },
@@ -1630,7 +1606,7 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 768,
+          x = 704,
           y = 320,
           width = 64,
           height = 64,

@@ -177,7 +177,8 @@ return {
       imagewidth = 77,
       imageheight = 372,
       properties = {
-        ["anim"] = "true"
+        ["anim"] = "true",
+        ["frames"] = "8"
       },
       tiles = {}
     },
@@ -205,7 +206,8 @@ return {
       imagewidth = 122,
       imageheight = 599,
       properties = {
-        ["anim"] = "true"
+        ["anim"] = "true",
+        ["frames"] = "8"
       },
       tiles = {}
     },
@@ -220,7 +222,8 @@ return {
       imagewidth = 46,
       imageheight = 243,
       properties = {
-        ["anim"] = "true"
+        ["anim"] = "true",
+        ["frames"] = "8"
       },
       tiles = {}
     },
@@ -238,26 +241,45 @@ return {
       tiles = {}
     },
     {
-      name = "lamp1",
+      name = "lampe1",
       firstgid = 18,
       tilewidth = 64,
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/lamp1.png",
+      image = "data/lampe1.png",
       imagewidth = 67,
       imageheight = 64,
-      properties = {},
+      properties = {
+        ["anim"] = "true",
+        ["frames"] = "4"
+      },
       tiles = {}
     },
     {
-      name = "lamp2",
+      name = "lampe2",
       firstgid = 19,
       tilewidth = 64,
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/lamp2.png",
+      image = "data/lampe2.png",
+      imagewidth = 64,
+      imageheight = 64,
+      properties = {
+        ["anim"] = "true",
+        ["frames"] = "4"
+      },
+      tiles = {}
+    },
+    {
+      name = "cable",
+      firstgid = 20,
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      image = "data/cable.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -265,7 +287,7 @@ return {
     },
     {
       name = "cable",
-      firstgid = 20,
+      firstgid = 21,
       tilewidth = 64,
       tileheight = 64,
       spacing = 0,
@@ -314,7 +336,7 @@ return {
       properties = {},
       encoding = "lua",
       data = {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 1, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

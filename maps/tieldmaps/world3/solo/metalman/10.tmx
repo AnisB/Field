@@ -89,12 +89,12 @@
  </tileset>
  <layer name="foreground" width="80" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt0LEJAEAIBEHBBr7/am3AwOBBgxnY/LgIAIA/cnsAAAAAAAAAAAAAAAAAJ7xh9PzHpgKytAFE
+   eJzt1VEKAjEMRdEBN1D3v1l/iwrTdpK+JL0HgiAMtNfBXBeA07z5DoCTl/oA2C7Sfzu7AgByi7QD2BUAkBu7AgBghV3hr3WDcf+a0fHeSCM6/lppQkebBnS81wbnBKMtVqcy73ZVG7buk4Zz+vvs7FehodU9Tmu4+z2r1FDdKnNHdZ/MDb/PqO6UraPnuVb7ZGiofo+e9FM3VDey6KdoqG5j3W9nQ3WX2RZPnvVS/TfLfv4IY0V9j2gNZ55Vnz/K0M+2IdZ9APbgN8E=
   </data>
  </layer>
  <layer name="front" width="80" height="50">
   <data encoding="base64" compression="zlib">
-   eJztmm1vgzAMhLv37f//4bXSkCJkUttnh/PwSf6SQi48CrlAud1aK/RCVG/3ej+xPv7GYeXHpjPH1PzWejc/zLv5Yd7S8dG5oO33IWlNl8YXkTVHfVt0xO8Kirj25ve8LbuPqmp+mFbyi8qH2XGPTBjXdM26r80RbVZk8vNq9bnINTHu/xj4aY9rfmv9rnz/RvihawWaKfv8QJ8j9hkUcZ0zrVxrtf4ZfbLx288zr67Kz+Ol9c/ok4GfNAdRreQ3rq9H7+rPnn+WvIjIj+isyOInHZM1Jy2K5rKKX5Q/qir8LHPSqh/HOaNndluU/2yf7PVHVYmf1KZhOvOO6CO7jc3fksmavrLbsvy1/Y2/ecvix8DPe09J+xlt/ef9X5Z/hpofJlZ+0r2J+meIlV+Gf4Yq8JNyBcnXZ/lh+c+yyvvnSmLgV5khA7/KYuRXiSkDv8is8D5/eL59Yfj+hVXIWJtf80PV/DAx8tu3Z2SFNz+Q72JWfX9/ZTU/TBuPbX7O6vNe3yeMkVnW+fSVMoq6Guffa5e5tkz5BZatBgE=
+   eJztWu2OwiAQVOt55/u/sPenCSJsd/aLxTIJicHC0pHZWVovl4UIXBO1+397FJ9/gtseG+UuG0auCeFk8deOje7BbBjNH3Lt4u8ztla/1r7AnbflGY9qbRtxrcQvuJz00OPvDNDeO7X/zgBKe9zxi7/PvqVfHiL1a+EPR9dtnetqryjzPsdHeueKSP1q9mT0WM09ZayfM/BXo97rknhR9XNG/qixS7/yebz818tTjs4f6DkC0WW0/2piUWuwRj0nymmEfq1yZwR/aF+kfrXw4m9jxBlRP0tjUWuwRm/9ZX6lauoo/0U9xdo/uOcKr/xHzcEZ57UnEXj8/kjsTLWeVTxt/htVP0s9+SkYU8a07vPyX6pOpsZ6wiP/IbE9vAKNr53Dum+0/3LjchpnrlZfRP5D55XOV34nbUi8DP4r1VSrnuE2yfOD3jvIEhnPv0hfNLL6r7QvGtr8h8TR/C6Z+dP0Lf2+o5f/emMj9NvyFY2/HvkH8s6S4yk9eOp3JmQ8/87GYYmM/jsLMp9/Z0E2/Wq9AvUP6l0lOg65zyN8477SjPXSb1Z48Oeh36wYyR81xyzIql9vr5D6h/TZFue//RQnLcxeE3vAQr9nxs4Htyb6G7DGzED336/XQiZFmYtvq8Ft1+ULthgHCQ==
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="80" height="50">
@@ -111,7 +111,7 @@
   <object x="1280" y="768" width="64" height="64"/>
   <object x="3008" y="128" width="64" height="256"/>
   <object x="4352" y="768" width="64" height="64"/>
-  <object x="4672" y="1024" width="64" height="384"/>
+  <object x="4672" y="1024" width="64" height="1088"/>
   <object x="3712" y="2560" width="64" height="256"/>
   <object x="1920" y="1920" width="64" height="256"/>
   <object x="1600" y="1600" width="64" height="192"/>
@@ -120,7 +120,7 @@
   <object x="3200" y="768" width="64" height="256"/>
   <object x="960" y="960" width="64" height="1856"/>
   <object x="2688" y="1088" width="64" height="256"/>
-  <object x="4672" y="1536" width="64" height="1280"/>
+  <object x="4672" y="2240" width="64" height="576"/>
   <object x="1600" y="1920" width="64" height="256"/>
   <object x="1280" y="1536" width="64" height="960"/>
   <object x="4032" y="768" width="64" height="256"/>
@@ -550,7 +550,7 @@
     <property name="type" value="FinVH"/>
    </properties>
   </object>
-  <object x="4672" y="1408" width="64" height="64">
+  <object x="4672" y="2112" width="64" height="64">
    <properties>
     <property name="animid" value="203"/>
     <property name="closeid" value="2"/>
@@ -558,7 +558,7 @@
     <property name="type" value="DebutVH"/>
    </properties>
   </object>
-  <object x="4672" y="1472" width="64" height="64">
+  <object x="4672" y="2176" width="64" height="64">
    <properties>
     <property name="animid" value="204"/>
     <property name="openid" value="2"/>
@@ -805,6 +805,11 @@
   <object x="1856" y="1152" width="64" height="64"/>
   <object x="2816" y="192" width="64" height="64"/>
   <object x="2816" y="512" width="64" height="64"/>
+  <object x="3456" y="1472" width="64" height="64"/>
+  <object x="3136" y="1472" width="64" height="64"/>
+  <object x="2816" y="1472" width="64" height="64"/>
+  <object x="2496" y="1472" width="64" height="64"/>
+  <object x="2176" y="1472" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="arcswitch" width="80" height="50">
   <object x="1664" y="2112" width="64" height="64">

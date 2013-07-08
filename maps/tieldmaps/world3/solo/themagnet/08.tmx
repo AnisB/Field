@@ -89,12 +89,12 @@
  </tileset>
  <layer name="foreground" width="60" height="20">
   <data encoding="base64" compression="zlib">
-   eJztzzEKACAQA8H7wv3/s7aiiI2NYQbSpNsqAAAAyNPT0nXtvet32i9uDUm9CQ2vDRBKAss=
+   eJztz7EJADAIRUFHcP9p04aEYJVCuYPfWPkiAAAAYJ7cNl3G3XveXuuiapjU2/XvnxaGywJx
   </data>
  </layer>
  <layer name="front" width="60" height="20">
   <data encoding="base64" compression="zlib">
-   eJztl+sOwyAIhXXduvX9X7jtD5OVHBBUHMt2EtKIBPyq8ZKSTvmw+2GPQLYy40L+4tPKEjtTXgx/3msfNW+11BrNG10jeT8ptI+uIM5rfmfza+t9Ky86f6T+0ecR7fPmbc3vOb/e1qKI61niQf5z7WrXaiTe/PbNxCfljXD+9vJyeUqb3outNXpje3npnCL2hfHXapZ/E2l/1vAmJsZSM8L80j2X5llAXsQahbd2hkj92n3awqt9w78qebi2pYb2jY9YOd5NGKekpyF2pix3kPLvbz9i59rYARLrA0E=
+   eJztV+0OgzAIbFed7v1fePaHSSUHBfsxlu0SYgoIXkvAhqBDPGQ5ZHUkT+a7kP7UaWHxnYlRHP58rzYqo3EnV2++3tGT7yfB9SzkZ4kp2SJZz4Q237fyRbOmBJqbPecRtc3gO/o96/mOljvwWM8SH6TPuqTM6ameY/GMRCfF9TB/W/lyceie5L6E5k4tR6tvK196poh7YvS1nOW+eKlnDd/A+Fhyejhf2nNpnATiIq5e+NZmiGTX9mkLX80dPtf+XonDrbU5LHd8xJXj+xK+U8Jm8J0Jyz/IufePH5FcG28pkAMn
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="60" height="20">

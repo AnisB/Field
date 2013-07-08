@@ -89,12 +89,12 @@
  </tileset>
  <layer name="foreground" width="60" height="7">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMAoGHgAABpAAAQ==
+   eJxjYBgFo2AUDBUggISHMxDAgocjGAl+JAUAAG1fAME=
   </data>
  </layer>
  <layer name="front" width="60" height="7">
   <data encoding="base64" compression="zlib">
-   eJxjYCAOMAIxMxCzIGFWHOLEYEr0kqMfpp5YQIrawQpG/UsdtYMVkJL+2QfIjZQCDiQ2KXHGhsZnRNLPSCamRC+6fmIALH6ZRggGldEAeusBmw==
+   eJxjYCAOMAIxCxCzImE2HOLEYEr0kqMfpp5YQIrawQpG/UsdtYMVEJv+QWmfY4DcSCngRGKTEmfsaHzGQYaJAbD4ZRohGJROAbNmAds=
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="60" height="7">
@@ -128,7 +128,7 @@
     <property name="type" value="DebutV"/>
    </properties>
   </object>
-  <object x="1024" y="320" width="64" height="64">
+  <object x="1024" y="256" width="64" height="64">
    <properties>
     <property name="enabled" value="true"/>
     <property name="id" value="1"/>
@@ -142,7 +142,7 @@
     <property name="type" value="MillieuV"/>
    </properties>
   </object>
-  <object x="1984" y="320" width="64" height="64">
+  <object x="1984" y="256" width="64" height="64">
    <properties>
     <property name="enabled" value="true"/>
     <property name="id" value="2"/>
@@ -177,7 +177,7 @@
     <property name="type" value="MillieuV"/>
    </properties>
   </object>
-  <object x="3008" y="320" width="64" height="64">
+  <object x="3008" y="256" width="64" height="64">
    <properties>
     <property name="enabled" value="true"/>
     <property name="id" value="3"/>
@@ -199,27 +199,6 @@
    </properties>
   </object>
   <object x="3008" y="128" width="64" height="64">
-   <properties>
-    <property name="enabled" value="true"/>
-    <property name="id" value="3"/>
-    <property name="type" value="MillieuV"/>
-   </properties>
-  </object>
-  <object x="1024" y="256" width="64" height="64">
-   <properties>
-    <property name="enabled" value="true"/>
-    <property name="id" value="1"/>
-    <property name="type" value="MillieuV"/>
-   </properties>
-  </object>
-  <object x="1984" y="256" width="64" height="64">
-   <properties>
-    <property name="enabled" value="true"/>
-    <property name="id" value="2"/>
-    <property name="type" value="MillieuV"/>
-   </properties>
-  </object>
-  <object x="3008" y="256" width="64" height="64">
    <properties>
     <property name="enabled" value="true"/>
     <property name="id" value="3"/>
@@ -251,7 +230,6 @@
     <property name="timers" value="2@1@0#"/>
    </properties>
   </object>
-  <object x="896" y="384" width="448"/>
   <object x="2880" y="256" width="64" height="64">
    <properties>
     <property name="enabled" value="true"/>

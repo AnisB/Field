@@ -15,7 +15,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/mur.png",
+      image = "../../../world2/solo/metalman/data/mur.png",
       imagewidth = 64,
       imageheight = 64,
       transparentcolor = "#ffffff",
@@ -29,7 +29,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/sol.png",
+      image = "../../../world2/solo/metalman/data/sol.png",
       imagewidth = 64,
       imageheight = 64,
       transparentcolor = "#ffffff",
@@ -43,7 +43,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/alone.png",
+      image = "../../../world2/solo/metalman/data/alone.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -56,7 +56,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/left.png",
+      image = "../../../world2/solo/metalman/data/left.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -69,7 +69,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/mid.png",
+      image = "../../../world2/solo/metalman/data/mid.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -82,7 +82,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/right.png",
+      image = "../../../world2/solo/metalman/data/right.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -95,7 +95,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/portebas.png",
+      image = "../../../world2/solo/metalman/data/portebas.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -108,7 +108,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/portehaut.png",
+      image = "../../../world2/solo/metalman/data/portehaut.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -121,7 +121,7 @@ return {
       tileheight = 128,
       spacing = 0,
       margin = 0,
-      image = "data/fin.png",
+      image = "../../../world2/solo/metalman/data/fin.png",
       imagewidth = 192,
       imageheight = 128,
       properties = {},
@@ -134,7 +134,7 @@ return {
       tileheight = 327,
       spacing = 0,
       margin = 0,
-      image = "data/cube1.png",
+      image = "../../../world2/solo/metalman/data/cube1.png",
       imagewidth = 327,
       imageheight = 327,
       properties = {
@@ -150,7 +150,7 @@ return {
       tileheight = 291,
       spacing = 0,
       margin = 0,
-      image = "data/cube2.png",
+      image = "../../../world2/solo/metalman/data/cube2.png",
       imagewidth = 691,
       imageheight = 291,
       properties = {
@@ -166,7 +166,7 @@ return {
       tileheight = 159,
       spacing = 0,
       margin = 0,
-      image = "data/cube3.png",
+      image = "../../../world2/solo/metalman/data/cube3.png",
       imagewidth = 452,
       imageheight = 159,
       properties = {
@@ -182,7 +182,7 @@ return {
       tileheight = 521,
       spacing = 0,
       margin = 0,
-      image = "data/barre.png",
+      image = "../../../world2/solo/metalman/data/barre.png",
       imagewidth = 126,
       imageheight = 521,
       properties = {},
@@ -195,7 +195,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/cable.png",
+      image = "../../../world2/solo/metalman/data/cable.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -208,7 +208,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/mur2.png",
+      image = "../../../world2/solo/metalman/data/mur2.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {},
@@ -221,7 +221,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/lampe1.png",
+      image = "../../../world2/solo/metalman/data/lampe1.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {
@@ -237,7 +237,7 @@ return {
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/lampe2.png",
+      image = "../../../world2/solo/metalman/data/lampe2.png",
       imagewidth = 64,
       imageheight = 64,
       properties = {
@@ -266,9 +266,9 @@ return {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
       }
     },
@@ -284,14 +284,14 @@ return {
       properties = {},
       encoding = "lua",
       data = {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 5, 6, 1, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 1, 4, 5, 5, 5, 5, 6, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 5, 5, 6, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        4, 5, 5, 5, 5, 5, 5, 5, 5, 6, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
       }
@@ -977,23 +977,6 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 2560,
-          y = 384,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {
-            ["animid"] = "18",
-            ["enabled"] = "true",
-            ["next"] = "17",
-            ["prev"] = "19",
-            ["type"] = "MillieuHD"
-          }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
           x = 2240,
           y = 384,
           width = 64,
@@ -1133,6 +1116,23 @@ return {
             ["next"] = "214",
             ["prev"] = "212",
             ["type"] = "MillieuVH"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2560,
+          y = 384,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["animid"] = "18",
+            ["enabled"] = "true",
+            ["next"] = "17",
+            ["prev"] = "19",
+            ["type"] = "MillieuHD"
           }
         }
       }
@@ -1408,32 +1408,6 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 2560,
-          y = 512,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {
-            ["type"] = "bm"
-          }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 2560,
-          y = 448,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {
-            ["type"] = "hm"
-          }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
           x = 1792,
           y = 512,
           width = 64,
@@ -1533,6 +1507,32 @@ return {
           properties = {
             ["type"] = "hm"
           }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2560,
+          y = 512,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["type"] = "bm"
+          }
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2560,
+          y = 448,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {
+            ["type"] = "hm"
+          }
         }
       }
     },
@@ -1606,7 +1606,7 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 768,
+          x = 704,
           y = 320,
           width = 64,
           height = 64,

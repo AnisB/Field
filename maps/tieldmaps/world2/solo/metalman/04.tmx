@@ -77,12 +77,12 @@
  </tileset>
  <layer name="foreground" width="70" height="10">
   <data encoding="base64" compression="zlib">
-   eJztzgEJAAAMA6BVeP+yjzEYmsAEAKDr2gGmPTNQABI=
+   eJxjYBgFo2AUjIJRMApGAT0APxSTo4cQHoqAEj8Mx3AZqu4eCgAAXxABtA==
   </data>
  </layer>
  <layer name="front" width="70" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYCAOMAIxCxCzDlHMBvUDtQG1zWREwsSIU8vOwW4mIxpNSJyadg52M+kNRsMFOxgNF+yAVuGCXB+xEamHWuUoNcwiRR+xdS8HGW6gZbgQax4nmhnUBuwkqMXmB1qEC6lmkppemEYIJibvwwAAVSwCBA==
+   eJxjYCAOMAIxCxCzAjEbGn+wYHzugslRG1DbTEYkTIw4tewc7GYyotGExKlp52A3k95gNFywg9FwwQ5oFS7I5TwbkXqoVY5SwyxS9BFT14LCgIMMN9AyXIg1jxPNDGoDdhLUYvMDLcKFVDNJTS9MIwQTk/dhAAAFAAH9
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="70" height="10">
@@ -310,15 +310,6 @@
     <property name="type" value="MillieuHD"/>
    </properties>
   </object>
-  <object x="2560" y="384" width="64" height="64">
-   <properties>
-    <property name="animid" value="18"/>
-    <property name="enabled" value="true"/>
-    <property name="next" value="17"/>
-    <property name="prev" value="19"/>
-    <property name="type" value="MillieuHD"/>
-   </properties>
-  </object>
   <object x="2240" y="384" width="64" height="64">
    <properties>
     <property name="animid" value="13"/>
@@ -390,6 +381,15 @@
     <property name="next" value="214"/>
     <property name="prev" value="212"/>
     <property name="type" value="MillieuVH"/>
+   </properties>
+  </object>
+  <object x="2560" y="384" width="64" height="64">
+   <properties>
+    <property name="animid" value="18"/>
+    <property name="enabled" value="true"/>
+    <property name="next" value="17"/>
+    <property name="prev" value="19"/>
+    <property name="type" value="MillieuHD"/>
    </properties>
   </object>
  </objectgroup>
@@ -494,16 +494,6 @@
     <property name="type" value="hm"/>
    </properties>
   </object>
-  <object x="2560" y="512" width="64" height="64">
-   <properties>
-    <property name="type" value="bm"/>
-   </properties>
-  </object>
-  <object x="2560" y="448" width="64" height="64">
-   <properties>
-    <property name="type" value="hm"/>
-   </properties>
-  </object>
   <object x="1792" y="512" width="64" height="64">
    <properties>
     <property name="type" value="bm"/>
@@ -544,6 +534,16 @@
     <property name="type" value="hm"/>
    </properties>
   </object>
+  <object x="2560" y="512" width="64" height="64">
+   <properties>
+    <property name="type" value="bm"/>
+   </properties>
+  </object>
+  <object x="2560" y="448" width="64" height="64">
+   <properties>
+    <property name="type" value="hm"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ffff00" name="arc" width="70" height="10"/>
  <objectgroup color="#ffff00" name="levelend" width="70" height="10">
@@ -567,7 +567,7 @@
     <property name="openid" value="1"/>
    </properties>
   </object>
-  <object x="768" y="320" width="64" height="64">
+  <object x="704" y="320" width="64" height="64">
    <properties>
     <property name="closeid" value="3"/>
     <property name="openid" value="3"/>

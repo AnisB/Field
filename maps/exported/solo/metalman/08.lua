@@ -128,99 +128,101 @@ return {
       tiles = {}
     },
     {
-      name = "citerne",
+      name = "cube1",
       firstgid = 10,
-      tilewidth = 418,
-      tileheight = 632,
+      tilewidth = 250,
+      tileheight = 250,
       spacing = 0,
       margin = 0,
-      image = "data/citerne.png",
-      imagewidth = 418,
-      imageheight = 632,
-      properties = {},
+      image = "data/cube1.png",
+      imagewidth = 250,
+      imageheight = 250,
+      properties = {
+        ["anim"] = "true",
+        ["frames"] = "8"
+      },
       tiles = {}
     },
     {
-      name = "container1",
+      name = "plateforme1",
       firstgid = 11,
-      tilewidth = 610,
-      tileheight = 276,
+      tilewidth = 190,
+      tileheight = 58,
       spacing = 0,
       margin = 0,
-      image = "data/container1.png",
-      imagewidth = 610,
-      imageheight = 276,
-      properties = {},
+      image = "data/plateforme1.png",
+      imagewidth = 190,
+      imageheight = 58,
+      properties = {
+        ["anim"] = "true",
+        ["frames"] = "8"
+      },
       tiles = {}
     },
     {
-      name = "container2",
+      name = "plateforme2",
       firstgid = 12,
-      tilewidth = 480,
-      tileheight = 330,
+      tilewidth = 294,
+      tileheight = 66,
       spacing = 0,
       margin = 0,
-      image = "data/container2.png",
-      imagewidth = 480,
-      imageheight = 330,
-      properties = {},
+      image = "data/plateforme2.png",
+      imagewidth = 294,
+      imageheight = 66,
+      properties = {
+        ["anim"] = "true",
+        ["frames"] = "8"
+      },
       tiles = {}
     },
     {
-      name = "cable1",
+      name = "rectangle",
       firstgid = 13,
-      tilewidth = 77,
-      tileheight = 372,
+      tilewidth = 355,
+      tileheight = 442,
       spacing = 0,
       margin = 0,
-      image = "data/cable1.png",
-      imagewidth = 77,
-      imageheight = 372,
-      properties = {},
+      image = "data/rectangle.png",
+      imagewidth = 355,
+      imageheight = 442,
+      properties = {
+        ["anim"] = "true",
+        ["frames"] = "8"
+      },
       tiles = {}
     },
     {
-      name = "passerelle1",
+      name = "rocher1",
       firstgid = 14,
-      tilewidth = 198,
-      tileheight = 342,
+      tilewidth = 272,
+      tileheight = 445,
       spacing = 0,
       margin = 0,
-      image = "data/passerelle1.png",
-      imagewidth = 198,
-      imageheight = 342,
-      properties = {},
+      image = "data/rocher1.png",
+      imagewidth = 272,
+      imageheight = 445,
+      properties = {
+        ["anim"] = "true",
+        ["frames"] = "8"
+      },
       tiles = {}
     },
     {
-      name = "passerelle2",
+      name = "cable",
       firstgid = 15,
-      tilewidth = 122,
-      tileheight = 599,
+      tilewidth = 64,
+      tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/passerelle2.png",
-      imagewidth = 122,
-      imageheight = 599,
-      properties = {},
-      tiles = {}
-    },
-    {
-      name = "cable2",
-      firstgid = 16,
-      tilewidth = 46,
-      tileheight = 243,
-      spacing = 0,
-      margin = 0,
-      image = "data/cable2.png",
-      imagewidth = 46,
-      imageheight = 243,
+      image = "data/cable.png",
+      imagewidth = 64,
+      imageheight = 64,
       properties = {},
       tiles = {}
     },
     {
       name = "mur2",
-      firstgid = 17,
+      firstgid = 16,
       tilewidth = 64,
       tileheight = 64,
       spacing = 0,
@@ -232,42 +234,35 @@ return {
       tiles = {}
     },
     {
-      name = "lamp1",
+      name = "lampe1",
+      firstgid = 17,
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      image = "data/lampe1.png",
+      imagewidth = 64,
+      imageheight = 64,
+      properties = {
+        ["anim"] = "true",
+        ["frames"] = "4"
+      },
+      tiles = {}
+    },
+    {
+      name = "lampe2",
       firstgid = 18,
       tilewidth = 64,
       tileheight = 64,
       spacing = 0,
       margin = 0,
-      image = "data/lamp1.png",
+      image = "data/lampe2.png",
       imagewidth = 64,
       imageheight = 64,
-      properties = {},
-      tiles = {}
-    },
-    {
-      name = "lamp2",
-      firstgid = 19,
-      tilewidth = 64,
-      tileheight = 64,
-      spacing = 0,
-      margin = 0,
-      image = "data/lamp2.png",
-      imagewidth = 64,
-      imageheight = 64,
-      properties = {},
-      tiles = {}
-    },
-    {
-      name = "cable",
-      firstgid = 20,
-      tilewidth = 64,
-      tileheight = 64,
-      spacing = 0,
-      margin = 0,
-      image = "data/cable.png",
-      imagewidth = 64,
-      imageheight = 64,
-      properties = {},
+      properties = {
+        ["anim"] = "true",
+        ["frames"] = "4"
+      },
       tiles = {}
     }
   },
@@ -285,11 +280,11 @@ return {
       encoding = "lua",
       data = {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 17, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 17, 17, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 17, 17, 17, 0,
-        17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 0,
-        17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 16, 16, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 16, 16, 16, 16, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 16, 16, 16, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
       }
     },
@@ -309,8 +304,8 @@ return {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-        4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 1,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        4, 5, 5, 5, 5, 5, 5, 5, 5, 6, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 1,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6
       }
     },
@@ -492,7 +487,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 1024,
-          y = 320,
+          y = 256,
           width = 64,
           height = 64,
           visible = true,
@@ -522,7 +517,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 1984,
-          y = 320,
+          y = 256,
           width = 64,
           height = 64,
           visible = true,
@@ -597,7 +592,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 3008,
-          y = 320,
+          y = 256,
           width = 64,
           height = 64,
           visible = true,
@@ -643,51 +638,6 @@ return {
           shape = "rectangle",
           x = 3008,
           y = 128,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {
-            ["enabled"] = "true",
-            ["id"] = "3",
-            ["type"] = "MillieuV"
-          }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 1024,
-          y = 256,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {
-            ["enabled"] = "true",
-            ["id"] = "1",
-            ["type"] = "MillieuV"
-          }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 1984,
-          y = 256,
-          width = 64,
-          height = 64,
-          visible = true,
-          properties = {
-            ["enabled"] = "true",
-            ["id"] = "2",
-            ["type"] = "MillieuV"
-          }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 3008,
-          y = 256,
           width = 64,
           height = 64,
           visible = true,
@@ -773,17 +723,6 @@ return {
             ["id"] = "2",
             ["timers"] = "2@1@0#"
           }
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 896,
-          y = 384,
-          width = 448,
-          height = 0,
-          visible = true,
-          properties = {}
         },
         {
           name = "",

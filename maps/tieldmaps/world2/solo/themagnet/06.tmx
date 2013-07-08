@@ -82,7 +82,7 @@
  </layer>
  <layer name="front" width="70" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYCAOMAIxCxCzDlHMBvUDtQEtzKQ3GA0X7GA0XLCDwRguA102DdbyhRpuGgxuoLaZgyEfkuIGYtM3B5XdiA5oFW6cNLaDnQZmIgNi3IxNDSl+JTW9MI0QzEZCuAAAPiUCdA==
+   eJxjYCAOMAIxCxCzDlHMBvUDtQEtzKQ3GA0X7GA0XLCDwRgu+MonQvLEqhmK5Qs13DQY3EBtMwdDPiTFDcSmSw4quxEd0CrcOGlsBzsNzEQGxLgZmxpS/EpqemEaIZiNhHABAK4iAlw=
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="70" height="10">

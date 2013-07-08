@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="80" height="8" tilewidth="64" tileheight="64">
-  <tileset firstgid="1" name="mur" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="mur" tilewidth="64" tileheight="64">
   <image source="data/mur.png" trans="ffffff" width="64" height="64"/>
  </tileset>
  <tileset firstgid="2" name="sol" tilewidth="64" tileheight="64">
@@ -89,7 +89,7 @@
  </tileset>
  <layer name="foreground" width="80" height="8">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIKRAQSR8CggDQgyYIYfuhguPFIBoTAZDT/cYDRMaA8ABagCyw==
+   eJxjYBgFo2AUjIKRAQSQ8CggDQgwYIYfuhguPFIBoTAZDT/CYDQcaAcAIukCUQ==
   </data>
  </layer>
  <layer name="front" width="80" height="8">

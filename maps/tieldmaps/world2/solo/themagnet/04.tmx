@@ -82,7 +82,7 @@
  </layer>
  <layer name="front" width="70" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYCAOMAIxCxCzDlHMBvUDtcFAmUlNe0fDhfZm0dJMZiqpIRYMlXChNxgNF+yAVuGCrT5iI0E/MibHfkr0w8wgFhBb93KQ6RaYe6gdLsSawYlmBrUBO5n6sPmHWuFCqjmkphemEYKJzfMgAABymAIO
+   eJxjYCAOMAIxCxCzImE2HOLEYGL0kmo+PvUwOWqDgTKTmvaOhgvtzaKlmcxUUkMsGCrhQm8wGi7YAa3CBVc5T6x+ZEyO/ZToh5lBLCC2DuQg0y0w91A7XIg1gxPNDGoDdjL1YfMPtcKFVHNITS9MIwQTm+dBAADMWQH+
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="70" height="10">
@@ -485,7 +485,7 @@
     <property name="openid" value="1"/>
    </properties>
   </object>
-  <object x="768" y="320" width="64" height="64">
+  <object x="704" y="320" width="64" height="64">
    <properties>
     <property name="closeid" value="3"/>
     <property name="openid" value="3"/>
