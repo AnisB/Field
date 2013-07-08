@@ -6,6 +6,9 @@ This file is part of the Field project
 TilesetsSolo = {}
 TilesetsSolo.__index =  TilesetsSolo
 
+TilesetsSolo.sprites = { }
+
+
 function TilesetsSolo.new(tile,layer,map)
     local self = {}
     setmetatable(self, TilesetsSolo)
@@ -32,18 +35,29 @@ function TilesetsSolo:getTiles(tiles,map)
 
 		else
 			tile.anim = false
+			if (TilesetsSolo.sprites[map.."-fieldmap/"..v.image] ==nil) then
+				gameStateManager.loader.newImage(TilesetsSolo.sprites ,map.."-fieldmap/"..v.image, map.."-fieldmap/"..v.image)
+			else
+			end
+			tile.img = map.."-fieldmap/"..v.image
 			table.insert(self.tiles,tile)
-			gameStateManager.loader.newImage(self.tiles[tile.id] ,"img", map.."-fieldmap/"..v.image)
 		end
 
 	end
 end
 
+function TilesetsSolo:init()
+	for i,v in pairs(self.tiles) do
+		if not v.anim then
+			print(v.img)
+			v.img = TilesetsSolo.sprites[v.img]
+		end
+	end
+end
 
 function TilesetsSolo:update(dt)
 	for i,v in pairs(self.tiles) do
 		if v.anim then
-			print(v.id)
 			v.img:update(dt)
 		end
 	end

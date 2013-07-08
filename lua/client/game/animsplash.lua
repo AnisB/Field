@@ -36,21 +36,26 @@ AnimSplash.ANIMS.normal.loop = true
 AnimSplash.ANIMS.kill.loop = false
 
 
+AnimSplash.sprites={}
 
 -- PUBLIC : constructor
 function AnimSplash.new(folder)
 	local self = {}
 	setmetatable(self, AnimSplash)
+	assert(folder ~= nil)
 	self.time = 0.0
-	self.sprites = {}
-	for key,val in pairs(AnimSplash.ANIMS) do
-		self.sprites[key] = {}
-		for i=1, val.number do
-			local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
-			-- print("loading image =>", path)
-			self.sprites[key][i] = love.graphics.newImage(path)
+	if AnimSplash.sprites[folder]==nil then
+		print(folder)
+		AnimSplash.sprites[folder]={}
+		for key,val in pairs(AnimSplash.ANIMS) do
+			AnimSplash.sprites[folder][key] = {}
+			for i=1, val.number do
+				local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
+				self.sprites[folder][key][i] = love.graphics.newImage(path)
+			end
 		end
 	end
+	self.folder=folder
 	self.currentAnim = AnimSplash.ANIMS.normal
 	self.currentPos = 1
 	-- begin of an animation
@@ -60,6 +65,7 @@ function AnimSplash.new(folder)
 	self:updateImg()
 	return self
 end
+
 
 -- PUBLIC : getter for the sprite
 function AnimSplash:getSprite()
@@ -132,7 +138,7 @@ end
 
 -- PRIVATE
 function AnimSplash:updateImg()
-	self.currentImg = self.sprites[self.currentAnim.name][self.currentPos]
+	self.currentImg = AnimSplash.sprites[self.folder][self.currentAnim.name][self.currentPos]
 end
 
 -- NETWORK

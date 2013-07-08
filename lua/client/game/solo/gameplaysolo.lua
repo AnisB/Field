@@ -45,7 +45,6 @@ function GameplaySolo.new(mapFile,continuous,player)
     -- Vars
     self.continuous=continuous
 
-
     -- Physics
     love.physics.setMeter( unitWorldSize) --the height of a meter our worlds will be 64px
     world = love.physics.newWorld( 0, 18*unitWorldSize, false )
@@ -132,13 +131,16 @@ function GameplaySolo.new(mapFile,continuous,player)
     -- Starting the multithreading loading
     local returnF = GameplaySolo.loadFinished
     self.loading=gameStateManager.loader.start(returnF, print)
-
+    if not self.loading then
+        self.loading = true
+        self:init()
+    end
     return self
 end
 
 
     -- Fonction qui init l'état gameplay solo quand l'état est fini
-    function GameplaySolo:loadFinished()
+    function GameplaySolo.loadFinished()
         local gp = gameStateManager.state["GameplaySolo"]
         gp:init()
     end
@@ -218,12 +220,6 @@ end
         self.shouldEnd=true
     end    
 
-    -- function GameplaySolo:sendPause(state)
-    --     self.gameIsPaused=state
-    --     self.pauseMenu.isActive=state
-    -- end
-
-
     function GameplaySolo:mousePressed(x, y, button)
     end
     
@@ -245,8 +241,6 @@ end
 
     function GameplaySolo:sendPressedKey(key, unicode)
         if not self.loading then
-            print("RECU"..key)
-
             if not self.gameIsPaused then
 
                 -- Inputs for players
@@ -317,7 +311,6 @@ end
 
             -- Pause
             if key =="escape" then
-                print("LA")
                 self.pauseMenu:sendPauseOrder()
             end   
         end
@@ -379,14 +372,14 @@ end
         dt=dttheo*self.slowTimer
         if  not self.gameIsPaused then
             if(self.levelFinished) then
-			   -- inputManager:clearInputs()
+			   self.inputManager:clearInputs()
                gameStateManager.state['LevelEndingSolo']=LevelEndingSolo.new(self.mapLoader.levelends[1].next,self.continuous)
                gameStateManager:changeState('LevelEndingSolo')
                return
            end
 
             if(self.shouldEnd) then
-                -- inputManager:clearInputs()
+                self.inputManager:clearInputs()
                 gameStateManager.state['LevelFailedSolo']=LevelFailedSolo.new()
                 gameStateManager:changeState('LevelFailedSolo')
                 return        

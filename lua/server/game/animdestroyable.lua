@@ -47,7 +47,7 @@ function AnimDestroyable.new(folder)
 		for i=1, val.number do
 			local path = 'game/anim/'..folder..'/'..key..'/'..i..'.png'
 			-- print("loading image =>", path)
-			self.sprites[key][i] = love.graphics.newImage(path)
+			-- self.sprites[key][i] = love.graphics.newImage(path)
 		end
 	end
 	self.currentAnim = AnimDestroyable.ANIMS.normal

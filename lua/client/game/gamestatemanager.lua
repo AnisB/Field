@@ -126,6 +126,11 @@ end
 function GameStateManager:changeState(newState)
 	self.currentState = newState
 end
+function GameStateManager:resetLoader()
+	self.loader = nil
+	self.loader = require 'game/love-loader'
+end
+
 
 function GameStateManager:resetAndChangeState(newState)
 	self.state[newState]:reset()

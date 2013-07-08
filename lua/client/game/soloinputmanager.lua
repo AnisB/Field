@@ -146,7 +146,10 @@ function SoloInputManager:update()
 	
 end
 
-
+function SoloInputManager:clearInputs()
+	self.listKeys =nil
+	self.listKeys ={}
+end
 function SoloInputManager:isKeyDown(key)
 	local ok=false
 	if self.listKeys[key]~=nil then
