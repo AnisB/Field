@@ -52,7 +52,7 @@ function CameraSolo:newPosition(ax,ay)
 end
 
 function CameraSolo:getPos()
-	return {x = self.position.x, y= self.position.y -5}
+	return {x = self.position.x -5, y= self.position.y -5}
 end
 
 
