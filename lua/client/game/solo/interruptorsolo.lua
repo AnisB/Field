@@ -110,12 +110,12 @@ function InterruptorSolo:handleTry(tryer)
 		if self.canBeEnableMM>0 then
 			self.on= not self.on
 			if self.on then
-				self.magnetManager:enableG(self.generatorID)
+				self.mapLoader:enableGene(self.generatorID)
 				self:loadAnimation("launching",true)
 				self:executeActions(Interruptor.TimeEvent.Launching)
 
 			else
-				self.magnetManager:disableG(self.generatorID)
+				self.mapLoader:disableGene(self.generatorID)
 				self:loadAnimation("shutdown",true)
 				self:executeActions(Interruptor.TimeEvent.Shutdown)
 			end
