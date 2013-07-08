@@ -14,10 +14,17 @@ function ArcSolo.new(pos,w,h,typeArcSolo,id,enable, mapInfo)
 
 	self.id=tonumber(id)
 	self.position={x=pos.x,y=pos.y}
-	self.w=w
-	self.h=h
-	local decalage={w/2,h/2}
-	self.pc = Physics.newZone(self.position.x,self.position.y,w,h,decalage)
+	if( typeArcSolo==ArcSoloType.MillieuH or typeArcSolo==ArcSoloType.DebutH or typeArcSolo==ArcSoloType.FinH) then
+		self.w=64
+		self.h=16
+		local decalage={self.w/2,self.h/2}
+		self.pc = Physics.newZone(self.position.x,self.position.y+24,self.w,self.h,decalage)
+	else
+		self.w=16
+		self.h=64
+		local decalage={self.w/2,self.h/2}
+		self.pc = Physics.newZone(self.position.x + 24,self.position.y,self.w,self.h,decalage)
+	end
 	self.pc.fixture:setUserData(self)
 	self.type='ArcSolo'
 	self.arcSoloType=typeArcSolo
@@ -76,6 +83,10 @@ end
 function ArcSolo:unCollideWith( object, collision )
 
 end
+
+function ArcSolo:flush()
+
+end
 function ArcSolo:activateA( )
 	self.enabled = true
 	self.anim:load("on",true)
@@ -90,9 +101,6 @@ function ArcSolo:update(seconds)
 		self.timer=self.timer+seconds
 	end
 	self.anim:update(seconds)
-	x,y =self.pc.body:getPosition()
-	self.position.x=x
-	self.position.y=y
 	if(self.timer>=TimerArcSolo) then
 		self.isTouched=false
 		gameStateManager:failed()

@@ -676,3 +676,10 @@ function MapLoaderSolo:handleTry(tryer)
         p:handleTry(tryer)
     end    
 end
+
+
+function MapLoaderSolo:destroy()
+    for i,j in pairs(self.tilesets) do
+        j:destroy()
+    end
+end

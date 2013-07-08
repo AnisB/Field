@@ -159,6 +159,7 @@ end
             self.theMagnet:init()
         end
         self.loading=false
+        self.inputManager:clearInputs()
     end
 
     
@@ -181,7 +182,23 @@ end
         world:destroy()
         world=nil
         world = love.physics.newWorld( 0, 18*unitWorldSize, false )
+        self.mapLoader:destroy()
         world:setCallbacks(beginContact, endContact, preSolve, postSolve)
+        self.background1:destroy()
+        self.background2:destroy()
+        self.background3:destroy()
+        self.background4:destroy()
+        self.background5:destroy()
+        self.background:destroy()
+        
+        self.background2 = nil
+        self.background3 = nil
+        self.background4 = nil
+        self.background5 = nil
+        self.background = nil
+
+        self.mapLoaderSolo = nil
+        collectgarbage()
     end  
 
     function GameplaySolo:reset()
@@ -537,6 +554,7 @@ function preSolve(a, b, coll)
     	o2:preSolve(o1, coll)
     end
 end
+
 
 function GameplaySolo:postSolve(a, b, coll)
 -- we won't do anything with this function

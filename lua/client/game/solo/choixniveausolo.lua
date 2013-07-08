@@ -116,6 +116,7 @@ function ChoixNiveauSolo:sendPressedKey(key, unicode)
 		self.timerPrev=0
 	elseif key == "return" then
 		if self.play.selected then
+			gameStateManager.state['GameplaySolo']= nil
 			gameStateManager.state['GameplaySolo']= GameplaySolo.new("maps/solo/"..self.player.."/"..self.level,self.continuous,self.player)
 			gameStateManager:changeState('GameplaySolo')
 		elseif self.returnB.selected then

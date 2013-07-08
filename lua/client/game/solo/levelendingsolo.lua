@@ -77,6 +77,7 @@ function LevelEndingSolo:sendPressedKey(key, unicode)
             if self.continuous then
                 local player=gameStateManager.state['GameplaySolo'].player
                 gameStateManager.state['GameplaySolo']:destroy()
+                gameStateManager.state['GameplaySolo']= nil
                 gameStateManager.state['GameplaySolo']=GameplaySolo.new("maps/solo/"..player.."/"..self.next,true,player)
                 gameStateManager:changeState('GameplaySolo')        
             else

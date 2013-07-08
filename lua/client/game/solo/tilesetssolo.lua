@@ -63,6 +63,12 @@ function TilesetsSolo:update(dt)
 	end
 end
 
+function TilesetsSolo:destroy()
+		for i,v in pairs(TilesetsSolo.sprites) do
+			v =nil
+		end
+	end
+
 function TilesetsSolo:draw(pos)
 	for i=0,self.layer.height-1,1 do
 		for j=1,self.layer.width,1 do

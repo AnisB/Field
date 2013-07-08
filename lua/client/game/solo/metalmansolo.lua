@@ -29,7 +29,7 @@ function MetalManSolo.new(camera,pos,powers)
 	self.position={x=pos.x,y=pos.y}
 
 	-- The physics components
-	self.pc = Physics.newCharacter(self.position.x,self.position.y,unitWorldSize/2,false)
+	self.pc = Physics.newCharacter(self.position.x,self.position.y,unitWorldSize/2 ,false)
 	self.pc.fixture:setUserData(self)
 	self.pc.fixture:getUserData():reset()
 	self.gs = self.pc.body:getGravityScale()
@@ -374,7 +374,7 @@ function MetalManSolo:update(seconds)
 	end
 	self.anim:update(seconds)
 	x,y =self.pc.body:getPosition()
-	self.position.x=x
+	self.position.x=x + 5
 	self.position.y=y
 	self.camera:newPosition(x,y)
 

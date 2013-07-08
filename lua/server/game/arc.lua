@@ -1,5 +1,6 @@
 
 
+
 require("game.animarc")
 
 Arc = {}
@@ -15,10 +16,17 @@ function Arc.new(pos,w,h,typeArc,id,enable, netid)
 	self.id=tonumber(id)
 	self.netid = netid
 	self.position={x=pos.x,y=pos.y}
-	self.w=w
-	self.h=h
-	local decalage={w/2,h/2}
-	self.pc = Physics.newZone(self.position.x,self.position.y,w,h,decalage)
+	if( typeArc==ArcType.MillieuH or typeArc==ArcType.DebutH or typeArc==ArcType.FinH) then
+		self.w=64
+		self.h=16
+		local decalage={self.w/2,self.h/2}
+		self.pc = Physics.newZone(self.position.x,self.position.y+24,self.w,self.h,decalage)
+	else
+		self.w=16
+		self.h=64
+		local decalage={self.w/2,self.h/2}
+		self.pc = Physics.newZone(self.position.x + 24,self.position.y,self.w,self.h,decalage)
+	end
 	self.pc.fixture:setUserData(self)
 	self.type='Arc'
 	self.arcType=typeArc

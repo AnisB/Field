@@ -23,6 +23,10 @@ end
 function SimpleBackground:update(dt)
 end
 
+function SimpleBackground:destroy()
+	self.img = nil
+	collectgarbage("collect")
+end
 
 function SimpleBackground:draw(pos)
 		love.graphics.draw(self.img,0.0)

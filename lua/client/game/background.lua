@@ -6,11 +6,15 @@
 Background = {}
 Background.__index =  Background
 
+Background.sprites = {}
 function Background.new(path,scale,ymap)
     local self = {}
     setmetatable(self, Background)
 
-	self.img=love.graphics.newImage(path)
+    if Background.sprites[path] ==nil  then
+        Background.sprites[path]=love.graphics.newImage(path)
+    end
+    self.img = path
     self.scale=scale
     self.ymap=ymap
     self.scale=scale
@@ -19,13 +23,19 @@ function Background.new(path,scale,ymap)
 end
 
 
-
+function Background:destroy()
+    collectgarbage("collect")
+    for i,j in pairs(Background.sprites) do
+        j = nil
+    end
+end
 
 function Background:update(dt)
 end
 
 
 function Background:draw(pos)
-		love.graphics.drawq(self.img, self.quad,-(pos.x)*self.scale%1280-1280, -(self.img:getHeight()-windowH)*pos.y/self.ymap)
-		love.graphics.drawq(self.img,self.quad, -(pos.x)*self.scale%1280, -(self.img:getHeight()-windowH)*pos.y/self.ymap)
+    local img = Background.sprites[self.img]
+		love.graphics.drawq( img, self.quad,-(pos.x)*self.scale%1280-1280, -(img:getHeight()-windowH)*pos.y/self.ymap)
+		love.graphics.drawq( img,self.quad, -(pos.x)*self.scale%1280, -(img:getHeight()-windowH)*pos.y/self.ymap)
 end
