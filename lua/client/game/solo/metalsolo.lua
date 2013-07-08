@@ -40,7 +40,7 @@ function MetalSolo.new(pos,shapeType,typeP,material,typemetalSolo,netid)
 	end
 	self.pc.fixture:setUserData(self)
 	self.isStatic=type
-	self.strenght=5*unitWorldSize
+	self.strenght=7*unitWorldSize
 	self.type='MetalSolo'
 	if material=="aluminium" then
 		self.metalSoloWeight=MetalSoloMTypes.Alu

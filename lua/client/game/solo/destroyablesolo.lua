@@ -60,13 +60,14 @@
             x,y =object.pc.body:getLinearVelocity()
             local kinEnergyX = math.log(0.5*object.pc.body:getMass()*object.pc.body:getMass()*object.pc.body:getMass()*math.abs(x))
             local kinEnergyY = math.log(0.5*object.pc.body:getMass()*object.pc.body:getMass()*object.pc.body:getMass()*math.abs(y))
-            if(kinEnergyX>10.5) and object.position.y>self.position.y then
+            if(kinEnergyX>10.5) then
                 self.pc.body:destroy()
                 self.destroy=true
                 self:loadAnimation("breaking",true)
             end
+            print("X ENERGY",kinEnergyX)
 
-            if(kinEnergyY>11.2) and object.position.x>self.position.x then
+            if(kinEnergyY>11.2) then
                 self.pc.body:destroy()
                 self.destroy=true
                 self:loadAnimation("breaking",true)            
