@@ -77,7 +77,7 @@
  </tileset>
  <layer name="foreground" width="70" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjAIGBkEC/IEGAgPtACyAHwnTE+AKi8ESRgMVLshgsIQFDPAzkB8u6Hpx4cEOCLmf1DJnOITLcPDDUAEAFkoDRA==
+   eJxjYBgFo2AUjAIGBkEC/IEGAmTqY6OSGmyAHwnTE+AKC3LDiNpgoMIFGQyWsIABfgbywwVdLy482AEh95Na5gyHcBkOfhgqAABeAgNQ
   </data>
  </layer>
  <layer name="front" width="70" height="10">

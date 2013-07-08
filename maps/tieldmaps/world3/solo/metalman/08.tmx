@@ -89,7 +89,7 @@
  </tileset>
  <layer name="foreground" width="60" height="7">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDBUggISHMxDAgocjGAl+JAUAAG1fAME=
+   eJxjYBgFo2AUDBUggITR+fjwUAO4/DDc/DtU3U0rAABFDAIB
   </data>
  </layer>
  <layer name="front" width="60" height="7">

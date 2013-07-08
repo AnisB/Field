@@ -94,7 +94,7 @@
  </layer>
  <layer name="front" width="70" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYCAOMAIxCxCzUhGz0chcfHZRG9DCTEL2wTA1zaQ2GIhwoba9wyFcaAFGwwU7GA0X7GCgwoWRgTblJbXMJkUfsXUkBxF20jNciDWfE80MagN2PHLY3EyPcCHVDlLTC9MIwWwkhAsArAUB5w==
+   eJxjYCAOMAIxCxCzUhGz0chcfHZRG9DCTEL2wTA1zaQ2GIhwoba9wyFcaAFGwwU7GA0X7GCgwoWRgTblJbXMJkUfMXUkqI7jIMJOeoYLseZzoplBbcCORw6bm+kRLqTaQWp6YRohmI2EcAEArykB6A==
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="70" height="10">

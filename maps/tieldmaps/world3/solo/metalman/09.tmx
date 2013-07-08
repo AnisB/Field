@@ -89,12 +89,12 @@
  </tileset>
  <layer name="foreground" width="60" height="8">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjILBCQSQ8HAGAljwcAQjwY+kAABuTwDB
+   eJxjYBgFo2AUjILBCQSQMDofHx5qAJcfhpt/h6q7aQUARfwCAQ==
   </data>
  </layer>
  <layer name="front" width="60" height="8">
   <data encoding="base64" compression="zlib">
-   eJxjYCAOMAIxCxCzomE2PHKEMCV6SdUPU0sswKeWFHOw6WVEYzOSKE6KXbRQO1jBqH+po3awAlLyOscAuZFSwInEJiXO2LGI4SpDSKXJTTvY7CekHhS/TCMEg9IpANZ5Adg=
+   eJxjYCAOMAIxCxCzomE2PHKEMCV6SdUPU0sswKeWFHOw6WWkAptYu2ihdrCCUf9SR+1gBaTkdY4BciOlgBOJTUqcsWMRY0TDDGTS5KYdbPYTUg+KX6YRgkHpFADKmQHW
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="60" height="8">
