@@ -27,54 +27,74 @@
  <tileset firstgid="9" name="fin" tilewidth="192" tileheight="128">
   <image source="data/fin.png" width="192" height="128"/>
  </tileset>
- <tileset firstgid="10" name="citerne" tilewidth="418" tileheight="632">
-  <tileoffset x="0" y="632"/>
-  <image source="data/citerne.png" width="418" height="632"/>
- </tileset>
- <tileset firstgid="11" name="container1" tilewidth="610" tileheight="276">
-  <tileoffset x="0" y="195"/>
-  <image source="data/container1.png" width="610" height="276"/>
- </tileset>
- <tileset firstgid="12" name="container2" tilewidth="480" tileheight="330">
-  <tileoffset x="0" y="280"/>
-  <image source="data/container2.png" width="480" height="330"/>
- </tileset>
- <tileset firstgid="13" name="cable1" tilewidth="77" tileheight="372">
-  <tileoffset x="0" y="372"/>
-  <image source="data/cable1.png" width="77" height="372"/>
- </tileset>
- <tileset firstgid="14" name="passerelle1" tilewidth="198" tileheight="342">
-  <tileoffset x="0" y="342"/>
-  <image source="data/passerelle1.png" width="198" height="342"/>
- </tileset>
- <tileset firstgid="15" name="passerelle2" tilewidth="122" tileheight="599">
-  <tileoffset x="0" y="599"/>
-  <image source="data/passerelle2.png" width="122" height="599"/>
- </tileset>
- <tileset firstgid="16" name="cable2" tilewidth="46" tileheight="243">
-  <tileoffset x="0" y="243"/>
-  <image source="data/cable2.png" width="46" height="243"/>
- </tileset>
- <tileset firstgid="17" name="mur2" tilewidth="64" tileheight="64">
+ <tileset firstgid="10" name="mur2" tilewidth="64" tileheight="64">
   <image source="data/mur2.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="18" name="lamp1" tilewidth="64" tileheight="64">
-  <image source="data/lamp1.png" width="64" height="64"/>
+ <tileset firstgid="11" name="lamp1" tilewidth="64" tileheight="64">
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="4"/>
+  </properties>
+  <image source="data/lampe1.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="19" name="lamp2" tilewidth="64" tileheight="64">
-  <image source="data/lamp2.png" width="64" height="64"/>
+ <tileset firstgid="12" name="lamp2" tilewidth="64" tileheight="64">
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="4"/>
+  </properties>
+  <image source="data/lampe2.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="20" name="cable" tilewidth="64" tileheight="64">
+ <tileset firstgid="13" name="cable" tilewidth="64" tileheight="64">
   <image source="data/cable.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="14" name="cube1" tilewidth="250" tileheight="250">
+  <tileoffset x="0" y="632"/>
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="8"/>
+  </properties>
+  <image source="data/cube1.png" width="247" height="287"/>
+ </tileset>
+ <tileset firstgid="14" name="plateforme1" tilewidth="190" tileheight="58">
+  <tileoffset x="0" y="58"/>
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="8"/>
+  </properties>
+  <image source="data/plateforme1.png" width="202" height="98"/>
+ </tileset>
+ <tileset firstgid="15" name="plateforme2" tilewidth="294" tileheight="66">
+  <tileoffset x="0" y="66"/>
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="8"/>
+  </properties>
+  <image source="data/plateforme2.png" width="293" height="110"/>
+ </tileset>
+ <tileset firstgid="15" name="rectangle" tilewidth="355" tileheight="442">
+  <tileoffset x="0" y="442"/>
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="8"/>
+  </properties>
+  <image source="data/rectangle.png" width="357" height="465"/>
+ </tileset>
+ <tileset firstgid="16" name="rocher1" tilewidth="272" tileheight="445">
+  <tileoffset x="0" y="632"/>
+  <properties>
+   <property name="anim" value="true"/>
+   <property name="frames" value="8"/>
+  </properties>
+  <image source="data/rocher1.png" width="417" height="614"/>
  </tileset>
  <layer name="foreground" width="80" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt10EKwkAMQNFeoej9z+pCFCNVJpM0yaT/wWwKQvMZGtw2YD13npnceAYAb5W+7da94L0vRlT6tlv3AvsCgFWlvRDxv8Jbpb3A/woA2dgVNuwKAECk/eNAZz84+O+o2a8DabQNDaXZHnT0mf/qDUfwTZQ0e0J7ujuzXeeGEd26Noxu9+rXreO30bty1buYce+6NNTMRENpZhYaPllmoKHk9b7dG0bdm44Nsxus3DB79pUbZs/cpeOZOnbMviMr98ueq0LDmd9nz1Kpo/Z32e9f4cDPA+95PMA=
+   eJzt2ckOwjAMRdGuGQT//7UsUBdBhWZw8mxzj5RNpYr4yYpTsW1APHeeDbmKnt0c7QUAdp7O9tG5YD0vaqjO8RlzgXkx7qneACDmaS6s+K6wFvH7Y7aH4DcB+OBlVkS933maH5gvap8CI7gnrsP/FXNdDhZ+O8rs20KpNhsyLPXmYZlj1PueRf304jnOxFLLnGhdHlnei2dm5znDUStyy5rh6uz2/LLl+Km2V/61FxV9lyXDlprIsNRTCxm+jdRAhiWr/WbPcFXfZMxQnUHkDNW1R85QXXOWHGfKmKO6RyLnp67LQ4Y976tr8ZRj63vq/XtYsPMCLPAkcA==
   </data>
  </layer>
  <layer name="front" width="80" height="50">
   <data encoding="base64" compression="zlib">
-   eJztW+1uwyAM7Jau297/hbtJi4RogPO3YZzEH9LY5op9Jk1vtw0PvCUa95/xETgef3FQucuATHGgsWz+XkHlJFPcGbDzVwaN/NXWBdTulX48qtg0Naa23eOkhRZ/K6G1Hunae/tvJVD508jflWDFX8/GSsiQvxr6oHX+KOv+6J7emcIzf633pNeer7/vq+u7f8b8WOVvBDLxt/P3FWedLGunpf56nTmu9KNc41Fdq3UBObP01onMtSDdf5p7xtoWtc9A/Uh4mYW/o5gr93h0/zwLf9K5np9V8/cA7HvlL5Vnro70zhKtM4e2Vljkr7ROWgKJoax/GvbKz2rnqjen2nFF988c/r4Z9/T8Zctf6ZwlKHHVddNbf0dnDa7/kc2RDYnWtmJCfUfsP0SL0XVkzF8uRr4pvKE81tdaWmtRf6hcc2xSOEKeP9d9YGT/16pfEVrBtXVV/yQ+I/VXwqeEP02flvor8YXEonXfTPqrxeGM/HHsSrSTqx+U3yvRZwoUnW4hSisikDF/UVj0SZwY0HOKl/6i9pE+2Bqe/bMWf6N66AlK/bPKX6k+cPVD430YyjnFIn9XAPc5TQuU/bciPPN3NWjUv/PzyNxqsO6fPccJ7/9vSd+/j+7JMkIjf/8zTj7QXPgKiDEzqPvv0yqQSVH28u97sMavrjwBFSwHPw==
+   eJztW9lOxDAMXCgU+P8fhpWoZIUc4zNuyEh5SVvbGWxP0i2Px0YEXhKNt5/xPnGcv3FwucuATHGgsWz+/oLLSaa4M2DXrw4W9WutC6jdmn6cRWxcjTkZtnuctNDibyW01qNdey//VgKXP4v6XQle/PVsrIQM9WuhD1bnD9r3R8/0zhSR9eudk1E5X/69a9f3/hnz41W/M5CJv12/dfvPXnkWc7X7LPQ36sxR0w+6xqO4NjpXtPTCI0+0+WeZM962uPsM1I+Gl7vwd5A5muOz98934U871/Ozav0egP2o+uXyLNWR3lmidubw0AqP+tX2SU8gMdD+Z2GP3mtdq9GcWsc1e/8s4e9L8EzPX7b61c55ghMX7a+c3tnzLdWFmkZI/Y9sjmxotLYVE+p7Rv4hWoyuI2P9SjHyzeEN5bG81tJaj/7D5Vpik8MR8v659m6hFoNmTlO/HpqMxiJ9rux/Gp8z9VfDp4Y/S5+e+qvxhcRi9dyd9NeKwzvyJ7Gr0U6pfnB+r+x910LB0Z4WZmnFDGSsXxQe+yRJDOg5JUp/UfvIPtgbkftnK/5G/TASnP7nVb9afZDqh8X3MIim0DWgWFErWpC+p2mBk38rIrJ+V4NF/7vuR+ZWhGf9Ro4L0f+/pf3+fvaeLCMs6vc/4+IDPWd/TogxM7j59+EVyE1B9/Kve4jGsy6/AbOsByc=
   </data>
  </layer>
  <objectgroup color="#00ff00" name="wall" width="80" height="50">
@@ -729,58 +749,20 @@
   </object>
   <object x="3264" y="1280" width="64" height="64">
    <properties>
-    <property name="enabled" value="true"/>
     <property name="id" value="1"/>
     <property name="type" value="FinV"/>
    </properties>
   </object>
   <object x="3264" y="1152" width="64" height="64">
    <properties>
-    <property name="enabled" value="true"/>
     <property name="id" value="1"/>
     <property name="type" value="MillieuV"/>
    </properties>
   </object>
   <object x="3264" y="1088" width="64" height="64">
    <properties>
-    <property name="enabled" value="true"/>
     <property name="id" value="1"/>
     <property name="type" value="DebutV"/>
-   </properties>
-  </object>
-  <object x="3264" y="1216" width="64" height="64">
-   <properties>
-    <property name="enabled" value="true"/>
-    <property name="id" value="1"/>
-    <property name="type" value="MillieuV"/>
-   </properties>
-  </object>
-  <object x="3648" y="1088" width="64" height="64">
-   <properties>
-    <property name="enabled" value="true"/>
-    <property name="id" value="1"/>
-    <property name="type" value="DebutV"/>
-   </properties>
-  </object>
-  <object x="3648" y="1216" width="64" height="64">
-   <properties>
-    <property name="enabled" value="true"/>
-    <property name="id" value="1"/>
-    <property name="type" value="MillieuV"/>
-   </properties>
-  </object>
-  <object x="3648" y="1280" width="64" height="64">
-   <properties>
-    <property name="enabled" value="true"/>
-    <property name="id" value="1"/>
-    <property name="type" value="FinV"/>
-   </properties>
-  </object>
-  <object x="3648" y="1152" width="64" height="64">
-   <properties>
-    <property name="enabled" value="true"/>
-    <property name="id" value="1"/>
-    <property name="type" value="MillieuV"/>
    </properties>
   </object>
   <object x="1792" y="1344" width="64" height="64">
@@ -788,6 +770,36 @@
     <property name="enabled" value="true"/>
     <property name="id" value="4"/>
     <property name="type" value="MillieuH"/>
+   </properties>
+  </object>
+  <object x="3264" y="1216" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="type" value="MillieuV"/>
+   </properties>
+  </object>
+  <object x="3648" y="1152" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="type" value="MillieuV"/>
+   </properties>
+  </object>
+  <object x="3648" y="1280" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="type" value="FinV"/>
+   </properties>
+  </object>
+  <object x="3648" y="1216" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="type" value="MillieuV"/>
+   </properties>
+  </object>
+  <object x="3648" y="1088" width="64" height="64">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="type" value="DebutV"/>
    </properties>
   </object>
  </objectgroup>
@@ -862,6 +874,11 @@
   <object x="3776" y="1152" width="64" height="64"/>
   <object x="1856" y="1152" width="64" height="64"/>
   <object x="2816" y="512" width="64" height="64"/>
+  <object x="2176" y="1472" width="64" height="64"/>
+  <object x="3136" y="1472" width="64" height="64"/>
+  <object x="3456" y="1472" width="64" height="64"/>
+  <object x="2496" y="1472" width="64" height="64"/>
+  <object x="2816" y="1472" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="arcswitch" width="80" height="50">
   <object x="4608" y="1088" width="64" height="64">
