@@ -131,7 +131,7 @@ end
 
 -- PRIVATE
 function AnimGate:updateImg()
-	self.currentImg = self.sprites[self.currentAnim.name][self.currentPos]
+	--self.currentImg = self.sprites[self.currentAnim.name][self.currentPos]
 end
 
 -- NETWORK
