@@ -118,7 +118,7 @@ end
 
 -- PRIVATE
 function AnimDestroyable:updateImg()
-	self.currentImg = self.sprites[self.currentAnim.name][self.currentPos]
+	--self.currentImg = self.sprites[self.currentAnim.name][self.currentPos]
 end
 
 -- NETWORK
