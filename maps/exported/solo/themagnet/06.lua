@@ -357,6 +357,17 @@ return {
           height = 128,
           visible = true,
           properties = {}
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2176,
+          y = 256,
+          width = 64,
+          height = 64,
+          visible = true,
+          properties = {}
         }
       }
     },

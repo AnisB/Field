@@ -91,6 +91,7 @@
   <object x="1664" y="320" width="64" height="128"/>
   <object x="2752" y="320" width="64" height="64"/>
   <object x="2176" y="448" width="64" height="128"/>
+  <object x="2176" y="256" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#0000ff" name="platform" width="70" height="10">
   <object x="640" y="576" width="3200" height="64"/>

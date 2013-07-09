@@ -87,19 +87,9 @@
   </properties>
   <image source="data/lampe2.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="19" name="lampe1" tilewidth="64" tileheight="64">
-  <properties>
-   <property name="anim" value="true"/>
-   <property name="frames" value="4"/>
-  </properties>
-  <image source="../metalman/data/lampe1.png" width="64" height="64"/>
- </tileset>
- <tileset firstgid="20" name="alone" tilewidth="64" tileheight="64">
-  <image source="../metalman/data/alone.png" width="64" height="64"/>
- </tileset>
  <layer name="foreground" width="80" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt1UEOwiAQRmGOYKL3P6sLF0ZTKTPO8A/0fQkb09byRGgNwNXc+QxAkof6BTBdpb2dswIA1lbpDOCsAIC1cVYAAKJwVuS6HQz09XrRsm+0DQ0/eXvQMWb+V28Iu6Oz1Tp+PWd3Ee16/XZtGNVtpN9uDTO6jT53dTPmsEurb5b/W/ZYjXW/ouGbZ7+n4cvZvl9hVDXr3bwdqvZTryfveq9A3enf/UJJ3Siin6qhus9ZozZwjaqj4neL/k7V2lOvuVnrOoN6XhUaeu5Xz6VSR+t96vevMBDnCd3nMiw=
+   eJzt10EOwiAQRmGOoPe/rAsXRlMpMx34h+n7EjbG1vJEiK0BuJsnrwEAgqj2bM4KAKgn0/8FzgoA2BvnAgAgCufHXI+Dgb5eL1r2jbah4TdvDzrGzP/uDWF3dLZax7/7VBfRrtevasOobiP9qjWc0W30vrtbMYcqrX5Zfm+zx26s+xUNPzz7PQ3fzvb9DCOrVc/m7ZC1n3o9edd7BupOV/cLJXWjiH6qhuo+Z43awHtUHRXfW/Rnqtaees2tWtczqOeVoaHnevVcMnW0Xqd+/gwDcV6ZbjGc
   </data>
  </layer>
  <layer name="front" width="80" height="50">
@@ -807,6 +797,7 @@
   <object x="2496" y="1472" width="64" height="64"/>
   <object x="3456" y="1472" width="64" height="64"/>
   <object x="2816" y="1472" width="64" height="64"/>
+  <object x="1856" y="1152" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="arcswitch" width="80" height="50">
   <object x="3072" y="2112" width="64" height="64">
