@@ -55,7 +55,7 @@ end
 
 function ConnectToServer:error(msg)
     self.err = true
-    self.errcontent =msg
+    self.errcontent = msg
     self.errcoolDown = 1
 end
 
@@ -108,6 +108,10 @@ function ConnectToServer:sendPressedKey(key, unicode)
 			end
 		elseif key =="tab" or key =="down" then
 			self:incrementSelection()	
+		elseif key =="b" then
+			if self.ipaddrfield.selected then
+				self.ipaddrfield.text = "127.0.0.1"
+			end	
 	    elseif key =="up" or key =="left" then
 	    	self:decrementSelection()
 	    elseif key == "right" then
@@ -200,6 +204,7 @@ function ConnectToServer:onMessage(msg)
 		end
 		self.ipaddr = msg.ip
 		self.discovered = true
+		self.ipaddrfield.text = msg.ip
 		print('IP DISCOVER =', msg.ip)
 	else
 		print("[ConnectToServer] wrong type :", table2.tostring(msg))
