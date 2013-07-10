@@ -65,6 +65,9 @@ function Gameplay:reset()
 
     --Map
     print("LOADING FILE =", self.mapFile)
+
+    self.mapLoader:destroy()
+    self.mapLoader = nil
     self.mapLoader = MapLoader.new(self.mapFile)
     
     --Characters

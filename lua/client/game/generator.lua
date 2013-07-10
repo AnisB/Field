@@ -73,6 +73,11 @@ function Generator:getPosition(  )
 	return self.position
 end
 
+function Generator:destroy(  )
+	self.fieldSound:destroy()
+	self.fieldSound = nil
+end
+
 function Generator:update(seconds)
 	self.field:update(seconds)
 	self.anim:update(seconds)

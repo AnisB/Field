@@ -25,7 +25,7 @@ function FieldSound.new(soundName)
 	local path = FieldSound.SOUND_ROOT..name..'.ogg'
 	local pathLoop = FieldSound.SOUND_ROOT..name..FieldSound.SOUND_LOOP..'.ogg'
 	self.src = love.audio.newSource(path)
-	self.srcLoop = love.audio.newSource(pathLoop, "static")
+	self.srcLoop = love.audio.newSource(pathLoop)
 	self.src:setDistance(200,1000)
 	self.srcLoop:setDistance(200,1000)
 	self.isFadingIn = false
@@ -89,6 +89,12 @@ function FieldSound:done()
 	return self.isDone
 end
 
+function FieldSound:destroy()
+	self.src:stop()
+	self.src =  nil
+	self.srcLoop:stop()
+	self.srcLoop = nil
+end
 function FieldSound:immediateStop() --should be called before deleting the object
 	self.srcLoop:setLooping(false)
 	self.src:setVolume(0)

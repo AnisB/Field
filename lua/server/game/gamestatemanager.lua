@@ -26,7 +26,6 @@ function GameStateManager.new()
 	local self = {}
 	setmetatable(self, GameStateManager)
 	self.state = {
-		attenteTest= common.instance(AttenteTest),
 		attente= common.instance(Attente),
 		choixTypeJeu= common.instance(ChoixTypeJeu),
 		arcadeChoixPerso= common.instance(ArcadeChoixPerso),
@@ -42,7 +41,6 @@ end
 
 function GameStateManager:reset()
 	self.state = {
-		attenteTest= common.instance(AttenteTest),
 		attente= common.instance(Attente),
 		choixTypeJeu= common.instance(ChoixTypeJeu),
 		arcadeChoixPerso= common.instance(ArcadeChoixPerso),
@@ -72,7 +70,6 @@ function GameStateManager:keyPressed(key, unicode)
 end
 
 function GameStateManager:keyReleased(key, unicode)
-	print(self.currentState)
 	self.state[self.currentState]:keyReleased(key, unicode)
 end
 

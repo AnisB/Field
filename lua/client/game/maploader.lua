@@ -101,6 +101,12 @@ function MapLoader:update(dt)
 end
 
 
+function MapLoader:destroy()
+	for i,p in pairs(self.generators) do
+		p:destroy()
+	end
+end
+
 function MapLoader:draw(pos)
     for i,p in pairs(self.tilesets) do
             p:draw({x=pos.x-windowW/2,y=windowH/2-pos.y})
