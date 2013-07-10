@@ -23,7 +23,7 @@ function CommonBackground.new(isSimplfied)
     	self.tm = BasicAnim.new("runningtm", true,0.075,9)
     	self.tm:syncronize(4)
 	end
-    self.logo = BasicAnim.new("logo", true,0.2,8)
+    self.logo = BasicAnim.new("logo", true,0.15,8)
     return self
 end
 

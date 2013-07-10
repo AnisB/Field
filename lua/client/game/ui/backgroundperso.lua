@@ -15,7 +15,7 @@ function BackgroundNiveau.new()
 
     self.back3=love.graphics.newImage("backgrounds/common/back3.png")
     self.back1=AutoLoopingBackground.new("backgrounds/common/back1.png",300)
-    self.logo = BasicAnim.new("logo", true,0.2,8)
+    self.logo = BasicAnim.new("logo", true,0.15,8)
     return self
 end
 
