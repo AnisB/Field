@@ -35,45 +35,21 @@
    <property name="anim" value="true"/>
    <property name="frames" value="4"/>
   </properties>
-  <image source="data/lampe1.png" width="64" height="64"/>
+  <image source="data/lamp1.png" width="67" height="64"/>
  </tileset>
  <tileset firstgid="12" name="lamp2" tilewidth="64" tileheight="64">
   <properties>
    <property name="anim" value="true"/>
    <property name="frames" value="4"/>
   </properties>
-  <image source="data/lampe2.png" width="64" height="64"/>
+  <image source="data/lamp2.png" width="64" height="64"/>
  </tileset>
  <tileset firstgid="13" name="cable" tilewidth="64" tileheight="64">
   <image source="data/cable.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="14" name="cube1" tilewidth="250" tileheight="250">
-  <tileoffset x="0" y="632"/>
-  <properties>
-   <property name="anim" value="true"/>
-   <property name="frames" value="8"/>
-  </properties>
-  <image source="data/cube1.png" width="247" height="287"/>
- </tileset>
- <tileset firstgid="14" name="plateforme1" tilewidth="190" tileheight="58">
-  <tileoffset x="0" y="58"/>
-  <properties>
-   <property name="anim" value="true"/>
-   <property name="frames" value="8"/>
-  </properties>
-  <image source="data/plateforme1.png" width="202" height="98"/>
- </tileset>
- <tileset firstgid="15" name="plateforme2" tilewidth="294" tileheight="66">
-  <tileoffset x="0" y="66"/>
-  <properties>
-   <property name="anim" value="true"/>
-   <property name="frames" value="8"/>
-  </properties>
-  <image source="data/plateforme2.png" width="293" height="110"/>
- </tileset>
  <layer name="foreground" width="80" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt2csKg0AMQFHX1v7/73ZRXKRomZlMJg/vATcFwVwGg3TbgHze/KbycvrtCPQsAHCK9G7X7oXZ+6KF13vcYi+wLwBoRdoLK74rZsv4/QEAVtgVOpH2BwAgN/6vsLVfXPjvqtndBam1DQ2l0R50nDP/0xu24J0o9eyJ3qs6y3aVG67oVrXh6nZnv2odf7WelaeeRY9zV6Vhz0w0lEZmoeGXZgYaSrOet3rDVeemYkPvBpkbes+euaH3zFU6WqrY0fuMZO7nPVeEhiP3e88SqWPvfd7PH+HCPB9oPCQD
+   eJztmMEKAyEMBffc7v7/7/ZQtmCxJRrXF7Mz4EVUzBCMum0A63HQ52KnDwDgQ6Sz3VsXRtcLC5HOdm9doF4AgJdIdWHGu2I0keoC7woAUNNz5z8qYyzjreuvRM+df6+MsYy3rg8AoMD7hxTpD0pBSz15OufflUelwX9qzn41KLG6wWFJrw88jon/7g4tcCaWtNSJ1padK91ldjjDW1aHs92d/rJ5/MaaK3fNRUXeZXHYEhMOS3piweEbTww4LBm13+wOZ+VNRodqBys7VMe+skN1zFk8XklGj+ocWdmfOq4IDnvmq2OJ5LF1nnr/ERqM4wUv4SRg
   </data>
  </layer>
  <layer name="front" width="80" height="50">
@@ -821,9 +797,9 @@
   </object>
  </objectgroup>
  <objectgroup name="lamps" width="80" height="50">
-  <object x="3136" y="1152" width="64" height="64"/>
-  <object x="2496" y="1152" width="64" height="64"/>
-  <object x="2176" y="1152" width="64" height="64"/>
+  <object x="3008" y="1152" width="64" height="64"/>
+  <object x="2688" y="1152" width="64" height="64"/>
+  <object x="2240" y="1152" width="64" height="64"/>
   <object x="3456" y="1152" width="64" height="64"/>
   <object x="2496" y="832" width="64" height="64"/>
   <object x="3456" y="832" width="64" height="64"/>
@@ -858,9 +834,9 @@
   <object x="3776" y="1152" width="64" height="64"/>
   <object x="1856" y="1152" width="64" height="64"/>
   <object x="2816" y="512" width="64" height="64"/>
-  <object x="2176" y="1472" width="64" height="64"/>
+  <object x="2112" y="1472" width="64" height="64"/>
   <object x="3136" y="1472" width="64" height="64"/>
-  <object x="3456" y="1472" width="64" height="64"/>
+  <object x="3520" y="1472" width="64" height="64"/>
   <object x="2496" y="1472" width="64" height="64"/>
   <object x="2816" y="1472" width="64" height="64"/>
  </objectgroup>
