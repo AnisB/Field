@@ -31,8 +31,11 @@ function ArcInterruptor.new(pos,type,arcID,mapLoader,enabled,netid)
 	self.timer=0
 	self.quad= love.graphics.newQuad(0, 0, unitWorldSize, unitWorldSize, unitWorldSize*2,unitWorldSize)
 
-	self.enabled = enabled
-
+	if enabled == "true" then
+		self.enabled = true
+	else
+		self.enabled = false
+	end
 	return self
 end
 function ArcInterruptor:init()
