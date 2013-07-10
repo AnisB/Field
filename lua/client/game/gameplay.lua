@@ -68,6 +68,8 @@ function Gameplay:reset()
 
     self.mapLoader:destroy()
     self.mapLoader = nil
+    self.theMagnet:destroy()
+    self.theMagnet =nil
     self.mapLoader = MapLoader.new(self.mapFile)
     
     --Characters

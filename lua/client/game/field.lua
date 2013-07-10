@@ -128,8 +128,13 @@ function Field:disable()
   self.isActive=false
 end
 
+function Field:destroy()
+  self.back = nil
+  self.mov = nil
+end
+
 function Field:update(dt)
-	self.back:update(dt);
+	self.back:update(dt)
   self.mov:update(dt)
 	if  self.isActive then
 		self.back:start()

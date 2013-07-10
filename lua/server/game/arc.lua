@@ -92,9 +92,6 @@ function Arc:update(seconds)
 		self.timer=self.timer+seconds
 	end
 	self.anim:update(seconds)
-	x,y =self.pc.body:getPosition()
-	self.position.x=x
-	self.position.y=y
 	if(self.timer>=TimerArc) then
 		self.isTouched=false
 		gameStateManager:failed()

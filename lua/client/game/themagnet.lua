@@ -136,6 +136,16 @@ function TheMagnet:update(seconds)
 	end
 end
 
+function TheMagnet:destroy()
+	if self.soundPlaying ~=nil then
+		self.soundPlaying:destroy()
+		self.soundPlaying = nil
+	end
+
+	self.anim = nil
+	self.field:destroy()
+	self.field = nil
+end
 
 
 function TheMagnet:draw()
