@@ -1,5 +1,4 @@
 require("lubeboth.class")
-require("game.history")
 
 Attente = {}
 
@@ -74,8 +73,6 @@ function Attente:onMessage(msg, client)
 					i = i + 1
 				end
 				if monde.player1.cookie ~= monde.player2.cookie then
-					local histories = load_history(monde.player1.cookie, monde.player2.cookie)
-					monde.player1.history, monde.player2.history = histories
 					gameStateManager:changeState("choixTypeJeu")
 					monde.maps = listmaps()
 					print("MAAAPS =", table2.tostring(monde.maps))
