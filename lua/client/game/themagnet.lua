@@ -111,7 +111,6 @@ function TheMagnet:handlePacket( string )
 			else
 				self.field= AttField.new(t[8])
 			end			
-			print "Activating"
 			self.field.isActive=true
 		end
 	end

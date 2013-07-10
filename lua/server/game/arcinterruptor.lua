@@ -36,6 +36,15 @@ function ArcInterruptor.new(pos,type,arcID,mapLoader,enabled,netid)
 	else
 		self.enabled = false
 	end
+
+	if self.enabled then
+		self.on=true
+		self:loadAnimation("on",true)
+	else
+		self.on= false
+		self:loadAnimation("off",true)
+
+	end
 	return self
 end
 function ArcInterruptor:init()

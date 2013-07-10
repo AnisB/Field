@@ -39,6 +39,7 @@ function Arc.new(pos,w,h,typeArc,id,enable, netid)
 	self.isTouched=false
 	self.timer=0
 	self.diffuse  = love.graphics.newQuad(0, 0, 64, 64, 128, 64)
+	print("ARC RECU ", enable)
 	if enable == "true" then
 		self.enabled = true
 		self.anim:load("on")
