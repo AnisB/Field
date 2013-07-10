@@ -71,25 +71,9 @@
   </properties>
   <image source="data/plateforme2.png" width="293" height="110"/>
  </tileset>
- <tileset firstgid="15" name="rectangle" tilewidth="355" tileheight="442">
-  <tileoffset x="0" y="442"/>
-  <properties>
-   <property name="anim" value="true"/>
-   <property name="frames" value="8"/>
-  </properties>
-  <image source="data/rectangle.png" width="357" height="465"/>
- </tileset>
- <tileset firstgid="16" name="rocher1" tilewidth="272" tileheight="445">
-  <tileoffset x="0" y="632"/>
-  <properties>
-   <property name="anim" value="true"/>
-   <property name="frames" value="8"/>
-  </properties>
-  <image source="data/rocher1.png" width="417" height="614"/>
- </tileset>
  <layer name="foreground" width="80" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt2ckOwjAMRdGuGQT//7UsUBdBhWZw8mxzj5RNpYr4yYpTsW1APHeeDbmKnt0c7QUAdp7O9tG5YD0vaqjO8RlzgXkx7qneACDmaS6s+K6wFvH7Y7aH4DcB+OBlVkS933maH5gvap8CI7gnrsP/FXNdDhZ+O8rs20KpNhsyLPXmYZlj1PueRf304jnOxFLLnGhdHlnei2dm5znDUStyy5rh6uz2/LLl+Km2V/61FxV9lyXDlprIsNRTCxm+jdRAhiWr/WbPcFXfZMxQnUHkDNW1R85QXXOWHGfKmKO6RyLnp67LQ4Y976tr8ZRj63vq/XtYsPMCLPAkcA==
+   eJzt2csKg0AMQFHX1v7/73ZRXKRomZlMJg/vATcFwVwGg3TbgHze/KbycvrtCPQsAHCK9G7X7oXZ+6KF13vcYi+wLwBoRdoLK74rZsv4/QEAVtgVOpH2BwAgN/6vsLVfXPjvqtndBam1DQ2l0R50nDP/0xu24J0o9eyJ3qs6y3aVG67oVrXh6nZnv2odf7WelaeeRY9zV6Vhz0w0lEZmoeGXZgYaSrOet3rDVeemYkPvBpkbes+euaH3zFU6WqrY0fuMZO7nPVeEhiP3e88SqWPvfd7PH+HCPB9oPCQD
   </data>
  </layer>
  <layer name="front" width="80" height="50">
