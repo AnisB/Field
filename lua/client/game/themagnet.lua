@@ -142,8 +142,10 @@ function TheMagnet:destroy()
 	end
 
 	self.anim = nil
-	self.field:destroy()
-	self.field = nil
+	if self.field~=nil then
+		self.field:destroy()
+		self.field = nil
+	end
 end
 
 
