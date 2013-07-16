@@ -21,7 +21,7 @@ function ScenarioLoader.new(ScenarioLoaderFile)
     local self = {}
     setmetatable(self, ScenarioLoader)
     -- self.scenario = require (ScenarioLoaderFile.."-fieldscneario/content")
-    self.scenario = require ("scenario/"..ScenarioLoaderFile)
+    self.scenario = require ("scenario."..ScenarioLoaderFile)
 
     -- Init
     self.animatedEntities ={}
