@@ -38,6 +38,8 @@ function Action:execute(time)
 		cible = self.scenarioLoader:getEntity(self.id)
 	elseif self.cible == Action.Cibles.MobileSprites then
 		cible = self.scenarioLoader:getMobileSprite(self.id)
+	else 
+		assert(false, "The object your are trying to set an action on isn't in any of the existing categories")
 	end
 
 	if self.idAction == Action.Types.Position then
