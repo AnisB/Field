@@ -72,7 +72,7 @@ function love.load()
 	clients = {} -- map { idClient => client }
 	nb_clients = 0
     print("Ready !")
-    conn = lube.tcpServer()
+    conn = lube.udpServer()
 	conn.handshake = "hello"
 	conn:listen(3410)
 	-- setup callbacks ("low level" events) :

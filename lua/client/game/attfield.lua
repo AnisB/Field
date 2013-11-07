@@ -262,6 +262,12 @@ function AttField:update(dt)
 end
 
 
+function AttField:destroy()
+  self.back = nil
+  self.mov = nil
+end
+
+
 function AttField:draw(x,y)
   effect = love.graphics.getPixelEffect( )
   love.graphics.setPixelEffect()

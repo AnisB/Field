@@ -170,7 +170,7 @@ end
 
 function ConnectToServer:connect()
 	-- lube :
-    conn = lube.tcpClient()
+    conn = lube.udpClient()
 	conn.handshake = "hello"
 	serveur = common.instance(Client, conn) -- oui, le serveur est un "client" :)
 

@@ -66,10 +66,14 @@ function Gameplay:reset()
     --Map
     print("LOADING FILE =", self.mapFile)
 
-    self.mapLoader:destroy()
-    self.mapLoader = nil
-    self.theMagnet:destroy()
-    self.theMagnet =nil
+    if(self.mapLoader~=nil) then
+    	self.mapLoader:destroy()
+    	self.mapLoader =nil
+    end
+    if(self.theMagnet~=nil) then
+    	self.theMagnet:destroy()
+    	self.theMagnet =nil
+    end
     self.mapLoader = MapLoader.new(self.mapFile)
     
     --Characters
