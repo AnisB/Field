@@ -4,7 +4,7 @@ This file is part of the Field project]]
 
 -- Métaux masse
 MetalMTypes= {
-	Alu = 0.05,
+	Alu = 0.2,
 	Acier = 0.1
 }
 
@@ -19,7 +19,7 @@ MetaManRepFieldS={x=unitWorldSize*6,y=unitWorldSize*2.5}
 
 -- Impulsion des sauts
 MetalManJumpImpulse ={
-	Alu =   ( -10 * unitWorldSize / MetalMTypes.Alu / 7 ),
+	Alu =   ( -25 * unitWorldSize / MetalMTypes.Alu ),
 	Acier = ( -50 * unitWorldSize / MetalMTypes.Acier / 11 )
 }
 
@@ -27,6 +27,6 @@ MetalManJumpImpulse ={
 -- Vitesse max
 MetalManMaxSpeed=unitWorldSize*10
 -- Force de déplacement en fonction du matériaux
-MetalManMovingForce={Alu=unitWorldSize*50,Acier=unitWorldSize*100}
+MetalManMovingForce={Alu=unitWorldSize*250,Acier=unitWorldSize*100}
 -- Taux de réduction de la vitesse
-MetalManBreakFactor=2
+MetalManBreakFactor=5
