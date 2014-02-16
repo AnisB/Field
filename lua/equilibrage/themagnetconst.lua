@@ -6,7 +6,7 @@ This file is part of the Field project
 TheMagnetConst={}
 
 --  The magnet's
-TheMagnetConst.Mass=(0.05*unitWorldSize)
+TheMagnetConst.Mass=(0.2)
 
 
 -- Field Radius
@@ -20,12 +20,12 @@ TheMagnetConst.Rep={x=unitWorldSize*1.5,y=unitWorldSize*1.5}
 
 
 -- Jump impulse
-TheMagnetConst.jumpImpulse=-10*unitWorldSize/(0.05*7)
+TheMagnetConst.jumpImpulse=-25*unitWorldSize/TheMagnetConst.Mass
 
 
 -- Déplacement
 -- Run force
-TheMagnetConst.MovingForce=unitWorldSize*50
+TheMagnetConst.MovingForce=unitWorldSize*250
 -- Max speed
 TheMagnetConst.MaxSpeed=unitWorldSize*10
 -- Break factor 
