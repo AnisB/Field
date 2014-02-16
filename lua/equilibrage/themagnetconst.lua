@@ -29,5 +29,5 @@ TheMagnetConst.MovingForce=unitWorldSize*250
 -- Max speed
 TheMagnetConst.MaxSpeed=unitWorldSize*10
 -- Break factor 
-TheMagnetConst.BreakFactor=2
-TheMagnetConst.AirBreakFactor=1
+TheMagnetConst.BreakFactor=6
+TheMagnetConst.AirBreakFactor=2
