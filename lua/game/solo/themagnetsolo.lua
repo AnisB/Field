@@ -417,12 +417,12 @@ function TheMagnetSolo:stopMove( )
 	if self.alive then
 		self.animCounter=self.animCounter-1
 		x,y=self.pc.body:getLinearVelocity()
-		if(math.abs(y)<0.0001)
+		if(math.abs(y)<0.0001) then
 			self.pc.body:setLinearVelocity(x/TheMagnetConst.BreakFactor,y)
 		else
 			self.pc.body:setLinearVelocity(x/TheMagnetConst.AirBreakFactor,y)
-
-		if self.canjump and not self.isStatic  and  then
+		end
+		if self.canjump and not self.isStatic  then
 			if self.appliesField then
 				self:loadAnimation("field",true)		
 			else
