@@ -73,7 +73,7 @@ function GameStateManager.new()
 	states['GameplaySolo'] = nil
 	states['LevelEndingSolo'] = nil
 	states['LevelFailedSolo'] = nil
-	states['ChoixNiveauSolo'] = ChoixNiveauSolo.new("metalman",false)
+	states['ChoixNiveauSolo'] = ChoixNiveauSolo.new("themagnet",false)
 -- -- 
 -- 	-- Init
 	self.state = states

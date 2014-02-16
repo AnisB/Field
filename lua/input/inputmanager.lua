@@ -46,14 +46,14 @@ function InputManager:keypressed(akey, isrepeat)
 	-- if(self.debugPrint) then
 	-- 	print('Key pressed: ',akey,' isrepeat: ', isrepeat)
 	-- end
-	s_field:inputPressed(akey)
+	s_gameManager:inputPressed(akey)
 end
 
 function InputManager:keyreleased(akey)
 	-- if(self.debugPrint) then
 	-- 	print('Key released: ',akey)
 	-- end
-	s_field:inputReleased(akey)
+	s_gameManager:inputReleased(akey)
 end
 
  
@@ -63,7 +63,7 @@ function InputManager:joystickpressed(joystick, button)
 	-- 	print('Joystick button pressed joystick: ',joystick,'button: ', button)
 	-- end
 	local buttonName = 'b'..tostring(button)..'j'..tostring(joystick:getID())
-	s_field:inputPressed(buttonName)
+	s_gameManager:inputPressed(buttonName)
 
 end
 
@@ -72,7 +72,7 @@ function InputManager:joystickreleased(joystick, button)
 	-- 	print('Joystick button released joystick: ',joystick,'button: ', button)
 	-- end
 	local buttonName = 'b'..tostring(button)..'j'..tostring(joystick:getID())
-	s_field:inputReleased(buttonName)
+	s_gameManager:inputReleased(buttonName)
 end
 
 function InputManager:update(dt)
@@ -86,7 +86,7 @@ function InputManager:update(dt)
 				-- if(self.debugPrint) then
 				-- 	print("Droite du joystick ", i)
 				-- end
-				s_field:inputPressed('joyRj'..tostring(self.joysticks[i]:getID()))
+				s_gameManager:inputPressed('joyRj'..tostring(self.joysticks[i]:getID()))
 
 			end
 		elseif (xAxis < -0.5) then
@@ -96,15 +96,15 @@ function InputManager:update(dt)
 				-- if(self.debugPrint) then
 				-- 	print("Gauche du joystick ", i)
 				-- end
-				s_field:inputPressed('joyLj'..tostring(self.joysticks[i]:getID()))
+				s_gameManager:inputPressed('joyLj'..tostring(self.joysticks[i]:getID()))
 			end
 		elseif (self.joysticksData[i].right~=false or self.joysticksData[i].left~=false) then
 
 			if(self.joysticksData[i].right~=false) then
-				s_field:inputReleased('joyRj'..tostring(self.joysticks[i]:getID()))
+				s_gameManager:inputReleased('joyRj'..tostring(self.joysticks[i]:getID()))
 				self.joysticksData[i].right  = false
 			else	
-				s_field:inputReleased('joyLj'..tostring(self.joysticks[i]:getID()))
+				s_gameManager:inputReleased('joyLj'..tostring(self.joysticks[i]:getID()))
 				self.joysticksData[i].left  = false
 			end
 			-- if(self.debugPrint) then
@@ -120,7 +120,7 @@ function InputManager:update(dt)
 				-- if(self.debugPrint) then
 				-- 	print("Haut du joystick ", i)
 				-- end
-				s_field:inputPressed('joyUj'..tostring(self.joysticks[i]:getID()))
+				s_gameManager:inputPressed('joyUj'..tostring(self.joysticks[i]:getID()))
 			end
 		elseif (yAxis > 0.5) then
 			if (self.joysticksData[i].down~=true) then
@@ -129,15 +129,15 @@ function InputManager:update(dt)
 				-- if(self.debugPrint) then
 				-- 	print("Bas du joystick ", i)
 				-- end
-				s_field:inputPressed('joyDj'..tostring(self.joysticks[i]:getID()))
+				s_gameManager:inputPressed('joyDj'..tostring(self.joysticks[i]:getID()))
 			end
 		elseif (self.joysticksData[i].up~=false or self.joysticksData[i].down~=false) then
 			if(self.joysticksData[i].down~=false) then
-				s_field:inputReleased('joyDj'..tostring(self.joysticks[i]:getID()))
+				s_gameManager:inputReleased('joyDj'..tostring(self.joysticks[i]:getID()))
 
 				self.joysticksData[i].down  = false
 			else	
-				s_field:inputReleased('joyUj'..tostring(self.joysticks[i]:getID()))
+				s_gameManager:inputReleased('joyUj'..tostring(self.joysticks[i]:getID()))
 				self.joysticksData[i].up  = false
 			end
 			-- if(self.debugPrint) then

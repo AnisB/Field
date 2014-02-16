@@ -46,6 +46,8 @@ function TheMagnetSolo.new(camera,pos,powers)
 	-- Object's type
 	self.type='TheMagnetSolo'
 
+	self.moveState = 0
+
 	-- Field init
 
 		-- Particle field managing
@@ -89,12 +91,12 @@ end
 			self:disableStaticField()
 			self.alive=false
 			if(type=="acid") then
-				gameStateManager.state["GameplaySolo"]:dieEffect(Effects.Green)
-				gameStateManager.state["GameplaySolo"]:slow()
+				s_gameStateManager.state["GameplaySolo"]:dieEffect(Effects.Green)
+				s_gameStateManager.state["GameplaySolo"]:slow()
 			else
-				gameStateManager.state["GameplaySolo"]:dieEffect(Effects.White)
+				s_gameStateManager.state["GameplaySolo"]:dieEffect(Effects.White)
 				self:loadAnimation("mortelec",true)
-				gameStateManager.state["GameplaySolo"]:slow()
+				s_gameStateManager.state["GameplaySolo"]:slow()
 				Sound.playSound("electroc")
 			end
 		end
@@ -390,7 +392,7 @@ function TheMagnetSolo:disableStaticField()
 	end
 end
 -- Method that handles the begining of a movement
-function TheMagnetSolo:startMove(  )
+function TheMagnetSolo:startMove(parDirection  )
 	if self.alive then
 		self.animCounter=self.animCounter+1
 		if self.canjump and not self.isStatic then
@@ -401,6 +403,7 @@ function TheMagnetSolo:startMove(  )
 				self:loadAnimation("returnanim",true)
 			end
 		end
+		self.moveState = parDirection
 	end
 	end
 
@@ -417,6 +420,7 @@ function TheMagnetSolo:stopMove( )
 				self:loadAnimation("stoprunning",true)
 			end
 		end
+		self.moveState = 0
 	end
 end
 
@@ -447,10 +451,10 @@ function TheMagnetSolo:update(seconds)
 	self.position.y=y
 	if self.alive then
     -- if gameStateManager.state['GameplaySolo'].inputManager:isKeyDown("right") then --press the right arrow key to push the ball to the right
-    if false then --press the right arrow key to push the ball to the right
+    if self.moveState == 1 then --press the right arrow key to push the ball to the right
   	self.goF=true
   	self.pc.body:applyForce(TheMagnetConst.MovingForce, 0)
-  elseif false then --press the left arrow key to push the ball to the left
+  elseif self.moveState == 2 then --press the left arrow key to push the ball to the left
   -- elseif gameStateManager.state['GameplaySolo'].inputManager:isKeyDown("left") then --press the left arrow key to push the ball to the left
   	self.pc.body:applyForce(-TheMagnetConst.MovingForce,0)
   	self.goF=false

@@ -9,7 +9,7 @@ This file is part of the Field project
 require("const")
 require("conf")
 -- Game management
-require("field")
+require("gamemanager")
 
 -- Resources
 require("resource.resourcemanager")
@@ -25,14 +25,14 @@ function love.load()
 	s_inputManager:Init()
 
 	-- Initialisation du jeu
-	s_field:Init()
+	s_gameManager:Init()
 end
 
 function love.update(dt)
 	-- Mise a jour de l'input mamanger, principalement pour les axes des joystick
 	s_inputManager:update(dt)
 
-	s_field:update(dt)
+	s_gameManager:update(dt)
 end	
 
 function love.keypressed(key, isrepeat)
@@ -52,9 +52,9 @@ function love.joystickreleased(joystick, button)
 end
 
 function love.draw()
-	s_field:draw(dt)
+	s_gameManager:draw(dt)
 end
 
 function love.focus(b)
-	-- s_field:focus(dt)
+	-- s_gameManager:focus(dt)
 end

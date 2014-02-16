@@ -284,7 +284,7 @@ end
                         self.magnetmanager:changeMetalType(self.metalMan,self.metalMan.oldMetal,self.metalMan.metalType)
                     end     
                 elseif self.player=="themagnet" then
-                    if key=="up" then
+                    if key == InputType.ACTION1 then
                         self.theMagnet:jump()
                     end 
                     if key =="i" then
@@ -307,12 +307,12 @@ end
                         self.mapLoader:handleTry('TheMagnet')
                     end
 
-                    if key =="left" then
-                        self.theMagnet:startMove()
+                    if key == InputType.RIGHT  then
+                        self.theMagnet:startMove(1)
                     end
 
-                    if key =="right" then
-                        self.theMagnet:startMove()
+                    if key == InputType.LEFT then
+                        self.theMagnet:startMove(2)
                     end            
                 end
             else
