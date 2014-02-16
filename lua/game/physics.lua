@@ -9,10 +9,18 @@ This file is part of the Field project
 	Physics.__index = Physics
 
 
-	function  Physics.newCharacter(x, y, w,l, isStatic,dec)
+	function  Physics.newCharacter(x, y)
 		local pc = {}
 		setmetatable(pc, Physics)
-		pc.shape = love.physics.newRectangleShape( -unitWorldSize/10, -unitWorldSize/10, w-unitWorldSize/5, l, 0 )
+		pc.shape = love.physics.newPolygonShape(-unitWorldSize/3-5,-unitWorldSize/2-5, 
+												unitWorldSize/3-5,-unitWorldSize/2-5,
+												unitWorldSize/3-5,unitWorldSize/2-1-5, 
+												0,unitWorldSize/2-5, 
+												-unitWorldSize/3-5,unitWorldSize/2-1-5
+												-- x-unitWorldSize/4,y-unitWorldSize/2
+												)
+		print("THIS IS THE DATA ", x, y)
+		-- pc.shape = love.physics.newRectangleShape( -unitWorldSize/10, -unitWorldSize/10, w-unitWorldSize/5, l, 0 )
 		if isStatic == true then
 			pc.body = love.physics.newBody(world, x, y)
 		else

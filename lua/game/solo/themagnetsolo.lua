@@ -31,8 +31,7 @@ function TheMagnetSolo.new(camera,pos,powers)
 	self.position={x=pos.x,y=pos.y}
 
 	-- Physics Init
-	local decalage={unitWorldSize/2,unitWorldSize/2}
-	self.pc = Physics.newCharacter(self.position.x,self.position.y,unitWorldSize,unitWorldSize,type,decalage)
+	self.pc = Physics.newCharacter(self.position.x,self.position.y)
 	self.pc.fixture:setUserData(self)
 	self.pc.body:setMass(TheMagnetConst.Mass*unitWorldSize)
 
@@ -167,7 +166,8 @@ function TheMagnetSolo:collideWith( object, collision )
 		else
 			if(object:getPosition().y>self.position.y) and (not self.canjump)  then
 				self.canjump=true
-				if self.animCounter>0 then 
+				x,y=self.pc.body:getLinearVelocity()
+				if math.abs(y) <0.001 then 
 					self:loadAnimation("running",true)
 				else
 					if self.appliesField==true then
@@ -182,6 +182,10 @@ function TheMagnetSolo:collideWith( object, collision )
 end
 -- Method that handles the uncollision
 function TheMagnetSolo:unCollideWith( object, collision )
+	x,y=self.pc.body:getLinearVelocity()
+	if y>-0.001 then 
+		self:loadAnimation("running",true)
+	end
 end
 
 
@@ -413,8 +417,12 @@ function TheMagnetSolo:stopMove( )
 	if self.alive then
 		self.animCounter=self.animCounter-1
 		x,y=self.pc.body:getLinearVelocity()
-		self.pc.body:setLinearVelocity(x/TheMagnetConst.BreakFactor,y/TheMagnetConst.BreakFactor)
-		if self.canjump and not self.isStatic  and self.animCounter==0 then
+		if(math.abs(y)<0.0001)
+			self.pc.body:setLinearVelocity(x/TheMagnetConst.BreakFactor,y)
+		else
+			self.pc.body:setLinearVelocity(x/TheMagnetConst.AirBreakFactor,y)
+
+		if self.canjump and not self.isStatic  and  then
 			if self.appliesField then
 				self:loadAnimation("field",true)		
 			else
@@ -447,16 +455,17 @@ function TheMagnetSolo:update(seconds)
 	self.field:update(seconds,self.position.x,self.position.y)
 
 	self.anim:update(seconds)
+	if(self.anim.currentAnim.name == "standing" and self.moveState~=0 and math.abs(y)<0.0001 ) then
+		self:loadAnimation("running",true)		
+	end
 	x,y =self.pc.body:getPosition()
 	self.position.x=x
 	self.position.y=y
 	if self.alive then
-    -- if gameStateManager.state['GameplaySolo'].inputManager:isKeyDown("right") then --press the right arrow key to push the ball to the right
     if self.moveState == 1 then --press the right arrow key to push the ball to the right
   	self.goF=true
   	self.pc.body:applyForce(TheMagnetConst.MovingForce, 0)
   elseif self.moveState == 2 then --press the left arrow key to push the ball to the left
-  -- elseif gameStateManager.state['GameplaySolo'].inputManager:isKeyDown("left") then --press the left arrow key to push the ball to the left
   	self.pc.body:applyForce(-TheMagnetConst.MovingForce,0)
   	self.goF=false
   end
