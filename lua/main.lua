@@ -29,6 +29,9 @@ function love.load()
 end
 
 function love.update(dt)
+   if dt < 1/40 then
+      love.timer.sleep(1/40 - dt)
+   end
 	-- Mise a jour de l'input mamanger, principalement pour les axes des joystick
 	s_inputManager:update(dt)
 
