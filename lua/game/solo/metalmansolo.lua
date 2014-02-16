@@ -185,7 +185,7 @@ function MetalManSolo:changeMass()
 	if self.alive then
 
 		if 	self.metalWeight==MetalMTypes.Alu then
-			if self.powers["Acier"] then
+			-- if self.powers["Acier"] then
 				self.anim = AnimMMSolo.new('metalman/acier')
 				self:loadAnimation("standing",true)
 				self:loadAnimation("load1",true)
@@ -193,16 +193,16 @@ function MetalManSolo:changeMass()
 				self.metalWeight=MetalMTypes.Acier
 				self.tranfSound:stop()
 				self.tranfSound:play()
-			end
+			-- end
 		elseif 	self.metalWeight==MetalMTypes.Acier then
-			if self.powers["Alu"] then
+			-- if self.powers["Alu"] then
 				self.metalWeight=MetalMTypes.Alu
 				self.anim = AnimMMSolo.new('metalman/alu')
 				self:loadAnimation("load2",true)
 				self.s.time=0
 				self.tranfSound:stop()
 				self.tranfSound:play()
-			end
+			-- end
 		end
 		self.pc.body:setMass(self.metalWeight*unitWorldSize)
 	end
