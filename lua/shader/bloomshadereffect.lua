@@ -221,7 +221,7 @@ function CreateBloomEffect(xsize, ysize)
    
    
    -- call right before drawing the stuff you want bloomed
-   function bloom:predraw()
+   function bloom:enableCanvas()
       for k,v in pairs(self.canvas) do
          v:clear()
       end
@@ -229,10 +229,14 @@ function CreateBloomEffect(xsize, ysize)
       
    end
    
+   function bloom:disableCanvas()         
+      love.graphics.setCanvas()
    
-   function bloom:postdraw()         
+   end
+
+   function bloom:firstPass() 
       love.graphics.setColor(255, 255, 255)
-      local blendmode = love.graphics.getBlendMode()
+      self.blendmode = love.graphics.getBlendMode()
       love.graphics.setBlendMode("premultiplied")
       
       love.graphics.push()
@@ -253,15 +257,14 @@ function CreateBloomEffect(xsize, ysize)
       love.graphics.draw(self.canvas.blur_horiz, self.quad, 0, 0)
       
       love.graphics.setCanvas()
-      shaders.combine:send("bloomtex", self.canvas.blur_vert)
+   end
+
+   function bloom:finalPass()      
+      shaders.combine:send("bloomtex", self.canvas.blur_vert)  
       love.graphics.setShader(shaders.combine)
       love.graphics.draw(self.canvas.scene, self.scenequad, 0, 0)
-
       love.graphics.setShader()
-      
-      
-      love.graphics.setBlendMode(blendmode)
-      
+      love.graphics.setBlendMode(self.blendmode)
    end
    
    

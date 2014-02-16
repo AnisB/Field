@@ -22,7 +22,7 @@ require("shader.backlightshader")
 
 -- Inlcude Other
 require("game.simplebackground")
-require("render.background")
+require("render.paralax")
 require("ui.loadingscreen")
 require("ui.pausemenu")
 
@@ -33,7 +33,7 @@ require("const")
 GameplaySolo = {}
 GameplaySolo.__index = GameplaySolo
 
-Effects = {White = 1 , Green = 2}
+Effects = {Arc = 1 , Acid = 2}
 
 
 function GameplaySolo.new(mapFile,continuous,player)
@@ -43,15 +43,17 @@ function GameplaySolo.new(mapFile,continuous,player)
     -- Vars
     self.continuous=continuous
 
-    -- Physics
-    love.physics.setMeter( unitWorldSize) --the height of a meter our worlds will be 64px
+    -- Creation de la physique
+    love.physics.setMeter(unitWorldSize) --the height of a meter our worlds will be 64px
     world = love.physics.newWorld( 0, 18*unitWorldSize, false )
     world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 
-    -- Magnetics
+    -- Creation du magnétisme
     self.magnetmanager = MagnetManagerSolo.new()    
 
+    -- Indicateur du type de monde
     self.world = require(mapFile.."-fieldmap/info").world
+
     --Map loading
     self.mapFile=mapFile
     self.mapLoader = MapLoaderSolo.new(mapFile,self.magnetmanager)
@@ -60,36 +62,24 @@ function GameplaySolo.new(mapFile,continuous,player)
     -- Paralax Loading
     self.mapy= self.mapLoader.map.height*self.mapLoader.map.tileheight
 
-    self.paralax = true
-    self.background1=Background.new(ParalaxImg..self.world.."/1.png",1,self.mapy)
-    self.background2=Background.new(ParalaxImg..self.world.."/2.png",0.75,self.mapy)
-    self.background3=Background.new(ParalaxImg..self.world.."/3.png",0.5,self.mapy)
-    self.background4=Background.new(ParalaxImg..self.world.."/4.png",0.25,self.mapy)
-    self.background5=SimpleBackground.new(ParalaxImg..self.world.."/5.png",0.0,self.mapy)
+    self.paralax=Paralax.new(ParalaxImg..self.world,self.mapy)
 
-    self.background=Background.new(ParalaxImg..self.world.."/noparalax/1.png",1,self.mapy)
-
-
-    self. filterAcid = love.graphics.newImage("img/death/"..self.world.."/acid.png")
-    self. filterArc = love.graphics.newImage("img/death/"..self.world.."/arc.png")
-
-    -- self.inputManager = SoloInputManager.new(player,self)
-
+    self.acidShader = AfterEffect.new(ShaderDirectory.."blending.glsl")
+    self.arcShader = AfterEffect.new(ShaderDirectory.."blending.glsl")
+    self.acidShader:inject("filter", "img/death/"..self.world.."/acid.png")
+    self.arcShader:inject("filter", "img/death/"..self.world.."/arc.png")
 
     -- Player loading
     self.player= player
-    if self.player=="metalman" then
-        self.cameraMM =CameraSolo.new(0,0)
-        self.metalMan = MetalManSolo.new(self.cameraMM,self.mapLoader.metalManPos,self.mapLoader.metalManPowers)
-        self.magnetmanager:addMetal(self.metalMan)
-    elseif self.player=="themagnet" then
-        self.cameraTM =CameraSolo.new(0,0)
-        self.theMagnet = TheMagnetSolo.new(self.cameraTM,self.mapLoader.theMagnetPos,self.mapLoader.theMagnetPowers)
-        self.magnetmanager:addGenerator(self.theMagnet)
-    end
+    self.camera =CameraSolo.new(0,0)
 
-    -- Input managing
-    -- self.inputManager= InputManager.new()
+    if self.player=="metalman" then
+        self.personnage = MetalManSolo.new(self.camera,self.mapLoader.metalManPos,self.mapLoader.metalManPowers)
+        self.magnetmanager:addMetal(self.personnage)
+    elseif self.player=="themagnet" then
+        self.personnage = TheMagnetSolo.new(self.camera,self.mapLoader.theMagnetPos,self.mapLoader.theMagnetPowers)
+        self.magnetmanager:addGenerator(self.personnage)
+    end
 
     -- State Variables
     self.shouldEnd=false
@@ -102,13 +92,13 @@ function GameplaySolo.new(mapFile,continuous,player)
 
     -- Shaders
         -- Bloom Shader
-        self.bloom=CreateBloomEffect(1280,800)
+        self.bloom=CreateBloomEffect(windowW,windowH)
         -- Light Shader
         self.lightback = BackLightShader.new()
 
         self.lightback:setParameter{
-        light_pos = {windowW/2,windowH/2,30}
-    }
+            light_pos = {windowW/2,windowH/2,30}
+        }
 
         -- Light Shader
         self.light = LightShader.new()
@@ -151,13 +141,8 @@ end
         self.mapLoader:init()
 
         -- Init character
-        if self.player=="metalman" then
-            self.metalMan:init()
-        elseif self.player=="themagnet" then
-            self.theMagnet:init()
-        end
+        self.personnage:init()
         self.loading=true
-        -- self.inputManager:clearInputs()
     end
 
     
@@ -172,6 +157,14 @@ end
 
     function GameplaySolo:dieEffect(effect)
         self.effect = effect
+        print(effect)
+        if(self.effect == Effects.Acid) then
+            print("Enable acid")
+            self.acidShader:activate()
+        elseif (self.effect == Effects.Arc) then
+            self.arcShader:activate()
+            print("Enable arc")
+        end
     end
 
     function GameplaySolo:destroy()
@@ -181,20 +174,7 @@ end
         world=nil
         world = love.physics.newWorld( 0, 18*unitWorldSize, false )
         self.mapLoader:destroy()
-        world:setCallbacks(beginContact, endContact, preSolve, postSolve)
-        self.background1:destroy()
-        self.background2:destroy()
-        self.background3:destroy()
-        self.background4:destroy()
-        self.background5:destroy()
-        self.background:destroy()
-        
-        self.background2 = nil
-        self.background3 = nil
-        self.background4 = nil
-        self.background5 = nil
-        self.background = nil
-
+        self.paralax:destroy()
         self.mapLoaderSolo = nil
         collectgarbage()
     end  
@@ -211,20 +191,15 @@ end
 
         self.mapLoader = MapLoaderSolo.new(self.mapFile, self.magnetmanager)
 
-        -- Camera Metal Man
-        self.cameraMM =Camera.new(0,0)
-        -- Camera The Magnet
-        self.cameraTM =Camera.new(0,0)
+        -- La camera
+        self.camera =Camera.new(0,0)
 
-        
         if self.player=="metalman" then
-            self.cameraMM =CameraSolo.new(0,0)
-            self.metalMan = MetalManSolo.new(self.cameraMM,self.mapLoader.metalManPos)
-            self.magnetmanager:addMetal(self.metalMan)
+            self.personnage = MetalManSolo.new(self.camera,self.mapLoader.metalManPos)
+            self.magnetmanager:addMetal(self.personnage)
         elseif self.player=="themagnet" then
-            self.cameraTM =CameraSolo.new(0,0)
-            self.theMagnet = TheMagnetSolo.new(self.cameraTM,self.mapLoader.theMagnetPos)
-            self.magnetmanager:addGenerator(self.theMagnet)
+            self.personnage = TheMagnetSolo.new(self.camera,self.mapLoader.theMagnetPos)
+            self.magnetmanager:addGenerator(self.personnage)
         end
         self.gameIsPaused=false
         self.shouldEnd=false 
@@ -235,85 +210,53 @@ end
         self.shouldEnd=true
     end    
 
-    function GameplaySolo:mousePressed(x, y, button)
-    end
-    
-    function GameplaySolo:mouseReleased(x, y, button)
-    end
-    
-    -- function GameplaySolo:keyPressed(key, unicode)
-        -- self.inputManager:keyPressed(key,unicode)
-    -- end
-
-    function GameplaySolo:joystickPressed(key, unicode)
-        -- self.inputManager:joystickPressed(key,unicode)
-    end
-
-
-    function GameplaySolo:joystickReleased(key, unicode)
-        -- self.inputManager:joystickReleased(key,unicode)
-    end
-
     function GameplaySolo:keyPressed(key, unicode)
         -- if not self.loading then
             if not self.gameIsPaused then
 
                 -- Inputs for players
-                if self.player=="metalman" then
                     if key == InputType.ACTION1 then
-                        self.metalMan:jump()     
+                        self.personnage:jump()     
                     end
                     if key == InputType.ACTION4 then
-                        self.mapLoader:handleTry('MetalMan')
+                        self.mapLoader:handleTry(self.player)
                     end
-                    if not self.metalMan.isStatic then
-                        if key == InputType.ACTION2 then
-                            self.metalMan:changeMass()
-                        end
-                    end
+                    
                     if key == InputType.RIGHT then
-                        self.metalMan:startMove(1)
+                        self.personnage:startMove(1)
                     end
 
                     if key ==InputType.LEFT then
-                        self.metalMan:startMove(2)
+                        self.personnage:startMove(2)
                     end  
 
+                if self.player=="metalman" then
+                    if not self.personnage.isStatic then
+                        if key == InputType.ACTION2 then
+                            self.personnage:changeMass()
+                        end
+                    end
                     if key == InputType.ACTION3 then
-                        self.metalMan:switchType()
-                        self.magnetmanager:changeMetalType(self.metalMan,self.metalMan.oldMetal,self.metalMan.metalType)
+                        self.personnage:switchType()
+                        self.magnetmanager:changeMetalType(self.personnage,self.personnage.oldMetal,self.personnage.metalType)
                     end     
                 elseif self.player=="themagnet" then
-                    if key == InputType.ACTION1 then
-                        self.theMagnet:jump()
-                    end 
                     if key =="i" then
-                        self.theMagnet:enableStaticField()
+                        self.personnage:enableStaticField()
                     end
                     if key =="o" then
-                        self.theMagnet:enableAttractiveField()
+                        self.personnage:enableAttractiveField()
                     end
                     if key =="p" then
-                        self.theMagnet:enableRepulsiveField()
+                        self.personnage:enableRepulsiveField()
                     end
 
                     if key =="k" then
-                        self.theMagnet:enableRotativeLField()
+                        self.personnage:enableRotativeLField()
                     end
                     if key =="l" then
-                        self.theMagnet:enableRotativeRField()
-                    end
-                    if key =="f" then
-                        self.mapLoader:handleTry('TheMagnet')
-                    end
-
-                    if key == InputType.RIGHT  then
-                        self.theMagnet:startMove(1)
-                    end
-
-                    if key == InputType.LEFT then
-                        self.theMagnet:startMove(2)
-                    end            
+                        self.personnage:enableRotativeRField()
+                    end          
                 end
             else
                 self.pauseMenu:keyPressed(key, unicode)
@@ -333,57 +276,30 @@ end
 
     function GameplaySolo:keyReleased(key, unicode)
             if not self.gameIsPaused then
-                if self.player=="metalman" then
-                    if key == InputType.LEFT or key == InputType.RIGHT then
-                        self.metalMan:stopMove()
-                    end
+                if key == InputType.LEFT or key == InputType.RIGHT then
+                    self.personnage:stopMove()
+                end
 
-                elseif self.player=="themagnet" then
+                if key == InputType.LEFT or key == InputType.RIGHT then
+                        self.personnage:stopMove()
+                end
+                if self.player=="themagnet" then
                     if key =="i" then
-                        self.theMagnet:disableStaticField()
+                        self.personnage:disableStaticField()
                     end
-
                     if key =="o" or key =="p" or key =="k"or key =="l"then
-                        self.theMagnet:disableField()
-                    end
-
-                    if key == InputType.LEFT or key == InputType.RIGHT then
-                        self.theMagnet:stopMove()
+                        self.personnage:disableField()
                     end
                 end
             end
     end
-
-    function GameplaySolo:sendReleasedKey(key)
-        -- if not self.loading then
-
-            if not self.gameIsPaused then
-                if self.player=="metalman" then
-                    if key == InputType.LEFT or key == InputType.RIGHT then
-                        self.metalMan:stopMove()
-                    end
-
-                elseif self.player=="themagnet" then
-                    if key =="i" then
-                        self.theMagnet:disableStaticField()
-                    end
-
-                    if key =="o" or key =="p" or key =="k"or key =="l"then
-                        self.theMagnet:disableField()
-                    end
-
-                    if key == InputType.LEFT or key == InputType.RIGHT then
-                        self.theMagnet:stopMove()
-                    end
-                end
-            end
-        -- end
-    end
-    
     
     function GameplaySolo:update(dttheo)
 
-        -- self.inputManager:update()
+        -- Mise a jour des shaders
+        self.acidShader:update(dttheo)
+        self.arcShader:update(dttheo)
+
         if  self.loading then
             gameStateManager.loader.update(dttheo)
             self.loadingScreen:update(dttheo)
@@ -399,14 +315,12 @@ end
         dt=dttheo*self.slowTimer
         if  not self.gameIsPaused then
             if(self.levelFinished) then
-			   -- self.inputManager:clearInputs()
                s_gameStateManager.state['LevelEndingSolo']=LevelEndingSolo.new(self.mapLoader.levelends[1].next,self.continuous)
                s_gameStateManager:changeState('LevelEndingSolo')
                return
            end
 
             if(self.shouldEnd) then
-                -- self.inputManager:clearInputs()
                 s_gameStateManager.state['LevelFailedSolo']=LevelFailedSolo.new()
                 s_gameStateManager:changeState('LevelFailedSolo')
                 return        
@@ -415,13 +329,8 @@ end
             self.magnetmanager:update(dt)   
 
           -- Other stuff
-          if self.player=="metalman" then
-            self.cameraMM:update(dt)
-            self.metalMan:update(dt)
-            elseif self.player=="themagnet" then
-                self.cameraTM:update(dt)
-                self.theMagnet:update(dt)
-            end
+            self.camera:update(dt)
+            self.personnage:update(dt)
             self.mapLoader:update(dt)
 
         end
@@ -432,103 +341,35 @@ end
         if  self.loading then
             self.loadingScreen:draw()
         else
-            if self.isSlowing then
-                if self.effect == Effects.White then
-                    love.graphics.setColor(255,255,255,255*(1-self.slowTimer))
-                else
-                    love.graphics.setColor(0,100,0,255*(1-self.slowTimer))
-                end
-                love.graphics.rectangle("fill", 0,0, windowW, windowH)
-            end
-        if self.player=="metalman" then
 
-            self.metalMan:preDraw()
-
-            if self.paralax then
-                self.background5:draw(self.cameraMM:getPos()) 
-            else
-            end
-
-            self.metalMan:postDraw()
-
-            self.bloom:predraw()
-            self.lightback:predraw()
-
-            if self.paralax then
-                self.background4:draw(self.cameraMM:getPos())
-                self.background3:draw(self.cameraMM:getPos())
-                self.background2:draw(self.cameraMM:getPos())
-                self.background1:draw(self.cameraMM:getPos())
-            else
-                self.background:draw(self.cameraMM:getPos())
-            end
-            self.lightback:postdraw()
-            
-            self.light:predraw()
-
-            self.mapLoader:draw(self.cameraMM:getPos())
-
-            self.metalMan:draw()
-            self.mapLoader:firstPlanDraw(self.cameraMM:getPos())
-
-            self.light:postdraw()
-            self.bloom:postdraw() 
-            if self.isSlowing then
-                if self.effect == Effects.White then
-                    love.graphics.setColor(255,255,255,255*(1-self.slowTimer))
-                    love.graphics.draw(self.filterArc,0,0,0, 2,2)
-                else
-                    love.graphics.setColor(255,255,255,255*(1-self.slowTimer))
-                    love.graphics.draw(self.filterAcid,0,0,0, 2,2)
-                end
-            end
-        elseif self.player=="themagnet" then
-
-            if self.isSlowing then
-                if self.effect == Effects.White then
-                    love.graphics.setColor(255,255,255,255*(1-self.slowTimer))
-                else
-                    love.graphics.setColor(0,100,0,255*(1-self.slowTimer))
-                end
-                love.graphics.rectangle("fill", 0,0, windowW, windowH)
-            end
-
-            if self.paralax then
-                self.background5:draw(self.cameraTM:getPos()) 
-                self.background4:draw(self.cameraTM:getPos())
-            else
-            end
-            self.bloom:predraw()
+            self.bloom:enableCanvas()
 
             self.lightback:predraw()
-            if self.paralax then
-                self.background4:draw(self.cameraTM:getPos())
-                self.background3:draw(self.cameraTM:getPos())
-                self.background2:draw(self.cameraTM:getPos())
-                self.background1:draw(self.cameraTM:getPos())
-            else
-                self.background:draw(self.cameraTM:getPos())
-            end
-
-            self.mapLoader:draw(self.cameraTM:getPos())
+            self.paralax:draw(self.camera:getPos())
             self.lightback:postdraw()
 
             self.light:predraw()
-            self.theMagnet:draw() 
-            
-            self.mapLoader:firstPlanDraw(self.cameraTM:getPos())
+            self.mapLoader:draw(self.camera:getPos())
+            self.personnage:draw() 
+            self.mapLoader:firstPlanDraw(self.camera:getPos())
             self.light:postdraw()
-            self.bloom:postdraw() 
-            if self.isSlowing then
-                if self.effect == Effects.White then
-                    love.graphics.setColor(255,255,255,255*(1-self.slowTimer))
-                    love.graphics.draw(self.filterArc,0,0,0, 2,2)
-                else
-                    love.graphics.setColor(255,255,255,255*(1-self.slowTimer))
-                    love.graphics.draw(self.filterAcid,0,0,0, 2,2)
-                end
-            end
-        end
+
+            self.bloom:disableCanvas() 
+            self.bloom:firstPass()
+
+            -- if self.isSlowing then
+            self.acidShader:enableCanvas()
+            self.bloom:finalPass() 
+            self.acidShader:disableCanvas()
+
+            self.arcShader:enableCanvas()
+            self.acidShader:pass() 
+            self.arcShader:disableCanvas()
+
+
+            self.personnage:preDraw() 
+            self.arcShader:pass()
+            self.personnage:postDraw() 
     end
 
         if self.gameIsPaused then
@@ -538,18 +379,16 @@ end
     end
     
     
-    function beginContact(a, b, coll)
-        local x,y = coll:getNormal()
-        b:getUserData():collideWith(a:getUserData(), coll)
-        a:getUserData():collideWith(b:getUserData(), coll)
+function beginContact(a, b, coll)
+    local x,y = coll:getNormal()
+    b:getUserData():collideWith(a:getUserData(), coll)
+    a:getUserData():collideWith(b:getUserData(), coll)
+end
 
-    end
-    
-    function endContact(a, b, coll)
+function endContact(a, b, coll)
     local x,y = coll:getNormal()
     b:getUserData():unCollideWith(a:getUserData(), coll)
     a:getUserData():unCollideWith(b:getUserData(), coll)
-    collectgarbage()
 end
 
 function preSolve(a, b, coll)
@@ -567,21 +406,13 @@ end
 
 
 function GameplaySolo:postSolve(a, b, coll)
--- we won't do anything with this function
+    -- we won't do anything with this function
 end
 
 function GameplaySolo:shakeOnX(dx,speed,duration)
-    if self.player=="metalman" then
-        self.cameraMM:shakeOnX(dx,speed,duration)
-    elseif self.player=="themagnet" then
-        self.cameraTM:shakeOnX(dx,speed,duration)
-    end
+        self.camera:shakeOnX(dx,speed,duration)
 end
 
 function GameplaySolo:shakeOnY(dy,speed,duration)
-    if self.player=="metalman" then
-        self.cameraMM:shakeOnY(dy,speed,duration)
-    elseif self.player=="themagnet" then
-        self.cameraTM:shakeOnY(dy,speed,duration)
-    end
+        self.camera:shakeOnY(dy,speed,duration)
 end

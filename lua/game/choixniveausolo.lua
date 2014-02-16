@@ -110,43 +110,6 @@ end
 
 
 
-function ChoixNiveauSolo:sendPressedKey(key, unicode) 
-	
-	if key == "left" then
-		self.num_level = self.num_level - 1
-		if self.num_level < 1 then self.num_level = 1 end
-		if self.num_level > #self.availableMaps then self.num_level = #self.availableMaps end
-		self.level = self.availableMaps[self.num_level]
-		if self.prev[self.level]==nil then
-			self.prev[self.level]=love.graphics.newImage("maps/solo/"..self.player.."/"..self.level.."-fieldmap/prev.png")
-		end
-		self.fonduDone=false
-		self.timerPrev=0
-	elseif key== "right" then
-		self.num_level = self.num_level + 1
-		if self.num_level < 1 then self.num_level = 1 end
-		if self.num_level > #self.availableMaps then self.num_level = #self.availableMaps end
-		self.level = self.availableMaps[self.num_level]
-		if self.prev[self.level]==nil then
-			self.prev[self.level]=love.graphics.newImage("maps/solo/"..self.player.."/"..self.level.."-fieldmap/prev.png")
-		end
-		self.fonduDone=false
-		self.timerPrev=0
-	elseif key == "return" then
-		if self.play.selected then
-			gameStateManager.state['GameplaySolo']= nil
-			gameStateManager.state['GameplaySolo']= GameplaySolo.new("maps/solo/"..self.player.."/"..self.level,self.continuous,self.player)
-			gameStateManager:changeState('GameplaySolo')
-		elseif self.returnB.selected then
-			gameStateManager:changeState('ChoixPersoSolo')
-		end
-	elseif key == "escape" then
-		gameStateManager:changeState('ChoixPersoSolo')
-	end
-
-
-end
-
 function ChoixNiveauSolo:update(dt)
 	self.layout:update(dt)
 	self.back:update(dt)

@@ -9,6 +9,7 @@ unitWorldSize=64
 
 ParalaxImg="img/paralax/"
 ButtonImg="img/button/"
+ShaderDirectory="shader/"
 SoloMapDirectory="maps/"
 SourceDirectory="./"
 ImgDirectory="img/"

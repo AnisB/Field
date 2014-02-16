@@ -13,7 +13,7 @@ require("game.solo.animmmsolo")
 require("equilibrage.metalmanconst")
 
 -- Include shader
-require ("shader.shockwave")
+require ("shader.aftereffect")
 
 MetalManSolo = {}
 MetalManSolo.__index = MetalManSolo
@@ -57,13 +57,11 @@ function MetalManSolo.new(camera,pos,powers)
 	self.willrotate=false
 
 	self.collisionCounter=0
-	self.s= ShockwaveEffect.new()
+	self.s= AfterEffect.new(ShaderDirectory.."shockwave.glsl")
 	self.s:setParameter{
 		center = {0.5,0.5},
 		shockParams = {20,0.8,0.1},
 	}
-	self.s.time=10
-
 
 	self.tranfSound=Sound.getSound("tranf")
 	self.shake=Sound.getSound("shake")
@@ -94,10 +92,10 @@ function MetalManSolo:die(type)
 	if self.alive then
 		self.alive=false
 		if(type=="acid") then
-			s_gameStateManager.state["GameplaySolo"]:dieEffect(Effects.Green)
+			s_gameStateManager.state["GameplaySolo"]:dieEffect(Effects.Acid)
 			s_gameStateManager.state["GameplaySolo"]:slow()
 		else
-			s_gameStateManager.state["GameplaySolo"]:dieEffect(Effects.White)
+			s_gameStateManager.state["GameplaySolo"]:dieEffect(Effects.Arc)
 			self:loadAnimation("mortelec",true)
 			s_gameStateManager.state["GameplaySolo"]:slow()
 			Sound.playSound("electroc")
@@ -188,7 +186,7 @@ function MetalManSolo:changeMass()
 				self.anim = AnimMMSolo.new('metalman/acier')
 				self:loadAnimation("standing",true)
 				self:loadAnimation("load1",true)
-				self.s.time=0
+				self.s:activate()
 				self.metalWeight=MetalMTypes.Acier
 				self.tranfSound:stop()
 				self.tranfSound:play()
@@ -198,7 +196,7 @@ function MetalManSolo:changeMass()
 				self.metalWeight=MetalMTypes.Alu
 				self.anim = AnimMMSolo.new('metalman/alu')
 				self:loadAnimation("load2",true)
-				self.s.time=0
+				self.s:activate()
 				self.tranfSound:stop()
 				self.tranfSound:play()
 			-- end
@@ -218,9 +216,8 @@ end
 
 function MetalManSolo:switchType()
 if self.alive then
-
 	if self.metalType ==MetalTypes.Normal then
-		if self.powers["Static"] then
+		-- if self.powers["Static"] then
 			self.oldMetal = self.metalType
 			self.metalType=MetalTypes.Static
 			self.anim = AnimMMSolo.new('metalman/static')
@@ -234,9 +231,9 @@ if self.alive then
 			self.isStatic=true
 			self.tranfSound:stop()
 			self.tranfSound:play()
-		end
+		-- end
 	elseif self.metalType ==MetalTypes.Static then
-		if self.powers["Acier"] or  self.powers["Alu"] then
+		-- if self.powers["Acier"] or  self.powers["Alu"] then
 			self.oldMetal = self.metalType
 			self.metalType=MetalTypes.Normal
 			self.isStatic=false
@@ -251,7 +248,7 @@ if self.alive then
 			end
 			self.tranfSound:stop()
 			self.tranfSound:play()
-		end
+		-- end
 
 	end
 end
@@ -325,8 +322,8 @@ end
 function MetalManSolo:left( )
 end
 
-function MetalManSolo:startMove( parSens )
-
+-- Method that handles the begining of a movement
+function MetalManSolo:startMove(parDirection  )
 	if self.alive then
 		self.animCounter=self.animCounter+1
 		if self.canjump and not self.isStatic then
@@ -337,22 +334,26 @@ function MetalManSolo:startMove( parSens )
 				self:loadAnimation("returnanim",true)
 			end
 		end
+		self.moveState = parDirection
 	end
-	self.moveState = parSens
 end
 
 
+-- Method that handles the end of a movement
 function MetalManSolo:stopMove( )
 	if self.alive then
 		self.animCounter=self.animCounter-1
 		x,y=self.pc.body:getLinearVelocity()
-		self.pc.body:setLinearVelocity(x/MetalManBreakFactor,y/MetalManBreakFactor)
-		if self.canjump and not self.isStatic  and self.animCounter==0 then
-			self:loadAnimation("stoprunning",true)	
+		if(math.abs(y)<0.0001) then
+			self.pc.body:setLinearVelocity(x/MetalManConst.BreakFactor,y)
+		else
+			self.pc.body:setLinearVelocity(x/MetalManConst.AirBreakFactor,y)
 		end
+		if self.canjump and not self.isStatic  then
+			self:loadAnimation("stoprunning",true)
+		end
+		self.moveState = 0
 	end
-	self.moveState = 0
-
 end
 	
 	function MetalManSolo:staticField(magnet)
@@ -378,6 +379,9 @@ function MetalManSolo:update(seconds)
 		self.pc.body:setLinearVelocity(-MetalManMaxSpeed,y)
 	end
 	self.anim:update(seconds)
+	if(self.anim.currentAnim.name == "standing" and self.moveState~=0 and math.abs(y)<0.0001 ) then
+		self:loadAnimation("running",true)		
+	end
 	x,y =self.pc.body:getPosition()
 	self.position.x=x
 	self.position.y=y
@@ -388,7 +392,6 @@ function MetalManSolo:update(seconds)
 			self:loadAnimation("running",true)	
 		end
 		if not self.isStatic  then
-			-- if s_gameStateManager.state['GameplaySolo'].inputManager:isKeyDown("right") then
 			if self.moveState==1 then
 				if self.metalWeight==MetalMTypes.Alu then
 					self.pc.body:applyForce(MetalManMovingForce.Alu, 0)
@@ -396,8 +399,6 @@ function MetalManSolo:update(seconds)
 					self.pc.body:applyForce(MetalManMovingForce.Acier, 0)
 				end
 				self.goF=true
-
-			-- elseif s_gameStateManager.state['GameplaySolo'].inputManager:isKeyDown("left") then 
 			elseif self.moveState==2 then 
 				if self.metalWeight==MetalMTypes.Alu then
 					self.pc.body:applyForce(-MetalManMovingForce.Alu, 0)
@@ -420,9 +421,10 @@ function MetalManSolo:draw()
 end
 
 function MetalManSolo:preDraw()
-		self.s:predraw()
+		self.s:enableCanvas()
 end
 
 function MetalManSolo:postDraw()
-		self.s:postdraw()
+		self.s:disableCanvas()
+		self.s:pass()
 end

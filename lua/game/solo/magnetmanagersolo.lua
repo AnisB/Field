@@ -74,7 +74,7 @@ end
 
 function MagnetManagerSolo:enableG(GID)
 	for i,v in pairs(self.passiveGenerators) do
-		print ("Recherche de ", GID,v.id)
+		-- print ("Recherche de ", GID,v.id)
 		if v.id == GID then
 
 			v:enableG()

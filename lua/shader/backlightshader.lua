@@ -8,7 +8,6 @@ BackLightShader.__index = BackLightShader
 function BackLightShader.new()
 	local self = {}
 	setmetatable(self, BackLightShader)
-  self.isSupported=love.graphics.isSupported("canvas","shader")
   self:init()
   return self
 end
@@ -54,11 +53,9 @@ self.xf = xf
 self.time = 0
 end
 function BackLightShader:setParameter(p)
-  if self.isSupported then
-    for k,v in pairs(p) do
-       self.xf:send(k,v)
-    end
- end
+  for k,v in pairs(p) do
+     self.xf:send(k,v)
+  end
 end
 
 function BackLightShader:update(dt)
@@ -66,13 +63,9 @@ function BackLightShader:update(dt)
 end
 
 function BackLightShader:predraw()
- if self.isSupported then
    love.graphics.setShader(self.xf)
-end
 end
 
 function BackLightShader:postdraw()
- if self.isSupported then
    love.graphics.setShader()
-end
 end

@@ -2,15 +2,14 @@
 This file is a part of the Field project
 ]]
 
--- require("game.prelude")
--- require("game.storyline")
+--  Verifications graphiques
 require("render.graphicchecks")
+-- Ecran titre
 require("game.firstenter")
 
 -- require("game.cinematic.cinematic")
 
 
--- require("game.connecttoserver")
 -- require("game.choixtypejeu")
 -- require("game.choixperso")
 -- require("game.choixniveau")
@@ -73,7 +72,7 @@ function GameStateManager.new()
 	states['GameplaySolo'] = nil
 	states['LevelEndingSolo'] = nil
 	states['LevelFailedSolo'] = nil
-	states['ChoixNiveauSolo'] = ChoixNiveauSolo.new("themagnet",false)
+	states['ChoixNiveauSolo'] = ChoixNiveauSolo.new("metalman",false)
 -- -- 
 -- 	-- Init
 	self.state = states

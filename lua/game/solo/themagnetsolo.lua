@@ -410,7 +410,7 @@ function TheMagnetSolo:startMove(parDirection  )
 		end
 		self.moveState = parDirection
 	end
-	end
+end
 
 -- Method that handles the begining of a movement
 function TheMagnetSolo:stopMove( )
@@ -462,18 +462,18 @@ function TheMagnetSolo:update(seconds)
 	self.position.x=x
 	self.position.y=y
 	if self.alive then
-    if self.moveState == 1 then --press the right arrow key to push the ball to the right
-  	self.goF=true
-  	self.pc.body:applyForce(TheMagnetConst.MovingForce, 0)
-  elseif self.moveState == 2 then --press the left arrow key to push the ball to the left
-  	self.pc.body:applyForce(-TheMagnetConst.MovingForce,0)
-  	self.goF=false
-  end
-end
-for i,m in ipairs(self.statMetals)  do
-	m:setVelocity(self.pc.body:getLinearVelocity())
-end
-self.camera:newPosition(self.position.x,self.position.y)
+	    if self.moveState == 1 then --press the right arrow key to push the ball to the right
+	  		self.goF=true
+	  		self.pc.body:applyForce(TheMagnetConst.MovingForce, 0)
+	  	elseif self.moveState == 2 then --press the left arrow key to push the ball to the left
+	  		self.pc.body:applyForce(-TheMagnetConst.MovingForce,0)
+	  		self.goF=false
+	  	end
+	end
+	for i,m in ipairs(self.statMetals)  do
+		m:setVelocity(self.pc.body:getLinearVelocity())
+	end
+	self.camera:newPosition(self.position.x,self.position.y)
 end
 
 
@@ -486,4 +486,10 @@ function TheMagnetSolo:draw()
 	else
 		love.graphics.draw(self.anim:getSprite(),self.diffuse, windowW/2+unitWorldSize/2,windowH/2-unitWorldSize/2,0 , -1,1)
 	end
+end
+
+function TheMagnetSolo:preDraw()
+end
+
+function TheMagnetSolo:postDraw()
 end

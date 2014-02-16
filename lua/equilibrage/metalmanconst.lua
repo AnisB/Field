@@ -2,6 +2,9 @@
 This file is part of the Field project]]
 
 
+
+MetalManConst={}
+
 -- Métaux masse
 MetalMTypes= {
 	-- Alu = 0.2,
@@ -31,4 +34,5 @@ MetalManMaxSpeed=unitWorldSize*10
 -- Force de déplacement en fonction du matériaux
 MetalManMovingForce={Alu=unitWorldSize*2500,Acier=unitWorldSize*150}
 -- Taux de réduction de la vitesse
-MetalManBreakFactor=6
+MetalManConst.BreakFactor=6
+MetalManConst.AirBreakFactor=2

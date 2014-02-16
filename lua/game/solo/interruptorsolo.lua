@@ -1,5 +1,6 @@
 
 
+
 require("game.solo.animintersolo")
 
 
@@ -106,7 +107,7 @@ end
 
 function InterruptorSolo:handleTry(tryer)
 
-	if tryer=='MetalMan' then
+	if tryer=='metalman' then
 		if self.canBeEnableMM>0 then
 			self.on= not self.on
 			if self.on then
@@ -120,7 +121,7 @@ function InterruptorSolo:handleTry(tryer)
 				self:executeActions(InterruptorSolo.TimeEvent.Shutdown)
 			end
 		end
-	elseif tryer=='TheMagnet' then
+	elseif tryer=='themagnet' then
 		if self.canBeEnableTM>0 then
 			self.on= not self.on
 			if self.on then
@@ -195,8 +196,4 @@ end
 function InterruptorSolo:draw(x,y)
     	love.graphics.draw(self.anim:getSprite(), self.quad,self.position.x-x, self.position.y+y)
 
-end
-
-function InterruptorSolo:send(x,y)
-    return ("@interruptorSolo".."#"..self.netid.."#"..self.anim:getImgInfo()[1].."#"..self.anim:getImgInfo()[2].."#"..math.floor(self.position.x-x).."#"..math.floor( self.position.y+y))
 end
