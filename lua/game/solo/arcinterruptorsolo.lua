@@ -169,7 +169,7 @@ function ArcInterruptorSolo:collideWith( object, collision )
 	if object.type=='MetalManSolo' then
 		self.canBeEnableMM =self.canBeEnableMM+1
 	end
-	if object.type =='TheMagnetSolo' then
+	if object.type =='TheMagnet' then
 		self.canBeEnableTM =self.canBeEnableTM+1
 	end
 end
@@ -178,7 +178,7 @@ function ArcInterruptorSolo:unCollideWith( object, collision )
 	if object.type=='MetalManSolo' then
 		self.canBeEnableMM =self.canBeEnableMM-1
 	end
-	if object.type =='TheMagnetSolo' then
+	if object.type =='TheMagnet' then
 		self.canBeEnableTM =self.canBeEnableTM-1
 	end
 end

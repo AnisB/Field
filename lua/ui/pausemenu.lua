@@ -50,23 +50,23 @@ function PauseMenu:keyPressed(key, unicode)
         elseif key =='up' then
             self:decrementSelection()
     
-        elseif key == "return"then
+        elseif key == InputType.START then
 
             if self.resume.selected then
-                gameStateManager.state['GameplaySolo'].gameIsPaused=false
+                s_gameStateManager.state['GameplaySolo'].gameIsPaused=false
                 self.isActive=false
             end
 
 
             if self.restart.selected then
-            local mapFile =gameStateManager.state['GameplaySolo'].mapFile
-            local continuous =gameStateManager.state['GameplaySolo'].continuous
-            local player =gameStateManager.state['GameplaySolo'].player
-            gameStateManager.state['GameplaySolo']:destroy()
-            gameStateManager:resetLoader()
-            gameStateManager.state['GameplaySolo'] =nil
-            gameStateManager.state['GameplaySolo'] = GameplaySolo.new(mapFile,continuous,player)
-            gameStateManager:changeState('GameplaySolo')    
+            local mapFile =s_gameStateManager.state['GameplaySolo'].mapFile
+            local continuous =s_gameStateManager.state['GameplaySolo'].continuous
+            local player =s_gameStateManager.state['GameplaySolo'].player
+            s_gameStateManager.state['GameplaySolo']:destroy()
+            s_gameStateManager:resetLoader()
+            s_gameStateManager.state['GameplaySolo'] =nil
+            s_gameStateManager.state['GameplaySolo'] = GameplaySolo.new(mapFile,continuous,player)
+            s_gameStateManager:changeState('GameplaySolo')    
             end
 
 
@@ -76,9 +76,9 @@ function PauseMenu:keyPressed(key, unicode)
 
 
             if self.quit.selected then
-                gameStateManager.state['GameplaySolo'].gameIsPaused=false
-                gameStateManager.state['GameplaySolo']:destroy()
-                gameStateManager:changeState('ChoixNiveauSolo')
+                s_gameStateManager.state['GameplaySolo'].gameIsPaused=false
+                s_gameStateManager.state['GameplaySolo']:destroy()
+                s_gameStateManager:changeState('ChoixNiveauSolo')
                 self.isActive=false
             end
 
@@ -93,14 +93,14 @@ end
 function PauseMenu:sendPauseOrder()
    if self.isActive then
     if not self.optionsFlag then
-        gameStateManager.state['GameplaySolo'].gameIsPaused=false    
+        s_gameStateManager.state['GameplaySolo'].gameIsPaused=false    
         self.isActive = false
     else
             self.optionsFlag = false
 
     end
    else
-    gameStateManager.state['GameplaySolo'].gameIsPaused=true    
+    s_gameStateManager.state['GameplaySolo'].gameIsPaused=true    
     self.isActive = true
    end
 end

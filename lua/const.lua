@@ -14,6 +14,7 @@ SoloMapDirectory="maps/"
 SourceDirectory="./"
 ImgDirectory="img/"
 FontDirectory="font/"
+CharacterDirectory="game/character/"
 
 InputType = {	UP = 'up', DOWN = 'down', LEFT = 'left', RIGHT = 'right', 
 						ACTION1 = 'action1', ACTION2 = 'action2', ACTION3 = 'action3',

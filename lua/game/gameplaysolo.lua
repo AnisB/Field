@@ -2,7 +2,7 @@
 This file is part of the Field project]]
 
 -- Includes Persos
-require("game.solo.themagnetsolo")
+require(CharacterDirectory.."themagnet")
 require("game.solo.metalmansolo")
 
 -- Include Camera
@@ -34,6 +34,7 @@ GameplaySolo = {}
 GameplaySolo.__index = GameplaySolo
 
 Effects = {Arc = 1 , Acid = 2}
+Direction = {Right = 1 , Left = 2}
 
 
 function GameplaySolo.new(mapFile,continuous,player)
@@ -77,7 +78,7 @@ function GameplaySolo.new(mapFile,continuous,player)
         self.personnage = MetalManSolo.new(self.camera,self.mapLoader.metalManPos,self.mapLoader.metalManPowers)
         self.magnetmanager:addMetal(self.personnage)
     elseif self.player=="themagnet" then
-        self.personnage = TheMagnetSolo.new(self.camera,self.mapLoader.theMagnetPos,self.mapLoader.theMagnetPowers)
+        self.personnage = TheMagnet.new(self.camera,self.mapLoader.theMagnetPos,self.mapLoader.theMagnetPowers)
         self.magnetmanager:addGenerator(self.personnage)
     end
 
@@ -91,22 +92,21 @@ function GameplaySolo.new(mapFile,continuous,player)
     self.isSlowing=false
 
     -- Shaders
-        -- Bloom Shader
-        self.bloom=CreateBloomEffect(windowW,windowH)
-        -- Light Shader
-        self.lightback = BackLightShader.new()
+    -- Bloom Shader
+    self.bloom=CreateBloomEffect(windowW,windowH)
+    -- Light Shader
+    self.lightback = BackLightShader.new()
 
-        self.lightback:setParameter{
-            light_pos = {windowW/2,windowH/2,30}
-        }
-
-        -- Light Shader
-        self.light = LightShader.new()
-
-        self.light:setParameter{
+    self.lightback:setParameter{
         light_pos = {windowW/2,windowH/2,30}
     }
 
+    -- Light Shader
+    self.light = LightShader.new()
+
+    self.light:setParameter{
+    light_pos = {windowW/2,windowH/2,30}
+    }
 
     -- Pause menu loading
     self.pauseMenu=PauseMenu.new(200,100,900,550)
@@ -198,7 +198,7 @@ end
             self.personnage = MetalManSolo.new(self.camera,self.mapLoader.metalManPos)
             self.magnetmanager:addMetal(self.personnage)
         elseif self.player=="themagnet" then
-            self.personnage = TheMagnetSolo.new(self.camera,self.mapLoader.theMagnetPos)
+            self.personnage = TheMagnet.new(self.camera,self.mapLoader.theMagnetPos)
             self.magnetmanager:addGenerator(self.personnage)
         end
         self.gameIsPaused=false
@@ -223,11 +223,11 @@ end
                     end
                     
                     if key == InputType.RIGHT then
-                        self.personnage:startMove(1)
+                        self.personnage:startMove(Direction.Right)
                     end
 
                     if key ==InputType.LEFT then
-                        self.personnage:startMove(2)
+                        self.personnage:startMove(Direction.Left)
                     end  
 
                 if self.player=="metalman" then
@@ -262,13 +262,13 @@ end
                 self.pauseMenu:keyPressed(key, unicode)
             end
             -- Cheat Code
-            if key=="c" then
-                self.levelFinished=true
-            end
+            -- if key=="c" then
+            --     self.levelFinished=true
+            -- end
 
 
             -- Pause
-            if key =="escape" then
+            if key == InputType.MENU then
                 self.pauseMenu:sendPauseOrder()
             end   
         -- end
@@ -315,7 +315,7 @@ end
         dt=dttheo*self.slowTimer
         if  not self.gameIsPaused then
             if(self.levelFinished) then
-               s_gameStateManager.state['LevelEndingSolo']=LevelEndingSolo.new(self.mapLoader.levelends[1].next,self.continuous)
+               s_gameStateManager.state['LevelEndingSolo']=LevelEndingSolo.new(self.mapLoader.levelends[1].next,self.continuous,self.player)
                s_gameStateManager:changeState('LevelEndingSolo')
                return
            end
@@ -373,7 +373,6 @@ end
     end
 
         if self.gameIsPaused then
-            x, y = love.mouse.getPosition()
             self.pauseMenu:draw(x,y)
         end
     end

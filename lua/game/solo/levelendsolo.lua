@@ -38,7 +38,7 @@ end
 
 
 function LevelEndSolo:collideWith( object, collision )
-	if object.type=='MetalManSolo' or object.type =='TheMagnetSolo' then
+	if object.type=='MetalManSolo' or object.type =='TheMagnet' then
 		self.isTouched=true
 	end
 end
@@ -55,7 +55,7 @@ function LevelEndSolo:update(seconds)
 	self.position.y=y
 	if(self.timer>=TimerLevelEndSolo) then
 		self.isTouched=false
-		gameStateManager:finish()
+		s_gameStateManager:finish()
 	end	
 end
 

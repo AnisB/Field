@@ -1,25 +1,26 @@
 --[[ 
 This file is part of the Field project
 ]]
+-- Données d'équilibrage
+require("equilibrage.themagnetconst")
+
 
 -- Includes
-require("game.solo.camerasolo")
 require("game.solo.animtmsolo")
 require("game.solo.fieldsolo")
 require("game.solo.attfieldsolo")
-require("equilibrage.themagnetconst")
 -- require("game.fieldsound")
 -- Class Init
-TheMagnetSolo = {}
-TheMagnetSolo.__index = TheMagnetSolo
+TheMagnet = {}
+TheMagnet.__index = TheMagnet
 
 
 -- Constructor
-function TheMagnetSolo.new(camera,pos,powers)
+function TheMagnet.new(camera,pos,powers)
 
 	-- Class init
 	local self = {}
-	setmetatable(self, TheMagnetSolo)
+	setmetatable(self, TheMagnet)
 
 	-- Id Init
 	self.id=-1
@@ -44,7 +45,7 @@ function TheMagnetSolo.new(camera,pos,powers)
 	self.animCounter=0
 
 	-- Object's type
-	self.type='TheMagnetSolo'
+	self.type='TheMagnet'
 
 	self.moveState = 0
 
@@ -81,34 +82,33 @@ function TheMagnetSolo.new(camera,pos,powers)
 
 
 
-function TheMagnetSolo:init()
+function TheMagnet:init()
 	self:loadAnimation("standing",true)
 end
 
-	function TheMagnetSolo:die(type)
-		if self.alive then
-			self:disableField()
-			self:disableStaticField()
-			self.alive=false
-			if(type=="acid") then
-				s_gameStateManager.state["GameplaySolo"]:dieEffect(Effects.Green)
-				s_gameStateManager.state["GameplaySolo"]:slow()
-			else
-				s_gameStateManager.state["GameplaySolo"]:dieEffect(Effects.White)
-				self:loadAnimation("mortelec",true)
-				s_gameStateManager.state["GameplaySolo"]:slow()
-				Sound.playSound("electroc")
-			end
+function TheMagnet:die(type)
+	if self.alive then
+		self:disableField()
+		self:disableStaticField()
+		self.alive=false
+		if(type=="acid") then
+			s_gameStateManager.state["GameplaySolo"]:dieEffect(Effects.Acid)
+			s_gameStateManager.state["GameplaySolo"]:slow()
+		else
+			s_gameStateManager.state["GameplaySolo"]:dieEffect(Effects.Arc)
+			self:loadAnimation("mortelec",true)
+			s_gameStateManager.state["GameplaySolo"]:slow()
+			Sound.playSound("electroc")
 		end
 	end
+end
 
 
 
 -- This method handles a jump try
-function TheMagnetSolo:jump()
+function TheMagnet:jump()
 	-- Trying to jump
 	if self.alive then
-
 		if self.canjump then
 		   -- The physics impulse
 		   self.pc.body:applyLinearImpulse(0, TheMagnetConst.jumpImpulse)
@@ -122,13 +122,13 @@ end
 
 
 -- This methods handles the object's state change
-function TheMagnetSolo:setState( state )
+function TheMagnet:setState( state )
 	self.currentState=state
 end
 
 
 -- This method tells if an object is affected by the magnetic field applied by this character
-function TheMagnetSolo:isAppliable(pos)
+function TheMagnet:isAppliable(pos)
 	local ax =pos.x-self.position.x
 	local ay =pos.y-self.position.y
 	if math.abs(math.sqrt(ax*ax+ay*ay))<=self.fieldRadius then
@@ -139,29 +139,30 @@ function TheMagnetSolo:isAppliable(pos)
 end
 
 -- Error catch
-function TheMagnetSolo:enableG()
+function TheMagnet:enableG()
 	print("Error")
 end
 
 -- Error catch
-function TheMagnetSolo:disableG()
+function TheMagnet:disableG()
 	print("Error")
 end
 
 -- Return the objects position
-function TheMagnetSolo:getPosition()
+function TheMagnet:getPosition()
 	return self.position
 end
 
 -- Return the object's speed
-function TheMagnetSolo:getSpeed(  )
+function TheMagnet:getSpeed(  )
+	print("Error")
 end
 
 
 -- Method that handles the collision
-function TheMagnetSolo:collideWith( object, collision )
+function TheMagnet:collideWith( object, collision )
 	if self.alive then
-		if object.type=='GateInterruptor' or object.type=='Interruptor' or object.type=='MetalMan' then
+		if object.type=='GateInterruptor' or object.type=='Interruptor' or object.type=='MetalMan' or object.type=='LevelEnd' then
 			-- Ghost object dude
 		else
 			if(object:getPosition().y>self.position.y) and (not self.canjump)  then
@@ -181,7 +182,7 @@ function TheMagnetSolo:collideWith( object, collision )
 	end
 end
 -- Method that handles the uncollision
-function TheMagnetSolo:unCollideWith( object, collision )
+function TheMagnet:unCollideWith( object, collision )
 	x,y=self.pc.body:getLinearVelocity()
 	if y>-0.001 then 
 		self:loadAnimation("running",true)
@@ -190,7 +191,7 @@ end
 
 
 -- Add a static metal to the ones wich are affected by the static field
-function TheMagnetSolo:addStatMetal(metal)
+function TheMagnet:addStatMetal(metal)
 	for _, value in pairs(self.statMetals) do
 		if value == metal then
 			return 
@@ -201,7 +202,7 @@ function TheMagnetSolo:addStatMetal(metal)
 end
 
 -- Enabling fields
-function TheMagnetSolo:enableRepulsiveField()
+function TheMagnet:enableRepulsiveField()
 	if self.powers["Repulsive"]~=nil then
 		if self.alive then
 			self.fieldSound= FieldSound.new("Repulsive")
@@ -217,7 +218,7 @@ function TheMagnetSolo:enableRepulsiveField()
 	end
 end
 
-function TheMagnetSolo:enableAttractiveField()
+function TheMagnet:enableAttractiveField()
 	if self.powers["Attractive"]~=nil then
 		if self.alive then
 			self.fieldSound= FieldSound.new("Attractive")
@@ -235,7 +236,7 @@ end
 
 
 
-function TheMagnetSolo:enableStaticField()
+function TheMagnet:enableStaticField()
 	if self.powers["Static"]~=nil then
 		if self.alive then
 			self.fieldSound= FieldSound.new("Static")
@@ -251,7 +252,7 @@ function TheMagnetSolo:enableStaticField()
 	end
 end
 
-function TheMagnetSolo:enableRotativeLField()
+function TheMagnet:enableRotativeLField()
 	if self.powers["RotativeL"]~=nil then
 		if self.alive then
 			self.fieldSound= FieldSound.new("RotativeL")
@@ -266,7 +267,7 @@ function TheMagnetSolo:enableRotativeLField()
 		end
 	end
 end
-function TheMagnetSolo:enableRotativeRField()
+function TheMagnet:enableRotativeRField()
 	if self.powers["RotativeR"]~=nil then
 		if self.alive then
 			self.fieldSound= FieldSound.new("RotativeR")
@@ -283,7 +284,7 @@ function TheMagnetSolo:enableRotativeRField()
 end
 
 -- In case of a static Metal
-function TheMagnetSolo:rotativeLField(pos,factor)
+function TheMagnet:rotativeLField(pos,factor)
 	if self.powers["RotativeL"]~=nil then
 		if self.alive then
 			local vx=self.position.x-pos.x
@@ -299,7 +300,7 @@ function TheMagnetSolo:rotativeLField(pos,factor)
 	end
 end
 
-function TheMagnetSolo:rotativeRField(pos,factor)
+function TheMagnet:rotativeRField(pos,factor)
 	if self.powers["RotativeR"]~=nil then
 		if self.alive then
 
@@ -316,7 +317,7 @@ function TheMagnetSolo:rotativeRField(pos,factor)
 	end
 end
 
-function TheMagnetSolo:attractiveField(pos,factor)
+function TheMagnet:attractiveField(pos,factor)
 	if self.powers["Attractive"]~=nil then
 
 		if self.alive then
@@ -337,7 +338,7 @@ function TheMagnetSolo:attractiveField(pos,factor)
 end
 
 
-function TheMagnetSolo:repulsiveField(pos,factor)
+function TheMagnet:repulsiveField(pos,factor)
 	if self.powers["Repulsive"]~=nil then
 
 		if self.alive then
@@ -360,7 +361,7 @@ end
 
 -- Disabling fields
 
-function TheMagnetSolo:disableField()
+function TheMagnet:disableField()
 	if self.alive then
 		if self.fieldSound~=nil then
 			self.fieldSound:stop()
@@ -377,7 +378,7 @@ function TheMagnetSolo:disableField()
 	end
 end
 
-function TheMagnetSolo:disableStaticField()
+function TheMagnet:disableStaticField()
 	if self.alive then
 		if self.fieldSound~=nil then
 			self.fieldSound:stop()
@@ -397,7 +398,7 @@ function TheMagnetSolo:disableStaticField()
 	end
 end
 -- Method that handles the begining of a movement
-function TheMagnetSolo:startMove(parDirection  )
+function TheMagnet:startMove(parDirection  )
 	if self.alive then
 		self.animCounter=self.animCounter+1
 		if self.canjump and not self.isStatic then
@@ -413,7 +414,7 @@ function TheMagnetSolo:startMove(parDirection  )
 end
 
 -- Method that handles the begining of a movement
-function TheMagnetSolo:stopMove( )
+function TheMagnet:stopMove( )
 	if self.alive then
 		self.animCounter=self.animCounter-1
 		x,y=self.pc.body:getLinearVelocity()
@@ -434,13 +435,13 @@ function TheMagnetSolo:stopMove( )
 end
 
 -- Method that loads an animation
-function TheMagnetSolo:loadAnimation(anim, force)
+function TheMagnet:loadAnimation(anim, force)
 	self.anim:load(anim, force)
 end
 
 
 -- Method that updates the character state
-function TheMagnetSolo:update(seconds)
+function TheMagnet:update(seconds)
 	if self.fieldSound~=nil then
 		self.fieldSound:update(seconds)
 	end
@@ -478,7 +479,7 @@ end
 
 
 
-function TheMagnetSolo:draw()
+function TheMagnet:draw()
 	-- Draws the field
 	self.field:draw(windowW/2+unitWorldSize/4, windowH/2+unitWorldSize/4)
 	if 	 self.goF then
@@ -488,8 +489,8 @@ function TheMagnetSolo:draw()
 	end
 end
 
-function TheMagnetSolo:preDraw()
+function TheMagnet:preDraw()
 end
 
-function TheMagnetSolo:postDraw()
+function TheMagnet:postDraw()
 end

@@ -64,7 +64,6 @@ function InputManager:joystickpressed(joystick, button)
 	-- end
 	local buttonName = 'b'..tostring(button)..'j'..tostring(joystick:getID())
 	s_gameManager:inputPressed(buttonName)
-
 end
 
 function InputManager:joystickreleased(joystick, button)
