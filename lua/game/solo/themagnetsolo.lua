@@ -31,7 +31,8 @@ function TheMagnetSolo.new(camera,pos,powers)
 	self.position={x=pos.x,y=pos.y}
 
 	-- Physics Init
-	self.pc = Physics.newCharacter(self.position.x,self.position.y,unitWorldSize/2 - 5,false)
+	local decalage={unitWorldSize/2,unitWorldSize/2}
+	self.pc = Physics.newCharacter(self.position.x,self.position.y,unitWorldSize,unitWorldSize,type,decalage)
 	self.pc.fixture:setUserData(self)
 	self.pc.body:setMass(TheMagnetConst.Mass*unitWorldSize)
 

@@ -9,10 +9,10 @@ This file is part of the Field project
 	Physics.__index = Physics
 
 
-	function  Physics.newCharacter(x, y, radius, isStatic)
+	function  Physics.newCharacter(x, y, w,l, isStatic,dec)
 		local pc = {}
 		setmetatable(pc, Physics)
-		pc.shape = love.physics.newCircleShape(radius-1)
+		pc.shape = love.physics.newRectangleShape( -unitWorldSize/10, -unitWorldSize/10, w-unitWorldSize/5, l, 0 )
 		if isStatic == true then
 			pc.body = love.physics.newBody(world, x, y)
 		else
