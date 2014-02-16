@@ -112,12 +112,12 @@ function InterruptorSolo:handleTry(tryer)
 			if self.on then
 				self.mapLoader:enableGene(self.generatorID)
 				self:loadAnimation("launching",true)
-				self:executeActions(Interruptor.TimeEvent.Launching)
+				self:executeActions(InterruptorSolo.TimeEvent.Launching)
 
 			else
 				self.mapLoader:disableGene(self.generatorID)
 				self:loadAnimation("shutdown",true)
-				self:executeActions(Interruptor.TimeEvent.Shutdown)
+				self:executeActions(InterruptorSolo.TimeEvent.Shutdown)
 			end
 		end
 	elseif tryer=='TheMagnet' then
@@ -126,11 +126,11 @@ function InterruptorSolo:handleTry(tryer)
 			if self.on then
 				self.magnetManager:enableG(self.generatorID)
 				self:loadAnimation("launching",true)
-				self:executeActions(Interruptor.TimeEvent.Launching)
+				self:executeActions(InterruptorSolo.TimeEvent.Launching)
 			else
 				self.magnetManager:disableG(self.generatorID)
 				self:loadAnimation("shutdown",true)
-				self:executeActions(Interruptor.TimeEvent.Shutdown)
+				self:executeActions(InterruptorSolo.TimeEvent.Shutdown)
 			end
 		end
 	end

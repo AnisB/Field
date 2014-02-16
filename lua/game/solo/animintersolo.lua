@@ -62,7 +62,8 @@ function AnimInterSolo.new(folder)
 				local path = 'anim/'..folder..'/'..key..'/'..i..'.png'
 			-- print("loading image =>", path)
 			--self.sprites[key][i] = 
-			    gameStateManager.loader.newImage(AnimInterSolo.sprites[folder][key],i, path)
+			    AnimInterSolo.sprites[folder][key][i] = s_resourceManager:LoadImage(path)
+			    -- gameStateManager.loader.newImage(AnimInterSolo.sprites[folder][key],i, path)
 			end
 		end
 	end

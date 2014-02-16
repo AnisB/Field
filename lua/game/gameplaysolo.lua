@@ -263,11 +263,11 @@ end
                     if key == InputType.ACTION1 then
                         self.metalMan:jump()     
                     end
-                    if key =="e" then
+                    if key == InputType.ACTION4 then
                         self.mapLoader:handleTry('MetalMan')
                     end
                     if not self.metalMan.isStatic then
-                        if key =="b" then
+                        if key == InputType.ACTION2 then
                             self.metalMan:changeMass()
                         end
                     end
@@ -279,7 +279,7 @@ end
                         self.metalMan:startMove(2)
                     end  
 
-                    if key=="n" then
+                    if key == InputType.ACTION3 then
                         self.metalMan:switchType()
                         self.magnetmanager:changeMetalType(self.metalMan,self.metalMan.oldMetal,self.metalMan.metalType)
                     end     

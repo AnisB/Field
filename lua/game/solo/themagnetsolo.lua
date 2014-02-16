@@ -33,7 +33,7 @@ function TheMagnetSolo.new(camera,pos,powers)
 	-- Physics Init
 	self.pc = Physics.newCharacter(self.position.x,self.position.y,unitWorldSize/2 - 5,false)
 	self.pc.fixture:setUserData(self)
-	self.pc.body:setMass(TheMagnetConst.Mass)
+	self.pc.body:setMass(TheMagnetConst.Mass*unitWorldSize)
 
 	-- State and animation init
 	self:setState("standing")
