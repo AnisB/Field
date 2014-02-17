@@ -70,6 +70,14 @@ function AfterEffect:disableCanvas()
 		love.graphics.setCanvas()	
 end
 
+function AfterEffect:filterPass(filter)
+	if(self.active or self.time>0) then
+		love.graphics.setShader(self.xf)
+	end
+	love.graphics.setColor(255,255,255,255*filter)
+	love.graphics.draw(self.canvas,0,0)
+	love.graphics.setShader()
+end
 function AfterEffect:pass()
 	if(self.active or self.time>0) then
 		love.graphics.setShader(self.xf)

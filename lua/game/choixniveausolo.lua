@@ -118,8 +118,10 @@ end
 
 function ChoixNiveauSolo:draw(filter)
 	-- background :
+	love.graphics.setColor(255,255,255,255*filter)
 	self.back:draw(filter)
 	self.layout:draw(filter)
+	love.graphics.setColor(255,255,255,255*filter)
 
 	love.graphics.draw(self.levellabel, 720, 200)
 	love.graphics.print(self.level, 920, 200)

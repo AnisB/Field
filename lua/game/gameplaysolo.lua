@@ -207,13 +207,14 @@ end
 
     function GameplaySolo:keyPressed(key, unicode)
         -- if not self.loading then
+        print(key)
             if not self.gameIsPaused then
 
                 -- Inputs for players
                     if key == InputType.ACTION1 then
                         self.personnage:jump()     
                     end
-                    if key == InputType.ACTION4 then
+                    if key == InputType.ACTION2 then
                         self.mapLoader:handleTry(self.player)
                     end
                     
@@ -227,29 +228,29 @@ end
 
                 if self.player=="metalman" then
                     if not self.personnage.isStatic then
-                        if key == InputType.ACTION2 then
+                        if key == InputType.ACTION5 then
                             self.personnage:changeMass()
                         end
                     end
-                    if key == InputType.ACTION3 then
+                    if key == InputType.ACTION6 then
                         self.personnage:switchType()
                         self.magnetmanager:changeMetalType(self.personnage,self.personnage.oldMetal,self.personnage.metalType)
                     end     
                 elseif self.player=="themagnet" then
-                    if key ==InputType.ACTION2 then
+                    if key ==InputType.ACTION3 then
                         self.personnage:enableStaticField()
                     end
-                    if key ==InputType.ACTION3 then
+                    if key ==InputType.ACTION4 then
                         self.personnage:enableAttractiveField()
                     end
-                    if key ==InputType.ACTION4 then
+                    if key ==InputType.ACTION5 then
                         self.personnage:enableRepulsiveField()
                     end
 
-                    if key ==InputType.ACTION5 then
+                    if key ==InputType.ACTION6 then
                         self.personnage:enableRotativeLField()
                     end
-                    if key ==InputType.ACTION6 then
+                    if key ==InputType.ACTION7 then
                         self.personnage:enableRotativeRField()
                     end          
                 end
@@ -347,7 +348,7 @@ end
     end
     end
     
-    function GameplaySolo:draw()
+    function GameplaySolo:draw(filter)
         if  self.loading then
             self.loadingScreen:draw()
         else
@@ -378,7 +379,7 @@ end
 
 
             self.personnage:preDraw() 
-            self.arcShader:pass()
+            self.arcShader:filterPass(filter)
             self.personnage:postDraw() 
     end
 

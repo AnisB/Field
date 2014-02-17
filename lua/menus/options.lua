@@ -1,0 +1,115 @@
+--[[ 
+This file is part of the Field project]]
+
+require("ui.button")
+Options = {}
+Options.__index = Options
+function Options:new()
+    local self = {}
+    setmetatable(self, Options)
+
+    local ret=Button.new(1000,625,200,50,"backgrounds/options/return.png", "ret")
+    local audio=Button.newDec(100,300,200,50,"backgrounds/options/audio.png", "audio")
+   	audio:decalage(-10,-10)
+    local video=Button.newDec(100,375,200,50,"backgrounds/options/video.png","video")
+   	video:decalage(-10,-10)
+
+    self.gameplay=Button.newDec(125,450,200,50 ,"backgrounds/options/gameplay.png",20,20)
+    self.commonBackground = CommonBackground.new()
+
+    self.selection = {
+        self.audio,
+        self.video,
+        self.gameplay,
+        self.returnB
+    }
+    self.selected = 1
+    self.audio:setSelected(true)
+
+    return self
+end
+
+function Options:mousePressed(x, y, button)
+end
+
+function Options:mouseReleased(x, y, button) 
+end
+
+function Options:incrementSelection()
+	self.selection[self.selected]:setSelected(false)
+	if self.selected == #self.selection then
+		self.selected = 0
+	end
+	self.selected = self.selected + 1
+	self.selection[self.selected]:setSelected(true)
+end
+
+function Options:decrementSelection()
+	self.selection[self.selected]:setSelected(false)
+		if self.selected == 1 then
+		self.selected = #self.selection + 1
+	end
+	self.selected = self.selected - 1
+	self.selection[self.selected]:setSelected(true)
+end
+
+function Options:keyPressed(key, unicode)
+    self.inputManager:keyPressed(key,unicode)
+end
+function Options:keyReleased(key, unicode)
+    self.inputManager:keyReleased(key,unicode)
+end
+
+function Options:joystickPressed(key, unicode)
+    self.inputManager:joystickPressed(key,unicode)
+end
+
+
+function Options:joystickReleased(key, unicode)
+    self.inputManager:joystickReleased(key,unicode)
+end
+
+
+function Options:sendPressedKey(key, unicode) 
+	if key == 'down' or key =='tab' then
+			self:incrementSelection()
+		elseif key =='up' then
+			self:decrementSelection()
+	
+		elseif key == "return" then
+			self.timer=0
+			self.enteringDone=false			
+			gameStateManager:changeState('Menu')
+		end
+end
+
+
+
+function Options:update(dt)
+	self.inputManager:update()
+	self.commonBackground:update(dt) 
+	if not self.enteringDone then
+		self.timer =self.timer +dt
+		if self.timer>=1 then
+			self.timer=1
+			self.enteringDone=true
+		end
+	end
+end
+
+
+function Options:draw()
+	love.graphics.setColor(255,255,255,255*self.timer)
+	x, y = love.mouse.getPosition()
+	self.commonBackground:draw(self.timer) 
+
+	self.audio:draw(self.timer)
+	self.video:draw(self.timer)
+	self.gameplay:draw(self.timer)
+	self.returnB:draw(self.timer)
+
+
+
+
+
+end

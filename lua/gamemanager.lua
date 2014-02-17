@@ -10,7 +10,8 @@ GameManager.__index = GameManager
 InputType = {		UP = 'up', DOWN = 'down', LEFT = 'left', RIGHT = 'right', 
 						ACTION1 = 'action1', ACTION2 = 'action2', ACTION3 = 'action3',
 						ACTION4 = 'action4', ACTION5 = 'action5', ACTION6 = 'action6',
-						START = 'start', HELP = 'help', MENU = 'menu', NONE='none'}
+						ACTION7 = 'action7', START = 'start', HELP = 'help', 
+						MENU = 'menu', NONE='none'}
 
 GameManager.Player = { PLAYERONE = 'p1', PLAYERTWO = 'p2', UNKNOWN = 'uk'}
 

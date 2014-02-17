@@ -68,16 +68,16 @@ function GameStateManager.new()
 -- 	-- Jeu Solo
 	states['ChoixTypeJeuSolo'] = ChoixTypeJeuSolo.new()	
 	states['ChoixPersoSolo'] = nil
-	-- states['ChoixNiveauSolo'] = nil
+	states['ChoixNiveauSolo'] = nil
 	states['GameplaySolo'] = nil
 	states['LevelEndingSolo'] = nil
 	states['LevelFailedSolo'] = nil
-	states['ChoixNiveauSolo'] = ChoixNiveauSolo.new("metalman",false)
+	-- states['ChoixNiveauSolo'] = ChoixNiveauSolo.new("metalman",false)
 -- -- 
 -- 	-- Init
 	self.state = states
-	self.currentState='ChoixNiveauSolo'
-	self.nextState='ChoixNiveauSolo'
+	self.currentState='GraphicChecks'
+	self.nextState='GraphicChecks'
 	self.isTransiton = 0
 	self.transitionTime = 1.0
 	self.timer = 0.0

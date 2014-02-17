@@ -49,9 +49,9 @@ function InterruptorSolo:getArgs(string)
 end
 
 function InterruptorSolo:executeActions(actionType)
-	print("EXECUTION DES ACTIONS")
+	-- print("EXECUTION DES ACTIONS")
 	for i,v in pairs(self.timers) do
-		print("TIMER",v[1],v[2],v[3])
+		-- print("TIMER",v[1],v[2],v[3])
 		if v[3] == actionType then
 			if v[2] == EventTimer.Actions.Shutdown then
 				self.mapLoader:disableT(v[1])

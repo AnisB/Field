@@ -54,13 +54,13 @@ function ChoixPersoSolo:keyPressed(key, player)
 			self.selectedPerso=1
 			self.layout:setFocused("themagnet",true)
 			self.layout:setFocused("metalman",false)
-			self.layout:Init()
+			-- self.layout:Init()
 		end
 		if name =="metalman" then
 			self.selectedPerso=2
 			self.layout:setFocused("themagnet",false)
 			self.layout:setFocused("metalman",true)
-			self.layout:Init()
+			-- self.layout:Init()
 		end
 		if name =="play" then
 	    	if self.selectedPerso~=-1 then
