@@ -51,7 +51,9 @@ function AnimArcSolo.new(folder)
 				local path = 'anim/'..folder..'/'..key..'/'..i..'.png'
 			-- print("loading image =>", path)
 			--self.sprites[key][i] = 
-			    gameStateManager.loader.newImage(AnimArcSolo.sprites[folder][key],i, path)
+			    -- gameStateManager.loader.newImage(AnimArcSolo.sprites[folder][key],i, path)
+			    AnimArcSolo.sprites[folder][key][i] = s_resourceManager:LoadImage(path)
+			    
 			end
 		end
 	end

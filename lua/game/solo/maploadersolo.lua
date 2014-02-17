@@ -8,7 +8,6 @@ require("const")
 
 -- Inlcudes relatifs aux objets
 require("game.solo.platformsolo")
-require("game.solo.camerasolo")
 require("game.solo.wallsolo")
 require("game.solo.destroyablesolo")
 require("game.solo.tilesetssolo")

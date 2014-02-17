@@ -3,12 +3,12 @@ This file is part of the Field project
 ]]
 
 require("const")
-CameraSolo = {}
-CameraSolo.__index =  CameraSolo
+Camera = {}
+Camera.__index =  Camera
 
-function CameraSolo.new(ax,ay)
+function Camera.new(ax,ay)
     local self = {}
-    setmetatable(self, CameraSolo)
+    setmetatable(self, Camera)
     self.position= {x=ax,y=ay}
     self.timer=0
     self.shake={x={},y={}}
@@ -16,7 +16,7 @@ function CameraSolo.new(ax,ay)
 end
 
 
-function CameraSolo:update(dt)
+function Camera:update(dt)
 	self.timer=self.timer+dt
 
 
@@ -35,7 +35,7 @@ function CameraSolo:update(dt)
 		self.shake.y.past=self.shake.y.past+dt	
 	end
 end
-function CameraSolo:newPosition(ax,ay)
+function Camera:newPosition(ax,ay)
     -- self.position.x= ax
     if self.shake.x.enable then
 		self.position.x= ax+self.shake.x.dx*math.cos(self.shake.x.past*self.shake.x.speed)
@@ -51,15 +51,15 @@ function CameraSolo:newPosition(ax,ay)
 	end	
 end
 
-function CameraSolo:getPos()
+function Camera:getPos()
 	return {x = self.position.x -5, y= self.position.y -5}
 end
 
 
-function CameraSolo:draw()
+function Camera:draw()
 end
 
-function CameraSolo:shakeOnX(dx,speed,duration)
+function Camera:shakeOnX(dx,speed,duration)
 	self.shake.x.dx=dx
 	self.shake.x.speed=speed
 	self.shake.x.duration=duration
@@ -67,7 +67,7 @@ function CameraSolo:shakeOnX(dx,speed,duration)
 	self.shake.x.enable=true
 end
 
-function CameraSolo:shakeOnY(dy,speed,duration)
+function Camera:shakeOnY(dy,speed,duration)
 	self.shake.y.dy=dy
 	self.shake.y.speed=speed
 	self.shake.y.duration=duration

@@ -26,11 +26,6 @@ function Scroller.new(x,y,img,initialPos, dex)
     return self
 end
 
-function Scroller:isCliked(x,y)
-
-	return( x > self.position.x and x < self.position.x+self.dimension.w and y > self.position.y and y < self.position.y+self.dimension.l )
-end
-
 function Scroller:update(dt)
 
 end
@@ -48,7 +43,7 @@ end
 function Scroller:basicDraw(filter)
 	love.graphics.setColor(255,255,255,255*filter)
 	love.graphics.draw(Scroller.base, self.position.x+255, self.position.y+30)
-	love.graphics.draw(Scroller.mover, self.position.x+255 + self.scrollPosition*240  , self.position.y+30)
+	-- love.graphics.draw(Scroller.mover, self.position.x+255 + self.scrollPosition*240  , self.position.y+30)
 	love.graphics.draw(self.img, self.position.x+25, self.position.y+20)
 	love.graphics.setColor(255,255,255,255)
 end
@@ -59,7 +54,7 @@ function Scroller:selectedDraw(filter)
 	love.graphics.setColor(255,255,255,255*filter)
 	love.graphics.draw(self.select, self.position.x-20, self.position.y+20)
 	love.graphics.draw(Scroller.base, self.position.x+255, self.position.y+30)
-	love.graphics.draw(Scroller.mover, self.position.x+255 + self.scrollPosition*240 , self.position.y+30)
+	-- love.graphics.draw(Scroller.mover, self.position.x+255 + self.scrollPosition*240 , self.position.y+30)
 	love.graphics.draw(self.img, self.position.x+25, self.position.y+20)
 	love.graphics.setColor(255,255,255,255)
 end

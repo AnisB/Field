@@ -6,7 +6,7 @@ require(CharacterDirectory.."themagnet")
 require("game.solo.metalmansolo")
 
 -- Include Camera
-require("game.solo.camerasolo")
+require("render.camera")
 
 -- Include physics
 require("game.solo.magnetmanagersolo")
@@ -72,7 +72,7 @@ function GameplaySolo.new(mapFile,continuous,player)
 
     -- Player loading
     self.player= player
-    self.camera =CameraSolo.new(0,0)
+    self.camera = Camera.new(0,0)
 
     if self.player=="metalman" then
         self.personnage = MetalManSolo.new(self.camera,self.mapLoader.metalManPos,self.mapLoader.metalManPowers)
@@ -241,20 +241,20 @@ end
                         self.magnetmanager:changeMetalType(self.personnage,self.personnage.oldMetal,self.personnage.metalType)
                     end     
                 elseif self.player=="themagnet" then
-                    if key =="i" then
+                    if key ==InputType.ACTION2 then
                         self.personnage:enableStaticField()
                     end
-                    if key =="o" then
+                    if key ==InputType.ACTION3 then
                         self.personnage:enableAttractiveField()
                     end
-                    if key =="p" then
+                    if key ==InputType.ACTION4 then
                         self.personnage:enableRepulsiveField()
                     end
 
-                    if key =="k" then
+                    if key ==InputType.ACTION5 then
                         self.personnage:enableRotativeLField()
                     end
-                    if key =="l" then
+                    if key ==InputType.ACTION6 then
                         self.personnage:enableRotativeRField()
                     end          
                 end
@@ -284,10 +284,10 @@ end
                         self.personnage:stopMove()
                 end
                 if self.player=="themagnet" then
-                    if key =="i" then
+                    if key ==InputType.ACTION2 then
                         self.personnage:disableStaticField()
                     end
-                    if key =="o" or key =="p" or key =="k"or key =="l"then
+                    if key ==InputType.ACTION3 or key ==InputType.ACTION4 or key ==InputType.ACTION5 or key ==InputType.ACTION6 then
                         self.personnage:disableField()
                     end
                 end

@@ -98,7 +98,7 @@ function TheMagnet:die(type)
 			s_gameStateManager.state["GameplaySolo"]:dieEffect(Effects.Arc)
 			self:loadAnimation("mortelec",true)
 			s_gameStateManager.state["GameplaySolo"]:slow()
-			Sound.playSound("electroc")
+			-- Sound.playSound("electroc")
 		end
 	end
 end
@@ -205,8 +205,8 @@ end
 function TheMagnet:enableRepulsiveField()
 	if self.powers["Repulsive"]~=nil then
 		if self.alive then
-			self.fieldSound= FieldSound.new("Repulsive")
-			self.fieldSound:play()
+			-- self.fieldSound= FieldSound.new("Repulsive")
+			-- self.fieldSound:play()
 			self.field= Field.new(FieldTypes.Repulsive,pos)
 			self.field.isActive=true
 			self.appliesField=true
@@ -221,8 +221,8 @@ end
 function TheMagnet:enableAttractiveField()
 	if self.powers["Attractive"]~=nil then
 		if self.alive then
-			self.fieldSound= FieldSound.new("Attractive")
-			self.fieldSound:play()
+			-- self.fieldSound= FieldSound.new("Attractive")
+			-- self.fieldSound:play()
 			self.field= AttField.new(pos)
 			self.field.isActive=true
 			self.appliesField=true
@@ -239,8 +239,8 @@ end
 function TheMagnet:enableStaticField()
 	if self.powers["Static"]~=nil then
 		if self.alive then
-			self.fieldSound= FieldSound.new("Static")
-			self.fieldSound:play()
+			-- self.fieldSound= FieldSound.new("Static")
+			-- self.fieldSound:play()
 			self.field= Field.new(FieldTypes.Static,pos)
 			self.field.isActive=true
 			self.appliesField=true
@@ -255,8 +255,8 @@ end
 function TheMagnet:enableRotativeLField()
 	if self.powers["RotativeL"]~=nil then
 		if self.alive then
-			self.fieldSound= FieldSound.new("RotativeL")
-			self.fieldSound:play()
+			-- self.fieldSound= FieldSound.new("RotativeL")
+			-- self.fieldSound:play()
 			self.field= Field.new(FieldTypes.RotativeL,pos)
 			self.field.isActive=true
 			self.appliesField=true
@@ -270,8 +270,8 @@ end
 function TheMagnet:enableRotativeRField()
 	if self.powers["RotativeR"]~=nil then
 		if self.alive then
-			self.fieldSound= FieldSound.new("RotativeR")
-			self.fieldSound:play()
+			-- self.fieldSound= FieldSound.new("RotativeR")
+			-- self.fieldSound:play()
 			self.field= Field.new(FieldTypes.RotativeR,pos)
 			self.field.isActive=true
 			self.appliesField=true

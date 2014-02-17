@@ -2,7 +2,6 @@
 This file is part of the Field project]]
 
 
-require("game.camera")
 
 MetalSolo = {}
 MetalSolo.__index = MetalSolo

@@ -4,7 +4,7 @@ This file is part of the Field project]]
 
 
 -- Include Camera
-require("game.solo.camerasolo")
+require("render.camera")
 
 -- Include Anim
 require("game.solo.animmmsolo")
