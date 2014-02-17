@@ -12,15 +12,12 @@ This file is part of the Field project
 	function  Physics.newCharacter(x, y)
 		local pc = {}
 		setmetatable(pc, Physics)
-		pc.shape = love.physics.newPolygonShape(-unitWorldSize/3-5,-unitWorldSize/2-5, 
-												unitWorldSize/3-5,-unitWorldSize/2-5,
-												unitWorldSize/3-5,unitWorldSize/2-1-5, 
-												0,unitWorldSize/2-5, 
-												-unitWorldSize/3-5,unitWorldSize/2-1-5
-												-- x-unitWorldSize/4,y-unitWorldSize/2
+		pc.shape = love.physics.newPolygonShape(-unitWorldSize/3,-unitWorldSize/2, 
+												unitWorldSize/3,-unitWorldSize/2,
+												unitWorldSize/3,unitWorldSize/2-1, 
+												0,unitWorldSize/2, 
+												-unitWorldSize/3,unitWorldSize/2-1
 												)
-		print("THIS IS THE DATA ", x, y)
-		-- pc.shape = love.physics.newRectangleShape( -unitWorldSize/10, -unitWorldSize/10, w-unitWorldSize/5, l, 0 )
 		if isStatic == true then
 			pc.body = love.physics.newBody(world, x, y)
 		else
@@ -29,7 +26,7 @@ This file is part of the Field project
 	pc.fixture = love.physics.newFixture(pc.body, pc.shape, 10) -- Attach fixture to body and give it a density of 1 (rigid body)
 	pc.fixture:setFilterData(1,1,-1)
 	pc.body:setFixedRotation(true)
-	pc.fixture:setFriction(0.5)
+	pc.fixture:setFriction(0)
 	pc.body:setInertia(1.0)
 	return pc
 end
@@ -62,7 +59,7 @@ function Physics.newRectangle(x, y, w,l, isStatic,dec)
 	end	
 	pc.fixture = love.physics.newFixture(pc.body, pc.shape, 10) -- Attach fixture to body and give it a density of 1 (rigid body)
 	pc.body:setFixedRotation(true)
-	pc.fixture:setFriction(0.5)
+	pc.fixture:setFriction(0)
 	pc.body:setInertia(1.0)
 	return pc
 end

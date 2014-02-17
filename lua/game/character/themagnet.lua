@@ -449,9 +449,11 @@ function TheMagnet:update(seconds)
 	if x>TheMagnetConst.MaxSpeed then
 		self.pc.body:setLinearVelocity(MetalManMaxSpeed,y)
 	end
-
 	if x<-TheMagnetConst.MaxSpeed then
 		self.pc.body:setLinearVelocity(-MetalManMaxSpeed,y)
+	end
+	if((self.moveState==0 or self.isStatic) and math.abs(y)<0.0001) then
+		self.pc.body:setLinearVelocity(0,y)
 	end
 	self.field:update(seconds,self.position.x,self.position.y)
 

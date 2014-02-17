@@ -26,8 +26,8 @@ function LevelEndingSolo.new(next,continuous,perso)
     self.layout:addSelectable(ret)
 
     self.layout:Init()
-
-    if player=="metalman" then
+    
+    if perso=="metalman" then
         self.perso = BasicAnim.new(perso.."/alu/running",true, 0.1, 9)
     else
         self.perso = BasicAnim.new(perso.."/running",true, 0.1, 9)

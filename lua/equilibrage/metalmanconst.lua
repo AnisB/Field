@@ -8,8 +8,8 @@ MetalManConst={}
 -- Métaux masse
 MetalMTypes= {
 	-- Alu = 0.2,
-	Alu = 1,
-	Acier = 0.25
+	Alu = 0.2,
+	Acier = 0.5
 }
 
 -- Puissance des champs
@@ -24,15 +24,15 @@ MetaManRepFieldS={x=unitWorldSize*6,y=unitWorldSize*2.5}
 -- Impulsion des sauts
 MetalManJumpImpulse ={
 	-- Alu =   ( -27 * unitWorldSize / MetalMTypes.Alu ),
-	Alu =   ( -700 * unitWorldSize / MetalMTypes.Alu ),
-	Acier = ( -400 * unitWorldSize / MetalMTypes.Acier )
+	Alu =   ( -25 * unitWorldSize / MetalMTypes.Alu ),
+	Acier = ( -120 * unitWorldSize / MetalMTypes.Acier )
 }
 
 -- Déplacement
 -- Vitesse max
 MetalManMaxSpeed=unitWorldSize*10
 -- Force de déplacement en fonction du matériaux
-MetalManMovingForce={Alu=unitWorldSize*2500,Acier=unitWorldSize*150}
+MetalManMovingForce={Alu=unitWorldSize*250,Acier=unitWorldSize*500}
 -- Taux de réduction de la vitesse
 MetalManConst.BreakFactor=6
 MetalManConst.AirBreakFactor=2

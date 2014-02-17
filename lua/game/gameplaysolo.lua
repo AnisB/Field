@@ -408,10 +408,10 @@ function GameplaySolo:postSolve(a, b, coll)
     -- we won't do anything with this function
 end
 
-function GameplaySolo:shakeOnX(dx,speed,duration)
-        self.camera:shakeOnX(dx,speed,duration)
+function GameplaySolo:shakeOnX(dx,speed,duration, amplitude)
+        self.camera:shakeOnX(dx,speed,duration, amplitude)
 end
 
-function GameplaySolo:shakeOnY(dy,speed,duration)
-        self.camera:shakeOnY(dy,speed,duration)
+function GameplaySolo:shakeOnY(dy,speed,duration, amplitude)
+        self.camera:shakeOnY(dy,speed,duration, amplitude)
 end

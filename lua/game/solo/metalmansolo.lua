@@ -268,20 +268,17 @@ function MetalManSolo:collideWith( object, collision )
 				vx,vy =self.pc.body:getLinearVelocity() 
 				local kinEnergyX = math.log(0.5*self.pc.body:getMass()*self.pc.body:getMass()*self.pc.body:getMass()*math.abs(vx))
 				local kinEnergyY = math.log(0.5*self.pc.body:getMass()*self.pc.body:getMass()*self.pc.body:getMass()*math.abs(vy))
-				print(kinEnergyX)
-				print (kinEnergyY)
 				if kinEnergyX>10.9 or kinEnergyY>11 then
-					s_gameStateManager.state["GameplaySolo"]:shakeOnX(2,100,0.2)
-					s_gameStateManager.state["GameplaySolo"]:shakeOnY(2,100,0.2)
-					self.shake:stop()
-					self.shake:play()
+					local amplitude = math.min(math.max(math.sqrt(vx*vx+vy*vy), 0.0), 1500) 
+					s_gameStateManager.state["GameplaySolo"]:shakeOnX(2,100,2.0,2.0*amplitude/1500.0)
+					s_gameStateManager.state["GameplaySolo"]:shakeOnY(2,100,2.0,2.0*amplitude/1500.0)
 				end
 			end
 			if self.isStatic==true  then
-					s_gameStateManager.state["GameplaySolo"]:shakeOnX(5,100,0.2)
-					s_gameStateManager.state["GameplaySolo"]:shakeOnY(5,100,0.2)
-					self.shake:stop()
-					self.shake:play()
+				vx,vy =self.pc.body:getLinearVelocity() 
+				local amplitude = math.min(math.max(math.sqrt(vx*vx+vy*vy), 0.0), 1500) 
+				s_gameStateManager.state["GameplaySolo"]:shakeOnX(5,100,2.0,3.0*amplitude/1500.0)
+				s_gameStateManager.state["GameplaySolo"]:shakeOnY(5,100,2.0,3.0*amplitude/1500.0)
 			end
 
 			if(object:getPosition().y>self.position.y) then
@@ -379,6 +376,9 @@ function MetalManSolo:update(seconds)
 		self.pc.body:setLinearVelocity(-MetalManMaxSpeed,y)
 	end
 	self.anim:update(seconds)
+	if((self.moveState==0 or self.isStatic) and math.abs(y)<0.0001) then
+		self.pc.body:setLinearVelocity(0,y)
+	end
 	if(self.anim.currentAnim.name == "standing" and self.moveState~=0 and math.abs(y)<0.0001 ) then
 		self:loadAnimation("running",true)		
 	end
@@ -386,11 +386,7 @@ function MetalManSolo:update(seconds)
 	self.position.x=x
 	self.position.y=y
 	self.camera:newPosition(x,y)
-
 	if self.alive then
-		if self.animCounter >=1 and self.anim.currentAnim.name=="standing" then
-			self:loadAnimation("running",true)	
-		end
 		if not self.isStatic  then
 			if self.moveState==1 then
 				if self.metalWeight==MetalMTypes.Alu then
@@ -409,6 +405,7 @@ function MetalManSolo:update(seconds)
 			end
 		end
 	end
+	x,y =self.pc.body:getLinearVelocity()
 end
 
 function MetalManSolo:draw()
