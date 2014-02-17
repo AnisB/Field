@@ -92,13 +92,12 @@ function TheMagnet:die(type)
 		self:disableStaticField()
 		self.alive=false
 		if(type=="acid") then
-			s_gameStateManager.state["GameplaySolo"]:dieEffect(Effects.Acid)
-			s_gameStateManager.state["GameplaySolo"]:slow()
+			PushEvent({type=Effects.Acid, sort=GameplayEvents.Die})
+			PushEvent({sort=GameplayEvents.Slow})
 		else
-			s_gameStateManager.state["GameplaySolo"]:dieEffect(Effects.Arc)
+			PushEvent({type=Effects.Arc, sort=GameplayEvents.Die})
+			PushEvent({sort=GameplayEvents.Slow})
 			self:loadAnimation("mortelec",true)
-			s_gameStateManager.state["GameplaySolo"]:slow()
-			-- Sound.playSound("electroc")
 		end
 	end
 end

@@ -72,7 +72,7 @@ function GameStateManager.new()
 	states['GameplaySolo'] = nil
 	states['LevelEndingSolo'] = nil
 	states['LevelFailedSolo'] = nil
-	states['ChoixNiveauSolo'] = ChoixNiveauSolo.new("themagnet",false)
+	states['ChoixNiveauSolo'] = ChoixNiveauSolo.new("metalman",false)
 -- -- 
 -- 	-- Init
 	self.state = states
@@ -85,6 +85,9 @@ function GameStateManager.new()
 	return self
 end
 
+function GetCurrentState()
+	return s_gameStateManager.state[s_gameStateManager.currentState]
+end
 function GameStateManager:inputPressed(key, unicode)
 	if(self.isTransiton == 0) then
 		self.state[self.currentState]:keyPressed(key, unicode)
@@ -100,7 +103,6 @@ end
 function GameStateManager:update(dt)
 	-- Mise a jour de l'état
 	self.state[self.currentState]:update(dt)
-
 
 	-- Transition en fondu
 	if(self.isTransiton == 1) then

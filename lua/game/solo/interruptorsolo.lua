@@ -145,7 +145,7 @@ end
 
 
 function InterruptorSolo:collideWith( object, collision )
-	if object.type=='MetalManSolo' then
+	if object.type=='MetalMan' then
 		self.canBeEnableMM =self.canBeEnableMM+1
 	end
 	if object.type =='TheMagnet' then
@@ -154,7 +154,7 @@ function InterruptorSolo:collideWith( object, collision )
 end
 
 function InterruptorSolo:unCollideWith( object, collision )
-	if object.type=='MetalManSolo' then
+	if object.type=='MetalMan' then
 		self.canBeEnableMM =self.canBeEnableMM-1
 	end
 	if object.type =='TheMagnet' then

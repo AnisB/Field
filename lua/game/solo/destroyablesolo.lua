@@ -56,7 +56,7 @@
         return self.position
     end 
     function DestroyableSolo:collideWith( object, collision )
-        if object.type=='MetalManSolo' or (object.type =='MetalSolo' and object.metalSoloWeight == MetalSoloMTypes.Acier)then
+        if object.type=='MetalMan' or (object.type =='MetalSolo' and object.metalSoloWeight == MetalSoloMTypes.Acier)then
             x,y =object.pc.body:getLinearVelocity()
             local kinEnergyX = math.log(0.5*object.pc.body:getMass()*object.pc.body:getMass()*object.pc.body:getMass()*math.abs(x))
             local kinEnergyY = math.log(0.5*object.pc.body:getMass()*object.pc.body:getMass()*object.pc.body:getMass()*math.abs(y))

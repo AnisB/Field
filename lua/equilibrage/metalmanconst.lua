@@ -23,7 +23,6 @@ MetaManRepFieldS={x=unitWorldSize*6,y=unitWorldSize*2.5}
 
 -- Impulsion des sauts
 MetalManJumpImpulse ={
-	-- Alu =   ( -27 * unitWorldSize / MetalMTypes.Alu ),
 	Alu =   ( -25 * unitWorldSize / MetalMTypes.Alu ),
 	Acier = ( -120 * unitWorldSize / MetalMTypes.Acier )
 }

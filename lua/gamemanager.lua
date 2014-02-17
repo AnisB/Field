@@ -23,6 +23,8 @@ end
 
 function GameManager:Init()
 	self.keys =  require("input.keys")
+	local eventList = {}
+	self.eventList = eventList
 end
 
 -- Gestion des touches
@@ -55,6 +57,10 @@ function GameManager:FindOwner(parKey)
 	end
 	return {player=GameManager.Player.UNKNOWN, key = parKey}
 
+end
+
+function PushEvent(newEvent)
+	    table.insert(s_gameManager.eventList, newEvent)
 end
 
 function GameManager:draw()

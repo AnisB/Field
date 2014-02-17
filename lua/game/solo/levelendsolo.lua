@@ -38,7 +38,7 @@ end
 
 
 function LevelEndSolo:collideWith( object, collision )
-	if object.type=='MetalManSolo' or object.type =='TheMagnet' then
+	if object.type=='MetalMan' or object.type =='TheMagnet' then
 		self.isTouched=true
 	end
 end

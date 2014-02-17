@@ -3,7 +3,7 @@ This file is part of the Field project]]
 
 -- Includes Persos
 require(CharacterDirectory.."themagnet")
-require("game.solo.metalmansolo")
+require(CharacterDirectory.."metalman")
 
 -- Include Camera
 require("render.camera")
@@ -35,6 +35,7 @@ GameplaySolo.__index = GameplaySolo
 
 Effects = {Arc = 1 , Acid = 2}
 Direction = {Right = 1 , Left = 2}
+GameplayEvents = {Die = 1 , Slow =2, Paralax = 3}
 
 
 function GameplaySolo.new(mapFile,continuous,player)
@@ -59,11 +60,8 @@ function GameplaySolo.new(mapFile,continuous,player)
     self.mapFile=mapFile
     self.mapLoader = MapLoaderSolo.new(mapFile,self.magnetmanager)
 
-
     -- Paralax Loading
-    self.mapy= self.mapLoader.map.height*self.mapLoader.map.tileheight
-
-    self.paralax=Paralax.new(ParalaxImg..self.world,self.mapy)
+    self.paralax=Paralax.new(ParalaxImg..self.world, self.mapLoader.map.height*self.mapLoader.map.tileheight)
 
     self.acidShader = AfterEffect.new(ShaderDirectory.."blending.glsl")
     self.arcShader = AfterEffect.new(ShaderDirectory.."blending.glsl")
@@ -75,7 +73,7 @@ function GameplaySolo.new(mapFile,continuous,player)
     self.camera = Camera.new(0,0)
 
     if self.player=="metalman" then
-        self.personnage = MetalManSolo.new(self.camera,self.mapLoader.metalManPos,self.mapLoader.metalManPowers)
+        self.personnage = MetalMan.new(self.camera,self.mapLoader.metalManPos,self.mapLoader.metalManPowers)
         self.magnetmanager:addMetal(self.personnage)
     elseif self.player=="themagnet" then
         self.personnage = TheMagnet.new(self.camera,self.mapLoader.theMagnetPos,self.mapLoader.theMagnetPowers)
@@ -157,13 +155,10 @@ end
 
     function GameplaySolo:dieEffect(effect)
         self.effect = effect
-        print(effect)
         if(self.effect == Effects.Acid) then
-            print("Enable acid")
             self.acidShader:activate()
         elseif (self.effect == Effects.Arc) then
             self.arcShader:activate()
-            print("Enable arc")
         end
     end
 
@@ -195,7 +190,7 @@ end
         self.camera =Camera.new(0,0)
 
         if self.player=="metalman" then
-            self.personnage = MetalManSolo.new(self.camera,self.mapLoader.metalManPos)
+            self.personnage = MetalMan.new(self.camera,self.mapLoader.metalManPos)
             self.magnetmanager:addMetal(self.personnage)
         elseif self.player=="themagnet" then
             self.personnage = TheMagnet.new(self.camera,self.mapLoader.theMagnetPos)
@@ -294,8 +289,23 @@ end
             end
     end
     
+    function GameplaySolo:HandleEvents()
+        for i,v in pairs(s_gameManager.eventList) do
+            print(v.sort)
+            if (v.sort == GameplayEvents.Die) then
+                self:dieEffect(v.type)
+            elseif (v.sort == GameplayEvents.Slow) then
+                self:slow()
+            elseif (v.sort == GameplayEvents.Paralax) then
+                self.paralax:setEnable(v.val)
+            end
+            s_gameManager.eventList[i] = nil
+        end
+    end
     function GameplaySolo:update(dttheo)
 
+        -- Gestion des evenements de la frame précédente
+        self:HandleEvents()
         -- Mise a jour des shaders
         self.acidShader:update(dttheo)
         self.arcShader:update(dttheo)

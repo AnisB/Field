@@ -26,7 +26,9 @@ function Paralax.new(path,ymap)
     return self
 end
 
-
+function Paralax:setEnable(parVal)
+    self.isActive = parVal
+end
 function Paralax:destroy()
     for i,j in pairs(Background.sprites) do
         j = nil

@@ -169,7 +169,7 @@ end
 
 
 function GateInterruptorSolo:collideWith( object, collision )
-	if object.type=='MetalManSolo' then
+	if object.type=='MetalMan' then
 		self.canBeEnableMM =self.canBeEnableMM+1
 	end
 	if object.type =='TheMagnet' then
@@ -178,7 +178,7 @@ function GateInterruptorSolo:collideWith( object, collision )
 end
 
 function GateInterruptorSolo:unCollideWith( object, collision )
-	if object.type=='MetalManSolo' then
+	if object.type=='MetalMan' then
 		self.canBeEnableMM =self.canBeEnableMM-1
 	end
 	if object.type =='TheMagnet' then

@@ -15,12 +15,12 @@ require("equilibrage.metalmanconst")
 -- Include shader
 require ("shader.aftereffect")
 
-MetalManSolo = {}
-MetalManSolo.__index = MetalManSolo
+MetalMan = {}
+MetalMan.__index = MetalMan
 
-function MetalManSolo.new(camera,pos,powers)
+function MetalMan.new(camera,pos,powers)
 	local self = {}
-	setmetatable(self, MetalManSolo)
+	setmetatable(self, MetalMan)
 
 	-- The camera
 	self.camera=camera
@@ -50,7 +50,7 @@ function MetalManSolo.new(camera,pos,powers)
 	self.strenght=MetalManFieldStr
 	self.metalType=MetalTypes.Normal
 	self.oldType=MetalTypes.Normal
-	self.type='MetalManSolo'
+	self.type='MetalMan'
 
 	self.alive=true
 
@@ -80,31 +80,30 @@ function MetalManSolo.new(camera,pos,powers)
 end
 
 
-function MetalManSolo:init()
+function MetalMan:init()
 	self:loadAnimation("standing",true)
 end
 
-function MetalManSolo:reset()
+function MetalMan:reset()
 end
 
 
-function MetalManSolo:die(type)
+function MetalMan:die(type)
 	if self.alive then
 		self.alive=false
 		if(type=="acid") then
-			s_gameStateManager.state["GameplaySolo"]:dieEffect(Effects.Acid)
-			s_gameStateManager.state["GameplaySolo"]:slow()
+			PushEvent({type=Effects.Acid, sort=GameplayEvents.Die})
+			PushEvent({sort=GameplayEvents.Slow})
 		else
-			s_gameStateManager.state["GameplaySolo"]:dieEffect(Effects.Arc)
+			PushEvent({type=Effects.Arc, sort=GameplayEvents.Die})
+			PushEvent({sort=GameplayEvents.Slow})
 			self:loadAnimation("mortelec",true)
-			s_gameStateManager.state["GameplaySolo"]:slow()
-			Sound.playSound("electroc")
 		end
 	end
 end
 
 
-function MetalManSolo:jump()
+function MetalMan:jump()
 	if self.alive then
 		if self.canjump and not self.isStatic then
 			if 	self.metalWeight==MetalMTypes.Alu then
@@ -119,7 +118,7 @@ function MetalManSolo:jump()
 	end
 end
 
-function MetalManSolo:rotativeLField(pos,factor)
+function MetalMan:rotativeLField(pos,factor)
 	local vx=self.position.x-pos.x +0.01
 	local vy=self.position.y-pos.y
 	local n = math.sqrt(vx*vx+vy*vy)
@@ -129,7 +128,7 @@ function MetalManSolo:rotativeLField(pos,factor)
 	self.willrotate=true
 end
 
-function MetalManSolo:rotativeRField(pos,factor)
+function MetalMan:rotativeRField(pos,factor)
 	local vx=self.position.x-pos.x+0.01
 	local vy=self.position.y-pos.y
 	local n = math.sqrt(vx*vx+vy*vy)
@@ -139,7 +138,7 @@ function MetalManSolo:rotativeRField(pos,factor)
 	self.willrotate=true	
 end
 
-function MetalManSolo:attractiveField(pos,factor)
+function MetalMan:attractiveField(pos,factor)
 	local vx=-self.position.x+pos.x+0.01
 	local vy=-self.position.y+pos.y
 	local n = math.sqrt(vx*vx+vy*vy)
@@ -152,7 +151,7 @@ function MetalManSolo:attractiveField(pos,factor)
 end
 
 
-function MetalManSolo:repulsiveField(pos,factor)
+function MetalMan:repulsiveField(pos,factor)
 	local vx=self.position.x-pos.x
 	local vy=self.position.y-pos.y
 	local n = math.sqrt(vx*vx+vy*vy)
@@ -164,21 +163,21 @@ function MetalManSolo:repulsiveField(pos,factor)
 	self.willrotate=false
 end
 
-function MetalManSolo:setVelocity(x,y)
+function MetalMan:setVelocity(x,y)
 	self.pc.body:setLinearVelocity(x,y)
 end
 
-function MetalManSolo:initStaticField()
+function MetalMan:initStaticField()
 	self.pc.body:setLinearVelocity(0,0)
 	self.isStatic=true
 	self.pc.body:setGravityScale(0)
 end
 
-function MetalManSolo:disableField()
+function MetalMan:disableField()
 
 end
 
-function MetalManSolo:changeMass()
+function MetalMan:changeMass()
 	if self.alive then
 
 		if 	self.metalWeight==MetalMTypes.Alu then
@@ -205,16 +204,16 @@ function MetalManSolo:changeMass()
 	end
 end
 
-function MetalManSolo:cancelStaticField()
+function MetalMan:cancelStaticField()
 		self.isStatic=false
 		self.pc.body:setGravityScale(self.gs)
 		self.pc.body:applyLinearImpulse(0, 1)
 end
-function MetalManSolo:setState( state )
+function MetalMan:setState( state )
 	self.state = state
 end
 
-function MetalManSolo:switchType()
+function MetalMan:switchType()
 if self.alive then
 	if self.metalType ==MetalTypes.Normal then
 		-- if self.powers["Static"] then
@@ -223,10 +222,10 @@ if self.alive then
 			self.anim = AnimMMSolo.new('metalman/static')
 			if 	self.metalWeight==MetalMTypes.Alu then
 				self:loadAnimation("load1",true)
-				self.s.time=0
+				self.s:activate()
 			elseif 	self.metalWeight==MetalMTypes.Acier then
 				self:loadAnimation("load2",true)
-				self.s.time=0			
+				self.s:activate()
 			end
 			self.isStatic=true
 			self.tranfSound:stop()
@@ -254,10 +253,10 @@ if self.alive then
 end
 end
 
-function MetalManSolo:getSpeed(  )
+function MetalMan:getSpeed(  )
 end
 
-function MetalManSolo:collideWith( object, collision )
+function MetalMan:collideWith( object, collision )
 
 	if self.alive then
 		if object.type=='GateInterruptorSolo' or object.type=='InterruptorSolo' or object.type=='ArcInterruptorSolo' or object.type=='ArcSolo' or object.type=='TheMagnet' or object.type=='LevelEnd' or object.type=='Acid' then
@@ -296,7 +295,7 @@ function MetalManSolo:collideWith( object, collision )
 	end
 end
 
-function MetalManSolo:unCollideWith( object, collision )
+function MetalMan:unCollideWith( object, collision )
 	if self.alive then
 		if object.type=='GateInterruptor' or object.type=='Interruptor' or object.type=='TheMagnet' then
 			--Ghost dude
@@ -310,17 +309,17 @@ function MetalManSolo:unCollideWith( object, collision )
 	end
 end
 
-function MetalManSolo:still(  )
+function MetalMan:still(  )
 end
 
-function MetalManSolo:teleport( x,y )
+function MetalMan:teleport( x,y )
 end
 
-function MetalManSolo:left( )
+function MetalMan:left( )
 end
 
 -- Method that handles the begining of a movement
-function MetalManSolo:startMove(parDirection  )
+function MetalMan:startMove(parDirection  )
 	if self.alive then
 		self.animCounter=self.animCounter+1
 		if self.canjump and not self.isStatic then
@@ -337,7 +336,7 @@ end
 
 
 -- Method that handles the end of a movement
-function MetalManSolo:stopMove( )
+function MetalMan:stopMove( )
 	if self.alive then
 		self.animCounter=self.animCounter-1
 		x,y=self.pc.body:getLinearVelocity()
@@ -353,19 +352,19 @@ function MetalManSolo:stopMove( )
 	end
 end
 	
-	function MetalManSolo:staticField(magnet)
+	function MetalMan:staticField(magnet)
 		
 	end
 
-function MetalManSolo:getPosition(  )
+function MetalMan:getPosition(  )
 	return self.position
 end
 
-function MetalManSolo:loadAnimation(anim, force)
+function MetalMan:loadAnimation(anim, force)
 		self.anim:load(anim, force)
 end
 
-function MetalManSolo:update(seconds)
+function MetalMan:update(seconds)
 	self.s:update(seconds)
 	x,y =self.pc.body:getLinearVelocity()
 	if x>MetalManMaxSpeed then
@@ -408,7 +407,7 @@ function MetalManSolo:update(seconds)
 	x,y =self.pc.body:getLinearVelocity()
 end
 
-function MetalManSolo:draw()
+function MetalMan:draw()
     	love.graphics.setColor(255,255,255,255)
     	if 	self.goF then
     		love.graphics.draw(self.anim:getSprite(), self.diffuse, windowW/2-unitWorldSize/2,windowH/2-unitWorldSize/2, 0, 1,1)
@@ -417,11 +416,11 @@ function MetalManSolo:draw()
     	end
 end
 
-function MetalManSolo:preDraw()
+function MetalMan:preDraw()
 		self.s:enableCanvas()
 end
 
-function MetalManSolo:postDraw()
+function MetalMan:postDraw()
 		self.s:disableCanvas()
 		self.s:pass()
 end

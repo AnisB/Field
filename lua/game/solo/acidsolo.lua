@@ -59,7 +59,7 @@ end
 
 
 function AcidSolo:collideWith( object, collision )
-	if object.type=='MetalManSolo' or object.type =='TheMagnet' then
+	if object.type=='MetalMan' or object.type =='TheMagnet' then
 		self.isTouched=true
 		if self.acidSoloType==AcidSolo.Types.hg  or self.acidSoloType==AcidSolo.Types.hm or self.acidSoloType==AcidSolo.Types.hd then
 			self.splash:load("kill",true)

@@ -58,11 +58,11 @@ function OptionsPauseMenu:keyPressed(key, unicode)
                 self.musicVolume.scrollPosition = self.musicVolume.scrollPosition -0.1  
                 musicM:setVolume(self.musicVolume.scrollPosition)
             end
-        elseif key == "return" or key == 3 then
+        elseif key == InputType.START then
 
             if self.paralax.selected then
                 self.paralax.state = not self.paralax.state
-                gameStateManager.state['GameplaySolo'].paralax = self.paralax.state
+                PushEvent({sort = GameplayEvents.Paralax, val = self.paralax.state}) 
             end
 
             if self.returnB.selected then
