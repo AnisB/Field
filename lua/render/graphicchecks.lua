@@ -28,7 +28,7 @@ end
 
 function GraphicChecks:update(dt)
 	if self.isSupported then
-		s_gameStateManager:changeState('FirstEnter')
+		s_gameStateManager:changeStateForce('FirstEnter')
 	end
 end
 

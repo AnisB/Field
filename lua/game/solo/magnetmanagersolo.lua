@@ -14,11 +14,15 @@ function MagnetManagerSolo.new(options)
     self.activeGenerators={}
     self.normalMetals={}
     self.staticMetals={}
+
+    self.interruptors = nil
     return self
 end
 
 
-
+function MagnetManagerSolo:setInterruptors(parInterruptors)
+	self.interruptors = parInterruptors
+end
 
 function MagnetManagerSolo:update(dt)
 
@@ -35,7 +39,6 @@ function MagnetManagerSolo:update(dt)
 			table.remove(self.activeGenerators,i)
 		end
 	end
-
 
 	    for i,g in ipairs(self.activeGenerators) do
 			for i,m in ipairs(self.normalMetals) do
@@ -82,7 +85,7 @@ function MagnetManagerSolo:enableG(GID)
 		end
 	end
 	if done then
-        for i,p in pairs(gameStateManager.state["GameplaySolo"].mapLoader.gateinterruptors) do
+        for i,p in pairs(self.interruptors) do
             if(p.generatorID==id) then
                 p:syncronizeState(false)
             end
@@ -99,7 +102,7 @@ function MagnetManagerSolo:disableG(GID)
 		end
 	end
 	if done then
-        for i,p in pairs(gameStateManager.state["GameplaySolo"].mapLoader.gateinterruptors) do
+        for i,p in pairs(self.interruptors) do
             if(p.generatorID==id) then
                 p:syncronizeState(false)
             end

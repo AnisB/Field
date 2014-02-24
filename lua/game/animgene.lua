@@ -61,7 +61,7 @@ function AnimGene.new(folder)
 			AnimGene.sprites[folder][key] = {}
 			for i=1, val.number do
 				local path = 'anim/'..folder..'/'..key..'/'..i..'.png'
-			    AnimGene.sprites[folder][key][i] = love.graphics.newImage(path)
+			    AnimGene.sprites[folder][key][i] = s_resourceManager:LoadImage(path)
 			end
 		end
 	end

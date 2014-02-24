@@ -13,7 +13,7 @@ function BackgroundNiveau.new()
     local self = {}
     setmetatable(self, BackgroundNiveau)
 
-    self.back3=love.graphics.newImage("backgrounds/common/back3.png")
+    self.back3=s_resourceManager:LoadImage("backgrounds/common/back3.png")
     self.back1=AutoLoopingBackground.new("backgrounds/common/back1.png",300)
     self.logo = BasicAnim.new("logo", true,0.15,8)
     return self

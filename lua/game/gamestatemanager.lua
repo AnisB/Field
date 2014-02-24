@@ -72,12 +72,12 @@ function GameStateManager.new()
 	states['GameplaySolo'] = nil
 	states['LevelEndingSolo'] = nil
 	states['LevelFailedSolo'] = nil
-	-- states['ChoixNiveauSolo'] = ChoixNiveauSolo.new("metalman",false)
+	states['ChoixNiveauSolo'] = ChoixNiveauSolo.new("metalman",false)
 -- -- 
 -- 	-- Init
 	self.state = states
-	self.currentState='GraphicChecks'
-	self.nextState='GraphicChecks'
+	self.currentState='ChoixNiveauSolo'
+	self.nextState='ChoixNiveauSolo'
 	self.isTransiton = 0
 	self.transitionTime = 1.0
 	self.timer = 0.0
@@ -113,7 +113,7 @@ function GameStateManager:update(dt)
 			self.currentState = self.nextState
 		end
 	elseif  (self.isTransiton == 2) then
-		self.timer = self.timer -dt
+		self.timer = self.timer - dt
 		if(self.timer<=0.0) then
 			self.timer = 0.0
 			self.isTransiton = 0
@@ -136,6 +136,13 @@ function GameStateManager:changeState(newState)
 	self.nextState = newState
 	self.isTransiton =  1
 end
+
+function GameStateManager:changeStateForce(newState)
+	self.nextState = newState
+	self.isTransiton =  2
+	self.timer= 1.0
+	self.currentState = self.nextState
+end
 function GameStateManager:resetLoader()
 	self.loader = nil
 	self.loader = require 'game/love-loader'
@@ -145,14 +152,6 @@ end
 function GameStateManager:resetAndChangeState(newState)
 	self.state[newState]:reset()
 	self.currentState=newState
-end
-
-function GameStateManager:failed()
-	self.state[self.currentState]:failed()
-end
-
-function GameStateManager:finish()
-	self.state[self.currentState]:finish()
 end
 
 s_gameStateManager = GameStateManager.new()

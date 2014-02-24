@@ -97,6 +97,7 @@ function LevelEndingSolo:draw(filter)
     love.graphics.setColor(255,255,255,255*filter)
     love.graphics.draw(self.back, 0, 0)
     self.layout:draw(filter)
+    love.graphics.setColor(255,255,255,255*filter)
     love.graphics.draw(self.perso:getSprite(), self.diffuse, self.pos,530 )
 
 end

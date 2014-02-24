@@ -12,6 +12,7 @@ function ChoixNiveauSolo.new(player,continuous)
     setmetatable(self, ChoixNiveauSolo)
     self.back=BackgroundNiveau.new()
     self.player = player
+    print(self.player)
 
     self.levellabel=s_resourceManager:LoadImage("backgrounds/choixniveau/level.png")
 
@@ -37,7 +38,7 @@ function ChoixNiveauSolo.new(player,continuous)
     self.availableMaps = self:listmaps()
     self.level = self.availableMaps[self.num_level]
     self.prev={}
-    self.prev[self.level]=love.graphics.newImage("maps/solo/"..player.."/"..self.level.."-fieldmap/prev.png")
+    self.prev[self.level]=s_resourceManager:LoadImage("maps/solo/"..player.."/"..self.level.."-fieldmap/prev.png")
 
     self.continuous=continuous
 

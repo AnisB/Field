@@ -53,7 +53,7 @@ function AnimSplashSolo.new(folder)
 			-- print("loading image =>", path)
 			--self.sprites[key][i] = 
 			    s_gameStateManager.loader.newImage(AnimSplashSolo.sprites[folder][key],i, path)
-			    -- AnimSplashSolo.sprites[folder][key][i] = love.graphics.newImage(path)
+			    -- AnimSplashSolo.sprites[folder][key][i] = s_resourceManager:LoadImage(path)
 			    
 			end
 		end

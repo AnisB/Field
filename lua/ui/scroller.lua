@@ -6,9 +6,9 @@ This file is part of the Field project
 Scroller = {}
 Scroller.__index =  Scroller
 
-Scroller.HighLight = love.graphics.newImage(ImgDirectory..'selection.png')
-Scroller.base = love.graphics.newImage("img/uielements/scroller.png")
-Scroller.mover = love.graphics.newImage("img/uielements/level.png")
+Scroller.HighLight = s_resourceManager:LoadImage(ImgDirectory..'selection.png')
+Scroller.base = s_resourceManager:LoadImage("img/uielements/scroller.png")
+Scroller.mover = s_resourceManager:LoadImage("img/uielements/level.png")
 
 
 function Scroller.new(x,y,img,initialPos, dex)
@@ -17,7 +17,7 @@ function Scroller.new(x,y,img,initialPos, dex)
 
     self.position={x=x,y=y}
     self.dimension={w=w,l=l}
-    self.img=love.graphics.newImage(img)
+    self.img=s_resourceManager:LoadImage(img)
     self.dec = dex
     self.selected=false
     self.enabled=true

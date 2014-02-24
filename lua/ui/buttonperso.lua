@@ -6,7 +6,7 @@ This file is part of the Field project
 ButtonPerso = {}
 ButtonPerso.__index =  ButtonPerso
 
-ButtonPerso.HighLight = love.graphics.newImage(ImgDirectory..'selection.png')
+ButtonPerso.HighLight = s_resourceManager:LoadImage(ImgDirectory..'selection.png')
 
 
 function ButtonPerso.new(x,y,img, name)
@@ -14,7 +14,7 @@ function ButtonPerso.new(x,y,img, name)
     setmetatable(self, ButtonPerso)
     self.position={x=x,y=y}
     self.dimension={w=300,l=300}
-    self.img=love.graphics.newImage(img)
+    self.img=s_resourceManager:LoadImage(img)
     self.dec={x=0,y=300}
     self.selected=false
     self.enabled=true

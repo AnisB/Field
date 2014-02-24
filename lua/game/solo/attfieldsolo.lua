@@ -24,7 +24,7 @@ function AttFieldSolo.new(type,position)
   self.colors={r1=30,g1=180,b1=30,a1=20,r2=30,g2=180,b2=30,a2=20}
 
 
-  i =love.graphics.newImage(id)
+  i =s_resourceManager:LoadImage(id)
   self.bufferSize=256
   self.EmissionRate=15
   self.lifeTime=0.1
@@ -61,7 +61,7 @@ function AttFieldSolo.new(type,position)
   self.tangentialAcceleration=1
   self.particleLife=0.4
     --2. create an image from that image data
-  i =love.graphics.newImage(movimg)
+  i =s_resourceManager:LoadImage(movimg)
   self.fieldType=type
   self.img= i
   self.bufferSize=256

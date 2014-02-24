@@ -6,9 +6,9 @@ This file is part of the Field project
 CheckBox = {}
 CheckBox.__index =  CheckBox
 
-CheckBox.HighLight = love.graphics.newImage(ImgDirectory..'selection.png')
-CheckBox.box = love.graphics.newImage("img/uielements/box.png")
-CheckBox.cross = love.graphics.newImage("img/uielements/cross.png")
+CheckBox.HighLight = s_resourceManager:LoadImage(ImgDirectory..'selection.png')
+CheckBox.box = s_resourceManager:LoadImage("img/uielements/box.png")
+CheckBox.cross = s_resourceManager:LoadImage("img/uielements/cross.png")
 
 
 function CheckBox.new(x,y,img,initialValue, dec)
@@ -17,7 +17,7 @@ function CheckBox.new(x,y,img,initialValue, dec)
 
     self.position={x=x,y=y}
     self.dimension={w=w,l=l}
-    self.img=love.graphics.newImage(img)
+    self.img=s_resourceManager:LoadImage(img)
     self.dec = dec
     self.selected=false
     self.enabled=true

@@ -8,6 +8,10 @@ require(CharacterDirectory.."metalman")
 -- Include Camera
 require("render.camera")
 
+-- Include shader
+require ("shader.aftereffect")
+require ("shader.aftereffectnotime")
+
 -- Include physics
 require("game.solo.magnetmanagersolo")
 
@@ -29,13 +33,14 @@ require("ui.pausemenu")
 
 require("const")
 
-
-GameplaySolo = {}
-GameplaySolo.__index = GameplaySolo
-
+-- Enumerations
 Effects = {Arc = 1 , Acid = 2}
 Direction = {Right = 1 , Left = 2}
-GameplayEvents = {Die = 1 , Slow =2, Paralax = 3}
+GameplayEvents = {Die = 1 , Slow =2, Shake = 3, Paralax = 4, Pause = 5, Quit = 6, Finish = 7, Fail = 9, Reset = 10}
+
+-- Declaration des classes
+GameplaySolo = {}
+GameplaySolo.__index = GameplaySolo
 
 
 function GameplaySolo.new(mapFile,continuous,player)
@@ -59,16 +64,22 @@ function GameplaySolo.new(mapFile,continuous,player)
     --Map loading
     self.mapFile=mapFile
     self.mapLoader = MapLoaderSolo.new(mapFile,self.magnetmanager)
-
+    self.magnetmanager:setInterruptors(self.mapLoader.gateinterruptors)
     -- Paralax Loading
     self.paralax=Paralax.new(ParalaxImg..self.world, self.mapLoader.map.height*self.mapLoader.map.tileheight)
 
-    self.acidShader = AfterEffect.new(ShaderDirectory.."blending.glsl")
-    self.arcShader = AfterEffect.new(ShaderDirectory.."blending.glsl")
-    self.acidShader:inject("filter", "img/death/"..self.world.."/acid.png")
-    self.arcShader:inject("filter", "img/death/"..self.world.."/arc.png")
+    self.afterEffects = {}
+    local acidShader = AfterEffect.new(ShaderDirectory.."blending.glsl")
+    local arcShader = AfterEffect.new(ShaderDirectory.."blending.glsl")
+    local halfScreen = AfterEffect.new(ShaderDirectory.."half.glsl")
+    acidShader:injectTex("filter", "img/death/"..self.world.."/acid.png")
+    arcShader:injectTex("filter", "img/death/"..self.world.."/arc.png")
+    self.afterEffects["Acid"] = acidShader
+    self.afterEffects["Arc"] = arcShader
+    self.afterEffects["Half"] = halfScreen
 
-    -- Player loading
+
+    -- Player creation
     self.player= player
     self.camera = Camera.new(0,0)
 
@@ -84,6 +95,7 @@ function GameplaySolo.new(mapFile,continuous,player)
     self.shouldEnd=false
     self.levelFinished=false
     self.gameIsPaused=false
+    self.isRunning = true
 
     -- Slow timer
     self.slowTimer=1
@@ -143,11 +155,6 @@ end
         self.loading=true
     end
 
-    
-    function GameplaySolo:finish()
-        self.levelFinished=true
-    end
-
     function GameplaySolo:slow()
         self.isSlowing=true
         self.slowTimer=0.2
@@ -156,9 +163,9 @@ end
     function GameplaySolo:dieEffect(effect)
         self.effect = effect
         if(self.effect == Effects.Acid) then
-            self.acidShader:activate()
+            self.afterEffects["Acid"]:activate()
         elseif (self.effect == Effects.Arc) then
-            self.arcShader:activate()
+            self.afterEffects["Arc"]:activate()
         end
     end
 
@@ -167,47 +174,16 @@ end
         world:setCallbacks(nil, function() collectgarbage() end)
         world:destroy()
         world=nil
-        world = love.physics.newWorld( 0, 18*unitWorldSize, false )
+        -- world = love.physics.newWorld( 0, 18*unitWorldSize, false )
         self.mapLoader:destroy()
         self.paralax:destroy()
         self.mapLoaderSolo = nil
         collectgarbage()
     end  
 
-    function GameplaySolo:reset()
-        world:setCallbacks(nil, function() collectgarbage() end)
-        world:destroy()
-        world=nil
-        world = love.physics.newWorld( 0, 18*unitWorldSize, false )
-        world:setCallbacks(beginContact, endContact, preSolve, postSolve)
-        -- Custom physics
-        self.magnetmanager= nil
-        self.magnetmanager = MagnetManagerSolo.new()
-
-        self.mapLoader = MapLoaderSolo.new(self.mapFile, self.magnetmanager)
-
-        -- La camera
-        self.camera =Camera.new(0,0)
-
-        if self.player=="metalman" then
-            self.personnage = MetalMan.new(self.camera,self.mapLoader.metalManPos)
-            self.magnetmanager:addMetal(self.personnage)
-        elseif self.player=="themagnet" then
-            self.personnage = TheMagnet.new(self.camera,self.mapLoader.theMagnetPos)
-            self.magnetmanager:addGenerator(self.personnage)
-        end
-        self.gameIsPaused=false
-        self.shouldEnd=false 
-
-    end
-
-    function GameplaySolo:failed()
-        self.shouldEnd=true
-    end    
-
     function GameplaySolo:keyPressed(key, unicode)
         -- if not self.loading then
-        print(key)
+        if self.isRunning then
             if not self.gameIsPaused then
 
                 -- Inputs for players
@@ -216,8 +192,13 @@ end
                     end
                     if key == InputType.ACTION2 then
                         self.mapLoader:handleTry(self.player)
+                        -- self.afterEffects["Half"]:injectUniform("vueP1",0)
+                        -- self.afterEffects["Half"]:activate()
                     end
-                    
+                    if key == InputType.ACTION3 then
+                        -- self.afterEffects["Half"]:injectUniform("vueP1",1)
+                        -- self.afterEffects["Half"]:activate()
+                    end
                     if key == InputType.RIGHT then
                         self.personnage:startMove(Direction.Right)
                     end
@@ -257,20 +238,16 @@ end
             else
                 self.pauseMenu:keyPressed(key, unicode)
             end
-            -- Cheat Code
-            -- if key=="c" then
-            --     self.levelFinished=true
-            -- end
-
-
             -- Pause
             if key == InputType.MENU then
                 self.pauseMenu:sendPauseOrder()
             end   
         -- end
+        end
     end
 
     function GameplaySolo:keyReleased(key, unicode)
+        if self.isRunning then
             if not self.gameIsPaused then
                 if key == InputType.LEFT or key == InputType.RIGHT then
                     self.personnage:stopMove()
@@ -288,17 +265,29 @@ end
                     end
                 end
             end
+        end
     end
     
     function GameplaySolo:HandleEvents()
         for i,v in pairs(s_gameManager.eventList) do
-            print(v.sort)
             if (v.sort == GameplayEvents.Die) then
                 self:dieEffect(v.type)
             elseif (v.sort == GameplayEvents.Slow) then
                 self:slow()
             elseif (v.sort == GameplayEvents.Paralax) then
                 self.paralax:setEnable(v.val)
+            elseif (v.sort == GameplayEvents.Shake) then
+                self:shake(v.xVal, v.yVal)
+            elseif (v.sort == GameplayEvents.Pause) then
+                self:pauseGame(v.val)
+            elseif (v.sort == GameplayEvents.Quit) then
+                self:quit()
+            elseif (v.sort == GameplayEvents.Finish) then
+                self:finish()
+            elseif (v.sort == GameplayEvents.Fail) then
+                self:fail()
+            elseif (v.sort == GameplayEvents.Reset) then
+                self:restart()
             end
             s_gameManager.eventList[i] = nil
         end
@@ -307,87 +296,79 @@ end
 
         -- Gestion des evenements de la frame précédente
         self:HandleEvents()
-        -- Mise a jour des shaders
-        self.acidShader:update(dttheo)
-        self.arcShader:update(dttheo)
 
-        if  self.loading then
-            gameStateManager.loader.update(dttheo)
-            self.loadingScreen:update(dttheo)
-        else
+        dt = self:computeTime(dttheo)
 
-        if self.isSlowing then
-            self.slowTimer =self.slowTimer +dttheo
-            if self.slowTimer>=1 then
-                self.slowTimer=1
-                self.isSlowing=false
+        if self.isRunning then
+        -- if  self.loading then
+        --     gameStateManager.loader.update(dttheo)
+        --     self.loadingScreen:update(dttheo)
+        -- else
+            if  not self.gameIsPaused then
+
+                -- Physics  
+                world:update(dt) 
+                self.magnetmanager:update(dt)   
+
+                -- Other stuff
+                self.camera:update(dt)
+                self.personnage:update(dt)
+                self.mapLoader:update(dt)
+                for i,v in pairs(self.afterEffects) do
+                    v:update(dt)
+                end
             end
         end
-        dt=dttheo*self.slowTimer
-        if  not self.gameIsPaused then
-            if(self.levelFinished) then
-               s_gameStateManager.state['LevelEndingSolo']=LevelEndingSolo.new(self.mapLoader.levelends[1].next,self.continuous,self.player)
-               s_gameStateManager:changeState('LevelEndingSolo')
-               return
-           end
-
-            if(self.shouldEnd) then
-                s_gameStateManager.state['LevelFailedSolo']=LevelFailedSolo.new()
-                s_gameStateManager:changeState('LevelFailedSolo')
-                return        
-            end        
-            world:update(dt) 
-            self.magnetmanager:update(dt)   
-
-          -- Other stuff
-            self.camera:update(dt)
-            self.personnage:update(dt)
-            self.mapLoader:update(dt)
-
-        end
-    end
     end
     
-    function GameplaySolo:draw(filter)
-        if  self.loading then
-            self.loadingScreen:draw()
-        else
-
-            self.bloom:enableCanvas()
-
-            self.lightback:predraw()
-            self.paralax:draw(self.camera:getPos())
-            self.lightback:postdraw()
-
-            self.light:predraw()
-            self.mapLoader:draw(self.camera:getPos())
-            self.personnage:draw() 
-            self.mapLoader:firstPlanDraw(self.camera:getPos())
-            self.light:postdraw()
-
-            self.bloom:disableCanvas() 
-            self.bloom:firstPass()
-
-            -- if self.isSlowing then
-            self.acidShader:enableCanvas()
-            self.bloom:finalPass() 
-            self.acidShader:disableCanvas()
-
-            self.arcShader:enableCanvas()
-            self.acidShader:pass() 
-            self.arcShader:disableCanvas()
-
-
-            self.personnage:preDraw() 
-            self.arcShader:filterPass(filter)
-            self.personnage:postDraw() 
-    end
-
+function GameplaySolo:draw(filter)
+    if  self.loading then
+        self.loadingScreen:draw()
+    else
         if self.gameIsPaused then
-            self.pauseMenu:draw(x,y)
+            self.pauseMenu:draw(filter)
+        else
+            self:drawScene(filter)
         end
     end
+end
     
+function GameplaySolo:drawScene(filter)
+    self.bloom:enableCanvas()
+
+    self.lightback:predraw()
+    self.paralax:draw(self.camera:getPos())
+    self.lightback:postdraw()
+
+    self.light:predraw()
+    self.mapLoader:draw(self.camera:getPos())
+    self.personnage:draw() 
+    self.mapLoader:firstPlanDraw(self.camera:getPos())
+    self.light:postdraw()
+
+    self.bloom:disableCanvas() 
+    self.bloom:firstPass()
+
+    self.afterEffects["Arc"]:enableCanvas()
+    self.bloom:finalPass() 
+    self.afterEffects["Arc"]:disableCanvas()
+
+    self.afterEffects["Acid"]:enableCanvas()
+    self.afterEffects["Arc"]:pass() 
+    self.afterEffects["Acid"]:disableCanvas()
+
+
+    self.personnage:preDraw() 
+    self.afterEffects["Acid"]:filterPass(filter)
+    self.personnage:postDraw()
+
+    -- self.afterEffects["Half"]:enableCanvas()
+    self.personnage:pass() 
+    -- self.afterEffects["Half"]:disableCanvas()
+
+    -- self.afterEffects["Half"]:filterPass(filter)
+
+end
     
 function beginContact(a, b, coll)
     local x,y = coll:getNormal()
@@ -415,14 +396,73 @@ function preSolve(a, b, coll)
 end
 
 
+function GameplaySolo:computeTime(parTime)
+    if self.isSlowing then
+        self.slowTimer =self.slowTimer +parTime
+        if self.slowTimer>=1 then
+            self.slowTimer=1
+            self.isSlowing=false
+        end
+    end
+    return parTime*self.slowTimer
+end
 function GameplaySolo:postSolve(a, b, coll)
     -- we won't do anything with this function
 end
 
-function GameplaySolo:shakeOnX(dx,speed,duration, amplitude)
-        self.camera:shakeOnX(dx,speed,duration, amplitude)
+function GameplaySolo:shake(xData, yData)
+        self.camera:shakeOnX(xData[1],xData[2],xData[3], xData[4])
+        self.camera:shakeOnX(yData[1],yData[2],yData[3], yData[4])
+end
+function GameplaySolo:finish()
+   self.isRunning = false
+   s_gameStateManager.state['LevelEndingSolo']=LevelEndingSolo.new(self.mapLoader.levelends[1].next,self.continuous,self.player)
+   s_gameStateManager:changeState('LevelEndingSolo')
 end
 
-function GameplaySolo:shakeOnY(dy,speed,duration, amplitude)
-        self.camera:shakeOnY(dy,speed,duration, amplitude)
+function GameplaySolo:fail()
+    self.isRunning = false
+    s_gameStateManager.state['LevelFailedSolo']=LevelFailedSolo.new()
+    s_gameStateManager:changeState('LevelFailedSolo')
+end
+
+function GameplaySolo:restart()
+    self.isRunning = false
+    self:destroy()
+    world = love.physics.newWorld( 0, 18*unitWorldSize, false )
+    world:setCallbacks(beginContact, endContact, preSolve, postSolve)
+    -- Custom physics
+    self.magnetmanager= nil
+    self.magnetmanager = MagnetManagerSolo.new()
+
+    self.mapLoader = MapLoaderSolo.new(self.mapFile, self.magnetmanager)
+    self.magnetmanager:setInterruptors(self.mapLoader.gateinterruptors)
+
+    -- La camera
+    self.camera =Camera.new(0,0)
+
+    if self.player=="metalman" then
+        self.personnage = MetalMan.new(self.camera,self.mapLoader.metalManPos)
+        self.magnetmanager:addMetal(self.personnage)
+    elseif self.player=="themagnet" then
+        self.personnage = TheMagnet.new(self.camera,self.mapLoader.theMagnetPos)
+        self.magnetmanager:addGenerator(self.personnage)
+    end
+
+    self.gameIsPaused=false
+    self.shouldEnd=false
+    s_gameStateManager:changeStateForce('GameplaySolo')
+    self.isRunning = true
+
+end
+
+function GameplaySolo:quit()
+    self.isRunning = false
+    self.gameIsPaused = false
+    self:destroy()
+    s_gameStateManager:changeState('ChoixNiveauSolo')
+end
+
+function GameplaySolo:pauseGame(pauseValue)
+    self.gameIsPaused = pauseValue
 end

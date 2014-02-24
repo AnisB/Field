@@ -88,15 +88,10 @@ end
 
 function TheMagnet:die(type)
 	if self.alive then
+		self.alive=false
 		self:disableField()
 		self:disableStaticField()
-		self.alive=false
-		if(type=="acid") then
-			PushEvent({type=Effects.Acid, sort=GameplayEvents.Die})
-			PushEvent({sort=GameplayEvents.Slow})
-		else
-			PushEvent({type=Effects.Arc, sort=GameplayEvents.Die})
-			PushEvent({sort=GameplayEvents.Slow})
+		if(type=="Arc") then
 			self:loadAnimation("mortelec",true)
 		end
 	end

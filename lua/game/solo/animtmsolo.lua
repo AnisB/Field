@@ -119,7 +119,7 @@ function AnimTMSolo.new(folder)
 			local path = 'anim/'..folder..'/'..key..'/'..i..'.png'
 			-- print("loading image =>", path)
 			-- gameStateManager.loader.newImage(self.sprites[key],i, path)
-			self.sprites[key][i] = love.graphics.newImage(path)
+			self.sprites[key][i] = s_resourceManager:LoadImage(path)
 		end
 	end
 	self.currentAnim = AnimTMSolo.ANIMS.running

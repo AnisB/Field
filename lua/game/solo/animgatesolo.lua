@@ -66,7 +66,7 @@ function AnimGateSolo.new(folder)
 			-- print("loading image =>", path)
 			--self.sprites[key][i] = 
 			    -- gameStateManager.loader.newImage(AnimGateSolo.sprites[folder][key],i, path)
-				AnimGateSolo.sprites[folder][key][i] = love.graphics.newImage(path)
+				AnimGateSolo.sprites[folder][key][i] = s_resourceManager:LoadImage(path)
 			end
 		end
 	end

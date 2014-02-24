@@ -11,7 +11,7 @@ function CommonBackground.new(isSimplfied)
     local self = {}
     setmetatable(self, CommonBackground)
 
-    self.back2=love.graphics.newImage("backgrounds/common/back2.png")
+    self.back2=s_resourceManager:LoadImage("backgrounds/common/back2.png")
     self.back1=AutoLoopingBackground.new("backgrounds/common/back1.png",300,300)
     self.back0=AutoLoopingBackground.new("backgrounds/common/back0.png",300)
     self.isSimplfied = isSimplfied

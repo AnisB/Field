@@ -121,7 +121,7 @@ function AnimMMSolo.new(folder)
 		for i=1, val.number do
 			local path = 'anim/'..folder..'/'..key..'/'..i..'.png'
 			-- print("loading image =>", path)
-			self.sprites[key][i] = love.graphics.newImage(path)
+			self.sprites[key][i] = s_resourceManager:LoadImage(path)
 		end
 	end
 	self.currentAnim = AnimMMSolo.ANIMS.running

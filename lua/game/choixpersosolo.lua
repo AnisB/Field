@@ -43,36 +43,37 @@ end
 
 
 function ChoixPersoSolo:keyPressed(key, player)
+	-- if(self.player == player) then
+	
 	self.layout:inputPressed(key, player)
-
-    if key == InputType.START then
-    	local name = self.layout:getSelectedName()
-		if name =="ret" then
-			s_gameStateManager:changeState('ChoixTypeJeuSolo')
+	    if key == InputType.START then
+	    	local name = self.layout:getSelectedName()
+			if name =="ret" then
+				s_gameStateManager:changeState('ChoixTypeJeuSolo')
+			end
+			if name =="themagnet" then
+				self.selectedPerso=1
+				self.layout:setFocused("themagnet",true)
+				self.layout:setFocused("metalman",false)
+			end
+			if name =="metalman" then
+				self.selectedPerso=2
+				self.layout:setFocused("themagnet",false)
+				self.layout:setFocused("metalman",true)
+			end
+			if name =="play" then
+				print(self.selectedPerso)
+		    	if self.selectedPerso~=-1 then
+		    		if self.selectedPerso==1 then
+		    			s_gameStateManager.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new("themagnet",self.continuous)
+		    		elseif self.selectedPerso==2 then
+		    			s_gameStateManager.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new("metalman",self.continuous)
+		    		end
+		    		s_gameStateManager:changeState('ChoixNiveauSolo')
+		    	end
+			end
 		end
-		if name =="themagnet" then
-			self.selectedPerso=1
-			self.layout:setFocused("themagnet",true)
-			self.layout:setFocused("metalman",false)
-			-- self.layout:Init()
-		end
-		if name =="metalman" then
-			self.selectedPerso=2
-			self.layout:setFocused("themagnet",false)
-			self.layout:setFocused("metalman",true)
-			-- self.layout:Init()
-		end
-		if name =="play" then
-	    	if self.selectedPerso~=-1 then
-	    		if self.selectedPerso==1 then
-	    			s_gameStateManager.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new("metalman",self.continuous)
-	    		elseif self.selectedPerso==2 then
-	    			s_gameStateManager.state['ChoixNiveauSolo'] = ChoixNiveauSolo.new("themagnet",self.continuous)
-	    		end
-	    		s_gameStateManager:changeState('ChoixNiveauSolo')
-	    	end
-		end
-	end
+	-- end
 end
 function ChoixPersoSolo:keyReleased(key, unicode)
 end

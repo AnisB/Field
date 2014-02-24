@@ -55,7 +55,7 @@ function LevelEndSolo:update(seconds)
 	self.position.y=y
 	if(self.timer>=TimerLevelEndSolo) then
 		self.isTouched=false
-		s_gameStateManager:finish()
+		PushEvent({sort = GameplayEvents.Finish})
 	end	
 end
 

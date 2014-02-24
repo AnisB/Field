@@ -57,13 +57,14 @@ function Menu:reset()
     -- self.filter=1
 end
 
-function Menu:keyPressed(key, unicode)
+function Menu:keyPressed(key, player)
     self.layout:inputPressed(key)
 
     if key == InputType.START then
     	local name = self.layout:getSelectedName()
     	if( not self.layout.isPopUp) then
 			if name =="solo" then
+				s_gameStateManager.state['ChoixTypeJeuSolo'].player = player
 				s_gameStateManager:changeState('ChoixTypeJeuSolo')
 			end
 

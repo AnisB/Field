@@ -13,7 +13,7 @@ function OptionsPauseMenu.new( father )
     local self = {}
     setmetatable(self, OptionsPauseMenu)
 
-    self.back = love.graphics.newImage("img/pause.png")
+    self.back = s_resourceManager:LoadImage("img/pause.png")
 
     self.musicVolume=Scroller.new(310,225,"backgrounds/ingame/volume.png", MUSIC_VOL,20)
     self.paralax=CheckBox.new(340,300,"backgrounds/ingame/paralax.png",true,125)

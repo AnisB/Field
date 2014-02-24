@@ -39,7 +39,7 @@ local resourceKinds = {
     resourceKey = "imageData",
     constructor = love.image.newImageData,
     postProcess = function(data)
-      return love.graphics.newImage(data)
+      return s_resourceManager:LoadImage(data)
     end
   },
   source = {

@@ -32,10 +32,12 @@ function AfterEffect:setAutoReset(parReset)
 	self.autoReset = parReset
 end
 
-function AfterEffect:inject(parTexName, parImagePath)
+function AfterEffect:injectTex(parTexName, parImagePath)
 	self.xf:send(parTexName,s_resourceManager:LoadImage(parImagePath))
 end
-
+function AfterEffect:injectUniform(parUniform, parVal)
+	self.xf:send(parUniform, parVal)
+end
 function AfterEffect:setParameter(p)
 		for k,v in pairs(p) do
 			self.xf:send(k,v)

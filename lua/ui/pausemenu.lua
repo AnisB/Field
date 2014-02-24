@@ -11,23 +11,21 @@ function PauseMenu.new(x,y,w,l)
     local self = {}
     setmetatable(self, PauseMenu)
 
-    self.back = love.graphics.newImage("img/pause.png")
+    self.back = s_resourceManager:LoadImage("img/pause.png")
 
-    self.resume=Button.new(500,225,200,50, "backgrounds/ingame/resume.png")
-    self.restart=Button.new(500,300,250,50, "backgrounds/ingame/restart.png")
-    self.options=Button.new(500,375,250,50, "backgrounds/ingame/options.png")
-    self.quit=Button.new(550,450,250,50, "backgrounds/ingame/quit.png")
+    local resume=Button.new(500,225,200,50, "backgrounds/ingame/resume.png", "resume")
+    local restart=Button.new(500,300,250,50, "backgrounds/ingame/restart.png", "restart")
+    local options=Button.new(500,375,250,50, "backgrounds/ingame/options.png", "options")
+    local quit=Button.new(550,450,250,50, "backgrounds/ingame/quit.png", "quit")
 
+    self.layout = UILayout.new()
 
-    self.selection = {
-        self.resume,
-        self.restart,
-        self.options,
-        self.quit
-    }
+    self.layout:addSelectable(resume)
+    self.layout:addSelectable(restart)
+    self.layout:addSelectable(options)
+    self.layout:addSelectable(quit)
 
-    self.selected = 1
-    self.resume:setSelected(true)
+    self.layout:Init()
 
     self.optionsFlag = false
     self.optionsMenu = OptionsPauseMenu.new(self)
@@ -45,40 +43,28 @@ end
 function PauseMenu:keyPressed(key, unicode)
 
     if not self.optionsFlag then
-        if key == 'down' or key =='tab' then
-            self:incrementSelection()
-        elseif key =='up' then
-            self:decrementSelection()
-    
-        elseif key == InputType.START then
+        self.layout:inputPressed(key)
+        local name = self.layout:getSelectedName()
+        if key == InputType.START then
 
-            if self.resume.selected then
-                s_gameStateManager.state['GameplaySolo'].gameIsPaused=false
+            if name == "resume" then
+                PushEvent({sort=GameplayEvents.Pause, val=false})
                 self.isActive=false
             end
 
 
-            if self.restart.selected then
-            local mapFile =s_gameStateManager.state['GameplaySolo'].mapFile
-            local continuous =s_gameStateManager.state['GameplaySolo'].continuous
-            local player =s_gameStateManager.state['GameplaySolo'].player
-            s_gameStateManager.state['GameplaySolo']:destroy()
-            s_gameStateManager:resetLoader()
-            s_gameStateManager.state['GameplaySolo'] =nil
-            s_gameStateManager.state['GameplaySolo'] = GameplaySolo.new(mapFile,continuous,player)
-            s_gameStateManager:changeState('GameplaySolo')    
+            if name == "restart" then
+                PushEvent({sort=GameplayEvents.Reset}) 
             end
 
 
-            if self.options.selected then
+            if name == "options" then
                 self.optionsFlag=true
             end
 
 
-            if self.quit.selected then
-                s_gameStateManager.state['GameplaySolo'].gameIsPaused=false
-                s_gameStateManager.state['GameplaySolo']:destroy()
-                s_gameStateManager:changeState('ChoixNiveauSolo')
+            if name == "quit" then
+                PushEvent({sort=GameplayEvents.Quit})
                 self.isActive=false
             end
 
@@ -93,46 +79,25 @@ end
 function PauseMenu:sendPauseOrder()
    if self.isActive then
     if not self.optionsFlag then
-        s_gameStateManager.state['GameplaySolo'].gameIsPaused=false    
+        PushEvent({sort=GameplayEvents.Pause, val=false})
         self.isActive = false
     else
             self.optionsFlag = false
 
     end
    else
-    s_gameStateManager.state['GameplaySolo'].gameIsPaused=true    
+    PushEvent({sort=GameplayEvents.Pause, val=true})    
     self.isActive = true
    end
 end
 
-function PauseMenu:incrementSelection()
-    self.selection[self.selected]:setSelected(false)
-    if self.selected == #self.selection then
-        self.selected = 0
-    end
-    self.selected = self.selected + 1
-    self.selection[self.selected]:setSelected(true)
-end
-
-function PauseMenu:decrementSelection()
-    self.selection[self.selected]:setSelected(false)
-        if self.selected == 1 then
-        self.selected = #self.selection + 1
-    end
-    self.selected = self.selected - 1
-    self.selection[self.selected]:setSelected(true)
-end
-
-function PauseMenu:draw(x,y)
+function PauseMenu:draw(filter)
         if  self.isActive then
             if self.optionsFlag then
                 self.optionsMenu:draw()
                 return
             end
             love.graphics.draw(self.back,250,50)
-            self.resume:draw(1)
-            self.restart:draw(1)
-            self.options:draw(1)
-            self.quit:draw(1)
+            self.layout:draw(filter)
         end
 end

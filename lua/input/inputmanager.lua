@@ -25,6 +25,7 @@ function InputManager:Init()
 		joysticksData[i].nbAxis = self.joysticks[i]:getAxisCount( )
 		
 		-- Il y a un joystick utilisable
+		print("Nombre d'axes ", joysticksData[i].nbAxis)
 		if(joysticksData[i].nbAxis > 2) then
 			joysticksData[i].up  = false
 			joysticksData[i].down  = false

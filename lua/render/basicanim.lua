@@ -64,7 +64,7 @@ function BasicAnim.newL(folder,looping,delay,number)
 		BasicAnim.sprites[folder]={}
 		for i=1, self.number do
 			local path = 'anim/'..folder..'/'..i..'.png'
-		    -- BasicAnim.sprites[folder][i] = love.graphics.newImage(path)
+		    -- BasicAnim.sprites[folder][i] = s_resourceManager:LoadImage(path)
 		    -- On doit utiliser le loader
 		end
 	end

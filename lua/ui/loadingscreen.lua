@@ -7,7 +7,7 @@ LoadingScreen = {}
 LoadingScreen.__index =  LoadingScreen
 
 
-LoadingScreen.spiral = love.graphics.newImage("img/loading.png")
+LoadingScreen.spiral = s_resourceManager:LoadImage("img/loading.png")
 
 
 function LoadingScreen.new(options)

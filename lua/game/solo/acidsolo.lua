@@ -66,7 +66,9 @@ function AcidSolo:collideWith( object, collision )
 			pos=object:getPosition()
 			self.splashpos={x=pos.x,y=pos.y}
 		end
-		object:die("acid")
+		PushEvent({type=Effects.Acid, sort=GameplayEvents.Die})
+		PushEvent({sort=GameplayEvents.Slow})
+		object:die("Acid")
 	end
 end
 
@@ -88,7 +90,7 @@ function AcidSolo:update(seconds)
 	self.position.y=y-self.dec
 	if(self.timer>=TimerAcidSolo) then
 		self.isTouched=false
-		s_gameStateManager:failed()
+		PushEvent({sort=GameplayEvents.Fail})
 	end	
 end
 

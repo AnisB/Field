@@ -10,7 +10,7 @@ function SimpleBackground.new(path,scale,ymap)
     local self = {}
     setmetatable(self, SimpleBackground)
 
-	self.img=love.graphics.newImage(path)
+	self.img=s_resourceManager:LoadImage(path)
     self.scale=scale
     self.ymap=ymap
     self.scale=scale

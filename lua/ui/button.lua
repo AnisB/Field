@@ -27,7 +27,7 @@ function Button.new(x,y,w,l,img,name)
     setmetatable(self, Button)
     self.position={x=x,y=y}
     self.dimension={w=w,l=l}
-    self.img=love.graphics.newImage(img)
+    self.img=s_resourceManager:LoadImage(img)
     self.dec={x=0,y=0}
     self.selected=false
     self.enabled=true

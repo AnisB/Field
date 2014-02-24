@@ -67,7 +67,7 @@ function Field.new(type,position)
     self.colors={r1=255,g1=150,b1=30,a1=10,r2=255,g2=127,b2=30,a2=10}
     self.particleLife=1
   end         
-  i =love.graphics.newImage(id)
+  i =s_resourceManager:LoadImage(id)
   self.back = love.graphics.newParticleSystem(i, self.bufferSize)
   self.back:setEmissionRate          (self.EmissionRate)
   -- self.back:setLifetime              (self.lifeTime)
@@ -88,7 +88,7 @@ function Field.new(type,position)
   self.back:stop();
 
     --2. create an image from that image data
-  i =love.graphics.newImage(movimg)
+  i =s_resourceManager:LoadImage(movimg)
   self.fieldType=type
   self.img= i
   self.bufferSize=256

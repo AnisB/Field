@@ -12,9 +12,6 @@ require("game.solo.animmmsolo")
 -- Include const
 require("equilibrage.metalmanconst")
 
--- Include shader
-require ("shader.aftereffect")
-
 MetalMan = {}
 MetalMan.__index = MetalMan
 
@@ -91,12 +88,7 @@ end
 function MetalMan:die(type)
 	if self.alive then
 		self.alive=false
-		if(type=="acid") then
-			PushEvent({type=Effects.Acid, sort=GameplayEvents.Die})
-			PushEvent({sort=GameplayEvents.Slow})
-		else
-			PushEvent({type=Effects.Arc, sort=GameplayEvents.Die})
-			PushEvent({sort=GameplayEvents.Slow})
+		if(type=="Arc") then
 			self:loadAnimation("mortelec",true)
 		end
 	end
@@ -269,15 +261,14 @@ function MetalMan:collideWith( object, collision )
 				local kinEnergyY = math.log(0.5*self.pc.body:getMass()*self.pc.body:getMass()*self.pc.body:getMass()*math.abs(vy))
 				if kinEnergyX>10.9 or kinEnergyY>11 then
 					local amplitude = math.min(math.max(math.sqrt(vx*vx+vy*vy), 0.0), 1500) 
-					s_gameStateManager.state["GameplaySolo"]:shakeOnX(2,100,2.0,2.0*amplitude/1500.0)
-					s_gameStateManager.state["GameplaySolo"]:shakeOnY(2,100,2.0,2.0*amplitude/1500.0)
+					PushEvent({sort=GameplayEvents.Shake, xVal = {2,100,2.0,2.0*amplitude/1500.0}, yVal = {2,100,2.0,2.0*amplitude/1500.0}})
 				end
 			end
 			if self.isStatic==true  then
 				vx,vy =self.pc.body:getLinearVelocity() 
 				local amplitude = math.min(math.max(math.sqrt(vx*vx+vy*vy), 0.0), 1500) 
-				s_gameStateManager.state["GameplaySolo"]:shakeOnX(5,100,2.0,3.0*amplitude/1500.0)
-				s_gameStateManager.state["GameplaySolo"]:shakeOnY(5,100,2.0,3.0*amplitude/1500.0)
+				PushEvent({sort=GameplayEvents.Shake, xVal = {5,100,2.0,3.0*amplitude/1500.0}, yVal = {5,100,2.0,2.0*amplitude/1500.0}})
+
 			end
 
 			if(object:getPosition().y>self.position.y) then
@@ -422,5 +413,8 @@ end
 
 function MetalMan:postDraw()
 		self.s:disableCanvas()
-		self.s:pass()
+end
+
+function MetalMan:pass()
+	self.s:pass()
 end
