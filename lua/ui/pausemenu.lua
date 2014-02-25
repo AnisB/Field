@@ -48,13 +48,13 @@ function PauseMenu:keyPressed(key, unicode)
         if key == InputType.START then
 
             if name == "resume" then
-                PushEvent({sort=GameplayEvents.Pause, val=false})
+                PushEvent("Gameplay", {sort=GameplayEvents.Pause, val=false})
                 self.isActive=false
             end
 
 
             if name == "restart" then
-                PushEvent({sort=GameplayEvents.Reset}) 
+                PushEvent("Gameplay", {sort=GameplayEvents.Reset}) 
             end
 
 
@@ -64,7 +64,7 @@ function PauseMenu:keyPressed(key, unicode)
 
 
             if name == "quit" then
-                PushEvent({sort=GameplayEvents.Quit})
+                PushEvent("Gameplay", {sort=GameplayEvents.Quit})
                 self.isActive=false
             end
 
@@ -79,14 +79,14 @@ end
 function PauseMenu:sendPauseOrder()
    if self.isActive then
     if not self.optionsFlag then
-        PushEvent({sort=GameplayEvents.Pause, val=false})
+        PushEvent("Gameplay", {sort=GameplayEvents.Pause, val=false})
         self.isActive = false
     else
             self.optionsFlag = false
 
     end
    else
-    PushEvent({sort=GameplayEvents.Pause, val=true})    
+    PushEvent("Gameplay", {sort=GameplayEvents.Pause, val=true})    
     self.isActive = true
    end
 end

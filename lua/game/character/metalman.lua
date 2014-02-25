@@ -261,14 +261,13 @@ function MetalMan:collideWith( object, collision )
 				local kinEnergyY = math.log(0.5*self.pc.body:getMass()*self.pc.body:getMass()*self.pc.body:getMass()*math.abs(vy))
 				if kinEnergyX>10.9 or kinEnergyY>11 then
 					local amplitude = math.min(math.max(math.sqrt(vx*vx+vy*vy), 0.0), 1500) 
-					PushEvent({sort=GameplayEvents.Shake, xVal = {2,100,2.0,2.0*amplitude/1500.0}, yVal = {2,100,2.0,2.0*amplitude/1500.0}})
+					PushEvent("Gameplay", {sort=GameplayEvents.Shake, xVal = {2,100,2.0,2.0*amplitude/1500.0}, yVal = {2,100,2.0,2.0*amplitude/1500.0}})
 				end
 			end
 			if self.isStatic==true  then
 				vx,vy =self.pc.body:getLinearVelocity() 
 				local amplitude = math.min(math.max(math.sqrt(vx*vx+vy*vy), 0.0), 1500) 
-				PushEvent({sort=GameplayEvents.Shake, xVal = {5,100,2.0,3.0*amplitude/1500.0}, yVal = {5,100,2.0,2.0*amplitude/1500.0}})
-
+				PushEvent("Gameplay", {sort=GameplayEvents.Shake, xVal = {5,100,2.0,3.0*amplitude/1500.0}, yVal = {5,100,2.0,2.0*amplitude/1500.0}})
 			end
 
 			if(object:getPosition().y>self.position.y) then

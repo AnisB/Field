@@ -13,8 +13,6 @@ require("gamemanager")
 
 -- Resources
 require("resource.resourcemanager")
--- Inputs
-require("input.inputmanager")
 
 
 function love.load()
@@ -26,12 +24,11 @@ function love.load()
 
 	-- Initialisation du jeu
 	s_gameManager:Init()
+
+	PushEvent("Input", {joystick=1, duration=0.2, intersityX=0.5, intersitY=0.5})
 end
 
 function love.update(dt)
-   if dt < 1/40 then
-      love.timer.sleep(1/40 - dt)
-   end
 	-- Mise a jour de l'input mamanger, principalement pour les axes des joystick
 	s_inputManager:update(dt)
 

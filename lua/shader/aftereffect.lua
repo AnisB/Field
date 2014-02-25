@@ -13,6 +13,7 @@ function AfterEffect.new(parPath)
     self.duration = 1.0
     self.active = false
     self.autoReset = false
+    self.time = 0.0
 	return self
 end
 
@@ -45,14 +46,17 @@ function AfterEffect:setParameter(p)
 end
 
 function AfterEffect:activate()
-    self.active = true
-    self.time = 0
+	-- if not self.active then
+	    self.active = true
+	    self.time = 0
+	-- end
 end
 
 function AfterEffect:update(dt)
 	if(self.active) then
 		self.time = self.time + dt
 		if(self.time>=self.duration) then
+			self.time = self.duration
 			if not self.autoReset then
 				self.active = false
 			else

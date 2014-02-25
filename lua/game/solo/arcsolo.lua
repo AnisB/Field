@@ -74,9 +74,9 @@ function ArcSolo:collideWith( object, collision )
 		if object.type=='MetalMan' or object.type =='TheMagnet' then
 			self.isTouched=true
 			object:die("Arc")
-			PushEvent({type=Effects.Arc, sort=GameplayEvents.Die})
-			PushEvent({sort=GameplayEvents.Slow})
-			PushEvent({sort=GameplayEvents.Shake, xVal = {4,500,4.0,2.0}, yVal = {4,500,4.0,2.0}})
+			PushEvent("Gameplay", {type=Effects.Arc, sort=GameplayEvents.Die})
+			PushEvent("Gameplay", {sort=GameplayEvents.Slow})
+			PushEvent("Gameplay", {sort=GameplayEvents.Shake, xVal = {4,500,4.0,2.0}, yVal = {4,500,4.0,2.0}})
 
 		end
 	end
@@ -105,7 +105,7 @@ function ArcSolo:update(seconds)
 	self.anim:update(seconds)
 	if(self.timer>=TimerArcSolo) then
 		self.isTouched=false
-		PushEvent({sort=GameplayEvents.Fail})
+		PushEvent("Gameplay", {sort=GameplayEvents.Fail})
 	end
 end
 

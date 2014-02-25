@@ -39,6 +39,10 @@ function InputManager:Init()
 
     -- Initialisation des variables
     self.debugPrint = true
+
+
+	-- Initialisation des vibrations
+    self.vibrationEvent = {}
 end
 
 
@@ -76,6 +80,8 @@ function InputManager:joystickreleased(joystick, button)
 end
 
 function InputManager:update(dt)
+
+	self:manageVibrations(dt)
 	for i = 1, self.nbConnectedJoysticks do
 		local xAxis = self.joysticks[i]:getAxis(1)
 		local yAxis = self.joysticks[i]:getAxis(2)
@@ -148,6 +154,26 @@ function InputManager:update(dt)
 
 end
 
+function InputManager:manageVibrations(dt)
+	for i,v in pairs(self.vibrationEvent) do
+		v.time = v.time+dt 
+		if(v.time>=v.duration) then
+			self.joysticks[v.index]:setVibration(0.0,0.0)
+			table.remove(self.vibrationEvent,i)
+		end
+	end
+end
+
+function InputManager:addVibration(parEvent)
+		local vibration = {}
+		vibration.index = parEvent.joystick
+		vibration.duration = parEvent.duration
+		vibration.time  = 0.0
+		vibration.intersityX = parEvent.intersityX
+		vibration.intersityY = parEvent.intersityY
+		self.joysticks[parEvent.joystick]:setVibration(parEvent.intersityX,parEvent.intersityY)
+		table.insert(self.vibrationEvent,vibration)
+end
 function InputManager:draw()
 
 end

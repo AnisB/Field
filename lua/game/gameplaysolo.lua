@@ -192,12 +192,12 @@ end
                     end
                     if key == InputType.ACTION2 then
                         self.mapLoader:handleTry(self.player)
-                        -- self.afterEffects["Half"]:injectUniform("vueP1",0)
-                        -- self.afterEffects["Half"]:activate()
+                        self.afterEffects["Half"]:injectUniform("vueP1",0)
+                        self.afterEffects["Half"]:activate()
                     end
                     if key == InputType.ACTION3 then
-                        -- self.afterEffects["Half"]:injectUniform("vueP1",1)
-                        -- self.afterEffects["Half"]:activate()
+                        self.afterEffects["Half"]:injectUniform("vueP1",1)
+                        self.afterEffects["Half"]:activate()
                     end
                     if key == InputType.RIGHT then
                         self.personnage:startMove(Direction.Right)
@@ -315,6 +315,7 @@ end
                 self.personnage:update(dt)
                 self.mapLoader:update(dt)
                 for i,v in pairs(self.afterEffects) do
+                    print("Time ", dt)
                     v:update(dt)
                 end
             end
@@ -362,11 +363,11 @@ function GameplaySolo:drawScene(filter)
     self.afterEffects["Acid"]:filterPass(filter)
     self.personnage:postDraw()
 
-    -- self.afterEffects["Half"]:enableCanvas()
+    self.afterEffects["Half"]:enableCanvas()
     self.personnage:pass() 
-    -- self.afterEffects["Half"]:disableCanvas()
+    self.afterEffects["Half"]:disableCanvas()
 
-    -- self.afterEffects["Half"]:filterPass(filter)
+    self.afterEffects["Half"]:filterPass(filter)
 
 end
     
@@ -413,6 +414,7 @@ end
 function GameplaySolo:shake(xData, yData)
         self.camera:shakeOnX(xData[1],xData[2],xData[3], xData[4])
         self.camera:shakeOnX(yData[1],yData[2],yData[3], yData[4])
+        PushEvent("Input", {joystick=1, duration=0.2, intersityX=0.5, intersitY=0.5})
 end
 function GameplaySolo:finish()
    self.isRunning = false

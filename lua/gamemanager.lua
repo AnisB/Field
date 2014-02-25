@@ -1,7 +1,8 @@
 
 require("game.gamestatemanager")
 require("const")
-
+-- Inputs
+require("input.inputmanager")
 
 GameManager = {}
 GameManager.__index = GameManager
@@ -60,8 +61,12 @@ function GameManager:FindOwner(parKey)
 
 end
 
-function PushEvent(newEvent)
-	    table.insert(s_gameManager.eventList, newEvent)
+function PushEvent(parType, newEvent)
+		if(parType == "Gameplay") then
+	    	table.insert(s_gameManager.eventList, newEvent)
+	    elseif(parType == "Input") then
+	    	-- s_inputManager:addVibration(newEvent)
+	    end
 end
 
 function GameManager:draw()

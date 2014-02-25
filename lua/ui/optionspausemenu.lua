@@ -62,7 +62,7 @@ function OptionsPauseMenu:keyPressed(key, unicode)
 
             if self.paralax.selected then
                 self.paralax.state = not self.paralax.state
-                PushEvent({sort = GameplayEvents.Paralax, val = self.paralax.state}) 
+                PushEvent("Gameplay", {sort = GameplayEvents.Paralax, val = self.paralax.state}) 
             end
 
             if self.returnB.selected then
